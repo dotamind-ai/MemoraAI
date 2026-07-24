@@ -6,18 +6,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Memora AI</title>
+<title>MEMORA</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-<div class="container">
-
+<header>
 
 <div class="logo">
 
@@ -31,53 +30,75 @@
 
 </div>
 
+<h1>MEMORA</h1>
 
-<h1>
-Memora AI
-</h1>
+<p>Remember less. Think more.</p>
+
+</header>
 
 
-<p>
-Твой второй мозг
-</p>
+<section class="hero">
 
+<div class="glass">
+
+<h2>✨ Сегодня</h2>
+
+<span id="memoryCount">
+0 воспоминаний
+</span>
+
+</div>
+
+</section>
+
+
+<section>
 
 <button id="addMemory">
-＋ Добавить память
+
+＋ Новая память
+
 </button>
 
+</section>
 
-<div id="memoryBox" class="hidden">
 
+<section id="memoryBox" class="hidden">
 
-<input 
+<input
 id="memoryTitle"
 placeholder="Название">
 
-
 <textarea
 id="memoryText"
-placeholder="Твоя мысль...">
-</textarea>
-
+placeholder="Запиши мысль..."></textarea>
 
 <button id="saveMemory">
+
 Сохранить
+
 </button>
 
+</section>
+
+
+<section>
+
+<h3>
+
+Последние записи
+
+</h3>
+
+<div id="memoryList">
 
 </div>
 
-
-<div id="memoryList"></div>
-
+</section>
 
 </div>
-
-
 
 <script src="app.js"></script>
-
 
 </body>
 
