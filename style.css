@@ -10,7 +10,7 @@ body{
     min-height:100vh;
 
     background:
-    radial-gradient(circle at top,#253b70,#05070d 60%);
+    radial-gradient(circle at top,#253b70,#05070d 65%);
 
     color:white;
 
@@ -35,8 +35,9 @@ body{
 
 
 
-
-/* ===== HEADER / ЯДРО ===== */
+/* =====================
+   LOGO MEMORA
+===================== */
 
 
 header{
@@ -74,23 +75,27 @@ header{
 
     background:
 
-    radial-gradient(circle,
-
+    radial-gradient(
+    circle at 35% 35%,
     #ffffff 0%,
-
-    #74d9ff 20%,
-
-    #5865ff 45%,
-
-    #090b18 75%);
-
+    #9ff5ff 15%,
+    #5865ff 40%,
+    #11152d 75%
+    );
 
 
     box-shadow:
 
-    0 0 30px #5865ff,
+    0 0 25px #6c8cff,
 
-    0 0 80px rgba(88,101,255,.8);
+    0 0 60px rgba(108,140,255,.8),
+
+    0 0 120px rgba(108,140,255,.5);
+
+
+    animation:
+
+    coreGlow 4s infinite alternate;
 
 }
 
@@ -104,12 +109,22 @@ header{
 
     border-radius:50%;
 
+
     border:
 
-    2px solid rgba(255,255,255,.35);
+    2px solid rgba(160,220,255,.7);
 
 
-    animation:spin 8s linear infinite;
+    box-shadow:
+
+    0 0 25px #6c8cff,
+
+    inset 0 0 20px rgba(255,255,255,.4);
+
+
+    animation:
+
+    spin 8s linear infinite;
 
 }
 
@@ -123,18 +138,55 @@ header{
 
     height:16px;
 
-    border-radius:50%;
-
-    background:white;
 
     top:42px;
 
     left:42px;
 
 
+    border-radius:50%;
+
+
+    background:white;
+
+
     box-shadow:
 
-    0 0 25px white;
+    0 0 20px white,
+
+    0 0 50px #9ff5ff;
+
+}
+
+
+
+@keyframes coreGlow{
+
+
+    from{
+
+        box-shadow:
+
+        0 0 25px #6c8cff,
+
+        0 0 60px rgba(108,140,255,.7),
+
+        0 0 100px rgba(108,140,255,.3);
+
+    }
+
+
+    to{
+
+        box-shadow:
+
+        0 0 45px #9ff5ff,
+
+        0 0 100px rgba(159,245,255,.8),
+
+        0 0 160px rgba(88,101,255,.5);
+
+    }
 
 }
 
@@ -148,6 +200,7 @@ header{
 
     }
 
+
     to{
 
         transform:rotate(360deg);
@@ -159,12 +212,9 @@ header{
 
 
 
-
 h1{
 
     font-size:42px;
-
-    margin:10px 0;
 
     letter-spacing:5px;
 
@@ -182,7 +232,9 @@ header p{
 
 
 
-/* ===== СТЕКЛО ===== */
+/* =====================
+   GLASS
+===================== */
 
 
 .glass{
@@ -210,7 +262,7 @@ header p{
 
     box-shadow:
 
-    0 0 40px rgba(0,0,0,.4);
+    0 0 40px rgba(0,0,0,.45);
 
 }
 
@@ -220,9 +272,9 @@ header p{
 
 button{
 
-    border:none;
-
     cursor:pointer;
+
+    border:none;
 
 
     padding:12px 20px;
@@ -247,13 +299,12 @@ button{
 
 button:hover{
 
-
     transform:translateY(-3px);
 
 
     box-shadow:
 
-    0 0 20px rgba(255,255,255,.3);
+    0 0 20px rgba(255,255,255,.25);
 
 }
 
@@ -285,9 +336,7 @@ textarea{
     border-radius:18px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.2);
+    color:white;
 
 
     background:
@@ -295,35 +344,27 @@ textarea{
     rgba(0,0,0,.3);
 
 
-    color:white;
+    border:
 
-
-    outline:none;
-
-}
-
-
-
-textarea{
-
-    min-height:120px;
+    1px solid rgba(255,255,255,.2);
 
 }
 
 
 
 
-/* ===== ТИПЫ ===== */
+/* =====================
+   TYPES
+===================== */
 
 
 .memory-types{
 
-
     display:flex;
 
-    gap:10px;
-
     flex-wrap:wrap;
+
+    gap:10px;
 
     margin:20px 0;
 
@@ -333,11 +374,9 @@ textarea{
 
 .type-button.active{
 
-
     background:
 
-    rgba(90,110,255,.5);
-
+    rgba(88,101,255,.55);
 
 }
 
@@ -345,7 +384,9 @@ textarea{
 
 
 
-/* ===== КАРТОЧКИ ===== */
+/* =====================
+   MEMORY CARDS
+===================== */
 
 
 #memoryList{
@@ -388,7 +429,6 @@ textarea{
 
     transition:.4s;
 
-
 }
 
 
@@ -409,7 +449,7 @@ textarea{
 
     box-shadow:
 
-    0 0 25px rgba(88,101,255,.4);
+    0 0 25px rgba(88,101,255,.45);
 
 }
 
@@ -421,7 +461,7 @@ textarea{
 
     box-shadow:
 
-    0 0 25px rgba(0,229,255,.4);
+    0 0 25px rgba(0,229,255,.45);
 
 }
 
@@ -433,7 +473,7 @@ textarea{
 
     box-shadow:
 
-    0 0 25px rgba(255,102,196,.4);
+    0 0 25px rgba(255,102,196,.45);
 
 }
 
@@ -445,7 +485,7 @@ textarea{
 
     box-shadow:
 
-    0 0 25px rgba(112,255,112,.4);
+    0 0 25px rgba(112,255,112,.45);
 
 }
 
@@ -457,7 +497,7 @@ textarea{
 
     box-shadow:
 
-    0 0 25px rgba(255,179,71,.4);
+    0 0 25px rgba(255,179,71,.45);
 
 }
 
@@ -465,7 +505,9 @@ textarea{
 
 
 
-/* ===== ЗАКРЕПЛЕНИЕ ===== */
+/* =====================
+   FAVORITE
+===================== */
 
 
 .memory-card.favorite{
@@ -476,9 +518,9 @@ textarea{
 
     box-shadow:
 
-    0 0 30px rgba(255,228,122,.8),
+    0 0 35px rgba(255,228,122,.85),
 
-    0 0 80px rgba(255,228,122,.35);
+    0 0 90px rgba(255,228,122,.35);
 
 
 }
@@ -515,9 +557,7 @@ textarea{
 
 
 
-
 .favoriteButton{
-
 
     color:#ffe47a;
 
@@ -526,14 +566,12 @@ textarea{
 
     1px solid rgba(255,228,122,.5);
 
-
 }
 
 
 
 
 .deleteButton{
-
 
     margin-left:10px;
 
