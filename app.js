@@ -4,11 +4,12 @@ const saveMemory = document.getElementById("saveMemory");
 
 const titleInput = document.getElementById("memoryTitle");
 const textInput = document.getElementById("memoryText");
+const typeInput = document.getElementById("memoryType");
+
+const typeButtons = document.querySelectorAll(".type-button");
 
 const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
-
-const typeButtons = document.querySelectorAll(".type-button");
 
 
 let memories = JSON.parse(
@@ -21,37 +22,41 @@ let selectedType = "idea";
 
 
 
-// выбор типа памяти
+
+// Выбор категории
 
 typeButtons.forEach(button => {
 
-    button.addEventListener("click",()=>{
+
+    button.addEventListener("click", function(){
 
 
-        selectedType = button.dataset.type;
+        selectedType = this.dataset.type;
 
 
-        typeButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
+        if(typeInput){
+
+            typeInput.value = selectedType;
+
+        }
 
 
-        button.classList.add("active");
+
+        typeButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+
+        this.classList.add("active");
 
 
     });
 
+
 });
-
-
-
-
-
-addMemory.onclick = ()=>{
-
-    memoryBox.classList.remove("hidden");
-
-};
 
 
 
@@ -61,12 +66,50 @@ addMemory.onclick = ()=>{
 
 function saveData(){
 
+
     localStorage.setItem(
+
         "memora",
+
         JSON.stringify(memories)
+
     );
 
+
 }
+
+
+
+
+
+
+
+function getTypeName(type){
+
+
+    const names = {
+
+
+        idea:"◇ Идея",
+
+        goal:"◎ Цель",
+
+        note:"▤ Заметка",
+
+        project:"◈ Проект",
+
+        personal:"◉ Личное"
+
+
+    };
+
+
+    return names[type] || "◇ Память";
+
+
+}
+
+
 
 
 
@@ -76,31 +119,25 @@ function saveData(){
 function renderMemories(){
 
 
-    memoryList.innerHTML="";
-
-
-
-    memories.sort((a,b)=>{
-
-        return Number(b.favorite)-Number(a.favorite);
-
-    });
-
-
+    memoryList.innerHTML = "";
 
 
 
     memories.forEach((memory,index)=>{
 
 
-        const card=document.createElement("div");
+
+        const card = document.createElement("div");
 
 
-        card.className =
+
+        card.className = 
+
         "memory-card " + memory.type;
 
 
 
+        // закрепление
 
         if(memory.favorite){
 
@@ -111,25 +148,15 @@ function renderMemories(){
 
 
 
+
         card.innerHTML = `
 
 
-        <div class="card-top">
+        <h4>
 
-            <span class="memory-icon">
+        ${getTypeName(memory.type)}
 
-            ${memory.icon}
-
-            </span>
-
-
-            <span>
-
-            ${memory.category}
-
-            </span>
-
-        </div>
+        </h4>
 
 
 
@@ -146,6 +173,18 @@ function renderMemories(){
         ${memory.text}
 
         </p>
+
+
+
+        <small>
+
+        ${memory.date}
+
+        </small>
+
+
+
+        <br><br>
 
 
 
@@ -170,22 +209,20 @@ function renderMemories(){
 
 
 
-
         card.querySelector(".favoriteButton")
-        .onclick=()=>{
+        .onclick = function(){
 
 
-            memory.favorite =
-            !memory.favorite;
+            memory.favorite = !memory.favorite;
 
 
             saveData();
+
 
             renderMemories();
 
 
         };
-
 
 
 
@@ -193,13 +230,14 @@ function renderMemories(){
 
 
         card.querySelector(".deleteButton")
-        .onclick=()=>{
+        .onclick = function(){
 
 
             memories.splice(index,1);
 
 
             saveData();
+
 
             renderMemories();
 
@@ -208,19 +246,17 @@ function renderMemories(){
 
 
 
-
-
         memoryList.appendChild(card);
+
 
 
     });
 
 
 
+    memoryCount.innerText =
 
-
-    memoryCount.textContent =
-    memories.length+" воспоминаний";
+    memories.length + " воспоминаний";
 
 
 }
@@ -231,50 +267,70 @@ function renderMemories(){
 
 
 
-saveMemory.onclick=()=>{
+
+addMemory.onclick = function(){
+
+
+    memoryBox.classList.remove("hidden");
+
+
+};
+
+
+
+
+
+
+
+
+saveMemory.onclick = function(){
+
 
 
     const title =
+
     titleInput.value.trim();
 
 
+
     const text =
+
     textInput.value.trim();
 
 
 
 
-    if(!title){
+    if(title === ""){
 
-        alert("Заполни название памяти");
+
+        alert("Введите название памяти");
+
 
         return;
+
 
     }
 
 
 
 
-    const data = {
 
 
-        title:title,
-
-
-        text:text || "Без текста",
-
+    const newMemory = {
 
 
         type:selectedType,
 
 
-
-        category:getCategory(selectedType),
-
+        title:title,
 
 
-        icon:getIcon(selectedType),
+        text:text || "Без описания",
 
+
+        date:new Date()
+
+        .toLocaleString("ru-RU"),
 
 
         favorite:false
@@ -286,84 +342,31 @@ saveMemory.onclick=()=>{
 
 
 
-    memories.unshift(data);
+
+    memories.unshift(newMemory);
 
 
 
     saveData();
 
 
+
     renderMemories();
 
 
 
-    titleInput.value="";
 
-    textInput.value="";
+
+    titleInput.value = "";
+
+    textInput.value = "";
+
 
 
     memoryBox.classList.add("hidden");
 
 
-};
-
-
-
-
-
-
-
-function getCategory(type){
-
-
-    const list={
-
-        idea:"Идея",
-
-        goal:"Цель",
-
-        note:"Заметка",
-
-        project:"Проект",
-
-        personal:"Личное"
-
-    };
-
-
-    return list[type] || "Память";
-
-
 }
-
-
-
-
-
-
-function getIcon(type){
-
-
-    const icons={
-
-        idea:"◇",
-
-        goal:"◎",
-
-        note:"▤",
-
-        project:"◈",
-
-        personal:"◉"
-
-    };
-
-
-    return icons[type] || "◇";
-
-
-}
-
 
 
 
