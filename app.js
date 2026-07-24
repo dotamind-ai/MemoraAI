@@ -21,15 +21,21 @@ let selectedType = "idea";
 
 
 
-// выбор категории
+
+
+// Выбор категории
 
 typeButtons.forEach(button => {
 
+
     button.addEventListener("click", function(){
+
 
         selectedType = this.dataset.type;
 
+
         typeInput.value = selectedType;
+
 
 
         typeButtons.forEach(btn => {
@@ -39,10 +45,12 @@ typeButtons.forEach(button => {
         });
 
 
+
         this.classList.add("active");
 
 
     });
+
 
 });
 
@@ -50,12 +58,19 @@ typeButtons.forEach(button => {
 
 
 
+
+
 function saveData(){
 
+
     localStorage.setItem(
+
         "memora",
+
         JSON.stringify(memories)
+
     );
+
 
 }
 
@@ -63,9 +78,13 @@ function saveData(){
 
 
 
+
+
 function getTypeName(type){
 
+
     const names = {
+
 
         idea:"◇ Идея",
 
@@ -77,12 +96,16 @@ function getTypeName(type){
 
         personal:"◉ Личное"
 
+
     };
 
 
-    return names[type] || "◇ Идея";
+    return names[type] || "◇ Память";
+
 
 }
+
+
 
 
 
@@ -95,56 +118,96 @@ function renderMemories(){
     memoryList.innerHTML = "";
 
 
+
     memories.forEach((memory,index)=>{
+
 
 
         const card = document.createElement("div");
 
 
+
+        // добавляем класс категории для свечения
+
+        card.className = 
+
+        "memory-card " + memory.type;
+
+
+
         card.innerHTML = `
 
+
         <h4>
+
         ${getTypeName(memory.type)}
+
         </h4>
 
+
+
         <h3>
+
         ${memory.title}
+
         </h3>
 
+
+
         <p>
+
         ${memory.text}
+
         </p>
 
+
+
         <small>
+
         ${memory.date}
+
         </small>
 
+
+
         <button class="deleteButton">
+
         Удалить
+
         </button>
 
+
         `;
+
 
 
         card.querySelector(".deleteButton")
         .onclick = function(){
 
+
             memories.splice(index,1);
+
 
             saveData();
 
+
             renderMemories();
 
+
         };
+
 
 
         memoryList.appendChild(card);
 
 
+
     });
 
 
+
     memoryCount.innerText =
+
     memories.length + " воспоминаний";
 
 
@@ -154,11 +217,18 @@ function renderMemories(){
 
 
 
+
+
+
 addMemory.onclick = function(){
+
 
     memoryBox.classList.remove("hidden");
 
+
 };
+
+
 
 
 
@@ -168,43 +238,71 @@ addMemory.onclick = function(){
 saveMemory.onclick = function(){
 
 
+
     const title =
+
     titleInput.value.trim();
 
 
+
     const text =
+
     textInput.value.trim();
+
 
 
 
     if(title === ""){
 
+
         alert("Введите название памяти");
 
+
         return;
+
 
     }
 
 
 
-    memories.unshift({
+
+
+
+    const newMemory = {
+
 
         type:selectedType,
 
+
         title:title,
+
 
         text:text || "Без описания",
 
+
         date:new Date()
+
         .toLocaleString("ru-RU")
 
-    });
+
+    };
+
+
+
+
+
+
+    memories.unshift(newMemory);
 
 
 
     saveData();
 
+
+
     renderMemories();
+
+
 
 
 
@@ -213,10 +311,13 @@ saveMemory.onclick = function(){
     textInput.value = "";
 
 
+
     memoryBox.classList.add("hidden");
 
 
 };
+
+
 
 
 
