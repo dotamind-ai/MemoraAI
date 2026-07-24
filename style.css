@@ -5,26 +5,21 @@ box-sizing:border-box;
 }
 
 
-
 body {
 
 margin:0;
 
 min-height:100vh;
 
-
 background:
-radial-gradient(circle at top,#29294d,#07070b 60%);
-
+radial-gradient(circle at top,#29294d,#07070b 70%);
 
 font-family:
 -apple-system,
 BlinkMacSystemFont,
 Arial,sans-serif;
 
-
 color:white;
-
 
 }
 
@@ -32,115 +27,11 @@ color:white;
 
 .app {
 
-
 max-width:430px;
 
 margin:auto;
 
-
 padding:35px 22px;
-
-
-}
-
-
-
-
-header {
-
-text-align:center;
-
-}
-
-
-
-.logo {
-
-height:120px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-}
-
-
-
-.core {
-
-
-width:80px;
-
-height:80px;
-
-
-border-radius:50%;
-
-
-position:relative;
-
-
-background:
-radial-gradient(circle,#fff,#8888ff,#22223d);
-
-
-box-shadow:
-0 0 50px #7777ff;
-
-
-animation:pulse 3s infinite;
-
-
-}
-
-
-
-.ring {
-
-
-position:absolute;
-
-inset:-12px;
-
-
-border-radius:50%;
-
-
-border:2px solid rgba(255,255,255,.4);
-
-
-}
-
-
-
-.point {
-
-
-position:absolute;
-
-
-width:18px;
-
-height:18px;
-
-
-background:white;
-
-
-border-radius:50%;
-
-
-top:31px;
-
-left:31px;
-
-
-box-shadow:
-0 0 20px white;
-
 
 }
 
@@ -148,21 +39,19 @@ box-shadow:
 
 h1 {
 
+text-align:center;
 
 font-size:42px;
 
 letter-spacing:5px;
 
-margin:10px 0;
-
-
 }
 
 
 
-header p {
+p {
 
-color:#999;
+color:#b5b5c5;
 
 }
 
@@ -170,26 +59,16 @@ color:#999;
 
 .glass {
 
-
-margin-top:40px;
-
+margin-top:35px;
 
 padding:25px;
 
-
 border-radius:28px;
-
 
 background:
 rgba(255,255,255,.08);
 
-
-border:
-1px solid rgba(255,255,255,.1);
-
-
 backdrop-filter:blur(20px);
-
 
 }
 
@@ -197,43 +76,37 @@ backdrop-filter:blur(20px);
 
 button {
 
-
 width:100%;
-
-
-margin-top:25px;
-
 
 padding:18px;
 
+margin-top:20px;
 
 border:0;
 
-
 border-radius:22px;
 
-
-background:white;
-
-
-color:black;
-
-
-font-size:18px;
-
+font-size:17px;
 
 font-weight:600;
-
 
 }
 
 
 
-.memory-form {
+#addMemory {
 
+background:white;
+
+color:black;
+
+}
+
+
+
+#memoryBox {
 
 margin-top:20px;
-
 
 }
 
@@ -245,28 +118,20 @@ textarea {
 
 width:100%;
 
+padding:16px;
 
 margin-top:15px;
 
-
-padding:16px;
-
-
 border:0;
 
-
 border-radius:18px;
-
 
 background:
 rgba(255,255,255,.12);
 
-
 color:white;
 
-
 font-size:16px;
-
 
 }
 
@@ -274,9 +139,7 @@ font-size:16px;
 
 textarea {
 
-
 height:120px;
-
 
 }
 
@@ -284,19 +147,7 @@ height:120px;
 
 .hidden {
 
-
 display:none;
-
-
-}
-
-
-
-h3 {
-
-
-margin-top:35px;
-
 
 }
 
@@ -305,27 +156,28 @@ margin-top:35px;
 #memoryList div {
 
 
-display:block;
+margin-top:18px;
+
+padding:22px;
 
 
-width:100%;
-
-
-padding:20px;
-
-
-margin-top:15px;
-
-
-border-radius:22px;
+border-radius:25px;
 
 
 background:
-rgba(255,255,255,.1);
+linear-gradient(
+135deg,
+rgba(255,255,255,.14),
+rgba(255,255,255,.05)
+);
 
 
 border:
-1px solid rgba(255,255,255,.1);
+1px solid rgba(255,255,255,.12);
+
+
+animation:
+appear .4s ease;
 
 
 }
@@ -334,36 +186,56 @@ border:
 
 #memoryList h4 {
 
-
-margin:0 0 10px;
-
+margin:0;
 
 font-size:20px;
 
+}
+
+
+
+#memoryList small {
+
+display:block;
+
+margin-top:15px;
+
+color:#999;
 
 }
 
 
 
-#memoryList p {
+.deleteButton {
 
+background:
+rgba(255,80,80,.2);
 
-margin:0;
-
-
-color:#ccc;
-
+color:white;
 
 }
 
 
 
-@keyframes pulse {
+@keyframes appear {
 
 
-50% {
+from {
 
-transform:scale(1.08);
+opacity:0;
+
+transform:
+translateY(20px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:
+translateY(0);
 
 }
 
