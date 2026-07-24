@@ -2,22 +2,24 @@
     box-sizing: border-box;
 }
 
+
 body {
 
     margin: 0;
 
     min-height: 100vh;
 
-    background: #09090b;
+    background:
+    radial-gradient(circle at top, #1b1b2b, #09090b 60%);
 
     color: white;
 
     font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        Arial,
-        sans-serif;
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    Arial,
+    sans-serif;
 
     display: flex;
 
@@ -38,20 +40,56 @@ body {
 
     text-align: center;
 
-    background: rgba(255,255,255,0.05);
+    background:
+    rgba(255,255,255,0.06);
 
     border-radius: 32px;
 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
 
 }
 
 
 .logo {
 
-    font-size: 70px;
+    width: 90px;
 
-    margin-bottom: 20px;
+    height: 90px;
+
+    margin: 0 auto 25px;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #8b8bff
+    );
+
+    box-shadow:
+    0 0 40px rgba(120,120,255,0.5);
+
+}
+
+
+.logo span {
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    color: #111;
+
+    font-family:
+    Arial,
+    sans-serif;
 
 }
 
@@ -60,7 +98,9 @@ h1 {
 
     font-size: 38px;
 
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
+
+    letter-spacing: -1px;
 
 }
 
@@ -94,6 +134,42 @@ button {
 
     font-weight: 600;
 
-    cursor: pointer;
+}
+
+
+input,
+textarea {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: none;
+
+    background: rgba(255,255,255,0.1);
+
+    color: white;
+
+    font-size: 16px;
+
+}
+
+
+textarea {
+
+    height: 120px;
+
+    resize: none;
+
+}
+
+
+.hidden {
+
+    display: none;
 
 }
