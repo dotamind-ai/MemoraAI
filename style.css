@@ -9,39 +9,35 @@ body{
 
     min-height:100vh;
 
-
     font-family:
     "Segoe UI",
     Arial,
     sans-serif;
 
-
-    color:#151515;
-
+    color:white;
 
 
     background:
 
-
     radial-gradient(
-    circle at 50% 0%,
-    rgba(255,255,255,.8),
-    transparent 35%
+    circle at 50% -10%,
+    rgba(150,90,255,.25),
+    transparent 40%
     ),
 
 
     radial-gradient(
-    circle at 15% 80%,
-    rgba(255,255,255,.35),
-    transparent 40%
+    circle at 20% 80%,
+    rgba(100,50,180,.18),
+    transparent 35%
     ),
 
 
     linear-gradient(
     145deg,
-    #dadadd,
-    #aeb1b6,
-    #777b82
+    #09080d,
+    #12101a,
+    #07070b
     );
 
 
@@ -57,37 +53,32 @@ body::before{
 
     content:"";
 
-
     position:fixed;
 
+    width:550px;
 
-    width:600px;
-
-    height:600px;
-
+    height:550px;
 
     top:-200px;
 
     left:-200px;
 
 
-
     background:
-
 
     radial-gradient(
     circle,
-    rgba(255,255,255,.5),
+    rgba(255,255,255,.08),
     transparent 70%
     );
 
 
-    filter:blur(90px);
+    filter:blur(80px);
 
 
     animation:
 
-    moveGlow 18s infinite alternate;
+    floatLight 18s infinite alternate;
 
 
     z-index:-1;
@@ -102,37 +93,32 @@ body::after{
 
     content:"";
 
-
     position:fixed;
-
 
     width:500px;
 
     height:500px;
 
-
     right:-200px;
 
-    bottom:-150px;
-
+    bottom:-200px;
 
 
     background:
 
-
     radial-gradient(
     circle,
-    rgba(255,255,255,.3),
+    rgba(130,80,220,.16),
     transparent 70%
     );
 
 
-    filter:blur(100px);
+    filter:blur(90px);
 
 
     animation:
 
-    moveGlow2 20s infinite alternate;
+    floatLight2 22s infinite alternate;
 
 
     z-index:-1;
@@ -143,44 +129,31 @@ body::after{
 
 
 
-@keyframes moveGlow{
-
+@keyframes floatLight{
 
     from{
-
         transform:translate(0,0);
-
     }
 
-
     to{
-
-        transform:translate(120px,80px);
-
+        transform:translate(120px,70px);
     }
 
 }
 
 
-
-
-@keyframes moveGlow2{
-
+@keyframes floatLight2{
 
     from{
-
         transform:translate(0,0);
-
     }
 
-
     to{
-
-        transform:translate(-100px,-70px);
-
+        transform:translate(-100px,-60px);
     }
 
 }
+
 
 
 
@@ -214,7 +187,6 @@ header{
 
 
 
-
 .logo{
 
     height:150px;
@@ -230,13 +202,11 @@ header{
 
 
 
-
 .core{
 
     width:100px;
 
     height:100px;
-
 
     position:relative;
 
@@ -244,33 +214,28 @@ header{
     border-radius:50%;
 
 
-
     background:
-
 
     radial-gradient(
     circle at 35% 30%,
-    white,
-    #eeeeee 25%,
-    #bcbcbc 50%,
-    #555 80%
+    #ffffff,
+    #d7d7df 25%,
+    #777 55%,
+    #151515 85%
     );
-
 
 
     box-shadow:
 
 
-    0 0 35px white,
+    0 0 35px rgba(255,255,255,.7),
 
-
-    0 0 90px rgba(255,255,255,.7);
-
+    0 0 100px rgba(150,90,255,.35);
 
 
     animation:
 
-    floatCore 5s infinite ease-in-out;
+    logoFloat 5s infinite ease-in-out;
 
 }
 
@@ -282,33 +247,21 @@ header{
 
     content:"";
 
-
     position:absolute;
 
-
     inset:-18px;
-
 
     border-radius:50%;
 
 
-
     border:
 
-    1px solid rgba(255,255,255,.9);
-
-
-
-    box-shadow:
-
-
-    0 0 30px white;
-
+    1px solid rgba(255,255,255,.5);
 
 
     animation:
 
-    spin 12s linear infinite;
+    rotate 12s linear infinite;
 
 }
 
@@ -320,28 +273,24 @@ header{
 
     content:"";
 
-
     position:absolute;
 
-
     inset:-35px;
-
 
     border-radius:50%;
 
 
-
     border:
 
-    1px dashed rgba(255,255,255,.6);
-
+    1px dashed rgba(170,120,255,.4);
 
 
     animation:
 
-    spinBack 18s linear infinite;
+    rotateBack 18s linear infinite;
 
 }
+
 
 
 
@@ -350,30 +299,23 @@ header{
 
     position:absolute;
 
-
     width:15px;
-
 
     height:15px;
 
+    top:42px;
 
     left:42px;
 
 
-    top:42px;
-
+    background:white;
 
     border-radius:50%;
 
 
-    background:white;
-
-
-
     box-shadow:
 
-
-    0 0 35px white;
+    0 0 30px white;
 
 }
 
@@ -381,8 +323,7 @@ header{
 
 
 
-@keyframes floatCore{
-
+@keyframes logoFloat{
 
     50%{
 
@@ -394,8 +335,7 @@ header{
 
 
 
-@keyframes spin{
-
+@keyframes rotate{
 
     to{
 
@@ -407,8 +347,7 @@ header{
 
 
 
-@keyframes spinBack{
-
+@keyframes rotateBack{
 
     to{
 
@@ -424,33 +363,26 @@ header{
 
 h1{
 
-
     font-size:42px;
-
 
     letter-spacing:7px;
 
 
-    color:#111;
-
-
-
     text-shadow:
 
-
-    0 2px 10px rgba(255,255,255,.8);
+    0 0 20px rgba(255,255,255,.25);
 
 }
-
-
 
 
 
 header p{
 
-    color:#333;
+    color:#999;
 
 }
+
+
 
 
 
@@ -461,41 +393,36 @@ header p{
 
 .glass{
 
-
     background:
 
-
-    rgba(255,255,255,.32);
-
+    rgba(255,255,255,.07);
 
 
     border:
 
-
-    1px solid rgba(255,255,255,.7);
-
+    1px solid rgba(255,255,255,.15);
 
 
     backdrop-filter:
 
-
-    blur(30px);
-
+    blur(25px);
 
 
-    border-radius:32px;
+    border-radius:30px;
 
 
     padding:30px;
 
 
-
     box-shadow:
 
 
-    0 30px 80px rgba(0,0,0,.25);
+    0 30px 80px rgba(0,0,0,.6),
+
+    inset 0 0 30px rgba(255,255,255,.04);
 
 }
+
 
 
 
@@ -507,29 +434,23 @@ header p{
 
 button{
 
+    background:
 
-    padding:13px 25px;
+    rgba(255,255,255,.08);
+
+
+    color:white;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
 
 
     border-radius:18px;
 
 
-    background:
-
-
-    rgba(255,255,255,.35);
-
-
-
-    color:#111;
-
-
-
-    border:
-
-
-    1px solid rgba(255,255,255,.8);
-
+    padding:13px 25px;
 
 
     cursor:pointer;
@@ -546,16 +467,15 @@ button{
 button:hover{
 
 
-    background:white;
-
-
-
     box-shadow:
 
 
-    0 0 25px rgba(255,255,255,.8);
+    0 0 25px rgba(255,255,255,.25);
 
 
+    background:
+
+    rgba(255,255,255,.14);
 
 }
 
@@ -569,11 +489,10 @@ button:active{
     transform:scale(.96);
 
 
-
     box-shadow:
 
 
-    0 0 40px white;
+    0 0 35px white;
 
 }
 
@@ -583,15 +502,9 @@ button:active{
 
 #addMemory{
 
-
     display:block;
 
-
-    margin:0 auto 25px auto;
-
-
-    padding:15px 45px;
-
+    margin:0 auto 25px;
 
     font-size:18px;
 
@@ -601,64 +514,83 @@ button:active{
 
 
 
+
 .hidden{
 
-    display:none !important;
+    display:none!important;
 
 }
 
 
 
-
-
-/* CREATE WINDOW */
 
 
 #memoryBox{
 
 
+    margin-top:25px;
+
+
     padding:30px;
 
 
-    margin-top:20px;
-
+    border-radius:25px;
 
 
     background:
 
-
-    rgba(255,255,255,.28);
-
-
-
-    border-radius:28px;
+    rgba(255,255,255,.05);
 
 
     border:
 
+    1px solid rgba(255,255,255,.12);
 
-    1px solid rgba(255,255,255,.7);
 
+    animation:
+
+    popup .35s ease;
 
 }
+
+
+
+
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-15px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
 
 
 
 
 .memory-types{
 
-
     display:flex;
-
 
     justify-content:center;
 
-
     flex-wrap:wrap;
 
-
     gap:12px;
-
 
     margin-bottom:25px;
 
@@ -671,16 +603,19 @@ button:active{
 .type-button.active{
 
 
-    background:white;
+    background:
 
+    rgba(255,255,255,.16);
 
 
     box-shadow:
 
 
-    0 0 25px white;
+    0 0 25px rgba(255,255,255,.35);
 
 }
+
+
 
 
 
@@ -702,22 +637,17 @@ textarea{
     border-radius:20px;
 
 
-
     background:
 
-
-    rgba(255,255,255,.45);
-
+    rgba(0,0,0,.25);
 
 
     border:
 
-
-    1px solid white;
-
+    1px solid rgba(255,255,255,.15);
 
 
-    color:#111;
+    color:white;
 
 }
 
@@ -737,13 +667,12 @@ textarea{
 
 #saveMemory{
 
-
     display:block;
-
 
     margin:25px auto 0;
 
 }
+
 
 
 
@@ -756,9 +685,6 @@ textarea{
 .memory-card{
 
 
-    position:relative;
-
-
     margin:20px 0;
 
 
@@ -768,40 +694,25 @@ textarea{
     border-radius:28px;
 
 
-
     background:
 
-
-    rgba(255,255,255,.38);
-
+    rgba(255,255,255,.06);
 
 
     border:
 
-
-    1px solid rgba(255,255,255,.8);
-
+    1px solid rgba(255,255,255,.12);
 
 
     backdrop-filter:
 
-
-    blur(25px);
-
-
-
-    color:#111;
-
-
-
-    box-shadow:
-
-
-    0 20px 50px rgba(0,0,0,.18);
-
+    blur(20px);
 
 
     transition:.35s;
+
+
+    position:relative;
 
 }
 
@@ -815,14 +726,13 @@ textarea{
     transform:translateY(-6px);
 
 
-
     box-shadow:
 
 
-    0 25px 70px rgba(0,0,0,.25),
+    0 25px 60px rgba(0,0,0,.6),
 
 
-    0 0 30px white;
+    0 0 25px rgba(255,255,255,.12);
 
 }
 
@@ -832,43 +742,40 @@ textarea{
 
 .memory-card.idea{
 
-    border-left:4px solid white;
+    border-left:3px solid #fff;
 
 }
 
 
 .memory-card.goal{
 
-    border-left:4px solid #ddd;
+    border-left:3px solid #bba5ff;
 
 }
 
 
 .memory-card.note{
 
-    border-left:4px solid #aaa;
+    border-left:3px solid #aaa;
 
 }
 
 
 .memory-card.project{
 
-    border-left:4px solid white;
+    border-left:3px solid #ddd;
 
 }
 
 
 .memory-card.personal{
 
-    border-left:4px solid #ccc;
+    border-left:3px solid #9970ff;
 
 }
 
 
 
-
-
-/* FAVORITE */
 
 
 .memory-card.favorite{
@@ -877,7 +784,7 @@ textarea{
     box-shadow:
 
 
-    0 0 40px white;
+    0 0 35px rgba(255,255,255,.35);
 
 }
 
@@ -897,13 +804,19 @@ textarea{
     right:20px;
 
 
-    top:15px;
+    top:18px;
 
 
-    font-size:28px;
+    color:white;
 
 
-    color:#111;
+    font-size:26px;
+
+
+    text-shadow:
+
+
+    0 0 20px white;
 
 }
 
@@ -915,6 +828,6 @@ textarea{
 
     text-align:center;
 
-    color:#333;
+    color:#888;
 
 }
