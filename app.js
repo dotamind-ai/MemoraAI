@@ -9,18 +9,108 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-addMemory.addEventListener("click", function(){
+let memories = JSON.parse(
+    localStorage.getItem("memora")
+) || [];
+
+
+
+function renderMemories() {
+
+    memoryList.innerHTML = "";
+
+
+    memories.forEach((memory, index) => {
+
+
+        const card = document.createElement("div");
+
+
+        card.innerHTML = `
+
+        <h4>
+        💡 ${memory.title}
+        </h4>
+
+        <p>
+        ${memory.text}
+        </p>
+
+        <small>
+        ${memory.date}
+        </small>
+
+        <button class="delete">
+        Удалить
+        </button>
+
+        `;
+
+
+        card.querySelector(".delete")
+        .onclick = function(){
+
+
+            memories.splice(index,1);
+
+
+            saveMemories();
+
+
+            renderMemories();
+
+
+        };
+
+
+        memoryList.appendChild(card);
+
+
+    });
+
+
+    memoryCount.innerText =
+    memories.length +
+    " воспоминаний";
+
+
+}
+
+
+
+
+function saveMemories(){
+
+    localStorage.setItem(
+        "memora",
+        JSON.stringify(memories)
+    );
+
+}
+
+
+
+
+addMemory.onclick = function(){
 
     memoryBox.classList.remove("hidden");
 
-});
+};
 
 
-saveMemory.addEventListener("click", function(){
 
 
-    const title = titleInput.value;
-    const text = textInput.value;
+
+saveMemory.onclick = function(){
+
+
+    const title =
+    titleInput.value.trim();
+
+
+    const text =
+    textInput.value.trim();
+
 
 
     if(title === "" || text === ""){
@@ -32,33 +122,40 @@ saveMemory.addEventListener("click", function(){
     }
 
 
-    const card = document.createElement("div");
+
+    memories.unshift({
+
+        title:title,
+
+        text:text,
+
+        date:
+        new Date()
+        .toLocaleDateString("ru-RU")
+
+    });
 
 
-    card.style.marginTop = "15px";
-    card.style.padding = "20px";
-    card.style.borderRadius = "20px";
-    card.style.background = "rgba(255,255,255,0.1)";
+
+    saveMemories();
 
 
-    card.innerHTML = 
-    `
-    <h4>${title}</h4>
-    <p>${text}</p>
-    `;
 
+    titleInput.value="";
 
-    memoryList.appendChild(card);
-
-
-    memoryCount.innerText = "1 воспоминание";
-
-
-    titleInput.value = "";
-    textInput.value = "";
+    textInput.value="";
 
 
     memoryBox.classList.add("hidden");
 
 
-});
+    renderMemories();
+
+
+};
+
+
+
+
+
+renderMemories();
