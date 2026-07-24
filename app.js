@@ -9,68 +9,56 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-let memories = [];
-
-
-addMemory.onclick = function() {
+addMemory.addEventListener("click", function(){
 
     memoryBox.classList.remove("hidden");
 
-};
+});
 
 
-
-saveMemory.onclick = function() {
-
-
-    let title = titleInput.value;
-
-    let text = textInput.value;
+saveMemory.addEventListener("click", function(){
 
 
-    if(title === "" || text === "") {
+    const title = titleInput.value;
+    const text = textInput.value;
 
-        alert("Заполни поля");
+
+    if(title === "" || text === ""){
+
+        alert("Заполни оба поля");
 
         return;
 
     }
 
 
+    const card = document.createElement("div");
 
-    let card = document.createElement("div");
+
+    card.style.marginTop = "15px";
+    card.style.padding = "20px";
+    card.style.borderRadius = "20px";
+    card.style.background = "rgba(255,255,255,0.1)";
 
 
-    card.innerHTML = `
-
+    card.innerHTML = 
+    `
     <h4>${title}</h4>
-
     <p>${text}</p>
-
     `;
-
 
 
     memoryList.appendChild(card);
 
 
-
-    memories.push(title);
-
-
-
-    memoryCount.innerText =
-    memories.length + " воспоминаний";
-
+    memoryCount.innerText = "1 воспоминание";
 
 
     titleInput.value = "";
-
     textInput.value = "";
-
 
 
     memoryBox.classList.add("hidden");
 
 
-};
+});
