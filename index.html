@@ -9,6 +9,7 @@
 
 <title>MEMORA</title>
 
+
 <link rel="stylesheet" href="style.css">
 
 </head>
@@ -53,6 +54,7 @@ M
 
 
 
+
 <h1>
 MEMORA
 </h1>
@@ -61,6 +63,7 @@ MEMORA
 <p>
 Твоя цифровая память
 </p>
+
 
 
 </header>
@@ -165,7 +168,6 @@ data-type="personal">
 
 
 
-
 <input
 
 id="memoryTitle"
@@ -182,7 +184,6 @@ placeholder="Название памяти"
 
 
 
-
 <textarea
 
 id="memoryText"
@@ -190,7 +191,6 @@ id="memoryText"
 placeholder="Запиши мысль..."
 
 ></textarea>
-
 
 
 
@@ -222,14 +222,11 @@ value="idea"
 
 
 
-
-
 <button id="cancelEdit" class="hidden">
 
 Отмена
 
 </button>
-
 
 
 
@@ -253,11 +250,123 @@ value="idea"
 
 
 
+
+
+
+<div class="filters">
+
+
+
+<button 
+class="filter-button active"
+data-filter="all">
+
+Все
+
+</button>
+
+
+
+<button 
+class="filter-button"
+data-filter="idea">
+
+◇ Идеи
+
+</button>
+
+
+
+<button 
+class="filter-button"
+data-filter="goal">
+
+◎ Цели
+
+</button>
+
+
+
+<button 
+class="filter-button"
+data-filter="note">
+
+▤ Заметки
+
+</button>
+
+
+
+<button 
+class="filter-button"
+data-filter="project">
+
+◈ Проекты
+
+</button>
+
+
+
+<button 
+class="filter-button"
+data-filter="personal">
+
+◉ Личное
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<select id="sortMemory">
+
+
+<option value="new">
+
+Новые
+
+</option>
+
+
+
+<option value="old">
+
+Старые
+
+</option>
+
+
+
+<option value="favorite">
+
+Закреплённые
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
 <h3 id="memoryCount">
 
 0 воспоминаний
 
 </h3>
+
 
 
 
@@ -271,8 +380,9 @@ value="idea"
 
 
 
-</section>
 
+
+</section>
 
 
 
