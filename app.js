@@ -1,4 +1,3 @@
-alert("ЗАГРУЗИЛСЯ НОВЫЙ APP.JS");
 const addMemory = document.getElementById("addMemory");
 const memoryBox = document.getElementById("memoryBox");
 const saveMemory = document.getElementById("saveMemory");
@@ -22,27 +21,39 @@ let selectedType = "idea";
 
 
 
-// выбор категории
 
-typeButtons.forEach(function(button){
+typeButtons.forEach(button => {
 
-    button.addEventListener("click", function(){
+    button.onclick = () => {
 
-        selectedType = this.dataset.type;
+        selectedType = button.dataset.type;
 
 
-        typeButtons.forEach(function(btn){
+        typeButtons.forEach(btn => {
 
             btn.classList.remove("active");
 
         });
 
 
-        this.classList.add("active");
+        button.classList.add("active");
 
-    });
+    };
 
 });
+
+
+
+
+
+
+addMemory.onclick = () => {
+
+    memoryBox.classList.remove("hidden");
+
+};
+
+
 
 
 
@@ -62,32 +73,6 @@ function saveData(){
 
 
 
-function getTypeName(type){
-
-    const names = {
-
-        idea:"◇ Идея",
-
-        goal:"◎ Цель",
-
-        note:"▤ Заметка",
-
-        project:"◈ Проект",
-
-        personal:"◉ Личное"
-
-    };
-
-
-    return names[type] || "◇ Память";
-
-}
-
-
-
-
-
-
 
 function renderMemories(){
 
@@ -96,10 +81,9 @@ function renderMemories(){
 
 
 
-    memories.sort(function(a,b){
+    memories.sort((a,b)=>{
 
-        return (b.favorite ? 1 : 0) -
-               (a.favorite ? 1 : 0);
+        return Number(b.favorite) - Number(a.favorite);
 
     });
 
@@ -107,7 +91,8 @@ function renderMemories(){
 
 
 
-    memories.forEach(function(memory,index){
+    memories.forEach((memory,index)=>{
+
 
 
         const card = document.createElement("div");
@@ -131,18 +116,34 @@ function renderMemories(){
         card.innerHTML = `
 
 
+        <div class="card-icon">
+
+        ${memory.icon || "◇"}
+
+        </div>
+
+
+
         <h4>
-        ${getTypeName(memory.type)}
+
+        ${memory.type}
+
         </h4>
 
 
+
         <h3>
+
         ${memory.title}
+
         </h3>
 
 
+
         <p>
+
         ${memory.text}
+
         </p>
 
 
@@ -167,8 +168,10 @@ function renderMemories(){
 
 
 
+
+
         card.querySelector(".favoriteButton")
-        .onclick = function(){
+        .onclick = ()=>{
 
 
             memory.favorite =
@@ -177,11 +180,11 @@ function renderMemories(){
 
             saveData();
 
-
             renderMemories();
 
 
         };
+
 
 
 
@@ -189,14 +192,13 @@ function renderMemories(){
 
 
         card.querySelector(".deleteButton")
-        .onclick = function(){
+        .onclick = ()=>{
 
 
             memories.splice(index,1);
 
 
             saveData();
-
 
             renderMemories();
 
@@ -205,7 +207,10 @@ function renderMemories(){
 
 
 
+
+
         memoryList.appendChild(card);
+
 
 
     });
@@ -214,7 +219,7 @@ function renderMemories(){
 
 
 
-    memoryCount.innerText =
+    memoryCount.textContent =
     memories.length + " воспоминаний";
 
 
@@ -227,20 +232,7 @@ function renderMemories(){
 
 
 
-addMemory.onclick = function(){
-
-    memoryBox.classList.remove("hidden");
-
-};
-
-
-
-
-
-
-
-
-saveMemory.onclick = function(){
+saveMemory.onclick = ()=>{
 
 
     const title =
@@ -253,12 +245,9 @@ saveMemory.onclick = function(){
 
 
 
+    if(!title){
 
-    if(title === ""){
-
-
-        alert("Введите название памяти");
-
+        alert("Заполни название памяти");
 
         return;
 
@@ -275,7 +264,7 @@ saveMemory.onclick = function(){
         title:title,
 
 
-        text:text || "Без описания",
+        text:text || "Без текста",
 
 
         type:selectedType,
@@ -284,8 +273,13 @@ saveMemory.onclick = function(){
         favorite:false,
 
 
-        date:new Date()
-        .toLocaleString("ru-RU")
+        icon:
+        selectedType === "goal" ? "◎" :
+        selectedType === "note" ? "▤" :
+        selectedType === "project" ? "◈" :
+        selectedType === "personal" ? "◉" :
+        "◇"
+
 
 
     });
@@ -302,17 +296,15 @@ saveMemory.onclick = function(){
 
 
 
+    titleInput.value="";
 
-    titleInput.value = "";
-
-    textInput.value = "";
+    textInput.value="";
 
 
     memoryBox.classList.add("hidden");
 
 
 };
-
 
 
 
