@@ -11,6 +11,9 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
+alert("MEMORA новый код загружен");
+
+
 
 let memories = JSON.parse(
     localStorage.getItem("memora")
@@ -22,8 +25,6 @@ let selectedType = "idea";
 
 
 
-
-// Выбор категории
 
 typeButtons.forEach(function(button){
 
@@ -56,7 +57,6 @@ typeButtons.forEach(function(button){
 
 
 
-
 function saveData(){
 
     localStorage.setItem(
@@ -71,19 +71,16 @@ function saveData(){
 
 
 
+
 function typeName(type){
 
 
     const names = {
 
         idea:"◇ Идея",
-
         goal:"◎ Цель",
-
         note:"▤ Заметка",
-
         project:"◈ Проект",
-
         personal:"◉ Личное"
 
     };
@@ -98,14 +95,13 @@ function typeName(type){
 
 
 
+
 function renderMemories(){
 
 
     memoryList.innerHTML = "";
 
 
-
-    // закреплённые сверху
 
     memories.sort(function(a,b){
 
@@ -121,9 +117,7 @@ function renderMemories(){
     memories.forEach(function(memory,index){
 
 
-
         const card = document.createElement("div");
-
 
 
         card.className =
@@ -145,33 +139,22 @@ function renderMemories(){
 
 
         <h4>
-
         ${typeName(memory.type)}
-
         </h4>
 
 
-
         <h3>
-
         ${memory.title}
-
         </h3>
 
 
-
         <p>
-
         ${memory.text}
-
         </p>
 
 
-
         <small>
-
         ${memory.date}
-
         </small>
 
 
@@ -197,26 +180,20 @@ function renderMemories(){
 
 
 
-
-
         card.querySelector(".favoriteButton")
         .onclick = function(){
-
 
 
             memory.favorite =
             !memory.favorite;
 
 
-
             saveData();
-
 
             renderMemories();
 
 
         };
-
 
 
 
@@ -227,13 +204,10 @@ function renderMemories(){
         .onclick = function(){
 
 
-
             memories.splice(index,1);
 
 
-
             saveData();
-
 
             renderMemories();
 
@@ -243,14 +217,10 @@ function renderMemories(){
 
 
 
-
         memoryList.appendChild(card);
 
 
-
     });
-
-
 
 
 
@@ -266,12 +236,9 @@ function renderMemories(){
 
 
 
-
 addMemory.onclick = function(){
 
-
     memoryBox.classList.remove("hidden");
-
 
 };
 
@@ -288,10 +255,8 @@ saveMemory.onclick = function(){
     titleInput.value.trim();
 
 
-
     const text =
     textInput.value.trim();
-
 
 
 
@@ -304,10 +269,7 @@ saveMemory.onclick = function(){
 
         return;
 
-
     }
-
-
 
 
 
@@ -315,27 +277,18 @@ saveMemory.onclick = function(){
 
     memories.unshift({
 
-
         type:selectedType,
-
 
         title:title,
 
-
         text:text || "Без описания",
-
 
         favorite:false,
 
-
         date:new Date()
-
         .toLocaleString("ru-RU")
 
-
     });
-
-
 
 
 
@@ -348,19 +301,15 @@ saveMemory.onclick = function(){
 
 
 
+    titleInput.value="";
 
-    titleInput.value = "";
-
-    textInput.value = "";
-
+    textInput.value="";
 
 
     memoryBox.classList.add("hidden");
 
 
 };
-
-
 
 
 
