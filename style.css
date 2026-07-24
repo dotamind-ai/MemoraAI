@@ -1,25 +1,30 @@
 * {
-    box-sizing: border-box;
+
+box-sizing:border-box;
+
 }
+
 
 
 body {
 
-    margin: 0;
+margin:0;
 
-    min-height: 100vh;
+min-height:100vh;
 
-    background:
-    radial-gradient(circle at top, #25254a, #07070b 55%);
 
-    color: white;
+background:
+radial-gradient(circle at top,#29294d,#07070b 60%);
 
-    font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    Arial,
-    sans-serif;
+
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+Arial,sans-serif;
+
+
+color:white;
+
 
 }
 
@@ -27,27 +32,23 @@ body {
 
 .app {
 
-    width: 100%;
 
-    max-width: 430px;
+max-width:430px;
 
-    min-height: 100vh;
+margin:auto;
 
-    margin: auto;
 
-    padding: 35px 22px;
+padding:35px 22px;
+
 
 }
 
 
 
-/* LOGO */
 
 header {
 
-    text-align: center;
-
-    padding-top: 25px;
+text-align:center;
 
 }
 
@@ -55,17 +56,14 @@ header {
 
 .logo {
 
-    width: 110px;
+height:120px;
 
-    height: 110px;
+display:flex;
 
-    margin: 0 auto 20px;
+align-items:center;
 
-    display: flex;
+justify-content:center;
 
-    align-items: center;
-
-    justify-content: center;
 
 }
 
@@ -73,33 +71,28 @@ header {
 
 .core {
 
-    width: 80px;
 
-    height: 80px;
+width:80px;
 
-    border-radius: 50%;
-
-    position: relative;
+height:80px;
 
 
-    background:
-
-    radial-gradient(
-        circle,
-        white 0%,
-        #8d8dff 25%,
-        #29294d 75%
-    );
+border-radius:50%;
 
 
-    box-shadow:
-
-    0 0 50px
-    rgba(140,140,255,0.8);
+position:relative;
 
 
-    animation:
-    pulse 3s infinite;
+background:
+radial-gradient(circle,#fff,#8888ff,#22223d);
+
+
+box-shadow:
+0 0 50px #7777ff;
+
+
+animation:pulse 3s infinite;
+
 
 }
 
@@ -107,16 +100,17 @@ header {
 
 .ring {
 
-    position: absolute;
 
-    inset: -12px;
+position:absolute;
 
-    border-radius: 50%;
+inset:-12px;
 
-    border:
 
-    2px solid
-    rgba(255,255,255,0.4);
+border-radius:50%;
+
+
+border:2px solid rgba(255,255,255,.4);
+
 
 }
 
@@ -124,23 +118,29 @@ header {
 
 .point {
 
-    position:absolute;
 
-    width:18px;
+position:absolute;
 
-    height:18px;
 
-    background:white;
+width:18px;
 
-    border-radius:50%;
+height:18px;
 
-    top:31px;
 
-    left:31px;
+background:white;
 
-    box-shadow:
 
-    0 0 20px white;
+border-radius:50%;
+
+
+top:31px;
+
+left:31px;
+
+
+box-shadow:
+0 0 20px white;
+
 
 }
 
@@ -148,11 +148,13 @@ header {
 
 h1 {
 
-    font-size: 42px;
 
-    letter-spacing: 5px;
+font-size:42px;
 
-    margin: 0;
+letter-spacing:5px;
+
+margin:10px 0;
+
 
 }
 
@@ -160,127 +162,110 @@ h1 {
 
 header p {
 
-    color:#9b9ba7;
-
-    margin-top:10px;
+color:#999;
 
 }
 
-
-
-/* GLASS CARD */
 
 
 .glass {
 
-    margin-top:45px;
 
-    padding:25px;
-
-
-    border-radius:28px;
+margin-top:40px;
 
 
-    background:
-
-    rgba(255,255,255,0.08);
+padding:25px;
 
 
-    backdrop-filter:
-
-    blur(25px);
+border-radius:28px;
 
 
-    border:
+background:
+rgba(255,255,255,.08);
 
-    1px solid
 
-    rgba(255,255,255,0.1);
+border:
+1px solid rgba(255,255,255,.1);
+
+
+backdrop-filter:blur(20px);
+
 
 }
 
-
-
-.glass h2 {
-
-    margin:0 0 10px;
-
-}
-
-
-
-#memoryCount {
-
-    color:#aaa;
-
-}
-
-
-
-/* BUTTON */
 
 
 button {
 
-    width:100%;
 
-    margin-top:25px;
-
-    padding:18px;
+width:100%;
 
 
-    border:none;
+margin-top:25px;
 
 
-    border-radius:22px;
+padding:18px;
 
 
-    background:white;
+border:0;
 
 
-    color:black;
+border-radius:22px;
 
 
-    font-size:18px;
+background:white;
 
 
-    font-weight:600;
+color:black;
+
+
+font-size:18px;
+
+
+font-weight:600;
+
 
 }
 
 
 
-/* INPUT */
+.memory-form {
+
+
+margin-top:20px;
+
+
+}
+
 
 
 input,
 textarea {
 
 
-    width:100%;
+width:100%;
 
 
-    margin-top:15px;
+margin-top:15px;
 
 
-    padding:16px;
+padding:16px;
 
 
-    border:none;
+border:0;
 
 
-    border-radius:18px;
+border-radius:18px;
 
 
-    background:
-
-    rgba(255,255,255,0.1);
-
-
-    color:white;
+background:
+rgba(255,255,255,.12);
 
 
-    font-size:16px;
+color:white;
+
+
+font-size:16px;
 
 
 }
@@ -289,9 +274,9 @@ textarea {
 
 textarea {
 
-    height:120px;
 
-    resize:none;
+height:120px;
+
 
 }
 
@@ -299,7 +284,9 @@ textarea {
 
 .hidden {
 
-    display:none;
+
+display:none;
+
 
 }
 
@@ -307,7 +294,9 @@ textarea {
 
 h3 {
 
-    margin-top:35px;
+
+margin-top:35px;
+
 
 }
 
@@ -316,18 +305,54 @@ h3 {
 #memoryList div {
 
 
-    margin-top:15px;
+display:block;
 
 
-    padding:20px;
+width:100%;
 
 
-    border-radius:22px;
+padding:20px;
 
 
-    background:
+margin-top:15px;
 
-    rgba(255,255,255,0.06);
+
+border-radius:22px;
+
+
+background:
+rgba(255,255,255,.1);
+
+
+border:
+1px solid rgba(255,255,255,.1);
+
+
+}
+
+
+
+#memoryList h4 {
+
+
+margin:0 0 10px;
+
+
+font-size:20px;
+
+
+}
+
+
+
+#memoryList p {
+
+
+margin:0;
+
+
+color:#ccc;
+
 
 }
 
@@ -336,24 +361,11 @@ h3 {
 @keyframes pulse {
 
 
-    0% {
+50% {
 
-        transform:scale(1);
+transform:scale(1.08);
 
-    }
+}
 
-
-    50% {
-
-        transform:scale(1.08);
-
-    }
-
-
-    100% {
-
-        transform:scale(1);
-
-    }
 
 }
