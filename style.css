@@ -9,7 +9,7 @@ body{
 
     min-height:100vh;
 
-    color:#f5f5f5;
+    color:#f4f4f4;
 
     font-family:
     "Segoe UI",
@@ -19,24 +19,28 @@ body{
 
     background:
 
+
     radial-gradient(
         circle at 50% 0%,
-        rgba(255,255,255,.12),
+        rgba(255,255,255,.16),
         transparent 35%
     ),
 
+
     radial-gradient(
-        circle at 15% 80%,
-        rgba(255,255,255,.06),
+        circle at 20% 80%,
+        rgba(255,255,255,.08),
         transparent 35%
     ),
+
 
     linear-gradient(
         145deg,
-        #17191d,
-        #0d0f13,
-        #07080a
+        #18191d,
+        #0d0f12,
+        #090a0c
     );
+
 
     overflow-x:hidden;
 
@@ -45,35 +49,44 @@ body{
 
 
 
+
+/* живой фон */
+
+
 body::before{
 
     content:"";
 
     position:fixed;
 
-    width:550px;
+    width:600px;
 
-    height:550px;
+    height:600px;
+
 
     top:-200px;
 
     left:-200px;
 
 
+
     background:
 
     radial-gradient(
         circle,
-        rgba(255,255,255,.08),
-        transparent 70%
+        rgba(255,255,255,.12),
+        transparent 65%
     );
+
 
 
     filter:blur(80px);
 
+
     animation:
 
-    fog 18s infinite alternate;
+    lightMove 18s infinite alternate;
+
 
     z-index:-1;
 
@@ -88,29 +101,35 @@ body::after{
 
     position:fixed;
 
-    width:450px;
+    width:500px;
 
-    height:450px;
+    height:500px;
 
-    right:-150px;
+
+    right:-200px;
 
     bottom:-150px;
+
 
 
     background:
 
     radial-gradient(
         circle,
-        rgba(255,255,255,.05),
-        transparent 70%
+        rgba(210,210,220,.10),
+        transparent 65%
     );
+
 
 
     filter:blur(90px);
 
+
+
     animation:
 
-    fog2 20s infinite alternate;
+    lightMoveTwo 22s infinite alternate;
+
 
     z-index:-1;
 
@@ -119,31 +138,47 @@ body::after{
 
 
 
-@keyframes fog{
+
+@keyframes lightMove{
+
 
     from{
+
         transform:translate(0,0);
+
     }
 
+
     to{
-        transform:translate(100px,70px);
+
+        transform:translate(130px,80px);
+
     }
 
 }
 
 
 
-@keyframes fog2{
+
+
+@keyframes lightMoveTwo{
+
 
     from{
+
         transform:translate(0,0);
+
     }
 
+
     to{
-        transform:translate(-80px,-60px);
+
+        transform:translate(-120px,-70px);
+
     }
 
 }
+
 
 
 
@@ -162,14 +197,17 @@ body::after{
 
 
 
-/* HEADER */
+
+/* =====================
+        LOGO
+===================== */
 
 
 header{
 
     text-align:center;
 
-    margin-bottom:40px;
+    margin-bottom:45px;
 
 }
 
@@ -191,16 +229,18 @@ header{
 
 
 
-
 .core{
 
     width:100px;
 
     height:100px;
 
+
     position:relative;
 
+
     border-radius:50%;
+
 
 
     background:
@@ -208,22 +248,26 @@ header{
     radial-gradient(
         circle at 35% 30%,
         white,
-        #ddd 20%,
+        #e6e6e6 20%,
         #888 45%,
         #222 75%
     );
 
 
+
     box-shadow:
 
-    0 0 35px rgba(255,255,255,.4),
 
-    0 0 90px rgba(255,255,255,.15);
+    0 0 35px rgba(255,255,255,.45),
+
+
+    0 0 100px rgba(255,255,255,.15);
+
 
 
     animation:
 
-    floatLogo 5s infinite ease-in-out;
+    logoFloat 5s infinite ease-in-out;
 
 }
 
@@ -236,14 +280,18 @@ header{
 
     position:absolute;
 
+
     inset:-18px;
+
 
     border-radius:50%;
 
 
+
     border:
 
-    1px solid rgba(255,255,255,.5);
+    1px solid rgba(255,255,255,.45);
+
 
 
     animation:
@@ -255,21 +303,25 @@ header{
 
 
 
-
 .core::after{
 
     content:"";
 
+
     position:absolute;
+
 
     inset:-35px;
 
+
     border-radius:50%;
+
 
 
     border:
 
     1px dashed rgba(255,255,255,.25);
+
 
 
     animation:
@@ -284,33 +336,53 @@ header{
 
 .point{
 
+
     position:absolute;
+
 
     width:15px;
 
+
     height:15px;
+
 
     left:42px;
 
+
     top:42px;
+
+
 
     border-radius:50%;
 
+
     background:white;
+
+
 
     box-shadow:
 
+
     0 0 25px white;
+
+
+    animation:
+
+    pointGlow 3s infinite;
 
 }
 
 
 
 
-@keyframes floatLogo{
+
+@keyframes logoFloat{
+
 
     50%{
+
         transform:translateY(-8px);
+
     }
 
 }
@@ -319,8 +391,11 @@ header{
 
 @keyframes rotate{
 
+
     to{
+
         transform:rotate(360deg);
+
     }
 
 }
@@ -329,8 +404,11 @@ header{
 
 @keyframes rotateBack{
 
+
     to{
+
         transform:rotate(-360deg);
+
     }
 
 }
@@ -338,17 +416,36 @@ header{
 
 
 
-h1{
+@keyframes pointGlow{
 
-    letter-spacing:7px;
+
+    50%{
+
+        transform:scale(1.4);
+
+    }
+
+}
+
+
+
+
+
+h1{
 
     font-size:42px;
 
+    letter-spacing:7px;
+
+
+
     text-shadow:
 
-    0 0 15px rgba(255,255,255,.25);
+
+    0 0 20px rgba(255,255,255,.25);
 
 }
+
 
 
 
@@ -362,7 +459,10 @@ header p{
 
 
 
-/* GLASS MAIN */
+
+/* =====================
+       GLASS BLOCK
+===================== */
 
 
 .glass{
@@ -370,77 +470,81 @@ header p{
 
     background:
 
-    rgba(255,255,255,.07);
+
+    rgba(255,255,255,.075);
+
 
 
     border:
 
-    1px solid rgba(255,255,255,.15);
+
+    1px solid rgba(255,255,255,.18);
 
 
 
     backdrop-filter:
 
+
     blur(30px);
 
 
 
-    border-radius:30px;
+    border-radius:32px;
 
 
     padding:30px;
 
 
-}
+
+    box-shadow:
 
 
+    0 30px 80px rgba(0,0,0,.55),
 
 
-
-/* NEW MEMORY BUTTON */
-
-
-#addMemory{
-
-
-    display:block;
-
-    margin:0 auto 25px auto;
-
-
-    padding:15px 45px;
-
-
-    font-size:18px;
+    inset 0 0 40px rgba(255,255,255,.04);
 
 }
 
 
 
+
+
+
+/* =====================
+        BUTTONS
+===================== */
 
 
 button{
 
-    border:
 
-    1px solid rgba(255,255,255,.15);
-
-
-    background:
-
-    rgba(255,255,255,.08);
-
-
-    color:white;
+    padding:13px 25px;
 
 
     border-radius:18px;
 
 
-    padding:12px 22px;
+
+    border:
+
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    background:
+
+
+    rgba(255,255,255,.08);
+
+
+
+    color:white;
 
 
     cursor:pointer;
+
 
 
     transition:.3s;
@@ -450,25 +554,72 @@ button{
 
 
 
+
 button:hover{
+
 
     background:
 
+
     rgba(255,255,255,.16);
 
-    transform:translateY(-2px);
+
+
+    box-shadow:
+
+
+    0 0 20px rgba(255,255,255,.25);
 
 }
 
 
 
 
-/* HIDDEN */
+
+button:active{
+
+
+    transform:scale(.95);
+
+
+
+    box-shadow:
+
+
+    0 0 35px rgba(255,255,255,.7),
+
+
+    inset 0 0 20px rgba(255,255,255,.25);
+
+}
+
+
+
+
+
+#addMemory{
+
+
+    display:block;
+
+
+    margin:0 auto 25px auto;
+
+
+    font-size:18px;
+
+
+    padding:15px 45px;
+
+}
+
+
+
 
 
 .hidden{
 
-    display:none;
+    display:none !important;
 
 }
 
@@ -476,7 +627,7 @@ button:hover{
 
 
 
-/* CREATE WINDOW */
+/* окно создания */
 
 
 #memoryBox{
@@ -488,18 +639,22 @@ button:hover{
     padding:30px;
 
 
-    border-radius:28px;
-
 
     background:
+
 
     rgba(255,255,255,.06);
 
 
+
     border:
+
 
     1px solid rgba(255,255,255,.15);
 
+
+
+    border-radius:28px;
 
 
     animation:
@@ -512,6 +667,7 @@ button:hover{
 
 
 @keyframes popup{
+
 
     from{
 
@@ -535,15 +691,21 @@ button:hover{
 
 
 
+
 .memory-types{
+
 
     display:flex;
 
+
     justify-content:center;
+
 
     flex-wrap:wrap;
 
+
     gap:12px;
+
 
     margin-bottom:25px;
 
@@ -552,9 +714,28 @@ button:hover{
 
 
 
-.type-button{
 
-    min-width:110px;
+.type-button.active{
+
+
+    background:
+
+
+    rgba(255,255,255,.18);
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.5);
+
+
+
+    box-shadow:
+
+
+    0 0 25px rgba(255,255,255,.35);
 
 }
 
@@ -575,23 +756,28 @@ textarea{
     padding:16px;
 
 
-    border-radius:18px;
+    border-radius:20px;
 
 
 
     background:
 
-    rgba(255,255,255,.05);
+
+    rgba(255,255,255,.06);
+
 
 
     border:
 
+
     1px solid rgba(255,255,255,.15);
+
 
 
     color:white;
 
 }
+
 
 
 
@@ -612,25 +798,19 @@ textarea{
 
     display:block;
 
+
     margin:25px auto 0 auto;
 
-    padding:14px 45px;
-
 }
 
 
 
 
 
-/* CARDS */
 
-
-#memoryList{
-
-    margin-top:30px;
-
-}
-
+/* =====================
+        CARDS
+===================== */
 
 
 .memory-card{
@@ -645,10 +825,12 @@ textarea{
     margin:20px 0;
 
 
-    border-radius:26px;
+    border-radius:28px;
+
 
 
     background:
+
 
     rgba(255,255,255,.07);
 
@@ -656,13 +838,16 @@ textarea{
 
     border:
 
+
     1px solid rgba(255,255,255,.15);
 
 
 
     backdrop-filter:
 
+
     blur(25px);
+
 
 
     transition:.35s;
@@ -676,7 +861,23 @@ textarea{
 .memory-card:hover{
 
 
-    transform:translateY(-5px);
+    transform:translateY(-6px);
+
+
+
+    border-color:
+
+
+    rgba(255,255,255,.35);
+
+
+    box-shadow:
+
+
+    0 20px 60px rgba(0,0,0,.55),
+
+
+    0 0 25px rgba(255,255,255,.12);
 
 }
 
@@ -722,20 +923,26 @@ textarea{
 
 
 
-/* FAVORITE */
+/* закреплённая память */
 
 
 .memory-card.favorite{
 
 
-    border:1px solid white;
+    border:
+
+
+    1px solid white;
+
 
 
     box-shadow:
 
-    0 0 30px rgba(255,255,255,.35);
+
+    0 0 35px rgba(255,255,255,.35);
 
 }
+
 
 
 
@@ -752,7 +959,8 @@ textarea{
     right:20px;
 
 
-    top:15px;
+    top:18px;
+
 
 
     font-size:26px;
@@ -761,7 +969,14 @@ textarea{
     color:white;
 
 
+
+    text-shadow:
+
+
+    0 0 20px white;
+
 }
+
 
 
 
