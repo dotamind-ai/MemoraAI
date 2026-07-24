@@ -1,5 +1,5 @@
 /* =====================================
-        MEMORA V2 APP
+        MEMORA V2 APP FULL
 ===================================== */
 
 
@@ -8,6 +8,8 @@ const addMemory = document.getElementById("addMemory");
 const memoryBox = document.getElementById("memoryBox");
 
 const saveMemory = document.getElementById("saveMemory");
+
+const cancelEdit = document.getElementById("cancelEdit");
 
 
 const titleInput = document.getElementById("memoryTitle");
@@ -24,23 +26,21 @@ const memoryList = document.getElementById("memoryList");
 
 const memoryCount = document.getElementById("memoryCount");
 
-
+const searchMemory = document.getElementById("searchMemory");
 
 
 
 
 let memories = JSON.parse(
-
     localStorage.getItem("memora")
-
 ) || [];
-
-
 
 
 
 let selectedType = "idea";
 
+
+let editIndex = null;
 
 
 
@@ -48,15 +48,14 @@ let selectedType = "idea";
 
 
 /* =========================
-        CATEGORY
+        TYPES
 ========================= */
-
 
 
 typeButtons.forEach(button => {
 
 
-    button.addEventListener("click",()=>{
+    button.onclick = ()=>{
 
 
         selectedType = button.dataset.type;
@@ -68,9 +67,7 @@ typeButtons.forEach(button => {
 
         typeButtons.forEach(btn=>{
 
-
             btn.classList.remove("active");
-
 
         });
 
@@ -79,9 +76,7 @@ typeButtons.forEach(button => {
         button.classList.add("active");
 
 
-
-    });
-
+    };
 
 
 });
@@ -92,12 +87,9 @@ typeButtons.forEach(button => {
 
 
 
-
-
 /* =========================
-        SAVE
+        STORAGE
 ========================= */
-
 
 
 function saveData(){
@@ -113,7 +105,6 @@ function saveData(){
 
 
 }
-
 
 
 
@@ -152,21 +143,63 @@ function getTypeName(type){
 
 
 
-
 /* =========================
         RENDER
 ========================= */
 
 
-
 function renderMemories(){
 
 
-    memoryList.innerHTML = "";
+    memoryList.innerHTML="";
 
 
 
-    memories.sort((a,b)=>{
+    let result = memories;
+
+
+
+    if(searchMemory && searchMemory.value.trim() !== ""){
+
+
+        let query =
+
+        searchMemory.value.toLowerCase();
+
+
+
+        result = memories.filter(memory=>{
+
+
+            return (
+
+                memory.title
+                .toLowerCase()
+                .includes(query)
+
+
+                ||
+
+
+                memory.text
+                .toLowerCase()
+                .includes(query)
+
+
+            );
+
+
+        });
+
+
+    }
+
+
+
+
+
+
+    result.sort((a,b)=>{
 
 
         return b.favorite - a.favorite;
@@ -177,7 +210,14 @@ function renderMemories(){
 
 
 
-    memories.forEach((memory,index)=>{
+
+
+
+    result.forEach((memory)=>{
+
+
+
+        const index = memories.indexOf(memory);
 
 
 
@@ -203,8 +243,8 @@ function renderMemories(){
 
 
 
-
         card.innerHTML = `
+
 
 
         <h4>
@@ -238,17 +278,25 @@ function renderMemories(){
         </small>
 
 
-
         <br><br>
+
+
+
+        <button class="editButton">
+
+        ✏️ Изменить
+
+        </button>
 
 
 
         <button class="favoriteButton">
 
-        ${memory.favorite ? "★ Закреплено" : "☆ Закрепить"}
+        ${memory.favorite 
+        ? "★ Закреплено"
+        : "☆ Закрепить"}
 
         </button>
-
 
 
 
@@ -268,14 +316,67 @@ function renderMemories(){
 
 
 
-        const favoriteButton =
 
-        card.querySelector(".favoriteButton");
-
-
+        card.querySelector(".editButton")
+        .onclick = ()=>{
 
 
-        favoriteButton.onclick = ()=>{
+            titleInput.value = memory.title;
+
+
+            textInput.value = memory.text;
+
+
+
+            selectedType = memory.type;
+
+
+            typeButtons.forEach(btn=>{
+
+
+                btn.classList.remove("active");
+
+
+
+                if(btn.dataset.type === memory.type){
+
+
+                    btn.classList.add("active");
+
+
+                }
+
+
+            });
+
+
+
+            editIndex = index;
+
+
+
+            saveMemory.innerText =
+            "Обновить";
+
+
+
+            cancelEdit.classList.remove("hidden");
+
+
+
+            memoryBox.classList.remove("hidden");
+
+
+        };
+
+
+
+
+
+
+
+        card.querySelector(".favoriteButton")
+        .onclick = ()=>{
 
 
             memory.favorite =
@@ -290,7 +391,6 @@ function renderMemories(){
             renderMemories();
 
 
-
         };
 
 
@@ -301,7 +401,6 @@ function renderMemories(){
 
 
         card.querySelector(".deleteButton")
-
         .onclick = ()=>{
 
 
@@ -321,8 +420,8 @@ function renderMemories(){
 
 
 
-        memoryList.appendChild(card);
 
+        memoryList.appendChild(card);
 
 
     });
@@ -335,7 +434,7 @@ function renderMemories(){
     memoryCount.innerText =
 
 
-    memories.length +
+    result.length +
 
     " воспоминаний";
 
@@ -349,11 +448,9 @@ function renderMemories(){
 
 
 
-
 /* =========================
-        OPEN WINDOW
+        OPEN
 ========================= */
-
 
 
 addMemory.onclick = ()=>{
@@ -370,11 +467,9 @@ addMemory.onclick = ()=>{
 
 
 
-
 /* =========================
-        CREATE MEMORY
+        SAVE / EDIT
 ========================= */
-
 
 
 saveMemory.onclick = ()=>{
@@ -394,13 +489,12 @@ saveMemory.onclick = ()=>{
 
 
 
-    if(title === ""){
+
+    if(title===""){
 
 
         alert(
-
         "Введите название памяти"
-
         );
 
 
@@ -414,57 +508,85 @@ saveMemory.onclick = ()=>{
 
 
 
-    const memory = {
-
-
-        id:Date.now(),
+    if(editIndex !== null){
 
 
 
-        type:selectedType,
+        memories[editIndex].title = title;
+
+
+        memories[editIndex].text =
+
+        text || "Без описания";
 
 
 
-        title:title,
+        memories[editIndex].type = selectedType;
 
 
 
-        text:
-
-        text || "Без описания",
+        editIndex = null;
 
 
 
-        date:
-
-        new Date()
-
-        .toLocaleString("ru-RU"),
+        saveMemory.innerText =
+        "Сохранить";
 
 
 
-        favorite:false
-
-
-    };
+        cancelEdit.classList.add("hidden");
 
 
 
+    }
+
+    else{
+
+
+
+        memories.unshift({
+
+
+            id:Date.now(),
+
+
+            type:selectedType,
+
+
+            title:title,
+
+
+            text:
+            text || "Без описания",
+
+
+
+            date:
+            new Date()
+            .toLocaleString("ru-RU"),
+
+
+
+            favorite:false
+
+
+
+        });
+
+
+
+    }
 
 
 
 
-    memories.unshift(memory);
 
 
 
     saveData();
 
 
-
     renderMemories();
-
-
 
 
 
@@ -490,9 +612,83 @@ saveMemory.onclick = ()=>{
 
 
 /* =========================
-        START
+        CANCEL EDIT
 ========================= */
 
+
+if(cancelEdit){
+
+
+cancelEdit.onclick = ()=>{
+
+
+    editIndex=null;
+
+
+    titleInput.value="";
+
+
+    textInput.value="";
+
+
+
+    saveMemory.innerText =
+    "Сохранить";
+
+
+
+    cancelEdit.classList.add("hidden");
+
+
+
+    memoryBox.classList.add("hidden");
+
+
+
+};
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+        SEARCH
+========================= */
+
+
+if(searchMemory){
+
+
+searchMemory.addEventListener(
+
+"input",
+
+()=>{
+
+
+    renderMemories();
+
+
+}
+
+);
+
+
+}
+
+
+
+
+
+
+
+/* START */
 
 
 renderMemories();
