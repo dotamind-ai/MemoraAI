@@ -1294,3 +1294,40 @@ textarea{
     margin:0;
 
 }
+.topBar{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    gap:20px !important;
+
+    width:100%;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.topBar #searchMemory{
+
+    flex:1 !important;
+
+    margin:0 !important;
+
+}
+
+
+
+.topBar #openFilters{
+
+    width:60px !important;
+
+    height:60px !important;
+
+    margin:0 !important;
+
+    border-radius:20px !important;
+
+}
