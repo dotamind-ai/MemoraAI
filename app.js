@@ -9,18 +9,23 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
+// Загружаем сохранённые записи
+
 let memories = JSON.parse(
     localStorage.getItem("memora")
 ) || [];
 
 
 
+// Показываем записи
+
 function renderMemories() {
+
 
     memoryList.innerHTML = "";
 
 
-    memories.forEach((memory, index) => {
+    memories.forEach(function(memory, index) {
 
 
         const card = document.createElement("div");
@@ -32,29 +37,39 @@ function renderMemories() {
         💡 ${memory.title}
         </h4>
 
+
         <p>
         ${memory.text}
         </p>
+
 
         <small>
         ${memory.date}
         </small>
 
-        <button class="delete">
+
+        <br>
+
+
+        <button class="deleteButton">
         Удалить
         </button>
 
         `;
 
 
-        card.querySelector(".delete")
-        .onclick = function(){
+
+        const deleteButton =
+        card.querySelector(".deleteButton");
+
+
+        deleteButton.onclick = function(){
 
 
             memories.splice(index,1);
 
 
-            saveMemories();
+            saveData();
 
 
             renderMemories();
@@ -63,43 +78,54 @@ function renderMemories() {
         };
 
 
+
         memoryList.appendChild(card);
 
 
     });
 
 
+
     memoryCount.innerText =
-    memories.length +
-    " воспоминаний";
+    memories.length + " воспоминаний";
 
 
 }
 
 
 
+// Сохраняем данные
 
-function saveMemories(){
+function saveData(){
+
 
     localStorage.setItem(
+
         "memora",
+
         JSON.stringify(memories)
+
     );
+
 
 }
 
 
 
+// Открыть форму
 
 addMemory.onclick = function(){
 
+
     memoryBox.classList.remove("hidden");
+
 
 };
 
 
 
 
+// Сохранить память
 
 saveMemory.onclick = function(){
 
@@ -115,47 +141,61 @@ saveMemory.onclick = function(){
 
     if(title === "" || text === ""){
 
+
         alert("Заполни оба поля");
 
+
         return;
+
 
     }
 
 
 
-    memories.unshift({
+    const memory = {
+
 
         title:title,
 
+
         text:text,
+
 
         date:
         new Date()
         .toLocaleDateString("ru-RU")
 
-    });
+
+    };
 
 
 
-    saveMemories();
+    memories.unshift(memory);
 
 
 
-    titleInput.value="";
+    saveData();
 
-    textInput.value="";
+
+    renderMemories();
+
+
+
+    titleInput.value = "";
+
+    textInput.value = "";
 
 
     memoryBox.classList.add("hidden");
 
 
-    renderMemories();
+    alert("Воспоминание сохранено");
 
 
 };
 
 
 
-
+// Первый запуск
 
 renderMemories();
