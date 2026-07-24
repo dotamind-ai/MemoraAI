@@ -2,13 +2,16 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Memora AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Memora AI</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
@@ -16,50 +19,61 @@
 <div class="container">
 
 
-    <div class="logo">
-        <span>M</span>
-    </div>
+<div class="logo">
+
+<div class="core">
+
+<div class="ring"></div>
+
+<div class="point"></div>
+
+</div>
+
+</div>
 
 
-    <h1>
-        Memora AI
-    </h1>
+<h1>
+Memora AI
+</h1>
 
 
-    <p>
-        Твой второй мозг
-    </p>
+<p>
+Твой второй мозг
+</p>
 
 
-    <button id="addMemory">
-        ＋ Добавить память
-    </button>
+<button id="addMemory">
+＋ Добавить память
+</button>
 
 
-    <div id="memoryBox" class="hidden">
-
-        <input 
-        id="memoryTitle"
-        placeholder="Название памяти">
+<div id="memoryBox" class="hidden">
 
 
-        <textarea
-        id="memoryText"
-        placeholder="Что сохранить?">
-        </textarea>
+<input 
+id="memoryTitle"
+placeholder="Название">
 
 
-        <button id="saveMemory">
-            Сохранить
-        </button>
+<textarea
+id="memoryText"
+placeholder="Твоя мысль...">
+</textarea>
 
-    </div>
 
-
-    <div id="memoryList"></div>
+<button id="saveMemory">
+Сохранить
+</button>
 
 
 </div>
+
+
+<div id="memoryList"></div>
+
+
+</div>
+
 
 
 <script src="app.js"></script>
