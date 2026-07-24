@@ -54,7 +54,6 @@ M
 
 
 
-
 <h1>
 MEMORA
 </h1>
@@ -124,7 +123,6 @@ data-type="goal">
 
 
 
-
 <button 
 class="type-button"
 data-type="note">
@@ -136,7 +134,6 @@ data-type="note">
 
 
 
-
 <button 
 class="type-button"
 data-type="project">
@@ -144,7 +141,6 @@ data-type="project">
 ◈ Проект
 
 </button>
-
 
 
 
@@ -197,6 +193,8 @@ placeholder="Запиши мысль..."
 
 
 
+
+
 <input
 
 id="memoryType"
@@ -218,6 +216,7 @@ value="idea"
 Сохранить
 
 </button>
+
 
 
 
@@ -253,12 +252,61 @@ value="idea"
 
 
 
+
+<input
+
+id="searchMemory"
+
+type="text"
+
+placeholder="🔎 Поиск памяти..."
+
+>
+
+
+
+
+
+
+
+<button id="openFilters">
+
+⚙️ Фильтры
+
+</button>
+
+
+
+
+
+
+
+
+<div id="filterPanel" class="hidden filter-panel">
+
+
+
+<h3>
+
+Настройки памяти
+
+</h3>
+
+
+
+
+
+
+
+
 <div class="filters">
 
 
 
-<button 
+<button
+
 class="filter-button active"
+
 data-filter="all">
 
 Все
@@ -267,8 +315,11 @@ data-filter="all">
 
 
 
-<button 
+
+<button
+
 class="filter-button"
+
 data-filter="idea">
 
 ◇ Идеи
@@ -277,8 +328,11 @@ data-filter="idea">
 
 
 
-<button 
+
+<button
+
 class="filter-button"
+
 data-filter="goal">
 
 ◎ Цели
@@ -287,8 +341,11 @@ data-filter="goal">
 
 
 
-<button 
+
+<button
+
 class="filter-button"
+
 data-filter="note">
 
 ▤ Заметки
@@ -297,8 +354,11 @@ data-filter="note">
 
 
 
-<button 
+
+<button
+
 class="filter-button"
+
 data-filter="project">
 
 ◈ Проекты
@@ -307,8 +367,11 @@ data-filter="project">
 
 
 
-<button 
+
+<button
+
 class="filter-button"
+
 data-filter="personal">
 
 ◉ Личное
@@ -336,13 +399,11 @@ data-filter="personal">
 </option>
 
 
-
 <option value="old">
 
 Старые
 
 </option>
-
 
 
 <option value="favorite">
@@ -360,12 +421,22 @@ data-filter="personal">
 
 
 
+</div>
+
+
+
+
+
+
+
 
 <h3 id="memoryCount">
 
 0 воспоминаний
 
 </h3>
+
+
 
 
 
@@ -389,8 +460,8 @@ data-filter="personal">
 
 
 
-</div>
 
+</div>
 
 
 
