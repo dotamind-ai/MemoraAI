@@ -4,6 +4,7 @@ const saveMemory = document.getElementById("saveMemory");
 
 const titleInput = document.getElementById("memoryTitle");
 const textInput = document.getElementById("memoryText");
+const typeInput = document.getElementById("memoryType");
 
 const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
@@ -39,49 +40,94 @@ function saveData(){
 
 
 
+function getTypeName(type){
+
+
+    const types = {
+
+
+        idea:"◇ Идея",
+
+        goal:"◎ Цель",
+
+        note:"▤ Заметка",
+
+        project:"◈ Проект",
+
+        personal:"◉ Личное"
+
+
+    };
+
+
+    return types[type] || "◇ Идея";
+
+
+}
+
+
+
+
 function renderMemories(){
 
 
     memoryList.innerHTML = "";
 
 
+
     memories.forEach(function(item,index){
+
 
 
         const card = document.createElement("div");
 
 
+
         card.innerHTML = `
 
+
         <h4>
-        💡 ${item.title}
+
+        ${getTypeName(item.type)}
+
         </h4>
 
 
         <p>
+
+        ${item.title}
+
+        </p>
+
+
+        <p>
+
         ${item.text}
+
         </p>
 
 
         <small>
-        🕒 ${item.date}
+
+        ${item.date}
+
         </small>
 
 
+
         <button class="deleteButton">
+
         Удалить
+
         </button>
+
 
         `;
 
 
 
-        const deleteButton =
-        card.querySelector(".deleteButton");
-
-
-
-        deleteButton.onclick = function(){
+        card.querySelector(".deleteButton")
+        .onclick = function(){
 
 
             memories.splice(index,1);
@@ -105,6 +151,7 @@ function renderMemories(){
 
 
     memoryCount.innerText =
+
     memories.length + " воспоминаний";
 
 
@@ -115,10 +162,11 @@ function renderMemories(){
 
 addMemory.onclick = function(){
 
+
     memoryBox.classList.remove("hidden");
 
-};
 
+};
 
 
 
@@ -127,42 +175,62 @@ addMemory.onclick = function(){
 saveMemory.onclick = function(){
 
 
+
     const title =
+
     titleInput.value.trim();
 
 
+
     const text =
+
     textInput.value.trim();
+
 
 
 
     if(title === ""){
 
+
         alert("Введите название памяти");
+
 
         return;
 
+
     }
+
 
 
 
     const newMemory = {
 
 
+
+        type:typeInput.value,
+
+
+
         title:title,
 
 
+
         text:
+
         text || "Без описания",
 
 
 
         date:
+
         new Date()
+
         .toLocaleString("ru-RU")
 
 
+
     };
+
 
 
 
@@ -173,16 +241,20 @@ saveMemory.onclick = function(){
     saveData();
 
 
+
     renderMemories();
 
 
 
-    titleInput.value = "";
+    titleInput.value="";
 
-    textInput.value = "";
+
+    textInput.value="";
+
 
 
     memoryBox.classList.add("hidden");
+
 
 
 };
