@@ -3,10 +3,13 @@
 }
 
 body {
+
     margin: 0;
+
     min-height: 100vh;
 
-    background: #0b0b0f;
+    background: #09090b;
+
     color: white;
 
     font-family:
@@ -17,25 +20,39 @@ body {
         sans-serif;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
 }
+
 
 .container {
 
     width: 90%;
+
     max-width: 420px;
+
+    padding: 35px;
 
     text-align: center;
 
-    padding: 30px;
+    background: rgba(255,255,255,0.05);
 
-    background: #16161d;
+    border-radius: 32px;
 
-    border-radius: 30px;
+    backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.4);
+}
+
+
+.logo {
+
+    font-size: 70px;
+
+    margin-bottom: 20px;
+
 }
 
 
@@ -43,7 +60,7 @@ h1 {
 
     font-size: 38px;
 
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
 
 }
 
@@ -53,5 +70,30 @@ p {
     color: #a1a1aa;
 
     font-size: 18px;
+
+    margin-bottom: 35px;
+
+}
+
+
+button {
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: black;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
 
 }
