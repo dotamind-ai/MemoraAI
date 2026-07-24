@@ -4,7 +4,6 @@ const saveMemory = document.getElementById("saveMemory");
 
 const titleInput = document.getElementById("memoryTitle");
 const textInput = document.getElementById("memoryText");
-const typeInput = document.getElementById("memoryType");
 
 const typeButtons = document.querySelectorAll(".type-button");
 
@@ -12,7 +11,6 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-// Загружаем сохранённые данные
 
 let memories = JSON.parse(
     localStorage.getItem("memora")
@@ -24,20 +22,22 @@ let selectedType = "idea";
 
 
 
-// =========================
-// Выбор категории
-// =========================
+
+// Выбор типа
 
 typeButtons.forEach(function(button){
 
 
-    button.addEventListener("click", function(){
+    button.onclick = function(){
 
 
-        selectedType = this.dataset.type;
+        selectedType = button.dataset.type;
 
 
-        typeInput.value = selectedType;
+        console.log(
+            "Выбран тип:",
+            selectedType
+        );
 
 
 
@@ -49,13 +49,10 @@ typeButtons.forEach(function(button){
 
 
 
-        this.classList.add("active");
+        button.classList.add("active");
 
 
-        console.log("Выбрано:", selectedType);
-
-
-    });
+    };
 
 
 });
@@ -80,6 +77,7 @@ function saveData(){
 
 
 
+
 function getTypeName(type){
 
 
@@ -95,13 +93,14 @@ function getTypeName(type){
 
         personal:"◉ Личное"
 
+
     };
 
 
-    return names[type] || "◇ Идея";
+    return names[type] || "◇ Память";
+
 
 }
-
 
 
 
@@ -123,43 +122,56 @@ function renderMemories(){
         const card = document.createElement("div");
 
 
-        // класс для свечения
 
-        card.classList.add(
-            "memory-card",
-            memory.type
-        );
+        card.className =
+        "memory-card " + memory.type;
 
 
 
         card.innerHTML = `
 
+
         <h4>
+
         ${getTypeName(memory.type)}
+        (${memory.type})
+
         </h4>
 
 
+
         <h3>
+
         ${memory.title}
+
         </h3>
 
 
+
         <p>
+
         ${memory.text}
+
         </p>
 
 
+
         <small>
+
         ${memory.date}
+
         </small>
 
 
+
         <button class="deleteButton">
+
         Удалить
+
         </button>
 
-        `;
 
+        `;
 
 
 
@@ -183,15 +195,18 @@ function renderMemories(){
         memoryList.appendChild(card);
 
 
+
     });
 
 
 
     memoryCount.innerText =
+
     memories.length + " воспоминаний";
 
 
 }
+
 
 
 
@@ -218,14 +233,15 @@ addMemory.onclick = function(){
 saveMemory.onclick = function(){
 
 
-
     const title =
     titleInput.value.trim();
 
 
 
     const text =
-    textInput.value.trim();
+    document.getElementById("memoryText")
+    .value.trim();
+
 
 
 
@@ -245,10 +261,11 @@ saveMemory.onclick = function(){
 
 
 
+
     memories.unshift({
 
 
-        type: selectedType,
+        type:selectedType,
 
 
         title:title,
@@ -274,17 +291,17 @@ saveMemory.onclick = function(){
 
 
 
-
     titleInput.value = "";
 
-    textInput.value = "";
+    document.getElementById("memoryText")
+    .value = "";
+
 
 
     memoryBox.classList.add("hidden");
 
 
 };
-
 
 
 
