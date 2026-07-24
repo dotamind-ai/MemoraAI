@@ -1,36 +1,24 @@
 * {
-
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
 
 
 body {
 
-margin:0;
+    margin:0;
+    min-height:100vh;
 
-min-height:100vh;
+    background:
+    radial-gradient(circle at top,#30305a,#07070c 75%);
 
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
-background:
-
-radial-gradient(
-circle at top,
-#30305a,
-#07070c 75%
-);
-
-
-font-family:
-
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-Arial,
-sans-serif;
-
-
-color:white;
+    color:white;
 
 }
 
@@ -38,20 +26,19 @@ color:white;
 
 .app {
 
-max-width:430px;
-
-margin:auto;
-
-padding:35px 22px;
+    max-width:430px;
+    margin:auto;
+    padding:35px 22px;
 
 }
 
 
 
 
+
 header {
 
-text-align:center;
+    text-align:center;
 
 }
 
@@ -61,13 +48,11 @@ text-align:center;
 
 .logo {
 
-height:130px;
+    height:130px;
 
-display:flex;
-
-justify-content:center;
-
-align-items:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
 }
 
@@ -77,62 +62,47 @@ align-items:center;
 
 .core {
 
-width:85px;
+    width:85px;
+    height:85px;
 
-height:85px;
+    border-radius:50%;
 
-border-radius:50%;
-
-
-position:relative;
+    position:relative;
 
 
-background:
-
-radial-gradient(
-circle at 35% 35%,
-#ffffff,
-#9b9bff,
-#252545
-);
+    background:
+    radial-gradient(circle at 35% 35%,
+    #ffffff,
+    #9b9bff,
+    #252545);
 
 
+    box-shadow:
 
-box-shadow:
-
-0 0 35px #8b8bff,
-
-0 0 80px rgba(120,120,255,.5);
+    0 0 35px #8b8bff,
+    0 0 80px rgba(120,120,255,.5);
 
 
-
-animation:pulse 3s infinite;
+    animation:pulse 3s infinite;
 
 }
 
 
 
 
-
 .ring {
 
-position:absolute;
+    position:absolute;
+
+    inset:-14px;
+
+    border-radius:50%;
+
+    border:
+    2px solid rgba(255,255,255,.35);
 
 
-inset:-14px;
-
-
-border-radius:50%;
-
-
-border:
-
-2px solid rgba(255,255,255,.35);
-
-
-
-animation:rotate 8s linear infinite;
-
+    animation:rotate 8s linear infinite;
 
 }
 
@@ -141,46 +111,32 @@ animation:rotate 8s linear infinite;
 
 .point {
 
-position:absolute;
+    position:absolute;
 
+    width:20px;
+    height:20px;
 
-width:20px;
+    top:32px;
+    left:32px;
 
+    border-radius:50%;
 
-height:20px;
+    background:white;
 
-
-top:32px;
-
-
-left:32px;
-
-
-border-radius:50%;
-
-
-background:white;
-
-
-box-shadow:
-
-0 0 25px white;
-
+    box-shadow:0 0 25px white;
 
 }
 
 
 
 
-
 h1 {
 
-margin:5px 0;
+    margin:5px 0;
 
-font-size:42px;
+    font-size:42px;
 
-letter-spacing:6px;
-
+    letter-spacing:6px;
 
 }
 
@@ -188,7 +144,7 @@ letter-spacing:6px;
 
 header p {
 
-color:#a7a7b8;
+    color:#a7a7b8;
 
 }
 
@@ -198,97 +154,55 @@ color:#a7a7b8;
 
 .glass {
 
+    margin-top:35px;
 
-margin-top:35px;
+    padding:25px;
 
+    border-radius:30px;
 
-padding:25px;
-
-
-border-radius:30px;
-
-
-background:
-
-rgba(255,255,255,.08);
+    background:
+    rgba(255,255,255,.08);
 
 
-
-border:
-
-1px solid rgba(255,255,255,.12);
+    border:
+    1px solid rgba(255,255,255,.12);
 
 
-
-backdrop-filter:
-
-blur(20px);
-
+    backdrop-filter:blur(20px);
 
 }
 
-
-
-
-.glass h2 {
-
-margin:0 0 10px;
-
-}
-
-
-
-
-
-#memoryCount {
-
-color:#bdbdff;
-
-}
 
 
 
 
 button {
 
+    width:100%;
 
-width:100%;
+    padding:18px;
 
+    margin-top:20px;
 
-padding:18px;
+    border:none;
 
+    border-radius:24px;
 
-margin-top:20px;
+    font-size:17px;
 
-
-border:none;
-
-
-border-radius:24px;
-
-
-font-size:17px;
-
-
-font-weight:600;
-
-
-cursor:pointer;
-
+    cursor:pointer;
 
 }
 
 
 
 
+
 #addMemory {
 
+    background:white;
 
-background:white;
-
-
-color:#111;
-
+    color:#111;
 
 }
 
@@ -298,121 +212,58 @@ color:#111;
 
 .hidden {
 
-display:none;
+    display:none;
 
 }
-
-
-
-
-
-#memoryBox {
-
-
-margin-top:20px;
-
-
-}
-
-
-
-
-
-.type-title {
-
-
-margin-top:20px;
-
-
-color:#aaa;
-
-
-}
-
 
 
 
 
 .memory-types {
 
+    display:flex;
 
-display:flex;
+    flex-wrap:wrap;
 
-
-flex-wrap:wrap;
-
-
-gap:10px;
-
-
-margin-top:15px;
-
+    gap:10px;
 
 }
-
-
 
 
 
 .type-button {
 
+    flex:1;
 
-flex:1;
+    min-width:110px;
 
+    padding:14px;
 
-min-width:110px;
-
-
-padding:14px;
-
-
-background:
-
-rgba(255,255,255,.08);
+    background:
+    rgba(255,255,255,.08);
 
 
-
-color:white;
-
+    color:white;
 
 
-border:
-
-1px solid rgba(255,255,255,.15);
-
+    border:
+    1px solid rgba(255,255,255,.15);
 
 
-border-radius:18px;
-
-
-font-size:14px;
-
+    border-radius:18px;
 
 }
 
 
 
-
-
 .type-button.active {
 
-
-background:
-
-rgba(140,140,255,.35);
+    background:
+    rgba(140,140,255,.35);
 
 
-
-border-color:
-
-rgba(160,160,255,.8);
-
-
-
-box-shadow:
-
-0 0 20px rgba(120,120,255,.4);
-
+    box-shadow:
+    0 0 20px rgba(140,140,255,.5);
 
 }
 
@@ -424,109 +275,67 @@ input,
 textarea {
 
 
-width:100%;
+    width:100%;
+
+    padding:16px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:20px;
+
+    outline:none;
+
+    background:
+    rgba(255,255,255,.12);
 
 
-padding:16px;
+    color:white;
 
-
-margin-top:15px;
-
-
-border:none;
-
-
-outline:none;
-
-
-border-radius:20px;
-
-
-
-background:
-
-rgba(255,255,255,.12);
-
-
-
-color:white;
-
-
-font-size:16px;
-
+    font-size:16px;
 
 }
-
 
 
 
 textarea {
 
-height:120px;
+    height:120px;
 
-resize:none;
+    resize:none;
 
 }
 
 
 
+
+
+/* ===== MEMORY CARDS ===== */
 
 
 #memoryList div {
 
+    margin-top:18px;
 
-position:relative;
+    padding:24px;
 
-
-overflow:hidden;
-
-
-margin-top:18px;
+    border-radius:28px;
 
 
-padding:24px;
+    background:
+    rgba(255,255,255,.08);
 
 
-border-radius:28px;
+    backdrop-filter:blur(20px);
 
 
-
-background:
-
-linear-gradient(
-
-135deg,
-
-rgba(255,255,255,.16),
-
-rgba(255,255,255,.05)
-
-);
+    transition:.4s;
 
 
+    position:relative;
 
-border:
-
-1px solid rgba(255,255,255,.12);
-
-
-
-backdrop-filter:
-
-blur(18px);
-
-
-
-box-shadow:
-
-0 10px 35px rgba(0,0,0,.35);
-
-
-
-animation:
-
-memoryAppear .5s ease;
-
+    overflow:hidden;
 
 }
 
@@ -534,29 +343,10 @@ memoryAppear .5s ease;
 
 
 
-#memoryList div::before {
+.memory-card:hover {
 
-
-content:"";
-
-
-position:absolute;
-
-
-left:0;
-
-
-top:0;
-
-
-width:4px;
-
-
-height:100%;
-
-
-background:#8d8dff;
-
+    transform:
+    translateY(-5px);
 
 }
 
@@ -564,35 +354,19 @@ background:#8d8dff;
 
 
 
-#memoryList h4 {
+.memory-card::before {
 
+    content:"";
 
-margin:0 0 12px;
+    position:absolute;
 
+    left:0;
 
-font-size:15px;
+    top:0;
 
+    width:5px;
 
-letter-spacing:1px;
-
-
-color:#bdbdff;
-
-
-}
-
-
-
-
-
-#memoryList h3 {
-
-
-margin:8px 0;
-
-
-font-size:22px;
-
+    height:100%;
 
 }
 
@@ -600,14 +374,27 @@ font-size:22px;
 
 
 
-#memoryList p {
+/* IDEA - Aurora Mint */
 
 
-color:#e0e0e8;
+.memory-card.idea {
+
+    border:
+    2px solid #32E6C5;
 
 
-line-height:1.5;
+    box-shadow:
 
+    0 0 25px #32E6C5,
+    0 0 60px rgba(50,230,197,.5);
+
+}
+
+
+
+.memory-card.idea::before {
+
+    background:#32E6C5;
 
 }
 
@@ -615,11 +402,114 @@ line-height:1.5;
 
 
 
-#memoryList small {
+/* GOAL - Quantum Blue */
 
 
-color:#888;
+.memory-card.goal {
 
+    border:
+    2px solid #4DA3FF;
+
+
+    box-shadow:
+
+    0 0 25px #4DA3FF,
+    0 0 60px rgba(77,163,255,.5);
+
+}
+
+
+
+.memory-card.goal::before {
+
+    background:#4DA3FF;
+
+}
+
+
+
+
+
+/* NOTE - Moon Silver */
+
+
+.memory-card.note {
+
+
+    border:
+    2px solid #E8ECFF;
+
+
+    box-shadow:
+
+    0 0 25px #E8ECFF,
+    0 0 50px rgba(232,236,255,.4);
+
+}
+
+
+
+.memory-card.note::before {
+
+    background:#E8ECFF;
+
+}
+
+
+
+
+
+/* PROJECT - Neural Violet */
+
+
+.memory-card.project {
+
+
+    border:
+    2px solid #B06CFF;
+
+
+    box-shadow:
+
+    0 0 30px #B06CFF,
+    0 0 70px rgba(176,108,255,.6);
+
+}
+
+
+
+.memory-card.project::before {
+
+    background:#B06CFF;
+
+}
+
+
+
+
+
+/* PERSONAL - Cosmic Rose */
+
+
+.memory-card.personal {
+
+
+    border:
+    2px solid #FF7EB3;
+
+
+    box-shadow:
+
+    0 0 30px #FF7EB3,
+    0 0 70px rgba(255,126,179,.5);
+
+}
+
+
+
+.memory-card.personal::before {
+
+    background:#FF7EB3;
 
 }
 
@@ -629,49 +519,10 @@ color:#888;
 
 .deleteButton {
 
+    background:
+    rgba(255,255,255,.08);
 
-margin-top:18px;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-color:#aaa;
-
-
-
-font-size:14px;
-
-
-
-transition:.3s;
-
-
-}
-
-
-
-
-.deleteButton:hover {
-
-
-background:
-
-rgba(255,80,80,.25);
-
-
-
-color:white;
-
+    color:#aaa;
 
 }
 
@@ -681,83 +532,29 @@ color:white;
 
 @keyframes pulse {
 
+    50% {
 
-50% {
+        transform:scale(1.08);
 
-
-transform:scale(1.08);
-
-
-}
-
+    }
 
 }
-
 
 
 
 
 @keyframes rotate {
 
+    from {
 
-from {
+        transform:rotate(0deg);
 
+    }
 
-transform:rotate(0deg);
+    to {
 
+        transform:rotate(360deg);
 
-}
-
-
-to {
-
-
-transform:rotate(360deg);
-
-
-}
-
-
-}
-
-
-
-
-
-@keyframes memoryAppear {
-
-
-from {
-
-
-opacity:0;
-
-
-transform:
-
-translateY(25px)
-
-scale(.96);
-
-
-}
-
-
-
-to {
-
-
-opacity:1;
-
-
-transform:
-
-translateY(0)
-
-scale(1);
-
-
-}
-
+    }
 
 }
