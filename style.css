@@ -32,32 +32,26 @@ sans-serif;
 
 color:white;
 
-
 }
 
 
 
 .app {
 
-
 max-width:430px;
-
 
 margin:auto;
 
-
 padding:35px 22px;
-
 
 }
 
 
 
+
 header {
 
-
 text-align:center;
-
 
 }
 
@@ -67,18 +61,13 @@ text-align:center;
 
 .logo {
 
-
 height:130px;
-
 
 display:flex;
 
-
 justify-content:center;
 
-
 align-items:center;
-
 
 }
 
@@ -88,18 +77,14 @@ align-items:center;
 
 .core {
 
-
 width:85px;
 
-
 height:85px;
-
 
 border-radius:50%;
 
 
 position:relative;
-
 
 
 background:
@@ -115,26 +100,21 @@ circle at 35% 35%,
 
 box-shadow:
 
-
 0 0 35px #8b8bff,
-
 
 0 0 80px rgba(120,120,255,.5);
 
 
 
-animation:
-
-pulse 3s infinite;
-
+animation:pulse 3s infinite;
 
 }
 
 
 
 
-.ring {
 
+.ring {
 
 position:absolute;
 
@@ -145,16 +125,13 @@ inset:-14px;
 border-radius:50%;
 
 
-
 border:
 
 2px solid rgba(255,255,255,.35);
 
 
 
-animation:
-
-rotate 8s linear infinite;
+animation:rotate 8s linear infinite;
 
 
 }
@@ -162,9 +139,7 @@ rotate 8s linear infinite;
 
 
 
-
 .point {
-
 
 position:absolute;
 
@@ -184,9 +159,7 @@ left:32px;
 border-radius:50%;
 
 
-
 background:white;
-
 
 
 box-shadow:
@@ -199,14 +172,12 @@ box-shadow:
 
 
 
-h1 {
 
+h1 {
 
 margin:5px 0;
 
-
 font-size:42px;
-
 
 letter-spacing:6px;
 
@@ -215,12 +186,9 @@ letter-spacing:6px;
 
 
 
-
 header p {
 
-
 color:#a7a7b8;
-
 
 }
 
@@ -264,20 +232,17 @@ blur(20px);
 
 .glass h2 {
 
-
 margin:0 0 10px;
-
 
 }
 
 
 
 
+
 #memoryCount {
 
-
 color:#bdbdff;
-
 
 }
 
@@ -333,9 +298,7 @@ color:#111;
 
 .hidden {
 
-
 display:none;
-
 
 }
 
@@ -362,9 +325,6 @@ margin-top:20px;
 
 
 color:#aaa;
-
-
-font-size:14px;
 
 
 }
@@ -408,7 +368,6 @@ padding:14px;
 
 background:
 
-
 rgba(255,255,255,.08);
 
 
@@ -419,7 +378,6 @@ color:white;
 
 border:
 
-
 1px solid rgba(255,255,255,.15);
 
 
@@ -427,12 +385,12 @@ border:
 border-radius:18px;
 
 
-
 font-size:14px;
 
 
-
 }
+
+
 
 
 
@@ -441,13 +399,11 @@ font-size:14px;
 
 background:
 
-
 rgba(140,140,255,.35);
 
 
 
 border-color:
-
 
 rgba(160,160,255,.8);
 
@@ -455,12 +411,11 @@ rgba(160,160,255,.8);
 
 box-shadow:
 
-
 0 0 20px rgba(120,120,255,.4);
 
 
-
 }
+
 
 
 
@@ -507,12 +462,9 @@ font-size:16px;
 
 textarea {
 
-
 height:120px;
 
-
 resize:none;
-
 
 }
 
@@ -523,18 +475,23 @@ resize:none;
 #memoryList div {
 
 
+position:relative;
+
+
+overflow:hidden;
+
+
 margin-top:18px;
 
 
-padding:22px;
+padding:24px;
 
 
-border-radius:26px;
+border-radius:28px;
 
 
 
 background:
-
 
 linear-gradient(
 
@@ -554,9 +511,51 @@ border:
 
 
 
+backdrop-filter:
+
+blur(18px);
+
+
+
+box-shadow:
+
+0 10px 35px rgba(0,0,0,.35);
+
+
+
 animation:
 
-appear .4s ease;
+memoryAppear .5s ease;
+
+
+}
+
+
+
+
+
+#memoryList div::before {
+
+
+content:"";
+
+
+position:absolute;
+
+
+left:0;
+
+
+top:0;
+
+
+width:4px;
+
+
+height:100%;
+
+
+background:#8d8dff;
 
 
 }
@@ -571,10 +570,13 @@ appear .4s ease;
 margin:0 0 12px;
 
 
-font-size:20px;
+font-size:15px;
 
 
-color:#cfcfff;
+letter-spacing:1px;
+
+
+color:#bdbdff;
 
 
 }
@@ -586,7 +588,10 @@ color:#cfcfff;
 #memoryList h3 {
 
 
-margin:5px 0;
+margin:8px 0;
+
+
+font-size:22px;
 
 
 }
@@ -598,7 +603,7 @@ margin:5px 0;
 #memoryList p {
 
 
-color:#ddd;
+color:#e0e0e8;
 
 
 line-height:1.5;
@@ -625,21 +630,47 @@ color:#888;
 .deleteButton {
 
 
+margin-top:18px;
+
+
 background:
 
-rgba(255,80,80,.2);
+rgba(255,255,255,.08);
 
 
 
-color:white;
+border:
+
+1px solid rgba(255,255,255,.15);
 
 
 
-padding:12px;
+color:#aaa;
 
 
 
 font-size:14px;
+
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+.deleteButton:hover {
+
+
+background:
+
+rgba(255,80,80,.25);
+
+
+
+color:white;
 
 
 }
@@ -661,6 +692,7 @@ transform:scale(1.08);
 
 
 }
+
 
 
 
@@ -691,7 +723,8 @@ transform:rotate(360deg);
 
 
 
-@keyframes appear {
+
+@keyframes memoryAppear {
 
 
 from {
@@ -700,10 +733,15 @@ from {
 opacity:0;
 
 
-transform:translateY(20px);
+transform:
+
+translateY(25px)
+
+scale(.96);
 
 
 }
+
 
 
 to {
@@ -712,7 +750,11 @@ to {
 opacity:1;
 
 
-transform:translateY(0);
+transform:
+
+translateY(0)
+
+scale(1);
 
 
 }
