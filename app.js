@@ -1,3 +1,4 @@
+alert("ЗАГРУЗИЛСЯ НОВЫЙ APP.JS");
 const addMemory = document.getElementById("addMemory");
 const memoryBox = document.getElementById("memoryBox");
 const saveMemory = document.getElementById("saveMemory");
