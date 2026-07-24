@@ -9,43 +9,58 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-// Загружаем память
-
 let memories = [];
 
-const saved = localStorage.getItem("memora");
 
-if (saved) {
-    memories = JSON.parse(saved);
+try {
+
+    memories = JSON.parse(
+        localStorage.getItem("memora")
+    ) || [];
+
+} catch {
+
+    memories = [];
+
 }
 
 
-// Показываем карточки
 
-function renderMemories() {
+function saveData(){
+
+    localStorage.setItem(
+        "memora",
+        JSON.stringify(memories)
+    );
+
+
+    console.log(
+        "Сохранено:",
+        memories
+    );
+
+}
+
+
+
+function render(){
 
     memoryList.innerHTML = "";
 
 
-    memories.forEach((memory, index) => {
+    memories.forEach((item)=>{
 
 
-        const card = document.createElement("div");
+        let card = document.createElement("div");
 
 
         card.innerHTML = `
 
-        <h4>💡 ${memory.title}</h4>
+        <h4>💡 ${item.title}</h4>
 
-        <p>${memory.text}</p>
+        <p>${item.text}</p>
 
-        <small>${memory.date}</small>
-
-        <br><br>
-
-        <button onclick="deleteMemory(${index})">
-        Удалить
-        </button>
+        <small>${item.date}</small>
 
         `;
 
@@ -63,36 +78,8 @@ function renderMemories() {
 
 
 
-// Удаление
 
-function deleteMemory(index){
-
-    memories.splice(index,1);
-
-    saveMemories();
-
-    renderMemories();
-
-}
-
-
-
-// Сохранение
-
-function saveMemories(){
-
-    localStorage.setItem(
-        "memora",
-        JSON.stringify(memories)
-    );
-
-}
-
-
-
-// Открываем форму
-
-addMemory.onclick = function(){
+addMemory.onclick = ()=>{
 
     memoryBox.classList.remove("hidden");
 
@@ -101,65 +88,44 @@ addMemory.onclick = function(){
 
 
 
-// Создаем память
-
-saveMemory.onclick = function(){
+saveMemory.onclick = ()=>{
 
 
-    let title = titleInput.value.trim();
+    let newMemory = {
 
-    let text = textInput.value.trim();
+        title:titleInput.value,
 
+        text:textInput.value,
 
-
-    if(title === ""){
-
-        alert("Напиши название");
-
-        return;
-
-    }
-
-
-
-    let memory = {
-
-        title: title,
-
-        text: text || "Без описания",
-
-        date: new Date()
-        .toLocaleDateString("ru-RU")
+        date:new Date()
+        .toLocaleDateString()
 
     };
 
 
 
-    memories.unshift(memory);
+    memories.push(newMemory);
 
 
 
-    saveMemories();
+    saveData();
 
 
-    renderMemories();
+    render();
 
 
 
-    titleInput.value = "";
+    titleInput.value="";
 
-    textInput.value = "";
+    textInput.value="";
 
 
     memoryBox.classList.add("hidden");
 
 
-    alert("Воспоминание сохранено");
-
 };
 
 
 
-// Запуск
 
-renderMemories();
+render();
