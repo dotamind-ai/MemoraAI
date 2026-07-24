@@ -52,15 +52,18 @@ Remember less. Think more.
 
 
 
+
 <div class="glass">
 
 <h2>
 Сегодня
 </h2>
 
+
 <span id="memoryCount">
 0 воспоминаний
 </span>
+
 
 </div>
 
@@ -79,37 +82,86 @@ Remember less. Think more.
 
 
 
+
 <div id="memoryBox" class="hidden">
 
 
-<select id="memoryType">
 
-<option value="idea">
+
+
+<div class="type-title">
+
+Выбери тип памяти
+
+</div>
+
+
+
+
+<div class="memory-types">
+
+
+<button 
+class="type-button active"
+data-type="idea">
+
 ◇ Идея
-</option>
+
+</button>
 
 
-<option value="goal">
+
+<button 
+class="type-button"
+data-type="goal">
+
 ◎ Цель
-</option>
+
+</button>
 
 
-<option value="note">
+
+<button 
+class="type-button"
+data-type="note">
+
 ▤ Заметка
-</option>
+
+</button>
 
 
-<option value="project">
+
+<button 
+class="type-button"
+data-type="project">
+
 ◈ Проект
-</option>
+
+</button>
 
 
-<option value="personal">
+
+<button 
+class="type-button"
+data-type="personal">
+
 ◉ Личное
-</option>
+
+</button>
 
 
-</select>
+
+</div>
+
+
+
+
+<input 
+type="hidden"
+id="memoryType"
+value="idea">
+
+
 
 
 
@@ -138,6 +190,7 @@ placeholder="Запиши мысль">
 
 
 
+
 <button id="saveMemory">
 
 Сохранить
@@ -153,12 +206,10 @@ placeholder="Запиши мысль">
 
 
 
-
 <h3>
-
 Последние записи
-
 </h3>
+
 
 
 
@@ -169,7 +220,9 @@ placeholder="Запиши мысль">
 
 
 
+
 </div>
+
 
 
 
