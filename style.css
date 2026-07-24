@@ -1255,16 +1255,19 @@ textarea{
 
 .topBar{
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    gap:14px;
+gap:15px;
 
-    margin-bottom:28px;
+width:100%;
+
+margin-top:35px;
+
+margin-bottom:45px;
 
 }
-
 #searchMemory{
 
     flex:1;
