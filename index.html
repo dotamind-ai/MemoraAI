@@ -9,7 +9,8 @@
 
 <title>MEMORA</title>
 
-<link rel="stylesheet" href="style.css?v=30">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -20,28 +21,48 @@
 <div class="app">
 
 
+
 <header>
 
 
 <div class="logo">
 
+
 <div class="core">
+
 
 <div class="ring"></div>
 
-<div class="point"></div>
+
+<div class="memory-letter">
+M
+</div>
+
+
+<div class="particle p1"></div>
+
+<div class="particle p2"></div>
+
+<div class="particle p3"></div>
+
 
 </div>
 
+
 </div>
 
 
-<h1>MEMORA</h1>
+
+
+<h1>
+MEMORA
+</h1>
 
 
 <p>
 Твоя цифровая память
 </p>
+
 
 
 </header>
@@ -50,7 +71,9 @@
 
 
 
+
 <section class="glass">
+
 
 
 <button id="addMemory">
@@ -67,42 +90,67 @@
 
 
 
+
+
 <div class="memory-types">
 
 
-<button class="type-button active" data-type="idea">
+
+<button 
+class="type-button active"
+data-type="idea">
 
 ◇ Идея
 
 </button>
 
 
-<button class="type-button" data-type="goal">
+
+
+<button 
+class="type-button"
+data-type="goal">
 
 ◎ Цель
 
 </button>
 
 
-<button class="type-button" data-type="note">
+
+
+
+<button 
+class="type-button"
+data-type="note">
 
 ▤ Заметка
 
 </button>
 
 
-<button class="type-button" data-type="project">
+
+
+
+<button 
+class="type-button"
+data-type="project">
 
 ◈ Проект
 
 </button>
 
 
-<button class="type-button" data-type="personal">
+
+
+
+<button 
+class="type-button"
+data-type="personal">
 
 ◉ Личное
 
 </button>
+
 
 
 </div>
@@ -111,9 +159,13 @@
 
 
 
-<input 
+
+
+<input
 id="memoryTitle"
+type="text"
 placeholder="Название памяти">
+
 
 
 
@@ -121,8 +173,20 @@ placeholder="Название памяти">
 
 <textarea
 id="memoryText"
-placeholder="Запиши мысль">
+placeholder="Запиши мысль...">
 </textarea>
+
+
+
+
+
+
+<input 
+id="memoryType"
+type="hidden"
+value="idea">
+
+
 
 
 
@@ -137,10 +201,14 @@ placeholder="Запиши мысль">
 
 
 
+
 </div>
 
 
+
 </section>
+
+
 
 
 
@@ -150,6 +218,7 @@ placeholder="Запиши мысль">
 <section class="memories">
 
 
+
 <h3 id="memoryCount">
 
 0 воспоминаний
@@ -157,7 +226,15 @@ placeholder="Запиши мысль">
 </h3>
 
 
-<div id="memoryList"></div>
+
+
+
+<div id="memoryList">
+
+</div>
+
+
+
 
 
 </section>
@@ -170,7 +247,10 @@ placeholder="Запиши мысль">
 
 
 
-<script src="app.js?v=30"></script>
+
+
+
+<script src="app.js"></script>
 
 
 </body>
