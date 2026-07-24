@@ -4,7 +4,6 @@ const saveMemory = document.getElementById("saveMemory");
 
 const titleInput = document.getElementById("memoryTitle");
 const textInput = document.getElementById("memoryText");
-const typeInput = document.getElementById("memoryType");
 
 const typeButtons = document.querySelectorAll(".type-button");
 
@@ -21,29 +20,33 @@ let selectedType = "idea";
 
 
 
-// выбор типа
+
+
+// выбор категории
 
 typeButtons.forEach(button => {
 
-    button.addEventListener("click", function(){
+
+    button.onclick = function(){
+
 
         selectedType = this.dataset.type;
 
 
-        if(typeInput){
-            typeInput.value = selectedType;
-        }
-
 
         typeButtons.forEach(btn=>{
+
             btn.classList.remove("active");
+
         });
+
 
 
         this.classList.add("active");
 
 
-    });
+    };
+
 
 });
 
@@ -51,12 +54,19 @@ typeButtons.forEach(button => {
 
 
 
+
+
 function saveData(){
 
+
     localStorage.setItem(
+
         "memora",
+
         JSON.stringify(memories)
+
     );
+
 
 }
 
@@ -65,9 +75,12 @@ function saveData(){
 
 
 
-function getTypeName(type){
+
+function typeName(type){
+
 
     const names = {
+
 
         idea:"◇ Идея",
 
@@ -79,10 +92,12 @@ function getTypeName(type){
 
         personal:"◉ Личное"
 
+
     };
 
 
-    return names[type] || "◇ Память";
+    return names[type];
+
 
 }
 
@@ -95,13 +110,13 @@ function getTypeName(type){
 function renderMemories(){
 
 
-    memoryList.innerHTML = "";
+    memoryList.innerHTML="";
 
 
 
     memories.sort((a,b)=>{
 
-        return Number(b.favorite) - Number(a.favorite);
+        return Number(b.favorite)-Number(a.favorite);
 
     });
 
@@ -112,11 +127,14 @@ function renderMemories(){
     memories.forEach((memory,index)=>{
 
 
-        const card = document.createElement("div");
+
+        const card=document.createElement("div");
+
 
 
         card.className =
         "memory-card " + memory.type;
+
 
 
 
@@ -131,29 +149,38 @@ function renderMemories(){
 
 
 
+
         card.innerHTML = `
 
 
         <h4>
-        ${getTypeName(memory.type)}
+
+        ${typeName(memory.type)}
+
         </h4>
 
 
 
         <h3>
+
         ${memory.title}
+
         </h3>
 
 
 
         <p>
+
         ${memory.text}
+
         </p>
 
 
 
         <small>
+
         ${memory.date}
+
         </small>
 
 
@@ -185,12 +212,15 @@ function renderMemories(){
 
 
 
+
         card.querySelector(".favoriteButton")
-        .onclick = function(){
+        .onclick=function(){
+
 
 
             memory.favorite =
             !memory.favorite;
+
 
 
             saveData();
@@ -198,7 +228,9 @@ function renderMemories(){
             renderMemories();
 
 
+
         };
+
 
 
 
@@ -207,18 +239,23 @@ function renderMemories(){
 
 
         card.querySelector(".deleteButton")
-        .onclick = function(){
+        .onclick=function(){
+
 
 
             memories.splice(index,1);
 
 
+
             saveData();
+
 
             renderMemories();
 
 
+
         };
+
 
 
 
@@ -233,7 +270,9 @@ function renderMemories(){
 
 
 
-    memoryCount.innerText =
+
+    memoryCount.textContent =
+
     memories.length + " воспоминаний";
 
 
@@ -245,9 +284,12 @@ function renderMemories(){
 
 
 
-addMemory.onclick = function(){
+
+addMemory.onclick=function(){
+
 
     memoryBox.classList.remove("hidden");
+
 
 };
 
@@ -257,25 +299,25 @@ addMemory.onclick = function(){
 
 
 
-saveMemory.onclick = function(){
+
+
+saveMemory.onclick=function(){
 
 
 
-    const title =
+    let title =
     titleInput.value.trim();
 
 
 
-    const text =
+    let text =
     textInput.value.trim();
 
 
 
 
 
-    if(title === ""){
-
-        alert("Введите название памяти");
+    if(!title){
 
         return;
 
@@ -285,10 +327,9 @@ saveMemory.onclick = function(){
 
 
 
-    const newMemory = {
 
+    let memory={
 
-        type:selectedType,
 
 
         title:title,
@@ -298,12 +339,18 @@ saveMemory.onclick = function(){
 
 
 
+        type:selectedType,
+
+
+
+        favorite:false,
+
+
+
         date:new Date()
-        .toLocaleString("ru-RU"),
 
+        .toLocaleString("ru-RU")
 
-
-        favorite:false
 
 
     };
@@ -312,7 +359,8 @@ saveMemory.onclick = function(){
 
 
 
-    memories.unshift(newMemory);
+
+    memories.unshift(memory);
 
 
 
@@ -325,15 +373,19 @@ saveMemory.onclick = function(){
 
 
 
-    titleInput.value = "";
 
-    textInput.value = "";
+
+    titleInput.value="";
+
+    textInput.value="";
+
 
 
     memoryBox.classList.add("hidden");
 
 
 };
+
 
 
 
