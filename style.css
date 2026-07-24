@@ -11,17 +11,27 @@ margin:0;
 
 min-height:100vh;
 
+
 background:
-radial-gradient(circle at top,#30305a,#07070c 70%);
+
+radial-gradient(
+circle at top,
+#30305a,
+#07070c 75%
+);
+
 
 font-family:
+
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
 Arial,
 sans-serif;
 
+
 color:white;
+
 
 }
 
@@ -29,36 +39,50 @@ color:white;
 
 .app {
 
+
 max-width:430px;
+
 
 margin:auto;
 
+
 padding:35px 22px;
 
-}
 
+}
 
 
 
 header {
 
+
 text-align:center;
 
+
 }
+
+
 
 
 
 .logo {
 
+
 height:130px;
+
 
 display:flex;
 
-align-items:center;
 
 justify-content:center;
 
+
+align-items:center;
+
+
 }
+
+
 
 
 
@@ -66,6 +90,7 @@ justify-content:center;
 
 
 width:85px;
+
 
 height:85px;
 
@@ -76,23 +101,31 @@ border-radius:50%;
 position:relative;
 
 
+
 background:
-radial-gradient(circle at 35% 35%,
+
+radial-gradient(
+circle at 35% 35%,
 #ffffff,
-#9b9bff 35%,
-#3b3b70 70%,
-#151525);
+#9b9bff,
+#252545
+);
+
 
 
 box-shadow:
 
-0 0 30px #8b8bff,
 
-0 0 70px rgba(120,120,255,.5);
-
+0 0 35px #8b8bff,
 
 
-animation:pulse 3s infinite;
+0 0 80px rgba(120,120,255,.5);
+
+
+
+animation:
+
+pulse 3s infinite;
 
 
 }
@@ -112,16 +145,20 @@ inset:-14px;
 border-radius:50%;
 
 
+
 border:
 
 2px solid rgba(255,255,255,.35);
 
 
 
-animation:rotate 8s linear infinite;
+animation:
+
+rotate 8s linear infinite;
 
 
 }
+
 
 
 
@@ -134,10 +171,12 @@ position:absolute;
 
 width:20px;
 
+
 height:20px;
 
 
 top:32px;
+
 
 left:32px;
 
@@ -145,7 +184,9 @@ left:32px;
 border-radius:50%;
 
 
+
 background:white;
+
 
 
 box-shadow:
@@ -170,10 +211,8 @@ font-size:42px;
 letter-spacing:6px;
 
 
-font-weight:700;
-
-
 }
+
 
 
 
@@ -181,9 +220,6 @@ header p {
 
 
 color:#a7a7b8;
-
-
-margin-top:10px;
 
 
 }
@@ -221,8 +257,8 @@ backdrop-filter:
 blur(20px);
 
 
-
 }
+
 
 
 
@@ -233,6 +269,7 @@ margin:0 0 10px;
 
 
 }
+
 
 
 
@@ -253,10 +290,10 @@ button {
 width:100%;
 
 
-margin-top:20px;
-
-
 padding:18px;
+
+
+margin-top:20px;
 
 
 border:none;
@@ -278,6 +315,7 @@ cursor:pointer;
 
 
 
+
 #addMemory {
 
 
@@ -292,6 +330,19 @@ color:#111;
 
 
 
+
+.hidden {
+
+
+display:none;
+
+
+}
+
+
+
+
+
 #memoryBox {
 
 
@@ -299,6 +350,118 @@ margin-top:20px;
 
 
 }
+
+
+
+
+
+.type-title {
+
+
+margin-top:20px;
+
+
+color:#aaa;
+
+
+font-size:14px;
+
+
+}
+
+
+
+
+
+.memory-types {
+
+
+display:flex;
+
+
+flex-wrap:wrap;
+
+
+gap:10px;
+
+
+margin-top:15px;
+
+
+}
+
+
+
+
+
+.type-button {
+
+
+flex:1;
+
+
+min-width:110px;
+
+
+padding:14px;
+
+
+background:
+
+
+rgba(255,255,255,.08);
+
+
+
+color:white;
+
+
+
+border:
+
+
+1px solid rgba(255,255,255,.15);
+
+
+
+border-radius:18px;
+
+
+
+font-size:14px;
+
+
+
+}
+
+
+
+.type-button.active {
+
+
+background:
+
+
+rgba(140,140,255,.35);
+
+
+
+border-color:
+
+
+rgba(160,160,255,.8);
+
+
+
+box-shadow:
+
+
+0 0 20px rgba(120,120,255,.4);
+
+
+
+}
+
 
 
 
@@ -324,6 +487,7 @@ outline:none;
 border-radius:20px;
 
 
+
 background:
 
 rgba(255,255,255,.12);
@@ -340,6 +504,7 @@ font-size:16px;
 
 
 
+
 textarea {
 
 
@@ -347,16 +512,6 @@ height:120px;
 
 
 resize:none;
-
-
-}
-
-
-
-.hidden {
-
-
-display:none;
 
 
 }
@@ -379,6 +534,7 @@ border-radius:26px;
 
 
 background:
+
 
 linear-gradient(
 
@@ -408,45 +564,60 @@ appear .4s ease;
 
 
 
+
 #memoryList h4 {
 
 
 margin:0 0 12px;
 
 
-font-size:21px;
+font-size:20px;
+
+
+color:#cfcfff;
 
 
 }
+
+
+
+
+
+#memoryList h3 {
+
+
+margin:5px 0;
+
+
+}
+
+
 
 
 
 #memoryList p {
 
 
+color:#ddd;
+
+
 line-height:1.5;
 
 
-color:#d0d0d8;
-
-
 }
+
+
 
 
 
 #memoryList small {
 
 
-display:block;
-
-
-margin-top:15px;
-
-
 color:#888;
 
 
 }
+
 
 
 
@@ -459,30 +630,25 @@ background:
 rgba(255,80,80,.2);
 
 
+
 color:white;
 
-
-font-size:14px;
 
 
 padding:12px;
 
 
+
+font-size:14px;
+
+
 }
+
 
 
 
 
 @keyframes pulse {
-
-
-0%,100% {
-
-
-transform:scale(1);
-
-
-}
 
 
 50% {
