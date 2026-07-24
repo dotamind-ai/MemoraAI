@@ -9,6 +9,7 @@
 
 <title>MEMORA</title>
 
+
 <link rel="stylesheet" href="style.css">
 
 </head>
@@ -25,24 +26,26 @@
 
 <div class="logo">
 
+
 <div class="core">
 
 <div class="ring"></div>
 
 <div class="point"></div>
 
-</div>
 
 </div>
 
 
-<h1>
-MEMORA
-</h1>
+</div>
+
+
+
+<h1>MEMORA</h1>
 
 
 <p>
-Remember less. Think more.
+Твоя цифровая память
 </p>
 
 
@@ -52,30 +55,14 @@ Remember less. Think more.
 
 
 
-<div class="glass">
-
-<h2>
-Сегодня
-</h2>
-
-<span id="memoryCount">
-0 воспоминаний
-</span>
-
-</div>
-
-
-
-
+<section class="glass">
 
 
 <button id="addMemory">
 
-＋ Новая память
++ Новая память
 
 </button>
-
-
 
 
 
@@ -84,96 +71,45 @@ Remember less. Think more.
 <div id="memoryBox" class="hidden">
 
 
-
-
-
-<div class="type-title">
-Выбери тип памяти
-</div>
-
-
-
-
-
 <div class="memory-types">
 
 
-
-<button 
-type="button"
-class="type-button active"
-data-type="idea">
+<button class="type-button active" data-type="idea">
 
 ◇ Идея
 
 </button>
 
 
-
-
-
-<button 
-type="button"
-class="type-button"
-data-type="goal">
+<button class="type-button" data-type="goal">
 
 ◎ Цель
 
 </button>
 
 
-
-
-
-<button 
-type="button"
-class="type-button"
-data-type="note">
+<button class="type-button" data-type="note">
 
 ▤ Заметка
 
 </button>
 
 
-
-
-
-<button 
-type="button"
-class="type-button"
-data-type="project">
+<button class="type-button" data-type="project">
 
 ◈ Проект
 
 </button>
 
 
-
-
-
-<button 
-type="button"
-class="type-button"
-data-type="personal">
+<button class="type-button" data-type="personal">
 
 ◉ Личное
 
 </button>
 
 
-
 </div>
-
-
-
-
-
-<input 
-type="hidden"
-id="memoryType"
-value="idea">
-
-
 
 
 
@@ -183,25 +119,14 @@ value="idea">
 
 id="memoryTitle"
 
-type="text"
-
 placeholder="Название памяти">
-
-
-
-
 
 
 <textarea
 
 id="memoryText"
 
-placeholder="Запиши мысль">
-
-</textarea>
-
-
-
+placeholder="Запиши мысль"></textarea>
 
 
 
@@ -214,12 +139,10 @@ placeholder="Запиши мысль">
 </button>
 
 
-
-
-
 </div>
 
 
+</section>
 
 
 
@@ -227,26 +150,26 @@ placeholder="Запиши мысль">
 
 
 
-<h3>
-Последние записи
+<section>
+
+
+<h3 id="memoryCount">
+
+0 воспоминаний
+
 </h3>
 
 
+<div id="memoryList"></div>
 
 
-
-<div id="memoryList">
-
-</div>
-
-
+</section>
 
 
 
 
 
 </div>
-
 
 
 
@@ -256,6 +179,5 @@ placeholder="Запиши мысль">
 
 
 </body>
-
 
 </html>
