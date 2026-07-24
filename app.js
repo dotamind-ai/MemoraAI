@@ -12,78 +12,25 @@ const memoryCount = document.getElementById("memoryCount");
 let memories = [];
 
 
-try {
-
-    memories = JSON.parse(
-        localStorage.getItem("memora")
-    ) || [];
-
-} catch {
-
-    memories = [];
-
-}
-
-
-
-function renderMemories() {
-
-    memoryList.innerHTML = "";
-
-
-    memories.forEach((memory) => {
-
-
-        const card = document.createElement("div");
-
-
-        card.innerHTML = `
-            <h4>${memory.title}</h4>
-            <p>${memory.text}</p>
-        `;
-
-
-        memoryList.appendChild(card);
-
-
-    });
-
-
-
-    memoryCount.textContent =
-        memories.length + " воспоминаний";
-
-}
-
-
-
-addMemory.addEventListener("click", () => {
+addMemory.onclick = function() {
 
     memoryBox.classList.remove("hidden");
 
-});
+};
 
 
 
-
-saveMemory.addEventListener("click", (event) => {
-
-
-    event.preventDefault();
+saveMemory.onclick = function() {
 
 
-    const title =
-        titleInput.value.trim();
+    let title = titleInput.value;
+
+    let text = textInput.value;
 
 
-    const text =
-        textInput.value.trim();
+    if(title === "" || text === "") {
 
-
-
-    if (!title || !text) {
-
-        alert("Заполни оба поля");
+        alert("Заполни поля");
 
         return;
 
@@ -91,30 +38,29 @@ saveMemory.addEventListener("click", (event) => {
 
 
 
-    const newMemory = {
-
-        title: title,
-
-        text: text,
-
-        created:
-        new Date().toISOString()
-
-    };
+    let card = document.createElement("div");
 
 
+    card.innerHTML = `
 
-    memories.unshift(newMemory);
+    <h4>${title}</h4>
+
+    <p>${text}</p>
+
+    `;
 
 
 
-    localStorage.setItem(
+    memoryList.appendChild(card);
 
-        "memora",
 
-        JSON.stringify(memories)
 
-    );
+    memories.push(title);
+
+
+
+    memoryCount.innerText =
+    memories.length + " воспоминаний";
 
 
 
@@ -123,14 +69,8 @@ saveMemory.addEventListener("click", (event) => {
     textInput.value = "";
 
 
+
     memoryBox.classList.add("hidden");
 
 
-    renderMemories();
-
-
-});
-
-
-
-renderMemories();
+};
