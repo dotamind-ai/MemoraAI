@@ -11,7 +11,6 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-
 let memories = JSON.parse(
     localStorage.getItem("memora")
 ) || [];
@@ -21,23 +20,16 @@ let selectedType = "idea";
 
 
 
-
-
-// Выбор типа
+// ======================
+// Выбор категории
+// ======================
 
 typeButtons.forEach(function(button){
 
-
-    button.onclick = function(){
-
-
-        selectedType = button.dataset.type;
+    button.addEventListener("click", function(){
 
 
-        console.log(
-            "Выбран тип:",
-            selectedType
-        );
+        selectedType = this.getAttribute("data-type");
 
 
 
@@ -49,19 +41,19 @@ typeButtons.forEach(function(button){
 
 
 
-        button.classList.add("active");
+        this.classList.add("active");
 
 
-    };
-
+    });
 
 });
 
 
 
 
-
-
+// ======================
+// Сохранение
+// ======================
 
 function saveData(){
 
@@ -75,11 +67,7 @@ function saveData(){
 
 
 
-
-
-
-function getTypeName(type){
-
+function typeName(type){
 
     const names = {
 
@@ -93,12 +81,10 @@ function getTypeName(type){
 
         personal:"◉ Личное"
 
-
     };
 
 
-    return names[type] || "◇ Память";
-
+    return names[type] || "◇ Идея";
 
 }
 
@@ -107,6 +93,9 @@ function getTypeName(type){
 
 
 
+// ======================
+// Отображение карточек
+// ======================
 
 function renderMemories(){
 
@@ -118,9 +107,7 @@ function renderMemories(){
     memories.forEach(function(memory,index){
 
 
-
         const card = document.createElement("div");
-
 
 
         card.className =
@@ -130,52 +117,36 @@ function renderMemories(){
 
         card.innerHTML = `
 
-
         <h4>
-
-        ${getTypeName(memory.type)}
-        (${memory.type})
-
+        ${typeName(memory.type)}
         </h4>
 
 
-
         <h3>
-
         ${memory.title}
-
         </h3>
 
 
-
         <p>
-
         ${memory.text}
-
         </p>
 
 
-
         <small>
-
         ${memory.date}
-
         </small>
 
 
-
         <button class="deleteButton">
-
         Удалить
-
         </button>
-
 
         `;
 
 
 
-        card.querySelector(".deleteButton")
+        card
+        .querySelector(".deleteButton")
         .onclick = function(){
 
 
@@ -195,13 +166,11 @@ function renderMemories(){
         memoryList.appendChild(card);
 
 
-
     });
 
 
 
     memoryCount.innerText =
-
     memories.length + " воспоминаний";
 
 
@@ -212,14 +181,13 @@ function renderMemories(){
 
 
 
-
-
+// ======================
+// Открытие формы
+// ======================
 
 addMemory.onclick = function(){
 
-
     memoryBox.classList.remove("hidden");
-
 
 };
 
@@ -228,7 +196,9 @@ addMemory.onclick = function(){
 
 
 
-
+// ======================
+// Создание памяти
+// ======================
 
 saveMemory.onclick = function(){
 
@@ -237,23 +207,17 @@ saveMemory.onclick = function(){
     titleInput.value.trim();
 
 
-
     const text =
-    document.getElementById("memoryText")
-    .value.trim();
-
+    textInput.value.trim();
 
 
 
 
     if(title === ""){
 
-
         alert("Введите название памяти");
 
-
         return;
-
 
     }
 
@@ -261,8 +225,7 @@ saveMemory.onclick = function(){
 
 
 
-
-    memories.unshift({
+    const memory = {
 
 
         type:selectedType,
@@ -278,9 +241,13 @@ saveMemory.onclick = function(){
         .toLocaleString("ru-RU")
 
 
-    });
+    };
 
 
+
+
+
+    memories.unshift(memory);
 
 
 
@@ -293,15 +260,14 @@ saveMemory.onclick = function(){
 
     titleInput.value = "";
 
-    document.getElementById("memoryText")
-    .value = "";
-
+    textInput.value = "";
 
 
     memoryBox.classList.add("hidden");
 
 
 };
+
 
 
 
