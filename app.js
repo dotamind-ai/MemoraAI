@@ -1,43 +1,45 @@
 const addMemory = document.getElementById("addMemory");
-
 const memoryBox = document.getElementById("memoryBox");
-
 const saveMemory = document.getElementById("saveMemory");
 
 const titleInput = document.getElementById("memoryTitle");
-
 const textInput = document.getElementById("memoryText");
 
 const memoryList = document.getElementById("memoryList");
-
 const memoryCount = document.getElementById("memoryCount");
 
 
-
-let memories = JSON.parse(
-    localStorage.getItem("memora")
-) || [];
+let memories = [];
 
 
+try {
 
-function renderMemories(){
+    memories = JSON.parse(
+        localStorage.getItem("memora")
+    ) || [];
 
+} catch {
+
+    memories = [];
+
+}
+
+
+
+function renderMemories() {
 
     memoryList.innerHTML = "";
 
 
-    memories.forEach(memory => {
+    memories.forEach((memory) => {
 
 
         const card = document.createElement("div");
 
 
         card.innerHTML = `
-
-        <h4>${memory.title}</h4>
-
-        <p>${memory.text}</p>
-
+            <h4>${memory.title}</h4>
+            <p>${memory.text}</p>
         `;
 
 
@@ -47,80 +49,87 @@ function renderMemories(){
     });
 
 
-    memoryCount.innerText =
-    memories.length +
-    " воспоминаний";
 
+    memoryCount.textContent =
+        memories.length + " воспоминаний";
 
 }
 
 
 
-addMemory.onclick = function(){
-
+addMemory.addEventListener("click", () => {
 
     memoryBox.classList.remove("hidden");
 
-
-};
-
-
-
-saveMemory.onclick = function(){
-
-
-    let title =
-    titleInput.value.trim();
-
-
-    let text =
-    textInput.value.trim();
+});
 
 
 
-    if(title && text){
+
+saveMemory.addEventListener("click", (event) => {
 
 
-        memories.push({
-
-            title:title,
-
-            text:text,
-
-            date:new Date()
-            .toLocaleDateString()
-
-        });
+    event.preventDefault();
 
 
+    const title =
+        titleInput.value.trim();
 
-        localStorage.setItem(
 
-            "memora",
-
-            JSON.stringify(memories)
-
-        );
+    const text =
+        textInput.value.trim();
 
 
 
-        titleInput.value="";
+    if (!title || !text) {
 
-        textInput.value="";
+        alert("Заполни оба поля");
 
-
-
-        memoryBox.classList.add("hidden");
-
-
-
-        renderMemories();
-
+        return;
 
     }
 
 
-};
+
+    const newMemory = {
+
+        title: title,
+
+        text: text,
+
+        created:
+        new Date().toISOString()
+
+    };
+
+
+
+    memories.unshift(newMemory);
+
+
+
+    localStorage.setItem(
+
+        "memora",
+
+        JSON.stringify(memories)
+
+    );
+
+
+
+    titleInput.value = "";
+
+    textInput.value = "";
+
+
+    memoryBox.classList.add("hidden");
+
+
+    renderMemories();
+
+
+});
 
 
 
