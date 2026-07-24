@@ -1,68 +1,53 @@
 * {
-
-box-sizing:border-box;
-
+    box-sizing: border-box;
 }
-
 
 
 body {
 
+    margin: 0;
 
-margin:0;
+    min-height: 100vh;
 
-min-height:100vh;
+    background:
+    radial-gradient(circle at top, #25254a, #07070b 55%);
 
-background:
-radial-gradient(
-circle at top,
-#242442,
-#08080c 60%
-);
+    color: white;
 
-
-color:white;
-
-font-family:
--apple-system,
-BlinkMacSystemFont,
-Arial,
-sans-serif;
-
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    Arial,
+    sans-serif;
 
 }
 
 
 
-.container {
+.app {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding: 35px 22px;
+
+}
 
 
-width:90%;
 
-max-width:420px;
+/* LOGO */
 
-padding:35px;
+header {
 
+    text-align: center;
 
-text-align:center;
-
-
-background:
-rgba(255,255,255,0.06);
-
-
-border-radius:35px;
-
-
-backdrop-filter:blur(25px);
-
+    padding-top: 25px;
 
 }
 
@@ -70,20 +55,17 @@ backdrop-filter:blur(25px);
 
 .logo {
 
+    width: 110px;
 
-width:120px;
+    height: 110px;
 
-height:120px;
+    margin: 0 auto 20px;
 
-margin:0 auto 25px;
+    display: flex;
 
+    align-items: center;
 
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
+    justify-content: center;
 
 }
 
@@ -91,57 +73,50 @@ justify-content:center;
 
 .core {
 
+    width: 80px;
 
-width:90px;
+    height: 80px;
 
-height:90px;
+    border-radius: 50%;
 
-
-border-radius:50%;
-
-
-position:relative;
+    position: relative;
 
 
-background:
+    background:
 
-radial-gradient(
-circle,
-#ffffff,
-#8c8cff 30%,
-#303050 70%
-);
-
-
-box-shadow:
+    radial-gradient(
+        circle,
+        white 0%,
+        #8d8dff 25%,
+        #29294d 75%
+    );
 
 
-0 0 50px
-rgba(120,120,255,0.8);
+    box-shadow:
+
+    0 0 50px
+    rgba(140,140,255,0.8);
 
 
-animation:pulse 3s infinite;
-
+    animation:
+    pulse 3s infinite;
 
 }
 
 
 
-
 .ring {
 
+    position: absolute;
 
-position:absolute;
+    inset: -12px;
 
+    border-radius: 50%;
 
-inset:-12px;
+    border:
 
-
-border-radius:50%;
-
-
-border:2px solid rgba(255,255,255,0.5);
-
+    2px solid
+    rgba(255,255,255,0.4);
 
 }
 
@@ -149,30 +124,23 @@ border:2px solid rgba(255,255,255,0.5);
 
 .point {
 
+    position:absolute;
 
-position:absolute;
+    width:18px;
 
+    height:18px;
 
-width:22px;
+    background:white;
 
-height:22px;
+    border-radius:50%;
 
+    top:31px;
 
-background:white;
+    left:31px;
 
+    box-shadow:
 
-border-radius:50%;
-
-
-top:34px;
-
-left:34px;
-
-
-box-shadow:
-
-0 0 25px white;
-
+    0 0 20px white;
 
 }
 
@@ -180,91 +148,139 @@ box-shadow:
 
 h1 {
 
+    font-size: 42px;
 
-font-size:40px;
+    letter-spacing: 5px;
 
-margin:0 0 10px;
-
-
-letter-spacing:-1px;
-
+    margin: 0;
 
 }
 
 
 
-p {
+header p {
 
+    color:#9b9ba7;
 
-color:#a1a1aa;
-
-font-size:18px;
-
-margin-bottom:35px;
-
+    margin-top:10px;
 
 }
 
+
+
+/* GLASS CARD */
+
+
+.glass {
+
+    margin-top:45px;
+
+    padding:25px;
+
+
+    border-radius:28px;
+
+
+    background:
+
+    rgba(255,255,255,0.08);
+
+
+    backdrop-filter:
+
+    blur(25px);
+
+
+    border:
+
+    1px solid
+
+    rgba(255,255,255,0.1);
+
+}
+
+
+
+.glass h2 {
+
+    margin:0 0 10px;
+
+}
+
+
+
+#memoryCount {
+
+    color:#aaa;
+
+}
+
+
+
+/* BUTTON */
 
 
 button {
 
+    width:100%;
 
-width:100%;
+    margin-top:25px;
 
-
-padding:18px;
-
-
-border:0;
+    padding:18px;
 
 
-border-radius:22px;
+    border:none;
 
 
-font-size:18px;
+    border-radius:22px;
 
 
-font-weight:600;
+    background:white;
 
 
-background:white;
+    color:black;
 
 
-color:black;
+    font-size:18px;
 
+
+    font-weight:600;
 
 }
 
+
+
+/* INPUT */
 
 
 input,
 textarea {
 
 
-width:100%;
+    width:100%;
 
 
-margin-top:15px;
+    margin-top:15px;
 
 
-padding:16px;
+    padding:16px;
 
 
-border:0;
+    border:none;
 
 
-border-radius:18px;
+    border-radius:18px;
 
 
-background:
-rgba(255,255,255,0.1);
+    background:
+
+    rgba(255,255,255,0.1);
 
 
-color:white;
+    color:white;
 
 
-font-size:16px;
+    font-size:16px;
 
 
 }
@@ -273,9 +289,9 @@ font-size:16px;
 
 textarea {
 
+    height:120px;
 
-height:120px;
-
+    resize:none;
 
 }
 
@@ -283,37 +299,61 @@ height:120px;
 
 .hidden {
 
-
-display:none;
-
+    display:none;
 
 }
 
+
+
+h3 {
+
+    margin-top:35px;
+
+}
+
+
+
+#memoryList div {
+
+
+    margin-top:15px;
+
+
+    padding:20px;
+
+
+    border-radius:22px;
+
+
+    background:
+
+    rgba(255,255,255,0.06);
+
+}
 
 
 
 @keyframes pulse {
 
 
-0% {
+    0% {
 
-transform:scale(1);
+        transform:scale(1);
 
-}
-
-
-50% {
-
-transform:scale(1.05);
-
-}
+    }
 
 
-100% {
+    50% {
 
-transform:scale(1);
+        transform:scale(1.08);
 
-}
+    }
 
+
+    100% {
+
+        transform:scale(1);
+
+    }
 
 }
