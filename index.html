@@ -10,22 +10,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
 
 <div class="container">
 
-
     <div class="logo">
         🧠
     </div>
 
-
     <h1>
         Memora AI
     </h1>
-
 
     <p>
         Твой второй мозг
@@ -35,6 +31,29 @@
     <button id="addMemory">
         ＋ Добавить память
     </button>
+
+
+    <div id="memoryBox" class="hidden">
+
+        <input 
+        id="memoryTitle"
+        placeholder="Название памяти">
+
+
+        <textarea
+        id="memoryText"
+        placeholder="Что сохранить?">
+        </textarea>
+
+
+        <button id="saveMemory">
+            Сохранить
+        </button>
+
+    </div>
+
+
+    <div id="memoryList"></div>
 
 
 </div>
