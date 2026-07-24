@@ -9,9 +9,7 @@ body{
 
     min-height:100vh;
 
-
     color:#f5f5f5;
-
 
     font-family:
     "Segoe UI",
@@ -21,28 +19,24 @@ body{
 
     background:
 
-
     radial-gradient(
-    circle at 50% 0%,
-    rgba(255,255,255,.18),
-    transparent 35%
+        circle at 50% 0%,
+        rgba(255,255,255,.12),
+        transparent 35%
     ),
 
-
     radial-gradient(
-    circle at 15% 75%,
-    rgba(190,190,200,.12),
-    transparent 35%
+        circle at 15% 80%,
+        rgba(255,255,255,.06),
+        transparent 35%
     ),
-
 
     linear-gradient(
-    145deg,
-    #1a1c22,
-    #101217,
-    #08090c
+        145deg,
+        #17191d,
+        #0d0f13,
+        #07080a
     );
-
 
     overflow-x:hidden;
 
@@ -51,47 +45,35 @@ body{
 
 
 
-
-/* мягкий свет фона */
-
-
 body::before{
-
 
     content:"";
 
-
     position:fixed;
 
+    width:550px;
 
-    width:600px;
+    height:550px;
 
-    height:600px;
-
-
-    top:-250px;
+    top:-200px;
 
     left:-200px;
 
 
-
     background:
 
-
     radial-gradient(
-    circle,
-    rgba(255,255,255,.12),
-    transparent 70%
+        circle,
+        rgba(255,255,255,.08),
+        transparent 70%
     );
 
 
     filter:blur(80px);
 
-
     animation:
 
-    moveLight 18s infinite alternate;
-
+    fog 18s infinite alternate;
 
     z-index:-1;
 
@@ -102,41 +84,33 @@ body::before{
 
 body::after{
 
-
     content:"";
-
 
     position:fixed;
 
+    width:450px;
 
-    width:500px;
+    height:450px;
 
-    height:500px;
+    right:-150px;
 
-
-    right:-200px;
-
-    bottom:-200px;
-
+    bottom:-150px;
 
 
     background:
 
-
     radial-gradient(
-    circle,
-    rgba(255,255,255,.08),
-    transparent 70%
+        circle,
+        rgba(255,255,255,.05),
+        transparent 70%
     );
 
 
     filter:blur(90px);
 
-
     animation:
 
-    moveLight2 20s infinite alternate;
-
+    fog2 20s infinite alternate;
 
     z-index:-1;
 
@@ -145,58 +119,40 @@ body::after{
 
 
 
-
-@keyframes moveLight{
-
+@keyframes fog{
 
     from{
-
         transform:translate(0,0);
-
     }
 
-
     to{
-
-        transform:translate(100px,80px);
-
+        transform:translate(100px,70px);
     }
 
 }
 
 
 
-@keyframes moveLight2{
-
+@keyframes fog2{
 
     from{
-
         transform:translate(0,0);
-
     }
 
-
     to{
-
-        transform:translate(-100px,-70px);
-
+        transform:translate(-80px,-60px);
     }
 
 }
-
-
 
 
 
 
 .app{
 
-
     max-width:900px;
 
-
     margin:auto;
-
 
     padding:30px;
 
@@ -206,16 +162,12 @@ body::after{
 
 
 
-/* =====================
-          LOGO
-===================== */
+/* HEADER */
 
 
 header{
 
-
     text-align:center;
-
 
     margin-bottom:40px;
 
@@ -226,15 +178,11 @@ header{
 
 .logo{
 
-
-    height:160px;
-
+    height:150px;
 
     display:flex;
 
-
     justify-content:center;
-
 
     align-items:center;
 
@@ -246,80 +194,59 @@ header{
 
 .core{
 
-
     width:100px;
-
 
     height:100px;
 
+    position:relative;
 
     border-radius:50%;
 
 
-    position:relative;
-
-
-
     background:
 
-
     radial-gradient(
-    circle at 35% 30%,
-    white 0%,
-    #e5e5e5 20%,
-    #999 45%,
-    #222 75%
+        circle at 35% 30%,
+        white,
+        #ddd 20%,
+        #888 45%,
+        #222 75%
     );
-
 
 
     box-shadow:
 
+    0 0 35px rgba(255,255,255,.4),
 
-    0 0 40px rgba(255,255,255,.45),
-
-
-    0 0 100px rgba(255,255,255,.18);
-
+    0 0 90px rgba(255,255,255,.15);
 
 
     animation:
 
-
-    coreFloat 5s infinite ease-in-out,
-
-    coreLight 4s infinite alternate;
+    floatLogo 5s infinite ease-in-out;
 
 }
 
 
 
 
-
 .core::before{
-
 
     content:"";
 
-
     position:absolute;
 
-
     inset:-18px;
-
 
     border-radius:50%;
 
 
     border:
 
-
     1px solid rgba(255,255,255,.5);
 
 
-
     animation:
-
 
     rotate 12s linear infinite;
 
@@ -331,30 +258,23 @@ header{
 
 .core::after{
 
-
     content:"";
-
 
     position:absolute;
 
-
     inset:-35px;
-
 
     border-radius:50%;
 
 
     border:
 
-
     1px dashed rgba(255,255,255,.25);
-
 
 
     animation:
 
-
-    rotateReverse 18s linear infinite;
+    rotateBack 18s linear infinite;
 
 }
 
@@ -364,156 +284,75 @@ header{
 
 .point{
 
-
     position:absolute;
-
 
     width:15px;
 
-
     height:15px;
-
 
     left:42px;
 
-
     top:42px;
-
-
-
-    background:white;
-
 
     border-radius:50%;
 
-
+    background:white;
 
     box-shadow:
 
-
     0 0 25px white;
 
-
-
-    animation:
-
-
-    pulse 3s infinite;
-
 }
 
 
 
 
-
-@keyframes coreFloat{
-
+@keyframes floatLogo{
 
     50%{
-
         transform:translateY(-8px);
-
     }
 
 }
-
-
-
-
-@keyframes coreLight{
-
-
-    from{
-
-        filter:brightness(1);
-
-    }
-
-
-    to{
-
-        filter:brightness(1.35);
-
-    }
-
-}
-
-
 
 
 
 @keyframes rotate{
 
-
     to{
-
         transform:rotate(360deg);
-
     }
 
 }
 
 
 
-
-
-@keyframes rotateReverse{
-
+@keyframes rotateBack{
 
     to{
-
         transform:rotate(-360deg);
-
     }
 
 }
-
-
-
-
-
-@keyframes pulse{
-
-
-    50%{
-
-        transform:scale(1.5);
-
-    }
-
-}
-
-
 
 
 
 
 h1{
 
+    letter-spacing:7px;
 
     font-size:42px;
 
-
-    letter-spacing:7px;
-
-
-    margin:10px 0;
-
-
-
     text-shadow:
 
-
-    0 0 20px rgba(255,255,255,.25);
+    0 0 15px rgba(255,255,255,.25);
 
 }
 
 
 
-
-
 header p{
-
 
     color:#aaa;
 
@@ -523,11 +362,7 @@ header p{
 
 
 
-
-
-/* =====================
-          GLASS
-===================== */
+/* GLASS MAIN */
 
 
 .glass{
@@ -535,36 +370,48 @@ header p{
 
     background:
 
-
-    rgba(255,255,255,.08);
-
+    rgba(255,255,255,.07);
 
 
     border:
 
-
-    1px solid rgba(255,255,255,.18);
+    1px solid rgba(255,255,255,.15);
 
 
 
     backdrop-filter:
 
-
     blur(30px);
 
 
 
-    border-radius:32px;
+    border-radius:30px;
 
 
-    padding:28px;
+    padding:30px;
+
+
+}
 
 
 
-    box-shadow:
 
 
-    0 30px 90px rgba(0,0,0,.55);
+/* NEW MEMORY BUTTON */
+
+
+#addMemory{
+
+
+    display:block;
+
+    margin:0 auto 25px auto;
+
+
+    padding:15px 45px;
+
+
+    font-size:18px;
 
 }
 
@@ -574,28 +421,23 @@ header p{
 
 button{
 
+    border:
 
-    padding:12px 22px;
+    1px solid rgba(255,255,255,.15);
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    color:white;
 
 
     border-radius:18px;
 
 
-    border:
-
-
-    1px solid rgba(255,255,255,.15);
-
-
-
-    background:
-
-
-    rgba(255,255,255,.08);
-
-
-
-    color:white;
+    padding:12px 22px;
 
 
     cursor:pointer;
@@ -608,17 +450,25 @@ button{
 
 
 
-
 button:hover{
-
 
     background:
 
-
     rgba(255,255,255,.16);
 
+    transform:translateY(-2px);
 
-    transform:translateY(-3px);
+}
+
+
+
+
+/* HIDDEN */
+
+
+.hidden{
+
+    display:none;
 
 }
 
@@ -626,10 +476,85 @@ button:hover{
 
 
 
-.hidden{
+/* CREATE WINDOW */
 
 
-    display:none;
+#memoryBox{
+
+
+    margin-top:25px;
+
+
+    padding:30px;
+
+
+    border-radius:28px;
+
+
+    background:
+
+    rgba(255,255,255,.06);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    animation:
+
+    popup .35s ease;
+
+}
+
+
+
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-15px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+.memory-types{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+.type-button{
+
+    min-width:110px;
 
 }
 
@@ -650,22 +575,18 @@ textarea{
     padding:16px;
 
 
-    border-radius:20px;
+    border-radius:18px;
 
 
 
     background:
 
-
-    rgba(255,255,255,.06);
-
+    rgba(255,255,255,.05);
 
 
     border:
 
-
     1px solid rgba(255,255,255,.15);
-
 
 
     color:white;
@@ -675,10 +596,41 @@ textarea{
 
 
 
+textarea{
 
-/* =====================
-        CARDS
-===================== */
+    min-height:130px;
+
+    resize:none;
+
+}
+
+
+
+
+#saveMemory{
+
+
+    display:block;
+
+    margin:25px auto 0 auto;
+
+    padding:14px 45px;
+
+}
+
+
+
+
+
+/* CARDS */
+
+
+#memoryList{
+
+    margin-top:30px;
+
+}
+
 
 
 .memory-card{
@@ -687,45 +639,33 @@ textarea{
     position:relative;
 
 
-    margin:20px 0;
-
-
     padding:25px;
 
 
-    border-radius:28px;
+    margin:20px 0;
 
+
+    border-radius:26px;
 
 
     background:
 
-
-    rgba(255,255,255,.075);
+    rgba(255,255,255,.07);
 
 
 
     border:
 
-
-    1px solid rgba(255,255,255,.18);
+    1px solid rgba(255,255,255,.15);
 
 
 
     backdrop-filter:
 
-
     blur(25px);
 
 
-
-    box-shadow:
-
-
-    inset 0 0 40px rgba(255,255,255,.03);
-
-
-
-    transition:.4s;
+    transition:.35s;
 
 }
 
@@ -736,14 +676,7 @@ textarea{
 .memory-card:hover{
 
 
-    transform:translateY(-6px);
-
-
-
-    box-shadow:
-
-
-    0 25px 70px rgba(0,0,0,.55);
+    transform:translateY(-5px);
 
 }
 
@@ -753,45 +686,35 @@ textarea{
 
 .memory-card.idea{
 
-    border-left:
-
-    3px solid #aaa;
+    border-left:3px solid #aaa;
 
 }
 
 
 .memory-card.goal{
 
-    border-left:
-
-    3px solid #ddd;
+    border-left:3px solid #ddd;
 
 }
 
 
 .memory-card.note{
 
-    border-left:
-
-    3px solid #888;
+    border-left:3px solid #888;
 
 }
 
 
 .memory-card.project{
 
-    border-left:
-
-    3px solid #bbb;
+    border-left:3px solid #bbb;
 
 }
 
 
 .memory-card.personal{
 
-    border-left:
-
-    3px solid #999;
+    border-left:3px solid #999;
 
 }
 
@@ -799,28 +722,20 @@ textarea{
 
 
 
-/* =====================
-        FAVORITE
-===================== */
+/* FAVORITE */
 
 
 .memory-card.favorite{
 
 
-    border:
-
-
-    1px solid white;
-
+    border:1px solid white;
 
 
     box-shadow:
 
-
-    0 0 35px rgba(255,255,255,.35);
+    0 0 30px rgba(255,255,255,.35);
 
 }
-
 
 
 
@@ -837,7 +752,7 @@ textarea{
     right:20px;
 
 
-    top:18px;
+    top:15px;
 
 
     font-size:26px;
@@ -846,21 +761,15 @@ textarea{
     color:white;
 
 
-
-    text-shadow:
-
-
-    0 0 20px white;
-
 }
 
 
 
 
+#memoryCount{
 
-.favoriteButton{
+    text-align:center;
 
-
-    color:white;
+    color:#aaa;
 
 }
