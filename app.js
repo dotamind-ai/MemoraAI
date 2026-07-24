@@ -5,10 +5,10 @@ const saveMemory = document.getElementById("saveMemory");
 const titleInput = document.getElementById("memoryTitle");
 const textInput = document.getElementById("memoryText");
 
-const typeButtons = document.querySelectorAll(".type-button");
-
 const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
+
+const typeButtons = document.querySelectorAll(".type-button");
 
 
 let memories = JSON.parse(
@@ -21,24 +21,25 @@ let selectedType = "idea";
 
 
 
+// выбор типа памяти
 
 typeButtons.forEach(button => {
 
-    button.onclick = () => {
+    button.addEventListener("click",()=>{
+
 
         selectedType = button.dataset.type;
 
 
-        typeButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
+        typeButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
 
 
         button.classList.add("active");
 
-    };
+
+    });
 
 });
 
@@ -46,8 +47,7 @@ typeButtons.forEach(button => {
 
 
 
-
-addMemory.onclick = () => {
+addMemory.onclick = ()=>{
 
     memoryBox.classList.remove("hidden");
 
@@ -73,17 +73,16 @@ function saveData(){
 
 
 
-
 function renderMemories(){
 
 
-    memoryList.innerHTML = "";
+    memoryList.innerHTML="";
 
 
 
     memories.sort((a,b)=>{
 
-        return Number(b.favorite) - Number(a.favorite);
+        return Number(b.favorite)-Number(a.favorite);
 
     });
 
@@ -94,12 +93,12 @@ function renderMemories(){
     memories.forEach((memory,index)=>{
 
 
-
-        const card = document.createElement("div");
+        const card=document.createElement("div");
 
 
         card.className =
         "memory-card " + memory.type;
+
 
 
 
@@ -112,23 +111,25 @@ function renderMemories(){
 
 
 
-
         card.innerHTML = `
 
 
-        <div class="card-icon">
+        <div class="card-top">
 
-        ${memory.icon || "◇"}
+            <span class="memory-icon">
+
+            ${memory.icon}
+
+            </span>
+
+
+            <span>
+
+            ${memory.category}
+
+            </span>
 
         </div>
-
-
-
-        <h4>
-
-        ${memory.type}
-
-        </h4>
 
 
 
@@ -171,7 +172,7 @@ function renderMemories(){
 
 
         card.querySelector(".favoriteButton")
-        .onclick = ()=>{
+        .onclick=()=>{
 
 
             memory.favorite =
@@ -192,7 +193,7 @@ function renderMemories(){
 
 
         card.querySelector(".deleteButton")
-        .onclick = ()=>{
+        .onclick=()=>{
 
 
             memories.splice(index,1);
@@ -212,7 +213,6 @@ function renderMemories(){
         memoryList.appendChild(card);
 
 
-
     });
 
 
@@ -220,7 +220,7 @@ function renderMemories(){
 
 
     memoryCount.textContent =
-    memories.length + " воспоминаний";
+    memories.length+" воспоминаний";
 
 
 }
@@ -231,8 +231,7 @@ function renderMemories(){
 
 
 
-
-saveMemory.onclick = ()=>{
+saveMemory.onclick=()=>{
 
 
     const title =
@@ -256,9 +255,7 @@ saveMemory.onclick = ()=>{
 
 
 
-
-
-    memories.unshift({
+    const data = {
 
 
         title:title,
@@ -267,25 +264,29 @@ saveMemory.onclick = ()=>{
         text:text || "Без текста",
 
 
+
         type:selectedType,
 
 
-        favorite:false,
 
-
-        icon:
-        selectedType === "goal" ? "◎" :
-        selectedType === "note" ? "▤" :
-        selectedType === "project" ? "◈" :
-        selectedType === "personal" ? "◉" :
-        "◇"
+        category:getCategory(selectedType),
 
 
 
-    });
+        icon:getIcon(selectedType),
 
 
 
+        favorite:false
+
+
+    };
+
+
+
+
+
+    memories.unshift(data);
 
 
 
@@ -305,6 +306,64 @@ saveMemory.onclick = ()=>{
 
 
 };
+
+
+
+
+
+
+
+function getCategory(type){
+
+
+    const list={
+
+        idea:"Идея",
+
+        goal:"Цель",
+
+        note:"Заметка",
+
+        project:"Проект",
+
+        personal:"Личное"
+
+    };
+
+
+    return list[type] || "Память";
+
+
+}
+
+
+
+
+
+
+function getIcon(type){
+
+
+    const icons={
+
+        idea:"◇",
+
+        goal:"◎",
+
+        note:"▤",
+
+        project:"◈",
+
+        personal:"◉"
+
+    };
+
+
+    return icons[type] || "◇";
+
+
+}
+
 
 
 
