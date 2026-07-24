@@ -11,10 +11,6 @@ const memoryList = document.getElementById("memoryList");
 const memoryCount = document.getElementById("memoryCount");
 
 
-alert("MEMORA новый код загружен");
-
-
-
 let memories = JSON.parse(
     localStorage.getItem("memora")
 ) || [];
@@ -25,15 +21,13 @@ let selectedType = "idea";
 
 
 
+// выбор категории
 
 typeButtons.forEach(function(button){
 
-
-    button.onclick = function(){
-
+    button.addEventListener("click", function(){
 
         selectedType = this.dataset.type;
-
 
 
         typeButtons.forEach(function(btn){
@@ -43,15 +37,11 @@ typeButtons.forEach(function(button){
         });
 
 
-
         this.classList.add("active");
 
-
-    };
-
+    });
 
 });
-
 
 
 
@@ -71,16 +61,18 @@ function saveData(){
 
 
 
-
-function typeName(type){
-
+function getTypeName(type){
 
     const names = {
 
         idea:"◇ Идея",
+
         goal:"◎ Цель",
+
         note:"▤ Заметка",
+
         project:"◈ Проект",
+
         personal:"◉ Личное"
 
     };
@@ -139,7 +131,7 @@ function renderMemories(){
 
 
         <h4>
-        ${typeName(memory.type)}
+        ${getTypeName(memory.type)}
         </h4>
 
 
@@ -151,11 +143,6 @@ function renderMemories(){
         <p>
         ${memory.text}
         </p>
-
-
-        <small>
-        ${memory.date}
-        </small>
 
 
 
@@ -179,7 +166,6 @@ function renderMemories(){
 
 
 
-
         card.querySelector(".favoriteButton")
         .onclick = function(){
 
@@ -189,6 +175,7 @@ function renderMemories(){
 
 
             saveData();
+
 
             renderMemories();
 
@@ -209,6 +196,7 @@ function renderMemories(){
 
             saveData();
 
+
             renderMemories();
 
 
@@ -216,11 +204,12 @@ function renderMemories(){
 
 
 
-
         memoryList.appendChild(card);
 
 
     });
+
+
 
 
 
@@ -236,11 +225,13 @@ function renderMemories(){
 
 
 
+
 addMemory.onclick = function(){
 
     memoryBox.classList.remove("hidden");
 
 };
+
 
 
 
@@ -261,6 +252,7 @@ saveMemory.onclick = function(){
 
 
 
+
     if(title === ""){
 
 
@@ -275,20 +267,28 @@ saveMemory.onclick = function(){
 
 
 
+
     memories.unshift({
 
-        type:selectedType,
 
         title:title,
 
+
         text:text || "Без описания",
 
+
+        type:selectedType,
+
+
         favorite:false,
+
 
         date:new Date()
         .toLocaleString("ru-RU")
 
+
     });
+
 
 
 
@@ -301,15 +301,17 @@ saveMemory.onclick = function(){
 
 
 
-    titleInput.value="";
 
-    textInput.value="";
+    titleInput.value = "";
+
+    textInput.value = "";
 
 
     memoryBox.classList.add("hidden");
 
 
 };
+
 
 
 
