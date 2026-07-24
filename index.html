@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>MEMORA</title>
@@ -12,11 +13,15 @@
 
 </head>
 
+
 <body>
+
 
 <div class="app">
 
+
 <header>
+
 
 <div class="logo">
 
@@ -30,29 +35,37 @@
 
 </div>
 
+
 <h1>MEMORA</h1>
 
-<p>Remember less. Think more.</p>
+<p>
+Remember less. Think more.
+</p>
+
 
 </header>
 
 
-<section class="hero">
 
-<div class="glass">
 
-<h2>✨ Сегодня</h2>
+<section class="glass">
+
+
+<h2>
+✨ Сегодня
+</h2>
+
 
 <span id="memoryCount">
 0 воспоминаний
 </span>
 
-</div>
 
 </section>
 
 
-<section>
+
+
 
 <button id="addMemory">
 
@@ -60,18 +73,26 @@
 
 </button>
 
-</section>
 
 
-<section id="memoryBox" class="hidden">
 
-<input
+
+<section id="memoryBox" class="memory-form hidden">
+
+
+<input 
 id="memoryTitle"
-placeholder="Название">
+type="text"
+placeholder="Название памяти">
+
+
 
 <textarea
 id="memoryText"
-placeholder="Запиши мысль..."></textarea>
+placeholder="Запиши свою мысль...">
+</textarea>
+
+
 
 <button id="saveMemory">
 
@@ -79,26 +100,33 @@ placeholder="Запиши мысль..."></textarea>
 
 </button>
 
+
 </section>
 
 
-<section>
+
+
+
 
 <h3>
-
 Последние записи
-
 </h3>
+
+
 
 <div id="memoryList">
 
 </div>
 
-</section>
+
 
 </div>
 
+
+
+
 <script src="app.js"></script>
+
 
 </body>
 
