@@ -1,5 +1,5 @@
 /* =====================================
-        MEMORA V3 APP
+        MEMORA APP V4
 ===================================== */
 
 
@@ -37,20 +37,6 @@ const typeButtons =
 document.querySelectorAll(".type-button");
 
 
-const filterButtons =
-document.querySelectorAll(".filter-button");
-
-
-
-const searchMemory =
-document.getElementById("searchMemory");
-
-
-
-const sortMemory =
-document.getElementById("sortMemory");
-
-
 
 const memoryList =
 document.getElementById("memoryList");
@@ -61,12 +47,39 @@ document.getElementById("memoryCount");
 
 
 
+const searchMemory =
+document.getElementById("searchMemory");
 
 
 
-let memories =
-JSON.parse(localStorage.getItem("memora"))
-|| [];
+const filterButtons =
+document.querySelectorAll(".filter-button");
+
+
+
+const sortMemory =
+document.getElementById("sortMemory");
+
+
+
+const openFilters =
+document.getElementById("openFilters");
+
+
+const filterPanel =
+document.getElementById("filterPanel");
+
+
+
+
+
+
+let memories = JSON.parse(
+
+localStorage.getItem("memora")
+
+) || [];
+
 
 
 
@@ -85,6 +98,34 @@ let editIndex = null;
 
 
 
+
+/* =========================
+        FILTER WINDOW
+========================= */
+
+
+if(openFilters){
+
+
+openFilters.onclick = ()=>{
+
+
+filterPanel.classList.toggle("hidden");
+
+
+};
+
+
+}
+
+
+
+
+
+
+
+
+
 /* =========================
         TYPES
 ========================= */
@@ -93,7 +134,7 @@ let editIndex = null;
 typeButtons.forEach(button=>{
 
 
-button.onclick=()=>{
+button.onclick = ()=>{
 
 
 selectedType =
@@ -103,7 +144,9 @@ button.dataset.type;
 
 typeButtons.forEach(btn=>{
 
+
 btn.classList.remove("active");
+
 
 });
 
@@ -133,7 +176,7 @@ button.classList.add("active");
 filterButtons.forEach(button=>{
 
 
-button.onclick=()=>{
+button.onclick = ()=>{
 
 
 activeFilter =
@@ -143,7 +186,9 @@ button.dataset.filter;
 
 filterButtons.forEach(btn=>{
 
+
 btn.classList.remove("active");
+
 
 });
 
@@ -198,7 +243,7 @@ JSON.stringify(memories)
 function getTypeName(type){
 
 
-const names={
+const names = {
 
 
 idea:"◇ Идея",
@@ -237,21 +282,26 @@ return names[type] || "◇ Память";
 function renderMemories(){
 
 
-memoryList.innerHTML="";
+memoryList.innerHTML = "";
 
 
 
 let result = memories.filter(memory=>{
 
 
+
 if(activeFilter==="all"){
 
+
 return true;
+
 
 }
 
 
-return memory.type===activeFilter;
+
+return memory.type === activeFilter;
+
 
 
 });
@@ -260,20 +310,23 @@ return memory.type===activeFilter;
 
 
 
-if(searchMemory && searchMemory.value.trim()!==""){
 
 
+if(searchMemory && searchMemory.value.trim() !== ""){
 
-const query =
+
+let query =
+
 searchMemory.value.toLowerCase();
 
 
 
-result =
-result.filter(memory=>{
+result = result.filter(memory=>{
 
 
 return (
+
+
 
 memory.title
 .toLowerCase()
@@ -283,12 +336,53 @@ memory.title
 
 ||
 
+
+
 memory.text
 .toLowerCase()
 .includes(query)
 
 
+
 );
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+if(sortMemory.value==="new"){
+
+
+result.sort((a,b)=>{
+
+
+return b.id-a.id;
+
+
+});
+
+
+}
+
+
+
+
+if(sortMemory.value==="old"){
+
+
+result.sort((a,b)=>{
+
+
+return a.id-b.id;
 
 
 });
@@ -304,40 +398,13 @@ memory.text
 if(sortMemory.value==="favorite"){
 
 
-result.sort((a,b)=>
-
-b.favorite-a.favorite
-
-);
+result.sort((a,b)=>{
 
 
-}
+return b.favorite-a.favorite;
 
 
-
-if(sortMemory.value==="new"){
-
-
-result.sort((a,b)=>
-
-b.id-a.id
-
-);
-
-
-}
-
-
-
-
-if(sortMemory.value==="old"){
-
-
-result.sort((a,b)=>
-
-a.id-b.id
-
-);
+});
 
 
 }
@@ -352,9 +419,9 @@ a.id-b.id
 result.forEach(memory=>{
 
 
+
 const index =
 memories.indexOf(memory);
-
 
 
 
@@ -364,7 +431,12 @@ document.createElement("div");
 
 
 card.className =
-"memory-card "+memory.type;
+
+"memory-card " +
+
+memory.type;
+
+
 
 
 
@@ -383,7 +455,8 @@ card.classList.add("favorite");
 
 
 
-card.innerHTML=`
+card.innerHTML = `
+
 
 
 <h4>
@@ -430,13 +503,17 @@ ${memory.date}
 
 
 
+
 <button class="favoriteButton">
 
 ${memory.favorite
-?"★ Закреплено"
-:"☆ Закрепить"}
+
+? "★ Закреплено"
+
+: "☆ Закрепить"}
 
 </button>
+
 
 
 
@@ -445,6 +522,7 @@ ${memory.favorite
 Удалить
 
 </button>
+
 
 
 `;
@@ -456,12 +534,15 @@ ${memory.favorite
 
 
 
+
 card.querySelector(".editButton")
-.onclick=()=>{
+
+.onclick = ()=>{
 
 
 titleInput.value =
 memory.title;
+
 
 
 textInput.value =
@@ -471,6 +552,7 @@ memory.text;
 
 selectedType =
 memory.type;
+
 
 
 
@@ -490,11 +572,15 @@ btn.classList.add("active");
 }
 
 
+
 });
 
 
 
-editIndex=index;
+
+
+
+editIndex = index;
 
 
 
@@ -520,10 +606,12 @@ memoryBox.classList.remove("hidden");
 
 
 card.querySelector(".favoriteButton")
-.onclick=()=>{
+
+.onclick = ()=>{
 
 
 memory.favorite =
+
 !memory.favorite;
 
 
@@ -534,7 +622,9 @@ saveData();
 renderMemories();
 
 
+
 };
+
 
 
 
@@ -543,10 +633,12 @@ renderMemories();
 
 
 card.querySelector(".deleteButton")
-.onclick=()=>{
+
+.onclick = ()=>{
 
 
 memories.splice(index,1);
+
 
 
 saveData();
@@ -555,7 +647,10 @@ saveData();
 renderMemories();
 
 
+
 };
+
+
 
 
 
@@ -574,8 +669,10 @@ memoryList.appendChild(card);
 
 memoryCount.innerText =
 
-result.length+
+result.length +
+
 " воспоминаний";
+
 
 
 }
@@ -589,20 +686,45 @@ result.length+
 
 
 /* =========================
-        CREATE / UPDATE
+        OPEN CREATE
 ========================= */
 
 
-saveMemory.onclick=()=>{
+addMemory.onclick = ()=>{
+
+
+memoryBox.classList.remove("hidden");
+
+
+};
+
+
+
+
+
+
+
+
+
+/* =========================
+        SAVE MEMORY
+========================= */
+
+
+saveMemory.onclick = ()=>{
 
 
 const title =
+
 titleInput.value.trim();
 
 
 
 const text =
+
 textInput.value.trim();
+
+
 
 
 
@@ -611,7 +733,11 @@ textInput.value.trim();
 if(title===""){
 
 
-alert("Введите название памяти");
+alert(
+
+"Введите название памяти"
+
+);
 
 
 return;
@@ -625,30 +751,35 @@ return;
 
 
 
-if(editIndex!==null){
+
+if(editIndex !== null){
 
 
 
 memories[editIndex].title =
+
 title;
 
 
 
 memories[editIndex].text =
+
 text || "Без описания";
 
 
 
 memories[editIndex].type =
+
 selectedType;
 
 
 
-editIndex=null;
+editIndex = null;
 
 
 
 saveMemory.innerText =
+
 "Сохранить";
 
 
@@ -660,6 +791,7 @@ cancelEdit.classList.add("hidden");
 }
 
 else{
+
 
 
 memories.unshift({
@@ -674,18 +806,25 @@ type:selectedType,
 title:title,
 
 
-text:text || "Без описания",
+text:
+
+text || "Без описания",
 
 
-date:new Date()
+
+date:
+
+new Date()
+
 .toLocaleString("ru-RU"),
+
 
 
 favorite:false
 
 
-});
 
+});
 
 
 }
@@ -704,33 +843,16 @@ renderMemories();
 
 
 
+
 titleInput.value="";
 
 
 textInput.value="";
 
 
+
 memoryBox.classList.add("hidden");
 
-
-};
-
-
-
-
-
-
-
-
-/* =========================
-        OPEN
-========================= */
-
-
-addMemory.onclick=()=>{
-
-
-memoryBox.classList.remove("hidden");
 
 
 };
@@ -748,10 +870,14 @@ memoryBox.classList.remove("hidden");
 ========================= */
 
 
-cancelEdit.onclick=()=>{
+if(cancelEdit){
 
 
-editIndex=null;
+cancelEdit.onclick = ()=>{
+
+
+editIndex = null;
+
 
 
 titleInput.value="";
@@ -760,7 +886,9 @@ titleInput.value="";
 textInput.value="";
 
 
+
 saveMemory.innerText =
+
 "Сохранить";
 
 
@@ -768,10 +896,16 @@ saveMemory.innerText =
 cancelEdit.classList.add("hidden");
 
 
+
 memoryBox.classList.add("hidden");
 
 
+
 };
+
+
+
+}
 
 
 
@@ -782,14 +916,14 @@ memoryBox.classList.add("hidden");
 
 
 /* =========================
-        SEARCH + SORT
+        SEARCH SORT
 ========================= */
 
 
 if(searchMemory){
 
 
-searchMemory.oninput=()=>{
+searchMemory.oninput = ()=>{
 
 
 renderMemories();
@@ -799,6 +933,7 @@ renderMemories();
 
 
 }
+
 
 
 
@@ -807,7 +942,7 @@ renderMemories();
 if(sortMemory){
 
 
-sortMemory.onchange=()=>{
+sortMemory.onchange = ()=>{
 
 
 renderMemories();
@@ -823,6 +958,10 @@ renderMemories();
 
 
 
+
+
+
+/* START */
 
 
 renderMemories();
