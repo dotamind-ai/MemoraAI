@@ -9,7 +9,9 @@ body{
 
     min-height:100vh;
 
+
     color:#f5f5f5;
+
 
     font-family:
     "Segoe UI",
@@ -19,23 +21,26 @@ body{
 
     background:
 
-    radial-gradient(
-        circle at 50% -20%,
-        rgba(255,255,255,.12),
-        transparent 35%
-    ),
 
     radial-gradient(
-        circle at 10% 80%,
-        rgba(255,255,255,.05),
-        transparent 30%
+    circle at 50% 0%,
+    rgba(255,255,255,.18),
+    transparent 35%
     ),
+
+
+    radial-gradient(
+    circle at 15% 75%,
+    rgba(190,190,200,.12),
+    transparent 35%
+    ),
+
 
     linear-gradient(
-        145deg,
-        #050505,
-        #111111,
-        #030303
+    145deg,
+    #1a1c22,
+    #101217,
+    #08090c
     );
 
 
@@ -46,29 +51,36 @@ body{
 
 
 
-/* атмосферный туман */
+
+/* мягкий свет фона */
 
 
 body::before{
 
+
     content:"";
 
+
     position:fixed;
+
 
     width:600px;
 
     height:600px;
 
-    left:-250px;
 
-    top:100px;
+    top:-250px;
+
+    left:-200px;
+
 
 
     background:
 
+
     radial-gradient(
     circle,
-    rgba(255,255,255,.07),
+    rgba(255,255,255,.12),
     transparent 70%
     );
 
@@ -78,7 +90,7 @@ body::before{
 
     animation:
 
-    fogMove 20s infinite alternate;
+    moveLight 18s infinite alternate;
 
 
     z-index:-1;
@@ -87,26 +99,33 @@ body::before{
 
 
 
+
 body::after{
+
 
     content:"";
 
+
     position:fixed;
+
 
     width:500px;
 
     height:500px;
 
+
     right:-200px;
 
-    bottom:-100px;
+    bottom:-200px;
+
 
 
     background:
 
+
     radial-gradient(
     circle,
-    rgba(255,255,255,.05),
+    rgba(255,255,255,.08),
     transparent 70%
     );
 
@@ -116,7 +135,7 @@ body::after{
 
     animation:
 
-    fogMove2 25s infinite alternate;
+    moveLight2 20s infinite alternate;
 
 
     z-index:-1;
@@ -125,7 +144,10 @@ body::after{
 
 
 
-@keyframes fogMove{
+
+
+@keyframes moveLight{
+
 
     from{
 
@@ -133,16 +155,19 @@ body::after{
 
     }
 
+
     to{
 
-        transform:translate(120px,80px);
+        transform:translate(100px,80px);
 
     }
 
 }
 
 
-@keyframes fogMove2{
+
+@keyframes moveLight2{
+
 
     from{
 
@@ -150,13 +175,15 @@ body::after{
 
     }
 
+
     to{
 
-        transform:translate(-100px,-80px);
+        transform:translate(-100px,-70px);
 
     }
 
 }
+
 
 
 
@@ -164,9 +191,12 @@ body::after{
 
 .app{
 
+
     max-width:900px;
 
+
     margin:auto;
+
 
     padding:30px;
 
@@ -176,28 +206,35 @@ body::after{
 
 
 
-/* ===================
-        LOGO
-=================== */
+/* =====================
+          LOGO
+===================== */
 
 
 header{
 
+
     text-align:center;
 
-    margin-bottom:45px;
+
+    margin-bottom:40px;
 
 }
 
 
 
+
 .logo{
+
 
     height:160px;
 
+
     display:flex;
 
+
     justify-content:center;
+
 
     align-items:center;
 
@@ -206,13 +243,18 @@ header{
 
 
 
+
 .core{
+
 
     width:100px;
 
+
     height:100px;
 
+
     border-radius:50%;
+
 
     position:relative;
 
@@ -220,12 +262,13 @@ header{
 
     background:
 
+
     radial-gradient(
-        circle at 35% 30%,
-        white,
-        #dcdcdc 20%,
-        #777 45%,
-        #111 75%
+    circle at 35% 30%,
+    white 0%,
+    #e5e5e5 20%,
+    #999 45%,
+    #222 75%
     );
 
 
@@ -233,39 +276,50 @@ header{
     box-shadow:
 
 
-    0 0 30px rgba(255,255,255,.5),
+    0 0 40px rgba(255,255,255,.45),
 
-    0 0 100px rgba(255,255,255,.15);
+
+    0 0 100px rgba(255,255,255,.18);
 
 
 
     animation:
 
-    crystalFloat 5s infinite ease-in-out;
 
+    coreFloat 5s infinite ease-in-out,
+
+    coreLight 4s infinite alternate;
 
 }
 
 
 
+
+
 .core::before{
+
 
     content:"";
 
+
     position:absolute;
 
-    inset:-20px;
+
+    inset:-18px;
+
 
     border-radius:50%;
 
 
     border:
 
-    1px solid rgba(255,255,255,.45);
+
+    1px solid rgba(255,255,255,.5);
 
 
 
     animation:
+
 
     rotate 12s linear infinite;
 
@@ -273,24 +327,32 @@ header{
 
 
 
+
+
 .core::after{
+
 
     content:"";
 
+
     position:absolute;
 
+
     inset:-35px;
+
 
     border-radius:50%;
 
 
     border:
 
+
     1px dashed rgba(255,255,255,.25);
 
 
 
     animation:
+
 
     rotateReverse 18s linear infinite;
 
@@ -299,31 +361,42 @@ header{
 
 
 
+
 .point{
+
 
     position:absolute;
 
+
     width:15px;
+
 
     height:15px;
 
-    top:42px;
 
     left:42px;
 
 
-    border-radius:50%;
+    top:42px;
+
 
 
     background:white;
 
 
+    border-radius:50%;
+
+
+
     box-shadow:
+
 
     0 0 25px white;
 
 
+
     animation:
+
 
     pulse 3s infinite;
 
@@ -332,7 +405,8 @@ header{
 
 
 
-@keyframes crystalFloat{
+
+@keyframes coreFloat{
 
 
     50%{
@@ -342,6 +416,29 @@ header{
     }
 
 }
+
+
+
+
+@keyframes coreLight{
+
+
+    from{
+
+        filter:brightness(1);
+
+    }
+
+
+    to{
+
+        filter:brightness(1.35);
+
+    }
+
+}
+
+
 
 
 
@@ -358,6 +455,8 @@ header{
 
 
 
+
+
 @keyframes rotateReverse{
 
 
@@ -368,6 +467,8 @@ header{
     }
 
 }
+
+
 
 
 
@@ -386,14 +487,22 @@ header{
 
 
 
+
 h1{
+
 
     font-size:42px;
 
-    letter-spacing:8px;
+
+    letter-spacing:7px;
+
+
+    margin:10px 0;
+
 
 
     text-shadow:
+
 
     0 0 20px rgba(255,255,255,.25);
 
@@ -401,7 +510,10 @@ h1{
 
 
 
+
+
 header p{
+
 
     color:#aaa;
 
@@ -411,9 +523,11 @@ header p{
 
 
 
-/* ===================
-        GLASS
-=================== */
+
+
+/* =====================
+          GLASS
+===================== */
 
 
 .glass{
@@ -421,17 +535,20 @@ header p{
 
     background:
 
-    rgba(255,255,255,.045);
+
+    rgba(255,255,255,.08);
 
 
 
     border:
 
-    1px solid rgba(255,255,255,.12);
+
+    1px solid rgba(255,255,255,.18);
 
 
 
     backdrop-filter:
+
 
     blur(30px);
 
@@ -443,10 +560,11 @@ header p{
     padding:28px;
 
 
+
     box-shadow:
 
 
-    0 30px 90px rgba(0,0,0,.7);
+    0 30px 90px rgba(0,0,0,.55);
 
 }
 
@@ -457,23 +575,27 @@ header p{
 button{
 
 
-    background:
-
-    rgba(255,255,255,.08);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.12);
-
-
-    color:white;
-
-
     padding:12px 22px;
 
 
     border-radius:18px;
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    background:
+
+
+    rgba(255,255,255,.08);
+
+
+
+    color:white;
 
 
     cursor:pointer;
@@ -485,13 +607,29 @@ button{
 
 
 
+
+
 button:hover{
 
 
     background:
 
-    rgba(255,255,255,.15);
 
+    rgba(255,255,255,.16);
+
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+.hidden{
+
+
+    display:none;
 
 }
 
@@ -512,17 +650,22 @@ textarea{
     padding:16px;
 
 
+    border-radius:20px;
+
+
+
     background:
 
-    rgba(255,255,255,.05);
+
+    rgba(255,255,255,.06);
+
 
 
     border:
 
+
     1px solid rgba(255,255,255,.15);
 
-
-    border-radius:20px;
 
 
     color:white;
@@ -533,9 +676,9 @@ textarea{
 
 
 
-/* ===================
+/* =====================
         CARDS
-=================== */
+===================== */
 
 
 .memory-card{
@@ -544,10 +687,10 @@ textarea{
     position:relative;
 
 
-    padding:25px;
-
-
     margin:20px 0;
+
+
+    padding:25px;
 
 
     border-radius:28px;
@@ -556,17 +699,20 @@ textarea{
 
     background:
 
-    rgba(255,255,255,.045);
+
+    rgba(255,255,255,.075);
 
 
 
     border:
 
-    1px solid rgba(255,255,255,.12);
+
+    1px solid rgba(255,255,255,.18);
 
 
 
     backdrop-filter:
+
 
     blur(25px);
 
@@ -575,7 +721,7 @@ textarea{
     box-shadow:
 
 
-    inset 0 0 30px rgba(255,255,255,.03);
+    inset 0 0 40px rgba(255,255,255,.03);
 
 
 
@@ -586,16 +732,18 @@ textarea{
 
 
 
+
 .memory-card:hover{
 
 
     transform:translateY(-6px);
 
 
+
     box-shadow:
 
 
-    0 20px 60px rgba(0,0,0,.6);
+    0 25px 70px rgba(0,0,0,.55);
 
 }
 
@@ -607,40 +755,36 @@ textarea{
 
     border-left:
 
-    3px solid #888;
+    3px solid #aaa;
 
 }
-
 
 
 .memory-card.goal{
 
     border-left:
 
-    3px solid #bbb;
+    3px solid #ddd;
 
 }
-
 
 
 .memory-card.note{
 
     border-left:
 
-    3px solid #777;
+    3px solid #888;
 
 }
-
 
 
 .memory-card.project{
 
     border-left:
 
-    3px solid #aaa;
+    3px solid #bbb;
 
 }
-
 
 
 .memory-card.personal{
@@ -655,9 +799,9 @@ textarea{
 
 
 
-/* ===================
+/* =====================
         FAVORITE
-=================== */
+===================== */
 
 
 .memory-card.favorite{
@@ -665,7 +809,9 @@ textarea{
 
     border:
 
+
     1px solid white;
+
 
 
     box-shadow:
@@ -674,6 +820,7 @@ textarea{
     0 0 35px rgba(255,255,255,.35);
 
 }
+
 
 
 
@@ -693,10 +840,11 @@ textarea{
     top:18px;
 
 
+    font-size:26px;
+
+
     color:white;
 
-
-    font-size:26px;
 
 
     text-shadow:
@@ -711,6 +859,7 @@ textarea{
 
 
 .favoriteButton{
+
 
     color:white;
 
