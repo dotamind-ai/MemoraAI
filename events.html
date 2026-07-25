@@ -5,14 +5,55 @@
 
 <meta charset="UTF-8">
 
-<title>MEMORA События</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>MEMORA — События</title>
+
+<link rel="stylesheet" href="events.css?v=1">
 
 </head>
 
 
-<body>
+<body class="events-page">
+
+
+
+<!-- ЛОГОТИП -->
+
+<div class="memora-logo">
+
+
+<div class="sun-logo">
+
+<b>M</b>
+
+</div>
+
+
+<div class="orbit orbit1">
+<span></span>
+</div>
+
+
+<div class="orbit orbit2">
+<span></span>
+</div>
+
+
+<div class="orbit orbit3">
+<span></span>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<section class="events-container">
 
 
 <h1>
@@ -20,10 +61,145 @@
 </h1>
 
 
+
+<button class="new-event">
+
++ Новое событие
+
+</button>
+
+
+
+
+
+
+
+<div class="event-card">
+
+
+<div class="event-date">
+
+📅 Сегодня
+
+</div>
+
+
+<h2>
+
+Важное событие
+
+</h2>
+
+
 <p>
-Здесь будут события
+
+Здесь будет описание события
+
 </p>
 
+
+</div>
+
+
+
+
+
+
+<div class="event-card">
+
+
+<div class="event-date">
+
+⭐ Память
+
+</div>
+
+
+<h2>
+
+Особенный момент
+
+</h2>
+
+
+<p>
+
+Твои сохранённые события появятся здесь
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- НАВИГАЦИЯ -->
+
+<nav class="bottom-nav">
+
+
+<button class="nav-item" onclick="goHome()">
+
+<span>🏠</span>
+
+<small>Главная</small>
+
+</button>
+
+
+
+
+<button class="nav-item" onclick="goCalendar()">
+
+<span>📅</span>
+
+<small>Календарь</small>
+
+</button>
+
+
+
+
+<button class="nav-item active" onclick="goEvents()">
+
+<span>✨</span>
+
+<small>События</small>
+
+</button>
+
+
+
+
+<button class="nav-item" onclick="goSettings()">
+
+<span>⚙️</span>
+
+<small>Настройки</small>
+
+</button>
+
+
+
+</nav>
+
+
+
+
+
+
+<script src="app.js?v=2"></script>
 
 
 </body>
