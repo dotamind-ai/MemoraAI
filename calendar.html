@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 
 <head>
@@ -10,20 +9,15 @@
 
 <title>MEMORA Calendar</title>
 
-
 <link rel="stylesheet" href="style.css">
 
-
 </head>
-
 
 
 <body class="calendar-page">
 
 
-
 <div class="app">
-
 
 
 <header>
@@ -49,23 +43,16 @@ M
 
 
 <h1>
-
 Календарь
-
 </h1>
 
 
 <p>
-
 История твоих воспоминаний
-
 </p>
 
 
-
 </header>
-
-
 
 
 
@@ -75,32 +62,25 @@ M
 
 
 
-<h2>
+<div class="calendar-header">
 
+
+
+<button onclick="changeMonth(-1)">
+◀
+</button>
+
+
+
+<h2 id="monthTitle">
 Июль 2026
-
 </h2>
 
 
 
-
-
-<div class="calendar-grid">
-
-
-<div>Пн</div>
-
-<div>Вт</div>
-
-<div>Ср</div>
-
-<div>Чт</div>
-
-<div>Пт</div>
-
-<div>Сб</div>
-
-<div>Вс</div>
+<button onclick="changeMonth(1)">
+▶
+</button>
 
 
 
@@ -110,9 +90,17 @@ M
 
 
 
+<div class="calendar-grid" id="calendarGrid">
+
+
+</div>
+
+
+
+
 <p class="calendar-empty">
 
-Скоро здесь появятся твои воспоминания
+Твои воспоминания появятся здесь
 
 </p>
 
@@ -124,8 +112,6 @@ M
 
 
 
-
-
 </div>
 
 
@@ -133,7 +119,7 @@ M
 
 
 
-
+<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
@@ -142,7 +128,9 @@ M
 
 <button class="nav-item" onclick="goHome()">
 
-<span>🏠</span>
+<span>
+🏠
+</span>
 
 </button>
 
@@ -151,7 +139,9 @@ M
 
 <button class="nav-item active">
 
-<span>📅</span>
+<span>
+📅
+</span>
 
 </button>
 
@@ -160,7 +150,9 @@ M
 
 <button class="nav-item" onclick="goFavorites()">
 
-<span>⭐</span>
+<span>
+⭐
+</span>
 
 </button>
 
@@ -169,7 +161,9 @@ M
 
 <button class="nav-item" onclick="goSettings()">
 
-<span>⚙️</span>
+<span>
+⚙️
+</span>
 
 </button>
 
@@ -184,6 +178,8 @@ M
 
 
 <script src="app.js"></script>
+
+<script src="calendar.js"></script>
 
 
 
