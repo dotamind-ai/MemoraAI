@@ -1,4 +1,4 @@
-alert("calendar.js работает");
+alert("calendar.js подключен");
 let currentMonth = 6;
 let currentYear = 2026;
 
