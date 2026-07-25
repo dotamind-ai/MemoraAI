@@ -214,3 +214,59 @@ renderCalendar();
 }
 
 );
+function openMemory(day){
+
+
+let modal=document.getElementById("memoryModal");
+
+let title=document.getElementById("memoryDate");
+
+
+title.innerHTML = day + " " + 
+["Январь","Февраль","Март","Апрель",
+"Май","Июнь","Июль","Август",
+"Сентябрь","Октябрь","Ноябрь","Декабрь"][currentMonth];
+
+
+
+modal.classList.add("show");
+
+
+}
+
+
+
+
+function closeMemory(){
+
+
+document
+.getElementById("memoryModal")
+.classList.remove("show");
+
+
+}
+
+
+
+
+
+function saveMemory(){
+
+
+let text=document.getElementById("memoryText").value;
+
+
+if(text.trim()===""){
+
+return;
+
+}
+
+
+alert("Воспоминание сохранено 🧠");
+
+closeMemory();
+
+
+}
