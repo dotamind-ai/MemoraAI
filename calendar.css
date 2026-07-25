@@ -11,13 +11,13 @@ body.calendar-page{
 
     padding-top:150px;
 
-
     display:flex;
 
     justify-content:center;
 
     align-items:flex-start;
 
+    overflow:hidden;
 
 
     font-family:
@@ -27,12 +27,11 @@ body.calendar-page{
     sans-serif;
 
 
-
     background:
 
     radial-gradient(
     circle at top,
-    #8a1f58,
+    #7d2457,
     transparent 40%
     ),
 
@@ -47,11 +46,14 @@ body.calendar-page{
 
 
 
-/* Логотип M */
+
+/* ===== ЛОГОТИП MEMORA ===== */
+
 
 body.calendar-page::before{
 
     content:"M";
+
 
     position:absolute;
 
@@ -66,10 +68,10 @@ body.calendar-page::before{
 
 
 
-    width:65px;
+    width:75px;
 
 
-    height:65px;
+    height:75px;
 
 
 
@@ -83,7 +85,7 @@ body.calendar-page::before{
 
 
 
-    border-radius:22px;
+    border-radius:50%;
 
 
 
@@ -91,13 +93,15 @@ body.calendar-page::before{
 
     linear-gradient(
     135deg,
-    rgba(255,255,255,.35),
-    rgba(255,120,200,.25)
+    rgba(255,255,255,.45),
+    rgba(255,90,190,.25)
     );
 
 
 
-    backdrop-filter:blur(15px);
+    border:
+
+    1px solid rgba(255,255,255,.35);
 
 
 
@@ -105,7 +109,7 @@ body.calendar-page::before{
 
 
 
-    font-size:42px;
+    font-size:46px;
 
 
 
@@ -113,26 +117,34 @@ body.calendar-page::before{
 
 
 
-    letter-spacing:-2px;
-
-
-
     box-shadow:
 
-    0 10px 35px
 
+    0 0 25px
+    rgba(255,100,200,.7),
+
+
+    0 0 70px
     rgba(255,100,200,.35),
 
 
     inset 0 0 20px
+    rgba(255,255,255,.25);
 
-    rgba(255,255,255,.2);
+
+
+    animation:
+
+    logoFloat 4s ease-in-out infinite,
+    logoLight 3s ease-in-out infinite;
+
 
 }
 
 
 
-/* название MEMORA */
+
+
 
 body.calendar-page::after{
 
@@ -143,9 +155,7 @@ body.calendar-page::after{
     position:absolute;
 
 
-
-    top:100px;
-
+    top:112px;
 
 
     left:50%;
@@ -158,17 +168,18 @@ body.calendar-page::after{
     color:white;
 
 
-
     font-size:20px;
-
 
 
     font-weight:700;
 
 
+    letter-spacing:5px;
 
-    letter-spacing:4px;
 
+    text-shadow:
+
+    0 0 20px rgba(255,120,200,.7);
 
 
 }
@@ -176,6 +187,59 @@ body.calendar-page::after{
 
 
 
+
+@keyframes logoFloat{
+
+
+    0%,100%{
+
+        transform:
+        translateX(-50%)
+        translateY(0)
+        rotate(0deg);
+
+    }
+
+
+
+    50%{
+
+        transform:
+        translateX(-50%)
+        translateY(-8px)
+        rotate(8deg);
+
+    }
+
+}
+
+
+
+
+@keyframes logoLight{
+
+
+    0%,100%{
+
+        filter:brightness(1);
+
+    }
+
+
+    50%{
+
+        filter:brightness(1.5);
+
+    }
+
+}
+
+
+
+
+
+
+/* ===== КАЛЕНДАРЬ ===== */
 
 
 .calendar-container{
@@ -189,6 +253,9 @@ body.calendar-page::after{
 
 
     padding:28px;
+
+
+    margin-top:20px;
 
 
 
@@ -208,16 +275,9 @@ body.calendar-page::after{
 
 
 
-    -webkit-backdrop-filter:
-
-    blur(25px);
-
-
-
     border:
 
     1px solid
-
     rgba(255,255,255,.15);
 
 
@@ -225,7 +285,6 @@ body.calendar-page::after{
     box-shadow:
 
     0 25px 60px
-
     rgba(0,0,0,.45);
 
 
@@ -240,15 +299,14 @@ body.calendar-page::after{
 
 
 
+
 .calendar-container h1{
 
 
     text-align:center;
 
 
-
     margin:0 0 25px;
-
 
 
     font-size:28px;
@@ -261,24 +319,19 @@ body.calendar-page::after{
 
 
 
-
 .calendar-header{
 
 
     display:flex;
 
 
+    justify-content:space-between;
+
 
     align-items:center;
 
 
-
-    justify-content:space-between;
-
-
 }
-
-
 
 
 
@@ -287,7 +340,6 @@ body.calendar-page::after{
 
 
     margin:0;
-
 
 
     font-size:23px;
@@ -306,7 +358,6 @@ body.calendar-page::after{
     width:46px;
 
 
-
     height:46px;
 
 
@@ -321,7 +372,7 @@ body.calendar-page::after{
 
     background:
 
-    rgba(255,255,255,.15);
+    rgba(255,255,255,.18);
 
 
 
@@ -344,16 +395,16 @@ body.calendar-page::after{
 
 
 
+
 .month-btn:hover{
 
 
     background:
 
-    rgba(255,255,255,.3);
+    rgba(255,255,255,.35);
 
 
-
-    transform:scale(1.08);
+    transform:scale(1.1);
 
 
 }
@@ -365,7 +416,7 @@ body.calendar-page::after{
 .month-btn:active{
 
 
-    transform:scale(.92);
+    transform:scale(.9);
 
 
 }
@@ -382,15 +433,12 @@ body.calendar-page::after{
     display:grid;
 
 
-
     grid-template-columns:
-
     repeat(7,1fr);
 
 
 
     margin-top:25px;
-
 
 
     margin-bottom:12px;
@@ -409,16 +457,13 @@ body.calendar-page::after{
     text-align:center;
 
 
+    opacity:.7;
+
 
     font-size:13px;
 
 
-
-    opacity:.65;
-
-
 }
-
 
 
 
@@ -431,9 +476,7 @@ body.calendar-page::after{
     display:grid;
 
 
-
     grid-template-columns:
-
     repeat(7,1fr);
 
 
@@ -442,7 +485,6 @@ body.calendar-page::after{
 
 
 }
-
 
 
 
@@ -469,9 +511,7 @@ body.calendar-page::after{
     display:flex;
 
 
-
     justify-content:center;
-
 
 
     align-items:center;
@@ -491,11 +531,6 @@ body.calendar-page::after{
     color:white;
 
 
-
-    font-size:16px;
-
-
-
     cursor:pointer;
 
 
@@ -510,13 +545,12 @@ body.calendar-page::after{
 
 
 
-
 .calendar-day:hover{
 
 
     background:
 
-    rgba(255,255,255,.25);
+    rgba(255,255,255,.3);
 
 
 
@@ -524,7 +558,6 @@ body.calendar-page::after{
 
 
 }
-
 
 
 
@@ -544,7 +577,6 @@ body.calendar-page::after{
 
 
 
-
 .today{
 
 
@@ -552,7 +584,7 @@ body.calendar-page::after{
 
 
 
-    color:#8a1f58;
+    color:#7d2457;
 
 
 
@@ -562,288 +594,8 @@ body.calendar-page::after{
 
     box-shadow:
 
-    0 0 20px
+    0 0 25px
+    rgba(255,255,255,.5);
 
-    rgba(255,255,255,.4);
-
-
-}
-/* ===== Анимация логотипа MEMORA ===== */
-
-
-body.calendar-page::before{
-
-
-    animation:
-
-    logoFloat 4s ease-in-out infinite,
-
-    logoGlow 3s ease-in-out infinite;
-
-
-    position:absolute;
-
-}
-
-
-
-
-body.calendar-page::after{
-
-    animation:
-
-    textGlow 3s ease-in-out infinite;
-
-}
-
-
-
-
-
-@keyframes logoFloat{
-
-
-    0%,100%{
-
-        transform:
-        translateX(-50%)
-        translateY(0)
-        rotate(0deg);
-
-    }
-
-
-    50%{
-
-        transform:
-        translateX(-50%)
-        translateY(-8px)
-        rotate(5deg);
-
-    }
-
-}
-
-
-
-
-
-
-@keyframes logoGlow{
-
-
-    0%,100%{
-
-        box-shadow:
-
-        0 0 20px
-        rgba(255,100,200,.3),
-
-        inset 0 0 20px
-        rgba(255,255,255,.2);
-
-    }
-
-
-    50%{
-
-
-        box-shadow:
-
-        0 0 45px
-        rgba(255,120,220,.8),
-
-        inset 0 0 30px
-        rgba(255,255,255,.4);
-
-
-    }
-
-}
-
-
-
-
-
-
-@keyframes textGlow{
-
-
-    0%,100%{
-
-        opacity:.7;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-        text-shadow:
-
-        0 0 20px
-        rgba(255,130,220,.8);
-
-    }
-
-}
-
-
-
-
-
-
-/* летающие блики вокруг логотипа */
-
-
-.calendar-page::marker{
-
-    display:none;
-
-}
-
-
-
-
-body.calendar-page .calendar-container::before{
-
-
-    content:"✦";
-
-
-    position:absolute;
-
-
-    top:35px;
-
-
-    left:calc(50% - 70px);
-
-
-
-    color:white;
-
-
-    font-size:20px;
-
-
-
-    animation:
-
-    sparkleLeft 3s infinite;
-
-
-}
-
-
-
-
-body.calendar-page .calendar-container::after{
-
-
-    content:"✦";
-
-
-    position:absolute;
-
-
-    top:45px;
-
-
-    left:calc(50% + 55px);
-
-
-
-    color:white;
-
-
-    font-size:16px;
-
-
-
-    animation:
-
-    sparkleRight 3.5s infinite;
-
-
-}
-
-
-
-
-
-
-
-@keyframes sparkleLeft{
-
-
-    0%{
-
-        opacity:0;
-
-        transform:
-        translateY(20px)
-        rotate(0deg);
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-
-    }
-
-
-    100%{
-
-        opacity:0;
-
-        transform:
-        translateY(-20px)
-        rotate(180deg);
-
-    }
-
-}
-
-
-
-
-
-
-
-@keyframes sparkleRight{
-
-
-    0%{
-
-        opacity:0;
-
-        transform:
-        translateY(-10px)
-        rotate(0deg);
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-
-    100%{
-
-        opacity:0;
-
-        transform:
-        translateY(30px)
-        rotate(180deg);
-
-    }
 
 }
