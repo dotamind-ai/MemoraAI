@@ -25,7 +25,6 @@
 
 <div class="logo">
 
-
 <div class="core">
 
 <div class="ring"></div>
@@ -34,12 +33,9 @@
 M
 </div>
 
-
 </div>
 
-
 </div>
-
 
 
 <h1>
@@ -67,7 +63,7 @@ M
 
 
 <button onclick="changeMonth(-1)">
-◀
+‹
 </button>
 
 
@@ -79,7 +75,7 @@ M
 
 
 <button onclick="changeMonth(1)">
-▶
+›
 </button>
 
 
@@ -91,7 +87,6 @@ M
 
 
 <div class="calendar-grid" id="calendarGrid">
-
 
 </div>
 
@@ -111,8 +106,71 @@ M
 
 
 
+</div>
+
+
+
+
+
+
+<!-- Окно воспоминания -->
+
+
+<div class="memory-modal" id="memoryModal">
+
+
+<div class="memory-window">
+
+
+<button 
+class="close-memory" 
+onclick="closeMemory()">
+
+×
+
+</button>
+
+
+
+<h2 id="memoryDate">
+
+24 июля
+
+</h2>
+
+
+
+<p>
+Новое воспоминание
+</p>
+
+
+
+
+<textarea 
+id="memoryText"
+placeholder="Что произошло сегодня?"
+></textarea>
+
+
+
+
+<button 
+class="save-memory" 
+onclick="saveMemory()">
+
+Сохранить
+
+</button>
+
+
 
 </div>
+
+
+</div>
+
+
 
 
 
@@ -126,7 +184,9 @@ M
 
 
 
-<button class="nav-item" onclick="goHome()">
+<button 
+class="nav-item" 
+onclick="goHome()">
 
 <span>
 🏠
@@ -137,7 +197,8 @@ M
 
 
 
-<button class="nav-item active">
+<button 
+class="nav-item active">
 
 <span>
 📅
@@ -148,7 +209,9 @@ M
 
 
 
-<button class="nav-item" onclick="goFavorites()">
+<button 
+class="nav-item" 
+onclick="goFavorites()">
 
 <span>
 ⭐
@@ -159,7 +222,9 @@ M
 
 
 
-<button class="nav-item" onclick="goSettings()">
+<button 
+class="nav-item" 
+onclick="goSettings()">
 
 <span>
 ⚙️
