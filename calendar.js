@@ -1,4 +1,4 @@
-const months=[
+const months = [
 "Январь",
 "Февраль",
 "Март",
@@ -14,52 +14,60 @@ const months=[
 ];
 
 
-let date=new Date();
+let current = new Date();
 
 
 
 function renderCalendar(){
 
 
-let grid=document.getElementById("calendarGrid");
+const grid =
+document.getElementById("calendarGrid");
 
-let title=document.getElementById("monthTitle");
+
+const title =
+document.getElementById("monthTitle");
+
 
 
 grid.innerHTML="";
 
 
 
-let month=date.getMonth();
+let month=current.getMonth();
 
-let year=date.getFullYear();
+let year=current.getFullYear();
 
 
 
-title.textContent=
+title.textContent =
 months[month]+" "+year;
 
 
 
-let firstDay=
+
+
+let firstDay =
 new Date(year,month,1).getDay();
 
 
 
-firstDay =
-firstDay===0 ? 6 : firstDay-1;
+if(firstDay===0){
+
+firstDay=7;
+
+}
 
 
 
-
-let days=
+let days =
 new Date(year,month+1,0).getDate();
 
 
 
 
 
-for(let i=0;i<firstDay;i++){
+for(let i=1;i<firstDay;i++){
 
 
 let empty=document.createElement("div");
@@ -70,6 +78,7 @@ grid.appendChild(empty);
 
 
 }
+
 
 
 
@@ -87,19 +96,23 @@ cell.textContent=day;
 
 
 
+
 let today=new Date();
 
 
 
 if(
+
 day===today.getDate() &&
 month===today.getMonth() &&
 year===today.getFullYear()
+
 ){
 
 cell.classList.add("today");
 
 }
+
 
 
 
@@ -114,17 +127,20 @@ grid.appendChild(cell);
 
 
 
-
 document
 .getElementById("prevMonth")
 .onclick=function(){
 
-date.setMonth(date.getMonth()-1);
+
+current.setMonth(
+current.getMonth()-1
+);
+
 
 renderCalendar();
 
-};
 
+};
 
 
 
@@ -133,9 +149,14 @@ document
 .getElementById("nextMonth")
 .onclick=function(){
 
-date.setMonth(date.getMonth()+1);
+
+current.setMonth(
+current.getMonth()+1
+);
+
 
 renderCalendar();
+
 
 };
 
