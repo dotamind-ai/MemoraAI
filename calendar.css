@@ -1,4 +1,4 @@
-/* ===== MEMORA CALENDAR ONLY ===== */
+/* ===== MEMORA CALENDAR DESIGN ===== */
 
 
 * {
@@ -21,15 +21,32 @@ body.calendar-page {
 
     padding:20px;
 
-    font-family:Arial, sans-serif;
+
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 
 
     background:
+
+    radial-gradient(
+    circle at top left,
+    #ff9bd5,
+    transparent 40%
+    ),
+
+    radial-gradient(
+    circle at bottom right,
+    #7657ff,
+    transparent 45%
+    ),
+
     linear-gradient(
     135deg,
-    #6b4cff,
-    #b54cff,
-    #ff7ac8
+    #5c3cff,
+    #b84cff
     );
 
 }
@@ -39,46 +56,74 @@ body.calendar-page {
 
 .calendar-container {
 
+
     width:100%;
 
-    max-width:400px;
+    max-width:420px;
 
 
-    padding:25px;
+    padding:28px;
 
 
-    border-radius:32px;
+    border-radius:35px;
 
 
     background:
+
     rgba(255,255,255,0.16);
 
 
-    backdrop-filter:blur(20px);
+    backdrop-filter:
+    blur(25px);
 
-    -webkit-backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:
+    blur(25px);
+
 
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,0.25);
+
+    0 25px 60px
+    rgba(0,0,0,.25);
+
+
+    border:
+
+    1px solid
+    rgba(255,255,255,.25);
+
 
 
     color:white;
 
+
 }
+
+
 
 
 
 
 .calendar-container h1 {
 
+
     text-align:center;
 
-    margin:0 0 25px;
 
-    font-size:30px;
+    margin:
+
+    0 0 25px;
+
+
+    font-size:32px;
+
+
+    font-weight:700;
+
 
 }
+
 
 
 
@@ -86,26 +131,40 @@ body.calendar-page {
 
 .calendar-header {
 
+
     display:flex;
+
 
     align-items:center;
 
+
     justify-content:space-between;
 
-    margin-bottom:20px;
+
+    margin-bottom:25px;
+
 
 }
+
+
 
 
 
 
 .calendar-header h2 {
 
+
     margin:0;
 
-    font-size:22px;
+
+    font-size:24px;
+
+
+    font-weight:600;
+
 
 }
+
 
 
 
@@ -113,50 +172,91 @@ body.calendar-page {
 
 .month-btn {
 
-    width:45px;
 
-    height:45px;
+    width:48px;
 
 
-    border:none;
+    height:48px;
+
+
 
     border-radius:50%;
 
 
+
+    border:none;
+
+
+
     background:
-    rgba(255,255,255,0.2);
+
+    rgba(255,255,255,.18);
+
 
 
     color:white;
 
 
-    font-size:32px;
+
+    font-size:34px;
+
+
+
+    line-height:1;
+
 
 
     cursor:pointer;
 
 
+
     display:flex;
 
-    align-items:center;
 
     justify-content:center;
 
 
-    transition:.2s;
+    align-items:center;
+
+
+
+
+    transition:.25s;
+
 
 
 }
 
 
+
+
+
+
+.month-btn:hover {
+
+
+    background:
+
+    rgba(255,255,255,.35);
+
+
+
+    transform:scale(1.08);
+
+
+}
 
 
 
 .month-btn:active {
 
-    transform:scale(.9);
+
+    transform:scale(.92);
+
 
 }
+
+
 
 
 
@@ -167,12 +267,18 @@ body.calendar-page {
 
     display:grid;
 
-    grid-template-columns:repeat(7,1fr);
+
+    grid-template-columns:
+
+    repeat(7,1fr);
 
 
-    margin-bottom:10px;
+
+    margin-bottom:12px;
+
 
 }
+
 
 
 
@@ -183,11 +289,15 @@ body.calendar-page {
 
     text-align:center;
 
+
     font-size:13px;
+
 
     opacity:.7;
 
+
 }
+
 
 
 
@@ -199,32 +309,27 @@ body.calendar-page {
     display:grid;
 
 
-    grid-template-columns:repeat(7,1fr);
+    grid-template-columns:
 
-
-    gap:8px;
-
-
-}
+    repeat(7,1fr);
 
 
 
-
-
-.calendar-day,
-.calendar-empty {
-
-
-    height:42px;
+    gap:9px;
 
 
 }
+
+
 
 
 
 
 
 .calendar-day {
+
+
+    height:44px;
 
 
     display:flex;
@@ -236,7 +341,9 @@ body.calendar-page {
     align-items:center;
 
 
-    border-radius:14px;
+
+    border-radius:16px;
+
 
 
     background:
@@ -244,13 +351,25 @@ body.calendar-page {
     rgba(255,255,255,.14);
 
 
+
     color:white;
+
 
 
     font-size:16px;
 
 
+
+    cursor:pointer;
+
+
+
+    transition:.2s;
+
+
 }
+
+
 
 
 
@@ -262,7 +381,14 @@ body.calendar-page {
 
     rgba(255,255,255,.3);
 
+
+
+    transform:translateY(-2px);
+
+
 }
+
+
 
 
 
@@ -270,10 +396,13 @@ body.calendar-page {
 .calendar-empty {
 
 
-    visibility:hidden;
+    height:44px;
 
 
 }
+
+
+
 
 
 
@@ -284,10 +413,19 @@ body.calendar-page {
     background:white;
 
 
-    color:#7545ff;
+    color:#7048ff;
 
 
-    font-weight:bold;
+
+    font-weight:700;
+
+
+
+    box-shadow:
+
+    0 0 25px
+
+    rgba(255,255,255,.6);
 
 
 }
