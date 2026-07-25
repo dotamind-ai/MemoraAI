@@ -1,3 +1,6 @@
+body.calendar-page {
+    background: red !important;
+}
 *{
     box-sizing:border-box;
 }
