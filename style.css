@@ -1893,3 +1893,48 @@ white-space:nowrap;
     padding:0 !important;
     font-size:12px !important;
 }
+/* CALENDAR POLISH */
+
+
+.calendar-day{
+
+background:rgba(255,255,255,0.06);
+
+border-radius:12px;
+
+transition:.25s;
+
+}
+
+
+
+.calendar-day:hover{
+
+background:rgba(255,255,255,0.18);
+
+transform:scale(1.08);
+
+}
+
+
+
+.day-name{
+
+font-size:11px;
+
+opacity:.55;
+
+}
+
+
+
+.today{
+
+background:rgba(255,255,255,0.22);
+
+box-shadow:
+0 0 18px rgba(255,255,255,.8);
+
+font-weight:700;
+
+}
