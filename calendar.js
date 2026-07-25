@@ -3,163 +3,156 @@ let currentYear = new Date().getFullYear();
 
 
 
+const months = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
+];
+
+
+
 function renderCalendar(){
 
 
-const grid = document.getElementById("calendarGrid");
-const title = document.getElementById("monthTitle");
+    const grid = document.getElementById("calendarGrid");
+    const title = document.getElementById("monthTitle");
 
 
+    if(!grid || !title){
+        return;
+    }
 
-if(!grid || !title){
 
-return;
+    title.innerHTML = months[currentMonth] + " " + currentYear;
 
-}
 
+    grid.innerHTML = "";
 
 
-const months = [
 
-"Январь",
-"Февраль",
-"Март",
-"Апрель",
-"Май",
-"Июнь",
-"Июль",
-"Август",
-"Сентябрь",
-"Октябрь",
-"Ноябрь",
-"Декабрь"
+    const weekDays = [
+        "Пн",
+        "Вт",
+        "Ср",
+        "Чт",
+        "Пт",
+        "Сб",
+        "Вс"
+    ];
 
-];
 
 
+    weekDays.forEach(day => {
 
-title.innerHTML = months[currentMonth] + " " + currentYear;
 
+        let item = document.createElement("div");
 
+        item.className = "day-name";
 
-grid.innerHTML = "";
+        item.innerHTML = day;
 
+        grid.appendChild(item);
 
 
-const weekDays = [
+    });
 
-"Пн",
-"Вт",
-"Ср",
-"Чт",
-"Пт",
-"Сб",
-"Вс"
 
-];
 
 
+    let firstDay = new Date(
+        currentYear,
+        currentMonth,
+        1
+    ).getDay();
 
-weekDays.forEach(day=>{
 
 
-let item=document.createElement("div");
-item.onclick = function(){
+    if(firstDay === 0){
 
-openMemory(day);
+        firstDay = 7;
 
-};
+    }
 
-item.className="day-name";
 
-item.innerHTML=day;
 
+    let totalDays = new Date(
+        currentYear,
+        currentMonth + 1,
+        0
+    ).getDate();
 
-grid.appendChild(item);
 
 
-});
 
+    for(let i = 1; i < firstDay; i++){
 
 
-let firstDay = new Date(
-currentYear,
-currentMonth,
-1
-).getDay();
+        let empty = document.createElement("div");
 
+        grid.appendChild(empty);
 
 
-if(firstDay===0){
+    }
 
-firstDay=7;
 
-}
 
 
 
-let totalDays = new Date(
-currentYear,
-currentMonth + 1,
-0
-).getDate();
+    for(let day = 1; day <= totalDays; day++){
 
 
+        let item = document.createElement("div");
 
-for(let i=1;i<firstDay;i++){
 
+        item.className = "calendar-day";
 
-let empty=document.createElement("div");
 
-grid.appendChild(empty);
+        item.innerHTML = day;
 
 
-}
 
+        item.onclick = function(){
 
 
+            openMemory(day);
 
 
-for(let day=1; day<=totalDays; day++){
+        };
 
 
-let item=document.createElement("div");
 
 
-item.className="calendar-day";
 
+        let today = new Date();
 
-item.innerHTML=day;
 
 
+        if(
+            day === today.getDate() &&
+            currentMonth === today.getMonth() &&
+            currentYear === today.getFullYear()
+        ){
 
-let today = new Date();
+            item.classList.add("today");
 
+        }
 
 
-if(
 
-day===today.getDate() &&
 
-currentMonth===today.getMonth() &&
+        grid.appendChild(item);
 
-currentYear===today.getFullYear()
 
-){
-
-item.classList.add("today");
-
-
-}
-
-
-
-grid.appendChild(item);
-
-
-
-}
-
+    }
 
 
 }
@@ -170,69 +163,69 @@ grid.appendChild(item);
 function changeMonth(value){
 
 
-currentMonth += value;
+    currentMonth += value;
 
 
 
-if(currentMonth < 0){
+    if(currentMonth < 0){
 
-currentMonth = 11;
+        currentMonth = 11;
 
-currentYear--;
+        currentYear--;
+
+    }
+
+
+
+    if(currentMonth > 11){
+
+        currentMonth = 0;
+
+        currentYear++;
+
+    }
+
+
+
+    renderCalendar();
+
 
 }
 
 
 
-if(currentMonth > 11){
-
-currentMonth = 0;
-
-currentYear++;
-
-}
-
-
-
-renderCalendar();
-
-
-}
 
 
 
 
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
-
-renderCalendar();
-
-}
-
-);
 function openMemory(day){
 
 
-let modal=document.getElementById("memoryModal");
+    let modal = document.getElementById("memoryModal");
 
-let title=document.getElementById("memoryDate");
-
-
-title.innerHTML = day + " " + 
-["Январь","Февраль","Март","Апрель",
-"Май","Июнь","Июль","Август",
-"Сентябрь","Октябрь","Ноябрь","Декабрь"][currentMonth];
+    let title = document.getElementById("memoryDate");
 
 
 
-modal.classList.add("show");
+    if(!modal || !title){
+
+        return;
+
+    }
+
+
+
+    title.innerHTML =
+    day + " " + months[currentMonth];
+
+
+
+    modal.classList.add("show");
 
 
 }
+
+
 
 
 
@@ -240,12 +233,18 @@ modal.classList.add("show");
 function closeMemory(){
 
 
-document
-.getElementById("memoryModal")
-.classList.remove("show");
+    let modal = document.getElementById("memoryModal");
+
+
+    if(modal){
+
+        modal.classList.remove("show");
+
+    }
 
 
 }
+
 
 
 
@@ -254,19 +253,33 @@ document
 function saveMemory(){
 
 
-let text=document.getElementById("memoryText").value;
+    let text = document.getElementById("memoryText").value;
 
 
-if(text.trim()===""){
 
-return;
+    if(text.trim() === ""){
+
+        return;
+
+    }
+
+
+
+    closeMemory();
+
 
 }
 
 
-alert("Воспоминание сохранено 🧠");
 
-closeMemory();
 
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+    renderCalendar();
 
 }
+);
