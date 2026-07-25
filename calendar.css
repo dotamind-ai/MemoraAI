@@ -17,78 +17,52 @@ align-items:center;
 
 padding:20px;
 
-
 font-family:Arial,sans-serif;
 
-
-background:
-
-linear-gradient(
+background:linear-gradient(
 135deg,
-#6b45ff,
+#6745ff,
 #d85cff,
-#ff8ac8
+#ff8bc7
 );
 
 }
 
 
 
-
 .calendar-container{
-
 
 width:100%;
 
 max-width:420px;
 
-
 padding:25px;
-
 
 border-radius:30px;
 
-
-background:
-
-rgba(255,255,255,0.18);
-
+background:rgba(255,255,255,.18);
 
 backdrop-filter:blur(20px);
 
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.25);
-
+box-shadow:0 20px 50px rgba(0,0,0,.25);
 
 color:white;
 
-
 }
 
 
 
-
-
-.calendar-container h1{
-
+h1{
 
 text-align:center;
 
-font-size:32px;
-
-margin-bottom:25px;
-
+margin-top:0;
 
 }
-
-
 
 
 
 .calendar-header{
-
 
 display:flex;
 
@@ -96,54 +70,35 @@ align-items:center;
 
 justify-content:space-between;
 
-
 }
-
-
 
 
 
 .calendar-header h2{
 
-
-margin:0;
-
-font-size:24px;
-
+font-size:22px;
 
 }
 
 
 
-
-
 .month-btn{
 
+width:48px;
 
-width:50px;
-
-height:50px;
-
+height:48px;
 
 border:none;
 
-
 border-radius:50%;
 
-
-background:
-
-rgba(255,255,255,.25);
-
+background:rgba(255,255,255,.25);
 
 color:white;
 
-
-font-size:34px;
-
+font-size:32px;
 
 cursor:pointer;
-
 
 }
 
@@ -157,20 +112,15 @@ transform:scale(.9);
 
 
 
-
-
 .week-days{
-
 
 display:grid;
 
 grid-template-columns:repeat(7,1fr);
 
-
-margin-top:25px;
+margin-top:20px;
 
 margin-bottom:10px;
-
 
 }
 
@@ -178,54 +128,38 @@ margin-bottom:10px;
 
 .week-days div{
 
-
 text-align:center;
 
 font-size:13px;
 
 opacity:.8;
 
-
 }
-
-
-
 
 
 
 .calendar-grid{
 
-
 display:grid;
-
 
 grid-template-columns:repeat(7,1fr);
 
-
 gap:8px;
 
-
 }
-
-
 
 
 
 .calendar-day,
 .calendar-empty{
 
-
 height:45px;
-
 
 }
 
 
 
-
-
 .calendar-day{
-
 
 display:flex;
 
@@ -233,58 +167,38 @@ align-items:center;
 
 justify-content:center;
 
-
 border-radius:15px;
 
+background:rgba(255,255,255,.15);
 
-background:
-
-rgba(255,255,255,.15);
-
-
-font-size:16px;
-
+cursor:pointer;
 
 }
-
 
 
 
 .calendar-day:hover{
 
-
-background:
-
-rgba(255,255,255,.35);
-
+background:rgba(255,255,255,.35);
 
 }
-
-
-
-
-.today{
-
-
-background:white;
-
-
-color:#7048ff;
-
-
-font-weight:bold;
-
-
-}
-
-
 
 
 
 .calendar-empty{
 
-
 visibility:hidden;
 
+}
+
+
+
+.today{
+
+background:white;
+
+color:#6745ff;
+
+font-weight:bold;
 
 }
