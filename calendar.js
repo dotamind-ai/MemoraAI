@@ -1,17 +1,17 @@
 const months = [
 
-"Январь",
-"Февраль",
-"Март",
-"Апрель",
-"Май",
-"Июнь",
-"Июль",
-"Август",
-"Сентябрь",
-"Октябрь",
-"Ноябрь",
-"Декабрь"
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
 
 ];
 
@@ -25,43 +25,125 @@ let date = new Date();
 function drawCalendar(){
 
 
-const grid =
-document.getElementById("calendarGrid");
+    const grid = document.getElementById("calendarGrid");
+    const title = document.getElementById("monthTitle");
 
 
-const title =
-document.getElementById("monthTitle");
-
-
-
-grid.innerHTML="";
+    if(!grid || !title){
+        return;
+    }
 
 
 
-let month =
-date.getMonth();
-
-
-let year =
-date.getFullYear();
+    grid.innerHTML = "";
 
 
 
-title.textContent =
-months[month]+" "+year;
+    let month = date.getMonth();
+
+    let year = date.getFullYear();
 
 
 
 
-
-let firstDay =
-new Date(year,month,1).getDay();
-
+    title.textContent =
+    months[month] + " " + year;
 
 
-if(firstDay===0){
 
-firstDay=7;
+
+
+    let firstDay =
+    new Date(year, month, 1).getDay();
+
+
+
+    if(firstDay === 0){
+
+        firstDay = 7;
+
+    }
+
+
+
+
+
+
+    for(let i = 1; i < firstDay; i++){
+
+
+        let empty =
+        document.createElement("div");
+
+
+        empty.className =
+        "calendar-empty";
+
+
+        grid.appendChild(empty);
+
+
+    }
+
+
+
+
+
+
+    let days =
+    new Date(year, month + 1, 0).getDate();
+
+
+
+
+
+    for(let i = 1; i <= days; i++){
+
+
+        let day =
+        document.createElement("div");
+
+
+
+        day.className =
+        "calendar-day";
+
+
+
+        day.textContent = i;
+
+
+
+
+
+        let now = new Date();
+
+
+
+
+        if(
+
+            i === now.getDate()
+            &&
+            month === now.getMonth()
+            &&
+            year === now.getFullYear()
+
+        ){
+
+            day.classList.add("today");
+
+        }
+
+
+
+
+        grid.appendChild(day);
+
+
+
+    }
+
 
 }
 
@@ -69,111 +151,64 @@ firstDay=7;
 
 
 
-for(let i=1;i<firstDay;i++){
-
-
-let empty=document.createElement("div");
-
-
-empty.className="calendar-empty";
-
-
-grid.appendChild(empty);
-
-
-}
 
 
 
+// Стрелки календаря
+
+
+const prevMonth =
+document.getElementById("prevMonth");
 
 
 
-let days =
-new Date(year,month+1,0).getDate();
+const nextMonth =
+document.getElementById("nextMonth");
 
 
 
 
 
+if(prevMonth){
 
-for(let i=1;i<=days;i++){
-
-
-let day=document.createElement("div");
+prevMonth.onclick = ()=>{
 
 
-day.className="calendar-day";
+    date.setMonth(
+        date.getMonth() - 1
+    );
 
 
-day.textContent=i;
-
-
-
-let now=new Date();
-
-
-
-if(
-i===now.getDate()
-&&
-month===now.getMonth()
-&&
-year===now.getFullYear()
-){
-
-day.classList.add("today");
-
-}
-
-
-
-grid.appendChild(day);
-
-
-}
-
-
-
-}
-
-
-
-
-
-document
-.getElementById("prevMonth")
-.onclick=()=>{
-
-
-date.setMonth(
-date.getMonth()-1
-);
-
-
-drawCalendar();
+    drawCalendar();
 
 
 };
 
+}
 
 
 
 
 
-document
-.getElementById("nextMonth")
-.onclick=()=>{
+
+if(nextMonth){
+
+nextMonth.onclick = ()=>{
 
 
-date.setMonth(
-date.getMonth()+1
-);
+    date.setMonth(
+        date.getMonth() + 1
+    );
 
 
-drawCalendar();
+    drawCalendar();
 
 
 };
+
+}
+
+
 
 
 
@@ -184,13 +219,18 @@ drawCalendar();
 // ===== НАВИГАЦИЯ =====
 
 
+window.addEventListener("DOMContentLoaded",()=>{
+
+
 
 const homeScreen =
 document.getElementById("homeScreen");
 
 
+
 const calendarScreen =
 document.getElementById("calendarScreen");
+
 
 
 const navItems =
@@ -200,19 +240,24 @@ document.querySelectorAll(".nav-item");
 
 
 
+if(
+!homeScreen ||
+!calendarScreen ||
+navItems.length < 2
+){
 
-function openScreen(screen){
+console.log("Навигация не найдена");
+
+return;
+
+}
 
 
 
-homeScreen.classList.add("hidden");
-
-calendarScreen.classList.add("hidden");
 
 
 
-screen.classList.remove("hidden");
-
+function setActive(button){
 
 
 navItems.forEach(item=>{
@@ -222,6 +267,8 @@ item.classList.remove("active");
 });
 
 
+button.classList.add("active");
+
 
 }
 
@@ -229,13 +276,44 @@ item.classList.remove("active");
 
 
 
-navItems[0].onclick=()=>{
 
 
-openScreen(homeScreen);
+// Главная
 
 
-navItems[0].classList.add("active");
+navItems[0].onclick = ()=>{
+
+
+calendarScreen.classList.add("hidden");
+
+
+homeScreen.classList.remove("hidden");
+
+
+setActive(navItems[0]);
+
+
+};
+
+
+
+
+
+
+
+// Календарь
+
+
+navItems[1].onclick = ()=>{
+
+
+homeScreen.classList.add("hidden");
+
+
+calendarScreen.classList.remove("hidden");
+
+
+setActive(navItems[1]);
 
 
 };
@@ -244,16 +322,7 @@ navItems[0].classList.add("active");
 
 
 
-navItems[1].onclick=()=>{
-
-
-openScreen(calendarScreen);
-
-
-navItems[1].classList.add("active");
-
-
-};
+});
 
 
 
