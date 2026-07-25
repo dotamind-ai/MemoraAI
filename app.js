@@ -974,15 +974,12 @@ window.location.href="index.html";
 
 function openPage(page){
 
-
 document.body.style.animation="pageExit .35s ease";
 
 
 setTimeout(()=>{
 
-
-window.location.href=page;
-
+window.location.href = page;
 
 },300);
 
@@ -996,9 +993,7 @@ function goHome(){
 
 openPage("index.html");
 
-
 }
-
 
 
 
@@ -1006,9 +1001,7 @@ function goCalendar(){
 
 openPage("calendar.html");
 
-
 }
-
 
 
 
@@ -1016,18 +1009,13 @@ function goFavorites(){
 
 openPage("favorites.html");
 
-
 }
-
 
 
 
 function goSettings(){
 
 openPage("settings.html");
-
-
-}
 
 }
 
