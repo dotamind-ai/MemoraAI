@@ -2864,7 +2864,7 @@ height:45px;
     z-index:-1;
 
 }
-/* FIX ACTIVE HOME NAV */
+/* ACTIVE NAV WITHOUT CIRCLE */
 
 .bottom-nav .nav-item{
     position:relative;
@@ -2888,28 +2888,15 @@ height:45px;
 }
 
 
+/* убрать круг */
+
 .bottom-nav .nav-item.active::before{
 
-    content:"";
+    display:none;
 
-    position:absolute;
-
-    width:45px;
-
-    height:45px;
-
-    border-radius:50%;
+}
 
 
-    background:
-    rgba(255,255,255,.12);
-
-
-    filter:
-    blur(12px);
-
-
-    z-index:-1;
 
 }
 
