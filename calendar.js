@@ -232,6 +232,30 @@ navItems[1].classList.add("active");
 
 
 drawCalendar();
+const navButtons = document.querySelectorAll(".nav-item");
+
+
+navButtons.forEach(button => {
+
+
+    button.addEventListener("click", function(){
+
+
+        navButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+        this.classList.add("active");
+
+
+    });
+
+
+});
+
 
 
 
