@@ -16,7 +16,6 @@ const months = [
 ];
 
 
-
 let date = new Date();
 
 
@@ -24,7 +23,6 @@ let date = new Date();
 
 
 function drawCalendar(){
-
 
 
 const grid =
@@ -46,7 +44,6 @@ date.getMonth();
 
 let year =
 date.getFullYear();
-
 
 
 
@@ -75,12 +72,10 @@ firstDay=7;
 for(let i=1;i<firstDay;i++){
 
 
-let empty =
-document.createElement("div");
+let empty=document.createElement("div");
 
 
-empty.className =
-"calendar-empty";
+empty.className="calendar-empty";
 
 
 grid.appendChild(empty);
@@ -100,43 +95,30 @@ new Date(year,month+1,0).getDate();
 
 
 
+
 for(let i=1;i<=days;i++){
 
 
-
-let day =
-document.createElement("div");
+let day=document.createElement("div");
 
 
-
-day.className =
-"calendar-day";
-
+day.className="calendar-day";
 
 
 day.textContent=i;
 
 
 
-
-
-let now =
-new Date();
+let now=new Date();
 
 
 
 if(
-
 i===now.getDate()
-
 &&
-
 month===now.getMonth()
-
 &&
-
 year===now.getFullYear()
-
 ){
 
 day.classList.add("today");
@@ -145,12 +127,11 @@ day.classList.add("today");
 
 
 
-
 grid.appendChild(day);
 
 
-
 }
+
 
 
 }
@@ -199,27 +180,86 @@ drawCalendar();
 
 
 
-drawCalendar();
-const homeScreen=document.getElementById("homeScreen");
 
-const calendarScreen=document.getElementById("calendarScreen");
-
-const navItems=document.querySelectorAll(".nav-item");
+// ===== НАВИГАЦИЯ =====
 
 
-navItems[0].onclick=function(){
 
-calendarScreen.classList.add("hidden");
-
-homeScreen.classList.remove("hidden");
-
-};
+const homeScreen =
+document.getElementById("homeScreen");
 
 
-navItems[1].onclick=function(){
+const calendarScreen =
+document.getElementById("calendarScreen");
+
+
+const navItems =
+document.querySelectorAll(".nav-item");
+
+
+
+
+
+
+function openScreen(screen){
+
+
 
 homeScreen.classList.add("hidden");
 
-calendarScreen.classList.remove("hidden");
+calendarScreen.classList.add("hidden");
+
+
+
+screen.classList.remove("hidden");
+
+
+
+navItems.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+
+
+}
+
+
+
+
+
+navItems[0].onclick=()=>{
+
+
+openScreen(homeScreen);
+
+
+navItems[0].classList.add("active");
+
 
 };
+
+
+
+
+
+navItems[1].onclick=()=>{
+
+
+openScreen(calendarScreen);
+
+
+navItems[1].classList.add("active");
+
+
+};
+
+
+
+
+
+
+
+
+drawCalendar();
