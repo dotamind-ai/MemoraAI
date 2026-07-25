@@ -1871,3 +1871,25 @@ font-size:18px;
 white-space:nowrap;
 
 }
+.calendar-box{
+    width:320px !important;
+    max-width:320px !important;
+    overflow:hidden !important;
+}
+
+
+.calendar-grid{
+    display:grid !important;
+    grid-template-columns:repeat(7, 35px) !important;
+    gap:4px !important;
+    justify-content:center !important;
+}
+
+
+.calendar-day,
+.day-name{
+    width:35px !important;
+    height:35px !important;
+    padding:0 !important;
+    font-size:12px !important;
+}
