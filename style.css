@@ -1997,3 +1997,57 @@ transform:scale(.9);
 
 
 }
+/* NEW CALENDAR ARROWS */
+
+
+.calendar-header button{
+
+background:transparent !important;
+
+border:none !important;
+
+width:28px !important;
+
+height:28px !important;
+
+padding:0 !important;
+
+border-radius:0 !important;
+
+color:white !important;
+
+font-size:26px !important;
+
+font-weight:300;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:.7;
+
+box-shadow:none !important;
+
+}
+
+
+
+.calendar-header button:hover{
+
+opacity:1;
+
+transform:scale(1.15);
+
+background:transparent !important;
+
+}
+
+
+
+.calendar-header button:active{
+
+transform:scale(.9);
+
+}
