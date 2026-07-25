@@ -1,26 +1,17 @@
-const newEvent =
-document.getElementById("newEvent");
+const newEvent = document.getElementById("newEvent");
+
+const eventForm = document.getElementById("eventForm");
+
+const saveEvent = document.getElementById("saveEvent");
+
+const cancelEvent = document.getElementById("cancelEvent");
+
+const eventList = document.getElementById("eventList");
 
 
-const eventForm =
-document.getElementById("eventForm");
-
-
-const saveEvent =
-document.getElementById("saveEvent");
-
-
-const cancelEvent =
-document.getElementById("cancelEvent");
-
-
-const eventList =
-document.getElementById("eventList");
-
-
-
-let events =
-JSON.parse(localStorage.getItem("memoraEvents")) || [];
+let events = JSON.parse(
+    localStorage.getItem("memoraEvents")
+) || [];
 
 
 
@@ -29,44 +20,47 @@ JSON.parse(localStorage.getItem("memoraEvents")) || [];
 function showEvents(){
 
 
-eventList.innerHTML="";
+    eventList.innerHTML = "";
 
 
 
-events.forEach((event,index)=>{
+    events.forEach((event,index)=>{
 
 
-let card =
-document.createElement("div");
+        let card = document.createElement("div");
 
 
-card.className="saved-event";
-
-
-
-card.innerHTML=`
-
-<h2>
-${event.title}
-</h2>
-
-<p>
-${event.text}
-</p>
-
-<button onclick="deleteEvent(${index})">
-Удалить
-</button>
-
-`;
+        card.className = "saved-event";
 
 
 
-eventList.appendChild(card);
+        card.innerHTML = `
+
+        <h2>
+        ${event.title}
+        </h2>
+
+
+        <p>
+        ${event.text}
+        </p>
+
+
+        <button onclick="deleteEvent(${index})">
+
+        Удалить
+
+        </button>
+
+        `;
 
 
 
-});
+        eventList.appendChild(card);
+
+
+
+    });
 
 
 }
@@ -76,23 +70,17 @@ eventList.appendChild(card);
 
 
 
-newEvent.onclick=()=>{
+
+// открыть форму
 
 
-eventForm.classList.remove("hidden");
+newEvent.onclick = ()=>{
 
 
-};
+    eventForm.classList.remove("hidden");
 
 
-
-
-
-
-cancelEvent.onclick=()=>{
-
-
-eventForm.classList.add("hidden");
+    newEvent.classList.add("hidden");
 
 
 };
@@ -102,53 +90,17 @@ eventForm.classList.add("hidden");
 
 
 
-saveEvent.onclick=()=>{
+
+// отмена
 
 
-let title =
-document.getElementById("eventTitle").value;
+cancelEvent.onclick = ()=>{
 
 
-let text =
-document.getElementById("eventText").value;
+    eventForm.classList.add("hidden");
 
 
-
-if(!title){
-
-return;
-
-}
-
-
-
-events.push({
-
-title:title,
-
-text:text
-
-});
-
-
-
-localStorage.setItem(
-"memoraEvents",
-JSON.stringify(events)
-);
-
-
-
-document.getElementById("eventTitle").value="";
-
-document.getElementById("eventText").value="";
-
-
-
-eventForm.classList.add("hidden");
-
-
-showEvents();
+    newEvent.classList.remove("hidden");
 
 
 };
@@ -156,61 +108,162 @@ showEvents();
 
 
 
+
+
+
+// сохранить
+
+
+saveEvent.onclick = ()=>{
+
+
+    let title =
+    document.getElementById("eventTitle").value;
+
+
+
+    let text =
+    document.getElementById("eventText").value;
+
+
+
+
+
+    if(title.trim() === ""){
+
+        return;
+
+    }
+
+
+
+
+
+
+    events.push({
+
+        title:title,
+
+        text:text
+
+    });
+
+
+
+
+
+    localStorage.setItem(
+
+        "memoraEvents",
+
+        JSON.stringify(events)
+
+    );
+
+
+
+
+
+    document.getElementById("eventTitle").value = "";
+
+    document.getElementById("eventText").value = "";
+
+
+
+
+
+    eventForm.classList.add("hidden");
+
+
+    newEvent.classList.remove("hidden");
+
+
+
+    showEvents();
+
+
+
+};
+
+
+
+
+
+
+
+// удалить событие
 
 
 function deleteEvent(index){
 
 
-events.splice(index,1);
+    events.splice(index,1);
 
 
 
-localStorage.setItem(
-"memoraEvents",
-JSON.stringify(events)
-);
+    localStorage.setItem(
+
+        "memoraEvents",
+
+        JSON.stringify(events)
+
+    );
 
 
 
-showEvents();
+    showEvents();
 
 
 }
 
 
 
+
+
+
+
+
+// ===== НАВИГАЦИЯ =====
 
 
 
 function goHome(){
 
-window.location.href="index.html";
+    window.location.href="index.html";
 
 }
+
 
 
 function goCalendar(){
 
-window.location.href="calendar.html";
+    window.location.href="calendar.html";
 
 }
+
 
 
 function goEvents(){
 
-window.location.href="events.html";
+    window.location.href="events.html";
 
 }
+
 
 
 function goSettings(){
 
-window.location.href="settings.html";
+    window.location.href="settings.html";
 
 }
 
 
 
+
+
+
+
+// запуск
 
 
 showEvents();
