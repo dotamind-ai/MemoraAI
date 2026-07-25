@@ -9,7 +9,7 @@
 
 <title>MEMORA — События</title>
 
-<link rel="stylesheet" href="events.css?v=1">
+<link rel="stylesheet" href="events.css?v=2">
 
 </head>
 
@@ -17,10 +17,21 @@
 <body class="events-page">
 
 
-
-<!-- ЛОГОТИП -->
+<!-- ЛОГО -->
 
 <div class="memora-logo">
+
+<div class="orbit orbit1">
+<span></span>
+</div>
+
+<div class="orbit orbit2">
+<span></span>
+</div>
+
+<div class="orbit orbit3">
+<span></span>
+</div>
 
 
 <div class="sun-logo">
@@ -30,23 +41,7 @@
 </div>
 
 
-<div class="orbit orbit1">
-<span></span>
 </div>
-
-
-<div class="orbit orbit2">
-<span></span>
-</div>
-
-
-<div class="orbit orbit3">
-<span></span>
-</div>
-
-
-</div>
-
 
 
 
@@ -62,7 +57,7 @@
 
 
 
-<button class="new-event">
+<button id="newEvent">
 
 + Новое событие
 
@@ -74,64 +69,50 @@
 
 
 
-<div class="event-card">
+<div id="eventForm" class="event-form hidden">
 
 
-<div class="event-date">
-
-📅 Сегодня
-
-</div>
-
-
-<h2>
-
-Важное событие
-
-</h2>
-
-
-<p>
-
-Здесь будет описание события
-
-</p>
-
-
-</div>
+<input 
+id="eventTitle"
+placeholder="Название события"
+>
 
 
 
+<textarea 
+id="eventText"
+placeholder="Описание"
+></textarea>
 
 
 
-<div class="event-card">
+<button id="saveEvent">
+
+Сохранить
+
+</button>
 
 
-<div class="event-date">
+<button id="cancelEvent">
 
-⭐ Память
+Отмена
 
-</div>
+</button>
 
-
-<h2>
-
-Особенный момент
-
-</h2>
-
-
-<p>
-
-Твои сохранённые события появятся здесь
-
-</p>
 
 
 </div>
 
 
+
+
+
+
+
+<div id="eventList">
+
+
+</div>
 
 
 
@@ -143,8 +124,6 @@
 
 
 
-
-<!-- НАВИГАЦИЯ -->
 
 <nav class="bottom-nav">
 
@@ -191,15 +170,13 @@
 </button>
 
 
-
 </nav>
 
 
 
 
 
-
-<script src="app.js?v=2"></script>
+<script src="events.js?v=1"></script>
 
 
 </body>
