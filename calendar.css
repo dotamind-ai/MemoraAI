@@ -46,7 +46,8 @@ body.calendar-page{
 
 
 
-/* ===== LOGO ===== */
+
+/* ===== LOGO MEMORA ===== */
 
 
 .memora-logo{
@@ -68,9 +69,6 @@ body.calendar-page{
 
 
 
-
-
-
 .sun-logo{
 
     position:absolute;
@@ -84,12 +82,15 @@ body.calendar-page{
     translate(-50%,-50%);
 
 
+
     width:60px;
 
     height:60px;
 
 
+
     border-radius:50%;
+
 
 
     display:flex;
@@ -97,6 +98,7 @@ body.calendar-page{
     align-items:center;
 
     justify-content:center;
+
 
 
     background:
@@ -108,8 +110,8 @@ body.calendar-page{
     );
 
 
-    box-shadow:
 
+    box-shadow:
 
     0 0 20px white,
 
@@ -120,7 +122,6 @@ body.calendar-page{
     animation:
 
     glow 3s infinite;
-
 
 }
 
@@ -145,8 +146,6 @@ body.calendar-page{
 
 
 
-
-
 .orbit{
 
     position:absolute;
@@ -154,6 +153,7 @@ body.calendar-page{
     left:50%;
 
     top:50%;
+
 
 
     transform:
@@ -173,8 +173,6 @@ body.calendar-page{
 
 
 
-
-
 .orbit span{
 
     position:absolute;
@@ -190,7 +188,6 @@ body.calendar-page{
     0 0 12px white;
 
 }
-
 
 
 
@@ -296,7 +293,6 @@ body.calendar-page{
 
 @keyframes rotate1{
 
-
 from{
 
 transform:
@@ -304,7 +300,6 @@ translate(-50%,-50%)
 rotate(0deg);
 
 }
-
 
 to{
 
@@ -314,16 +309,13 @@ rotate(360deg);
 
 }
 
-
 }
-
 
 
 
 
 @keyframes rotate2{
 
-
 from{
 
 transform:
@@ -332,7 +324,6 @@ rotate(360deg);
 
 }
 
-
 to{
 
 transform:
@@ -340,7 +331,6 @@ translate(-50%,-50%)
 rotate(0deg);
 
 }
-
 
 }
 
@@ -349,21 +339,12 @@ rotate(0deg);
 
 @keyframes glow{
 
-
-0%,100%{
-
-filter:brightness(1);
-
-}
-
-
 50%{
 
 filter:brightness(1.5);
 
 }
 
-
 }
 
 
@@ -373,7 +354,7 @@ filter:brightness(1.5);
 
 
 
-/* ===== CALENDAR ===== */
+/* ===== КАЛЕНДАРЬ ===== */
 
 
 .calendar-container{
@@ -400,20 +381,17 @@ filter:brightness(1.5);
 
     background:
 
-
     rgba(255,255,255,.06);
 
 
 
     backdrop-filter:
 
-
     blur(18px);
 
 
 
     border:
-
 
     1px solid rgba(255,255,255,.10);
 
@@ -424,9 +402,7 @@ filter:brightness(1.5);
 
     0 15px 40px rgba(0,0,0,.45);
 
-
 }
-
 
 
 
@@ -460,7 +436,6 @@ filter:brightness(1.5);
 
     align-items:center;
 
-
 }
 
 
@@ -469,14 +444,11 @@ filter:brightness(1.5);
 
 .calendar-header h2{
 
-
     margin:0;
-
 
     font-size:20px;
 
 }
-
 
 
 
@@ -518,8 +490,6 @@ filter:brightness(1.5);
 
 
 
-
-
 .week{
 
 
@@ -537,16 +507,14 @@ filter:brightness(1.5);
 
     opacity:.65;
 
-
 }
+
 
 
 
 .week span{
 
-
     text-align:center;
-
 
     font-size:12px;
 
@@ -574,9 +542,7 @@ filter:brightness(1.5);
 
     margin-top:8px;
 
-
 }
-
 
 
 
@@ -588,10 +554,7 @@ filter:brightness(1.5);
 
     height:38px;
 
-
 }
-
-
 
 
 
@@ -620,11 +583,7 @@ filter:brightness(1.5);
     rgba(255,255,255,.09);
 
 
-    font-size:14px;
-
 }
-
-
 
 
 
@@ -634,7 +593,6 @@ filter:brightness(1.5);
 
 
     background:
-
 
     rgba(255,255,255,.22);
 
@@ -646,11 +604,9 @@ filter:brightness(1.5);
 
 .calendar-empty{
 
-
     visibility:hidden;
 
 }
-
 
 
 
@@ -668,10 +624,179 @@ filter:brightness(1.5);
     font-weight:bold;
 
 
+}
+
+
+
+
+
+
+
+
+
+/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
+
+
+
+.bottom-nav{
+
+
+    position:fixed;
+
+
+    bottom:18px;
+
+
+    left:50%;
+
+
+
+    transform:translateX(-50%);
+
+
+
+    width:350px;
+
+
+    max-width:90%;
+
+
+
+    height:75px;
+
+
+
+    display:flex;
+
+
+    justify-content:space-around;
+
+
+    align-items:center;
+
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    border-radius:30px;
+
+
+
     box-shadow:
 
+    0 15px 40px rgba(0,0,0,.5);
 
-    0 0 15px white;
+}
 
+
+
+
+
+.nav-item{
+
+
+    border:none;
+
+
+    background:none;
+
+
+
+    color:white;
+
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+
+    gap:4px;
+
+
+
+    opacity:.55;
+
+
+
+    font-size:22px;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+}
+
+
+
+
+
+.nav-item small{
+
+
+    font-size:11px;
+
+}
+
+
+
+
+
+.nav-item.active{
+
+
+    opacity:1;
+
+
+    transform:translateY(-8px);
+
+}
+
+
+
+
+
+.nav-item.active span{
+
+
+    filter:
+
+    drop-shadow(0 0 10px white);
+
+}
+
+
+
+
+
+.nav-item:hover{
+
+
+    opacity:1;
 
 }
