@@ -64,6 +64,11 @@ weekDays.forEach(day=>{
 
 
 let item=document.createElement("div");
+item.onclick = function(){
+
+openMemory(day);
+
+};
 
 item.className="day-name";
 
