@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA Calendar</title>
+<title>MEMORA — Календарь</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,7 +17,9 @@
 <body class="calendar-page">
 
 
+
 <div class="app">
+
 
 
 <header>
@@ -38,17 +40,20 @@ M
 </div>
 
 
+
 <h1>
 Календарь
 </h1>
 
 
 <p>
-История твоих воспоминаний
+Твои воспоминания по дням
 </p>
 
 
+
 </header>
+
 
 
 
@@ -61,9 +66,11 @@ M
 <div class="calendar-header">
 
 
+
 <button onclick="changeMonth(-1)">
 ‹
 </button>
+
 
 
 
@@ -73,34 +80,33 @@ M
 
 
 
+
 <button onclick="changeMonth(1)">
 ›
 </button>
 
 
-</div>
-
-
-
-
-
-<div class="calendar-grid" id="calendarGrid">
 
 </div>
 
 
 
-<p class="calendar-empty">
 
-Твои воспоминания появятся здесь
 
-</p>
+
+<div 
+class="calendar-grid" 
+id="calendarGrid">
+
+</div>
 
 
 
 </section>
 
 
+
+
 </div>
 
 
@@ -109,13 +115,17 @@ M
 
 
 
-<!-- Окно воспоминания -->
+<!-- Окно памяти -->
 
 
-<div class="memory-modal" id="memoryModal">
+<div 
+class="memory-modal" 
+id="memoryModal">
+
 
 
 <div class="memory-window">
+
 
 
 <button 
@@ -128,30 +138,26 @@ onclick="closeMemory()">
 
 
 
+
 <h2 id="memoryDate">
 
-24 июля
+Дата
 
 </h2>
 
 
 
-<p>
-Новое воспоминание
-</p>
 
-
-
-
-<textarea
+<textarea 
 id="memoryText"
-placeholder="Что произошло сегодня?"
-></textarea>
+placeholder="Что произошло сегодня?">
+
+</textarea>
 
 
 
 
-<button
+<button 
 class="save-memory"
 onclick="saveMemory()">
 
@@ -172,7 +178,6 @@ onclick="saveMemory()">
 
 
 
-<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
@@ -180,50 +185,35 @@ onclick="saveMemory()">
 
 
 <button 
-class="nav-item"
 onclick="goHome()">
 
-<span>
 🏠
-</span>
 
 </button>
 
 
 
+<button class="active">
 
-<button 
-class="nav-item active">
-
-<span>
 📅
-</span>
 
 </button>
 
 
 
-
 <button 
-class="nav-item"
 onclick="goFavorites()">
 
-<span>
 ⭐
-</span>
 
 </button>
 
 
 
-
 <button 
-class="nav-item"
 onclick="goSettings()">
 
-<span>
 ⚙️
-</span>
 
 </button>
 
@@ -238,7 +228,8 @@ onclick="goSettings()">
 
 <script src="app.js"></script>
 
-<script src="calendar.js"></script>
+<script src="./calendar.js"></script>
+
 
 
 </body>
