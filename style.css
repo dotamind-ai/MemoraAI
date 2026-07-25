@@ -2819,3 +2819,49 @@ height:45px;
 
 
 }
+/* ===== ACTIVE NAV FIX FOR HOME ===== */
+
+.bottom-nav .nav-item.active{
+
+    opacity:1;
+
+    transform:translateY(-7px);
+
+}
+
+
+.bottom-nav .nav-item.active span{
+
+    filter:
+    drop-shadow(0 0 10px white);
+
+}
+
+
+/* лёгкое свечение самой кнопки */
+
+.bottom-nav .nav-item.active::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    filter:blur(10px);
+
+
+    z-index:-1;
+
+}
+
