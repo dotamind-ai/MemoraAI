@@ -1046,3 +1046,4 @@ function goSettings(){
 window.location.href="settings.html";
 
 }
+alert("MEMORA JS работает");
