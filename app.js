@@ -1,7 +1,7 @@
 /* =====================================
         MEMORA APP V4
 ===================================== */
-
+alert("MEMORA работает");
 
 const addMemory =
 document.getElementById("addMemory");
