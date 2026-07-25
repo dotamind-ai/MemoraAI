@@ -2,7 +2,6 @@ let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 
 
-
 const months = [
     "Январь",
     "Февраль",
@@ -28,18 +27,19 @@ function renderCalendar(){
 
 
     if(!grid || !title){
+        console.log("Нет элементов календаря");
         return;
     }
 
 
-    title.innerHTML = months[currentMonth] + " " + currentYear;
-
 
     grid.innerHTML = "";
 
+    title.innerHTML = months[currentMonth] + " " + currentYear;
 
 
-    const weekDays = [
+
+    const week = [
         "Пн",
         "Вт",
         "Ср",
@@ -51,19 +51,20 @@ function renderCalendar(){
 
 
 
-    weekDays.forEach(day => {
+    week.forEach(day=>{
 
 
-        let item = document.createElement("div");
+        const name = document.createElement("div");
 
-        item.className = "day-name";
+        name.className = "day-name";
 
-        item.innerHTML = day;
+        name.innerHTML = day;
 
-        grid.appendChild(item);
+        grid.appendChild(name);
 
 
     });
+
 
 
 
@@ -84,11 +85,13 @@ function renderCalendar(){
 
 
 
-    let totalDays = new Date(
+
+    let days = new Date(
         currentYear,
         currentMonth + 1,
         0
     ).getDate();
+
 
 
 
@@ -107,27 +110,25 @@ function renderCalendar(){
 
 
 
-    for(let day = 1; day <= totalDays; day++){
+    for(let day = 1; day <= days; day++){
 
 
-        let item = document.createElement("div");
+        let cell = document.createElement("div");
 
 
-        item.className = "calendar-day";
+        cell.className = "calendar-day";
 
 
-        item.innerHTML = day;
+        cell.innerHTML = day;
 
 
 
-        item.onclick = function(){
 
+        cell.onclick = function(){
 
             openMemory(day);
 
-
         };
-
 
 
 
@@ -137,25 +138,32 @@ function renderCalendar(){
 
 
         if(
+
             day === today.getDate() &&
+
             currentMonth === today.getMonth() &&
+
             currentYear === today.getFullYear()
+
         ){
 
-            item.classList.add("today");
+            cell.classList.add("today");
 
         }
 
 
 
-
-        grid.appendChild(item);
+        grid.appendChild(cell);
 
 
     }
 
 
+
 }
+
+
+
 
 
 
@@ -174,6 +182,7 @@ function changeMonth(value){
         currentYear--;
 
     }
+
 
 
 
@@ -198,16 +207,17 @@ function changeMonth(value){
 
 
 
+
 function openMemory(day){
 
 
-    let modal = document.getElementById("memoryModal");
+    const modal = document.getElementById("memoryModal");
 
-    let title = document.getElementById("memoryDate");
+    const date = document.getElementById("memoryDate");
 
 
 
-    if(!modal || !title){
+    if(!modal || !date){
 
         return;
 
@@ -215,7 +225,8 @@ function openMemory(day){
 
 
 
-    title.innerHTML =
+
+    date.innerHTML =
     day + " " + months[currentMonth];
 
 
@@ -233,7 +244,7 @@ function openMemory(day){
 function closeMemory(){
 
 
-    let modal = document.getElementById("memoryModal");
+    const modal = document.getElementById("memoryModal");
 
 
     if(modal){
@@ -253,17 +264,19 @@ function closeMemory(){
 function saveMemory(){
 
 
-    let text = document.getElementById("memoryText").value;
+    const text = document.getElementById("memoryText");
 
 
 
-    if(text.trim() === ""){
+    if(!text.value.trim()){
 
         return;
 
     }
 
 
+
+    text.value = "";
 
     closeMemory();
 
@@ -275,11 +288,11 @@ function saveMemory(){
 
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+
+window.onload = function(){
+
 
     renderCalendar();
 
-}
-);
+
+};
