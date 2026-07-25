@@ -1,39 +1,46 @@
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
-
 
 
 body.calendar-page{
 
-margin:0;
+    margin:0;
 
-min-height:100vh;
+    min-height:100vh;
 
-padding-top:150px;
-
-
-display:flex;
-
-justify-content:center;
+    padding-top:190px;
 
 
-font-family:Arial,sans-serif;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
 
 
-background:
-
-linear-gradient(
-160deg,
-#090910,
-#201426,
-#090910
-);
+    font-family:Arial, sans-serif;
 
 
-color:white;
+    background:
 
-overflow:hidden;
+    radial-gradient(
+        circle at top,
+        #302038,
+        transparent 45%
+    ),
+
+    linear-gradient(
+        160deg,
+        #090910,
+        #171522,
+        #090910
+    );
+
+
+    color:white;
+
+    overflow:hidden;
 
 }
 
@@ -41,23 +48,30 @@ overflow:hidden;
 
 
 
-
-/* ===== ЛОГОТИП ===== */
+/* ===== LOGO ===== */
 
 
 .memora-logo{
 
-position:absolute;
 
-top:20px;
+    position:absolute;
 
-left:50%;
 
-transform:translateX(-50%);
+    top:20px;
 
-width:150px;
 
-height:150px;
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+
+    width:150px;
+
+
+    height:150px;
+
 
 }
 
@@ -68,57 +82,62 @@ height:150px;
 .sun-logo{
 
 
-position:absolute;
-
-left:50%;
-
-top:50%;
+    position:absolute;
 
 
-transform:
-translate(-50%,-50%);
+    left:50%;
 
 
-
-width:65px;
-
-height:65px;
+    top:50%;
 
 
-border-radius:50%;
+    transform:
+    translate(-50%,-50%);
 
 
 
-display:flex;
-
-align-items:center;
-
-justify-content:center;
+    width:65px;
 
 
-
-background:
-
-radial-gradient(
-circle,
-#ffffff,
-#777777
-);
+    height:65px;
 
 
 
-box-shadow:
-
-
-0 0 20px white,
-
-0 0 60px rgba(255,255,255,.5);
+    border-radius:50%;
 
 
 
-animation:
+    display:flex;
 
-glow 3s infinite;
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.05)
+    );
+
+
+
+    box-shadow:
+
+    0 0 25px white,
+
+    0 0 60px rgba(180,180,255,.5);
+
+
+
+    animation:
+
+    glow 3s ease-in-out infinite;
 
 
 }
@@ -129,11 +148,20 @@ glow 3s infinite;
 .sun-logo b{
 
 
-font-size:42px;
+    color:white;
 
-color:white;
 
-font-weight:900;
+    font-size:42px;
+
+
+    font-weight:900;
+
+
+
+    text-shadow:
+
+    0 0 20px white;
+
 
 }
 
@@ -145,46 +173,55 @@ font-weight:900;
 .orbit{
 
 
-position:absolute;
+    position:absolute;
 
 
-left:50%;
-
-top:50%;
+    left:50%;
 
 
-transform:
-translate(-50%,-50%);
+    top:50%;
 
 
 
-border-radius:50%;
+    transform:
+
+    translate(-50%,-50%);
 
 
-border:
 
-1px solid rgba(255,255,255,.15);
+    border-radius:50%;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.13);
 
 
 }
 
 
 
+
+
 .orbit span{
 
 
-position:absolute;
+    position:absolute;
 
 
-border-radius:50%;
+    display:block;
 
 
-background:white;
+    border-radius:50%;
 
 
-box-shadow:
+    background:white;
 
-0 0 15px white;
+
+    box-shadow:
+
+    0 0 12px white;
 
 
 }
@@ -196,30 +233,41 @@ box-shadow:
 
 .orbit1{
 
-width:90px;
 
-height:90px;
+    width:90px;
 
 
-animation:
+    height:90px;
 
-spin1 5s linear infinite;
+
+    animation:
+
+    rotate1 5s linear infinite;
+
 
 }
+
+
 
 
 
 .orbit1 span{
 
-width:7px;
 
-height:7px;
+    width:7px;
 
-top:-4px;
 
-left:50%;
+    height:7px;
+
+
+    top:-4px;
+
+
+    left:50%;
+
 
 }
+
 
 
 
@@ -227,30 +275,41 @@ left:50%;
 
 .orbit2{
 
-width:120px;
 
-height:120px;
+    width:120px;
 
 
-animation:
+    height:120px;
 
-spin2 8s linear infinite;
+
+    animation:
+
+    rotate2 8s linear infinite;
+
 
 }
+
+
 
 
 
 .orbit2 span{
 
-width:9px;
 
-height:9px;
+    width:8px;
 
-right:-5px;
 
-top:50%;
+    height:8px;
+
+
+    right:-4px;
+
+
+    top:50%;
+
 
 }
+
 
 
 
@@ -258,30 +317,42 @@ top:50%;
 
 .orbit3{
 
-width:150px;
 
-height:150px;
+    width:145px;
 
 
-animation:
+    height:145px;
 
-spin1 12s linear infinite;
+
+    animation:
+
+    rotate1 12s linear infinite;
+
 
 }
+
+
 
 
 
 .orbit3 span{
 
-width:10px;
 
-height:10px;
+    width:10px;
 
-bottom:15px;
 
-left:15px;
+    height:10px;
 
-background:#a8d7ff;
+
+    bottom:15px;
+
+
+    left:15px;
+
+
+
+    background:#a8d7ff;
+
 
 }
 
@@ -289,105 +360,133 @@ background:#a8d7ff;
 
 
 
-@keyframes spin1{
-
-from{
-
-transform:
-translate(-50%,-50%)
-rotate(0deg);
-
-}
-
-to{
-
-transform:
-translate(-50%,-50%)
-rotate(360deg);
-
-}
-
-}
 
 
+@keyframes rotate1{
 
-@keyframes spin2{
 
-from{
+    from{
 
-transform:
-translate(-50%,-50%)
-rotate(360deg);
+        transform:
+        translate(-50%,-50%)
+        rotate(0deg);
+
+    }
+
+
+    to{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(360deg);
+
+    }
 
 }
 
-to{
 
-transform:
-translate(-50%,-50%)
-rotate(0deg);
+
+
+
+@keyframes rotate2{
+
+
+    from{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(360deg);
+
+    }
+
+
+    to{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(0deg);
+
+    }
 
 }
 
-}
+
 
 
 
 @keyframes glow{
 
 
-50%{
+    0%,100%{
 
-filter:brightness(1.5);
+        filter:brightness(1);
+
+    }
+
+
+    50%{
+
+        filter:brightness(1.5);
+
+    }
+
 
 }
 
 
-}
 
 
 
 
 
-
-
-
-/* ===== КАЛЕНДАРЬ ===== */
+/* ===== CALENDAR GLASS ===== */
 
 
 
 .calendar-container{
 
 
-width:420px;
-
-max-width:90%;
+    width:390px;
 
 
-
-padding:25px;
-
-
-border-radius:30px;
+    max-width:88%;
 
 
 
-background:
-
-rgba(255,255,255,.08);
+    padding:22px;
 
 
 
-backdrop-filter:
-
-blur(20px);
+    margin-top:35px;
 
 
 
-border:
+    border-radius:28px;
 
-1px solid rgba(255,255,255,.15);
 
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+
+    box-shadow:
+
+
+    0 20px 50px rgba(0,0,0,.5);
 
 
 }
@@ -395,11 +494,24 @@ border:
 
 
 
-h1{
 
-text-align:center;
+
+.calendar-container h1{
+
+
+    text-align:center;
+
+
+    margin:0 0 20px;
+
+
+    font-size:28px;
+
 
 }
+
+
+
 
 
 
@@ -407,113 +519,191 @@ text-align:center;
 .calendar-header{
 
 
-display:flex;
+    display:flex;
 
-justify-content:space-between;
 
-align-items:center;
+    justify-content:space-between;
+
+
+    align-items:center;
+
 
 }
+
+
+
+
+
+.calendar-header h2{
+
+
+    margin:0;
+
+
+    font-size:22px;
+
+
+}
+
+
+
+
 
 
 
 .calendar-header button{
 
 
-width:45px;
-
-height:45px;
+    width:45px;
 
 
-border-radius:50%;
-
-
-border:none;
-
-
-background:
-
-rgba(255,255,255,.2);
+    height:45px;
 
 
 
-color:white;
+    border-radius:50%;
 
 
-font-size:30px;
+    border:none;
 
 
-cursor:pointer;
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+
+    color:white;
+
+
+    font-size:30px;
+
+
+    cursor:pointer;
 
 
 }
+
+
+
+
+
+
+.calendar-header button:hover{
+
+
+    background:
+
+    rgba(255,255,255,.3);
+
+
+}
+
+
+
+
 
 
 
 .week{
 
 
-display:grid;
-
-grid-template-columns:repeat(7,1fr);
-
-margin-top:20px;
+    display:grid;
 
 
-opacity:.7;
+    grid-template-columns:
+
+    repeat(7,1fr);
+
+
+
+    margin-top:20px;
+
+
+    opacity:.7;
+
 
 }
+
+
 
 
 
 .week span{
 
-text-align:center;
+
+    text-align:center;
+
+
+    font-size:13px;
+
 
 }
+
+
+
 
 
 
 .calendar-grid{
 
 
-display:grid;
+    display:grid;
 
 
-grid-template-columns:repeat(7,1fr);
+    grid-template-columns:
+
+    repeat(7,1fr);
 
 
-gap:8px;
+
+    gap:7px;
 
 
-margin-top:10px;
+    margin-top:10px;
 
 
 }
+
+
+
+
+
+.calendar-day,
+.calendar-empty{
+
+
+    height:42px;
+
+
+}
+
+
+
 
 
 
 .calendar-day{
 
 
-height:45px;
+    display:flex;
 
 
-display:flex;
+    justify-content:center;
 
 
-align-items:center;
+    align-items:center;
 
 
-justify-content:center;
+
+    border-radius:13px;
 
 
-border-radius:14px;
 
+    background:
 
-background:
-
-rgba(255,255,255,.12);
+    rgba(255,255,255,.1);
 
 
 }
@@ -521,18 +711,18 @@ rgba(255,255,255,.12);
 
 
 
-.today{
 
 
-background:white;
+.calendar-day:hover{
 
 
-color:#222;
+    background:
 
+    rgba(255,255,255,.25);
 
-font-weight:bold;
 
 }
+
 
 
 
@@ -540,8 +730,32 @@ font-weight:bold;
 
 .calendar-empty{
 
-height:45px;
 
-visibility:hidden;
+    visibility:hidden;
+
+
+}
+
+
+
+
+
+.today{
+
+
+    background:white;
+
+
+    color:#302038;
+
+
+    font-weight:bold;
+
+
+
+    box-shadow:
+
+    0 0 20px white;
+
 
 }
