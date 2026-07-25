@@ -800,3 +800,17 @@ filter:brightness(1.5);
 
 
 }
+/* ===== Screens ===== */
+
+.screen{
+
+display:block;
+
+}
+
+
+.hidden{
+
+display:none;
+
+}
