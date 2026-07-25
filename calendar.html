@@ -22,33 +22,15 @@
 
 <header>
 
-<div class="logo">
-
-<div class="core">
-
-<div class="ring"></div>
-
-<div class="memory-letter">
-M
-</div>
-
-</div>
-
-</div>
-
-
 <h1>
 Календарь
 </h1>
-
 
 <p>
 Твои воспоминания
 </p>
 
-
 </header>
-
 
 
 
@@ -64,9 +46,11 @@ M
 </button>
 
 
+
 <h2 id="monthTitle">
 Июль 2026
 </h2>
+
 
 
 <button onclick="changeMonth(1)">
@@ -75,6 +59,7 @@ M
 
 
 </div>
+
 
 
 
@@ -97,7 +82,6 @@ class="calendar-grid">
 
 
 
-
 <div 
 id="memoryModal"
 class="memory-modal">
@@ -107,17 +91,19 @@ class="memory-modal">
 
 
 <button 
-class="close-memory"
-onclick="closeMemory()">
+onclick="closeMemory()"
+class="close-memory">
 
 ×
 
 </button>
 
 
+
 <h2 id="memoryDate">
 Дата
 </h2>
+
 
 
 <textarea 
@@ -127,13 +113,12 @@ placeholder="Что произошло сегодня?">
 
 
 
-<button 
-class="save-memory"
-onclick="saveMemory()">
+<button onclick="saveMemory()">
 
 Сохранить
 
 </button>
+
 
 
 </div>
@@ -177,18 +162,10 @@ onclick="saveMemory()">
 
 
 
+
 <script src="app.js"></script>
 
-
-<script src="./calendar.js"></script>
-
-
-
-<script>
-
-
-
-</script>
+<script src="calendar.js"></script>
 
 
 
