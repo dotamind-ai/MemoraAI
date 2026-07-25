@@ -1,18 +1,17 @@
 const months = [
-"Январь",
-"Февраль",
-"Март",
-"Апрель",
-"Май",
-"Июнь",
-"Июль",
-"Август",
-"Сентябрь",
-"Октябрь",
-"Ноябрь",
-"Декабрь"
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
 ];
-
 
 
 let currentDate = new Date();
@@ -21,160 +20,133 @@ let currentDate = new Date();
 
 
 
-function renderCalendar(){
+function renderCalendar() {
 
 
-const grid =
-document.getElementById("calendarGrid");
+    const grid = document.getElementById("calendarGrid");
+    const title = document.getElementById("monthTitle");
 
 
-const title =
-document.getElementById("monthTitle");
+    grid.innerHTML = "";
 
 
 
-grid.innerHTML = "";
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
 
 
 
-let month =
-currentDate.getMonth();
+    title.textContent =
+        months[month] + " " + year;
 
 
 
-let year =
-currentDate.getFullYear();
 
 
+    // первый день месяца
+    // 0 = воскресенье, 1 = понедельник
 
-title.textContent =
-months[month] + " " + year;
+    let firstDay = new Date(
+        year,
+        month,
+        1
+    ).getDay();
 
 
 
+    // переводим в формат:
+    // понедельник = 0
+    // воскресенье = 6
 
+    if (firstDay === 0) {
 
+        firstDay = 6;
 
-let firstDay =
-new Date(
-year,
-month,
-1
-).getDay();
+    } else {
 
+        firstDay = firstDay - 1;
 
+    }
 
 
 
-if(firstDay === 0){
 
-firstDay = 7;
 
-}
+    // количество дней в месяце
 
+    const totalDays = new Date(
+        year,
+        month + 1,
+        0
+    ).getDate();
 
 
 
 
 
 
-let days =
-new Date(
-year,
-month + 1,
-0
-).getDate();
+    // пустые места перед первым числом
 
+    for (let i = 0; i < firstDay; i++) {
 
 
+        const empty = document.createElement("div");
 
+        empty.className = "calendar-empty";
 
+        grid.appendChild(empty);
 
-// пустые места до первого дня
+    }
 
-for(
-let i = 1;
-i < firstDay;
-i++
-){
 
 
-let empty =
-document.createElement("div");
 
 
-empty.className =
-"calendar-empty";
 
 
-grid.appendChild(empty);
+    // создаём дни
 
+    for (let day = 1; day <= totalDays; day++) {
 
-}
 
+        const cell = document.createElement("div");
 
 
+        cell.className = "calendar-day";
 
 
+        cell.textContent = day;
 
 
-// дни месяца
 
-for(
-let day = 1;
-day <= days;
-day++
-){
 
 
 
-let cell =
-document.createElement("div");
+        const today = new Date();
 
 
 
-cell.className =
-"calendar-day";
+        if (
 
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
 
+        ) {
 
-cell.textContent =
-day;
+            cell.classList.add("today");
 
+        }
 
 
 
 
 
-let today =
-new Date();
 
+        grid.appendChild(cell);
 
 
-if(
-
-day === today.getDate() &&
-month === today.getMonth() &&
-year === today.getFullYear()
-
-){
-
-
-cell.classList.add("today");
-
-
-}
-
-
-
-
-
-
-grid.appendChild(cell);
-
-
-
-}
+    }
 
 
 }
@@ -186,54 +158,51 @@ grid.appendChild(cell);
 
 
 
-document
-.getElementById("prevMonth")
-.addEventListener(
-"click",
-function(){
-
-
-currentDate.setMonth(
-currentDate.getMonth() - 1
-);
-
-
-renderCalendar();
-
-
-});
-
-
-
-
-
-
-
-document
-.getElementById("nextMonth")
-.addEventListener(
-"click",
-function(){
-
-
-currentDate.setMonth(
-currentDate.getMonth() + 1
-);
-
-
-renderCalendar();
-
-
-});
-
-
-
-
-
-
-
-
-window.addEventListener(
+document.addEventListener(
 "DOMContentLoaded",
-renderCalendar
-);
+function(){
+
+
+    renderCalendar();
+
+
+
+    document
+    .getElementById("prevMonth")
+    .addEventListener(
+    "click",
+    function(){
+
+
+        currentDate.setMonth(
+            currentDate.getMonth() - 1
+        );
+
+
+        renderCalendar();
+
+
+    });
+
+
+
+    document
+    .getElementById("nextMonth")
+    .addEventListener(
+    "click",
+    function(){
+
+
+        currentDate.setMonth(
+            currentDate.getMonth() + 1
+        );
+
+
+        renderCalendar();
+
+
+    });
+
+
+
+});
