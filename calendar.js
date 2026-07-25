@@ -1,5 +1,4 @@
 const months = [
-
     "Январь",
     "Февраль",
     "Март",
@@ -12,7 +11,6 @@ const months = [
     "Октябрь",
     "Ноябрь",
     "Декабрь"
-
 ];
 
 
@@ -20,129 +18,102 @@ let date = new Date();
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+
 
 
 function drawCalendar(){
 
 
-    const grid = document.getElementById("calendarGrid");
-    const title = document.getElementById("monthTitle");
+const grid = document.getElementById("calendarGrid");
+const title = document.getElementById("monthTitle");
 
 
-    if(!grid || !title){
-        return;
-    }
+if(!grid || !title){
+    return;
+}
 
 
+grid.innerHTML="";
 
-    grid.innerHTML = "";
 
+let month = date.getMonth();
 
+let year = date.getFullYear();
 
-    let month = date.getMonth();
 
-    let year = date.getFullYear();
 
+title.textContent =
+months[month] + " " + year;
 
 
 
-    title.textContent =
-    months[month] + " " + year;
 
+let firstDay =
+new Date(year, month, 1).getDay();
 
 
 
+if(firstDay===0){
+    firstDay=7;
+}
 
-    let firstDay =
-    new Date(year, month, 1).getDay();
 
 
 
-    if(firstDay === 0){
+for(let i=1;i<firstDay;i++){
 
-        firstDay = 7;
+let empty=document.createElement("div");
 
-    }
+empty.className="calendar-empty";
 
+grid.appendChild(empty);
 
+}
 
 
 
 
-    for(let i = 1; i < firstDay; i++){
 
+let days =
+new Date(year,month+1,0).getDate();
 
-        let empty =
-        document.createElement("div");
 
 
-        empty.className =
-        "calendar-empty";
+for(let i=1;i<=days;i++){
 
 
-        grid.appendChild(empty);
+let day=document.createElement("div");
 
+day.className="calendar-day";
 
-    }
+day.textContent=i;
 
 
 
+let now=new Date();
 
 
 
-    let days =
-    new Date(year, month + 1, 0).getDate();
+if(
+i===now.getDate()
+&&
+month===now.getMonth()
+&&
+year===now.getFullYear()
+){
 
+day.classList.add("today");
 
+}
 
 
 
-    for(let i = 1; i <= days; i++){
+grid.appendChild(day);
 
 
-        let day =
-        document.createElement("div");
+}
 
-
-
-        day.className =
-        "calendar-day";
-
-
-
-        day.textContent = i;
-
-
-
-
-
-        let now = new Date();
-
-
-
-
-        if(
-
-            i === now.getDate()
-            &&
-            month === now.getMonth()
-            &&
-            year === now.getFullYear()
-
-        ){
-
-            day.classList.add("today");
-
-        }
-
-
-
-
-        grid.appendChild(day);
-
-
-
-    }
 
 
 }
@@ -152,14 +123,8 @@ function drawCalendar(){
 
 
 
-
-
-// Стрелки календаря
-
-
 const prevMonth =
 document.getElementById("prevMonth");
-
 
 
 const nextMonth =
@@ -171,21 +136,15 @@ document.getElementById("nextMonth");
 
 if(prevMonth){
 
-prevMonth.onclick = ()=>{
+prevMonth.onclick=()=>{
 
+date.setMonth(date.getMonth()-1);
 
-    date.setMonth(
-        date.getMonth() - 1
-    );
-
-
-    drawCalendar();
-
+drawCalendar();
 
 };
 
 }
-
 
 
 
@@ -193,16 +152,11 @@ prevMonth.onclick = ()=>{
 
 if(nextMonth){
 
-nextMonth.onclick = ()=>{
+nextMonth.onclick=()=>{
 
+date.setMonth(date.getMonth()+1);
 
-    date.setMonth(
-        date.getMonth() + 1
-    );
-
-
-    drawCalendar();
-
+drawCalendar();
 
 };
 
@@ -213,24 +167,15 @@ nextMonth.onclick = ()=>{
 
 
 
-
-
-
-// ===== НАВИГАЦИЯ =====
-
-
-window.addEventListener("DOMContentLoaded",()=>{
-
+// НАВИГАЦИЯ
 
 
 const homeScreen =
 document.getElementById("homeScreen");
 
 
-
 const calendarScreen =
 document.getElementById("calendarScreen");
-
 
 
 const navItems =
@@ -240,57 +185,21 @@ document.querySelectorAll(".nav-item");
 
 
 
-if(
-!homeScreen ||
-!calendarScreen ||
-navItems.length < 2
-){
-
-console.log("Навигация не найдена");
-
-return;
-
-}
+if(homeScreen && calendarScreen && navItems.length>=2){
 
 
 
-
-
-
-function setActive(button){
-
-
-navItems.forEach(item=>{
-
-item.classList.remove("active");
-
-});
-
-
-button.classList.add("active");
-
-
-}
-
-
-
-
-
-
-
-// Главная
-
-
-navItems[0].onclick = ()=>{
-
-
-calendarScreen.classList.add("hidden");
+navItems[0].onclick=()=>{
 
 
 homeScreen.classList.remove("hidden");
 
+calendarScreen.classList.add("hidden");
 
-setActive(navItems[0]);
+
+navItems.forEach(btn=>btn.classList.remove("active"));
+
+navItems[0].classList.add("active");
 
 
 };
@@ -299,32 +208,23 @@ setActive(navItems[0]);
 
 
 
-
-
-// Календарь
-
-
-navItems[1].onclick = ()=>{
-
-
-homeScreen.classList.add("hidden");
+navItems[1].onclick=()=>{
 
 
 calendarScreen.classList.remove("hidden");
 
+homeScreen.classList.add("hidden");
 
-setActive(navItems[1]);
+
+navItems.forEach(btn=>btn.classList.remove("active"));
+
+navItems[1].classList.add("active");
 
 
 };
 
 
-
-
-
-});
-
-
+}
 
 
 
@@ -332,3 +232,7 @@ setActive(navItems[1]);
 
 
 drawCalendar();
+
+
+
+});
