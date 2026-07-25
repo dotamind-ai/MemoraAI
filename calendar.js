@@ -14,24 +14,24 @@ const months=[
 ];
 
 
-let currentDate=new Date();
+let date=new Date();
 
 
 
-function renderCalendar(){
+function draw(){
 
 
-const grid=document.getElementById("calendarGrid");
+let grid=document.getElementById("calendarGrid");
 
-const title=document.getElementById("monthTitle");
+let title=document.getElementById("monthTitle");
 
 
 grid.innerHTML="";
 
 
-let month=currentDate.getMonth();
+let month=date.getMonth();
 
-let year=currentDate.getFullYear();
+let year=date.getFullYear();
 
 
 
@@ -40,72 +40,59 @@ months[month]+" "+year;
 
 
 
-
-let firstDay=
-new Date(year,month,1).getDay();
+let first=new Date(year,month,1).getDay();
 
 
+if(first===0) first=7;
 
-if(firstDay===0){
 
-firstDay=7;
+
+for(let i=1;i<first;i++){
+
+let e=document.createElement("div");
+
+e.className="calendar-empty";
+
+grid.appendChild(e);
 
 }
 
 
 
-let days=
+let total=
 new Date(year,month+1,0).getDate();
 
 
 
+for(let i=1;i<=total;i++){
 
-for(let i=1;i<firstDay;i++){
+
+let d=document.createElement("div");
 
 
-let empty=document.createElement("div");
+d.className="calendar-day";
 
-empty.className="calendar-empty";
 
-grid.appendChild(empty);
-
-}
-
+d.textContent=i;
 
 
 
-for(let day=1;day<=days;day++){
-
-
-let cell=document.createElement("div");
-
-
-cell.className="calendar-day";
-
-
-cell.textContent=day;
-
-
-
-
-let today=new Date();
-
+let now=new Date();
 
 
 if(
-day===today.getDate() &&
-month===today.getMonth() &&
-year===today.getFullYear()
+i===now.getDate() &&
+month===now.getMonth() &&
+year===now.getFullYear()
 ){
 
-cell.classList.add("today");
+d.classList.add("today");
 
 }
 
 
 
-
-grid.appendChild(cell);
+grid.appendChild(d);
 
 
 }
@@ -119,11 +106,9 @@ grid.appendChild(cell);
 
 document.getElementById("prevMonth").onclick=()=>{
 
-currentDate.setMonth(
-currentDate.getMonth()-1
-);
+date.setMonth(date.getMonth()-1);
 
-renderCalendar();
+draw();
 
 };
 
@@ -131,14 +116,12 @@ renderCalendar();
 
 document.getElementById("nextMonth").onclick=()=>{
 
-currentDate.setMonth(
-currentDate.getMonth()+1
-);
+date.setMonth(date.getMonth()+1);
 
-renderCalendar();
+draw();
 
 };
 
 
 
-renderCalendar();
+draw();
