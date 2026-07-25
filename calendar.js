@@ -200,3 +200,26 @@ drawCalendar();
 
 
 drawCalendar();
+const homeScreen=document.getElementById("homeScreen");
+
+const calendarScreen=document.getElementById("calendarScreen");
+
+const navItems=document.querySelectorAll(".nav-item");
+
+
+navItems[0].onclick=function(){
+
+calendarScreen.classList.add("hidden");
+
+homeScreen.classList.remove("hidden");
+
+};
+
+
+navItems[1].onclick=function(){
+
+homeScreen.classList.add("hidden");
+
+calendarScreen.classList.remove("hidden");
+
+};
