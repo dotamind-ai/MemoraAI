@@ -1,20 +1,21 @@
 const months = [
-"Январь",
-"Февраль",
-"Март",
-"Апрель",
-"Май",
-"Июнь",
-"Июль",
-"Август",
-"Сентябрь",
-"Октябрь",
-"Ноябрь",
-"Декабрь"
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
 ];
 
 
 let today = new Date();
+
 
 let currentMonth = today.getMonth();
 
@@ -22,128 +23,216 @@ let currentYear = today.getFullYear();
 
 
 
+
+
 function createCalendar(){
 
 
-const grid = document.getElementById("calendarGrid");
+    const grid = document.getElementById("calendarGrid");
 
-const title = document.getElementById("monthTitle");
-
-
-grid.innerHTML = "";
+    const title = document.getElementById("monthTitle");
 
 
-title.textContent =
-months[currentMonth] + " " + currentYear;
+    grid.innerHTML = "";
 
 
-
-let firstDay = new Date(
-currentYear,
-currentMonth,
-1
-).getDay();
+    title.textContent =
+    months[currentMonth] + " " + currentYear;
 
 
 
-if(firstDay === 0){
 
-firstDay = 7;
+
+    // первый день месяца (Пн = 0, Вс = 6)
+
+    let firstDay = new Date(
+        currentYear,
+        currentMonth,
+        1
+    ).getDay();
+
+
+
+    firstDay = firstDay === 0 ? 6 : firstDay - 1;
+
+
+
+
+
+    // количество дней в месяце
+
+    let totalDays = new Date(
+        currentYear,
+        currentMonth + 1,
+        0
+    ).getDate();
+
+
+
+
+
+
+
+    // пустые клетки до первого дня
+
+    for(let i = 0; i < firstDay; i++){
+
+
+        let empty = document.createElement("div");
+
+
+        empty.className = "calendar-empty";
+
+
+        grid.appendChild(empty);
+
+
+    }
+
+
+
+
+
+
+
+    // дни месяца
+
+    for(let day = 1; day <= totalDays; day++){
+
+
+
+        let cell = document.createElement("div");
+
+
+        cell.className = "calendar-day";
+
+
+        cell.textContent = day;
+
+
+
+
+
+
+
+        // сегодняшняя дата
+
+        if(
+
+            day === today.getDate() &&
+
+            currentMonth === today.getMonth() &&
+
+            currentYear === today.getFullYear()
+
+        ){
+
+
+            cell.classList.add("today");
+
+
+        }
+
+
+
+
+
+
+
+        grid.appendChild(cell);
+
+
+    }
+
+
 
 }
 
 
 
-let totalDays = new Date(
-currentYear,
-currentMonth + 1,
-0
-).getDate();
-
-
-
-for(let i = 1; i < firstDay; i++){
-
-let empty = document.createElement("div");
-
-empty.className = "calendar-empty";
-
-grid.appendChild(empty);
-
-}
-
-
-
-for(let day = 1; day <= totalDays; day++){
-
-
-let cell = document.createElement("div");
-
-
-cell.className = "calendar-day";
-
-
-cell.textContent = day;
-
-
-
-if(
-day === today.getDate() &&
-currentMonth === today.getMonth() &&
-currentYear === today.getFullYear()
-){
-
-cell.classList.add("today");
-
-}
-
-
-
-grid.appendChild(cell);
-
-
-}
-
-
-}
 
 
 
 
-document.getElementById("prevMonth").onclick = function(){
 
-currentMonth--;
+// кнопка назад
 
-if(currentMonth < 0){
+document
+.getElementById("prevMonth")
+.onclick = function(){
 
-currentMonth = 11;
 
-currentYear--;
+    currentMonth--;
 
-}
 
-createCalendar();
+
+    if(currentMonth < 0){
+
+
+        currentMonth = 11;
+
+
+        currentYear--;
+
+
+    }
+
+
+
+    createCalendar();
+
 
 };
 
 
 
-document.getElementById("nextMonth").onclick = function(){
 
-currentMonth++;
 
-if(currentMonth > 11){
 
-currentMonth = 0;
 
-currentYear++;
 
-}
 
-createCalendar();
+// кнопка вперёд
+
+document
+.getElementById("nextMonth")
+.onclick = function(){
+
+
+    currentMonth++;
+
+
+
+    if(currentMonth > 11){
+
+
+        currentMonth = 0;
+
+
+        currentYear++;
+
+
+    }
+
+
+
+    createCalendar();
+
 
 };
 
 
 
-window.onload = createCalendar;
+
+
+
+
+
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    createCalendar();
+
+});
