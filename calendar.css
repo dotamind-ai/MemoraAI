@@ -9,8 +9,7 @@ body.calendar-page{
 
     min-height:100vh;
 
-    padding-top:190px;
-
+    padding-top:175px;
 
     display:flex;
 
@@ -18,8 +17,7 @@ body.calendar-page{
 
     align-items:flex-start;
 
-
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 
 
     background:
@@ -53,25 +51,18 @@ body.calendar-page{
 
 .memora-logo{
 
-
     position:absolute;
 
-
-    top:20px;
-
+    top:15px;
 
     left:50%;
-
 
     transform:translateX(-50%);
 
 
-
     width:150px;
 
-
     height:150px;
-
 
 }
 
@@ -79,14 +70,12 @@ body.calendar-page{
 
 
 
-.sun-logo{
 
+.sun-logo{
 
     position:absolute;
 
-
     left:50%;
-
 
     top:50%;
 
@@ -95,26 +84,19 @@ body.calendar-page{
     translate(-50%,-50%);
 
 
+    width:60px;
 
-    width:65px;
-
-
-    height:65px;
-
+    height:60px;
 
 
     border-radius:50%;
 
 
-
     display:flex;
-
 
     align-items:center;
 
-
     justify-content:center;
-
 
 
     background:
@@ -126,18 +108,18 @@ body.calendar-page{
     );
 
 
-
     box-shadow:
 
-    0 0 25px white,
 
-    0 0 60px rgba(180,180,255,.5);
+    0 0 20px white,
+
+    0 0 55px rgba(180,180,255,.45);
 
 
 
     animation:
 
-    glow 3s ease-in-out infinite;
+    glow 3s infinite;
 
 
 }
@@ -147,21 +129,16 @@ body.calendar-page{
 
 .sun-logo b{
 
-
     color:white;
 
-
-    font-size:42px;
-
+    font-size:38px;
 
     font-weight:900;
 
 
-
     text-shadow:
 
-    0 0 20px white;
-
+    0 0 15px white;
 
 }
 
@@ -172,19 +149,14 @@ body.calendar-page{
 
 .orbit{
 
-
     position:absolute;
 
-
     left:50%;
-
 
     top:50%;
 
 
-
     transform:
-
     translate(-50%,-50%);
 
 
@@ -195,8 +167,7 @@ body.calendar-page{
 
     border:
 
-    1px solid rgba(255,255,255,.13);
-
+    1px solid rgba(255,255,255,.12);
 
 }
 
@@ -206,12 +177,7 @@ body.calendar-page{
 
 .orbit span{
 
-
     position:absolute;
-
-
-    display:block;
-
 
     border-radius:50%;
 
@@ -223,9 +189,7 @@ body.calendar-page{
 
     0 0 12px white;
 
-
 }
-
 
 
 
@@ -233,41 +197,31 @@ body.calendar-page{
 
 .orbit1{
 
+    width:85px;
 
-    width:90px;
-
-
-    height:90px;
+    height:85px;
 
 
     animation:
 
     rotate1 5s linear infinite;
 
-
 }
-
-
 
 
 
 .orbit1 span{
 
+    width:6px;
 
-    width:7px;
-
-
-    height:7px;
+    height:6px;
 
 
-    top:-4px;
-
+    top:-3px;
 
     left:50%;
 
-
 }
-
 
 
 
@@ -275,41 +229,31 @@ body.calendar-page{
 
 .orbit2{
 
+    width:110px;
 
-    width:120px;
-
-
-    height:120px;
+    height:110px;
 
 
     animation:
 
     rotate2 8s linear infinite;
 
-
 }
-
-
 
 
 
 .orbit2 span{
 
-
     width:8px;
-
 
     height:8px;
 
 
     right:-4px;
 
-
     top:50%;
 
-
 }
-
 
 
 
@@ -317,46 +261,34 @@ body.calendar-page{
 
 .orbit3{
 
+    width:135px;
 
-    width:145px;
-
-
-    height:145px;
+    height:135px;
 
 
     animation:
 
     rotate1 12s linear infinite;
 
-
 }
-
-
 
 
 
 .orbit3 span{
 
+    width:9px;
 
-    width:10px;
-
-
-    height:10px;
+    height:9px;
 
 
     bottom:15px;
 
-
     left:15px;
 
 
-
-    background:#a8d7ff;
-
+    background:#9fd4ff;
 
 }
-
-
 
 
 
@@ -365,22 +297,23 @@ body.calendar-page{
 @keyframes rotate1{
 
 
-    from{
+from{
 
-        transform:
-        translate(-50%,-50%)
-        rotate(0deg);
+transform:
+translate(-50%,-50%)
+rotate(0deg);
 
-    }
+}
 
 
-    to{
+to{
 
-        transform:
-        translate(-50%,-50%)
-        rotate(360deg);
+transform:
+translate(-50%,-50%)
+rotate(360deg);
 
-    }
+}
+
 
 }
 
@@ -391,25 +324,25 @@ body.calendar-page{
 @keyframes rotate2{
 
 
-    from{
+from{
 
-        transform:
-        translate(-50%,-50%)
-        rotate(360deg);
-
-    }
-
-
-    to{
-
-        transform:
-        translate(-50%,-50%)
-        rotate(0deg);
-
-    }
+transform:
+translate(-50%,-50%)
+rotate(360deg);
 
 }
 
+
+to{
+
+transform:
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+}
 
 
 
@@ -417,18 +350,18 @@ body.calendar-page{
 @keyframes glow{
 
 
-    0%,100%{
+0%,100%{
 
-        filter:brightness(1);
+filter:brightness(1);
 
-    }
+}
 
 
-    50%{
+50%{
 
-        filter:brightness(1.5);
+filter:brightness(1.5);
 
-    }
+}
 
 
 }
@@ -439,54 +372,57 @@ body.calendar-page{
 
 
 
-/* ===== CALENDAR GLASS ===== */
 
+/* ===== CALENDAR ===== */
 
 
 .calendar-container{
 
 
-    width:390px;
+    width:360px;
 
 
-    max-width:88%;
-
-
-
-    padding:22px;
+    max-width:85%;
 
 
 
-    margin-top:35px;
+    padding:18px;
 
 
 
-    border-radius:28px;
+    margin-top:20px;
+
+
+
+    border-radius:25px;
 
 
 
     background:
 
-    rgba(255,255,255,.08);
+
+    rgba(255,255,255,.06);
 
 
 
     backdrop-filter:
 
-    blur(20px);
+
+    blur(18px);
 
 
 
     border:
 
-    1px solid rgba(255,255,255,.12);
+
+    1px solid rgba(255,255,255,.10);
 
 
 
     box-shadow:
 
 
-    0 20px 50px rgba(0,0,0,.5);
+    0 15px 40px rgba(0,0,0,.45);
 
 
 }
@@ -502,15 +438,12 @@ body.calendar-page{
     text-align:center;
 
 
-    margin:0 0 20px;
+    margin:0 0 18px;
 
 
-    font-size:28px;
-
+    font-size:25px;
 
 }
-
-
 
 
 
@@ -540,11 +473,9 @@ body.calendar-page{
     margin:0;
 
 
-    font-size:22px;
-
+    font-size:20px;
 
 }
-
 
 
 
@@ -554,14 +485,14 @@ body.calendar-page{
 .calendar-header button{
 
 
-    width:45px;
+    width:40px;
 
 
-    height:45px;
-
+    height:40px;
 
 
     border-radius:50%;
+
 
 
     border:none;
@@ -570,6 +501,7 @@ body.calendar-page{
 
     background:
 
+
     rgba(255,255,255,.15);
 
 
@@ -577,25 +509,7 @@ body.calendar-page{
     color:white;
 
 
-    font-size:30px;
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-
-
-
-.calendar-header button:hover{
-
-
-    background:
-
-    rgba(255,255,255,.3);
+    font-size:26px;
 
 
 }
@@ -618,15 +532,13 @@ body.calendar-page{
 
 
 
-    margin-top:20px;
+    margin-top:18px;
 
 
-    opacity:.7;
+    opacity:.65;
 
 
 }
-
-
 
 
 
@@ -636,8 +548,7 @@ body.calendar-page{
     text-align:center;
 
 
-    font-size:13px;
-
+    font-size:12px;
 
 }
 
@@ -658,13 +569,14 @@ body.calendar-page{
 
 
 
-    gap:7px;
+    gap:6px;
 
 
-    margin-top:10px;
+    margin-top:8px;
 
 
 }
+
 
 
 
@@ -674,10 +586,11 @@ body.calendar-page{
 .calendar-empty{
 
 
-    height:42px;
+    height:38px;
 
 
 }
+
 
 
 
@@ -697,16 +610,20 @@ body.calendar-page{
 
 
 
-    border-radius:13px;
+    border-radius:12px;
 
 
 
     background:
 
-    rgba(255,255,255,.1);
 
+    rgba(255,255,255,.09);
+
+
+    font-size:14px;
 
 }
+
 
 
 
@@ -718,11 +635,10 @@ body.calendar-page{
 
     background:
 
-    rgba(255,255,255,.25);
 
+    rgba(255,255,255,.22);
 
 }
-
 
 
 
@@ -733,8 +649,8 @@ body.calendar-page{
 
     visibility:hidden;
 
-
 }
+
 
 
 
@@ -752,10 +668,10 @@ body.calendar-page{
     font-weight:bold;
 
 
-
     box-shadow:
 
-    0 0 20px white;
+
+    0 0 15px white;
 
 
 }
