@@ -17,13 +17,12 @@ const months = [
 
 
 
-let now = new Date();
+let today = new Date();
 
 
-let currentMonth = now.getMonth();
+let currentMonth = today.getMonth();
 
-let currentYear = now.getFullYear();
-
+let currentYear = today.getFullYear();
 
 
 
@@ -33,12 +32,9 @@ function createCalendar(){
 
 
 
-const grid =
-document.getElementById("calendarGrid");
+const grid = document.getElementById("calendarGrid");
 
-
-const title =
-document.getElementById("monthTitle");
+const title = document.getElementById("monthTitle");
 
 
 
@@ -71,7 +67,7 @@ firstDay = 7;
 
 
 
-let days =
+let totalDays =
 new Date(
 currentYear,
 currentMonth + 1,
@@ -83,11 +79,7 @@ currentMonth + 1,
 
 
 
-for(
-let i = 1;
-i < firstDay;
-i++
-){
+for(let i = 1; i < firstDay; i++){
 
 
 let empty =
@@ -109,11 +101,7 @@ grid.appendChild(empty);
 
 
 
-for(
-let day = 1;
-day <= days;
-day++
-){
+for(let day = 1; day <= totalDays; day++){
 
 
 
@@ -121,14 +109,11 @@ let cell =
 document.createElement("div");
 
 
-
 cell.className =
 "calendar-day";
 
 
-
-cell.textContent =
-day;
+cell.textContent = day;
 
 
 
@@ -136,15 +121,13 @@ day;
 
 if(
 
-day === now.getDate() &&
-currentMonth === now.getMonth() &&
-currentYear === now.getFullYear()
+day === today.getDate() &&
+currentMonth === today.getMonth() &&
+currentYear === today.getFullYear()
 
 ){
 
-
 cell.classList.add("today");
-
 
 }
 
@@ -154,7 +137,6 @@ cell.classList.add("today");
 grid.appendChild(cell);
 
 
-
 }
 
 
@@ -168,47 +150,60 @@ grid.appendChild(cell);
 
 
 
-function changeMonth(step){
+document
+.getElementById("prevMonth")
+.onclick = function(){
 
 
-
-currentMonth += step;
-
-
+currentMonth--;
 
 
 
 if(currentMonth < 0){
 
-
 currentMonth = 11;
 
 currentYear--;
 
-
 }
 
+
+
+createCalendar();
+
+
+};
+
+
+
+
+
+
+
+
+document
+.getElementById("nextMonth")
+.onclick = function(){
+
+
+currentMonth++;
 
 
 
 if(currentMonth > 11){
 
-
 currentMonth = 0;
 
 currentYear++;
 
-
 }
-
-
 
 
 
 createCalendar();
 
 
-}
+};
 
 
 
@@ -216,12 +211,10 @@ createCalendar();
 
 
 
+window.onload = function(){
 
-window.addEventListener(
-"DOMContentLoaded",
-function(){
 
 createCalendar();
 
-}
-);
+
+};
