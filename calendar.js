@@ -260,3 +260,32 @@ navButtons.forEach(button => {
 
 
 });
+function goHome(){
+
+window.location.href="index.html";
+
+}
+
+
+
+function goCalendar(){
+
+window.location.href="calendar.html";
+
+}
+
+
+
+function goEvents(){
+
+window.location.href="events.html";
+
+}
+
+
+
+function goSettings(){
+
+window.location.href="settings.html";
+
+}
