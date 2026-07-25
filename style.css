@@ -2899,4 +2899,35 @@ height:45px;
 
 
 }
+/* Убираем круг вокруг активной кнопки */
 
+.bottom-nav .nav-item.active,
+.bottom-nav .nav-item.active::before,
+.bottom-nav .nav-item.active::after {
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    border: none !important;
+
+}
+
+
+/* Оставляем только свечение иконки */
+
+.bottom-nav .nav-item.active span {
+
+    filter:
+    drop-shadow(0 0 10px white) !important;
+
+}
+
+
+/* Подъём кнопки */
+
+.bottom-nav .nav-item.active {
+
+    transform: translateY(-7px) !important;
+
+}
