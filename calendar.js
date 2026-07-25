@@ -1,4 +1,3 @@
-alert("НОВЫЙ CALENDAR JS");
 let currentMonth = 6;
 let currentYear = 2026;
 
@@ -23,13 +22,14 @@ const months = [
 function renderCalendar(){
 
 
-const grid = document.getElementById("calendarGrid");
-const title = document.getElementById("monthTitle");
+let grid = document.getElementById("calendarGrid");
+let title = document.getElementById("monthTitle");
 
 
-if(!grid){
 
-console.log("calendarGrid не найден");
+if(!grid || !title){
+
+console.log("Календарь не найден");
 
 return;
 
@@ -37,38 +37,43 @@ return;
 
 
 
-grid.innerHTML="";
+grid.innerHTML = "";
+
 
 
 title.innerHTML =
-months[currentMonth]+" "+currentYear;
+months[currentMonth] + " " + currentYear;
 
 
 
-let daysInMonth =
+
+let days =
 new Date(
 currentYear,
-currentMonth+1,
+currentMonth + 1,
 0
 ).getDate();
 
 
 
-for(let i=1;i<=daysInMonth;i++){
+
+
+for(let i = 1; i <= days; i++){
 
 
 let day =
 document.createElement("div");
 
 
-day.className="calendar-day";
+day.className =
+"calendar-day";
 
 
-day.textContent=i;
+day.innerHTML = i;
 
 
 
-day.onclick=function(){
+day.onclick = function(){
 
 openMemory(i);
 
@@ -82,6 +87,7 @@ grid.appendChild(day);
 }
 
 
+
 }
 
 
@@ -89,15 +95,16 @@ grid.appendChild(day);
 
 
 
-function changeMonth(step){
+function changeMonth(value){
 
 
-currentMonth += step;
+currentMonth += value;
+
 
 
 if(currentMonth < 0){
 
-currentMonth=11;
+currentMonth = 11;
 
 currentYear--;
 
@@ -107,7 +114,7 @@ currentYear--;
 
 if(currentMonth > 11){
 
-currentMonth=0;
+currentMonth = 0;
 
 currentYear++;
 
@@ -138,20 +145,21 @@ document.getElementById("memoryDate");
 
 
 
+if(date){
+
+date.innerHTML =
+day + " " + months[currentMonth];
+
+}
+
+
+
 if(modal){
 
 modal.classList.add("show");
 
 }
 
-
-
-if(date){
-
-date.innerHTML =
-day+" "+months[currentMonth];
-
-}
 
 
 }
@@ -166,6 +174,7 @@ function closeMemory(){
 
 let modal =
 document.getElementById("memoryModal");
+
 
 
 if(modal){
@@ -183,6 +192,18 @@ modal.classList.remove("show");
 
 
 function saveMemory(){
+
+
+let text =
+document.getElementById("memoryText");
+
+
+
+if(text){
+
+text.value="";
+
+}
 
 
 closeMemory();
