@@ -9,13 +9,12 @@ body.calendar-page{
 
     min-height:100vh;
 
-    padding-top:70px;
+    padding-top:150px;
 
 
     display:flex;
 
     justify-content:center;
-
 
     align-items:flex-start;
 
@@ -33,31 +32,29 @@ body.calendar-page{
 
     radial-gradient(
     circle at top,
-    #7a174f,
-    transparent 45%
+    #8a1f58,
+    transparent 40%
     ),
 
     linear-gradient(
     160deg,
-    #160b1d,
-    #3a102d,
-    #1a1024
+    #120914,
+    #351025,
+    #180d20
     );
 
 }
 
 
 
-
-
-
-/* Логотип сверху */
+/* Логотип M */
 
 body.calendar-page::before{
 
-    content:"MEMORA";
+    content:"M";
 
     position:absolute;
+
 
     top:25px;
 
@@ -69,13 +66,38 @@ body.calendar-page::before{
 
 
 
-    font-size:34px;
+    width:65px;
 
 
-    font-weight:800;
+    height:65px;
 
 
-    letter-spacing:3px;
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    border-radius:22px;
+
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    rgba(255,255,255,.35),
+    rgba(255,120,200,.25)
+    );
+
+
+
+    backdrop-filter:blur(15px);
 
 
 
@@ -83,14 +105,73 @@ body.calendar-page::before{
 
 
 
-    text-shadow:
+    font-size:42px;
 
-    0 0 20px rgba(255,120,200,.5);
 
+
+    font-weight:800;
+
+
+
+    letter-spacing:-2px;
+
+
+
+    box-shadow:
+
+    0 10px 35px
+
+    rgba(255,100,200,.35),
+
+
+    inset 0 0 20px
+
+    rgba(255,255,255,.2);
 
 }
 
 
+
+/* название MEMORA */
+
+body.calendar-page::after{
+
+
+    content:"MEMORA";
+
+
+    position:absolute;
+
+
+
+    top:100px;
+
+
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+
+    color:white;
+
+
+
+    font-size:20px;
+
+
+
+    font-weight:700;
+
+
+
+    letter-spacing:4px;
+
+
+
+}
 
 
 
@@ -108,11 +189,6 @@ body.calendar-page::before{
 
 
     padding:28px;
-
-
-
-    margin-top:40px;
-
 
 
 
@@ -146,7 +222,6 @@ body.calendar-page::before{
 
 
 
-
     box-shadow:
 
     0 25px 60px
@@ -156,6 +231,7 @@ body.calendar-page::before{
 
 
     color:white;
+
 
 }
 
@@ -170,7 +246,9 @@ body.calendar-page::before{
     text-align:center;
 
 
-    margin-top:0;
+
+    margin:0 0 25px;
+
 
 
     font-size:28px;
@@ -184,14 +262,15 @@ body.calendar-page::before{
 
 
 
-
 .calendar-header{
 
 
     display:flex;
 
 
+
     align-items:center;
+
 
 
     justify-content:space-between;
@@ -203,10 +282,12 @@ body.calendar-page::before{
 
 
 
+
 .calendar-header h2{
 
 
     margin:0;
+
 
 
     font-size:23px;
@@ -225,11 +306,13 @@ body.calendar-page::before{
     width:46px;
 
 
+
     height:46px;
 
 
 
     border-radius:50%;
+
 
 
     border:none;
@@ -245,6 +328,7 @@ body.calendar-page::before{
     color:white;
 
 
+
     font-size:32px;
 
 
@@ -252,11 +336,11 @@ body.calendar-page::before{
     cursor:pointer;
 
 
+
     transition:.25s;
 
+
 }
-
-
 
 
 
@@ -278,11 +362,25 @@ body.calendar-page::before{
 
 
 
+.month-btn:active{
+
+
+    transform:scale(.92);
+
+
+}
+
+
+
+
+
+
 
 .week-days{
 
 
     display:grid;
+
 
 
     grid-template-columns:
@@ -294,10 +392,13 @@ body.calendar-page::before{
     margin-top:25px;
 
 
+
     margin-bottom:12px;
 
 
 }
+
+
 
 
 
@@ -308,7 +409,9 @@ body.calendar-page::before{
     text-align:center;
 
 
+
     font-size:13px;
+
 
 
     opacity:.65;
@@ -321,10 +424,12 @@ body.calendar-page::before{
 
 
 
+
 .calendar-grid{
 
 
     display:grid;
+
 
 
     grid-template-columns:
@@ -337,6 +442,7 @@ body.calendar-page::before{
 
 
 }
+
 
 
 
@@ -356,13 +462,16 @@ body.calendar-page::before{
 
 
 
+
 .calendar-day{
 
 
     display:flex;
 
 
+
     justify-content:center;
+
 
 
     align-items:center;
@@ -382,10 +491,21 @@ body.calendar-page::before{
     color:white;
 
 
+
+    font-size:16px;
+
+
+
+    cursor:pointer;
+
+
+
     transition:.2s;
 
 
 }
+
+
 
 
 
@@ -399,7 +519,12 @@ body.calendar-page::before{
     rgba(255,255,255,.25);
 
 
+
+    transform:translateY(-2px);
+
+
 }
+
 
 
 
@@ -418,13 +543,17 @@ body.calendar-page::before{
 
 
 
+
+
 .today{
 
 
     background:white;
 
 
-    color:#7a174f;
+
+    color:#8a1f58;
+
 
 
     font-weight:700;
