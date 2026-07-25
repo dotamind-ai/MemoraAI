@@ -1,9 +1,4 @@
-alert("calendar.js подключен");
-let currentMonth = 6;
-let currentYear = 2026;
-
-
-const months = [
+const monthNames = [
 "Январь",
 "Февраль",
 "Март",
@@ -20,21 +15,24 @@ const months = [
 
 
 
-function renderCalendar(){
+let today = new Date();
+
+
+let currentMonth = today.getMonth();
+
+let currentYear = today.getFullYear();
+
+
+
+
+
+function createCalendar(){
+
 
 
 let grid = document.getElementById("calendarGrid");
+
 let title = document.getElementById("monthTitle");
-
-
-
-if(!grid || !title){
-
-console.log("Календарь не найден");
-
-return;
-
-}
 
 
 
@@ -43,13 +41,35 @@ grid.innerHTML = "";
 
 
 title.innerHTML =
-months[currentMonth] + " " + currentYear;
+monthNames[currentMonth] +
+" " +
+currentYear;
 
 
 
 
-let days =
-new Date(
+
+let firstDay = new Date(
+currentYear,
+currentMonth,
+1
+).getDay();
+
+
+
+
+
+if(firstDay === 0){
+
+firstDay = 7;
+
+}
+
+
+
+
+
+let daysInMonth = new Date(
 currentYear,
 currentMonth + 1,
 0
@@ -59,170 +79,88 @@ currentMonth + 1,
 
 
 
-for(let i = 1; i <= days; i++){
+
+for(let i = 1; i < firstDay; i++){
 
 
-let day =
+let empty =
 document.createElement("div");
 
 
-day.className =
+empty.className =
+"calendar-empty";
+
+
+grid.appendChild(empty);
+
+
+}
+
+
+
+
+
+
+
+for(let day = 1; day <= daysInMonth; day++){
+
+
+
+let cell =
+document.createElement("div");
+
+
+
+cell.className =
 "calendar-day";
 
 
-day.innerHTML = i;
+
+cell.innerHTML =
+day;
 
 
 
-day.onclick = function(){
 
-openMemory(i);
+
+if(
+
+day === today.getDate() &&
+currentMonth === today.getMonth() &&
+currentYear === today.getFullYear()
+
+){
+
+
+cell.classList.add("today");
+
+
+}
+
+
+
+
+
+grid.appendChild(cell);
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+window.onload = function(){
+
+
+createCalendar();
+
 
 };
-
-
-
-grid.appendChild(day);
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-function changeMonth(value){
-
-
-currentMonth += value;
-
-
-
-if(currentMonth < 0){
-
-currentMonth = 11;
-
-currentYear--;
-
-}
-
-
-
-if(currentMonth > 11){
-
-currentMonth = 0;
-
-currentYear++;
-
-}
-
-
-
-renderCalendar();
-
-
-}
-
-
-
-
-
-
-
-function openMemory(day){
-
-
-let modal =
-document.getElementById("memoryModal");
-
-
-let date =
-document.getElementById("memoryDate");
-
-
-
-if(date){
-
-date.innerHTML =
-day + " " + months[currentMonth];
-
-}
-
-
-
-if(modal){
-
-modal.classList.add("show");
-
-}
-
-
-
-}
-
-
-
-
-
-
-function closeMemory(){
-
-
-let modal =
-document.getElementById("memoryModal");
-
-
-
-if(modal){
-
-modal.classList.remove("show");
-
-}
-
-
-}
-
-
-
-
-
-
-function saveMemory(){
-
-
-let text =
-document.getElementById("memoryText");
-
-
-
-if(text){
-
-text.value="";
-
-}
-
-
-closeMemory();
-
-
-}
-
-
-
-
-
-
-
-window.addEventListener(
-"load",
-function(){
-
-renderCalendar();
-
-}
-);
