@@ -4,12 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>MEMORA</title>
 
-<link rel="stylesheet" href="./calendar.css?v=11">
+<link rel="stylesheet" href="./calendar.css?v=20">
 
 </head>
 
@@ -21,16 +20,13 @@
 
 <div class="memora-logo">
 
-
     <div class="orbit orbit1">
         <span></span>
     </div>
 
-
     <div class="orbit orbit2">
         <span></span>
     </div>
-
 
     <div class="orbit orbit3">
         <span></span>
@@ -43,6 +39,20 @@
 
     </div>
 
+</div>
+
+
+
+
+
+<!-- СТРАНИЦЫ -->
+
+
+<div id="homePage" class="page hidden">
+
+<h1>MEMORA</h1>
+
+<p>Добро пожаловать ✨</p>
 
 </div>
 
@@ -50,10 +60,7 @@
 
 
 
-<!-- КАЛЕНДАРЬ -->
-
-
-<div class="calendar-container">
+<div class="calendar-container page">
 
 
 <h1>Календарь</h1>
@@ -82,8 +89,6 @@
 
 
 
-
-
 <div class="week">
 
 <span>Пн</span>
@@ -98,10 +103,7 @@
 
 
 
-
-
 <div id="calendarGrid" class="calendar-grid"></div>
-
 
 
 </div>
@@ -112,14 +114,53 @@
 
 
 
-<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+<div id="eventsPage" class="page hidden">
+
+
+<h1>✨ События</h1>
+
+
+<p>
+Здесь будут ваши события
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div id="settingsPage" class="page hidden">
+
+
+<h1>⚙️ Настройки</h1>
+
+
+<p>
+Настройки приложения
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- НАВИГАЦИЯ -->
 
 
 <nav class="bottom-nav">
 
 
-
-<button class="nav-item">
+<button class="nav-item" data-page="home">
 
 <span>🏠</span>
 
@@ -130,8 +171,7 @@
 
 
 
-
-<button class="nav-item active">
+<button class="nav-item active" data-page="calendar">
 
 <span>📅</span>
 
@@ -143,7 +183,7 @@
 
 
 
-<button class="nav-item">
+<button class="nav-item" data-page="events">
 
 <span>✨</span>
 
@@ -155,7 +195,7 @@
 
 
 
-<button class="nav-item">
+<button class="nav-item" data-page="settings">
 
 <span>⚙️</span>
 
@@ -172,8 +212,7 @@
 
 
 
-
-<script src="./calendar.js?v=11"></script>
+<script src="./calendar.js?v=20"></script>
 
 
 </body>
