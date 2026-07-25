@@ -1,152 +1,112 @@
-const months = [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь"
+const months=[
+"Январь",
+"Февраль",
+"Март",
+"Апрель",
+"Май",
+"Июнь",
+"Июль",
+"Август",
+"Сентябрь",
+"Октябрь",
+"Ноябрь",
+"Декабрь"
 ];
 
 
-let currentDate = new Date();
+let date=new Date();
 
 
 
+function renderCalendar(){
 
 
-function renderCalendar() {
+let grid=document.getElementById("calendarGrid");
 
+let title=document.getElementById("monthTitle");
 
-    const grid = document.getElementById("calendarGrid");
-    const title = document.getElementById("monthTitle");
 
+grid.innerHTML="";
 
-    grid.innerHTML = "";
 
 
+let month=date.getMonth();
 
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
+let year=date.getFullYear();
 
 
 
-    title.textContent =
-        months[month] + " " + year;
+title.textContent=
+months[month]+" "+year;
 
 
 
+let firstDay=
+new Date(year,month,1).getDay();
 
 
-    // первый день месяца
-    // 0 = воскресенье, 1 = понедельник
 
-    let firstDay = new Date(
-        year,
-        month,
-        1
-    ).getDay();
+firstDay =
+firstDay===0 ? 6 : firstDay-1;
 
 
 
-    // переводим в формат:
-    // понедельник = 0
-    // воскресенье = 6
 
-    if (firstDay === 0) {
+let days=
+new Date(year,month+1,0).getDate();
 
-        firstDay = 6;
 
-    } else {
 
-        firstDay = firstDay - 1;
 
-    }
 
+for(let i=0;i<firstDay;i++){
 
 
+let empty=document.createElement("div");
 
+empty.className="calendar-empty";
 
-    // количество дней в месяце
+grid.appendChild(empty);
 
-    const totalDays = new Date(
-        year,
-        month + 1,
-        0
-    ).getDate();
 
+}
 
 
 
 
+for(let day=1;day<=days;day++){
 
-    // пустые места перед первым числом
 
-    for (let i = 0; i < firstDay; i++) {
+let cell=document.createElement("div");
 
 
-        const empty = document.createElement("div");
+cell.className="calendar-day";
 
-        empty.className = "calendar-empty";
 
-        grid.appendChild(empty);
+cell.textContent=day;
 
-    }
 
 
+let today=new Date();
 
 
 
+if(
+day===today.getDate() &&
+month===today.getMonth() &&
+year===today.getFullYear()
+){
 
+cell.classList.add("today");
 
-    // создаём дни
+}
 
-    for (let day = 1; day <= totalDays; day++) {
 
 
-        const cell = document.createElement("div");
+grid.appendChild(cell);
 
 
-        cell.className = "calendar-day";
-
-
-        cell.textContent = day;
-
-
-
-
-
-
-        const today = new Date();
-
-
-
-        if (
-
-            day === today.getDate() &&
-            month === today.getMonth() &&
-            year === today.getFullYear()
-
-        ) {
-
-            cell.classList.add("today");
-
-        }
-
-
-
-
-
-
-        grid.appendChild(cell);
-
-
-    }
+}
 
 
 }
@@ -155,54 +115,31 @@ function renderCalendar() {
 
 
 
+document
+.getElementById("prevMonth")
+.onclick=function(){
+
+date.setMonth(date.getMonth()-1);
+
+renderCalendar();
+
+};
 
 
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
 
 
-    renderCalendar();
+document
+.getElementById("nextMonth")
+.onclick=function(){
 
+date.setMonth(date.getMonth()+1);
 
+renderCalendar();
 
-    document
-    .getElementById("prevMonth")
-    .addEventListener(
-    "click",
-    function(){
-
-
-        currentDate.setMonth(
-            currentDate.getMonth() - 1
-        );
-
-
-        renderCalendar();
-
-
-    });
+};
 
 
 
-    document
-    .getElementById("nextMonth")
-    .addEventListener(
-    "click",
-    function(){
 
-
-        currentDate.setMonth(
-            currentDate.getMonth() + 1
-        );
-
-
-        renderCalendar();
-
-
-    });
-
-
-
-});
+renderCalendar();
