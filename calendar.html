@@ -53,7 +53,7 @@
 
 
 
-<!-- КАЛЕНДАРЬ -->
+<!-- ГЛАВНАЯ -->
 
 <div id="homeScreen" class="screen hidden">
 
@@ -62,6 +62,14 @@
     <p>Добро пожаловать 👋</p>
 
 </div>
+
+
+
+
+
+
+<!-- КАЛЕНДАРЬ -->
+
 <div id="calendarScreen" class="calendar-container screen">
 
 
@@ -123,33 +131,69 @@
 
 
 
+
+
+
+<!-- НАВИГАЦИЯ -->
+
 <nav class="bottom-nav">
 
-    <button class="nav-item active">
-        <span>🏠</span>
-        <small>Главная</small>
-    </button>
+
+<button class="nav-item" onclick="goHome()">
+
+<span>🏠</span>
+
+<small>Главная</small>
+
+</button>
 
 
-    <button class="nav-item">
-        <span>📅</span>
-        <small>Календарь</small>
-    </button>
 
 
-    <button class="nav-item">
-        <span>✨</span>
-        <small>События</small>
-    </button>
+
+<button class="nav-item active" onclick="goCalendar()">
+
+<span>📅</span>
+
+<small>Календарь</small>
+
+</button>
 
 
-    <button class="nav-item">
-        <span>⚙️</span>
-        <small>Настройки</small>
-    </button>
+
+
+
+<button class="nav-item" onclick="goEvents()">
+
+<span>✨</span>
+
+<small>События</small>
+
+</button>
+
+
+
+
+
+<button class="nav-item" onclick="goSettings()">
+
+<span>⚙️</span>
+
+<small>Настройки</small>
+
+</button>
+
+
 
 </nav>
-<script src="./calendar.js?v=100"></script>
+
+
+
+
+
+
+
+<script src="./calendar.js?v=101"></script>
 
 
 </body>
