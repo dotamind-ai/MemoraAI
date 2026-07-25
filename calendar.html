@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA Calendar</title>
+<title>MEMORA Календарь</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -20,16 +20,24 @@
 <div class="calendar-container">
 
 
-<h1>Календарь</h1>
+<h1>
+Календарь
+</h1>
+
 
 
 
 <div class="calendar-header">
 
 
-<button id="prevMonth">
+<button 
+id="prevMonth"
+class="month-btn">
+
 ‹
+
 </button>
+
 
 
 
@@ -37,8 +45,13 @@
 
 
 
-<button id="nextMonth">
+
+<button 
+id="nextMonth"
+class="month-btn">
+
 ›
+
 </button>
 
 
@@ -47,26 +60,38 @@
 
 
 
-<div class="calendar-week">
 
-<span>Пн</span>
-<span>Вт</span>
-<span>Ср</span>
-<span>Чт</span>
-<span>Пт</span>
-<span>Сб</span>
-<span>Вс</span>
+
+<div class="week-days">
+
+<div>Пн</div>
+<div>Вт</div>
+<div>Ср</div>
+<div>Чт</div>
+<div>Пт</div>
+<div>Сб</div>
+<div>Вс</div>
+
+</div>
+
+
+
+
+
+
+<div 
+id="calendarGrid"
+class="calendar-grid">
 
 </div>
 
 
 
 
-<div id="calendarGrid"></div>
-
-
 
 </div>
+
+
 
 
 
