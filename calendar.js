@@ -14,11 +14,14 @@ const months = [
 ];
 
 
+
 let currentDate = new Date();
 
 
 
-function drawCalendar(){
+
+
+function renderCalendar(){
 
 
 const grid =
@@ -38,6 +41,7 @@ let month =
 currentDate.getMonth();
 
 
+
 let year =
 currentDate.getFullYear();
 
@@ -45,6 +49,30 @@ currentDate.getFullYear();
 
 title.textContent =
 months[month] + " " + year;
+
+
+
+
+
+
+let firstDay =
+new Date(
+year,
+month,
+1
+).getDay();
+
+
+
+
+
+if(firstDay === 0){
+
+firstDay = 7;
+
+}
+
+
 
 
 
@@ -61,38 +89,26 @@ month + 1,
 
 
 
-let start =
-new Date(
-year,
-month,
-1
-).getDay();
 
+// пустые места до первого дня
 
+for(
+let i = 1;
+i < firstDay;
+i++
+){
 
-// переводим воскресенье в конец
-
-if(start === 0){
-
-start = 7;
-
-}
-
-
-
-
-
-// создаём только нужные пустые места
-
-for(let i = 1; i < start; i++){
 
 let empty =
 document.createElement("div");
 
+
 empty.className =
-"empty";
+"calendar-empty";
+
 
 grid.appendChild(empty);
+
 
 }
 
@@ -101,19 +117,32 @@ grid.appendChild(empty);
 
 
 
-for(let day = 1; day <= days; day++){
+
+// дни месяца
+
+for(
+let day = 1;
+day <= days;
+day++
+){
 
 
-let item =
+
+let cell =
 document.createElement("div");
 
 
-item.className =
-"day";
+
+cell.className =
+"calendar-day";
 
 
-item.textContent =
+
+cell.textContent =
 day;
+
+
+
 
 
 
@@ -130,21 +159,28 @@ year === today.getFullYear()
 
 ){
 
-item.classList.add("active-day");
 
-}
-
-
-
-grid.appendChild(item);
-
+cell.classList.add("today");
 
 
 }
 
 
 
+
+
+
+grid.appendChild(cell);
+
+
+
 }
+
+
+}
+
+
+
 
 
 
@@ -152,18 +188,22 @@ grid.appendChild(item);
 
 document
 .getElementById("prevMonth")
-.onclick = ()=>{
+.addEventListener(
+"click",
+function(){
 
 
 currentDate.setMonth(
-currentDate.getMonth()-1
+currentDate.getMonth() - 1
 );
 
 
-drawCalendar();
+renderCalendar();
 
 
-};
+});
+
+
 
 
 
@@ -171,21 +211,29 @@ drawCalendar();
 
 document
 .getElementById("nextMonth")
-.onclick = ()=>{
+.addEventListener(
+"click",
+function(){
 
 
 currentDate.setMonth(
-currentDate.getMonth()+1
+currentDate.getMonth() + 1
 );
 
 
-drawCalendar();
+renderCalendar();
 
 
-};
+});
 
 
 
 
 
-drawCalendar();
+
+
+
+window.addEventListener(
+"DOMContentLoaded",
+renderCalendar
+);
