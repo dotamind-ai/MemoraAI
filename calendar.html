@@ -17,34 +17,18 @@
 <body class="calendar-page">
 
 
-<div class="app">
+<div class="calendar-container">
 
 
-<header>
+<header class="calendar-top">
 
-<h1>
-Календарь
-</h1>
+<h1>Календарь</h1>
 
-<p>
-Твои воспоминания
-</p>
-
-</header>
-
-
-
-
-<section class="glass calendar-box">
-
-
-<div class="calendar-header">
-
+<div class="month-control">
 
 <button onclick="changeMonth(-1)">
 ‹
 </button>
-
 
 
 <h2 id="monthTitle">
@@ -52,47 +36,42 @@
 </h2>
 
 
-
 <button onclick="changeMonth(1)">
 ›
 </button>
 
+</div>
+
+</header>
+
+
+
+
+<div id="calendarGrid" class="calendar-grid">
+
+</div>
+
+
 
 </div>
 
 
 
 
-<div 
-id="calendarGrid"
-class="calendar-grid">
-
-</div>
 
 
-
-</section>
-
+<!-- Окно воспоминания -->
 
 
-</div>
-
-
-
-
-
-
-<div 
-id="memoryModal"
-class="memory-modal">
+<div id="memoryModal" class="memory-modal">
 
 
 <div class="memory-window">
 
 
 <button 
-onclick="closeMemory()"
-class="close-memory">
+class="close-memory"
+onclick="closeMemory()">
 
 ×
 
@@ -108,7 +87,7 @@ class="close-memory">
 
 <textarea 
 id="memoryText"
-placeholder="Что произошло сегодня?">
+placeholder="Запиши воспоминание...">
 </textarea>
 
 
@@ -125,7 +104,6 @@ placeholder="Что произошло сегодня?">
 
 
 </div>
-
 
 
 
