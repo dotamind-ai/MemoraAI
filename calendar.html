@@ -20,87 +20,48 @@
 <div class="calendar-container">
 
 
-<header class="calendar-top">
+<h1>
+Календарь
+</h1>
 
-<h1>Календарь</h1>
 
-<div class="month-control">
 
-<button onclick="changeMonth(-1)">
-‹
-</button>
+<div class="calendar-header">
 
 
 <h2 id="monthTitle">
-Июль 2026
 </h2>
 
 
-<button onclick="changeMonth(1)">
-›
-</button>
-
-</div>
-
-</header>
-
-
-
-
-<div id="calendarGrid" class="calendar-grid">
-
-</div>
-
-
-
 </div>
 
 
 
 
 
+<div class="week-days">
 
-<!-- Окно воспоминания -->
-
-
-<div id="memoryModal" class="memory-modal">
-
-
-<div class="memory-window">
-
-
-<button 
-class="close-memory"
-onclick="closeMemory()">
-
-×
-
-</button>
-
-
-
-<h2 id="memoryDate">
-Дата
-</h2>
-
-
-
-<textarea 
-id="memoryText"
-placeholder="Запиши воспоминание...">
-</textarea>
-
-
-
-<button onclick="saveMemory()">
-
-Сохранить
-
-</button>
-
-
+<div>Пн</div>
+<div>Вт</div>
+<div>Ср</div>
+<div>Чт</div>
+<div>Пт</div>
+<div>Сб</div>
+<div>Вс</div>
 
 </div>
+
+
+
+
+
+<div 
+id="calendarGrid"
+class="calendar-grid">
+
+</div>
+
+
 
 
 </div>
@@ -109,42 +70,8 @@ placeholder="Запиши воспоминание...">
 
 
 
-
-<nav class="bottom-nav">
-
-
-<button onclick="goHome()">
-🏠
-</button>
-
-
-<button class="active">
-📅
-</button>
-
-
-<button onclick="goFavorites()">
-⭐
-</button>
-
-
-<button onclick="goSettings()">
-⚙️
-</button>
-
-
-</nav>
-
-
-
-
-
-
-
-<script src="app.js"></script>
 
 <script src="calendar.js"></script>
-
 
 
 </body>
