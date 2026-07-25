@@ -4,12 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>MEMORA</title>
 
-<link rel="stylesheet" href="calendar.css">
+<link rel="stylesheet" href="./calendar.css?v=10">
 
 </head>
 
@@ -17,40 +16,27 @@
 <body class="calendar-page">
 
 
-<!-- ЛОГОТИП -->
-
 <div class="memora-logo">
 
+    <div class="orbit orbit1">
+        <span></span>
+    </div>
 
-    <div class="space-ring ring-one">
+    <div class="orbit orbit2">
+        <span></span>
+    </div>
+
+    <div class="orbit orbit3">
         <span></span>
     </div>
 
 
-    <div class="space-ring ring-two">
-        <span></span>
+    <div class="sun-logo">
+        <b>M</b>
     </div>
-
-
-    <div class="space-ring ring-three">
-        <span></span>
-    </div>
-
-
-    <div class="logo-sun">
-
-        <span>M</span>
-
-    </div>
-
 
 </div>
 
-
-
-
-
-<!-- КАЛЕНДАРЬ -->
 
 
 <div class="calendar-container">
@@ -59,21 +45,17 @@
 <h1>Календарь</h1>
 
 
-
 <div class="calendar-header">
 
-
-<button id="prevMonth" class="month-btn">
+<button id="prevMonth">
 ‹
 </button>
-
 
 
 <h2 id="monthTitle"></h2>
 
 
-
-<button id="nextMonth" class="month-btn">
+<button id="nextMonth">
 ›
 </button>
 
@@ -82,35 +64,28 @@
 
 
 
+<div class="week">
 
-
-<div class="week-days">
-
-<div>Пн</div>
-<div>Вт</div>
-<div>Ср</div>
-<div>Чт</div>
-<div>Пт</div>
-<div>Сб</div>
-<div>Вс</div>
+<span>Пн</span>
+<span>Вт</span>
+<span>Ср</span>
+<span>Чт</span>
+<span>Пт</span>
+<span>Сб</span>
+<span>Вс</span>
 
 </div>
-
-
 
 
 
 <div id="calendarGrid" class="calendar-grid"></div>
 
 
-
 </div>
 
 
 
-
-
-<script src="calendar.js"></script>
+<script src="./calendar.js?v=10"></script>
 
 
 </body>
