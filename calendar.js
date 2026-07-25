@@ -1,4 +1,4 @@
-const monthNames = [
+const months = [
 "Январь",
 "Февраль",
 "Март",
@@ -15,12 +15,12 @@ const monthNames = [
 
 
 
-let today = new Date();
+const date = new Date();
 
 
-let currentMonth = today.getMonth();
+const currentMonth = date.getMonth();
 
-let currentYear = today.getFullYear();
+const currentYear = date.getFullYear();
 
 
 
@@ -29,10 +29,17 @@ let currentYear = today.getFullYear();
 function createCalendar(){
 
 
+const grid =
+document.getElementById("calendarGrid");
 
-let grid = document.getElementById("calendarGrid");
 
-let title = document.getElementById("monthTitle");
+const title =
+document.getElementById("monthTitle");
+
+
+
+title.textContent =
+months[currentMonth] + " " + currentYear;
 
 
 
@@ -40,22 +47,14 @@ grid.innerHTML = "";
 
 
 
-title.innerHTML =
-monthNames[currentMonth] +
-" " +
-currentYear;
 
 
-
-
-
-let firstDay = new Date(
+let firstDay =
+new Date(
 currentYear,
 currentMonth,
 1
 ).getDay();
-
-
 
 
 
@@ -67,9 +66,8 @@ firstDay = 7;
 
 
 
-
-
-let daysInMonth = new Date(
+let totalDays =
+new Date(
 currentYear,
 currentMonth + 1,
 0
@@ -80,10 +78,11 @@ currentMonth + 1,
 
 
 
+
 for(let i = 1; i < firstDay; i++){
 
 
-let empty =
+const empty =
 document.createElement("div");
 
 
@@ -102,11 +101,11 @@ grid.appendChild(empty);
 
 
 
-for(let day = 1; day <= daysInMonth; day++){
+for(let day = 1; day <= totalDays; day++){
 
 
 
-let cell =
+const cell =
 document.createElement("div");
 
 
@@ -116,27 +115,23 @@ cell.className =
 
 
 
-cell.innerHTML =
+cell.textContent =
 day;
-
 
 
 
 
 if(
 
-day === today.getDate() &&
-currentMonth === today.getMonth() &&
-currentYear === today.getFullYear()
+day === date.getDate() &&
+currentMonth === date.getMonth() &&
+currentYear === date.getFullYear()
 
 ){
 
-
 cell.classList.add("today");
 
-
 }
-
 
 
 
@@ -149,18 +144,12 @@ grid.appendChild(cell);
 
 
 
-
 }
 
 
 
 
-
-
-window.onload = function(){
-
-
-createCalendar();
-
-
-};
+window.addEventListener(
+"DOMContentLoaded",
+createCalendar
+);
