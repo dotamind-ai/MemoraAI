@@ -1,9 +1,7 @@
-body.calendar-page{
-    background:red !important;
-}
 *{
 box-sizing:border-box;
 }
+
 
 
 body.calendar-page{
@@ -14,36 +12,26 @@ min-height:100vh;
 
 padding-top:150px;
 
+
 display:flex;
 
 justify-content:center;
 
-align-items:flex-start;
 
-
-font-family:
-Arial,
-sans-serif;
-
+font-family:Arial,sans-serif;
 
 
 background:
 
-radial-gradient(
-circle at top,
-#8b285d,
-transparent 45%
-),
-
-
 linear-gradient(
 160deg,
-#120914,
-#351025,
-#160b1d
+#090910,
+#201426,
+#090910
 );
 
 
+color:white;
 
 overflow:hidden;
 
@@ -51,19 +39,21 @@ overflow:hidden;
 
 
 
-/* ===== ЛОГОТИП MEMORA ===== */
+
+
+
+/* ===== ЛОГОТИП ===== */
 
 
 .memora-logo{
 
 position:absolute;
 
-top:15px;
+top:20px;
 
 left:50%;
 
 transform:translateX(-50%);
-
 
 width:150px;
 
@@ -75,14 +65,12 @@ height:150px;
 
 
 
-.logo-sun{
+.sun-logo{
 
 
 position:absolute;
 
-
 left:50%;
-
 
 top:50%;
 
@@ -94,9 +82,7 @@ translate(-50%,-50%);
 
 width:65px;
 
-
 height:65px;
-
 
 
 border-radius:50%;
@@ -105,9 +91,7 @@ border-radius:50%;
 
 display:flex;
 
-
 align-items:center;
-
 
 justify-content:center;
 
@@ -117,9 +101,8 @@ background:
 
 radial-gradient(
 circle,
-white,
-#ffb7df 40%,
-#b52c7d
+#ffffff,
+#777777
 );
 
 
@@ -127,16 +110,15 @@ white,
 box-shadow:
 
 
-0 0 25px white,
+0 0 20px white,
 
-
-0 0 70px #ff4fb9;
+0 0 60px rgba(255,255,255,.5);
 
 
 
 animation:
 
-sunPulse 3s infinite;
+glow 3s infinite;
 
 
 }
@@ -144,24 +126,14 @@ sunPulse 3s infinite;
 
 
 
-
-.logo-sun span{
-
-
-color:white;
+.sun-logo b{
 
 
 font-size:42px;
 
+color:white;
 
 font-weight:900;
-
-
-
-text-shadow:
-
-0 0 20px white;
-
 
 }
 
@@ -169,18 +141,16 @@ text-shadow:
 
 
 
-.space-ring{
+
+.orbit{
 
 
 position:absolute;
 
 
-
 left:50%;
 
-
 top:50%;
-
 
 
 transform:
@@ -191,33 +161,25 @@ translate(-50%,-50%);
 border-radius:50%;
 
 
-
 border:
 
-1px solid rgba(255,255,255,.35);
+1px solid rgba(255,255,255,.15);
 
 
 }
 
 
 
-
-
-.space-ring span{
+.orbit span{
 
 
 position:absolute;
-
-
-
-display:block;
 
 
 border-radius:50%;
 
 
 background:white;
-
 
 
 box-shadow:
@@ -232,40 +194,30 @@ box-shadow:
 
 
 
-.ring-one{
+.orbit1{
 
+width:90px;
 
-width:95px;
-
-
-height:95px;
-
+height:90px;
 
 
 animation:
 
-rotateOne 5s linear infinite;
-
+spin1 5s linear infinite;
 
 }
 
 
 
-.ring-one span{
+.orbit1 span{
 
+width:7px;
 
-width:8px;
-
-
-height:8px;
-
-
+height:7px;
 
 top:-4px;
 
-
 left:50%;
-
 
 }
 
@@ -273,86 +225,63 @@ left:50%;
 
 
 
-
-
-.ring-two{
-
+.orbit2{
 
 width:120px;
-
 
 height:120px;
 
 
-
 animation:
 
-rotateTwo 8s linear infinite;
-
+spin2 8s linear infinite;
 
 }
 
 
 
-.ring-two span{
+.orbit2 span{
 
+width:9px;
 
-width:7px;
+height:9px;
 
-
-height:7px;
-
-
-
-right:-3px;
-
+right:-5px;
 
 top:50%;
 
-
 }
 
 
 
 
 
+.orbit3{
 
+width:150px;
 
-.ring-three{
-
-
-width:145px;
-
-
-height:145px;
-
+height:150px;
 
 
 animation:
 
-rotateOne 12s linear infinite;
-
+spin1 12s linear infinite;
 
 }
 
 
 
+.orbit3 span{
 
-.ring-three span{
+width:10px;
 
+height:10px;
 
-width:5px;
+bottom:15px;
 
+left:15px;
 
-height:5px;
-
-
-
-bottom:18px;
-
-
-left:18px;
-
+background:#a8d7ff;
 
 }
 
@@ -360,8 +289,7 @@ left:18px;
 
 
 
-@keyframes rotateOne{
-
+@keyframes spin1{
 
 from{
 
@@ -370,7 +298,6 @@ translate(-50%,-50%)
 rotate(0deg);
 
 }
-
 
 to{
 
@@ -384,8 +311,7 @@ rotate(360deg);
 
 
 
-@keyframes rotateTwo{
-
+@keyframes spin2{
 
 from{
 
@@ -394,7 +320,6 @@ translate(-50%,-50%)
 rotate(360deg);
 
 }
-
 
 to{
 
@@ -408,25 +333,18 @@ rotate(0deg);
 
 
 
-
-@keyframes sunPulse{
-
-
-0%,100%{
-
-scale:1;
-
-}
+@keyframes glow{
 
 
 50%{
 
-scale:1.08;
+filter:brightness(1.5);
 
 }
 
 
 }
+
 
 
 
@@ -437,49 +355,39 @@ scale:1.08;
 /* ===== КАЛЕНДАРЬ ===== */
 
 
+
 .calendar-container{
 
 
-width:100%;
+width:420px;
 
-
-max-width:420px;
-
-
-
-padding:28px;
+max-width:90%;
 
 
 
-border-radius:35px;
+padding:25px;
+
+
+border-radius:30px;
 
 
 
 background:
 
-rgba(255,255,255,.12);
+rgba(255,255,255,.08);
 
 
 
 backdrop-filter:
 
-blur(25px);
+blur(20px);
 
 
 
 border:
 
-1px solid rgba(255,255,255,.2);
+1px solid rgba(255,255,255,.15);
 
-
-
-box-shadow:
-
-0 25px 60px rgba(0,0,0,.45);
-
-
-
-color:white;
 
 
 }
@@ -487,25 +395,11 @@ color:white;
 
 
 
-
-
-
-.calendar-container h1{
-
+h1{
 
 text-align:center;
 
-
-margin:0 0 25px;
-
-
-font-size:30px;
-
-
 }
-
-
-
 
 
 
@@ -515,50 +409,26 @@ font-size:30px;
 
 display:flex;
 
-
 justify-content:space-between;
-
 
 align-items:center;
 
-
 }
 
 
 
+.calendar-header button{
 
 
-.calendar-header h2{
+width:45px;
 
-
-margin:0;
-
-
-font-size:23px;
-
-
-}
-
-
-
-
-
-
-.month-btn{
-
-
-width:48px;
-
-
-height:48px;
-
+height:45px;
 
 
 border-radius:50%;
 
 
 border:none;
-
 
 
 background:
@@ -570,91 +440,37 @@ rgba(255,255,255,.2);
 color:white;
 
 
-font-size:32px;
+font-size:30px;
 
 
 cursor:pointer;
 
 
-transition:.25s;
-
-
 }
 
 
 
-
-
-.month-btn:hover{
-
-
-background:
-
-rgba(255,255,255,.35);
-
-
-transform:scale(1.08);
-
-
-}
-
-
-
-
-.month-btn:active{
-
-
-transform:scale(.9);
-
-
-}
-
-
-
-
-
-
-
-.week-days{
+.week{
 
 
 display:grid;
 
+grid-template-columns:repeat(7,1fr);
 
-grid-template-columns:
-
-repeat(7,1fr);
-
-
-
-margin-top:25px;
-
-
-margin-bottom:12px;
-
-
-}
-
-
-
-
-
-.week-days div{
-
-
-text-align:center;
+margin-top:20px;
 
 
 opacity:.7;
 
-
-font-size:13px;
-
-
 }
 
 
 
+.week span{
+
+text-align:center;
+
+}
 
 
 
@@ -664,34 +480,23 @@ font-size:13px;
 display:grid;
 
 
-grid-template-columns:
-
-repeat(7,1fr);
-
+grid-template-columns:repeat(7,1fr);
 
 
 gap:8px;
 
 
-}
-
-
-
-
-
-.calendar-day,
-.calendar-empty{
-
-
-height:45px;
+margin-top:10px;
 
 
 }
-
 
 
 
 .calendar-day{
+
+
+height:45px;
 
 
 display:flex;
@@ -703,9 +508,7 @@ align-items:center;
 justify-content:center;
 
 
-
-border-radius:15px;
-
+border-radius:14px;
 
 
 background:
@@ -713,40 +516,7 @@ background:
 rgba(255,255,255,.12);
 
 
-cursor:pointer;
-
-
-transition:.2s;
-
-
 }
-
-
-
-
-
-.calendar-day:hover{
-
-
-background:
-
-rgba(255,255,255,.3);
-
-
-}
-
-
-
-
-
-.calendar-empty{
-
-
-visibility:hidden;
-
-
-}
-
 
 
 
@@ -757,15 +527,21 @@ visibility:hidden;
 background:white;
 
 
-color:#8b285d;
+color:#222;
 
 
 font-weight:bold;
 
+}
 
-box-shadow:
 
-0 0 20px rgba(255,255,255,.5);
 
+
+
+.calendar-empty{
+
+height:45px;
+
+visibility:hidden;
 
 }
