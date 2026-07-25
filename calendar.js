@@ -16,7 +16,6 @@ const months = [
 ];
 
 
-
 let today = new Date();
 
 
@@ -49,8 +48,9 @@ months[currentMonth] + " " + currentYear;
 
 
 
-let firstDay =
-new Date(
+// первый день месяца
+
+let firstDay = new Date(
 currentYear,
 currentMonth,
 1
@@ -58,17 +58,16 @@ currentMonth,
 
 
 
-if(firstDay === 0){
-
-firstDay = 7;
-
-}
+firstDay = firstDay === 0 ? 6 : firstDay - 1;
 
 
 
 
-let totalDays =
-new Date(
+
+
+// количество дней
+
+let totalDays = new Date(
 currentYear,
 currentMonth + 1,
 0
@@ -79,7 +78,10 @@ currentMonth + 1,
 
 
 
-for(let i = 1; i < firstDay; i++){
+
+// пустые клетки перед первым числом
+
+for(let i = 0; i < firstDay; i++){
 
 
 let empty =
@@ -101,6 +103,9 @@ grid.appendChild(empty);
 
 
 
+
+// дни месяца
+
 for(let day = 1; day <= totalDays; day++){
 
 
@@ -109,15 +114,22 @@ let cell =
 document.createElement("div");
 
 
+
 cell.className =
 "calendar-day";
 
 
-cell.textContent = day;
+
+cell.textContent =
+day;
 
 
 
 
+
+
+
+// сегодня
 
 if(
 
@@ -127,9 +139,14 @@ currentYear === today.getFullYear()
 
 ){
 
+
 cell.classList.add("today");
 
+
 }
+
+
+
 
 
 
@@ -137,39 +154,49 @@ cell.classList.add("today");
 grid.appendChild(cell);
 
 
-}
-
-
 
 }
 
 
 
+}
 
 
 
 
+
+
+
+
+// назад месяц
 
 document
 .getElementById("prevMonth")
 .onclick = function(){
 
 
+
 currentMonth--;
+
+
 
 
 
 if(currentMonth < 0){
 
+
 currentMonth = 11;
 
 currentYear--;
+
 
 }
 
 
 
+
 createCalendar();
+
 
 
 };
@@ -181,26 +208,35 @@ createCalendar();
 
 
 
+// вперёд месяц
+
 document
 .getElementById("nextMonth")
 .onclick = function(){
+
 
 
 currentMonth++;
 
 
 
+
+
 if(currentMonth > 11){
+
 
 currentMonth = 0;
 
 currentYear++;
 
+
 }
 
 
 
+
 createCalendar();
+
 
 
 };
