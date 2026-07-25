@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA — Календарь</title>
+<title>MEMORA Calendar</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -26,13 +26,12 @@
 
 
 
-
 <div class="calendar-header">
 
 
 <button 
-class="month-btn"
-onclick="changeMonth(-1)">
+id="prevMonth"
+class="month-btn">
 
 ‹
 
@@ -41,16 +40,15 @@ onclick="changeMonth(-1)">
 
 
 
-<h2 id="monthTitle">
+<h2 id="monthTitle"></h2>
 
-</h2>
 
 
 
 
 <button 
-class="month-btn"
-onclick="changeMonth(1)">
+id="nextMonth"
+class="month-btn">
 
 ›
 
@@ -80,7 +78,6 @@ onclick="changeMonth(1)">
 
 
 
-
 <div 
 id="calendarGrid"
 class="calendar-grid">
@@ -97,7 +94,8 @@ class="calendar-grid">
 
 
 
-<script src="calendar.js"></script>
+
+<script src="./calendar.js"></script>
 
 
 </body>
