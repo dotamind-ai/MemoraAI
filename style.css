@@ -2093,3 +2093,67 @@ text-align:center;
 margin:0;
 
 }
+/* CALENDAR DEBUG FIX */
+
+.calendar-grid{
+
+display:grid !important;
+
+grid-template-columns:repeat(7, 35px) !important;
+
+gap:5px !important;
+
+visibility:visible !important;
+
+opacity:1 !important;
+
+height:auto !important;
+
+overflow:visible !important;
+
+}
+
+
+
+.calendar-day,
+.day-name{
+
+display:flex !important;
+
+visibility:visible !important;
+
+opacity:1 !important;
+
+color:white !important;
+
+background:rgba(255,255,255,.08);
+
+border-radius:10px;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+.calendar-header{
+
+position:relative;
+
+z-index:10;
+
+}
+
+
+
+.calendar-header button{
+
+position:relative;
+
+z-index:20;
+
+pointer-events:auto !important;
+
+}
