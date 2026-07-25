@@ -1,3 +1,4 @@
+alert("calendar.js работает");
 let currentMonth = 6;
 let currentYear = 2026;
 
