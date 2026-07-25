@@ -1,9 +1,6 @@
 *{
-
 box-sizing:border-box;
-
 }
-
 
 
 body.events-page{
@@ -14,16 +11,13 @@ min-height:100vh;
 
 padding-top:170px;
 
-
 display:flex;
 
 justify-content:center;
 
 align-items:flex-start;
 
-
 font-family:Arial,sans-serif;
-
 
 color:white;
 
@@ -50,11 +44,7 @@ overflow:hidden;
 
 
 
-
-
-
-
-/* ===== ЛОГОТИП ===== */
+/* ===== ЛОГО ===== */
 
 
 .memora-logo{
@@ -67,15 +57,11 @@ left:50%;
 
 transform:translateX(-50%);
 
-
 width:150px;
 
 height:150px;
 
 }
-
-
-
 
 
 
@@ -87,9 +73,7 @@ left:50%;
 
 top:50%;
 
-
-transform:
-translate(-50%,-50%);
+transform:translate(-50%,-50%);
 
 
 width:60px;
@@ -120,7 +104,6 @@ rgba(255,255,255,.05)
 
 box-shadow:
 
-
 0 0 25px white,
 
 0 0 70px rgba(180,180,255,.4);
@@ -130,24 +113,17 @@ box-shadow:
 
 
 
-
-
 .sun-logo b{
-
 
 font-size:38px;
 
 color:white;
 
-
 text-shadow:
 
 0 0 15px white;
 
-
 }
-
-
 
 
 
@@ -164,45 +140,32 @@ left:50%;
 
 top:50%;
 
-
-transform:
-translate(-50%,-50%);
-
+transform:translate(-50%,-50%);
 
 border-radius:50%;
-
 
 border:
 
 1px solid rgba(255,255,255,.12);
 
-
 }
-
-
 
 
 .orbit span{
 
-
 position:absolute;
-
 
 width:7px;
 
 height:7px;
 
-
 border-radius:50%;
 
-
 background:white;
-
 
 box-shadow:
 
 0 0 12px white;
-
 
 }
 
@@ -231,6 +194,7 @@ left:50%;
 
 
 
+
 .orbit2{
 
 width:115px;
@@ -251,6 +215,8 @@ right:-4px;
 top:50%;
 
 }
+
+
 
 
 
@@ -279,10 +245,7 @@ background:#9fd4ff;
 
 
 
-
-
 @keyframes rotate1{
-
 
 from{
 
@@ -292,7 +255,6 @@ rotate(0deg);
 
 }
 
-
 to{
 
 transform:
@@ -301,15 +263,12 @@ rotate(360deg);
 
 }
 
-
 }
-
 
 
 
 @keyframes rotate2{
 
-
 from{
 
 transform:
@@ -317,7 +276,6 @@ translate(-50%,-50%)
 rotate(360deg);
 
 }
-
 
 to{
 
@@ -327,7 +285,6 @@ rotate(0deg);
 
 }
 
-
 }
 
 
@@ -335,19 +292,14 @@ rotate(0deg);
 
 
 
-
-
-/* ===== СОБЫТИЯ ===== */
+/* ===== КОНТЕЙНЕР ===== */
 
 
 .events-container{
 
-
 width:360px;
 
-
 max-width:90%;
-
 
 
 padding:20px;
@@ -384,17 +336,11 @@ box-shadow:
 
 
 
-
-
-
 .events-container h1{
-
 
 text-align:center;
 
-
 margin-top:0;
-
 
 }
 
@@ -403,65 +349,189 @@ margin-top:0;
 
 
 
-
-
-
-/* КНОПКА */
+/* ===== НОВАЯ КНОПКА СОБЫТИЯ ===== */
 
 
 .new-event{
 
 
+position:relative;
+
+
 width:100%;
 
 
-height:50px;
+height:58px;
 
 
 border:none;
 
 
-border-radius:25px;
+border-radius:30px;
+
+
+overflow:hidden;
+
+
+cursor:pointer;
+
+
+
+color:white;
+
+
+font-size:17px;
+
+
+font-weight:700;
+
+
+
+
+background:
+
+
+linear-gradient(
+135deg,
+rgba(255,255,255,.25),
+rgba(170,130,255,.25)
+);
+
+
+
+
+backdrop-filter:
+
+blur(15px);
+
+
+
+
+border:
+
+1px solid rgba(255,255,255,.35);
+
+
+
+
+box-shadow:
+
+
+
+0 0 20px rgba(180,150,255,.45),
+
+
+inset 0 0 20px rgba(255,255,255,.15);
+
+
+
+
+transition:.35s;
+
+
+}
+
+
+
+
+
+.new-event::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+
+left:-120%;
+
+
+width:80%;
+
+
+height:100%;
 
 
 
 background:
 
 linear-gradient(
-135deg,
-white,
-#d8cfff
+90deg,
+transparent,
+rgba(255,255,255,.7),
+transparent
 );
 
 
 
-color:#302038;
-
-
-font-size:17px;
-
-
-font-weight:bold;
+transform:skewX(-25deg);
 
 
 
-box-shadow:
+animation:
 
-0 0 25px rgba(255,255,255,.35);
-
-
-
-transition:.3s;
+buttonLight 3s infinite;
 
 
 }
+
+
 
 
 
 .new-event:hover{
 
 
-transform:translateY(-3px);
+transform:
+
+translateY(-4px)
+scale(1.02);
+
+
+
+box-shadow:
+
+0 0 35px rgba(200,170,255,.8);
+
+
+}
+
+
+
+
+.new-event:active{
+
+
+transform:
+
+scale(.96);
+
+
+}
+
+
+
+
+
+@keyframes buttonLight{
+
+
+0%{
+
+left:-120%;
+
+}
+
+
+40%,100%{
+
+left:150%;
+
+}
 
 
 }
@@ -472,29 +542,20 @@ transform:translateY(-3px);
 
 
 
-/* ФОРМА */
+/* ===== ФОРМА ===== */
 
 
 .event-form{
 
-
 display:flex;
-
 
 flex-direction:column;
 
-
 gap:12px;
-
 
 margin-bottom:20px;
 
-
 }
-
-
-
-
 
 
 
@@ -526,34 +587,20 @@ rgba(255,255,255,.08);
 color:white;
 
 
-
 outline:none;
 
 
-font-size:15px;
-
-
 }
-
-
-
 
 
 
 .event-form textarea{
 
-
 height:100px;
-
 
 resize:none;
 
-
 }
-
-
-
-
 
 
 
@@ -569,13 +616,10 @@ border:none;
 border-radius:22px;
 
 
-
 background:white;
 
 
-
 color:#302038;
-
 
 
 font-weight:bold;
@@ -588,28 +632,18 @@ font-weight:bold;
 
 
 
-
-
-/* СПИСОК */
+/* ===== СОБЫТИЯ ===== */
 
 
 #eventList{
 
-
 display:flex;
-
 
 flex-direction:column;
 
-
 gap:12px;
 
-
 }
-
-
-
-
 
 
 
@@ -622,11 +656,9 @@ padding:15px;
 border-radius:20px;
 
 
-
 background:
 
 rgba(255,255,255,.09);
-
 
 
 animation:
@@ -638,30 +670,18 @@ show .4s ease;
 
 
 
-
-
-
 .saved-event h2{
-
 
 margin:0 0 8px;
 
-
 }
-
-
 
 
 .saved-event p{
 
-
 opacity:.7;
 
-
 }
-
-
-
 
 
 
@@ -680,19 +700,15 @@ border-radius:15px;
 padding:8px 15px;
 
 
-
 background:
 
 rgba(255,255,255,.15);
-
 
 
 color:white;
 
 
 }
-
-
 
 
 
@@ -706,40 +722,28 @@ display:none;
 
 
 
-
-
-
-
 @keyframes show{
 
 
 from{
 
-
 opacity:0;
 
-transform:
-translateY(20px);
-
+transform:translateY(20px);
 
 }
 
 
 to{
 
-
 opacity:1;
 
-
-transform:
-translateY(0);
-
+transform:translateY(0);
 
 }
 
 
 }
-
 
 
 
@@ -787,8 +791,6 @@ align-items:center;
 
 
 
-
-
 background:
 
 rgba(255,255,255,.07);
@@ -802,11 +804,9 @@ blur(20px);
 
 
 
-
 border:
 
 1px solid rgba(255,255,255,.15);
-
 
 
 
@@ -826,8 +826,6 @@ box-shadow:
 
 
 
-
-
 .nav-item{
 
 
@@ -837,9 +835,7 @@ border:none;
 background:none;
 
 
-
 color:white;
-
 
 
 display:flex;
@@ -848,17 +844,13 @@ display:flex;
 flex-direction:column;
 
 
-
 align-items:center;
-
 
 
 gap:3px;
 
 
-
 opacity:.55;
-
 
 
 font-size:22px;
@@ -869,17 +861,11 @@ font-size:22px;
 
 
 
-
-
 .nav-item small{
-
 
 font-size:11px;
 
-
 }
-
-
 
 
 
@@ -887,12 +873,9 @@ font-size:11px;
 
 .nav-item.active{
 
-
 opacity:1;
 
-
 transform:translateY(-7px);
-
 
 }
 
@@ -900,13 +883,10 @@ transform:translateY(-7px);
 
 
 
-
 .nav-item.active span{
-
 
 filter:
 
 drop-shadow(0 0 10px white);
-
 
 }
