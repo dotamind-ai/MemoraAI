@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA — Календарь</title>
+<title>MEMORA Calendar</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,13 +17,10 @@
 <body class="calendar-page">
 
 
-
 <div class="app">
 
 
-
 <header>
-
 
 <div class="logo">
 
@@ -40,16 +37,14 @@ M
 </div>
 
 
-
 <h1>
 Календарь
 </h1>
 
 
 <p>
-Твои воспоминания по дням
+Твои воспоминания
 </p>
-
 
 
 </header>
@@ -58,13 +53,10 @@ M
 
 
 
-
 <section class="glass calendar-box">
 
 
-
 <div class="calendar-header">
-
 
 
 <button onclick="changeMonth(-1)">
@@ -72,13 +64,9 @@ M
 </button>
 
 
-
-
 <h2 id="monthTitle">
 Июль 2026
 </h2>
-
-
 
 
 <button onclick="changeMonth(1)">
@@ -86,17 +74,13 @@ M
 </button>
 
 
-
 </div>
 
 
 
-
-
-
 <div 
-class="calendar-grid" 
-id="calendarGrid">
+id="calendarGrid"
+class="calendar-grid">
 
 </div>
 
@@ -106,7 +90,6 @@ id="calendarGrid">
 
 
 
-
 </div>
 
 
@@ -115,17 +98,12 @@ id="calendarGrid">
 
 
 
-<!-- Окно памяти -->
-
-
 <div 
-class="memory-modal" 
-id="memoryModal">
-
+id="memoryModal"
+class="memory-modal">
 
 
 <div class="memory-window">
-
 
 
 <button 
@@ -137,23 +115,15 @@ onclick="closeMemory()">
 </button>
 
 
-
-
 <h2 id="memoryDate">
-
 Дата
-
 </h2>
-
-
 
 
 <textarea 
 id="memoryText"
 placeholder="Что произошло сегодня?">
-
 </textarea>
-
 
 
 
@@ -166,13 +136,10 @@ onclick="saveMemory()">
 </button>
 
 
-
 </div>
 
 
 </div>
-
-
 
 
 
@@ -183,40 +150,24 @@ onclick="saveMemory()">
 <nav class="bottom-nav">
 
 
-
-<button 
-onclick="goHome()">
-
+<button onclick="goHome()">
 🏠
-
 </button>
-
 
 
 <button class="active">
-
 📅
-
 </button>
 
 
-
-<button 
-onclick="goFavorites()">
-
+<button onclick="goFavorites()">
 ⭐
-
 </button>
 
 
-
-<button 
-onclick="goSettings()">
-
+<button onclick="goSettings()">
 ⚙️
-
 </button>
-
 
 
 </nav>
@@ -228,7 +179,16 @@ onclick="goSettings()">
 
 <script src="app.js"></script>
 
+
 <script src="./calendar.js"></script>
+
+
+
+<script>
+
+alert("calendar.html обновился");
+
+</script>
 
 
 
