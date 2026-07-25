@@ -3,27 +3,19 @@ box-sizing:border-box;
 }
 
 
-
 body.calendar-page{
-
 
 margin:0;
 
-
 min-height:100vh;
 
-
-padding-top:220px;
-
+padding-top:150px;
 
 display:flex;
 
-
 justify-content:center;
 
-
 align-items:flex-start;
-
 
 
 font-family:
@@ -52,40 +44,29 @@ linear-gradient(
 
 overflow:hidden;
 
-
 }
 
 
 
-
-
-/* ===== ЛОГОТИП ===== */
+/* ===== ЛОГОТИП MEMORA ===== */
 
 
 .memora-logo{
 
-
 position:absolute;
 
-
-top:35px;
-
+top:15px;
 
 left:50%;
-
 
 transform:translateX(-50%);
 
 
+width:150px;
 
-width:190px;
-
-
-height:190px;
-
+height:150px;
 
 }
-
 
 
 
@@ -108,10 +89,10 @@ translate(-50%,-50%);
 
 
 
-width:80px;
+width:65px;
 
 
-height:80px;
+height:65px;
 
 
 
@@ -143,10 +124,10 @@ white,
 box-shadow:
 
 
-0 0 30px white,
+0 0 25px white,
 
 
-0 0 90px #ff4fb9;
+0 0 70px #ff4fb9;
 
 
 
@@ -167,7 +148,7 @@ sunPulse 3s infinite;
 color:white;
 
 
-font-size:52px;
+font-size:42px;
 
 
 font-weight:900;
@@ -251,10 +232,10 @@ box-shadow:
 .ring-one{
 
 
-width:120px;
+width:95px;
 
 
-height:120px;
+height:95px;
 
 
 
@@ -270,14 +251,14 @@ rotateOne 5s linear infinite;
 .ring-one span{
 
 
-width:10px;
+width:8px;
 
 
-height:10px;
+height:8px;
 
 
 
-top:-5px;
+top:-4px;
 
 
 left:50%;
@@ -294,10 +275,10 @@ left:50%;
 .ring-two{
 
 
-width:155px;
+width:120px;
 
 
-height:155px;
+height:120px;
 
 
 
@@ -313,14 +294,14 @@ rotateTwo 8s linear infinite;
 .ring-two span{
 
 
-width:8px;
+width:7px;
 
 
-height:8px;
+height:7px;
 
 
 
-right:-4px;
+right:-3px;
 
 
 top:50%;
@@ -337,10 +318,10 @@ top:50%;
 .ring-three{
 
 
-width:190px;
+width:145px;
 
 
-height:190px;
+height:145px;
 
 
 
@@ -357,17 +338,17 @@ rotateOne 12s linear infinite;
 .ring-three span{
 
 
-width:6px;
+width:5px;
 
 
-height:6px;
+height:5px;
 
 
 
-bottom:20px;
+bottom:18px;
 
 
-left:20px;
+left:18px;
 
 
 }
@@ -437,7 +418,7 @@ scale:1;
 
 50%{
 
-scale:1.12;
+scale:1.08;
 
 }
 
@@ -592,6 +573,37 @@ font-size:32px;
 cursor:pointer;
 
 
+transition:.25s;
+
+
+}
+
+
+
+
+
+.month-btn:hover{
+
+
+background:
+
+rgba(255,255,255,.35);
+
+
+transform:scale(1.08);
+
+
+}
+
+
+
+
+.month-btn:active{
+
+
+transform:scale(.9);
+
+
 }
 
 
@@ -698,6 +710,12 @@ background:
 rgba(255,255,255,.12);
 
 
+cursor:pointer;
+
+
+transition:.2s;
+
+
 }
 
 
@@ -740,6 +758,11 @@ color:#8b285d;
 
 
 font-weight:bold;
+
+
+box-shadow:
+
+0 0 20px rgba(255,255,255,.5);
 
 
 }
