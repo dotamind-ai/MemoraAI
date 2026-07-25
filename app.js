@@ -965,3 +965,32 @@ renderMemories();
 
 
 renderMemories();
+function goHome(){
+
+window.location.href="index.html";
+
+}
+
+
+
+function goCalendar(){
+
+window.location.href="calendar.html";
+
+}
+
+
+
+function goFavorites(){
+
+window.location.href="favorites.html";
+
+}
+
+
+
+function goSettings(){
+
+window.location.href="settings.html";
+
+}
