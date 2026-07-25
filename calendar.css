@@ -1,803 +1,140 @@
-*{
-    box-sizing:border-box;
-}
+.page{
 
+width:360px;
 
-body.calendar-page{
+max-width:85%;
 
-    margin:0;
 
-    min-height:100vh;
+padding:25px;
 
-    padding-top:175px;
 
-    display:flex;
+border-radius:25px;
 
-    justify-content:center;
 
-    align-items:flex-start;
+background:
 
-    font-family:Arial,sans-serif;
+rgba(255,255,255,.06);
 
 
-    background:
+backdrop-filter:
 
-    radial-gradient(
-        circle at top,
-        #302038,
-        transparent 45%
-    ),
+blur(18px);
 
-    linear-gradient(
-        160deg,
-        #090910,
-        #171522,
-        #090910
-    );
 
+border:
 
-    color:white;
+1px solid rgba(255,255,255,.12);
 
-    overflow:hidden;
 
-}
-
-
-
-
-
-
-/* ===== LOGO MEMORA ===== */
-
-
-.memora-logo{
-
-    position:absolute;
-
-    top:15px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-
-    width:150px;
-
-    height:150px;
-
-}
-
-
-
-.sun-logo{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-
-    transform:
-    translate(-50%,-50%);
-
-
-
-    width:60px;
-
-    height:60px;
-
-
-
-    border-radius:50%;
-
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-
-    background:
-
-    radial-gradient(
-        circle,
-        rgba(255,255,255,.35),
-        rgba(255,255,255,.05)
-    );
-
-
-
-    box-shadow:
-
-    0 0 20px white,
-
-    0 0 55px rgba(180,180,255,.45);
-
-
-
-    animation:
-
-    glow 3s infinite;
-
-}
-
-
-
-
-.sun-logo b{
-
-    color:white;
-
-    font-size:38px;
-
-    font-weight:900;
-
-
-    text-shadow:
-
-    0 0 15px white;
-
-}
-
-
-
-
-.orbit{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-
-
-    transform:
-    translate(-50%,-50%);
-
-
-
-    border-radius:50%;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.12);
-
-}
-
-
-
-.orbit span{
-
-    position:absolute;
-
-    border-radius:50%;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 0 12px white;
-
-}
-
-
-
-
-.orbit1{
-
-    width:85px;
-
-    height:85px;
-
-
-    animation:
-
-    rotate1 5s linear infinite;
-
-}
-
-
-
-.orbit1 span{
-
-    width:6px;
-
-    height:6px;
-
-
-    top:-3px;
-
-    left:50%;
-
-}
-
-
-
-
-
-.orbit2{
-
-    width:110px;
-
-    height:110px;
-
-
-    animation:
-
-    rotate2 8s linear infinite;
-
-}
-
-
-
-.orbit2 span{
-
-    width:8px;
-
-    height:8px;
-
-
-    right:-4px;
-
-    top:50%;
-
-}
-
-
-
-
-
-.orbit3{
-
-    width:135px;
-
-    height:135px;
-
-
-    animation:
-
-    rotate1 12s linear infinite;
-
-}
-
-
-
-.orbit3 span{
-
-    width:9px;
-
-    height:9px;
-
-
-    bottom:15px;
-
-    left:15px;
-
-
-    background:#9fd4ff;
-
-}
-
-
-
-
-
-@keyframes rotate1{
-
-from{
-
-transform:
-translate(-50%,-50%)
-rotate(0deg);
-
-}
-
-to{
-
-transform:
-translate(-50%,-50%)
-rotate(360deg);
-
-}
-
-}
-
-
-
-
-@keyframes rotate2{
-
-from{
-
-transform:
-translate(-50%,-50%)
-rotate(360deg);
-
-}
-
-to{
-
-transform:
-translate(-50%,-50%)
-rotate(0deg);
-
-}
-
-}
-
-
-
-
-@keyframes glow{
-
-50%{
-
-filter:brightness(1.5);
-
-}
-
-}
-
-
-
-
-
-
-
-
-/* ===== КАЛЕНДАРЬ ===== */
-
-
-.calendar-container{
-
-
-    width:360px;
-
-
-    max-width:85%;
-
-
-
-    padding:18px;
-
-
-
-    margin-top:20px;
-
-
-
-    border-radius:25px;
-
-
-
-    background:
-
-    rgba(255,255,255,.06);
-
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.10);
-
-
-
-    box-shadow:
-
-
-    0 15px 40px rgba(0,0,0,.45);
-
-}
-
-
-
-
-
-.calendar-container h1{
-
-
-    text-align:center;
-
-
-    margin:0 0 18px;
-
-
-    font-size:25px;
-
-}
-
-
-
-
-
-.calendar-header{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-}
-
-
-
-
-
-.calendar-header h2{
-
-    margin:0;
-
-    font-size:20px;
-
-}
-
-
-
-
-
-.calendar-header button{
-
-
-    width:40px;
-
-
-    height:40px;
-
-
-    border-radius:50%;
-
-
-
-    border:none;
-
-
-
-    background:
-
-
-    rgba(255,255,255,.15);
-
-
-
-    color:white;
-
-
-    font-size:26px;
+text-align:center;
 
 
 }
 
 
 
+.hidden{
 
-
-.week{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(7,1fr);
-
-
-
-    margin-top:18px;
-
-
-    opacity:.65;
+display:none;
 
 }
-
-
-
-
-.week span{
-
-    text-align:center;
-
-    font-size:12px;
-
-}
-
-
-
-
-
-
-.calendar-grid{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(7,1fr);
-
-
-
-    gap:6px;
-
-
-    margin-top:8px;
-
-}
-
-
-
-
-
-.calendar-day,
-.calendar-empty{
-
-
-    height:38px;
-
-}
-
-
-
-
-
-.calendar-day{
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-
-    border-radius:12px;
-
-
-
-    background:
-
-
-    rgba(255,255,255,.09);
-
-
-}
-
-
-
-
-
-.calendar-day:hover{
-
-
-    background:
-
-    rgba(255,255,255,.22);
-
-}
-
-
-
-
-
-.calendar-empty{
-
-    visibility:hidden;
-
-}
-
-
-
-
-
-.today{
-
-
-    background:white;
-
-
-    color:#302038;
-
-
-    font-weight:bold;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
 
 
 
 .bottom-nav{
 
-
-    position:fixed;
-
-
-    bottom:18px;
+position:fixed;
 
 
-    left:50%;
+bottom:18px;
 
 
+left:50%;
 
-    transform:translateX(-50%);
+
+transform:translateX(-50%);
 
 
 
-    width:350px;
+width:350px;
 
 
-    max-width:90%;
-
-
-
-    height:75px;
+height:75px;
 
 
 
-    display:flex;
+display:flex;
 
 
-    justify-content:space-around;
+justify-content:space-around;
 
 
-    align-items:center;
-
-
-
-    background:
-
-    rgba(255,255,255,.08);
+align-items:center;
 
 
 
-    backdrop-filter:
+background:
 
-    blur(20px);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
+rgba(255,255,255,.08);
 
 
 
-    border-radius:30px;
+backdrop-filter:
+
+blur(20px);
 
 
 
-    box-shadow:
+border-radius:30px;
 
-    0 15px 40px rgba(0,0,0,.5);
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
 
 }
-
-
 
 
 
 .nav-item{
 
+background:none;
 
-    border:none;
+border:none;
 
-
-    background:none;
-
-
-
-    color:white;
+color:white;
 
 
+display:flex;
 
-    display:flex;
+flex-direction:column;
 
-
-    flex-direction:column;
-
-
-    align-items:center;
+align-items:center;
 
 
-
-    gap:4px;
-
+opacity:.5;
 
 
-    opacity:.55;
+font-size:22px;
 
-
-
-    font-size:22px;
-
-
-
-    cursor:pointer;
-
-
-
-    transition:.3s;
 
 }
-
-
 
 
 
 .nav-item small{
 
-
-    font-size:11px;
+font-size:11px;
 
 }
-
-
 
 
 
 .nav-item.active{
 
+opacity:1;
 
-    opacity:1;
-
-
-    transform:translateY(-8px);
+transform:translateY(-8px);
 
 }
-
-
-
-
-
-.nav-item.active span{
-
-
-    filter:
-
-    drop-shadow(0 0 10px white);
-
-}
-
-
-
-
-
-.nav-item:hover{
-
-
-    opacity:1;
-
-}
-/* update 25-07-2026 */
