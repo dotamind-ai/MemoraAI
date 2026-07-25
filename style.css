@@ -1938,3 +1938,62 @@ box-shadow:
 font-weight:700;
 
 }
+/* MODERN CALENDAR ARROWS */
+
+
+.calendar-header button{
+
+
+background:transparent;
+
+border:none;
+
+color:white;
+
+width:32px;
+
+height:32px;
+
+font-size:22px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+opacity:.75;
+
+transition:.25s;
+
+
+}
+
+
+
+.calendar-header button:hover{
+
+
+opacity:1;
+
+transform:scale(1.15);
+
+
+text-shadow:
+
+0 0 12px rgba(255,255,255,.8);
+
+
+}
+
+
+
+.calendar-header button:active{
+
+
+transform:scale(.9);
+
+
+}
