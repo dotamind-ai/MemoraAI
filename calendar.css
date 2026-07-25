@@ -1,140 +1,677 @@
-.page{
-
-width:360px;
-
-max-width:85%;
+*{
+    box-sizing:border-box;
+}
 
 
-padding:25px;
+body.calendar-page{
+
+    margin:0;
+
+    min-height:100vh;
+
+    padding-top:175px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    font-family:Arial,sans-serif;
 
 
-border-radius:25px;
+    background:
+
+    radial-gradient(
+        circle at top,
+        #302038,
+        transparent 45%
+    ),
+
+    linear-gradient(
+        160deg,
+        #090910,
+        #171522,
+        #090910
+    );
 
 
-background:
+    color:white;
 
-rgba(255,255,255,.06);
+    overflow:hidden;
 
-
-backdrop-filter:
-
-blur(18px);
+}
 
 
-border:
-
-1px solid rgba(255,255,255,.12);
 
 
-text-align:center;
+
+/* ===== LOGO ===== */
+
+
+.memora-logo{
+
+    position:absolute;
+
+    top:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+
+    width:150px;
+
+    height:150px;
+
+}
+
+
+
+
+
+
+.sun-logo{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+
+    transform:
+    translate(-50%,-50%);
+
+
+    width:60px;
+
+    height:60px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.05)
+    );
+
+
+    box-shadow:
+
+
+    0 0 20px white,
+
+    0 0 55px rgba(180,180,255,.45);
+
+
+
+    animation:
+
+    glow 3s infinite;
 
 
 }
 
 
 
-.hidden{
 
-display:none;
+.sun-logo b{
 
-}
+    color:white;
 
+    font-size:38px;
 
-
-.bottom-nav{
-
-position:fixed;
+    font-weight:900;
 
 
-bottom:18px;
+    text-shadow:
 
-
-left:50%;
-
-
-transform:translateX(-50%);
-
-
-
-width:350px;
-
-
-height:75px;
-
-
-
-display:flex;
-
-
-justify-content:space-around;
-
-
-align-items:center;
-
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-border-radius:30px;
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
+    0 0 15px white;
 
 }
 
 
 
-.nav-item{
-
-background:none;
-
-border:none;
-
-color:white;
 
 
-display:flex;
 
-flex-direction:column;
+.orbit{
 
-align-items:center;
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
 
 
-opacity:.5;
+    transform:
+    translate(-50%,-50%);
 
 
-font-size:22px;
+
+    border-radius:50%;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+}
+
+
+
+
+
+.orbit span{
+
+    position:absolute;
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 0 12px white;
+
+}
+
+
+
+
+
+.orbit1{
+
+    width:85px;
+
+    height:85px;
+
+
+    animation:
+
+    rotate1 5s linear infinite;
+
+}
+
+
+
+.orbit1 span{
+
+    width:6px;
+
+    height:6px;
+
+
+    top:-3px;
+
+    left:50%;
+
+}
+
+
+
+
+
+.orbit2{
+
+    width:110px;
+
+    height:110px;
+
+
+    animation:
+
+    rotate2 8s linear infinite;
+
+}
+
+
+
+.orbit2 span{
+
+    width:8px;
+
+    height:8px;
+
+
+    right:-4px;
+
+    top:50%;
+
+}
+
+
+
+
+
+.orbit3{
+
+    width:135px;
+
+    height:135px;
+
+
+    animation:
+
+    rotate1 12s linear infinite;
+
+}
+
+
+
+.orbit3 span{
+
+    width:9px;
+
+    height:9px;
+
+
+    bottom:15px;
+
+    left:15px;
+
+
+    background:#9fd4ff;
+
+}
+
+
+
+
+
+@keyframes rotate1{
+
+
+from{
+
+transform:
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+to{
+
+transform:
+translate(-50%,-50%)
+rotate(360deg);
+
+}
 
 
 }
 
 
 
-.nav-item small{
 
-font-size:11px;
+
+@keyframes rotate2{
+
+
+from{
+
+transform:
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+to{
+
+transform:
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
 
 }
 
 
 
-.nav-item.active{
 
-opacity:1;
+@keyframes glow{
 
-transform:translateY(-8px);
+
+0%,100%{
+
+filter:brightness(1);
+
+}
+
+
+50%{
+
+filter:brightness(1.5);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* ===== CALENDAR ===== */
+
+
+.calendar-container{
+
+
+    width:360px;
+
+
+    max-width:85%;
+
+
+
+    padding:18px;
+
+
+
+    margin-top:20px;
+
+
+
+    border-radius:25px;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.06);
+
+
+
+    backdrop-filter:
+
+
+    blur(18px);
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.10);
+
+
+
+    box-shadow:
+
+
+    0 15px 40px rgba(0,0,0,.45);
+
+
+}
+
+
+
+
+
+
+.calendar-container h1{
+
+
+    text-align:center;
+
+
+    margin:0 0 18px;
+
+
+    font-size:25px;
+
+}
+
+
+
+
+
+.calendar-header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+.calendar-header h2{
+
+
+    margin:0;
+
+
+    font-size:20px;
+
+}
+
+
+
+
+
+
+.calendar-header button{
+
+
+    width:40px;
+
+
+    height:40px;
+
+
+    border-radius:50%;
+
+
+
+    border:none;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.15);
+
+
+
+    color:white;
+
+
+    font-size:26px;
+
+
+}
+
+
+
+
+
+
+
+.week{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(7,1fr);
+
+
+
+    margin-top:18px;
+
+
+    opacity:.65;
+
+
+}
+
+
+
+.week span{
+
+
+    text-align:center;
+
+
+    font-size:12px;
+
+}
+
+
+
+
+
+
+.calendar-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(7,1fr);
+
+
+
+    gap:6px;
+
+
+    margin-top:8px;
+
+
+}
+
+
+
+
+
+
+.calendar-day,
+.calendar-empty{
+
+
+    height:38px;
+
+
+}
+
+
+
+
+
+
+
+.calendar-day{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    border-radius:12px;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.09);
+
+
+    font-size:14px;
+
+}
+
+
+
+
+
+
+
+.calendar-day:hover{
+
+
+    background:
+
+
+    rgba(255,255,255,.22);
+
+}
+
+
+
+
+
+.calendar-empty{
+
+
+    visibility:hidden;
+
+}
+
+
+
+
+
+
+.today{
+
+
+    background:white;
+
+
+    color:#302038;
+
+
+    font-weight:bold;
+
+
+    box-shadow:
+
+
+    0 0 15px white;
+
 
 }
