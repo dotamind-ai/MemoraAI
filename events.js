@@ -1,5 +1,4 @@
-console.log("MEMORA EVENTS VERSION 110");
-
+console.log("MEMORA EVENTS VERSION 111");
 
 
 const newEvent = document.getElementById("newEvent");
@@ -9,9 +8,7 @@ const cancelEvent = document.getElementById("cancelEvent");
 const eventList = document.getElementById("eventList");
 
 
-
 let editIndex = null;
-
 
 
 let events = JSON.parse(
@@ -21,30 +18,14 @@ let events = JSON.parse(
 
 
 
-
-function saveStorage(){
-
-    localStorage.setItem(
-        "memoraEvents",
-        JSON.stringify(events)
-    );
-
-}
-
-
-
-
-
-
-
-
+// показать события
 
 function showEvents(){
 
 
     if(!eventList){
 
-        console.log("Нет eventList");
+        console.log("eventList не найден");
 
         return;
 
@@ -63,117 +44,104 @@ function showEvents(){
         const card = document.createElement("div");
 
 
-
         card.className =
         "event-card " + (event.type || "idea");
-
-
-
-
-
-        let icon="✦";
-
-
-        if(event.type==="goal") icon="◎";
-
-        if(event.type==="note") icon="▤";
-
-        if(event.type==="project") icon="◈";
-
-        if(event.type==="personal") icon="◉";
-
-
-
-
 
 
 
         card.innerHTML = `
 
 
-<button class="card-star"
-onclick="favoriteEvent(${index})">
+        <button 
+        class="card-star"
+        onclick="favoriteEvent(${index})">
 
-${event.favorite ? "★" : "☆"}
+        ${event.favorite ? "★" : "☆"}
 
-</button>
-
-
-
-
-<div class="event-top">
-
-<span class="event-symbol">
-
-${icon}
-
-</span>
-
-
-<h2>
-
-${event.title}
-
-</h2>
-
-
-</div>
+        </button>
 
 
 
 
 
-<p>
-
-${event.text}
-
-</p>
+        <div class="event-top">
 
 
+        <span class="event-symbol">
 
+        ${getIcon(event.type)}
 
-
-<div class="event-date">
-
-📅 ${event.eventDate || "Дата не выбрана"}
-
-<br>
-
-Создано: ${event.date || "Сегодня"}
-
-</div>
+        </span>
 
 
 
+        <h2>
+
+        ${event.title}
+
+        </h2>
 
 
-<div class="event-actions">
-
-
-<button
-class="event-edit"
-onclick="editEvent(${index})">
-
-✎
-
-</button>
+        </div>
 
 
 
-<button
-class="event-delete"
-onclick="deleteEvent(${index})">
-
-🗑
-
-</button>
-
-
-</div>
 
 
 
-`;
+        <p>
+
+        ${event.text}
+
+        </p>
+
+
+
+
+
+
+
+        <div class="event-date">
+
+        📅 ${event.eventDate || "Дата не выбрана"}
+
+        </div>
+
+
+
+
+
+
+
+        <div class="event-actions">
+
+
+        <button
+        class="event-edit"
+        onclick="editEvent(${index})">
+
+        ✎
+
+        </button>
+
+
+
+
+
+        <button
+        class="event-delete"
+        onclick="deleteEvent(${index})">
+
+        🗑
+
+        </button>
+
+
+        </div>
+
+
+
+        `;
 
 
 
@@ -193,6 +161,27 @@ onclick="deleteEvent(${index})">
 
 
 
+function getIcon(type){
+
+
+    if(type==="goal") return "◎";
+
+    if(type==="note") return "▤";
+
+    if(type==="project") return "◈";
+
+    if(type==="personal") return "◉";
+
+
+    return "✦";
+
+
+}
+
+
+
+
+
 
 
 
@@ -206,14 +195,7 @@ if(newEvent){
 newEvent.onclick = ()=>{
 
 
-    console.log("Открытие формы");
-
-
-    editIndex=null;
-
-
     eventForm.classList.remove("hidden");
-
 
     newEvent.classList.add("hidden");
 
@@ -222,8 +204,6 @@ newEvent.onclick = ()=>{
 
 
 }
-
-
 
 
 
@@ -244,7 +224,6 @@ cancelEvent.onclick = ()=>{
 
     eventForm.classList.add("hidden");
 
-
     newEvent.classList.remove("hidden");
 
 
@@ -261,17 +240,10 @@ cancelEvent.onclick = ()=>{
 
 
 
-
-
-// сохранение
+// сохранить
 
 
 if(saveEvent){
-
-
-
-console.log("Кнопка сохранить найдена");
-
 
 
 
@@ -279,187 +251,146 @@ saveEvent.onclick = ()=>{
 
 
 
-console.log("Нажали сохранить");
+    const title =
+    document.getElementById("eventTitle").value;
 
 
 
+    const text =
+    document.getElementById("eventText").value;
 
-const titleInput =
-document.getElementById("eventTitle");
 
 
+    const type =
+    document.getElementById("eventType").value;
 
-const textInput =
-document.getElementById("eventText");
 
 
+    const eventDate =
+    document.getElementById("eventDate").value;
 
-const typeInput =
-document.getElementById("eventType");
 
 
 
-const dateInput =
-document.getElementById("eventDate");
 
 
+    if(title.trim()===""){
 
+        alert("Введите название");
 
+        return;
 
-const title =
-titleInput ? titleInput.value : "";
+    }
 
 
 
-const text =
-textInput ? textInput.value : "";
 
 
 
-const type =
-typeInput ? typeInput.value : "idea";
+    if(editIndex !== null){
 
 
 
-const eventDate =
-dateInput ? dateInput.value : "";
+        events[editIndex] = {
 
 
+            ...events[editIndex],
 
 
+            title:title,
 
 
+            text:text,
 
 
-if(title.trim()===""){
+            type:type,
 
 
-console.log("Нет названия");
+            eventDate:eventDate
 
 
-return;
+        };
 
 
-}
 
+        editIndex=null;
 
 
 
+    }
 
+    else{
 
 
-if(editIndex !== null){
 
+        events.push({
 
 
-events[editIndex].title = title;
+            title:title,
 
 
-events[editIndex].text = text;
+            text:text,
 
 
-events[editIndex].type = type;
+            type:type,
 
 
-events[editIndex].eventDate = eventDate;
+            eventDate:eventDate,
 
 
+            favorite:false,
 
-console.log("Событие изменено");
 
+            date:new Date()
 
-}
+            .toLocaleDateString("ru-RU")
 
-else{
 
+        });
 
 
-events.push({
 
+    }
 
-title:title,
 
 
-text:text,
 
 
-type:type,
 
+    localStorage.setItem(
 
-favorite:false,
+        "memoraEvents",
 
+        JSON.stringify(events)
 
-eventDate:eventDate,
+    );
 
 
-date:new Date()
-.toLocaleDateString("ru-RU")
 
 
 
-});
 
+    document.getElementById("eventTitle").value="";
 
+    document.getElementById("eventText").value="";
 
-console.log("Новое событие создано");
+    document.getElementById("eventDate").value="";
 
 
-}
 
 
 
 
 
+    eventForm.classList.add("hidden");
 
+    newEvent.classList.remove("hidden");
 
 
-saveStorage();
 
 
 
-console.log(events);
-
-
-
-
-
-
-
-
-if(titleInput)
-
-titleInput.value="";
-
-
-
-if(textInput)
-
-textInput.value="";
-
-
-
-if(dateInput)
-
-dateInput.value="";
-
-
-
-
-
-
-
-eventForm.classList.add("hidden");
-
-
-newEvent.classList.remove("hidden");
-
-
-
-editIndex=null;
-
-
-
-showEvents();
+    showEvents();
 
 
 
@@ -468,16 +399,6 @@ showEvents();
 
 
 }
-
-else{
-
-
-console.log("Кнопка saveEvent не найдена");
-
-
-}
-
-
 
 
 
@@ -493,17 +414,23 @@ console.log("Кнопка saveEvent не найдена");
 function favoriteEvent(index){
 
 
+    events[index].favorite =
 
-events[index].favorite =
-!events[index].favorite;
-
-
-
-saveStorage();
+    !events[index].favorite;
 
 
-showEvents();
 
+    localStorage.setItem(
+
+        "memoraEvents",
+
+        JSON.stringify(events)
+
+    );
+
+
+
+    showEvents();
 
 
 }
@@ -516,63 +443,41 @@ showEvents();
 
 
 
-// редактирование
+// редактировать
 
 
 function editEvent(index){
 
 
 
-editIndex=index;
+    editIndex=index;
 
 
 
-const event=events[index];
+    let event=events[index];
 
 
 
-
-document.getElementById("eventTitle").value =
-event.title || "";
-
+    document.getElementById("eventTitle").value =
+    event.title;
 
 
-document.getElementById("eventText").value =
-event.text || "";
+    document.getElementById("eventText").value =
+    event.text;
 
 
+    document.getElementById("eventType").value =
+    event.type;
 
 
-
-if(document.getElementById("eventType")){
-
-
-document.getElementById("eventType").value =
-event.type || "idea";
-
-
-}
+    document.getElementById("eventDate").value =
+    event.eventDate;
 
 
 
+    eventForm.classList.remove("hidden");
 
-if(document.getElementById("eventDate")){
-
-
-document.getElementById("eventDate").value =
-event.eventDate || "";
-
-
-}
-
-
-
-
-
-eventForm.classList.remove("hidden");
-
-
-newEvent.classList.add("hidden");
+    newEvent.classList.add("hidden");
 
 
 
@@ -593,14 +498,21 @@ function deleteEvent(index){
 
 
 
-events.splice(index,1);
+    events.splice(index,1);
 
 
 
-saveStorage();
+    localStorage.setItem(
+
+        "memoraEvents",
+
+        JSON.stringify(events)
+
+    );
 
 
-showEvents();
+
+    showEvents();
 
 
 
@@ -619,28 +531,28 @@ showEvents();
 
 function goHome(){
 
-window.location.href="index.html";
+    window.location.href="index.html";
 
 }
 
 
 function goCalendar(){
 
-window.location.href="calendar.html";
+    window.location.href="calendar.html";
 
 }
 
 
 function goEvents(){
 
-window.location.href="events.html";
+    window.location.href="events.html";
 
 }
 
 
 function goSettings(){
 
-window.location.href="settings.html";
+    window.location.href="settings.html";
 
 }
 
