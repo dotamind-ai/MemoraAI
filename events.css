@@ -3005,3 +3005,116 @@ box-shadow:0 0 15px #ff5555;
 
 
 }
+/* Нижняя панель кнопок карточки */
+
+.event-actions{
+
+    width:100% !important;
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+    gap:10px !important;
+
+    margin-top:14px !important;
+
+    padding:0 !important;
+
+}
+
+
+
+
+
+.event-actions button{
+
+    position:relative !important;
+
+    flex:none !important;
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+    margin:0 !important;
+
+}
+
+
+
+
+
+.event-favorite,
+.event-edit,
+.event-delete{
+
+
+    width:34px !important;
+
+    height:34px !important;
+
+
+    padding:0 !important;
+
+
+    border-radius:50% !important;
+
+
+    line-height:1 !important;
+
+
+    font-size:17px !important;
+
+
+}
+
+
+
+
+
+.event-delete{
+
+
+    background:rgba(255,70,70,.18) !important;
+
+    color:#ff7777 !important;
+
+    border:none !important;
+
+
+}
+
+
+
+
+
+.event-edit{
+
+
+    background:rgba(255,255,255,.12) !important;
+
+    color:white !important;
+
+
+}
+
+
+
+
+
+.event-favorite{
+
+
+    background:rgba(255,255,255,.12) !important;
+
+    color:#ffd45c !important;
+
+
+}
