@@ -9,29 +9,37 @@
 
 <title>MEMORA — События</title>
 
-<link rel="stylesheet" href="events.css?v=5">
+
+<link rel="stylesheet" href="events.css?v=6">
+
 
 </head>
+
 
 
 <body class="events-page">
 
 
-<!-- ЛОГО -->
+
+<!-- ЛОГОТИП -->
 
 <div class="memora-logo">
+
 
 <div class="orbit orbit1">
 <span></span>
 </div>
 
+
 <div class="orbit orbit2">
 <span></span>
 </div>
 
+
 <div class="orbit orbit3">
 <span></span>
 </div>
+
 
 
 <div class="sun-logo">
@@ -48,51 +56,83 @@
 
 
 
+
+
+<!-- СОБЫТИЯ -->
+
+
 <section class="events-container">
 
 
 <h1>
+
 ✨ События
+
 </h1>
+
+
+
+
+
+<!-- КНОПКА -->
+
 <button id="newEvent" class="new-event">
 
-    <span class="event-icon">
-        ✦
-    </span>
 
-    <span class="event-text">
-        Новое событие
-    </span>
+<span class="event-icon">
+
+✦
+
+</span>
+
+
+<span>
+
+Новое событие
+
+</span>
+
 
 </button>
 
 
-<button id="newEvent">
-
-+ Новое событие
-
-</button>
 
 
 
 
 
+<!-- ФОРМА -->
 
 
 <div id="eventForm" class="event-form hidden">
 
 
-<input 
+
+<input
+
 id="eventTitle"
+
+type="text"
+
 placeholder="Название события"
+
 >
 
 
 
-<textarea 
+
+
+<textarea
+
 id="eventText"
-placeholder="Описание"
+
+placeholder="Описание события"
+
 ></textarea>
+
+
+
+
 
 
 
@@ -101,6 +141,10 @@ placeholder="Описание"
 Сохранить
 
 </button>
+
+
+
+
 
 
 <button id="cancelEvent">
@@ -119,10 +163,15 @@ placeholder="Описание"
 
 
 
+
+
+<!-- СПИСОК -->
+
 <div id="eventList">
 
 
 </div>
+
 
 
 
@@ -135,49 +184,111 @@ placeholder="Описание"
 
 
 
+
+<!-- НАВИГАЦИЯ -->
+
+
 <nav class="bottom-nav">
+
 
 
 <button class="nav-item" onclick="goHome()">
 
-<span>🏠</span>
 
-<small>Главная</small>
+<span>
+
+🏠
+
+</span>
+
+
+<small>
+
+Главная
+
+</small>
+
 
 </button>
+
+
+
 
 
 
 
 <button class="nav-item" onclick="goCalendar()">
 
-<span>📅</span>
 
-<small>Календарь</small>
+<span>
+
+📅
+
+</span>
+
+
+<small>
+
+Календарь
+
+</small>
+
 
 </button>
+
+
+
 
 
 
 
 <button class="nav-item active" onclick="goEvents()">
 
-<span>✨</span>
 
-<small>События</small>
+<span>
+
+✨
+
+</span>
+
+
+<small>
+
+События
+
+</small>
+
 
 </button>
+
+
+
+
 
 
 
 
 <button class="nav-item" onclick="goSettings()">
 
-<span>⚙️</span>
 
-<small>Настройки</small>
+<span>
+
+⚙️
+
+</span>
+
+
+<small>
+
+Настройки
+
+</small>
+
 
 </button>
+
+
+
 
 
 </nav>
@@ -186,7 +297,11 @@ placeholder="Описание"
 
 
 
-<script src="events.js?v=1"></script>
+
+
+
+<script src="events.js?v=2"></script>
+
 
 
 </body>
