@@ -5,98 +5,40 @@
 
 .profile-page{
 
-    margin:0;
-
     min-height:100vh;
 
     padding-top:40px;
 
-    padding-bottom:120px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
 
     font-family:Arial,sans-serif;
 
     color:white;
 
-
-    background:
-
-    radial-gradient(
-        circle at top,
-        #302038,
-        transparent 45%
-    ),
-
-    linear-gradient(
-        160deg,
-        #090910,
-        #171522,
-        #090910
-    );
-
 }
 
 
 
-
-/* =====================================
-        PROFILE CONTAINER
-===================================== */
-
+/* контейнер */
 
 .profile-container{
-
 
     width:360px;
 
     max-width:90%;
 
-    margin:auto;
-
-
     display:flex;
 
     flex-direction:column;
 
+    align-items:center;
+
     gap:20px;
 
-
-    animation:
-
-    profileShow .5s ease;
-
-
-}
-
-
-
-
-@keyframes profileShow{
-
-
-from{
-
-    opacity:0;
-
-    transform:
-
-    translateY(30px)
-    scale(.96);
-
-}
-
-
-to{
-
-    opacity:1;
-
-    transform:
-
-    translateY(0)
-    scale(1);
-
-}
-
-
 }
 
 
@@ -104,31 +46,22 @@ to{
 
 
 
-
-
-
-/* =====================================
+/* =========================
         PROFILE CARD
-===================================== */
+========================= */
 
 
 .profile-card{
 
+    width:100%;
 
     padding:25px;
 
-
     border-radius:30px;
-
-
-    text-align:center;
-
-
 
     background:
 
     rgba(255,255,255,.08);
-
 
 
     border:
@@ -136,37 +69,27 @@ to{
     1px solid rgba(255,255,255,.15);
 
 
-
-    backdrop-filter:
-
-    blur(20px);
-
+    backdrop-filter:blur(20px);
 
 
     box-shadow:
 
     0 20px 50px rgba(0,0,0,.45);
 
+    text-align:center;
 
 }
 
 
 
 
-
-
-
-/* =====================================
-        AVATAR
-===================================== */
-
-
 .profile-avatar{
 
+    width:90px;
 
-    width:100px;
+    height:90px;
 
-    height:100px;
+    border-radius:50%;
 
 
     margin:auto;
@@ -179,10 +102,7 @@ to{
     justify-content:center;
 
 
-    border-radius:50%;
-
-
-    font-size:50px;
+    font-size:45px;
 
 
     background:
@@ -190,91 +110,28 @@ to{
     rgba(255,255,255,.12);
 
 
-
-    border:
-
-    1px solid rgba(255,255,255,.25);
-
-
-
     box-shadow:
 
-    0 0 35px rgba(160,130,255,.7);
-
-
-
-    animation:
-
-    avatarGlow 3s infinite;
-
+    0 0 30px rgba(150,120,255,.6);
 
 }
 
 
-
-
-
-@keyframes avatarGlow{
-
-
-0%,100%{
-
-    box-shadow:
-
-    0 0 25px rgba(160,130,255,.5);
-
-}
-
-
-50%{
-
-    box-shadow:
-
-    0 0 45px rgba(200,170,255,.9);
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-        NAME
-===================================== */
 
 
 .profile-name{
 
-
     margin:15px 0 5px;
-
 
     font-size:28px;
 
-
 }
-
-
 
 
 
 .profile-status{
 
-
-    margin:0;
-
-
-    opacity:.75;
-
-
-    font-size:15px;
-
+    opacity:.7;
 
 }
 
@@ -284,23 +141,17 @@ to{
 
 
 
-
-/* =====================================
-        STATISTICS
-===================================== */
+/* =========================
+        STATS
+========================= */
 
 
 .profile-stats{
 
 
-    display:grid;
+    width:100%;
 
-
-    grid-template-columns:
-
-    repeat(3,1fr);
-
-
+    display:flex;
 
     gap:10px;
 
@@ -309,512 +160,29 @@ to{
 
 
 
-
-
-
 .stat-card{
 
 
+    flex:1;
+
     padding:15px 5px;
-
-
-    text-align:center;
-
-
-
-    border-radius:22px;
-
-
-
-    background:
-
-    rgba(255,255,255,.08);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
-
-
-
-    backdrop-filter:
-
-    blur(15px);
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.stat-card:hover{
-
-
-    transform:
-
-    translateY(-4px);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(150,120,255,.35);
-
-
-}
-
-
-
-
-
-.stat-card span{
-
-
-    display:block;
-
-
-    font-size:25px;
-
-
-    font-weight:bold;
-
-
-}
-
-
-
-
-
-.stat-card small{
-
-
-    opacity:.65;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-        ACHIEVEMENTS
-===================================== */
-
-
-.achievements-box{
-
-
-    padding:20px;
-
-
-    border-radius:28px;
-
-
-    background:
-
-    rgba(255,255,255,.07);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
-
-
-
-    backdrop-filter:
-
-    blur(20px);
-
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.35);
-
-
-
-}
-
-
-
-
-.achievements-box h2{
-
-
-    margin:0 0 15px;
-
-
-    font-size:21px;
-
-
-}
-
-
-
-
-
-.achievements-list{
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:12px;
-
-
-}
-
-
-
-
-
-.achievement{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:12px;
-
-
-    padding:12px;
 
 
     border-radius:20px;
 
 
-
     background:
 
     rgba(255,255,255,.08);
 
 
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.achievement:hover{
-
-
-    transform:
-
-    translateX(5px);
-
-
-}
-
-
-
-
-
-
-
-.achievement-icon{
-
-
-    width:45px;
-
-    height:45px;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    border-radius:50%;
-
-
-    font-size:23px;
-
-
-}
-
-
-
-
-
-
-
-.achievement h3{
-
-
-    margin:0;
-
-
-    font-size:15px;
-
-
-}
-
-
-
-
-
-.achievement p{
-
-
-    margin:5px 0 0;
-
-
-    font-size:12px;
-
-
-    opacity:.7;
-
-
-}
-
-
-
-
-
-/* открыто */
-
-
-.achievement.unlocked{
-
-
     border:
 
-    1px solid rgba(255,220,120,.5);
+    1px solid rgba(255,255,255,.15);
 
 
+    text-align:center;
 
-    box-shadow:
-
-    0 0 25px rgba(255,210,80,.25);
-
-
-}
-
-
-
-
-
-.achievement.unlocked .achievement-icon{
-
-
-    background:
-
-    rgba(255,210,80,.15);
-
-
-
-    box-shadow:
-
-    0 0 20px #ffd45c;
-
-
-}
-
-
-
-
-
-
-
-/* закрыто */
-
-
-.achievement.locked{
-
-
-    opacity:.45;
-
-
-    filter:
-
-    grayscale(1);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-        BUTTONS
-===================================== */
-
-
-.profile-actions{
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:12px;
-
-
-}
-
-
-
-
-
-.profile-button{
-
-
-    height:55px;
-
-
-    border:none;
-
-
-    border-radius:28px;
-
-
-
-    color:white;
-
-
-    font-size:16px;
-
-
-    font-weight:bold;
-
-
-    cursor:pointer;
-
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #9b7cff,
-        #5d5cff
-    );
-
-
-
-    box-shadow:
-
-    0 10px 30px rgba(120,90,255,.45);
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.profile-button:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
-
-}
-
-
-
-
-
-.profile-button:active{
-
-
-    transform:
-
-    scale(.95);
-
-
-}
-
-
-
-
-
-.login-button{
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #ff9b7c,
-        #ff5c7a
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-        MOBILE
-===================================== */
-
-
-@media(max-width:400px){
-
-
-.profile-container{
-
-    width:92%;
-
-}
-
-
-
-.profile-name{
-
-    font-size:24px;
-
-}
-
-
-
-.profile-stats{
-
-    gap:7px;
 
 }
 
@@ -822,63 +190,19 @@ to{
 
 .stat-card span{
 
-    font-size:22px;
+    display:block;
+
+    font-size:25px;
+
+    font-weight:bold;
 
 }
 
 
 
-}
-/* ===============================
-      MEMORA LOGO BUTTON
-=============================== */
+.stat-card small{
 
-
-.memora-menu-button{
-
-
-width:70px;
-
-height:70px;
-
-
-margin:10px auto;
-
-
-border:none;
-
-
-border-radius:50%;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-
-backdrop-filter:blur(20px);
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-cursor:pointer;
-
-
-
-box-shadow:
-
-0 0 25px rgba(160,130,255,.7);
-
-
-
-transition:.35s;
-
+    opacity:.6;
 
 }
 
@@ -886,66 +210,80 @@ transition:.35s;
 
 
 
-.memora-menu-button:hover{
 
 
-transform:
+/* =========================
+        MEMORA LOGO BUTTON
+========================= */
 
-scale(1.1);
+
+.profile-logo-button{
 
 
-box-shadow:
+    margin-top:25px;
 
-0 0 45px rgba(190,160,255,1);
+
+    width:90px;
+
+    height:90px;
+
+
+    border-radius:50%;
+
+
+    position:relative;
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:
+
+    radial-gradient(
+    circle,
+    #bca8ff,
+    #6755ff
+    );
+
+
+    box-shadow:
+
+    0 0 25px #8b70ff,
+
+    0 0 70px rgba(150,120,255,.6);
+
+
+    border:2px solid rgba(255,255,255,.4);
+
+
+    overflow:hidden;
+
+
+    transition:.35s;
 
 
 }
 
 
 
+.profile-logo-button:hover{
 
 
-.mini-logo{
+    transform:scale(1.08);
 
 
-width:45px;
+    box-shadow:
 
-height:45px;
+    0 0 40px #bca8ff,
 
-
-border-radius:50%;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-font-size:30px;
-
-
-font-weight:bold;
-
-
-color:white;
-
-
-
-background:
-
-radial-gradient(
-circle,
-#ffffff,
-#8d6cff
-);
-
-
-
-box-shadow:
-
-0 0 20px white;
+    0 0 90px rgba(150,120,255,.8);
 
 
 }
@@ -956,61 +294,268 @@ box-shadow:
 
 
 
-
-/* ===============================
-       MODAL
-=============================== */
+/* буква M */
 
 
-.profile-modal{
+.logo-letter{
+
+
+    font-size:45px;
+
+    font-weight:900;
+
+
+    color:white;
+
+
+    z-index:5;
+
+
+    text-shadow:
+
+    0 0 15px white;
+
+
+}
+
+
+
+
+
+
+
+
+/* сферы */
+
+
+.logo-orb{
+
+
+    position:absolute;
+
+
+    width:10px;
+
+    height:10px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 0 15px white;
+
+
+}
+
+
+
+
+
+
+.orb1{
+
+
+    animation:
+
+    crossMove1 3s linear infinite;
+
+
+}
+
+
+
+.orb2{
+
+
+    animation:
+
+    crossMove2 3s linear infinite;
+
+
+}
+
+
+
+
+.orb3{
+
+
+    animation:
+
+    crossMove3 4s linear infinite;
+
+
+}
+
+
+
+
+.orb4{
+
+
+    animation:
+
+    crossMove4 4s linear infinite;
+
+
+}
+
+
+
+
+
+
+
+@keyframes crossMove1{
+
+
+0%{
+
+transform:translate(-35px,-35px);
+
+}
+
+
+50%{
+
+transform:translate(35px,35px);
+
+}
+
+
+100%{
+
+transform:translate(-35px,-35px);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes crossMove2{
+
+
+0%{
+
+transform:translate(35px,-35px);
+
+}
+
+
+50%{
+
+transform:translate(-35px,35px);
+
+}
+
+
+100%{
+
+transform:translate(35px,-35px);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes crossMove3{
+
+
+0%{
+
+transform:translateY(-40px);
+
+}
+
+
+50%{
+
+transform:translateY(40px);
+
+}
+
+
+100%{
+
+transform:translateY(-40px);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes crossMove4{
+
+
+0%{
+
+transform:translateX(-40px);
+
+}
+
+
+50%{
+
+transform:translateX(40px);
+
+}
+
+
+100%{
+
+transform:translateX(-40px);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================
+        MENU WINDOW
+========================= */
+
+
+.profile-menu{
 
 
 position:fixed;
 
 
-inset:0;
+top:50%;
+
+left:50%;
 
 
-background:
+transform:
 
-rgba(0,0,0,.55);
-
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-z-index:1000;
-
-
-backdrop-filter:blur(8px);
-
-
-}
-
-
-
-
-
-.profile-modal.hidden{
-
-
-display:none;
-
-
-}
-
-
-
-
-
-.profile-modal-card{
+translate(-50%,-50%)
+scale(.8);
 
 
 width:320px;
@@ -1024,8 +569,7 @@ border-radius:30px;
 
 background:
 
-rgba(30,25,45,.85);
-
+rgba(20,18,35,.95);
 
 
 border:
@@ -1033,92 +577,43 @@ border:
 1px solid rgba(255,255,255,.2);
 
 
-
 box-shadow:
 
-0 20px 60px black;
+0 30px 80px black;
 
-
-animation:
-
-menuOpen .35s ease;
-
-
-}
-
-
-
-
-
-@keyframes menuOpen{
-
-
-from{
 
 opacity:0;
 
-transform:
 
-scale(.8)
-translateY(30px);
+visibility:hidden;
+
+
+transition:.35s;
+
+
+z-index:100;
+
 
 
 }
 
 
-to{
+
+
+
+.profile-menu.active{
+
 
 opacity:1;
 
+
+visibility:visible;
+
+
 transform:
 
-scale(1)
-translateY(0);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-.modal-close{
-
-
-position:absolute;
-
-
-margin-left:250px;
-
-
-margin-top:-15px;
-
-
-width:35px;
-
-height:35px;
-
-
-border-radius:50%;
-
-
-border:none;
-
-
-background:
-
-rgba(255,255,255,.15);
-
-
-color:white;
-
-
-font-size:25px;
+translate(-50%,-50%)
+scale(1);
 
 
 }
@@ -1127,7 +622,8 @@ font-size:25px;
 
 
 
-.modal-item{
+
+.profile-menu button{
 
 
 width:100%;
@@ -1145,16 +641,18 @@ border:none;
 border-radius:25px;
 
 
+background:
+
+rgba(255,255,255,.12);
+
+
 color:white;
 
 
 font-size:16px;
 
 
-background:
-
-rgba(255,255,255,.1);
-
+cursor:pointer;
 
 
 transition:.3s;
@@ -1164,9 +662,7 @@ transition:.3s;
 
 
 
-
-
-.modal-item:hover{
+.profile-menu button:hover{
 
 
 background:
@@ -1174,9 +670,154 @@ background:
 rgba(150,120,255,.35);
 
 
-transform:
+transform:translateY(-3px);
 
-translateX(5px);
 
+}
+
+
+
+
+
+
+
+
+/* затемнение */
+
+
+.profile-overlay{
+
+
+position:fixed;
+
+
+inset:0;
+
+
+background:
+
+rgba(0,0,0,.55);
+
+
+opacity:0;
+
+
+visibility:hidden;
+
+
+transition:.3s;
+
+
+z-index:90;
+
+
+}
+
+
+
+.profile-overlay.active{
+
+
+opacity:1;
+
+
+visibility:visible;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+        NAVIGATION
+========================= */
+
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:18px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+
+width:350px;
+
+max-width:90%;
+
+
+height:72px;
+
+
+border-radius:35px;
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+backdrop-filter:blur(20px);
+
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+
+}
+
+
+
+
+
+
+.nav-item{
+
+background:none;
+
+border:none;
+
+color:white;
+
+opacity:.6;
+
+font-size:22px;
+
+
+}
+
+
+
+.nav-item small{
+
+display:block;
+
+font-size:11px;
+
+}
+
+
+
+.nav-item.active{
+
+opacity:1;
+
+transform:translateY(-6px);
 
 }
