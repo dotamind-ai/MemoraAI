@@ -13,16 +13,19 @@ console.log("MEMORA PROFILE READY");
 // ===============================
 
 
-const logoButton = 
-document.getElementById("profileMenuButton");
+const logoButton = document.getElementById(
+    "profileMenuButton"
+);
 
 
-const menu = 
-document.getElementById("profileMenu");
+const profileMenu = document.getElementById(
+    "profileMenu"
+);
 
 
-const overlay = 
-document.getElementById("profileOverlay");
+const overlay = document.getElementById(
+    "profileOverlay"
+);
 
 
 
@@ -42,10 +45,14 @@ if(logoButton){
         ()=>{
 
 
-            menu.classList.add("active");
+            profileMenu.classList.add(
+                "active"
+            );
 
 
-            overlay.classList.add("active");
+            overlay.classList.add(
+                "active"
+            );
 
 
         }
@@ -53,6 +60,7 @@ if(logoButton){
 
 
 }
+
 
 
 
@@ -73,10 +81,14 @@ if(overlay){
         ()=>{
 
 
-            menu.classList.remove("active");
+            profileMenu.classList.remove(
+                "active"
+            );
 
 
-            overlay.classList.remove("active");
+            overlay.classList.remove(
+                "active"
+            );
 
 
         }
@@ -98,14 +110,17 @@ if(overlay){
 // ===============================
 
 
-
 const editProfile =
-document.getElementById("editProfile");
+document.getElementById(
+    "editProfile"
+);
 
 
 
 const loginButton =
-document.getElementById("loginButton");
+document.getElementById(
+    "loginButton"
+);
 
 
 
@@ -119,7 +134,7 @@ if(editProfile){
 
 
         alert(
-        "Edit Profile will be available soon"
+            "Edit Profile coming soon"
         );
 
 
@@ -133,6 +148,7 @@ if(editProfile){
 
 
 
+
 if(loginButton){
 
 
@@ -140,7 +156,7 @@ if(loginButton){
 
 
         alert(
-        "Login system will start after server launch"
+            "Registration will be added after server launch"
         );
 
 
@@ -162,24 +178,21 @@ if(loginButton){
 // ===============================
 
 
-
-function updateStats(){
-
+function updateProfileStats(){
 
 
-    let memories = JSON.parse(
 
+    let memories =
+    JSON.parse(
         localStorage.getItem("memora")
-
     ) || [];
 
 
 
 
-    let events = JSON.parse(
-
+    let events =
+    JSON.parse(
         localStorage.getItem("memoraEvents")
-
     ) || [];
 
 
@@ -211,6 +224,7 @@ function updateStats(){
 
 
 
+
     events.forEach(item=>{
 
 
@@ -229,18 +243,26 @@ function updateStats(){
 
 
 
-    const memory =
-    document.getElementById("memoryStat");
+
+
+    const memoryStat =
+    document.getElementById(
+        "memoryStat"
+    );
 
 
 
-    const event =
-    document.getElementById("eventStat");
+    const eventStat =
+    document.getElementById(
+        "eventStat"
+    );
 
 
 
-    const favorite =
-    document.getElementById("favoriteStat");
+    const favoriteStat =
+    document.getElementById(
+        "favoriteStat"
+    );
 
 
 
@@ -248,9 +270,11 @@ function updateStats(){
 
 
 
-    if(memory){
 
-        memory.innerText =
+
+    if(memoryStat){
+
+        memoryStat.innerText =
         memories.length;
 
     }
@@ -258,9 +282,9 @@ function updateStats(){
 
 
 
-    if(event){
+    if(eventStat){
 
-        event.innerText =
+        eventStat.innerText =
         events.length;
 
     }
@@ -268,10 +292,9 @@ function updateStats(){
 
 
 
+    if(favoriteStat){
 
-    if(favorite){
-
-        favorite.innerText =
+        favoriteStat.innerText =
         favorites;
 
     }
@@ -293,27 +316,31 @@ function updateStats(){
 // ===============================
 
 
+function loadProfileName(){
 
-function loadName(){
+
+
+    const savedName =
+    localStorage.getItem(
+        "memoraUser"
+    );
 
 
 
     const name =
-    localStorage.getItem("memoraUser");
-
-
-
-    const profileName =
-    document.getElementById("profileName");
+    document.getElementById(
+        "profileName"
+    );
 
 
 
 
 
-    if(name && profileName){
+    if(savedName && name){
 
 
-        profileName.innerText = name;
+        name.innerText =
+        savedName;
 
 
     }
@@ -331,15 +358,51 @@ function loadName(){
 
 
 // ===============================
-// НАВИГАЦИЯ
+// БУДУЩИЙ АВАТАР
 // ===============================
 
+
+const avatar =
+document.getElementById(
+    "profileAvatar"
+);
+
+
+
+if(avatar){
+
+
+    avatar.onclick = ()=>{
+
+
+        alert(
+            "Avatar upload will be added with registration"
+        );
+
+
+    };
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// НАВИГАЦИЯ
+// ===============================
 
 
 function goHome(){
 
 
-    window.location.href="app.html";
+    window.location.href =
+    "app.html";
 
 
 }
@@ -351,7 +414,8 @@ function goHome(){
 function goCalendar(){
 
 
-    window.location.href="calendar.html";
+    window.location.href =
+    "calendar.html";
 
 
 }
@@ -363,7 +427,8 @@ function goCalendar(){
 function goEvents(){
 
 
-    window.location.href="events.html";
+    window.location.href =
+    "events.html";
 
 
 }
@@ -375,7 +440,8 @@ function goEvents(){
 function goProfile(){
 
 
-    window.location.href="profile.html";
+    window.location.href =
+    "profile.html";
 
 
 }
@@ -387,7 +453,8 @@ function goProfile(){
 function goSettings(){
 
 
-    window.location.href="settings.html";
+    window.location.href =
+    "settings.html";
 
 
 }
@@ -405,18 +472,15 @@ function goSettings(){
 // ===============================
 
 
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 
-    updateStats();
+    updateProfileStats();
 
 
-    loadName();
+    loadProfileName();
 
 
-}
-
-);
+});
