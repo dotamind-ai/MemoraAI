@@ -2893,3 +2893,115 @@ box-shadow:0 0 15px rgba(255,255,255,.5);
 
 
 }
+/* нижняя панель действий карточки */
+
+.event-actions{
+
+
+display:flex !important;
+
+
+align-items:center !important;
+
+
+justify-content:center !important;
+
+
+gap:12px !important;
+
+
+width:100%;
+
+
+margin-top:12px !important;
+
+
+}
+
+
+
+
+.event-favorite,
+.event-edit,
+.event-delete{
+
+
+width:32px !important;
+
+
+height:32px !important;
+
+
+padding:0 !important;
+
+
+display:flex !important;
+
+
+align-items:center !important;
+
+
+justify-content:center !important;
+
+
+border-radius:50% !important;
+
+
+font-size:16px !important;
+
+
+line-height:1;
+
+
+}
+
+
+
+
+.event-favorite{
+
+
+color:#ffd45c;
+
+
+}
+
+
+
+
+.event-edit{
+
+
+color:white;
+
+
+}
+
+
+
+
+.event-delete{
+
+
+background:rgba(255,80,80,.18) !important;
+
+
+color:#ff7777;
+
+
+border:none;
+
+
+}
+
+
+
+
+
+.event-delete:hover{
+
+
+box-shadow:0 0 15px #ff5555;
+
+
+}
