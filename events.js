@@ -173,29 +173,23 @@ saveEvent.onclick = ()=>{
 
     if(title.trim() === ""){
 
-        return;
-
-    }
-
-
+        
+        const type =
+document.getElementById("eventType").value;
 
 
+events.push({
 
+title:title,
 
-    events.push({
+text:text,
 
+type:type,
 
-        title:title,
+date:new Date()
+.toLocaleDateString("ru-RU")
 
-
-        text:text,
-
-
-        date:new Date()
-        .toLocaleDateString("ru-RU")
-
-
-    });
+});
 
 
 
