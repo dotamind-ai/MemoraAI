@@ -1,5 +1,4 @@
-console.log("MEMORA EVENTS VERSION 103");
-
+console.log("MEMORA EVENTS VERSION 104");
 
 
 const newEvent = document.getElementById("newEvent");
@@ -24,6 +23,27 @@ let events = JSON.parse(
 
 
 
+// добавляем favorite старым событиям
+
+events.forEach(event=>{
+
+
+    if(event.favorite === undefined){
+
+        event.favorite = false;
+
+    }
+
+
+});
+
+
+
+
+
+
+
+
 
 // ===== ПОКАЗ СОБЫТИЙ =====
 
@@ -32,8 +52,11 @@ function showEvents(){
 
 
     if(!eventList){
+
         return;
+
     }
+
 
 
 
@@ -43,7 +66,18 @@ function showEvents(){
 
 
 
-    events.forEach((event,index)=>{
+
+    events
+
+    .sort((a,b)=>{
+
+        return b.favorite - a.favorite;
+
+    })
+
+    .forEach((event,index)=>{
+
+
 
 
 
@@ -52,7 +86,10 @@ function showEvents(){
 
 
         card.className =
+
         "event-card " + (event.type || "idea");
+
+
 
 
 
@@ -96,11 +133,14 @@ function showEvents(){
 
 
 
+
+
         card.innerHTML = `
 
 
 
         <div class="event-top">
+
 
 
             <span class="event-symbol">
@@ -111,6 +151,7 @@ function showEvents(){
 
 
 
+
             <h2>
 
                 ${event.title}
@@ -118,7 +159,10 @@ function showEvents(){
             </h2>
 
 
+
         </div>
+
+
 
 
 
@@ -137,6 +181,7 @@ function showEvents(){
 
 
 
+
         <div class="event-date">
 
             ${event.date || "Сегодня"}
@@ -148,24 +193,53 @@ function showEvents(){
 
 
 
-        <button 
-
-        class="event-delete"
-
-        onclick="deleteEvent(${index})">
 
 
-            Удалить
+        <div class="event-actions">
 
 
-        </button>
+
+            <button
+
+            class="event-favorite"
+
+            onclick="favoriteEvent(${index})">
+
+
+                ${event.favorite ? "★" : "☆"}
+
+
+            </button>
+
+
+
+
+
+
+
+            <button
+
+            class="event-delete"
+
+            onclick="deleteEvent(${index})">
+
+
+                Удалить
+
+
+            </button>
+
+
+
+        </div>
+
+
 
 
 
 
 
         `;
-
 
 
 
@@ -183,6 +257,7 @@ function showEvents(){
 
 
 
+
 }
 
 
@@ -193,7 +268,8 @@ function showEvents(){
 
 
 
-// ===== ОТКРЫТЬ ФОРМУ =====
+// ===== ОТКРЫТИЕ ФОРМЫ =====
+
 
 
 if(newEvent){
@@ -207,6 +283,7 @@ newEvent.onclick = ()=>{
 
 
     newEvent.classList.add("hidden");
+
 
 
 };
@@ -226,6 +303,7 @@ newEvent.onclick = ()=>{
 // ===== ОТМЕНА =====
 
 
+
 if(cancelEvent){
 
 
@@ -237,6 +315,7 @@ cancelEvent.onclick = ()=>{
 
 
     newEvent.classList.remove("hidden");
+
 
 
 };
@@ -254,6 +333,7 @@ cancelEvent.onclick = ()=>{
 
 
 // ===== СОХРАНЕНИЕ =====
+
 
 
 if(saveEvent){
@@ -290,7 +370,6 @@ saveEvent.onclick = ()=>{
 
 
 
-
     const type =
 
     typeElement ? typeElement.value : "idea";
@@ -316,6 +395,7 @@ saveEvent.onclick = ()=>{
 
 
 
+
     events.push({
 
 
@@ -332,6 +412,10 @@ saveEvent.onclick = ()=>{
 
 
 
+        favorite:false,
+
+
+
         date:new Date()
 
         .toLocaleDateString("ru-RU")
@@ -339,6 +423,7 @@ saveEvent.onclick = ()=>{
 
 
     });
+
 
 
 
@@ -362,9 +447,7 @@ saveEvent.onclick = ()=>{
 
 
 
-
     document.getElementById("eventTitle").value = "";
-
 
 
     document.getElementById("eventText").value = "";
@@ -376,13 +459,10 @@ saveEvent.onclick = ()=>{
 
 
 
-
     eventForm.classList.add("hidden");
 
 
-
     newEvent.classList.remove("hidden");
-
 
 
 
@@ -409,14 +489,20 @@ saveEvent.onclick = ()=>{
 
 
 
-// ===== УДАЛЕНИЕ =====
-
-
-function deleteEvent(index){
+// ===== ЗАКРЕПИТЬ =====
 
 
 
-    events.splice(index,1);
+function favoriteEvent(index){
+
+
+
+    events[index].favorite =
+
+    !events[index].favorite;
+
+
+
 
 
 
@@ -428,6 +514,51 @@ function deleteEvent(index){
         JSON.stringify(events)
 
     );
+
+
+
+
+
+
+
+    showEvents();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===== УДАЛЕНИЕ =====
+
+
+
+function deleteEvent(index){
+
+
+
+    events.splice(index,1);
+
+
+
+
+
+
+    localStorage.setItem(
+
+        "memoraEvents",
+
+        JSON.stringify(events)
+
+    );
+
+
 
 
 
@@ -447,6 +578,7 @@ function deleteEvent(index){
 
 
 // ===== НАВИГАЦИЯ =====
+
 
 
 function goHome(){
