@@ -1,5 +1,5 @@
 /* =====================================
-        MEMORA PROFILE PAGE
+        MEMORA PROFILE
 ===================================== */
 
 
@@ -11,9 +11,11 @@ min-height:100vh;
 
 padding-top:35px;
 
-padding-bottom:110px;
+padding-bottom:120px;
+
 
 font-family:Arial,sans-serif;
+
 
 color:white;
 
@@ -22,15 +24,15 @@ background:
 
 radial-gradient(
 circle at top,
-#302038,
+#39234d 0%,
 transparent 45%
 ),
 
 linear-gradient(
 160deg,
-#090910,
-#171522,
-#090910
+#080810,
+#161321,
+#080810
 );
 
 
@@ -40,7 +42,10 @@ justify-content:center;
 
 overflow-x:hidden;
 
+
 }
+
+
 
 
 
@@ -55,18 +60,26 @@ overflow-x:hidden;
 
 width:360px;
 
+
 max-width:90%;
+
 
 display:flex;
 
+
 flex-direction:column;
+
 
 align-items:center;
 
-gap:18px;
+
+gap:20px;
 
 
 }
+
+
+
 
 
 
@@ -80,32 +93,46 @@ gap:18px;
 .profile-avatar{
 
 
-width:95px;
+margin-top:25px;
 
-height:95px;
+
+width:140px;
+
+
+height:140px;
 
 
 border-radius:50%;
 
 
+
 display:flex;
 
+
 align-items:center;
+
 
 justify-content:center;
 
 
-font-size:45px;
+
+font-size:65px;
+
 
 
 background:
 
-rgba(255,255,255,.12);
+linear-gradient(
+145deg,
+rgba(255,255,255,.18),
+rgba(255,255,255,.05)
+);
+
 
 
 border:
 
-1px solid rgba(255,255,255,.25);
+2px solid rgba(255,255,255,.25);
 
 
 
@@ -115,18 +142,20 @@ backdrop-filter:blur(20px);
 
 box-shadow:
 
-0 0 35px rgba(160,130,255,.5);
+0 0 25px rgba(180,140,255,.7),
+
+0 0 60px rgba(100,180,255,.25);
 
 
 
 cursor:pointer;
 
 
-
 transition:.3s;
 
 
 }
+
 
 
 
@@ -147,37 +176,52 @@ transform:scale(1.05);
 
 
 
+
 /* =====================================
-        MEMORA LOGO BUTTON
+        LOGO BUTTON TOP RIGHT
 ===================================== */
 
 
 .memora-profile-logo{
 
 
-position:relative;
+position:fixed;
 
 
-width:55px;
 
-height:55px;
+top:22px;
 
 
-cursor:pointer;
+right:22px;
+
+
+
+width:48px;
+
+
+height:48px;
+
 
 
 display:flex;
 
+
 align-items:center;
+
 
 justify-content:center;
 
 
 
-margin-top:5px;
+cursor:pointer;
+
+
+
+z-index:50;
 
 
 }
+
 
 
 
@@ -186,32 +230,43 @@ margin-top:5px;
 .logo-letter{
 
 
-width:34px;
+width:32px;
 
-height:34px;
+
+height:32px;
+
 
 
 border-radius:50%;
 
 
+
 display:flex;
 
+
 align-items:center;
+
 
 justify-content:center;
 
 
-font-size:24px;
+
+font-size:22px;
 
 
 font-weight:bold;
+
+
+
+color:white;
+
 
 
 background:
 
 radial-gradient(
 circle,
-rgba(255,255,255,.35),
+rgba(255,255,255,.45),
 rgba(255,255,255,.05)
 );
 
@@ -219,17 +274,17 @@ rgba(255,255,255,.05)
 
 box-shadow:
 
-
 0 0 15px white,
 
-0 0 35px rgba(180,150,255,.7);
+0 0 35px #8c5cff;
 
 
 
-z-index:2;
+z-index:3;
 
 
 }
+
 
 
 
@@ -244,15 +299,18 @@ position:absolute;
 
 left:50%;
 
+
 top:50%;
+
 
 
 border-radius:50%;
 
 
+
 border:
 
-1px solid rgba(255,255,255,.25);
+1px solid rgba(255,255,255,.35);
 
 
 
@@ -261,9 +319,10 @@ transform:
 translate(-50%,-50%);
 
 
+
 animation:
 
-logoRotate linear infinite;
+logoSpin linear infinite;
 
 
 }
@@ -280,13 +339,14 @@ position:absolute;
 
 width:5px;
 
+
 height:5px;
 
 
-background:white;
-
-
 border-radius:50%;
+
+
+background:white;
 
 
 box-shadow:
@@ -300,14 +360,13 @@ box-shadow:
 
 
 
-
-
 .orbit-a{
 
 
-width:50px;
+width:45px;
 
-height:50px;
+
+height:45px;
 
 
 animation-duration:4s;
@@ -316,10 +375,13 @@ animation-duration:4s;
 }
 
 
+
+
 .orbit-a span{
 
 
 top:-3px;
+
 
 left:50%;
 
@@ -331,13 +393,13 @@ left:50%;
 
 
 
-
 .orbit-b{
 
 
-width:65px;
+width:60px;
 
-height:65px;
+
+height:60px;
 
 
 animation-duration:6s;
@@ -349,10 +411,14 @@ animation-direction:reverse;
 }
 
 
+
+
+
 .orbit-b span{
 
 
 right:-3px;
+
 
 top:50%;
 
@@ -363,12 +429,14 @@ top:50%;
 
 
 
+
 .orbit-c{
 
 
-width:80px;
+width:75px;
 
-height:80px;
+
+height:75px;
 
 
 animation-duration:8s;
@@ -383,12 +451,13 @@ animation-duration:8s;
 .orbit-c span{
 
 
-bottom:10px;
-
-left:10px;
+bottom:5px;
 
 
-background:#a9d8ff;
+left:15px;
+
+
+background:#75cfff;
 
 
 }
@@ -397,7 +466,9 @@ background:#a9d8ff;
 
 
 
-@keyframes logoRotate{
+
+
+@keyframes logoSpin{
 
 
 from{
@@ -410,6 +481,7 @@ rotate(0deg);
 }
 
 
+
 to{
 
 
@@ -417,6 +489,7 @@ transform:
 
 translate(-50%,-50%)
 rotate(360deg);
+
 
 }
 
@@ -442,7 +515,10 @@ rotate(360deg);
 margin:0;
 
 
-font-size:28px;
+font-size:30px;
+
+
+font-weight:700;
 
 
 text-align:center;
@@ -453,20 +529,21 @@ text-align:center;
 
 
 
+
+
 .profile-status{
 
 
 margin:0;
 
 
-opacity:.7;
-
-
 font-size:15px;
 
 
-}
+opacity:.7;
 
+
+}
 
 
 
@@ -499,19 +576,19 @@ gap:10px;
 
 
 
+
 .stat-card{
 
 
 flex:1;
 
 
+
 padding:15px 5px;
 
 
-border-radius:20px;
 
-
-text-align:center;
+border-radius:22px;
 
 
 
@@ -523,21 +600,27 @@ rgba(255,255,255,.08);
 
 border:
 
-1px solid rgba(255,255,255,.15);
+1px solid rgba(255,255,255,.18);
 
 
 
-backdrop-filter:blur(15px);
+backdrop-filter:blur(18px);
+
+
+
+text-align:center;
 
 
 
 box-shadow:
 
-0 10px 30px rgba(0,0,0,.3);
-
+0 10px 30px rgba(0,0,0,.35);
 
 
 }
+
+
+
 
 
 
@@ -548,7 +631,7 @@ box-shadow:
 display:block;
 
 
-font-size:25px;
+font-size:26px;
 
 
 font-weight:bold;
@@ -559,7 +642,12 @@ font-weight:bold;
 
 
 
+
+
 .stat-card small{
+
+
+font-size:12px;
 
 
 opacity:.65;
@@ -586,10 +674,14 @@ opacity:.65;
 width:100%;
 
 
-padding:18px;
+padding:20px;
+
+
+box-sizing:border-box;
 
 
 border-radius:25px;
+
 
 
 background:
@@ -620,10 +712,10 @@ text-align:center;
 .profile-level h2{
 
 
-font-size:17px;
-
-
 margin:0 0 15px;
+
+
+font-size:17px;
 
 
 }
@@ -633,13 +725,15 @@ margin:0 0 15px;
 
 
 
+
 .level-bar{
+
+
+width:100%;
 
 
 height:12px;
 
-
-width:100%;
 
 
 background:
@@ -660,6 +754,8 @@ overflow:hidden;
 
 
 
+
+
 .level-bar span{
 
 
@@ -672,38 +768,20 @@ height:100%;
 width:35%;
 
 
-border-radius:20px;
-
 
 background:
 
 linear-gradient(
 90deg,
-#8b5cff,
-#65b7ff
+#8c5cff,
+#65c7ff
 );
+
 
 
 box-shadow:
 
-0 0 15px #8b5cff;
-
-
-}
-
-
-
-
-.profile-level p{
-
-
-margin:10px 0 0;
-
-
-font-size:12px;
-
-
-opacity:.6;
+0 0 15px #8c5cff;
 
 
 }
@@ -731,10 +809,12 @@ width:100%;
 
 
 
+
+
 .achievements h2{
 
 
-font-size:20px;
+font-size:21px;
 
 
 margin-bottom:12px;
@@ -751,13 +831,16 @@ margin-bottom:12px;
 .achievement-card{
 
 
-padding:14px;
+padding:15px;
+
 
 
 margin-bottom:10px;
 
 
-border-radius:18px;
+
+border-radius:20px;
+
 
 
 background:
@@ -772,13 +855,7 @@ border:
 
 
 
-backdrop-filter:blur(15px);
-
-
-
-box-shadow:
-
-0 10px 25px rgba(0,0,0,.3);
+backdrop-filter:blur(18px);
 
 
 
@@ -786,6 +863,8 @@ transition:.3s;
 
 
 }
+
+
 
 
 
@@ -801,7 +880,7 @@ translateY(-3px);
 
 box-shadow:
 
-0 0 25px rgba(160,130,255,.5);
+0 0 25px rgba(150,120,255,.4);
 
 
 }
@@ -815,7 +894,7 @@ box-shadow:
 
 
 /* =====================================
-        POPUP MENU
+        MENU
 ===================================== */
 
 
@@ -836,10 +915,12 @@ rgba(0,0,0,.55);
 display:none;
 
 
-z-index:10;
+z-index:60;
 
 
 }
+
+
 
 
 
@@ -851,26 +932,23 @@ z-index:10;
 position:fixed;
 
 
-left:50%;
+
+top:85px;
 
 
-bottom:120px;
-
-
-transform:
-
-translateX(-50%)
-translateY(30px);
+right:20px;
 
 
 
-width:300px;
+width:280px;
 
 
-padding:20px;
+padding:18px;
 
 
-border-radius:30px;
+
+border-radius:25px;
+
 
 
 background:
@@ -881,7 +959,7 @@ rgba(255,255,255,.12);
 
 border:
 
-1px solid rgba(255,255,255,.2);
+1px solid rgba(255,255,255,.25);
 
 
 
@@ -892,16 +970,27 @@ backdrop-filter:blur(25px);
 display:none;
 
 
+
 flex-direction:column;
+
 
 
 gap:12px;
 
 
-z-index:11;
+
+z-index:70;
+
+
+
+box-shadow:
+
+0 0 40px rgba(0,0,0,.5);
 
 
 }
+
+
 
 
 
@@ -919,6 +1008,7 @@ border:none;
 border-radius:25px;
 
 
+
 background:
 
 rgba(255,255,255,.15);
@@ -928,13 +1018,18 @@ rgba(255,255,255,.15);
 color:white;
 
 
+
 font-size:16px;
+
 
 
 cursor:pointer;
 
 
 }
+
+
+
 
 
 
@@ -956,30 +1051,25 @@ rgba(255,255,255,.25);
 
 
 
-
-/* =====================================
-        MENU ACTIVE
-===================================== */
-
-
-.profile-menu.show,
-.profile-overlay.show{
+.profile-menu.show{
 
 
 display:flex;
 
 
-}
-
-
-
-
-.profile-menu.show{
-
-
 animation:
 
-menuShow .35s ease;
+menuOpen .3s ease;
+
+
+}
+
+
+
+.profile-overlay.show{
+
+
+display:block;
 
 
 }
@@ -987,7 +1077,8 @@ menuShow .35s ease;
 
 
 
-@keyframes menuShow{
+
+@keyframes menuOpen{
 
 
 from{
@@ -996,10 +1087,7 @@ from{
 opacity:0;
 
 
-transform:
-
-translateX(-50%)
-translateY(50px);
+transform:translateY(-20px);
 
 
 }
@@ -1012,10 +1100,7 @@ to{
 opacity:1;
 
 
-transform:
-
-translateX(-50%)
-translateY(0);
+transform:translateY(0);
 
 
 }
@@ -1039,6 +1124,7 @@ translateY(0);
 @media(max-width:400px){
 
 
+
 .profile-container{
 
 
@@ -1052,9 +1138,13 @@ width:330px;
 .profile-avatar{
 
 
-width:85px;
+width:125px;
 
-height:85px;
+
+height:125px;
+
+
+font-size:55px;
 
 
 }
@@ -1064,10 +1154,11 @@ height:85px;
 .profile-name{
 
 
-font-size:25px;
+font-size:26px;
 
 
 }
+
 
 
 }
