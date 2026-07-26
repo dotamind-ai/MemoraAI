@@ -3243,3 +3243,49 @@ transform:translateY(0) scale(1);
 
 
 }
+#eventList .event-card{
+
+
+    animation: memoraCardShow .45s ease forwards !important;
+
+
+    opacity:0 !important;
+
+
+    transform:translateY(20px) scale(.95) !important;
+
+
+}
+
+
+
+
+@keyframes memoraCardShow{
+
+
+    0%{
+
+
+        opacity:0;
+
+
+        transform:translateY(20px) scale(.95);
+
+
+    }
+
+
+
+    100%{
+
+
+        opacity:1;
+
+
+        transform:translateY(0) scale(1);
+
+
+    }
+
+
+}
