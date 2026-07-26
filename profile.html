@@ -7,9 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>Memora Profile</title>
-
 
 
 <link rel="stylesheet" href="style.css">
@@ -25,33 +23,65 @@
 
 
 
-
-
 <div class="profile-container">
 
 
 
-
-
-
-    <!-- Карточка профиля -->
-
+    <!-- ПРОФИЛЬ -->
 
     <div class="profile-card">
 
 
 
-        <div 
-        class="profile-avatar" 
-        id="profileAvatar">
+        <!-- КРУГЛАЯ КНОПКА MEMORA -->
 
-            👤
+        <div 
+        class="memora-profile-logo"
+        id="profileMenuButton">
+
+
+
+            <div class="logo-orbit orbit-a">
+
+                <span></span>
+
+            </div>
+
+
+
+            <div class="logo-orbit orbit-b">
+
+                <span></span>
+
+            </div>
+
+
+
+            <div class="logo-orbit orbit-c">
+
+                <span></span>
+
+            </div>
+
+
+
+            <div class="logo-letter">
+
+                M
+
+            </div>
+
+
 
         </div>
 
 
 
 
+
+
+
+        <!-- ИМЯ -->
 
         <h1 
         class="profile-name"
@@ -67,7 +97,7 @@
 
         <p class="profile-status">
 
-            ✨ Хранитель воспоминаний
+            ✨ Memory Keeper
 
         </p>
 
@@ -82,8 +112,7 @@
 
 
 
-
-    <!-- Статистика -->
+    <!-- СТАТИСТИКА -->
 
 
     <div class="profile-stats">
@@ -102,14 +131,12 @@
 
             <small>
 
-                Память
+                Memories
 
             </small>
 
 
         </div>
-
-
 
 
 
@@ -127,14 +154,12 @@
 
             <small>
 
-                События
+                Events
 
             </small>
 
 
         </div>
-
-
 
 
 
@@ -152,7 +177,7 @@
 
             <small>
 
-                Избранное
+                Favorites
 
             </small>
 
@@ -163,131 +188,6 @@
 
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- MEMORA CORE BUTTON -->
-
-
-    <div 
-    class="memora-core" 
-    id="memoraCore">
-
-
-
-        <div class="orbit o1">
-
-            <span></span>
-
-        </div>
-
-
-
-
-
-        <div class="orbit o2">
-
-            <span></span>
-
-        </div>
-
-
-
-
-
-        <div class="orbit o3">
-
-            <span></span>
-
-        </div>
-
-
-
-
-
-
-
-        <div class="core-letter">
-
-            M
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-    <div 
-    class="profile-menu hidden" 
-    id="profileMenu">
-
-
-
-
-
-        <button 
-        id="editProfile">
-
-            ✏️ Edit Profile
-
-        </button>
-
-
-
-
-
-
-        <button 
-        onclick="goSettings()">
-
-            ⚙️ Settings
-
-        </button>
-
-
-
-
-
-
-        <button 
-        id="loginButton">
-
-            🔐 Login / Register
-
-        </button>
-
-
-
-
-
-
-        <button>
-
-            🏆 Achievements
-
-        </button>
-
-
-
-
-
-    </div>
 
 
 
@@ -306,16 +206,86 @@
 
 
 
+<!-- ЗАТЕМНЕНИЕ -->
+
+<div 
+class="profile-overlay"
+id="profileOverlay">
+
+</div>
 
 
 
 
-<!-- Нижняя навигация -->
+
+
+
+
+<!-- ВСПЛЫВАЮЩЕЕ МЕНЮ -->
+
+
+<div 
+class="profile-menu"
+id="profileMenu">
+
+
+
+    <button 
+    id="editProfile">
+
+        ✏️ Edit Profile
+
+    </button>
+
+
+
+
+
+    <button 
+    onclick="goSettings()">
+
+        ⚙ Settings
+
+    </button>
+
+
+
+
+
+    <button 
+    id="loginButton">
+
+        🔐 Login / Register
+
+    </button>
+
+
+
+
+
+    <button>
+
+        🏆 Achievements
+
+    </button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- НИЖНЯЯ НАВИГАЦИЯ -->
 
 
 <nav class="bottom-nav">
-
-
 
 
 
@@ -327,17 +297,14 @@ onclick="goHome()">
 
 🏠
 
-
 <small>
 
-Главная
+Home
 
 </small>
 
 
 </button>
-
-
 
 
 
@@ -353,17 +320,14 @@ onclick="goCalendar()">
 
 📅
 
-
 <small>
 
-Календарь
+Calendar
 
 </small>
 
 
 </button>
-
-
 
 
 
@@ -379,17 +343,14 @@ onclick="goEvents()">
 
 ✨
 
-
 <small>
 
-События
+Events
 
 </small>
 
 
 </button>
-
-
 
 
 
@@ -405,10 +366,9 @@ onclick="goProfile()">
 
 👤
 
-
 <small>
 
-Профиль
+Profile
 
 </small>
 
@@ -429,8 +389,8 @@ onclick="goProfile()">
 
 
 
-<script src="profile.js"></script>
 
+<script src="profile.js"></script>
 
 
 
