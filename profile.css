@@ -1,85 +1,100 @@
 /* =====================================
-        MEMORA PROFILE PAGE
+        MEMORA PROFILE STYLE
 ===================================== */
 
 
-body.profile-page{
+.profile-page{
+
+    margin:0;
+
+    min-height:100vh;
+
+    padding-top:40px;
+
+    padding-bottom:120px;
+
+    font-family:Arial,sans-serif;
+
+    color:white;
 
 
-margin:0;
+    background:
 
-min-height:100vh;
+    radial-gradient(
+        circle at top,
+        #302038,
+        transparent 45%
+    ),
 
-padding-top:120px;
-
-padding-bottom:120px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:flex-start;
-
-
-font-family:Arial,sans-serif;
-
-color:white;
-
-
-
-background:
-
-
-radial-gradient(
-circle at top,
-#38264d,
-transparent 45%
-),
-
-
-linear-gradient(
-160deg,
-#090910,
-#171522,
-#090910
-);
-
-
-
-overflow-x:hidden;
-
+    linear-gradient(
+        160deg,
+        #090910,
+        #171522,
+        #090910
+    );
 
 }
 
 
 
 
-
-
-/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+/* =====================================
+        PROFILE CONTAINER
+===================================== */
 
 
 .profile-container{
 
 
-width:360px;
+    width:360px;
 
-max-width:90%;
+    max-width:90%;
 
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
+    margin:auto;
 
 
-gap:20px;
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
 
 
-animation:
+    animation:
 
-profileAppear .6s ease;
+    profileShow .5s ease;
+
+
+}
+
+
+
+
+@keyframes profileShow{
+
+
+from{
+
+    opacity:0;
+
+    transform:
+
+    translateY(30px)
+    scale(.96);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:
+
+    translateY(0)
+    scale(1);
+
+}
 
 
 }
@@ -89,52 +104,48 @@ profileAppear .6s ease;
 
 
 
-/* ===== КАРТОЧКА ПРОФИЛЯ ===== */
+
+
+
+/* =====================================
+        PROFILE CARD
+===================================== */
 
 
 .profile-card{
 
 
-width:100%;
+    padding:25px;
 
 
-padding:30px 20px;
+    border-radius:30px;
 
 
-border-radius:30px;
-
-
-
-background:
-
-rgba(255,255,255,.08);
+    text-align:center;
 
 
 
-border:
+    background:
 
-1px solid rgba(255,255,255,.18);
-
-
-
-backdrop-filter:
-
-blur(20px);
+    rgba(255,255,255,.08);
 
 
 
-box-shadow:
+    border:
 
-
-0 20px 50px rgba(0,0,0,.5),
-
-
-0 0 30px rgba(150,120,255,.25);
+    1px solid rgba(255,255,255,.15);
 
 
 
-text-align:center;
+    backdrop-filter:
 
+    blur(20px);
+
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.45);
 
 
 }
@@ -145,66 +156,56 @@ text-align:center;
 
 
 
-
-/* ===== АВАТАР ===== */
+/* =====================================
+        AVATAR
+===================================== */
 
 
 .profile-avatar{
 
 
-width:110px;
+    width:100px;
 
-height:110px;
-
-
-margin:auto;
+    height:100px;
 
 
-
-border-radius:50%;
-
+    margin:auto;
 
 
-display:flex;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
 
-align-items:center;
+    border-radius:50%;
 
 
-justify-content:center;
+    font-size:50px;
 
 
+    background:
 
-font-size:55px;
-
-
-
-
-background:
-
-
-linear-gradient(
-135deg,
-#9b7cff,
-#5d5cff
-);
+    rgba(255,255,255,.12);
 
 
 
-box-shadow:
+    border:
 
-
-0 0 30px rgba(150,120,255,.8),
-
-
-inset 0 0 25px rgba(255,255,255,.25);
+    1px solid rgba(255,255,255,.25);
 
 
 
-animation:
+    box-shadow:
 
-avatarPulse 3s infinite;
+    0 0 35px rgba(160,130,255,.7);
 
+
+
+    animation:
+
+    avatarGlow 3s infinite;
 
 
 }
@@ -213,61 +214,51 @@ avatarPulse 3s infinite;
 
 
 
-
-@keyframes avatarPulse{
+@keyframes avatarGlow{
 
 
 0%,100%{
 
+    box-shadow:
 
-transform:scale(1);
-
+    0 0 25px rgba(160,130,255,.5);
 
 }
 
 
 50%{
 
+    box-shadow:
 
-transform:scale(1.05);
+    0 0 45px rgba(200,170,255,.9);
+
+}
 
 
 }
 
 
-}
 
 
 
 
 
 
-
-
-
-/* ===== ИМЯ ===== */
+/* =====================================
+        NAME
+===================================== */
 
 
 .profile-name{
 
 
-margin:
-
-20px 0 8px;
+    margin:15px 0 5px;
 
 
-font-size:28px;
-
-
-text-shadow:
-
-
-0 0 15px rgba(255,255,255,.5);
+    font-size:28px;
 
 
 }
-
-
 
 
 
@@ -276,13 +267,13 @@ text-shadow:
 .profile-status{
 
 
-margin:0;
+    margin:0;
 
 
-opacity:.7;
+    opacity:.75;
 
 
-font-size:15px;
+    font-size:15px;
 
 
 }
@@ -294,26 +285,27 @@ font-size:15px;
 
 
 
-/* ===== СТАТИСТИКА ===== */
+/* =====================================
+        STATISTICS
+===================================== */
 
 
 .profile-stats{
 
 
-width:100%;
+    display:grid;
 
 
-display:grid;
+    grid-template-columns:
+
+    repeat(3,1fr);
 
 
-grid-template-columns:repeat(3,1fr);
 
-
-gap:10px;
+    gap:10px;
 
 
 }
-
 
 
 
@@ -323,51 +315,39 @@ gap:10px;
 .stat-card{
 
 
-padding:15px 5px;
+    padding:15px 5px;
 
 
-border-radius:20px;
-
-
-
-background:
-
-
-rgba(255,255,255,.08);
+    text-align:center;
 
 
 
-border:
-
-
-1px solid rgba(255,255,255,.15);
+    border-radius:22px;
 
 
 
-backdrop-filter:
+    background:
 
-blur(15px);
-
-
-
-text-align:center;
+    rgba(255,255,255,.08);
 
 
 
-box-shadow:
+    border:
+
+    1px solid rgba(255,255,255,.15);
 
 
-0 10px 25px rgba(0,0,0,.3);
+
+    backdrop-filter:
+
+    blur(15px);
 
 
 
-transition:.3s;
-
+    transition:.3s;
 
 
 }
-
-
 
 
 
@@ -376,22 +356,17 @@ transition:.3s;
 .stat-card:hover{
 
 
-transform:
+    transform:
 
-translateY(-5px);
-
-
-
-box-shadow:
+    translateY(-4px);
 
 
-0 15px 35px rgba(150,120,255,.5);
+    box-shadow:
 
+    0 10px 25px rgba(150,120,255,.35);
 
 
 }
-
-
 
 
 
@@ -400,26 +375,283 @@ box-shadow:
 .stat-card span{
 
 
-display:block;
+    display:block;
 
 
-font-size:26px;
+    font-size:25px;
 
 
-font-weight:bold;
+    font-weight:bold;
 
 
 }
+
+
 
 
 
 .stat-card small{
 
 
-opacity:.7;
+    opacity:.65;
 
 
-font-size:12px;
+}
+
+
+
+
+
+
+
+
+/* =====================================
+        ACHIEVEMENTS
+===================================== */
+
+
+.achievements-box{
+
+
+    padding:20px;
+
+
+    border-radius:28px;
+
+
+    background:
+
+    rgba(255,255,255,.07);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.35);
+
+
+
+}
+
+
+
+
+.achievements-box h2{
+
+
+    margin:0 0 15px;
+
+
+    font-size:21px;
+
+
+}
+
+
+
+
+
+.achievements-list{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:12px;
+
+
+}
+
+
+
+
+
+.achievement{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    padding:12px;
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.achievement:hover{
+
+
+    transform:
+
+    translateX(5px);
+
+
+}
+
+
+
+
+
+
+
+.achievement-icon{
+
+
+    width:45px;
+
+    height:45px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    font-size:23px;
+
+
+}
+
+
+
+
+
+
+
+.achievement h3{
+
+
+    margin:0;
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+
+.achievement p{
+
+
+    margin:5px 0 0;
+
+
+    font-size:12px;
+
+
+    opacity:.7;
+
+
+}
+
+
+
+
+
+/* открыто */
+
+
+.achievement.unlocked{
+
+
+    border:
+
+    1px solid rgba(255,220,120,.5);
+
+
+
+    box-shadow:
+
+    0 0 25px rgba(255,210,80,.25);
+
+
+}
+
+
+
+
+
+.achievement.unlocked .achievement-icon{
+
+
+    background:
+
+    rgba(255,210,80,.15);
+
+
+
+    box-shadow:
+
+    0 0 20px #ffd45c;
+
+
+}
+
+
+
+
+
+
+
+/* закрыто */
+
+
+.achievement.locked{
+
+
+    opacity:.45;
+
+
+    filter:
+
+    grayscale(1);
 
 
 }
@@ -432,27 +664,24 @@ font-size:12px;
 
 
 
-/* ===== КНОПКИ ===== */
+/* =====================================
+        BUTTONS
+===================================== */
 
 
 .profile-actions{
 
 
-width:100%;
+    display:flex;
 
 
-display:flex;
+    flex-direction:column;
 
 
-flex-direction:column;
-
-
-gap:12px;
+    gap:12px;
 
 
 }
-
-
 
 
 
@@ -461,54 +690,49 @@ gap:12px;
 .profile-button{
 
 
-height:55px;
+    height:55px;
 
 
-border:none;
+    border:none;
 
 
-border-radius:28px;
-
-
-
-background:
-
-
-linear-gradient(
-135deg,
-rgba(155,124,255,.8),
-rgba(93,92,255,.8)
-);
+    border-radius:28px;
 
 
 
-color:white;
+    color:white;
 
 
-font-size:16px;
+    font-size:16px;
 
 
-font-weight:bold;
+    font-weight:bold;
 
 
-cursor:pointer;
-
-
-
-box-shadow:
-
-
-0 10px 30px rgba(120,100,255,.45);
+    cursor:pointer;
 
 
 
-transition:.3s;
+    background:
 
+    linear-gradient(
+        135deg,
+        #9b7cff,
+        #5d5cff
+    );
+
+
+
+    box-shadow:
+
+    0 10px 30px rgba(120,90,255,.45);
+
+
+
+    transition:.3s;
 
 
 }
-
-
 
 
 
@@ -517,23 +741,12 @@ transition:.3s;
 .profile-button:hover{
 
 
-transform:
+    transform:
 
-
-translateY(-3px);
-
-
-
-box-shadow:
-
-
-0 15px 40px rgba(150,120,255,.8);
-
+    translateY(-3px);
 
 
 }
-
-
 
 
 
@@ -542,44 +755,27 @@ box-shadow:
 .profile-button:active{
 
 
-transform:
+    transform:
 
-
-scale(.95);
-
+    scale(.95);
 
 
 }
 
 
 
-
-
-
-
-
-
-/* ===== КНОПКА ВХОДА ===== */
 
 
 .login-button{
 
 
-background:
+    background:
 
-
-linear-gradient(
-135deg,
-#ff9f7c,
-#ff5c8a
-);
-
-
-
-box-shadow:
-
-
-0 10px 30px rgba(255,90,140,.45);
+    linear-gradient(
+        135deg,
+        #ff9b7c,
+        #ff5c7a
+    );
 
 
 }
@@ -591,191 +787,42 @@ box-shadow:
 
 
 
-/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
+
+/* =====================================
+        MOBILE
+===================================== */
 
 
-.profile-page .bottom-nav{
+@media(max-width:400px){
 
 
-position:fixed;
+.profile-container{
 
-
-bottom:18px;
-
-
-left:50%;
-
-
-transform:translateX(-50%);
-
-
-
-width:350px;
-
-
-max-width:90%;
-
-
-height:72px;
-
-
-display:flex;
-
-
-justify-content:space-around;
-
-
-align-items:center;
-
-
-
-background:
-
-
-rgba(255,255,255,.07);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-border:
-
-
-1px solid rgba(255,255,255,.15);
-
-
-
-border-radius:30px;
-
-
-
-box-shadow:
-
-
-0 15px 40px rgba(0,0,0,.5);
-
-
+    width:92%;
 
 }
 
 
 
+.profile-name{
 
-
-
-.profile-page .nav-item{
-
-
-background:none;
-
-
-border:none;
-
-
-color:white;
-
-
-opacity:.55;
-
-
-font-size:22px;
-
-
-display:flex;
-
-
-flex-direction:column;
-
-
-align-items:center;
-
-
-gap:3px;
-
+    font-size:24px;
 
 }
 
 
 
-.profile-page .nav-item small{
+.profile-stats{
 
-
-font-size:11px;
-
+    gap:7px;
 
 }
 
 
 
-.profile-page .nav-item.active{
+.stat-card span{
 
-
-opacity:1;
-
-
-transform:
-
-
-translateY(-7px);
-
-
-}
-
-
-
-.profile-page .nav-item.active{
-
-
-filter:
-
-drop-shadow(0 0 10px white);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ===== АНИМАЦИЯ СТРАНИЦЫ ===== */
-
-
-@keyframes profileAppear{
-
-
-from{
-
-
-opacity:0;
-
-
-transform:
-
-translateY(40px);
-
-
-}
-
-
-
-to{
-
-
-opacity:1;
-
-
-transform:
-
-translateY(0);
-
+    font-size:22px;
 
 }
 
