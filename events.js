@@ -9,9 +9,12 @@ const cancelEvent = document.getElementById("cancelEvent");
 const eventList = document.getElementById("eventList");
 
 
+
 let events = JSON.parse(
     localStorage.getItem("memoraEvents")
 ) || [];
+
+
 
 
 
@@ -30,27 +33,45 @@ function showEvents(){
         let card = document.createElement("div");
 
 
-        card.className = "saved-event";
+
+        card.className = "event-card";
 
 
 
         card.innerHTML = `
 
+
         <h2>
+
         ${event.title}
+
         </h2>
 
 
+
         <p>
+
         ${event.text}
+
         </p>
 
 
-        <button onclick="deleteEvent(${index})">
+
+        <div class="event-date">
+
+        ${event.date || "Новое событие"}
+
+        </div>
+
+
+
+        <button class="event-delete" onclick="deleteEvent(${index})">
 
         Удалить
 
         </button>
+
+
 
         `;
 
@@ -64,6 +85,8 @@ function showEvents(){
 
 
 }
+
+
 
 
 
@@ -91,6 +114,7 @@ newEvent.onclick = ()=>{
 
 
 
+
 // отмена
 
 
@@ -104,6 +128,8 @@ cancelEvent.onclick = ()=>{
 
 
 };
+
+
 
 
 
@@ -144,9 +170,15 @@ saveEvent.onclick = ()=>{
 
         title:title,
 
-        text:text
+        text:text,
+
+
+        date:new Date().toLocaleDateString("ru-RU")
+
 
     });
+
+
 
 
 
@@ -164,9 +196,13 @@ saveEvent.onclick = ()=>{
 
 
 
-    document.getElementById("eventTitle").value = "";
 
-    document.getElementById("eventText").value = "";
+
+    document.getElementById("eventTitle").value="";
+
+
+    document.getElementById("eventText").value="";
+
 
 
 
@@ -176,6 +212,8 @@ saveEvent.onclick = ()=>{
 
 
     newEvent.classList.remove("hidden");
+
+
 
 
 
@@ -191,7 +229,6 @@ saveEvent.onclick = ()=>{
 
 
 
-// удалить событие
 
 
 function deleteEvent(index){
@@ -222,14 +259,13 @@ function deleteEvent(index){
 
 
 
-
 // ===== НАВИГАЦИЯ =====
 
 
 
 function goHome(){
 
-    window.location.href="index.html";
+window.location.href="index.html";
 
 }
 
@@ -237,7 +273,7 @@ function goHome(){
 
 function goCalendar(){
 
-    window.location.href="calendar.html";
+window.location.href="calendar.html";
 
 }
 
@@ -245,7 +281,7 @@ function goCalendar(){
 
 function goEvents(){
 
-    window.location.href="events.html";
+window.location.href="events.html";
 
 }
 
@@ -253,7 +289,7 @@ function goEvents(){
 
 function goSettings(){
 
-    window.location.href="settings.html";
+window.location.href="settings.html";
 
 }
 
@@ -262,8 +298,6 @@ function goSettings(){
 
 
 
-
-// запуск
 
 
 showEvents();
