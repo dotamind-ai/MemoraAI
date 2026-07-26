@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Memora Profile</title>
 
 
@@ -18,7 +19,6 @@
 </head>
 
 
-
 <body class="profile-page">
 
 
@@ -27,51 +27,19 @@
 
 
 
-    <!-- ПРОФИЛЬ -->
-
-    <div class="profile-card">
 
 
+    <!-- ЛОГОТИП MEMORA -->
 
-        <!-- КРУГЛАЯ КНОПКА MEMORA -->
-
-        <div 
-        class="memora-profile-logo"
-        id="profileMenuButton">
+    <div 
+    class="memora-profile-logo"
+    id="profileMenuButton">
 
 
 
-            <div class="logo-orbit orbit-a">
+        <div class="logo-letter">
 
-                <span></span>
-
-            </div>
-
-
-
-            <div class="logo-orbit orbit-b">
-
-                <span></span>
-
-            </div>
-
-
-
-            <div class="logo-orbit orbit-c">
-
-                <span></span>
-
-            </div>
-
-
-
-            <div class="logo-letter">
-
-                M
-
-            </div>
-
-
+            M
 
         </div>
 
@@ -79,31 +47,89 @@
 
 
 
+        <div class="logo-orbit orbit-a">
 
+            <span></span>
 
-        <!-- ИМЯ -->
-
-        <h1 
-        class="profile-name"
-        id="profileName">
-
-            Гость
-
-        </h1>
+        </div>
 
 
 
 
 
-        <p class="profile-status">
+        <div class="logo-orbit orbit-b">
 
-            ✨ Memory Keeper
+            <span></span>
 
-        </p>
+        </div>
+
+
+
+
+
+        <div class="logo-orbit orbit-c">
+
+            <span></span>
+
+        </div>
 
 
 
     </div>
+
+
+
+
+
+
+
+
+    <!-- АВАТАР -->
+
+
+    <div 
+    class="profile-avatar"
+    id="profileAvatar">
+
+
+        👤
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ИМЯ -->
+
+
+    <h1 
+    class="profile-name"
+    id="profileName">
+
+
+        Гость
+
+
+    </h1>
+
+
+
+
+
+    <p class="profile-status">
+
+
+        ✨ Memory Keeper
+
+
+    </p>
+
 
 
 
@@ -142,6 +168,8 @@
 
 
 
+
+
         <div class="stat-card">
 
 
@@ -160,6 +188,8 @@
 
 
         </div>
+
+
 
 
 
@@ -196,6 +226,9 @@
 
 
 
+    <!-- МЕНЮ БУДЕТ ОТКРЫВАТЬ ЛОГОТИП -->
+
+
 
 </div>
 
@@ -206,7 +239,8 @@
 
 
 
-<!-- ЗАТЕМНЕНИЕ -->
+
+<!-- Затемнение -->
 
 <div 
 class="profile-overlay"
@@ -230,21 +264,13 @@ id="profileMenu">
 
 
 
-    <button 
-    id="editProfile">
+
+
+    <button id="editProfile">
+
 
         ✏️ Edit Profile
 
-    </button>
-
-
-
-
-
-    <button 
-    onclick="goSettings()">
-
-        ⚙ Settings
 
     </button>
 
@@ -252,22 +278,31 @@ id="profileMenu">
 
 
 
-    <button 
-    id="loginButton">
+
+    <button onclick="goSettings()">
+
+
+        ⚙️ Settings
+
+
+    </button>
+
+
+
+
+
+
+
+    <button id="loginButton">
+
 
         🔐 Login / Register
 
-    </button>
-
-
-
-
-
-    <button>
-
-        🏆 Achievements
 
     </button>
+
+
+
 
 
 
@@ -282,10 +317,12 @@ id="profileMenu">
 
 
 
-<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
+
+
 
 
 
@@ -296,6 +333,7 @@ onclick="goHome()">
 
 
 🏠
+
 
 <small>
 
@@ -320,6 +358,7 @@ onclick="goCalendar()">
 
 📅
 
+
 <small>
 
 Calendar
@@ -343,6 +382,7 @@ onclick="goEvents()">
 
 ✨
 
+
 <small>
 
 Events
@@ -365,6 +405,7 @@ onclick="goProfile()">
 
 
 👤
+
 
 <small>
 
@@ -395,5 +436,6 @@ Profile
 
 
 </body>
+
 
 </html>
