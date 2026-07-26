@@ -611,10 +611,8 @@ function goEvents(){
 }
 
 
-function goSettings(){
-
-    window.location.href="settings.html";
-
+function goProfile(){
+    window.location.href="profile.html";
 }
 
 
