@@ -1,137 +1,32 @@
-/* =====================================
-        MEMORA PROFILE JS
-===================================== */
+console.log("MEMORA PROFILE");
 
 
-console.log("MEMORA PROFILE READY");
 
+const openMenu =
+document.getElementById("openProfileMenu");
 
 
+const modal =
+document.getElementById("profileModal");
 
-// ===============================
-// Элементы
-// ===============================
 
+const closeMenu =
+document.getElementById("closeProfileMenu");
 
-const profileName =
-document.getElementById("profileName");
 
 
-const memoryStat =
-document.getElementById("memoryStat");
 
 
-const eventStat =
-document.getElementById("eventStat");
+if(openMenu){
 
 
-const favoriteStat =
-document.getElementById("favoriteStat");
+openMenu.onclick = ()=>{
 
 
-const editProfile =
-document.getElementById("editProfile");
+modal.classList.remove("hidden");
 
 
-const loginButton =
-document.getElementById("loginButton");
-
-
-
-
-
-
-
-
-// ===============================
-// Загрузка статистики
-// ===============================
-
-
-function loadProfileStats(){
-
-
-
-    // Память из app.js
-
-    let memories = JSON.parse(
-
-        localStorage.getItem("memora")
-
-    ) || [];
-
-
-
-
-    // События из events.js
-
-    let events = JSON.parse(
-
-        localStorage.getItem("memoraEvents")
-
-    ) || [];
-
-
-
-
-
-
-    let favorites = 0;
-
-
-
-
-    events.forEach(event=>{
-
-
-        if(event.favorite){
-
-            favorites++;
-
-        }
-
-
-    });
-
-
-
-
-
-
-    if(memoryStat){
-
-        memoryStat.innerText =
-        memories.length;
-
-
-    }
-
-
-
-
-
-
-    if(eventStat){
-
-        eventStat.innerText =
-        events.length;
-
-
-    }
-
-
-
-
-
-
-    if(favoriteStat){
-
-        favoriteStat.innerText =
-        favorites;
-
-
-    }
-
+};
 
 
 }
@@ -142,29 +37,16 @@ function loadProfileStats(){
 
 
 
+if(closeMenu){
 
 
-// ===============================
-// Имя пользователя
-// ===============================
+closeMenu.onclick = ()=>{
 
 
-function loadUser(){
+modal.classList.add("hidden");
 
 
-    let user =
-
-    localStorage.getItem("memoraUser");
-
-
-
-    if(user && profileName){
-
-
-        profileName.innerText = user;
-
-
-    }
+};
 
 
 }
@@ -175,52 +57,19 @@ function loadUser(){
 
 
 
+if(modal){
 
 
-// ===============================
-// Изменение профиля
-// ===============================
+modal.onclick = (e)=>{
 
 
-if(editProfile){
+if(e.target === modal){
 
 
-editProfile.onclick = ()=>{
+modal.classList.add("hidden");
 
 
-    let name = prompt(
-
-        "Введите имя:",
-
-        profileName.innerText
-
-    );
-
-
-
-
-
-    if(name && name.trim() !== ""){
-
-
-        localStorage.setItem(
-
-            "memoraUser",
-
-            name.trim()
-
-        );
-
-
-
-        profileName.innerText =
-
-        name.trim();
-
-
-
-    }
-
+}
 
 
 };
@@ -235,97 +84,101 @@ editProfile.onclick = ()=>{
 
 
 
-
-// ===============================
-// Регистрация (пока заглушка)
-// ===============================
+function updateStats(){
 
 
-if(loginButton){
-
-
-loginButton.onclick = ()=>{
-
-
-alert(
-
-"Регистрация будет подключена после запуска сервера"
-
-);
+let memories =
+JSON.parse(localStorage.getItem("memora"))
+|| [];
 
 
 
-};
+let events =
+JSON.parse(localStorage.getItem("memoraEvents"))
+|| [];
+
+
+
+
+let favorites =
+memories.filter(
+item=>item.favorite
+).length
++
+events.filter(
+item=>item.favorite
+).length;
+
+
+
+
+
+if(document.getElementById("memoryStat"))
+
+document.getElementById("memoryStat").innerText =
+memories.length;
+
+
+
+
+
+if(document.getElementById("eventStat"))
+
+document.getElementById("eventStat").innerText =
+events.length;
+
+
+
+
+
+if(document.getElementById("favoriteStat"))
+
+document.getElementById("favoriteStat").innerText =
+favorites;
+
 
 
 }
 
 
 
-
-
-
-
-
-
-// ===============================
-// Навигация
-// ===============================
 
 
 function goHome(){
 
-
 window.location.href="index.html";
 
-
 }
-
-
 
 
 
 function goCalendar(){
 
-
 window.location.href="calendar.html";
 
-
 }
-
-
 
 
 
 function goEvents(){
 
-
 window.location.href="events.html";
 
-
 }
-
-
 
 
 
 function goProfile(){
 
-
 window.location.href="profile.html";
 
-
 }
-
-
 
 
 
 function goSettings(){
 
-
-window.location.href="profile.html";
-
+window.location.href="settings.html";
 
 }
 
@@ -333,15 +186,4 @@ window.location.href="profile.html";
 
 
 
-
-
-
-// ===============================
-// Старт
-// ===============================
-
-
-loadProfileStats();
-
-
-loadUser();
+updateStats();
