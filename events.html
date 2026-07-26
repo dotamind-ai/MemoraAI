@@ -12,7 +12,6 @@
 
 <link rel="stylesheet" href="events.css?v=51">
 
-
 </head>
 
 
@@ -26,47 +25,45 @@
 <div class="memora-logo">
 
 
-<div class="orbit orbit1">
-<span></span>
+    <div class="orbit orbit1">
+        <span></span>
+    </div>
+
+
+    <div class="orbit orbit2">
+        <span></span>
+    </div>
+
+
+    <div class="orbit orbit3">
+        <span></span>
+    </div>
+
+
+    <div class="sun-logo">
+
+        <b>M</b>
+
+    </div>
+
+
 </div>
 
 
-<div class="orbit orbit2">
-<span></span>
-</div>
-
-
-<div class="orbit orbit3">
-<span></span>
-</div>
-
-
-
-<div class="sun-logo">
-
-<b>M</b>
-
-</div>
-
-
-</div>
 
 
 
 
 
-
-
-
-<!-- СОБЫТИЯ -->
-
+<!-- ОСНОВНОЙ ЭКРАН -->
 
 <section class="events-container">
 
 
+
 <h1>
 
-✨ События
+События
 
 </h1>
 
@@ -74,15 +71,20 @@
 
 
 
-<!-- КНОПКА -->
+
+<!-- КНОПКА НОВОЕ СОБЫТИЕ -->
+
 
 <button id="newEvent" class="new-event">
 
 
 <span class="event-icon"></span>
 
+
 <span>
+
 Новое событие
+
 </span>
 
 
@@ -94,83 +96,11 @@
 
 
 
+
 <!-- ФОРМА -->
 
 
-<!-- ФОРМА СОЗДАНИЯ СОБЫТИЯ -->
-
 <div id="eventForm" class="event-form hidden">
-
-
-    <input
-        id="eventTitle"
-        type="text"
-        placeholder="Название события"
-    >
-
-
-
-    <textarea
-        id="eventText"
-        placeholder="Описание события"
-    ></textarea>
-
-
-
-
-
-    <select id="eventType">
-
-
-        <option value="idea">
-            ✦ Идея
-        </option>
-
-
-        <option value="goal">
-            ◎ Цель
-        </option>
-
-
-        <option value="note">
-            ▤ Заметка
-        </option>
-
-
-        <option value="project">
-            ◈ Проект
-        </option>
-
-
-        <option value="personal">
-            ◉ Личное
-        </option>
-
-
-    </select>
-
-
-
-
-
-    <button id="saveEvent">
-
-        Сохранить
-
-    </button>
-
-
-
-
-
-    <button id="cancelEvent">
-
-        Отмена
-
-    </button>
-
-
-</div>
 
 
 
@@ -189,35 +119,63 @@ placeholder="Название события"
 
 
 <textarea
-    <select id="eventType">
-
-<option value="idea">
-✦ Идея
-</option>
-
-<option value="goal">
-◎ Цель
-</option>
-
-<option value="note">
-▤ Заметка
-</option>
-
-<option value="project">
-◈ Проект
-</option>
-
-<option value="personal">
-◉ Личное
-</option>
-
-</select>
 
 id="eventText"
 
 placeholder="Описание события"
 
 ></textarea>
+
+
+
+
+
+
+
+<select id="eventType">
+
+
+<option value="idea">
+
+✦ Идея
+
+</option>
+
+
+
+<option value="goal">
+
+◎ Цель
+
+</option>
+
+
+
+<option value="note">
+
+▤ Заметка
+
+</option>
+
+
+
+<option value="project">
+
+◈ Проект
+
+</option>
+
+
+
+<option value="personal">
+
+◉ Личное
+
+</option>
+
+
+</select>
+
 
 
 
@@ -244,6 +202,9 @@ placeholder="Описание события"
 
 
 
+
+
+
 </div>
 
 
@@ -253,8 +214,8 @@ placeholder="Описание события"
 
 
 
+<!-- СПИСОК СОБЫТИЙ -->
 
-<!-- СПИСОК -->
 
 <div id="eventList">
 
@@ -274,7 +235,8 @@ placeholder="Описание события"
 
 
 
-<!-- НАВИГАЦИЯ -->
+
+<!-- НИЖНЯЯ НАВИГАЦИЯ -->
 
 
 <nav class="bottom-nav">
@@ -356,7 +318,6 @@ placeholder="Описание события"
 
 
 
-
 <button class="nav-item" onclick="goSettings()">
 
 
@@ -389,7 +350,7 @@ placeholder="Описание события"
 
 
 
-<script src="events.js?v=101"></script>
+<script src="events.js?v=102"></script>
 
 
 
