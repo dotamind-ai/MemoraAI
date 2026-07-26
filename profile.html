@@ -18,6 +18,7 @@
 </head>
 
 
+
 <body class="profile-page">
 
 
@@ -26,32 +27,47 @@
 
 
 
-    <!-- Аватар -->
+    <div class="profile-card">
 
-    <div class="profile-avatar">
 
-        👤
+
+        <!-- Аватар -->
+
+        <div class="profile-avatar" id="profileAvatar">
+
+            👤
+
+        </div>
+
+
+
+
+
+        <!-- Имя -->
+
+        <h1 
+        class="profile-name"
+        id="profileName">
+
+            Гость
+
+        </h1>
+
+
+
+
+
+        <p class="profile-status">
+
+            ✨ Хранитель воспоминаний
+
+        </p>
+
+
 
     </div>
 
 
-
-
-    <!-- Имя -->
-
-    <h1 class="profile-name">
-
-        Гость
-
-    </h1>
-
-
-
-    <p class="profile-status">
-
-        Хранитель воспоминаний
-
-    </p>
 
 
 
@@ -140,36 +156,53 @@
 
 
 
-    <!-- Кнопки -->
+
+    <!-- Действия -->
 
 
     <div class="profile-actions">
 
 
 
-        <button class="profile-button">
+        <button 
+        class="profile-button"
+        id="editProfile">
+
 
             ✏️ Изменить профиль
 
+
         </button>
 
 
 
 
 
-        <button class="profile-button">
+
+
+        <button 
+        class="profile-button"
+        onclick="goSettings()">
+
 
             ⚙️ Настройки
 
+
         </button>
 
 
 
 
 
-        <button class="profile-button login-button">
+
+
+        <button 
+        class="profile-button login-button"
+        id="loginButton">
+
 
             🔐 Войти / Регистрация
+
 
         </button>
 
@@ -181,7 +214,10 @@
 
 
 
+
 </div>
+
+
 
 
 
@@ -217,6 +253,8 @@ onclick="goHome()">
 
 
 
+
+
 <button 
 class="nav-item"
 onclick="goCalendar()">
@@ -232,6 +270,8 @@ onclick="goCalendar()">
 
 
 </button>
+
+
 
 
 
@@ -257,6 +297,8 @@ onclick="goEvents()">
 
 
 
+
+
 <button 
 class="nav-item active"
 onclick="goProfile()">
@@ -272,6 +314,7 @@ onclick="goProfile()">
 
 
 </button>
+
 
 
 
