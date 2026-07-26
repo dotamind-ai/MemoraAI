@@ -1991,3 +1991,72 @@ translateY(0);
 
 
 }
+
+/* ПРОВЕРКА КАРТОЧЕК MEMORA */
+
+.event-card{
+
+display:block !important;
+
+margin-top:15px !important;
+
+padding:20px !important;
+
+border-radius:25px !important;
+
+background:rgba(120,90,255,.25) !important;
+
+border:2px solid rgba(255,255,255,.3) !important;
+
+color:white !important;
+
+box-shadow:
+0 0 30px rgba(140,100,255,.6) !important;
+
+}
+
+
+.event-card h2{
+
+font-size:22px !important;
+
+margin:0 0 10px !important;
+
+}
+
+
+.event-card p{
+
+font-size:15px !important;
+
+opacity:.8;
+
+}
+
+
+.event-date{
+
+font-size:12px;
+
+opacity:.6;
+
+margin-top:10px;
+
+}
+
+
+.event-delete{
+
+margin-top:15px;
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:20px;
+
+background:#ff5c7a;
+
+color:white;
+
+}
