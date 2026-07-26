@@ -2517,3 +2517,31 @@ translateY(0);
 
 
 }
+.event-card.idea{
+    border-left:5px solid #ffd45c !important;
+    box-shadow:0 0 30px #ffd45c !important;
+}
+
+
+.event-card.goal{
+    border-left:5px solid #63ff9a !important;
+    box-shadow:0 0 30px #63ff9a !important;
+}
+
+
+.event-card.note{
+    border-left:5px solid #65b7ff !important;
+    box-shadow:0 0 30px #65b7ff !important;
+}
+
+
+.event-card.project{
+    border-left:5px solid #b58cff !important;
+    box-shadow:0 0 30px #b58cff !important;
+}
+
+
+.event-card.personal{
+    border-left:5px solid #ff7ca8 !important;
+    box-shadow:0 0 30px #ff7ca8 !important;
+}
