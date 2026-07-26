@@ -2060,3 +2060,82 @@ background:#ff5c7a;
 color:white;
 
 }
+.event-card{
+
+border-left:5px solid white;
+
+}
+
+
+
+/* ИДЕЯ */
+
+.event-card.idea{
+
+border-left-color:#ffd966;
+
+}
+
+
+
+/* ЦЕЛЬ */
+
+.event-card.goal{
+
+border-left-color:#7cff9b;
+
+}
+
+
+
+/* ЗАМЕТКА */
+
+.event-card.note{
+
+border-left-color:#70b7ff;
+
+}
+
+
+
+/* ПРОЕКТ */
+
+.event-card.project{
+
+border-left-color:#b58cff;
+
+}
+
+
+
+/* ЛИЧНОЕ */
+
+.event-card.personal{
+
+border-left-color:#ff7ca8;
+
+}
+
+
+
+
+
+#eventType{
+
+width:100%;
+
+margin-top:15px;
+
+height:45px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.2);
+
+background:rgba(255,255,255,.1);
+
+color:white;
+
+padding:0 15px;
+
+}
