@@ -2139,3 +2139,77 @@ color:white;
 padding:0 15px;
 
 }
+
+/* ===== ЦВЕТА КАРТОЧЕК ПО ТИПУ ===== */
+
+
+.event-card{
+
+border-left:5px solid rgba(255,255,255,.4);
+
+}
+
+
+
+
+.event-card.idea{
+
+border-left-color:#ffd45c;
+
+box-shadow:
+
+0 10px 35px rgba(255,212,92,.25);
+
+}
+
+
+
+
+.event-card.goal{
+
+border-left-color:#63ff9a;
+
+box-shadow:
+
+0 10px 35px rgba(99,255,154,.25);
+
+}
+
+
+
+
+.event-card.note{
+
+border-left-color:#65b7ff;
+
+box-shadow:
+
+0 10px 35px rgba(101,183,255,.25);
+
+}
+
+
+
+
+.event-card.project{
+
+border-left-color:#b58cff;
+
+box-shadow:
+
+0 10px 35px rgba(181,140,255,.3);
+
+}
+
+
+
+
+.event-card.personal{
+
+border-left-color:#ff7ca8;
+
+box-shadow:
+
+0 10px 35px rgba(255,124,168,.3);
+
+}
