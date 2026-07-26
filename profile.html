@@ -7,7 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Memora Profile</title>
+
 
 
 <link rel="stylesheet" href="style.css">
@@ -18,7 +20,10 @@
 </head>
 
 
+
 <body class="profile-page">
+
+
 
 
 
@@ -26,19 +31,25 @@
 
 
 
-    <!-- PROFILE CARD -->
+
+
+
+    <!-- Карточка профиля -->
 
 
     <div class="profile-card">
 
 
+
         <div 
-        class="profile-avatar"
+        class="profile-avatar" 
         id="profileAvatar">
 
             👤
 
         </div>
+
+
 
 
 
@@ -49,6 +60,8 @@
             Гость
 
         </h1>
+
+
 
 
 
@@ -66,49 +79,83 @@
 
 
 
-    <!-- STATISTICS -->
+
+
+
+
+    <!-- Статистика -->
 
 
     <div class="profile-stats">
 
 
+
         <div class="stat-card">
+
 
             <span id="memoryStat">
+
                 0
+
             </span>
 
+
             <small>
+
                 Память
+
             </small>
+
 
         </div>
 
 
 
+
+
+
+
         <div class="stat-card">
+
 
             <span id="eventStat">
+
                 0
+
             </span>
 
+
             <small>
+
                 События
+
             </small>
+
 
         </div>
 
 
 
+
+
+
+
         <div class="stat-card">
 
+
             <span id="favoriteStat">
+
                 0
+
             </span>
 
+
             <small>
+
                 Избранное
+
             </small>
+
 
         </div>
 
@@ -122,101 +169,60 @@
 
 
 
-    <!-- MEMORA BUTTON -->
 
 
-    <button 
-    class="memora-menu-button"
-    id="openProfileMenu">
 
 
-        <div class="mini-logo">
+
+
+    <!-- MEMORA CORE BUTTON -->
+
+
+    <div 
+    class="memora-core" 
+    id="memoraCore">
+
+
+
+        <div class="orbit o1">
+
+            <span></span>
+
+        </div>
+
+
+
+
+
+        <div class="orbit o2">
+
+            <span></span>
+
+        </div>
+
+
+
+
+
+        <div class="orbit o3">
+
+            <span></span>
+
+        </div>
+
+
+
+
+
+
+
+        <div class="core-letter">
 
             M
 
         </div>
 
 
-    </button>
-
-
-
-
-
-
-
-
-    <!-- ACHIEVEMENTS -->
-
-
-    <div class="achievements-box">
-
-
-        <h2>
-
-            🏆 Achievements
-
-        </h2>
-
-
-
-        <div class="achievement unlocked">
-
-
-            <span>
-
-                🧠
-
-            </span>
-
-
-            <div>
-
-                <h3>
-                    Memory Keeper
-                </h3>
-
-
-                <p>
-                    Created first memory
-                </p>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="achievement locked">
-
-
-            <span>
-
-                🔒
-
-            </span>
-
-
-            <div>
-
-                <h3>
-                    Story Collector
-                </h3>
-
-
-                <p>
-                    Create 10 memories
-                </p>
-
-
-            </div>
-
-
-        </div>
-
-
 
     </div>
 
@@ -227,63 +233,30 @@
 
 
 
-
-</div>
-
-
-
+    <div 
+    class="profile-menu hidden" 
+    id="profileMenu">
 
 
-
-
-
-
-<!-- PROFILE MENU -->
-
-
-<div 
-class="profile-modal hidden"
-id="profileModal">
-
-
-    <div class="profile-modal-card">
 
 
 
         <button 
-        class="modal-close"
-        id="closeProfileMenu">
+        id="editProfile">
 
-            ×
-
-        </button>
-
-
-
-        <h2>
-
-            ✨ Memora Menu
-
-        </h2>
-
-
-
-
-
-        <button class="modal-item">
-
-            👤 Edit Profile
+            ✏️ Edit Profile
 
         </button>
 
 
 
 
+
+
         <button 
-        class="modal-item"
         onclick="goSettings()">
 
-            ⚙ Settings
+            ⚙️ Settings
 
         </button>
 
@@ -291,7 +264,9 @@ id="profileModal">
 
 
 
-        <button class="modal-item">
+
+        <button 
+        id="loginButton">
 
             🔐 Login / Register
 
@@ -301,17 +276,8 @@ id="profileModal">
 
 
 
-        <button class="modal-item">
 
-            🎨 Appearance
-
-        </button>
-
-
-
-
-
-        <button class="modal-item">
+        <button>
 
             🏆 Achievements
 
@@ -321,15 +287,14 @@ id="profileModal">
 
 
 
-        <button class="modal-item">
-
-            ☁ Cloud Sync
-
-        </button>
-
-
-
     </div>
+
+
+
+
+
+
+
 
 
 </div>
@@ -342,10 +307,16 @@ id="profileModal">
 
 
 
-<!-- NAVIGATION -->
+
+
+
+<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
+
+
+
 
 
 <button 
@@ -353,14 +324,24 @@ class="nav-item"
 onclick="goHome()">
 
 
+
 🏠
 
+
 <small>
+
 Главная
+
 </small>
 
 
 </button>
+
+
+
+
+
+
 
 
 
@@ -369,14 +350,24 @@ class="nav-item"
 onclick="goCalendar()">
 
 
+
 📅
 
+
 <small>
+
 Календарь
+
 </small>
 
 
 </button>
+
+
+
+
+
+
 
 
 
@@ -385,14 +376,24 @@ class="nav-item"
 onclick="goEvents()">
 
 
+
 ✨
 
+
 <small>
+
 События
+
 </small>
 
 
 </button>
+
+
+
+
+
+
 
 
 
@@ -401,14 +402,21 @@ class="nav-item active"
 onclick="goProfile()">
 
 
+
 👤
 
+
 <small>
+
 Профиль
+
 </small>
 
 
 </button>
+
+
+
 
 
 </nav>
@@ -418,7 +426,12 @@ onclick="goProfile()">
 
 
 
+
+
+
 <script src="profile.js"></script>
+
+
 
 
 </body>
