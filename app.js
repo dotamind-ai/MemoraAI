@@ -1028,9 +1028,9 @@ window.location.href="favorites.html";
 
 
 
-function goSettings(){
-
-window.location.href="settings.html";
+function goProfile(){
+    window.location.href="profile.html";
+}
 
 }
 function goHome(){
