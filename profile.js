@@ -3,69 +3,53 @@
 ===================================== */
 
 
-console.log("MEMORA PROFILE VERSION 2");
+console.log("MEMORA PROFILE READY");
 
 
 
 
+// ===============================
+// ЭЛЕМЕНТЫ
+// ===============================
 
-// =========================
-// ЛОГОТИП - ОТКРЫТИЕ МЕНЮ
-// =========================
 
-
-const profileButton = 
+const logoButton = 
 document.getElementById("profileMenuButton");
 
 
-const profileMenu = 
+const menu = 
 document.getElementById("profileMenu");
 
 
-const profileOverlay = 
+const overlay = 
 document.getElementById("profileOverlay");
 
 
 
 
 
-if(profileButton){
+
+// ===============================
+// ОТКРЫТИЕ МЕНЮ
+// ===============================
 
 
-    profileButton.onclick = ()=>{
+if(logoButton){
 
 
-        profileMenu.classList.add("active");
-
-        profileOverlay.classList.add("active");
-
-
-    };
+    logoButton.addEventListener(
+        "click",
+        ()=>{
 
 
-}
+            menu.classList.add("active");
 
 
+            overlay.classList.add("active");
 
 
-
-
-
-// закрытие окна
-
-
-if(profileOverlay){
-
-
-    profileOverlay.onclick = ()=>{
-
-
-        profileMenu.classList.remove("active");
-
-        profileOverlay.classList.remove("active");
-
-
-    };
+        }
+    );
 
 
 }
@@ -76,60 +60,88 @@ if(profileOverlay){
 
 
 
+// ===============================
+// ЗАКРЫТИЕ МЕНЮ
+// ===============================
 
-// =========================
+
+if(overlay){
+
+
+    overlay.addEventListener(
+        "click",
+        ()=>{
+
+
+            menu.classList.remove("active");
+
+
+            overlay.classList.remove("active");
+
+
+        }
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
 // КНОПКИ МЕНЮ
-// =========================
+// ===============================
 
 
 
-const menuButtons = 
-document.querySelectorAll(".profile-menu button");
+const editProfile =
+document.getElementById("editProfile");
 
 
 
-
-
-if(menuButtons.length){
-
-
-    menuButtons[0].onclick = ()=>{
-
-
-        alert("Редактирование профиля скоро будет доступно");
-
-
-    };
+const loginButton =
+document.getElementById("loginButton");
 
 
 
 
-    menuButtons[1].onclick = ()=>{
 
 
-        window.location.href="settings.html";
+if(editProfile){
+
+
+    editProfile.onclick = ()=>{
+
+
+        alert(
+        "Edit Profile will be available soon"
+        );
 
 
     };
 
 
-
-
-    menuButtons[2].onclick = ()=>{
-
-
-        alert("Регистрация появится после запуска сервера");
-
-
-    };
+}
 
 
 
 
-    menuButtons[3].onclick = ()=>{
 
 
-        alert("Achievements coming soon");
+if(loginButton){
+
+
+    loginButton.onclick = ()=>{
+
+
+        alert(
+        "Login system will start after server launch"
+        );
 
 
     };
@@ -145,13 +157,14 @@ if(menuButtons.length){
 
 
 
-// =========================
+// ===============================
 // СТАТИСТИКА
-// =========================
+// ===============================
 
 
 
-function loadProfileStats(){
+function updateStats(){
+
 
 
     let memories = JSON.parse(
@@ -173,7 +186,12 @@ function loadProfileStats(){
 
 
 
+
+
     let favorites = 0;
+
+
+
 
 
 
@@ -211,17 +229,17 @@ function loadProfileStats(){
 
 
 
-    const memoryStat =
+    const memory =
     document.getElementById("memoryStat");
 
 
 
-    const eventStat =
+    const event =
     document.getElementById("eventStat");
 
 
 
-    const favoriteStat =
+    const favorite =
     document.getElementById("favoriteStat");
 
 
@@ -229,9 +247,10 @@ function loadProfileStats(){
 
 
 
-    if(memoryStat){
 
-        memoryStat.innerText =
+    if(memory){
+
+        memory.innerText =
         memories.length;
 
     }
@@ -239,9 +258,9 @@ function loadProfileStats(){
 
 
 
-    if(eventStat){
+    if(event){
 
-        eventStat.innerText =
+        event.innerText =
         events.length;
 
     }
@@ -250,12 +269,13 @@ function loadProfileStats(){
 
 
 
-    if(favoriteStat){
+    if(favorite){
 
-        favoriteStat.innerText =
+        favorite.innerText =
         favorites;
 
     }
+
 
 
 }
@@ -268,13 +288,14 @@ function loadProfileStats(){
 
 
 
-// =========================
+// ===============================
 // ИМЯ ПОЛЬЗОВАТЕЛЯ
-// =========================
+// ===============================
 
 
 
-function loadUserName(){
+function loadName(){
+
 
 
     const name =
@@ -288,13 +309,15 @@ function loadUserName(){
 
 
 
-    if(profileName && name){
+
+    if(name && profileName){
 
 
-        profileName.innerText=name;
+        profileName.innerText = name;
 
 
     }
+
 
 
 }
@@ -307,9 +330,9 @@ function loadUserName(){
 
 
 
-// =========================
+// ===============================
 // НАВИГАЦИЯ
-// =========================
+// ===============================
 
 
 
@@ -361,7 +384,6 @@ function goProfile(){
 
 
 
-
 function goSettings(){
 
 
@@ -378,9 +400,9 @@ function goSettings(){
 
 
 
-// =========================
+// ===============================
 // ЗАПУСК
-// =========================
+// ===============================
 
 
 
@@ -389,11 +411,12 @@ document.addEventListener(
 ()=>{
 
 
-    loadProfileStats();
+    updateStats();
 
 
-    loadUserName();
+    loadName();
 
 
 }
+
 );
