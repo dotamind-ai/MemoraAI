@@ -12,7 +12,6 @@
 
 <link rel="stylesheet" href="events.css?v=67">
 
-
 </head>
 
 
@@ -20,12 +19,49 @@
 
 
 
-<div class="events-container">
+<!-- ЛОГО -->
+
+<div class="memora-logo">
+
+    <div class="orbit orbit1">
+        <span></span>
+    </div>
+
+    <div class="orbit orbit2">
+        <span></span>
+    </div>
+
+    <div class="orbit orbit3">
+        <span></span>
+    </div>
+
+
+    <div class="sun-logo">
+
+        <b>M</b>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<section class="events-container">
+
 
 
 <h1>
+
 События
+
 </h1>
+
+
 
 
 
@@ -33,7 +69,13 @@
 
 <button id="newEvent" class="new-event">
 
-✦ Новое событие
+<span class="event-icon">
+
+✦
+
+</span>
+
+Новое событие
 
 </button>
 
@@ -43,7 +85,10 @@
 
 
 
+
+
 <div id="eventForm" class="event-form hidden">
+
 
 
 
@@ -64,6 +109,8 @@ placeholder="Название события"
 
 
 
+
+
 <textarea
 
 id="eventText"
@@ -78,6 +125,17 @@ placeholder="Описание события"
 
 
 
+
+<div class="date-box">
+
+
+<label>
+
+📅 Выбрать дату
+
+</label>
+
+
 <input
 
 id="eventDate"
@@ -85,6 +143,10 @@ id="eventDate"
 type="date"
 
 >
+
+
+</div>
+
 
 
 
@@ -102,11 +164,13 @@ type="date"
 </option>
 
 
+
 <option value="goal">
 
 ◎ Цель
 
 </option>
+
 
 
 <option value="note">
@@ -116,6 +180,7 @@ type="date"
 </option>
 
 
+
 <option value="project">
 
 ◈ Проект
@@ -123,11 +188,13 @@ type="date"
 </option>
 
 
+
 <option value="personal">
 
 ◉ Личное
 
 </option>
+
 
 
 </select>
@@ -150,7 +217,6 @@ type="date"
 
 
 
-
 <button id="cancelEvent">
 
 Отмена
@@ -162,9 +228,7 @@ type="date"
 
 
 
-
 </div>
-
 
 
 
@@ -176,7 +240,6 @@ type="date"
 
 <div id="eventList">
 
-
 </div>
 
 
@@ -185,8 +248,7 @@ type="date"
 
 
 
-
-</div>
+</section>
 
 
 
@@ -199,35 +261,104 @@ type="date"
 <nav class="bottom-nav">
 
 
-<button onclick="goHome()">
+
+<button class="nav-item" onclick="goHome()">
+
+
+<span>
 
 🏠
 
+</span>
+
+
+<small>
+
+Главная
+
+</small>
+
+
 </button>
 
 
 
-<button onclick="goCalendar()">
+
+
+
+
+<button class="nav-item" onclick="goCalendar()">
+
+
+<span>
 
 📅
 
+</span>
+
+
+<small>
+
+Календарь
+
+</small>
+
+
 </button>
 
 
 
-<button onclick="goEvents()">
+
+
+
+
+<button class="nav-item active" onclick="goEvents()">
+
+
+<span>
 
 ✨
 
+</span>
+
+
+<small>
+
+События
+
+</small>
+
+
 </button>
 
 
 
-<button onclick="goSettings()">
+
+
+
+
+<button class="nav-item" onclick="goSettings()">
+
+
+<span>
 
 ⚙️
 
+</span>
+
+
+<small>
+
+Настройки
+
+</small>
+
+
 </button>
+
+
+
+
 
 
 </nav>
@@ -240,7 +371,7 @@ type="date"
 
 
 
-<script src="events.js?v=111"></script>
+<script src="events.js?v=108"></script>
 
 
 </body>
