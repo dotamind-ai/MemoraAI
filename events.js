@@ -1,4 +1,5 @@
-console.log("MEMORA EVENTS VERSION 100");
+console.log("MEMORA EVENTS VERSION 103");
+
 
 
 const newEvent = document.getElementById("newEvent");
@@ -10,6 +11,8 @@ const saveEvent = document.getElementById("saveEvent");
 const cancelEvent = document.getElementById("cancelEvent");
 
 const eventList = document.getElementById("eventList");
+
+
 
 
 
@@ -33,11 +36,15 @@ function showEvents(){
     }
 
 
+
     eventList.innerHTML = "";
 
 
 
+
+
     events.forEach((event,index)=>{
+
 
 
         const card = document.createElement("div");
@@ -49,40 +56,119 @@ function showEvents(){
 
 
 
+
+
+
+        let icon = "✦";
+
+
+
+        if(event.type === "goal"){
+
+            icon = "◎";
+
+        }
+
+
+        if(event.type === "note"){
+
+            icon = "▤";
+
+        }
+
+
+        if(event.type === "project"){
+
+            icon = "◈";
+
+        }
+
+
+        if(event.type === "personal"){
+
+            icon = "◉";
+
+        }
+
+
+
+
+
+
+
         card.innerHTML = `
 
 
-        <h2>
-        ${event.title}
-        </h2>
+
+        <div class="event-top">
+
+
+            <span class="event-symbol">
+
+                ${icon}
+
+            </span>
 
 
 
-        <p>
-        ${event.text}
-        </p>
+            <h2>
 
+                ${event.title}
 
+            </h2>
 
-        <div class="event-date">
-
-        ${event.date || "Сегодня"}
 
         </div>
 
 
 
 
+
+
+        <p>
+
+            ${event.text}
+
+        </p>
+
+
+
+
+
+
+
+        <div class="event-date">
+
+            ${event.date || "Сегодня"}
+
+        </div>
+
+
+
+
+
+
         <button 
+
         class="event-delete"
+
         onclick="deleteEvent(${index})">
 
-        Удалить
+
+            Удалить
+
 
         </button>
 
 
+
+
+
         `;
+
+
+
+
 
 
 
@@ -90,11 +176,15 @@ function showEvents(){
 
 
 
+
     });
 
 
 
+
+
 }
+
 
 
 
@@ -109,6 +199,7 @@ function showEvents(){
 if(newEvent){
 
 
+
 newEvent.onclick = ()=>{
 
 
@@ -119,6 +210,7 @@ newEvent.onclick = ()=>{
 
 
 };
+
 
 
 }
@@ -137,6 +229,7 @@ newEvent.onclick = ()=>{
 if(cancelEvent){
 
 
+
 cancelEvent.onclick = ()=>{
 
 
@@ -147,6 +240,7 @@ cancelEvent.onclick = ()=>{
 
 
 };
+
 
 
 }
@@ -165,28 +259,43 @@ cancelEvent.onclick = ()=>{
 if(saveEvent){
 
 
+
 saveEvent.onclick = ()=>{
 
 
 
     const title =
+
     document.getElementById("eventTitle").value;
 
 
 
+
+
     const text =
+
     document.getElementById("eventText").value;
 
 
 
 
+
+
+
     const typeElement =
+
     document.getElementById("eventType");
 
 
 
+
+
+
     const type =
+
     typeElement ? typeElement.value : "idea";
+
+
 
 
 
@@ -210,20 +319,27 @@ saveEvent.onclick = ()=>{
     events.push({
 
 
+
         title:title,
+
 
 
         text:text,
 
 
+
         type:type,
 
 
+
         date:new Date()
+
         .toLocaleDateString("ru-RU")
 
 
+
     });
+
 
 
 
@@ -245,10 +361,16 @@ saveEvent.onclick = ()=>{
 
 
 
-    document.getElementById("eventTitle").value="";
 
 
-    document.getElementById("eventText").value="";
+    document.getElementById("eventTitle").value = "";
+
+
+
+    document.getElementById("eventText").value = "";
+
+
+
 
 
 
@@ -258,7 +380,10 @@ saveEvent.onclick = ()=>{
     eventForm.classList.add("hidden");
 
 
+
     newEvent.classList.remove("hidden");
+
+
 
 
 
@@ -269,7 +394,9 @@ saveEvent.onclick = ()=>{
 
 
 
+
 };
+
 
 
 }
@@ -293,6 +420,7 @@ function deleteEvent(index){
 
 
 
+
     localStorage.setItem(
 
         "memoraEvents",
@@ -303,7 +431,9 @@ function deleteEvent(index){
 
 
 
+
     showEvents();
+
 
 
 }
@@ -317,7 +447,6 @@ function deleteEvent(index){
 
 
 // ===== НАВИГАЦИЯ =====
-
 
 
 function goHome(){
@@ -356,6 +485,9 @@ function goSettings(){
 
 
 
+
+
+// запуск
 
 
 showEvents();
