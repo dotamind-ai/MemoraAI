@@ -1,3 +1,5 @@
+console.log("MEMORA EVENTS VERSION 99");
+
 const newEvent = document.getElementById("newEvent");
 
 const eventForm = document.getElementById("eventForm");
@@ -17,10 +19,15 @@ let events = JSON.parse(
 
 
 
-
+// ===== ПОКАЗ СОБЫТИЙ =====
 
 
 function showEvents(){
+
+
+    if(!eventList){
+        return;
+    }
 
 
     eventList.innerHTML = "";
@@ -30,8 +37,8 @@ function showEvents(){
     events.forEach((event,index)=>{
 
 
-        let card = document.createElement("div");
 
+        const card = document.createElement("div");
 
 
         card.className = "event-card";
@@ -40,38 +47,30 @@ function showEvents(){
 
         card.innerHTML = `
 
-
         <h2>
-
         ${event.title}
-
         </h2>
 
 
-
         <p>
-
         ${event.text}
-
         </p>
-
 
 
         <div class="event-date">
 
-        ${event.date || "Новое событие"}
+        ${event.date || "Сегодня"}
 
         </div>
 
 
 
-        <button class="event-delete" onclick="deleteEvent(${index})">
+        <button class="event-delete"
+        onclick="deleteEvent(${index})">
 
         Удалить
 
         </button>
-
-
 
         `;
 
@@ -84,6 +83,7 @@ function showEvents(){
     });
 
 
+
 }
 
 
@@ -93,8 +93,10 @@ function showEvents(){
 
 
 
+// ===== ОТКРЫТЬ ФОРМУ =====
 
-// открыть форму
+
+if(newEvent){
 
 
 newEvent.onclick = ()=>{
@@ -109,13 +111,20 @@ newEvent.onclick = ()=>{
 };
 
 
+}
 
 
 
 
 
 
-// отмена
+
+
+
+// ===== ОТМЕНА =====
+
+
+if(cancelEvent){
 
 
 cancelEvent.onclick = ()=>{
@@ -130,6 +139,7 @@ cancelEvent.onclick = ()=>{
 };
 
 
+}
 
 
 
@@ -137,18 +147,24 @@ cancelEvent.onclick = ()=>{
 
 
 
-// сохранить
+
+
+// ===== СОХРАНЕНИЕ =====
+
+
+if(saveEvent){
 
 
 saveEvent.onclick = ()=>{
 
 
-    let title =
+
+    const title =
     document.getElementById("eventTitle").value;
 
 
 
-    let text =
+    const text =
     document.getElementById("eventText").value;
 
 
@@ -168,12 +184,15 @@ saveEvent.onclick = ()=>{
 
     events.push({
 
+
         title:title,
+
 
         text:text,
 
 
-        date:new Date().toLocaleDateString("ru-RU")
+        date:new Date()
+        .toLocaleDateString("ru-RU")
 
 
     });
@@ -191,6 +210,7 @@ saveEvent.onclick = ()=>{
         JSON.stringify(events)
 
     );
+
 
 
 
@@ -216,7 +236,6 @@ saveEvent.onclick = ()=>{
 
 
 
-
     showEvents();
 
 
@@ -224,14 +243,21 @@ saveEvent.onclick = ()=>{
 };
 
 
+}
 
 
 
 
 
+
+
+
+
+// ===== УДАЛЕНИЕ =====
 
 
 function deleteEvent(index){
+
 
 
     events.splice(index,1);
@@ -265,7 +291,7 @@ function deleteEvent(index){
 
 function goHome(){
 
-window.location.href="index.html";
+    window.location.href="index.html";
 
 }
 
@@ -273,7 +299,7 @@ window.location.href="index.html";
 
 function goCalendar(){
 
-window.location.href="calendar.html";
+    window.location.href="calendar.html";
 
 }
 
@@ -281,7 +307,7 @@ window.location.href="calendar.html";
 
 function goEvents(){
 
-window.location.href="events.html";
+    window.location.href="events.html";
 
 }
 
@@ -289,7 +315,7 @@ window.location.href="events.html";
 
 function goSettings(){
 
-window.location.href="settings.html";
+    window.location.href="settings.html";
 
 }
 
@@ -298,6 +324,8 @@ window.location.href="settings.html";
 
 
 
+
+// запуск
 
 
 showEvents();
