@@ -3618,3 +3618,122 @@ scale(1.02) !important;
 transition:.3s !important;
 
 }
+/* ================================= */
+/* MEMORA FINAL CARD ANIMATION */
+/* ================================= */
+
+
+#eventList .event-card{
+
+    opacity:1 !important;
+
+    visibility:visible !important;
+
+    animation:
+
+    memoraCardAppear .6s cubic-bezier(.22,1,.36,1) both !important;
+
+    transform-origin:center !important;
+
+}
+
+
+
+
+@keyframes memoraCardAppear{
+
+
+    0%{
+
+
+        opacity:0 !important;
+
+
+        transform:
+
+        translateY(40px)
+        scale(.9) !important;
+
+
+        filter:blur(12px);
+
+
+    }
+
+
+
+    50%{
+
+
+        opacity:1 !important;
+
+
+        transform:
+
+        translateY(-8px)
+        scale(1.03) !important;
+
+
+        filter:blur(0);
+
+
+    }
+
+
+
+    100%{
+
+
+        opacity:1 !important;
+
+
+        transform:
+
+        translateY(0)
+        scale(1) !important;
+
+
+    }
+
+
+}
+
+
+
+
+
+/* задержка карточек */
+
+#eventList .event-card:nth-child(1){
+
+    animation-delay:.05s !important;
+
+}
+
+
+#eventList .event-card:nth-child(2){
+
+    animation-delay:.12s !important;
+
+}
+
+
+#eventList .event-card:nth-child(3){
+
+    animation-delay:.18s !important;
+
+}
+
+
+#eventList .event-card:nth-child(4){
+
+    animation-delay:.24s !important;
+
+}
+
+
+#eventList .event-card:nth-child(5){
+
+    animation-delay:.30s !important;
+
+}
