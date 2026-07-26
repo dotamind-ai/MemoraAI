@@ -1397,3 +1397,125 @@ scale(1.2);
 
 
 }
+/* ===== СВЕТЯЩАЯСЯ ЗВЕЗДА MEMORA ===== */
+
+.event-icon{
+
+position:relative;
+
+width:22px;
+
+height:22px;
+
+display:block;
+
+
+}
+
+
+/* форма звезды */
+
+.event-icon::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+left:50%;
+
+top:50%;
+
+
+width:14px;
+
+height:14px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#fff4a8,
+#ffd45c
+);
+
+
+
+transform:
+
+translate(-50%,-50%)
+rotate(45deg);
+
+
+
+clip-path:
+
+polygon(
+50% 0%,
+61% 38%,
+100% 50%,
+61% 62%,
+50% 100%,
+39% 62%,
+0% 50%,
+39% 38%
+);
+
+
+
+box-shadow:
+
+0 0 10px #ffe58a,
+
+0 0 25px rgba(255,220,120,.8);
+
+
+
+animation:
+
+starGlow 2s infinite;
+
+
+}
+
+
+
+
+
+@keyframes starGlow{
+
+
+0%,100%{
+
+transform:
+
+translate(-50%,-50%)
+scale(1)
+rotate(45deg);
+
+
+filter:brightness(1);
+
+
+}
+
+
+50%{
+
+transform:
+
+translate(-50%,-50%)
+scale(1.25)
+rotate(45deg);
+
+
+filter:brightness(1.5);
+
+
+}
+
+
+}
