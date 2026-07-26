@@ -1,52 +1,46 @@
-console.log("MEMORA PROFILE");
+/* =====================================
+        MEMORA PROFILE JS
+===================================== */
 
 
-
-const openMenu =
-document.getElementById("openProfileMenu");
-
-
-const modal =
-document.getElementById("profileModal");
-
-
-const closeMenu =
-document.getElementById("closeProfileMenu");
+console.log("MEMORA PROFILE VERSION 2");
 
 
 
 
 
-if(openMenu){
+// =========================
+// ЛОГОТИП - ОТКРЫТИЕ МЕНЮ
+// =========================
 
 
-openMenu.onclick = ()=>{
+const profileButton = 
+document.getElementById("profileMenuButton");
 
 
-modal.classList.remove("hidden");
+const profileMenu = 
+document.getElementById("profileMenu");
 
 
-};
-
-
-}
-
-
+const profileOverlay = 
+document.getElementById("profileOverlay");
 
 
 
 
 
-if(closeMenu){
+if(profileButton){
 
 
-closeMenu.onclick = ()=>{
+    profileButton.onclick = ()=>{
 
 
-modal.classList.add("hidden");
+        profileMenu.classList.add("active");
+
+        profileOverlay.classList.add("active");
 
 
-};
+    };
 
 
 }
@@ -57,128 +51,322 @@ modal.classList.add("hidden");
 
 
 
-if(modal){
+// закрытие окна
 
 
-modal.onclick = (e)=>{
+if(profileOverlay){
 
 
-if(e.target === modal){
+    profileOverlay.onclick = ()=>{
 
 
-modal.classList.add("hidden");
+        profileMenu.classList.remove("active");
+
+        profileOverlay.classList.remove("active");
 
 
-}
-
-
-};
-
-
-}
-
-
-
-
-
-
-
-
-function updateStats(){
-
-
-let memories =
-JSON.parse(localStorage.getItem("memora"))
-|| [];
-
-
-
-let events =
-JSON.parse(localStorage.getItem("memoraEvents"))
-|| [];
-
-
-
-
-let favorites =
-memories.filter(
-item=>item.favorite
-).length
-+
-events.filter(
-item=>item.favorite
-).length;
-
-
-
-
-
-if(document.getElementById("memoryStat"))
-
-document.getElementById("memoryStat").innerText =
-memories.length;
-
-
-
-
-
-if(document.getElementById("eventStat"))
-
-document.getElementById("eventStat").innerText =
-events.length;
-
-
-
-
-
-if(document.getElementById("favoriteStat"))
-
-document.getElementById("favoriteStat").innerText =
-favorites;
-
+    };
 
 
 }
 
 
+
+
+
+
+
+
+// =========================
+// КНОПКИ МЕНЮ
+// =========================
+
+
+
+const menuButtons = 
+document.querySelectorAll(".profile-menu button");
+
+
+
+
+
+if(menuButtons.length){
+
+
+    menuButtons[0].onclick = ()=>{
+
+
+        alert("Редактирование профиля скоро будет доступно");
+
+
+    };
+
+
+
+
+    menuButtons[1].onclick = ()=>{
+
+
+        window.location.href="settings.html";
+
+
+    };
+
+
+
+
+    menuButtons[2].onclick = ()=>{
+
+
+        alert("Регистрация появится после запуска сервера");
+
+
+    };
+
+
+
+
+    menuButtons[3].onclick = ()=>{
+
+
+        alert("Achievements coming soon");
+
+
+    };
+
+
+}
+
+
+
+
+
+
+
+
+
+// =========================
+// СТАТИСТИКА
+// =========================
+
+
+
+function loadProfileStats(){
+
+
+    let memories = JSON.parse(
+
+        localStorage.getItem("memora")
+
+    ) || [];
+
+
+
+
+    let events = JSON.parse(
+
+        localStorage.getItem("memoraEvents")
+
+    ) || [];
+
+
+
+
+
+    let favorites = 0;
+
+
+
+    memories.forEach(item=>{
+
+
+        if(item.favorite){
+
+            favorites++;
+
+        }
+
+
+    });
+
+
+
+
+
+    events.forEach(item=>{
+
+
+        if(item.favorite){
+
+            favorites++;
+
+        }
+
+
+    });
+
+
+
+
+
+
+
+    const memoryStat =
+    document.getElementById("memoryStat");
+
+
+
+    const eventStat =
+    document.getElementById("eventStat");
+
+
+
+    const favoriteStat =
+    document.getElementById("favoriteStat");
+
+
+
+
+
+
+    if(memoryStat){
+
+        memoryStat.innerText =
+        memories.length;
+
+    }
+
+
+
+
+    if(eventStat){
+
+        eventStat.innerText =
+        events.length;
+
+    }
+
+
+
+
+
+    if(favoriteStat){
+
+        favoriteStat.innerText =
+        favorites;
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+// =========================
+// ИМЯ ПОЛЬЗОВАТЕЛЯ
+// =========================
+
+
+
+function loadUserName(){
+
+
+    const name =
+    localStorage.getItem("memoraUser");
+
+
+
+    const profileName =
+    document.getElementById("profileName");
+
+
+
+
+    if(profileName && name){
+
+
+        profileName.innerText=name;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+// =========================
+// НАВИГАЦИЯ
+// =========================
 
 
 
 function goHome(){
 
-window.location.href="index.html";
+
+    window.location.href="app.html";
+
 
 }
+
+
 
 
 
 function goCalendar(){
 
-window.location.href="calendar.html";
+
+    window.location.href="calendar.html";
+
 
 }
+
+
 
 
 
 function goEvents(){
 
-window.location.href="events.html";
+
+    window.location.href="events.html";
+
 
 }
+
+
 
 
 
 function goProfile(){
 
-window.location.href="profile.html";
+
+    window.location.href="profile.html";
+
 
 }
+
+
+
 
 
 
 function goSettings(){
 
-window.location.href="settings.html";
+
+    window.location.href="settings.html";
+
 
 }
 
@@ -186,4 +374,26 @@ window.location.href="settings.html";
 
 
 
-updateStats();
+
+
+
+
+// =========================
+// ЗАПУСК
+// =========================
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    loadProfileStats();
+
+
+    loadUserName();
+
+
+}
+);
