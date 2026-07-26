@@ -1,5 +1,4 @@
-console.log("MEMORA EVENTS VERSION 105");
-
+console.log("MEMORA EVENTS VERSION 106");
 
 
 const newEvent = document.getElementById("newEvent");
@@ -13,7 +12,6 @@ const cancelEvent = document.getElementById("cancelEvent");
 const eventList = document.getElementById("eventList");
 
 
-
 let editIndex = null;
 
 
@@ -25,15 +23,17 @@ let events = JSON.parse(
 
 
 
-// добавляем новые поля старым событиям
+// добавляем старым событиям favorite
 
 events.forEach(event=>{
+
 
     if(event.favorite === undefined){
 
         event.favorite = false;
 
     }
+
 
 });
 
@@ -42,6 +42,8 @@ events.forEach(event=>{
 
 
 
+
+// ===== ПОКАЗ СОБЫТИЙ =====
 
 
 function showEvents(){
@@ -69,6 +71,8 @@ function showEvents(){
     })
 
     .forEach((event,index)=>{
+
+
 
 
 
@@ -135,7 +139,6 @@ function showEvents(){
             </span>
 
 
-
             <h2>
 
                 ${event.title}
@@ -144,6 +147,7 @@ function showEvents(){
 
 
         </div>
+
 
 
 
@@ -161,9 +165,17 @@ function showEvents(){
 
 
 
+
+
         <div class="event-date">
 
-            ${event.date || "Сегодня"}
+
+            Создано: ${event.date || "Сегодня"}
+
+            <br>
+
+            📅 ${event.eventDate || "Дата не выбрана"}
+
 
         </div>
 
@@ -172,7 +184,12 @@ function showEvents(){
 
 
 
+
+
+
         <div class="event-actions">
+
+
 
 
 
@@ -200,10 +217,11 @@ function showEvents(){
             onclick="editEvent(${index})">
 
 
-                ✏️
+                ✎
 
 
             </button>
+
 
 
 
@@ -225,7 +243,9 @@ function showEvents(){
 
 
 
+
         </div>
+
 
 
 
@@ -254,10 +274,11 @@ function showEvents(){
 
 
 
-// открыть форму
+// ===== ОТКРЫТЬ ФОРМУ =====
 
 
 if(newEvent){
+
 
 
 newEvent.onclick = ()=>{
@@ -286,10 +307,11 @@ newEvent.onclick = ()=>{
 
 
 
-// отмена
+// ===== ОТМЕНА =====
 
 
 if(cancelEvent){
+
 
 
 cancelEvent.onclick = ()=>{
@@ -318,10 +340,11 @@ cancelEvent.onclick = ()=>{
 
 
 
-// сохранить
+// ===== СОХРАНЕНИЕ =====
 
 
 if(saveEvent){
+
 
 
 saveEvent.onclick = ()=>{
@@ -352,16 +375,22 @@ saveEvent.onclick = ()=>{
 
 
 
+    const eventDate =
+
+    document.getElementById("eventDate").value;
+
+
+
+
 
 
 
     if(title.trim() === ""){
 
-
         return;
 
-
     }
+
 
 
 
@@ -385,12 +414,16 @@ saveEvent.onclick = ()=>{
         events[editIndex].type = type;
 
 
+        events[editIndex].eventDate = eventDate;
+
+
 
         editIndex = null;
 
 
 
     }
+
 
 
 
@@ -418,9 +451,13 @@ saveEvent.onclick = ()=>{
             favorite:false,
 
 
+            eventDate:eventDate,
+
+
             date:new Date()
 
             .toLocaleDateString("ru-RU")
+
 
 
         });
@@ -428,6 +465,9 @@ saveEvent.onclick = ()=>{
 
 
     }
+
+
+
 
 
 
@@ -448,11 +488,13 @@ saveEvent.onclick = ()=>{
 
 
 
+    document.getElementById("eventTitle").value="";
 
-    document.getElementById("eventTitle").value = "";
+
+    document.getElementById("eventText").value="";
 
 
-    document.getElementById("eventText").value = "";
+    document.getElementById("eventDate").value="";
 
 
 
@@ -475,7 +517,6 @@ saveEvent.onclick = ()=>{
 
 
 
-
 };
 
 
@@ -490,7 +531,7 @@ saveEvent.onclick = ()=>{
 
 
 
-// ⭐ закрепить
+// ===== ⭐ ЗАКРЕПИТЬ =====
 
 
 function favoriteEvent(index){
@@ -520,6 +561,7 @@ function favoriteEvent(index){
     showEvents();
 
 
+
 }
 
 
@@ -530,7 +572,7 @@ function favoriteEvent(index){
 
 
 
-// ✏️ редактировать
+// ===== ✎ РЕДАКТИРОВАТЬ =====
 
 
 function editEvent(index){
@@ -572,6 +614,13 @@ function editEvent(index){
 
 
 
+    document.getElementById("eventDate").value =
+
+    event.eventDate || "";
+
+
+
+
 
 
     eventForm.classList.remove("hidden");
@@ -591,7 +640,7 @@ function editEvent(index){
 
 
 
-// удалить
+// ===== УДАЛЕНИЕ =====
 
 
 function deleteEvent(index){
@@ -599,6 +648,7 @@ function deleteEvent(index){
 
 
     events.splice(index,1);
+
 
 
 
@@ -616,7 +666,9 @@ function deleteEvent(index){
 
 
 
+
     showEvents();
+
 
 
 }
@@ -629,7 +681,7 @@ function deleteEvent(index){
 
 
 
-// навигация
+// ===== НАВИГАЦИЯ =====
 
 
 function goHome(){
@@ -639,6 +691,7 @@ function goHome(){
 }
 
 
+
 function goCalendar(){
 
     window.location.href="calendar.html";
@@ -646,11 +699,13 @@ function goCalendar(){
 }
 
 
+
 function goEvents(){
 
     window.location.href="events.html";
 
 }
+
 
 
 function goSettings(){
