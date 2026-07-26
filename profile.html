@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Memora Profile</title>
 
 
@@ -23,19 +24,31 @@
 
 
 
+
+
 <div class="profile-container">
 
+
+
+
+
+    <!-- PROFILE CARD -->
 
 
     <div class="profile-card">
 
 
 
-        <!-- Аватар -->
+        <!-- Avatar -->
 
-        <div class="profile-avatar" id="profileAvatar">
+
+        <div 
+        class="profile-avatar" 
+        id="profileAvatar">
+
 
             👤
+
 
         </div>
 
@@ -43,13 +56,18 @@
 
 
 
-        <!-- Имя -->
+
+
+        <!-- Name -->
+
 
         <h1 
         class="profile-name"
         id="profileName">
 
+
             Гость
+
 
         </h1>
 
@@ -57,11 +75,19 @@
 
 
 
+
+
+        <!-- Status -->
+
+
         <p class="profile-status">
+
 
             ✨ Хранитель воспоминаний
 
+
         </p>
+
 
 
 
@@ -74,10 +100,14 @@
 
 
 
-    <!-- Статистика -->
+
+    <!-- STATISTICS -->
+
 
 
     <div class="profile-stats">
+
+
 
 
 
@@ -99,6 +129,8 @@
 
 
         </div>
+
+
 
 
 
@@ -127,6 +159,8 @@
 
 
 
+
+
         <div class="stat-card">
 
 
@@ -148,6 +182,8 @@
 
 
 
+
+
     </div>
 
 
@@ -157,10 +193,239 @@
 
 
 
-    <!-- Действия -->
+
+    <!-- ACHIEVEMENTS -->
+
+
+    <div class="achievements-box">
+
+
+
+        <h2>
+
+
+            🏆 Achievements
+
+
+        </h2>
+
+
+
+
+
+
+        <div class="achievements-list">
+
+
+
+
+
+            <div class="achievement unlocked">
+
+
+
+                <span class="achievement-icon">
+
+
+                    🧠
+
+
+                </span>
+
+
+
+
+                <div>
+
+
+                    <h3>
+
+                        Memory Keeper
+
+                    </h3>
+
+
+                    <p>
+
+                        Created your first memory
+
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="achievement locked">
+
+
+
+                <span class="achievement-icon">
+
+
+                    🔒
+
+
+                </span>
+
+
+
+
+                <div>
+
+
+                    <h3>
+
+                        Story Collector
+
+                    </h3>
+
+
+                    <p>
+
+                        Create 10 memories
+
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="achievement locked">
+
+
+
+                <span class="achievement-icon">
+
+
+                    🔒
+
+
+                </span>
+
+
+
+
+                <div>
+
+
+                    <h3>
+
+                        Memory Master
+
+                    </h3>
+
+
+                    <p>
+
+                        Create 50 memories
+
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="achievement locked">
+
+
+
+                <span class="achievement-icon">
+
+
+                    🔒
+
+
+                </span>
+
+
+
+
+                <div>
+
+
+                    <h3>
+
+                        Archive Master
+
+                    </h3>
+
+
+                    <p>
+
+                        Build your archive
+
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ACTION BUTTONS -->
+
 
 
     <div class="profile-actions">
+
+
 
 
 
@@ -169,10 +434,13 @@
         id="editProfile">
 
 
+
             ✏️ Изменить профиль
 
 
+
         </button>
+
 
 
 
@@ -185,10 +453,13 @@
         onclick="goSettings()">
 
 
+
             ⚙️ Настройки
 
 
+
         </button>
+
 
 
 
@@ -201,14 +472,21 @@
         id="loginButton">
 
 
+
             🔐 Войти / Регистрация
+
 
 
         </button>
 
 
 
+
+
+
     </div>
+
+
 
 
 
@@ -225,51 +503,34 @@
 
 
 
+<!-- BOTTOM NAVIGATION -->
 
-<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
 
 
 
-<button 
-class="nav-item"
-onclick="goHome()">
 
 
-🏠
-
-<small>
-
-Главная
-
-</small>
-
-
-</button>
+    <button 
+    class="nav-item"
+    onclick="goHome()">
 
 
 
+        🏠
+
+
+        <small>
+
+            Главная
+
+        </small>
 
 
 
-
-<button 
-class="nav-item"
-onclick="goCalendar()">
-
-
-📅
-
-<small>
-
-Календарь
-
-</small>
-
-
-</button>
+    </button>
 
 
 
@@ -277,43 +538,81 @@ onclick="goCalendar()">
 
 
 
-<button 
-class="nav-item"
-onclick="goEvents()">
 
 
-✨
-
-<small>
-
-События
-
-</small>
-
-
-</button>
+    <button 
+    class="nav-item"
+    onclick="goCalendar()">
 
 
 
+        📅
+
+
+        <small>
+
+            Календарь
+
+        </small>
+
+
+
+    </button>
 
 
 
 
-<button 
-class="nav-item active"
-onclick="goProfile()">
 
 
-👤
-
-<small>
-
-Профиль
-
-</small>
 
 
-</button>
+
+    <button 
+    class="nav-item"
+    onclick="goEvents()">
+
+
+
+        ✨
+
+
+        <small>
+
+            События
+
+        </small>
+
+
+
+    </button>
+
+
+
+
+
+
+
+
+
+    <button 
+    class="nav-item active"
+    onclick="goProfile()">
+
+
+
+        👤
+
+
+        <small>
+
+            Профиль
+
+        </small>
+
+
+
+    </button>
+
 
 
 
@@ -332,5 +631,6 @@ onclick="goProfile()">
 
 
 </body>
+
 
 </html>
