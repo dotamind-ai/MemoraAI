@@ -3485,3 +3485,136 @@ transform:translateY(0) scale(1);
     box-shadow:0 0 25px rgba(255,124,168,.4) !important;
 
 }
+/* ===== MEMORA CARD OPEN PREMIUM ANIMATION ===== */
+
+
+#eventList .event-card{
+
+    opacity:1 !important;
+
+    visibility:visible !important;
+
+    animation:
+
+    memoraCardOpen .5s cubic-bezier(.22,1,.36,1) forwards !important;
+
+    transform-origin:center center !important;
+
+}
+
+
+
+
+@keyframes memoraCardOpen{
+
+
+    0%{
+
+        opacity:0 !important;
+
+        transform:
+
+        translateY(35px)
+        scale(.90) !important;
+
+
+        filter:blur(10px) !important;
+
+    }
+
+
+
+    60%{
+
+
+        opacity:1 !important;
+
+
+        transform:
+
+        translateY(-6px)
+        scale(1.03) !important;
+
+
+        filter:blur(0) !important;
+
+
+    }
+
+
+
+    100%{
+
+
+        opacity:1 !important;
+
+
+        transform:
+
+        translateY(0)
+        scale(1) !important;
+
+
+        filter:blur(0) !important;
+
+
+    }
+
+
+}
+
+
+
+
+/* появление по очереди */
+
+
+#eventList .event-card:nth-child(1){
+
+animation-delay:.05s !important;
+
+}
+
+
+#eventList .event-card:nth-child(2){
+
+animation-delay:.12s !important;
+
+}
+
+
+#eventList .event-card:nth-child(3){
+
+animation-delay:.18s !important;
+
+}
+
+
+#eventList .event-card:nth-child(4){
+
+animation-delay:.24s !important;
+
+}
+
+
+#eventList .event-card:nth-child(5){
+
+animation-delay:.30s !important;
+
+}
+
+
+/* лёгкий эффект при наведении */
+
+
+#eventList .event-card:hover{
+
+transform:
+
+translateY(-5px)
+scale(1.02) !important;
+
+
+transition:.3s !important;
+
+}
