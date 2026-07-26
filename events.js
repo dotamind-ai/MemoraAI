@@ -1,26 +1,55 @@
-console.log("MEMORA EVENTS VERSION 112");
+/* =====================================
+        MEMORA EVENTS JS V5
+===================================== */
 
 
-const newEvent = document.getElementById("newEvent");
+console.log("MEMORA EVENTS VERSION 5");
+
+
+
+// ЭЛЕМЕНТЫ
+
+const newEventBtn = document.getElementById("newEvent");
+
 const eventForm = document.getElementById("eventForm");
-const saveEvent = document.getElementById("saveEvent");
-const cancelEvent = document.getElementById("cancelEvent");
+
+const saveEventBtn = document.getElementById("saveEvent");
+
+const cancelEventBtn = document.getElementById("cancelEvent");
+
 const eventList = document.getElementById("eventList");
+
+
+
+const titleInput = document.getElementById("eventTitle");
+
+const textInput = document.getElementById("eventText");
+
+const typeInput = document.getElementById("eventType");
+
+const dateInput = document.getElementById("eventDate");
+
 
 
 let editIndex = null;
 
 
+
 let events = JSON.parse(
-    localStorage.getItem("memoraEvents")
+
+localStorage.getItem("memoraEvents")
+
 ) || [];
 
 
 
 
+
+
 // ===============================
-// Сохранение в память
+// СОХРАНЕНИЕ
 // ===============================
+
 
 function saveStorage(){
 
@@ -36,30 +65,30 @@ function saveStorage(){
 
 
 
+
 // ===============================
-// Иконки типов
+// ИКОНКИ
 // ===============================
+
 
 function getIcon(type){
 
-    switch(type){
+    const icons = {
 
-        case "goal":
-            return "◎";
+        idea:"✦",
 
-        case "note":
-            return "▤";
+        goal:"◎",
 
-        case "project":
-            return "◈";
+        note:"▤",
 
-        case "personal":
-            return "◉";
+        project:"◈",
 
-        default:
-            return "✦";
+        personal:"◉"
 
-    }
+    };
+
+
+    return icons[type] || "✦";
 
 }
 
@@ -69,41 +98,41 @@ function getIcon(type){
 
 
 
+
 // ===============================
-// Показ карточек
+// ПОКАЗ СОБЫТИЙ
 // ===============================
 
-function showEvents(){
+
+function renderEvents(){
 
 
-    if(!eventList){
-
-        return;
-
-    }
+    if(!eventList) return;
 
 
 
-    eventList.innerHTML = "";
+    eventList.innerHTML="";
 
 
 
     events.forEach((event,index)=>{
 
 
-        const card = document.createElement("div");
+
+        const card=document.createElement("div");
+
 
 
         card.className =
-        "event-card " + (event.type || "idea");
+        "event-card " + 
+        (event.type || "idea");
 
 
 
         card.innerHTML = `
 
 
-        <button class="card-star"
-        onclick="favoriteEvent(${index})">
+        <button class="card-star">
 
         ${event.favorite ? "★" : "☆"}
 
@@ -121,8 +150,11 @@ function showEvents(){
             </span>
 
 
+
             <h2>
+
             ${event.title}
+
             </h2>
 
 
@@ -131,14 +163,11 @@ function showEvents(){
 
 
 
-
         <p>
 
-        ${event.text}
+        ${event.text || "Без описания"}
 
         </p>
-
-
 
 
 
@@ -152,14 +181,10 @@ function showEvents(){
 
 
 
-
-
         <div class="event-actions">
 
 
-            <button 
-            class="event-edit"
-            onclick="editEvent(${index})">
+            <button class="event-edit">
 
             ✎
 
@@ -167,9 +192,7 @@ function showEvents(){
 
 
 
-            <button
-            class="event-delete"
-            onclick="deleteEvent(${index})">
+            <button class="event-delete">
 
             🗑
 
@@ -179,8 +202,108 @@ function showEvents(){
         </div>
 
 
-
         `;
+
+
+
+
+
+
+        // избранное
+
+        card.querySelector(".card-star")
+        .onclick=()=>{
+
+
+            event.favorite =
+            !event.favorite;
+
+
+            saveStorage();
+
+            renderEvents();
+
+
+        };
+
+
+
+
+
+
+        // редактирование
+
+        card.querySelector(".event-edit")
+        .onclick=()=>{
+
+
+            editIndex=index;
+
+
+
+            if(titleInput)
+            titleInput.value=event.title;
+
+
+
+            if(textInput)
+            textInput.value=event.text;
+
+
+
+            if(typeInput)
+            typeInput.value=event.type;
+
+
+
+            if(dateInput)
+            dateInput.value=event.eventDate;
+
+
+
+            if(eventForm)
+            eventForm.classList.remove("hidden");
+
+
+
+            if(newEventBtn)
+            newEventBtn.classList.add("hidden");
+
+
+
+            if(saveEventBtn)
+            saveEventBtn.innerText="Обновить";
+
+
+        };
+
+
+
+
+
+
+
+
+        // удаление
+
+
+        card.querySelector(".event-delete")
+        .onclick=()=>{
+
+
+            events.splice(index,1);
+
+
+            saveStorage();
+
+
+            renderEvents();
+
+
+        };
+
+
+
 
 
 
@@ -203,25 +326,31 @@ function showEvents(){
 
 
 // ===============================
-// Открыть форму
+// ОТКРЫТИЕ ФОРМЫ
 // ===============================
 
-if(newEvent){
+
+if(newEventBtn){
 
 
-    newEvent.onclick = ()=>{
+newEventBtn.onclick=()=>{
 
 
-        editIndex = null;
+    editIndex=null;
 
 
-        eventForm.classList.remove("hidden");
+    if(saveEventBtn)
+    saveEventBtn.innerText="Сохранить";
 
 
-        newEvent.classList.add("hidden");
+    if(eventForm)
+    eventForm.classList.remove("hidden");
 
 
-    };
+    newEventBtn.classList.add("hidden");
+
+
+};
 
 
 }
@@ -236,22 +365,33 @@ if(newEvent){
 
 
 // ===============================
-// Отмена
+// ОТМЕНА
 // ===============================
 
-if(cancelEvent){
+
+if(cancelEventBtn){
 
 
-    cancelEvent.onclick = ()=>{
+cancelEventBtn.onclick=()=>{
 
 
-        eventForm.classList.add("hidden");
+    editIndex=null;
 
 
-        newEvent.classList.remove("hidden");
+    clearForm();
 
 
-    };
+
+    if(eventForm)
+    eventForm.classList.add("hidden");
+
+
+    if(newEventBtn)
+    newEventBtn.classList.remove("hidden");
+
+
+
+};
 
 
 }
@@ -264,52 +404,34 @@ if(cancelEvent){
 
 
 
-
 // ===============================
-// Сохранение события
+// СОХРАНЕНИЕ СОБЫТИЯ
 // ===============================
 
-if(saveEvent){
+
+if(saveEventBtn){
 
 
-saveEvent.onclick = ()=>{
-
-
-    const titleElement =
-    document.getElementById("eventTitle");
-
-
-    const textElement =
-    document.getElementById("eventText");
-
-
-    const typeElement =
-    document.getElementById("eventType");
-
-
-    const dateElement =
-    document.getElementById("eventDate");
-
-
+saveEventBtn.onclick=()=>{
 
 
     const title =
-    titleElement ? titleElement.value : "";
+    titleInput?.value.trim() || "";
 
 
 
     const text =
-    textElement ? textElement.value : "";
+    textInput?.value.trim() || "";
 
 
 
     const type =
-    typeElement ? typeElement.value : "idea";
+    typeInput?.value || "idea";
 
 
 
     const eventDate =
-    dateElement ? dateElement.value : "";
+    dateInput?.value || "";
 
 
 
@@ -317,7 +439,7 @@ saveEvent.onclick = ()=>{
 
 
 
-    if(title.trim()===""){
+    if(title===""){
 
 
         alert("Введите название события");
@@ -334,27 +456,24 @@ saveEvent.onclick = ()=>{
 
 
 
-    const newData = {
+    const data={
 
 
-        title:title,
+        title,
 
+        text,
 
-        text:text,
+        type,
 
-
-        type:type,
-
-
-        eventDate:eventDate,
+        eventDate,
 
 
         favorite:false,
 
 
-        date:new Date()
+        created:
 
-        .toLocaleDateString("ru-RU")
+        Date.now()
 
 
     };
@@ -365,25 +484,22 @@ saveEvent.onclick = ()=>{
 
 
 
-    if(editIndex !== null){
+
+    if(editIndex!==null){
 
 
-        events[editIndex] = {
 
+        events[editIndex]={
 
             ...events[editIndex],
 
+            title,
 
-            title:title,
+            text,
 
+            type,
 
-            text:text,
-
-
-            type:type,
-
-
-            eventDate:eventDate
+            eventDate
 
 
         };
@@ -399,11 +515,10 @@ saveEvent.onclick = ()=>{
     else{
 
 
-        events.push(newData);
+        events.unshift(data);
 
 
     }
-
 
 
 
@@ -414,39 +529,25 @@ saveEvent.onclick = ()=>{
 
 
 
+    clearForm();
 
 
 
-
-    if(titleElement)
-    titleElement.value="";
-
-
-    if(textElement)
-    textElement.value="";
-
-
-    if(dateElement)
-    dateElement.value="";
-
-
-
-
-
-
-
+    if(eventForm)
     eventForm.classList.add("hidden");
 
 
-    newEvent.classList.remove("hidden");
+
+    if(newEventBtn)
+    newEventBtn.classList.remove("hidden");
 
 
 
+    saveEventBtn.innerText="Сохранить";
 
 
 
-
-    showEvents();
+    renderEvents();
 
 
 
@@ -464,24 +565,24 @@ saveEvent.onclick = ()=>{
 
 
 
-
 // ===============================
-// Избранное
+// ОЧИСТКА
 // ===============================
 
-function favoriteEvent(index){
+
+function clearForm(){
 
 
-
-    events[index].favorite =
-    !events[index].favorite;
-
+    if(titleInput)
+    titleInput.value="";
 
 
-    saveStorage();
+    if(textInput)
+    textInput.value="";
 
 
-    showEvents();
+    if(dateInput)
+    dateInput.value="";
 
 
 }
@@ -494,99 +595,8 @@ function favoriteEvent(index){
 
 
 
-
 // ===============================
-// Редактирование
-// ===============================
-
-function editEvent(index){
-
-
-    editIndex=index;
-
-
-    const event=events[index];
-
-
-
-    document.getElementById("eventTitle").value =
-    event.title || "";
-
-
-
-    document.getElementById("eventText").value =
-    event.text || "";
-
-
-
-    if(document.getElementById("eventType")){
-
-        document.getElementById("eventType").value =
-        event.type || "idea";
-
-    }
-
-
-
-
-    if(document.getElementById("eventDate")){
-
-        document.getElementById("eventDate").value =
-        event.eventDate || "";
-
-    }
-
-
-
-
-    eventForm.classList.remove("hidden");
-
-
-    newEvent.classList.add("hidden");
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// ===============================
-// Удаление
-// ===============================
-
-function deleteEvent(index){
-
-
-
-    events.splice(index,1);
-
-
-    saveStorage();
-
-
-    showEvents();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// ===============================
-// Навигация
+// НАВИГАЦИЯ
 // ===============================
 
 
@@ -597,11 +607,13 @@ function goHome(){
 }
 
 
+
 function goCalendar(){
 
     window.location.href="calendar.html";
 
 }
+
 
 
 function goEvents(){
@@ -611,8 +623,11 @@ function goEvents(){
 }
 
 
+
 function goProfile(){
+
     window.location.href="profile.html";
+
 }
 
 
@@ -621,6 +636,9 @@ function goProfile(){
 
 
 
-// запуск
 
-showEvents();
+
+// СТАРТ
+
+
+renderEvents();
