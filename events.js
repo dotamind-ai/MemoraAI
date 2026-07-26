@@ -1,4 +1,5 @@
-console.log("MEMORA EVENTS VERSION 99");
+console.log("MEMORA EVENTS VERSION 100");
+
 
 const newEvent = document.getElementById("newEvent");
 
@@ -15,6 +16,8 @@ const eventList = document.getElementById("eventList");
 let events = JSON.parse(
     localStorage.getItem("memoraEvents")
 ) || [];
+
+
 
 
 
@@ -37,25 +40,28 @@ function showEvents(){
     events.forEach((event,index)=>{
 
 
-
         const card = document.createElement("div");
 
 
-        card.className = 
-"event-card " + (event.type || "idea");
+
+        card.className =
+        "event-card " + (event.type || "idea");
 
 
 
         card.innerHTML = `
+
 
         <h2>
         ${event.title}
         </h2>
 
 
+
         <p>
         ${event.text}
         </p>
+
 
 
         <div class="event-date">
@@ -66,12 +72,15 @@ function showEvents(){
 
 
 
-        <button class="event-delete"
+
+        <button 
+        class="event-delete"
         onclick="deleteEvent(${index})">
 
         Удалить
 
         </button>
+
 
         `;
 
@@ -171,26 +180,50 @@ saveEvent.onclick = ()=>{
 
 
 
+    const typeElement =
+    document.getElementById("eventType");
+
+
+
+    const type =
+    typeElement ? typeElement.value : "idea";
+
+
+
+
+
 
     if(title.trim() === ""){
 
-        
-        const type =
-document.getElementById("eventType").value;
+
+        return;
 
 
-events.push({
+    }
 
-title:title,
 
-text:text,
 
-type:type,
 
-date:new Date()
-.toLocaleDateString("ru-RU")
 
-});
+
+
+    events.push({
+
+
+        title:title,
+
+
+        text:text,
+
+
+        type:type,
+
+
+        date:new Date()
+        .toLocaleDateString("ru-RU")
+
+
+    });
 
 
 
@@ -212,7 +245,6 @@ date:new Date()
 
 
 
-
     document.getElementById("eventTitle").value="";
 
 
@@ -227,6 +259,8 @@ date:new Date()
 
 
     newEvent.classList.remove("hidden");
+
+
 
 
 
@@ -280,6 +314,8 @@ function deleteEvent(index){
 
 
 
+
+
 // ===== НАВИГАЦИЯ =====
 
 
@@ -320,7 +356,6 @@ function goSettings(){
 
 
 
-// запуск
 
 
 showEvents();
