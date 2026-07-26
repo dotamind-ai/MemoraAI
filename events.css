@@ -2213,3 +2213,307 @@ box-shadow:
 0 10px 35px rgba(255,124,168,.3);
 
 }
+/* ================================= */
+/* MEMORA EVENT CARDS FINAL STYLE */
+/* ================================= */
+
+
+.event-card{
+
+
+    margin-top:18px;
+
+
+    padding:20px;
+
+
+    border-radius:25px;
+
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
+
+    color:white;
+
+
+
+    transition:.3s;
+
+
+
+    animation:
+
+    cardAppear .4s ease;
+
+
+
+}
+
+
+
+
+
+.event-card:hover{
+
+
+    transform:
+
+    translateY(-5px);
+
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.45);
+
+
+}
+
+
+
+
+
+
+.event-card h2{
+
+
+    margin:0 0 10px;
+
+
+    font-size:22px;
+
+
+}
+
+
+
+
+
+
+.event-card p{
+
+
+    margin:0;
+
+
+    opacity:.8;
+
+
+    line-height:1.5;
+
+
+}
+
+
+
+
+
+
+.event-date{
+
+
+    margin-top:12px;
+
+
+    font-size:12px;
+
+
+    opacity:.55;
+
+
+}
+
+
+
+
+
+
+.event-delete{
+
+
+    margin-top:15px;
+
+
+    border:none;
+
+
+    padding:10px 20px;
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+
+    color:white;
+
+
+
+    cursor:pointer;
+
+
+
+}
+
+
+
+
+
+
+/* ===== ТИПЫ СОБЫТИЙ ===== */
+
+
+
+.event-card.idea{
+
+
+    border-left:
+
+    5px solid #ffd45c;
+
+
+    box-shadow:
+
+    0 0 25px rgba(255,212,92,.25);
+
+
+}
+
+
+
+
+
+
+.event-card.goal{
+
+
+    border-left:
+
+    5px solid #63ff9a;
+
+
+    box-shadow:
+
+    0 0 25px rgba(99,255,154,.25);
+
+
+}
+
+
+
+
+
+
+.event-card.note{
+
+
+    border-left:
+
+    5px solid #65b7ff;
+
+
+    box-shadow:
+
+    0 0 25px rgba(101,183,255,.25);
+
+
+}
+
+
+
+
+
+
+.event-card.project{
+
+
+    border-left:
+
+    5px solid #b58cff;
+
+
+    box-shadow:
+
+    0 0 25px rgba(181,140,255,.3);
+
+
+}
+
+
+
+
+
+
+.event-card.personal{
+
+
+    border-left:
+
+    5px solid #ff7ca8;
+
+
+    box-shadow:
+
+    0 0 25px rgba(255,124,168,.3);
+
+
+}
+
+
+
+
+
+
+@keyframes cardAppear{
+
+
+from{
+
+
+opacity:0;
+
+
+transform:
+
+translateY(25px);
+
+
+}
+
+
+to{
+
+
+opacity:1;
+
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
