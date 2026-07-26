@@ -3289,3 +3289,199 @@ transform:translateY(0) scale(1);
 
 
 }
+/* ===== MEMORA FINAL FIX ===== */
+
+
+/* Карточки должны быть видимыми */
+
+#eventList .event-card{
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+    visibility:visible !important;
+
+    position:relative !important;
+
+    padding:14px !important;
+
+    margin-top:12px !important;
+
+    border-radius:20px !important;
+
+    color:white !important;
+
+    overflow:hidden !important;
+
+}
+
+
+/* сетка карточек */
+
+#eventList{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(2,1fr) !important;
+
+    gap:12px !important;
+
+    opacity:1 !important;
+
+    visibility:visible !important;
+
+}
+
+
+
+/* верх карточки */
+
+#eventList .event-top{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    gap:8px !important;
+
+}
+
+
+
+/* заголовок */
+
+#eventList h2{
+
+    margin:0 !important;
+
+    font-size:16px !important;
+
+}
+
+
+
+/* текст */
+
+#eventList p{
+
+    margin:8px 0 !important;
+
+    font-size:12px !important;
+
+    opacity:.8 !important;
+
+}
+
+
+
+/* дата */
+
+#eventList .event-date{
+
+    margin-top:auto !important;
+
+    font-size:10px !important;
+
+}
+
+
+
+/* кнопки снизу */
+
+#eventList .event-actions{
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+    gap:10px !important;
+
+    margin-top:12px !important;
+
+}
+
+
+
+/* все маленькие кнопки */
+
+#eventList .event-actions button{
+
+    width:32px !important;
+
+    height:32px !important;
+
+    padding:0 !important;
+
+    border-radius:50% !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    font-size:16px !important;
+
+}
+
+
+
+
+
+/* цвета карточек */
+
+
+#eventList .idea{
+
+    border-left:5px solid #ffd45c !important;
+
+    box-shadow:0 0 25px rgba(255,212,92,.4) !important;
+
+}
+
+
+
+#eventList .goal{
+
+    border-left:5px solid #63ff9a !important;
+
+    box-shadow:0 0 25px rgba(99,255,154,.4) !important;
+
+}
+
+
+
+#eventList .note{
+
+    border-left:5px solid #65b7ff !important;
+
+    box-shadow:0 0 25px rgba(101,183,255,.4) !important;
+
+}
+
+
+
+#eventList .project{
+
+    border-left:5px solid #b58cff !important;
+
+    box-shadow:0 0 25px rgba(181,140,255,.4) !important;
+
+}
+
+
+
+#eventList .personal{
+
+    border-left:5px solid #ff7ca8 !important;
+
+    box-shadow:0 0 25px rgba(255,124,168,.4) !important;
+
+}
