@@ -1,43 +1,71 @@
 /* =====================================
-        MEMORA PROFILE STYLE
+        MEMORA PROFILE DESIGN
 ===================================== */
 
 
 .profile-page{
 
-    min-height:100vh;
+margin:0;
 
-    padding-top:40px;
+min-height:100vh;
 
-    display:flex;
+padding-top:60px;
 
-    justify-content:center;
+display:flex;
 
-    align-items:flex-start;
+justify-content:center;
 
-    font-family:Arial,sans-serif;
+align-items:flex-start;
 
-    color:white;
+font-family:Arial,sans-serif;
+
+color:white;
+
+
+background:
+
+radial-gradient(
+circle at top,
+#302038,
+transparent 45%
+),
+
+linear-gradient(
+160deg,
+#090910,
+#171522,
+#090910
+);
+
+
+overflow-x:hidden;
 
 }
 
 
 
-/* контейнер */
+
+
+
+
+/* ================================
+        PROFILE CONTAINER
+================================ */
+
 
 .profile-container{
 
-    width:360px;
+width:360px;
 
-    max-width:90%;
+max-width:90%;
 
-    display:flex;
+display:flex;
 
-    flex-direction:column;
+flex-direction:column;
 
-    align-items:center;
+align-items:center;
 
-    gap:20px;
+gap:25px;
 
 }
 
@@ -46,92 +74,49 @@
 
 
 
-/* =========================
+
+/* ================================
         PROFILE CARD
-========================= */
+================================ */
 
 
 .profile-card{
 
-    width:100%;
+width:100%;
 
-    padding:25px;
+padding:25px;
 
-    border-radius:30px;
-
-    background:
-
-    rgba(255,255,255,.08);
+border-radius:30px;
 
 
-    border:
+background:
 
-    1px solid rgba(255,255,255,.15);
-
-
-    backdrop-filter:blur(20px);
+rgba(255,255,255,.08);
 
 
-    box-shadow:
+border:
 
-    0 20px 50px rgba(0,0,0,.45);
-
-    text-align:center;
-
-}
+1px solid rgba(255,255,255,.15);
 
 
 
+backdrop-filter:
 
-.profile-avatar{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:50%;
-
-
-    margin:auto;
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    font-size:45px;
-
-
-    background:
-
-    rgba(255,255,255,.12);
-
-
-    box-shadow:
-
-    0 0 30px rgba(150,120,255,.6);
-
-}
+blur(20px);
 
 
 
+box-shadow:
 
-.profile-name{
-
-    margin:15px 0 5px;
-
-    font-size:28px;
-
-}
+0 20px 50px rgba(0,0,0,.45);
 
 
 
-.profile-status{
+display:flex;
 
-    opacity:.7;
+flex-direction:column;
+
+align-items:center;
 
 }
 
@@ -141,154 +126,64 @@
 
 
 
-/* =========================
-        STATS
-========================= */
 
-
-.profile-stats{
-
-
-    width:100%;
-
-    display:flex;
-
-    gap:10px;
-
-
-}
-
-
-
-.stat-card{
-
-
-    flex:1;
-
-    padding:15px 5px;
-
-
-    border-radius:20px;
-
-
-    background:
-
-    rgba(255,255,255,.08);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
-
-
-    text-align:center;
-
-
-}
-
-
-
-.stat-card span{
-
-    display:block;
-
-    font-size:25px;
-
-    font-weight:bold;
-
-}
-
-
-
-.stat-card small{
-
-    opacity:.6;
-
-}
-
-
-
-
-
-
-
-/* =========================
+/* ================================
         MEMORA LOGO BUTTON
-========================= */
+================================ */
 
 
-.profile-logo-button{
+.memora-profile-logo{
 
 
-    margin-top:25px;
+position:relative;
 
 
-    width:90px;
+width:120px;
 
-    height:90px;
-
-
-    border-radius:50%;
+height:120px;
 
 
-    position:relative;
+border-radius:50%;
 
 
-    cursor:pointer;
+display:flex;
+
+align-items:center;
+
+justify-content:center;
 
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+cursor:pointer;
 
 
-    background:
-
-    radial-gradient(
-    circle,
-    #bca8ff,
-    #6755ff
-    );
+margin-bottom:20px;
 
 
-    box-shadow:
 
-    0 0 25px #8b70ff,
+background:
 
-    0 0 70px rgba(150,120,255,.6);
-
-
-    border:2px solid rgba(255,255,255,.4);
-
-
-    overflow:hidden;
+radial-gradient(
+circle,
+rgba(255,255,255,.25),
+rgba(120,90,255,.15)
+);
 
 
-    transition:.35s;
+
+box-shadow:
+
+
+0 0 25px rgba(160,130,255,.8),
+
+0 0 60px rgba(160,130,255,.4);
+
+
+
+overflow:visible;
+
 
 
 }
-
-
-
-.profile-logo-button:hover{
-
-
-    transform:scale(1.08);
-
-
-    box-shadow:
-
-    0 0 40px #bca8ff,
-
-    0 0 90px rgba(150,120,255,.8);
-
-
-}
-
-
 
 
 
@@ -300,377 +195,434 @@
 .logo-letter{
 
 
-    font-size:45px;
+position:absolute;
 
-    font-weight:900;
 
+z-index:5;
 
-    color:white;
 
+font-size:55px;
 
-    z-index:5;
 
-
-    text-shadow:
-
-    0 0 15px white;
-
-
-}
-
-
-
-
-
-
-
-
-/* сферы */
-
-
-.logo-orb{
-
-
-    position:absolute;
-
-
-    width:10px;
-
-    height:10px;
-
-
-    border-radius:50%;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 0 15px white;
-
-
-}
-
-
-
-
-
-
-.orb1{
-
-
-    animation:
-
-    crossMove1 3s linear infinite;
-
-
-}
-
-
-
-.orb2{
-
-
-    animation:
-
-    crossMove2 3s linear infinite;
-
-
-}
-
-
-
-
-.orb3{
-
-
-    animation:
-
-    crossMove3 4s linear infinite;
-
-
-}
-
-
-
-
-.orb4{
-
-
-    animation:
-
-    crossMove4 4s linear infinite;
-
-
-}
-
-
-
-
-
-
-
-@keyframes crossMove1{
-
-
-0%{
-
-transform:translate(-35px,-35px);
-
-}
-
-
-50%{
-
-transform:translate(35px,35px);
-
-}
-
-
-100%{
-
-transform:translate(-35px,-35px);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes crossMove2{
-
-
-0%{
-
-transform:translate(35px,-35px);
-
-}
-
-
-50%{
-
-transform:translate(-35px,35px);
-
-}
-
-
-100%{
-
-transform:translate(35px,-35px);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes crossMove3{
-
-
-0%{
-
-transform:translateY(-40px);
-
-}
-
-
-50%{
-
-transform:translateY(40px);
-
-}
-
-
-100%{
-
-transform:translateY(-40px);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes crossMove4{
-
-
-0%{
-
-transform:translateX(-40px);
-
-}
-
-
-50%{
-
-transform:translateX(40px);
-
-}
-
-
-100%{
-
-transform:translateX(-40px);
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =========================
-        MENU WINDOW
-========================= */
-
-
-.profile-menu{
-
-
-position:fixed;
-
-
-top:50%;
-
-left:50%;
-
-
-transform:
-
-translate(-50%,-50%)
-scale(.8);
-
-
-width:320px;
-
-
-padding:25px;
-
-
-border-radius:30px;
-
-
-background:
-
-rgba(20,18,35,.95);
-
-
-border:
-
-1px solid rgba(255,255,255,.2);
-
-
-box-shadow:
-
-0 30px 80px black;
-
-
-opacity:0;
-
-
-visibility:hidden;
-
-
-transition:.35s;
-
-
-z-index:100;
-
-
-
-}
-
-
-
-
-
-.profile-menu.active{
-
-
-opacity:1;
-
-
-visibility:visible;
-
-
-transform:
-
-translate(-50%,-50%)
-scale(1);
-
-
-}
-
-
-
-
-
-
-.profile-menu button{
-
-
-width:100%;
-
-
-height:50px;
-
-
-margin-top:12px;
-
-
-border:none;
-
-
-border-radius:25px;
-
-
-background:
-
-rgba(255,255,255,.12);
+font-weight:900;
 
 
 color:white;
 
 
-font-size:16px;
+
+text-shadow:
 
 
-cursor:pointer;
+0 0 15px white,
+
+0 0 35px #9b7cff;
 
 
-transition:.3s;
+
+animation:
+
+letterGlow 3s infinite;
 
 
 }
 
 
 
-.profile-menu button:hover{
+
+
+
+@keyframes letterGlow{
+
+
+0%,100%{
+
+filter:brightness(1);
+
+}
+
+
+
+50%{
+
+filter:brightness(1.5);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+        ОРБИТЫ
+================================ */
+
+
+
+.logo-orbit{
+
+
+position:absolute;
+
+
+left:50%;
+
+top:50%;
+
+
+border-radius:50%;
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+transform:
+
+translate(-50%,-50%);
+
+
+
+animation:
+
+orbitRotate linear infinite;
+
+
+}
+
+
+
+
+
+
+.logo-orbit span{
+
+
+position:absolute;
+
+
+width:10px;
+
+height:10px;
+
+
+border-radius:50%;
+
+
+
+background:white;
+
+
+box-shadow:
+
+
+0 0 15px white,
+
+0 0 30px #9b7cff;
+
+
+
+}
+
+
+
+
+
+
+
+.orbit-a{
+
+
+width:90px;
+
+height:90px;
+
+
+animation-duration:5s;
+
+}
+
+
+
+
+.orbit-a span{
+
+
+top:-5px;
+
+left:50%;
+
+
+}
+
+
+
+
+
+
+
+.orbit-b{
+
+
+width:120px;
+
+height:120px;
+
+
+animation-duration:8s;
+
+
+animation-direction:reverse;
+
+}
+
+
+
+
+
+.orbit-b span{
+
+
+right:-5px;
+
+top:50%;
+
+
+background:#8edcff;
+
+
+box-shadow:
+
+0 0 20px #8edcff;
+
+
+}
+
+
+
+
+
+
+
+.orbit-c{
+
+
+width:150px;
+
+height:150px;
+
+
+animation-duration:12s;
+
+
+}
+
+
+
+
+
+
+
+.orbit-c span{
+
+
+bottom:10px;
+
+left:10px;
+
+
+background:#ffd45c;
+
+
+box-shadow:
+
+0 0 20px #ffd45c;
+
+
+}
+
+
+
+
+
+
+
+@keyframes orbitRotate{
+
+
+from{
+
+transform:
+
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+
+to{
+
+transform:
+
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+        ИМЯ
+================================ */
+
+
+
+.profile-name{
+
+
+margin:0;
+
+
+font-size:28px;
+
+
+text-shadow:
+
+0 0 15px rgba(255,255,255,.5);
+
+
+}
+
+
+
+
+
+
+.profile-status{
+
+
+opacity:.7;
+
+
+margin-top:8px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+        СТАТИСТИКА
+================================ */
+
+
+
+.profile-stats{
+
+
+width:100%;
+
+
+display:grid;
+
+
+grid-template-columns:repeat(3,1fr);
+
+
+gap:12px;
+
+
+}
+
+
+
+
+
+
+.stat-card{
+
+
+padding:18px 8px;
+
+
+border-radius:22px;
 
 
 background:
 
-rgba(150,120,255,.35);
+rgba(255,255,255,.08);
 
 
-transform:translateY(-3px);
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+
+
+backdrop-filter:
+
+blur(15px);
+
+
+
+text-align:center;
+
+
+}
+
+
+
+
+
+.stat-card span{
+
+
+display:block;
+
+
+font-size:24px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+.stat-card small{
+
+
+opacity:.7;
+
+
+font-size:11px;
 
 
 }
@@ -682,7 +634,11 @@ transform:translateY(-3px);
 
 
 
-/* затемнение */
+
+/* ================================
+        MENU
+================================ */
+
 
 
 .profile-overlay{
@@ -702,13 +658,170 @@ rgba(0,0,0,.55);
 opacity:0;
 
 
-visibility:hidden;
+pointer-events:none;
+
+
+transition:.35s;
+
+
+z-index:20;
+
+
+}
+
+
+
+
+
+.profile-menu{
+
+
+position:fixed;
+
+
+left:50%;
+
+bottom:-350px;
+
+
+transform:
+
+translateX(-50%);
+
+
+
+width:330px;
+
+
+max-width:90%;
+
+
+
+padding:20px;
+
+
+border-radius:30px;
+
+
+
+background:
+
+rgba(30,25,45,.95);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+
+
+backdrop-filter:
+
+blur(25px);
+
+
+
+box-shadow:
+
+0 20px 60px black;
+
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+gap:12px;
+
+
+
+transition:.45s;
+
+
+z-index:21;
+
+
+}
+
+
+
+
+
+
+
+.profile-menu button{
+
+
+height:55px;
+
+
+border:none;
+
+
+border-radius:25px;
+
+
+background:
+
+rgba(255,255,255,.1);
+
+
+
+color:white;
+
+
+font-size:16px;
+
+
+cursor:pointer;
+
 
 
 transition:.3s;
 
 
-z-index:90;
+}
+
+
+
+
+
+.profile-menu button:hover{
+
+
+background:
+
+linear-gradient(
+135deg,
+#9b7cff,
+#5d5cff
+);
+
+
+
+transform:
+
+translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+/* открыто */
+
+
+.profile-menu.active{
+
+
+bottom:100px;
 
 
 }
@@ -721,7 +834,7 @@ z-index:90;
 opacity:1;
 
 
-visibility:visible;
+pointer-events:auto;
 
 
 }
@@ -733,91 +846,40 @@ visibility:visible;
 
 
 
-/* =========================
-        NAVIGATION
-========================= */
+/* ================================
+        MOBILE
+================================ */
 
 
-.bottom-nav{
 
-position:fixed;
-
-bottom:18px;
-
-left:50%;
-
-transform:translateX(-50%);
+@media(max-width:500px){
 
 
-width:350px;
 
-max-width:90%;
+.profile-container{
 
-
-height:72px;
-
-
-border-radius:35px;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-backdrop-filter:blur(20px);
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
+width:330px;
 
 }
 
 
 
+.memora-profile-logo{
 
+width:105px;
 
-
-.nav-item{
-
-background:none;
-
-border:none;
-
-color:white;
-
-opacity:.6;
-
-font-size:22px;
-
+height:105px;
 
 }
 
 
 
-.nav-item small{
+.logo-letter{
 
-display:block;
-
-font-size:11px;
+font-size:48px;
 
 }
 
 
-
-.nav-item.active{
-
-opacity:1;
-
-transform:translateY(-6px);
 
 }
