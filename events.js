@@ -1,4 +1,4 @@
-console.log("MEMORA EVENTS VERSION 107");
+console.log("MEMORA EVENTS VERSION 108");
 
 
 const newEvent = document.getElementById("newEvent");
@@ -10,6 +10,7 @@ const saveEvent = document.getElementById("saveEvent");
 const cancelEvent = document.getElementById("cancelEvent");
 
 const eventList = document.getElementById("eventList");
+
 
 
 let editIndex = null;
@@ -61,6 +62,7 @@ function showEvents(){
 
 
 
+
     events
 
     .sort((a,b)=>{
@@ -86,32 +88,32 @@ function showEvents(){
 
 
 
+        let icon="✦";
 
-        let icon = "✦";
 
 
-        if(event.type === "goal"){
+        if(event.type==="goal"){
 
             icon="◎";
 
         }
 
 
-        if(event.type === "note"){
+        if(event.type==="note"){
 
             icon="▤";
 
         }
 
 
-        if(event.type === "project"){
+        if(event.type==="project"){
 
             icon="◈";
 
         }
 
 
-        if(event.type === "personal"){
+        if(event.type==="personal"){
 
             icon="◉";
 
@@ -123,7 +125,28 @@ function showEvents(){
 
 
 
+
+
         card.innerHTML = `
+
+
+
+<button
+
+class="card-star"
+
+onclick="favoriteEvent(${index})">
+
+
+${event.favorite ? "★" : "☆"}
+
+
+</button>
+
+
+
+
+
 
 
 
@@ -137,6 +160,7 @@ ${icon}
 </span>
 
 
+
 <h2>
 
 ${event.title}
@@ -145,6 +169,7 @@ ${event.title}
 
 
 </div>
+
 
 
 
@@ -191,24 +216,6 @@ ${event.text}
 
 <button
 
-class="event-favorite"
-
-onclick="favoriteEvent(${index})">
-
-
-${event.favorite ? "★" : "☆"}
-
-
-</button>
-
-
-
-
-
-
-
-<button
-
 class="event-edit"
 
 onclick="editEvent(${index})">
@@ -241,6 +248,8 @@ onclick="deleteEvent(${index})">
 
 
 
+
+
 </div>
 
 
@@ -253,12 +262,11 @@ onclick="deleteEvent(${index})">
 
 
 
-eventList.appendChild(card);
+        eventList.appendChild(card);
 
 
 
-});
-
+    });
 
 
 
@@ -293,6 +301,7 @@ newEvent.onclick = ()=>{
 };
 
 
+
 }
 
 
@@ -322,6 +331,7 @@ cancelEvent.onclick = ()=>{
 
 
 };
+
 
 
 }
@@ -368,6 +378,7 @@ typeElement ? typeElement.value : "idea";
 
 
 
+
 const eventDate =
 
 document.getElementById("eventDate").value;
@@ -383,6 +394,7 @@ if(title.trim()===""){
 return;
 
 }
+
 
 
 
@@ -420,19 +432,25 @@ else{
 events.push({
 
 
+
 title:title,
+
 
 
 text:text,
 
 
+
 type:type,
+
 
 
 favorite:false,
 
 
+
 eventDate:eventDate,
+
 
 
 date:new Date()
@@ -466,6 +484,7 @@ JSON.stringify(events)
 
 
 
+
 document.getElementById("eventTitle").value="";
 
 
@@ -483,6 +502,7 @@ eventForm.classList.add("hidden");
 
 
 newEvent.classList.remove("hidden");
+
 
 
 
@@ -506,7 +526,7 @@ showEvents();
 
 
 
-// закрепление ⭐
+// ⭐ закрепление
 
 
 function favoriteEvent(index){
@@ -521,6 +541,8 @@ events[index].favorite =
 
 
 
+
+
 localStorage.setItem(
 
 "memoraEvents",
@@ -528,6 +550,7 @@ localStorage.setItem(
 JSON.stringify(events)
 
 );
+
 
 
 
@@ -547,7 +570,7 @@ showEvents();
 
 
 
-// редактирование ✎
+// ✎ редактирование
 
 
 function editEvent(index){
@@ -559,6 +582,7 @@ editIndex=index;
 
 
 const event=events[index];
+
 
 
 
@@ -596,6 +620,8 @@ event.eventDate || "";
 
 
 
+
+
 eventForm.classList.remove("hidden");
 
 
@@ -613,7 +639,7 @@ newEvent.classList.add("hidden");
 
 
 
-// удаление 🗑
+// 🗑 удаление
 
 
 function deleteEvent(index){
@@ -626,6 +652,8 @@ events.splice(index,1);
 
 
 
+
+
 localStorage.setItem(
 
 "memoraEvents",
@@ -633,6 +661,8 @@ localStorage.setItem(
 JSON.stringify(events)
 
 );
+
+
 
 
 
@@ -662,6 +692,7 @@ window.location.href="index.html";
 }
 
 
+
 function goCalendar(){
 
 window.location.href="calendar.html";
@@ -669,11 +700,13 @@ window.location.href="calendar.html";
 }
 
 
+
 function goEvents(){
 
 window.location.href="events.html";
 
 }
+
 
 
 function goSettings(){
