@@ -1,7 +1,9 @@
 /* =====================================
-        MEMORA PROFILE DESIGN
+        MEMORA PROFILE CSS
 ===================================== */
 
+
+/* ОСНОВА */
 
 .profile-page{
 
@@ -9,13 +11,17 @@ margin:0;
 
 min-height:100vh;
 
-padding-top:60px;
+padding-top:50px;
+
+padding-bottom:110px;
+
 
 display:flex;
 
 justify-content:center;
 
 align-items:flex-start;
+
 
 font-family:Arial,sans-serif;
 
@@ -26,7 +32,7 @@ background:
 
 radial-gradient(
 circle at top,
-#302038,
+#38234b,
 transparent 45%
 ),
 
@@ -47,25 +53,30 @@ overflow-x:hidden;
 
 
 
-
-/* ================================
-        PROFILE CONTAINER
-================================ */
+/* КОНТЕЙНЕР */
 
 
 .profile-container{
 
+
+position:relative;
+
+
 width:360px;
+
 
 max-width:90%;
 
+
 display:flex;
+
 
 flex-direction:column;
 
+
 align-items:center;
 
-gap:25px;
+
 
 }
 
@@ -75,61 +86,9 @@ gap:25px;
 
 
 
-/* ================================
-        PROFILE CARD
-================================ */
-
-
-.profile-card{
-
-width:100%;
-
-padding:25px;
-
-border-radius:30px;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.45);
-
-
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-}
-
-
-
-
-
-
-
-
-/* ================================
-        MEMORA LOGO BUTTON
-================================ */
+/* =====================================
+        MEMORA LOGO
+===================================== */
 
 
 .memora-profile-logo{
@@ -138,58 +97,29 @@ align-items:center;
 position:relative;
 
 
-width:120px;
+width:130px;
 
-height:120px;
-
-
-border-radius:50%;
+height:130px;
 
 
 display:flex;
 
+
 align-items:center;
 
+
 justify-content:center;
+
 
 
 cursor:pointer;
 
 
-margin-bottom:20px;
-
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(255,255,255,.25),
-rgba(120,90,255,.15)
-);
-
-
-
-box-shadow:
-
-
-0 0 25px rgba(160,130,255,.8),
-
-0 0 60px rgba(160,130,255,.4);
-
-
-
-overflow:visible;
-
+margin-top:20px;
 
 
 }
 
-
-
-
-
-/* буква M */
 
 
 .logo-letter{
@@ -201,10 +131,12 @@ position:absolute;
 z-index:5;
 
 
-font-size:55px;
+
+font-size:70px;
 
 
 font-weight:900;
+
 
 
 color:white;
@@ -216,13 +148,15 @@ text-shadow:
 
 0 0 15px white,
 
-0 0 35px #9b7cff;
+0 0 35px #9b7cff,
+
+0 0 70px #9b7cff;
 
 
 
 animation:
 
-letterGlow 3s infinite;
+letterPulse 3s infinite;
 
 
 }
@@ -231,13 +165,12 @@ letterGlow 3s infinite;
 
 
 
-
-@keyframes letterGlow{
+@keyframes letterPulse{
 
 
 0%,100%{
 
-filter:brightness(1);
+transform:scale(1);
 
 }
 
@@ -245,7 +178,7 @@ filter:brightness(1);
 
 50%{
 
-filter:brightness(1.5);
+transform:scale(1.08);
 
 }
 
@@ -260,10 +193,9 @@ filter:brightness(1.5);
 
 
 
-/* ================================
+/* =====================================
         ОРБИТЫ
-================================ */
-
+===================================== */
 
 
 .logo-orbit{
@@ -273,6 +205,7 @@ position:absolute;
 
 
 left:50%;
+
 
 top:50%;
 
@@ -294,12 +227,10 @@ translate(-50%,-50%);
 
 animation:
 
-orbitRotate linear infinite;
+rotateOrbit linear infinite;
 
 
 }
-
-
 
 
 
@@ -312,28 +243,25 @@ position:absolute;
 
 width:10px;
 
+
 height:10px;
 
 
 border-radius:50%;
 
 
-
 background:white;
+
 
 
 box-shadow:
 
-
 0 0 15px white,
 
-0 0 30px #9b7cff;
-
+0 0 35px #9b7cff;
 
 
 }
-
-
 
 
 
@@ -342,15 +270,16 @@ box-shadow:
 .orbit-a{
 
 
-width:90px;
+width:85px;
 
-height:90px;
+
+height:85px;
 
 
 animation-duration:5s;
 
-}
 
+}
 
 
 
@@ -358,6 +287,7 @@ animation-duration:5s;
 
 
 top:-5px;
+
 
 left:50%;
 
@@ -369,13 +299,13 @@ left:50%;
 
 
 
-
 .orbit-b{
 
 
-width:120px;
+width:115px;
 
-height:120px;
+
+height:115px;
 
 
 animation-duration:8s;
@@ -383,8 +313,8 @@ animation-duration:8s;
 
 animation-direction:reverse;
 
-}
 
+}
 
 
 
@@ -393,6 +323,7 @@ animation-direction:reverse;
 
 
 right:-5px;
+
 
 top:50%;
 
@@ -416,9 +347,10 @@ box-shadow:
 .orbit-c{
 
 
-width:150px;
+width:145px;
 
-height:150px;
+
+height:145px;
 
 
 animation-duration:12s;
@@ -428,16 +360,13 @@ animation-duration:12s;
 
 
 
-
-
-
-
 .orbit-c span{
 
 
-bottom:10px;
+bottom:8px;
 
-left:10px;
+
+left:15px;
 
 
 background:#ffd45c;
@@ -456,33 +385,34 @@ box-shadow:
 
 
 
-@keyframes orbitRotate{
+@keyframes rotateOrbit{
 
 
 from{
+
 
 transform:
 
 translate(-50%,-50%)
 rotate(0deg);
 
+
 }
 
 
-
 to{
+
 
 transform:
 
 translate(-50%,-50%)
 rotate(360deg);
 
-}
-
 
 }
 
 
+}
 
 
 
@@ -490,27 +420,133 @@ rotate(360deg);
 
 
 
-/* ================================
+
+
+/* =====================================
+        АВАТАР
+===================================== */
+
+
+.profile-avatar{
+
+
+position:absolute;
+
+
+top:35px;
+
+
+right:15px;
+
+
+
+width:60px;
+
+
+height:60px;
+
+
+
+border-radius:50%;
+
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+
+font-size:30px;
+
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+backdrop-filter:
+
+blur(15px);
+
+
+
+box-shadow:
+
+0 0 25px rgba(160,130,255,.7);
+
+
+
+cursor:pointer;
+
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+
+.profile-avatar:hover{
+
+
+transform:scale(1.1);
+
+
+box-shadow:
+
+0 0 40px #9b7cff;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
         ИМЯ
-================================ */
-
+===================================== */
 
 
 .profile-name{
 
 
-margin:0;
+margin-top:25px;
 
 
-font-size:28px;
+margin-bottom:5px;
+
+
+font-size:30px;
 
 
 text-shadow:
 
-0 0 15px rgba(255,255,255,.5);
+0 0 20px rgba(255,255,255,.4);
 
 
 }
+
 
 
 
@@ -520,10 +556,13 @@ text-shadow:
 .profile-status{
 
 
-opacity:.7;
+margin:0;
 
 
-margin-top:8px;
+opacity:.65;
+
+
+font-size:15px;
 
 
 }
@@ -536,16 +575,19 @@ margin-top:8px;
 
 
 
-/* ================================
+/* =====================================
         СТАТИСТИКА
-================================ */
-
+===================================== */
 
 
 .profile-stats{
 
 
+margin-top:35px;
+
+
 width:100%;
+
 
 
 display:grid;
@@ -563,7 +605,6 @@ gap:12px;
 
 
 
-
 .stat-card{
 
 
@@ -575,7 +616,7 @@ border-radius:22px;
 
 background:
 
-rgba(255,255,255,.08);
+rgba(255,255,255,.07);
 
 
 
@@ -606,7 +647,7 @@ text-align:center;
 display:block;
 
 
-font-size:24px;
+font-size:26px;
 
 
 font-weight:bold;
@@ -619,10 +660,10 @@ font-weight:bold;
 .stat-card small{
 
 
-opacity:.7;
-
-
 font-size:11px;
+
+
+opacity:.7;
 
 
 }
@@ -635,10 +676,9 @@ font-size:11px;
 
 
 
-/* ================================
-        MENU
-================================ */
-
+/* =====================================
+        POPUP MENU
+===================================== */
 
 
 .profile-overlay{
@@ -652,7 +692,8 @@ inset:0;
 
 background:
 
-rgba(0,0,0,.55);
+rgba(0,0,0,.6);
+
 
 
 opacity:0;
@@ -661,13 +702,32 @@ opacity:0;
 pointer-events:none;
 
 
+
 transition:.35s;
 
 
-z-index:20;
+
+z-index:50;
 
 
 }
+
+
+
+
+
+.profile-overlay.active{
+
+
+opacity:1;
+
+
+pointer-events:auto;
+
+
+}
+
+
 
 
 
@@ -681,12 +741,11 @@ position:fixed;
 
 left:50%;
 
-bottom:-350px;
+
+bottom:-400px;
 
 
-transform:
-
-translateX(-50%);
+transform:translateX(-50%);
 
 
 
@@ -706,19 +765,13 @@ border-radius:30px;
 
 background:
 
-rgba(30,25,45,.95);
+#181522;
 
 
 
 border:
 
-1px solid rgba(255,255,255,.2);
-
-
-
-backdrop-filter:
-
-blur(25px);
+1px solid rgba(255,255,255,.15);
 
 
 
@@ -741,10 +794,26 @@ gap:12px;
 transition:.45s;
 
 
-z-index:21;
+
+z-index:60;
 
 
 }
+
+
+
+
+
+
+
+.profile-menu.active{
+
+
+bottom:100px;
+
+
+}
+
 
 
 
@@ -764,16 +833,19 @@ border:none;
 border-radius:25px;
 
 
+
 background:
 
-rgba(255,255,255,.1);
+rgba(255,255,255,.08);
 
 
 
 color:white;
 
 
+
 font-size:16px;
+
 
 
 cursor:pointer;
@@ -784,6 +856,8 @@ transition:.3s;
 
 
 }
+
+
 
 
 
@@ -815,45 +889,14 @@ translateY(-3px);
 
 
 
-/* открыто */
 
 
-.profile-menu.active{
-
-
-bottom:100px;
-
-
-}
-
-
-
-.profile-overlay.active{
-
-
-opacity:1;
-
-
-pointer-events:auto;
-
-
-}
-
-
-
-
-
-
-
-
-/* ================================
+/* =====================================
         MOBILE
-================================ */
-
+===================================== */
 
 
 @media(max-width:500px){
-
 
 
 .profile-container{
@@ -866,9 +909,9 @@ width:330px;
 
 .memora-profile-logo{
 
-width:105px;
+width:110px;
 
-height:105px;
+height:110px;
 
 }
 
@@ -876,10 +919,19 @@ height:105px;
 
 .logo-letter{
 
-font-size:48px;
+font-size:58px;
 
 }
 
+
+
+.profile-avatar{
+
+
+right:5px;
+
+
+}
 
 
 }
