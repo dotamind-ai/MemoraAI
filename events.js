@@ -41,7 +41,8 @@ function showEvents(){
         const card = document.createElement("div");
 
 
-        card.className = "event-card";
+        card.className = 
+"event-card " + (event.type || "idea");
 
 
 
