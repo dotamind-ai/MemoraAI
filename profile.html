@@ -9,7 +9,11 @@
 
 <title>Memora Profile</title>
 
+
 <link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="profile.css">
+
 
 </head>
 
@@ -17,8 +21,12 @@
 <body class="profile-page">
 
 
+
 <div class="profile-container">
 
+
+
+    <!-- Аватар -->
 
     <div class="profile-avatar">
 
@@ -28,51 +36,100 @@
 
 
 
-    <h1>
+
+    <!-- Имя -->
+
+    <h1 class="profile-name">
+
         Гость
+
     </h1>
 
 
+
     <p class="profile-status">
+
         Хранитель воспоминаний
+
     </p>
 
 
 
 
+
+
+    <!-- Статистика -->
+
+
     <div class="profile-stats">
 
 
-        <div>
-            <b id="memoryStat">
+
+        <div class="stat-card">
+
+
+            <span id="memoryStat">
+
                 0
-            </b>
-            <span>
+
+            </span>
+
+
+            <small>
+
                 Память
-            </span>
+
+            </small>
+
+
         </div>
 
 
 
-        <div>
-            <b id="eventStat">
+
+
+        <div class="stat-card">
+
+
+            <span id="eventStat">
+
                 0
-            </b>
-            <span>
+
+            </span>
+
+
+            <small>
+
                 События
-            </span>
+
+            </small>
+
+
         </div>
 
 
 
-        <div>
-            <b id="favoriteStat">
+
+
+        <div class="stat-card">
+
+
+            <span id="favoriteStat">
+
                 0
-            </b>
-            <span>
-                Избранное
+
             </span>
+
+
+            <small>
+
+                Избранное
+
+            </small>
+
+
         </div>
+
 
 
     </div>
@@ -81,29 +138,45 @@
 
 
 
-    <button class="profile-button">
-
-        ✏️ Изменить профиль
-
-    </button>
 
 
+    <!-- Кнопки -->
 
 
-    <button class="profile-button">
-
-        ⚙️ Настройки
-
-    </button>
+    <div class="profile-actions">
 
 
 
+        <button class="profile-button">
 
-    <button class="profile-button login">
+            ✏️ Изменить профиль
 
-        🔐 Войти / Регистрация
+        </button>
 
-    </button>
+
+
+
+
+        <button class="profile-button">
+
+            ⚙️ Настройки
+
+        </button>
+
+
+
+
+
+        <button class="profile-button login-button">
+
+            🔐 Войти / Регистрация
+
+        </button>
+
+
+
+    </div>
+
 
 
 
@@ -114,56 +187,89 @@
 
 
 
+
+
+
+<!-- Нижняя навигация -->
+
+
 <nav class="bottom-nav">
 
 
-<button class="nav-item"
+
+<button 
+class="nav-item"
 onclick="goHome()">
+
 
 🏠
 
 <small>
+
 Главная
+
 </small>
+
 
 </button>
 
 
 
-<button class="nav-item"
+
+
+<button 
+class="nav-item"
 onclick="goCalendar()">
+
 
 📅
 
 <small>
+
 Календарь
+
 </small>
+
 
 </button>
 
 
 
-<button class="nav-item"
+
+
+<button 
+class="nav-item"
 onclick="goEvents()">
+
 
 ✨
 
 <small>
+
 События
+
 </small>
+
 
 </button>
 
 
 
-<button class="nav-item active"
+
+
+<button 
+class="nav-item active"
 onclick="goProfile()">
+
 
 👤
 
 <small>
+
 Профиль
+
 </small>
+
 
 </button>
 
@@ -174,7 +280,12 @@ onclick="goProfile()">
 
 
 
+
+
+
+
 <script src="profile.js"></script>
+
 
 
 </body>
