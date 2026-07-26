@@ -1162,3 +1162,97 @@ font-size:26px;
 
 
 }
+/* =====================================
+        PROFILE STATUS STYLE
+===================================== */
+
+
+.profile-status{
+
+font-family:
+
+"Segoe UI",
+"Helvetica Neue",
+sans-serif;
+
+
+font-size:16px;
+
+
+letter-spacing:3px;
+
+
+text-transform:uppercase;
+
+
+font-weight:300;
+
+
+
+background:
+
+linear-gradient(
+90deg,
+#ffffff,
+#b8a7ff,
+#7ed7ff
+);
+
+
+
+-webkit-background-clip:text;
+
+
+-webkit-text-fill-color:transparent;
+
+
+
+opacity:.9;
+
+
+
+position:relative;
+
+
+}
+
+
+
+
+
+.profile-status::after{
+
+
+content:"";
+
+
+display:block;
+
+
+width:45px;
+
+
+height:2px;
+
+
+margin:10px auto 0;
+
+
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+#9c7cff,
+transparent
+);
+
+
+
+box-shadow:
+
+0 0 12px #9c7cff;
+
+
+}
