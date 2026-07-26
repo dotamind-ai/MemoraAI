@@ -2669,3 +2669,176 @@ backdrop-filter:blur(15px);
     box-sizing:border-box !important;
 
 }
+.event-list,
+#eventList{
+
+
+display:grid;
+
+
+grid-template-columns:repeat(2, 1fr);
+
+
+gap:12px;
+
+
+padding-bottom:100px;
+
+
+}
+
+
+
+
+
+.event-card{
+
+
+padding:12px !important;
+
+
+border-radius:18px !important;
+
+
+min-height:140px;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+.event-top{
+
+
+gap:8px !important;
+
+
+}
+
+
+
+
+
+.event-symbol{
+
+
+width:30px !important;
+
+
+height:30px !important;
+
+
+font-size:18px !important;
+
+
+}
+
+
+
+
+
+.event-card h2{
+
+
+font-size:15px !important;
+
+
+white-space:nowrap;
+
+
+overflow:hidden;
+
+
+text-overflow:ellipsis;
+
+
+}
+
+
+
+
+
+.event-card p{
+
+
+font-size:12px !important;
+
+
+display:-webkit-box;
+
+
+-webkit-line-clamp:3;
+
+
+-webkit-box-orient:vertical;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+.event-date{
+
+
+font-size:10px !important;
+
+
+}
+
+
+
+
+
+.event-actions{
+
+
+margin-top:8px !important;
+
+
+}
+
+
+
+
+
+.event-favorite,
+.event-edit{
+
+
+width:32px !important;
+
+
+height:32px !important;
+
+
+font-size:16px !important;
+
+
+}
+
+
+
+
+
+.event-delete{
+
+
+padding:6px 10px !important;
+
+
+font-size:11px !important;
+
+
+border-radius:14px !important;
+
+
+}
