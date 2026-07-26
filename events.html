@@ -9,26 +9,33 @@
 
 <title>MEMORA — События</title>
 
-<link rel="stylesheet" href="events.css?v=57">
+
+<link rel="stylesheet" href="events.css?v=59">
 
 </head>
+
 
 
 <body class="events-page">
 
 
 
-<!-- ЛОГО -->
+
+
+<!-- ЛОГОТИП -->
 
 <div class="memora-logo">
+
 
     <div class="orbit orbit1">
         <span></span>
     </div>
 
+
     <div class="orbit orbit2">
         <span></span>
     </div>
+
 
     <div class="orbit orbit3">
         <span></span>
@@ -41,6 +48,7 @@
 
     </div>
 
+
 </div>
 
 
@@ -49,7 +57,11 @@
 
 
 
+
+<!-- СОБЫТИЯ -->
+
 <section class="events-container">
+
 
 
 <h1>
@@ -62,7 +74,11 @@
 
 
 
+
+
+
 <button id="newEvent" class="new-event">
+
 
 <span class="event-icon">
 
@@ -74,6 +90,7 @@
 Новое событие
 
 
+
 </button>
 
 
@@ -82,6 +99,9 @@
 
 
 
+
+
+<!-- ФОРМА -->
 
 
 <div id="eventForm" class="event-form hidden">
@@ -105,6 +125,8 @@ placeholder="Название события"
 
 
 
+
+
 <textarea
 
 id="eventText"
@@ -119,6 +141,19 @@ placeholder="Описание события"
 
 
 
+
+<div class="date-box">
+
+
+<label for="eventDate">
+
+📅 Выбрать дату
+
+</label>
+
+
+
+
 <input
 
 id="eventDate"
@@ -126,6 +161,11 @@ id="eventDate"
 type="date"
 
 >
+
+
+
+</div>
+
 
 
 
@@ -144,11 +184,13 @@ type="date"
 
 
 
+
 <option value="goal">
 
 ◎ Цель
 
 </option>
+
 
 
 
@@ -160,11 +202,13 @@ type="date"
 
 
 
+
 <option value="project">
 
 ◈ Проект
 
 </option>
+
 
 
 
@@ -196,12 +240,13 @@ type="date"
 
 
 
+
+
 <button id="cancelEvent">
 
 Отмена
 
 </button>
-
 
 
 
@@ -216,6 +261,9 @@ type="date"
 
 
 
+
+
+<!-- СПИСОК -->
 
 
 <div id="eventList">
@@ -238,16 +286,34 @@ type="date"
 
 
 
+<!-- НАВИГАЦИЯ -->
+
+
 <nav class="bottom-nav">
+
 
 
 <button class="nav-item" onclick="goHome()">
 
-<span>🏠</span>
 
-<small>Главная</small>
+<span>
+
+🏠
+
+</span>
+
+
+<small>
+
+Главная
+
+</small>
+
 
 </button>
+
+
+
 
 
 
@@ -255,11 +321,25 @@ type="date"
 
 <button class="nav-item" onclick="goCalendar()">
 
-<span>📅</span>
 
-<small>Календарь</small>
+<span>
+
+📅
+
+</span>
+
+
+<small>
+
+Календарь
+
+</small>
+
 
 </button>
+
+
+
 
 
 
@@ -267,11 +347,25 @@ type="date"
 
 <button class="nav-item active" onclick="goEvents()">
 
-<span>✨</span>
 
-<small>События</small>
+<span>
+
+✨
+
+</span>
+
+
+<small>
+
+События
+
+</small>
+
 
 </button>
+
+
+
 
 
 
@@ -279,11 +373,26 @@ type="date"
 
 <button class="nav-item" onclick="goSettings()">
 
-<span>⚙️</span>
 
-<small>Настройки</small>
+<span>
+
+⚙️
+
+</span>
+
+
+<small>
+
+Настройки
+
+</small>
+
 
 </button>
+
+
+
+
 
 
 </nav>
@@ -295,7 +404,9 @@ type="date"
 
 
 
+
 <script src="events.js?v=106"></script>
+
 
 
 </body>
