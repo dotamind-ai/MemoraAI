@@ -1221,6 +1221,192 @@ to{
 transform:rotate(0deg);
 
 }
+/* =====================================
+   MEMORA LOGO FORCE FIX
+===================================== */
+
+
+.home-header .mini-logo{
+
+    width:70px !important;
+    height:70px !important;
+
+    flex-shrink:0 !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+
+    position:relative !important;
+
+
+    border-radius:50% !important;
+
+
+    color:white !important;
+
+
+    font-size:34px !important;
+
+    font-weight:700 !important;
+
+
+    background:
+
+    rgba(255,255,255,0.08) !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25) !important;
+
+
+    overflow:visible !important;
+
+
+    animation:
+
+    logoMove 5s ease-in-out infinite !important;
 
 
 }
+
+
+
+
+
+.home-header .mini-logo::before{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:90px !important;
+
+    height:90px !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25) !important;
+
+
+    animation:
+
+    logoRotate 8s linear infinite !important;
+
+
+}
+
+
+
+
+
+.home-header .mini-logo::after{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:105px !important;
+
+    height:105px !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px dashed rgba(255,255,255,.15) !important;
+
+
+    animation:
+
+    logoRotateReverse 12s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+@keyframes logoMove{
+
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes logoRotate{
+
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes logoRotateReverse{
+
+
+from{
+
+transform:rotate(360deg);
+
+}
+
+
+to{
+
+transform:rotate(0deg);
+
+}
+
+
+}
+
