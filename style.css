@@ -14,8 +14,6 @@ body{
 
     margin:0;
 
-    padding:0;
-
     min-height:100%;
 
     font-family:
@@ -30,34 +28,27 @@ body{
 
 
 
-
 body.home-page{
 
-
     min-height:100vh;
+
+    padding-bottom:120px;
 
 
     background:
 
     radial-gradient(
-    circle at top,
-    rgba(100,70,130,.35),
-    transparent 40%
+        circle at top,
+        rgba(100,70,150,.35),
+        transparent 45%
     ),
 
-
     linear-gradient(
-    160deg,
-    #09090d,
-    #15121c,
-    #0b0b10
+        160deg,
+        #0b0b12,
+        #171326,
+        #0b0b12
     );
-
-
-    padding-bottom:110px;
-
-
-    overflow-x:hidden;
 
 
 }
@@ -77,18 +68,14 @@ body.home-page{
 
     width:360px;
 
-
     max-width:90%;
 
-
     margin:0 auto;
-
 
     padding-top:35px;
 
 
 }
-
 
 
 
@@ -107,12 +94,9 @@ body.home-page{
 
     display:flex;
 
-
     align-items:center;
 
-
     gap:15px;
-
 
     margin-bottom:35px;
 
@@ -122,88 +106,37 @@ body.home-page{
 
 
 
-.mini-logo{
 
-
-    width:52px;
-
-
-    height:52px;
-
-
-    border-radius:50%;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-
-    font-size:28px;
-
-
-    font-weight:700;
-
-
-    color:white;
-
-
-
-
-    background:
-
-    rgba(255,255,255,.08);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.2);
-
-
-
-    box-shadow:
-
-    0 8px 25px rgba(0,0,0,.4);
-
-
-}
-
-
-
-
-
-.home-header h1{
+.brand-text h1{
 
 
     margin:0;
 
 
-    font-size:32px;
-
-
-    letter-spacing:1px;
+    font-size:30px;
 
 
     font-weight:700;
+
+
+    letter-spacing:.5px;
 
 
 }
 
 
 
-.home-header p{
 
 
-    margin:5px 0 0;
+.brand-text p{
 
 
-    color:rgba(255,255,255,.55);
+    margin:4px 0 0;
+
+
+    color:
+
+    rgba(255,255,255,.55);
 
 
     font-size:14px;
@@ -219,41 +152,75 @@ body.home-page{
 
 
 
+
 /* =====================================
-        QUICK MEMORY
+        LOGO
 ===================================== */
 
 
-.quick-memory{
+.memora-mark{
 
 
-    padding:22px;
+    position:relative;
 
 
-    border-radius:28px;
+    width:48px;
 
+    height:48px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+}
+
+
+
+
+.logo-core{
+
+
+    width:32px;
+
+    height:32px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
 
     background:
 
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.08);
 
 
 
     border:
 
-    1px solid rgba(255,255,255,.14);
+    1px solid rgba(255,255,255,.25);
 
 
+    font-size:21px;
 
-    backdrop-filter:
-
-    blur(20px);
-
+    font-weight:700;
 
 
-    margin-bottom:30px;
+    animation:
 
+    logoPulse 5s ease-in-out infinite;
+
+
+    z-index:3;
 
 
 }
@@ -262,7 +229,232 @@ body.home-page{
 
 
 
-.quick-memory h2{
+@keyframes logoPulse{
+
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+
+    50%{
+
+        transform:scale(1.06);
+
+    }
+
+}
+
+
+
+
+
+
+
+.logo-orbit{
+
+
+    position:absolute;
+
+
+    left:50%;
+
+    top:50%;
+
+
+    border-radius:50%;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+    animation:
+
+    orbitMove linear infinite;
+
+
+}
+
+
+
+.logo-orbit span{
+
+
+    position:absolute;
+
+
+    width:5px;
+
+    height:5px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+}
+
+
+
+.orbit-one{
+
+
+    width:42px;
+
+    height:42px;
+
+    animation-duration:6s;
+
+
+}
+
+
+
+.orbit-one span{
+
+
+    top:-3px;
+
+    left:50%;
+
+
+}
+
+
+
+
+.orbit-two{
+
+
+    width:60px;
+
+    height:60px;
+
+    animation-duration:10s;
+
+    animation-direction:reverse;
+
+
+}
+
+
+
+
+.orbit-two span{
+
+
+    right:-3px;
+
+    top:50%;
+
+
+}
+
+
+
+
+
+@keyframes orbitMove{
+
+
+from{
+
+transform:
+
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+to{
+
+transform:
+
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+        QUICK THOUGHT
+===================================== */
+
+
+.thought-card{
+
+
+    padding:22px;
+
+
+    border-radius:28px;
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    backdrop-filter:blur(18px);
+
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.35);
+
+
+}
+
+
+
+
+
+
+.thought-header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+}
+
+
+
+.thought-header h2{
 
 
     margin:0;
@@ -276,10 +468,30 @@ body.home-page{
 
 
 
-.quick-memory p{
+.thought-header span{
 
 
-    margin:8px 0 18px;
+    color:white;
+
+
+    opacity:.7;
+
+
+    font-size:20px;
+
+
+}
+
+
+
+
+
+
+
+.thought-description{
+
+
+    margin:10px 0 18px;
 
 
     color:
@@ -303,7 +515,7 @@ body.home-page{
     width:100%;
 
 
-    height:130px;
+    min-height:120px;
 
 
     resize:none;
@@ -316,29 +528,29 @@ body.home-page{
     border-radius:20px;
 
 
+
     border:
 
-    1px solid rgba(255,255,255,.15);
+    1px solid rgba(255,255,255,.18);
 
 
 
     background:
 
-    rgba(0,0,0,.25);
+    rgba(0,0,0,.2);
 
 
 
     color:white;
 
 
-    font-size:15px;
-
-
     outline:none;
 
 
-}
+    font-size:15px;
 
+
+}
 
 
 
@@ -360,13 +572,6 @@ body.home-page{
 
 
 
-
-
-/* =====================================
-        SAVE BUTTON
-===================================== */
-
-
 #saveMemory{
 
 
@@ -379,18 +584,16 @@ body.home-page{
     margin-top:15px;
 
 
-
     border:none;
 
 
-    border-radius:18px;
-
+    border-radius:25px;
 
 
     background:white;
 
 
-    color:#111;
+    color:#171326;
 
 
     font-size:16px;
@@ -400,7 +603,6 @@ body.home-page{
 
 
     cursor:pointer;
-
 
 
     transition:.25s;
@@ -415,21 +617,19 @@ body.home-page{
 #saveMemory:hover{
 
 
-    transform:
-
-    translateY(-2px);
+    transform:translateY(-2px);
 
 
 }
 
 
 
+
+
 #saveMemory:active{
 
 
-    transform:
-
-    scale(.97);
+    transform:scale(.97);
 
 
 }
@@ -443,17 +643,29 @@ body.home-page{
 
 
 /* =====================================
-        FEED
+        MEMORY FEED
 ===================================== */
 
 
-.feed h2{
+.memory-feed{
 
 
-    font-size:22px;
+    margin-top:30px;
 
 
-    margin-bottom:15px;
+}
+
+
+
+
+
+.feed-title h2{
+
+
+    font-size:21px;
+
+
+    margin:0 0 15px;
 
 
 }
@@ -472,7 +684,7 @@ body.home-page{
     flex-direction:column;
 
 
-    gap:14px;
+    gap:12px;
 
 
 }
@@ -481,25 +693,13 @@ body.home-page{
 
 
 
-
-
-
-/* =====================================
-        MEMORY CARD
-===================================== */
-
-
-.memory-card{
-
-
-    position:relative;
+.memory-item{
 
 
     padding:18px;
 
 
     border-radius:22px;
-
 
 
     background:
@@ -510,17 +710,7 @@ body.home-page{
 
     border:
 
-    1px solid rgba(255,255,255,.14);
-
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-
-    transition:.25s;
+    1px solid rgba(255,255,255,.12);
 
 
 }
@@ -529,27 +719,7 @@ body.home-page{
 
 
 
-.memory-card:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
-
-    border-color:
-
-    rgba(255,255,255,.3);
-
-
-}
-
-
-
-
-
-
-.memory-card p{
+.memory-item p{
 
 
     margin:0;
@@ -567,114 +737,11 @@ body.home-page{
 
 
 
-.memory-footer{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-    margin-top:15px;
-
-
-}
-
-
-
-
-
-.memory-footer span{
-
-
-    font-size:12px;
-
-
-    color:
-
-    rgba(255,255,255,.45);
-
-
-}
-
-
-
-
-
-
-
-
-.delete-memory{
-
-
-    border:none;
-
-
-    background:none;
-
-
-    color:
-
-    rgba(255,255,255,.5);
-
-
-
-    font-size:22px;
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-.delete-memory:hover{
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-
-
-.empty-memory{
-
-
-    text-align:center;
-
-
-    padding:25px;
-
-
-    color:
-
-    rgba(255,255,255,.45);
-
-
-}
-
-
-
-
-
-
 
 
 
 /* =====================================
-        BOTTOM NAV
+        BOTTOM NAVIGATION
 ===================================== */
 
 
@@ -690,9 +757,7 @@ body.home-page{
     left:50%;
 
 
-    transform:
-
-    translateX(-50%);
+    transform:translateX(-50%);
 
 
 
@@ -703,7 +768,7 @@ body.home-page{
 
 
 
-    height:70px;
+    height:72px;
 
 
 
@@ -717,7 +782,7 @@ body.home-page{
 
 
 
-    border-radius:28px;
+    border-radius:30px;
 
 
 
@@ -727,27 +792,16 @@ body.home-page{
 
 
 
+    backdrop-filter:blur(20px);
+
+
+
     border:
 
     1px solid rgba(255,255,255,.15);
 
 
-
-    backdrop-filter:
-
-    blur(25px);
-
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.45);
-
-
 }
-
-
-
 
 
 
@@ -765,8 +819,7 @@ body.home-page{
     color:white;
 
 
-    opacity:.5;
-
+    opacity:.55;
 
 
     display:flex;
@@ -781,28 +834,20 @@ body.home-page{
     gap:4px;
 
 
-
-    cursor:pointer;
-
-
 }
 
 
 
 
-
-.nav-item img{
-
-
-    width:25px;
+.nav-icon{
 
 
-    height:25px;
+    width:26px;
+
+    height:26px;
 
 
 }
-
-
 
 
 
@@ -824,6 +869,9 @@ body.home-page{
     opacity:1;
 
 
+    transform:translateY(-5px);
+
+
 }
 
 
@@ -831,12 +879,14 @@ body.home-page{
 
 
 
-.nav-item.active img{
+.nav-item.active .nav-icon{
 
 
     filter:
 
-    brightness(1.8);
+    drop-shadow(
+    0 0 6px rgba(255,255,255,.6)
+    );
 
 
 }
@@ -848,14 +898,7 @@ body.home-page{
 
 
 
-
-/* =====================================
-        MOBILE
-===================================== */
-
-
 @media(max-width:400px){
-
 
 
 .home-container{
@@ -866,351 +909,6 @@ body.home-page{
 
 }
 
-
-
-.home-header h1{
-
-
-    font-size:28px;
-
-
-}
-
-
-
-}
-/* =====================================
-        MEMORA LOGO V2
-        minimal premium style
-===================================== */
-
-
-.memora-mark{
-
-position:relative;
-
-width:48px;
-
-height:48px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-flex-shrink:0;
-
-}
-
-
-
-
-
-/* центральная буква M */
-
-
-.logo-core{
-
-
-width:32px;
-
-height:32px;
-
-
-border-radius:50%;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-
-font-size:22px;
-
-
-font-weight:700;
-
-
-
-color:white;
-
-
-
-background:
-
-rgba(255,255,255,0.08);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.25);
-
-
-
-backdrop-filter:blur(10px);
-
-
-
-animation:
-
-memoraBreath 5s ease-in-out infinite;
-
-
-
-z-index:5;
-
-
-}
-
-
-
-
-
-@keyframes memoraBreath{
-
-
-0%,
-100%{
-
-transform:scale(1);
-
-}
-
-
-50%{
-
-transform:scale(1.08);
-
-}
-
-
-}
-
-
-
-
-
-
-
-/* орбиты */
-
-
-.logo-orbit{
-
-
-position:absolute;
-
-
-left:50%;
-
-top:50%;
-
-
-border-radius:50%;
-
-
-border:
-
-1px solid rgba(255,255,255,.18);
-
-
-
-transform:
-
-translate(-50%,-50%);
-
-
-
-animation:
-
-memoraOrbit linear infinite;
-
-
-}
-
-
-
-
-.logo-orbit span{
-
-
-position:absolute;
-
-
-width:5px;
-
-height:5px;
-
-
-border-radius:50%;
-
-
-background:white;
-
-
-box-shadow:
-
-0 0 8px rgba(255,255,255,.6);
-
-
-}
-
-
-
-
-
-
-
-/* первая сфера */
-
-
-.orbit-one{
-
-
-width:42px;
-
-height:42px;
-
-
-animation-duration:6s;
-
-
-}
-
-
-
-.orbit-one span{
-
-
-top:-3px;
-
-left:50%;
-
-
-}
-
-
-
-
-
-
-
-/* вторая сфера */
-
-
-.orbit-two{
-
-
-width:60px;
-
-height:60px;
-
-
-animation-duration:10s;
-
-
-animation-direction:reverse;
-
-
-}
-
-
-
-.orbit-two span{
-
-
-right:-3px;
-
-top:50%;
-
-
-}
-
-
-
-
-
-@keyframes memoraOrbit{
-
-
-from{
-
-
-transform:
-
-translate(-50%,-50%)
-rotate(0deg);
-
-
-}
-
-
-
-to{
-
-
-transform:
-
-translate(-50%,-50%)
-rotate(360deg);
-
-
-}
-
-
-}
-
-
-
-
-
-
-/* текст рядом с логотипом */
-
-
-.brand-text h1{
-
-
-margin:0;
-
-
-font-size:28px;
-
-
-font-weight:700;
-
-
-letter-spacing:.5px;
-
-
-color:white;
-
-
-}
-
-
-
-.brand-text p{
-
-
-margin:3px 0 0;
-
-
-font-size:13px;
-
-
-color:
-
-rgba(255,255,255,.55);
-
-
-
-letter-spacing:1px;
 
 
 }
