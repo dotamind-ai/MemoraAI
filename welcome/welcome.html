@@ -8,13 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>Welcome | Memora</title>
+<title>Welcome to Memora</title>
 
 
 <link rel="stylesheet" href="welcome.css">
 
 
 </head>
+
 
 
 <body class="welcome-page">
@@ -35,6 +36,7 @@
 <div class="welcome-logo">
 
 
+
     <div class="big-orbit orbit-one">
 
         <span class="big-planet"></span>
@@ -42,11 +44,16 @@
     </div>
 
 
+
+
     <div class="big-orbit orbit-two">
 
         <span class="big-planet"></span>
 
     </div>
+
+
+
 
 
     <div class="big-orbit orbit-three">
@@ -58,11 +65,13 @@
 
 
 
+
     <div class="big-logo-m">
 
         M
 
     </div>
+
 
 
 
@@ -76,12 +85,12 @@
 
 
 
-<!-- TITLE -->
+<!-- TEXT -->
 
 
 <h1>
 
-Welcome to Memora
+Memora
 
 </h1>
 
@@ -89,10 +98,9 @@ Welcome to Memora
 
 <p class="subtitle">
 
-Your personal memory space
+Your memory space
 
 </p>
-
 
 
 
@@ -104,13 +112,13 @@ Your personal memory space
 <!-- LOGIN -->
 
 
-<section class="auth-card">
+<div class="auth-card">
 
 
 
 <h2>
 
-Войти
+Welcome back
 
 </h2>
 
@@ -119,27 +127,27 @@ Your personal memory space
 
 <input
 
-id="loginLogin"
+id="loginInput"
 
 type="text"
 
-placeholder="Логин"
+placeholder="Login"
 
 >
-
 
 
 
 
 <input
 
-id="loginPassword"
+id="passwordInput"
 
 type="password"
 
-placeholder="Пароль"
+placeholder="Password"
 
 >
+
 
 
 
@@ -148,18 +156,21 @@ placeholder="Пароль"
 
 <button
 
-id="loginBtn"
+class="main-button"
 
-class="main-button">
+onclick="login()"
 
-Войти
+>
+
+Enter
 
 </button>
 
 
 
 
-</section>
+</div>
+
 
 
 
@@ -172,13 +183,13 @@ class="main-button">
 <!-- REGISTER -->
 
 
-<section class="auth-card">
+<div class="auth-card">
 
 
 
 <h2>
 
-Создать аккаунт
+Create account
 
 </h2>
 
@@ -187,25 +198,24 @@ class="main-button">
 
 <input
 
-id="registerLogin"
+id="newLogin"
 
 type="text"
 
-placeholder="Придумайте логин"
+placeholder="New login"
 
 >
 
 
 
 
-
 <input
 
-id="registerPassword"
+id="newPassword"
 
 type="password"
 
-placeholder="Придумайте пароль"
+placeholder="New password"
 
 >
 
@@ -216,18 +226,22 @@ placeholder="Придумайте пароль"
 
 <button
 
-id="registerBtn"
+class="secondary-button"
 
-class="secondary-button">
+onclick="register()"
 
-Создать аккаунт
+>
+
+Create
 
 </button>
 
 
 
 
-</section>
+</div>
+
+
 
 
 
@@ -248,5 +262,6 @@ class="secondary-button">
 
 
 </body>
+
 
 </html>
