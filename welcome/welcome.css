@@ -757,3 +757,525 @@ rotate(360deg);
 }
 
 }
+/* =====================================
+        MEMORA WELCOME PREMIUM MODE
+===================================== */
+
+
+/* общий фон */
+
+.welcome-page{
+
+    background:
+
+    radial-gradient(
+        circle at 50% 20%,
+        rgba(130,80,255,.25),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at 20% 80%,
+        rgba(70,120,255,.15),
+        transparent 30%
+    ),
+
+    linear-gradient(
+        160deg,
+        #050507,
+        #101018,
+        #050507
+    ) !important;
+
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+
+
+/* контейнер */
+
+
+.welcome-container{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+}
+
+
+
+
+
+
+/* логотип */
+
+
+.welcome-logo{
+
+    width:260px !important;
+
+    height:260px !important;
+
+
+    margin:20px auto 35px;
+
+
+    position:relative;
+
+
+}
+
+
+
+
+
+
+/* буква M */
+
+
+.big-logo-m{
+
+    position:absolute !important;
+
+
+    left:50%;
+
+    top:50%;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    width:90px !important;
+
+    height:90px !important;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    font-size:60px !important;
+
+
+    font-weight:900;
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35);
+
+
+    box-shadow:
+
+
+    0 0 30px rgba(255,255,255,.25),
+
+
+    inset 0 0 25px rgba(255,255,255,.15);
+
+
+
+    z-index:20;
+
+
+    animation:none !important;
+
+
+}
+
+
+
+
+
+
+
+/* орбиты */
+
+
+.big-orbit{
+
+
+    position:absolute;
+
+
+    left:50%;
+
+    top:50%;
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+
+    border-radius:50%;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    animation:
+
+    premiumOrbit linear infinite;
+
+
+}
+
+
+
+
+
+
+.orbit-one{
+
+
+    width:120px;
+
+    height:120px;
+
+    animation-duration:7s;
+
+
+}
+
+
+
+.orbit-two{
+
+
+    width:180px;
+
+    height:180px;
+
+    animation-duration:12s;
+
+
+    border-color:
+
+    rgba(150,120,255,.35);
+
+
+}
+
+
+
+.orbit-three{
+
+
+    width:240px;
+
+    height:240px;
+
+    animation-duration:18s;
+
+
+    border-style:dashed;
+
+
+}
+
+
+
+
+
+
+
+/* планеты */
+
+
+.big-planet{
+
+
+    position:absolute;
+
+
+    width:14px;
+
+    height:14px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+
+    0 0 15px white;
+
+
+}
+
+
+
+
+
+.orbit-one .big-planet{
+
+
+    top:-7px;
+
+    left:50%;
+
+
+}
+
+
+
+
+.orbit-two .big-planet{
+
+
+    right:-7px;
+
+    top:50%;
+
+
+}
+
+
+
+
+
+.orbit-three .big-planet{
+
+
+    bottom:20px;
+
+    left:20px;
+
+
+}
+
+
+
+
+
+
+@keyframes premiumOrbit{
+
+
+from{
+
+transform:
+
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+to{
+
+transform:
+
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+/* заголовок */
+
+
+.welcome-container h1{
+
+
+    font-size:42px !important;
+
+
+    letter-spacing:3px;
+
+
+    text-transform:uppercase;
+
+
+    text-shadow:
+
+
+    0 0 20px rgba(255,255,255,.25);
+
+
+}
+
+
+
+
+
+
+.subtitle{
+
+
+    font-size:16px;
+
+
+    opacity:.55;
+
+
+    margin-bottom:45px;
+
+
+}
+
+
+
+
+
+
+/* кнопки */
+
+
+.welcome-actions button{
+
+
+    height:58px;
+
+
+    border-radius:30px;
+
+
+    font-size:16px;
+
+
+    letter-spacing:1px;
+
+
+}
+
+
+
+
+
+.main-button{
+
+
+    box-shadow:
+
+
+    0 0 30px rgba(255,255,255,.25);
+
+
+}
+
+
+
+
+
+
+.secondary-button{
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+}
+
+
+
+
+
+
+
+/* частицы */
+
+
+.particle{
+
+
+    position:absolute;
+
+
+    width:4px;
+
+    height:4px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    opacity:.5;
+
+
+    animation:
+
+    particleMove linear infinite;
+
+
+}
+
+
+
+@keyframes particleMove{
+
+
+from{
+
+transform:
+
+translateY(100vh);
+
+opacity:0;
+
+}
+
+
+50%{
+
+opacity:.8;
+
+}
+
+
+to{
+
+transform:
+
+translateY(-20vh);
+
+opacity:0;
+
+}
+
+
+}
