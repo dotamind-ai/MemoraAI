@@ -838,3 +838,181 @@ textarea::placeholder{
 
 
 }
+/* =================================
+        MINI MEMORA LOGO ANIMATION
+================================= */
+
+
+.mini-logo{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+
+    font-size:32px;
+
+    font-weight:700;
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    animation:
+
+    logoFloat 4s ease-in-out infinite;
+
+
+}
+
+
+
+
+.mini-logo::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:80px;
+
+    height:80px;
+
+
+    border-radius:50%;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    animation:
+
+    logoRotate 10s linear infinite;
+
+
+}
+
+
+
+
+
+.mini-logo::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:90px;
+
+    height:90px;
+
+
+    border-radius:50%;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.08);
+
+
+
+    animation:
+
+    logoRotateReverse 14s linear infinite;
+
+
+}
+
+
+
+
+@keyframes logoFloat{
+
+
+0%,100%{
+
+    transform:translateY(0);
+
+}
+
+
+50%{
+
+    transform:translateY(-5px);
+
+}
+
+
+}
+
+
+
+
+@keyframes logoRotate{
+
+
+from{
+
+    transform:rotate(0deg);
+
+}
+
+
+to{
+
+    transform:rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+@keyframes logoRotateReverse{
+
+
+from{
+
+    transform:rotate(360deg);
+
+}
+
+
+to{
+
+    transform:rotate(0deg);
+
+}
+
+
+}
