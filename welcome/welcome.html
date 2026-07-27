@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>Welcome to Memora</title>
+<title>Memora Welcome</title>
 
 
 <link rel="stylesheet" href="welcome.css">
@@ -22,6 +22,23 @@
 
 
 
+<!-- фоновые частицы -->
+
+<div class="particles">
+
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+
+</div>
+
+
+
+
+
 
 
 <div class="welcome-container">
@@ -31,7 +48,8 @@
 
 
 
-<!-- LOGO -->
+
+<!-- ЛОГО -->
 
 <div class="welcome-logo">
 
@@ -45,14 +63,11 @@
 
 
 
-
     <div class="big-orbit orbit-two">
 
         <span class="big-planet"></span>
 
     </div>
-
-
 
 
 
@@ -65,13 +80,11 @@
 
 
 
-
     <div class="big-logo-m">
 
         M
 
     </div>
-
 
 
 
@@ -85,12 +98,9 @@
 
 
 
-<!-- TEXT -->
-
-
 <h1>
 
-Memora
+Welcome to Memora
 
 </h1>
 
@@ -98,7 +108,7 @@ Memora
 
 <p class="subtitle">
 
-Your memory space
+Your personal memory space
 
 </p>
 
@@ -109,18 +119,23 @@ Your memory space
 
 
 
-<!-- LOGIN -->
+
+<!-- ФОРМА -->
+
+<div class="auth-card" id="authCard">
 
 
-<div class="auth-card">
 
 
 
-<h2>
+<h2 id="authTitle">
 
 Welcome back
 
 </h2>
+
+
+
 
 
 
@@ -134,6 +149,9 @@ type="text"
 placeholder="Login"
 
 >
+
+
+
 
 
 
@@ -156,68 +174,15 @@ placeholder="Password"
 
 <button
 
-class="main-button"
+id="authButton"
 
-onclick="login()"
+class="main-button">
 
->
-
-Enter
+Login
 
 </button>
 
 
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<!-- REGISTER -->
-
-
-<div class="auth-card">
-
-
-
-<h2>
-
-Create account
-
-</h2>
-
-
-
-
-<input
-
-id="newLogin"
-
-type="text"
-
-placeholder="New login"
-
->
-
-
-
-
-<input
-
-id="newPassword"
-
-type="password"
-
-placeholder="New password"
-
->
 
 
 
@@ -226,19 +191,30 @@ placeholder="New password"
 
 <button
 
-class="secondary-button"
+id="switchButton"
 
-onclick="register()"
+class="secondary-button">
 
->
-
-Create
+Create account
 
 </button>
 
 
 
 
+
+
+
+<p id="authMessage">
+
+</p>
+
+
+
+
+
+
+
 </div>
 
 
@@ -257,7 +233,9 @@ Create
 
 
 
-<script src="auth.js"></script>
+
+
+<script src="welcome.js"></script>
 
 
 
