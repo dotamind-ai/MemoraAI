@@ -2876,3 +2876,234 @@ to{
 
 
 }
+/* =====================================
+   MEMORA LOGO HARD RESET
+===================================== */
+
+
+/* контейнер логотипа */
+
+.memora-logo{
+
+    width:100px !important;
+    height:100px !important;
+
+    position:relative !important;
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+}
+
+
+
+
+
+/* буква M фиксируем */
+
+.logo-m{
+
+    position:absolute !important;
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    transform:translate(-50%,-50%) !important;
+
+
+    animation:none !important;
+
+
+    width:45px !important;
+
+    height:45px !important;
+
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+
+    z-index:20 !important;
+
+}
+
+
+
+
+
+
+/* все старые анимации отключаем */
+
+.logo-circle{
+
+    animation:none !important;
+
+}
+
+
+
+
+
+/* создаём новые орбиты */
+
+
+.circle-one,
+.circle-two,
+.circle-three{
+
+
+    position:absolute !important;
+
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    border-radius:50% !important;
+
+
+    transform:translate(-50%,-50%) !important;
+
+
+    animation:
+
+    orbitSpin linear infinite !important;
+
+
+}
+
+
+
+
+.circle-one{
+
+    width:55px !important;
+
+    height:55px !important;
+
+    animation-duration:5s !important;
+
+}
+
+
+
+.circle-two{
+
+    width:75px !important;
+
+    height:75px !important;
+
+    animation-duration:8s !important;
+
+}
+
+
+
+.circle-three{
+
+    width:95px !important;
+
+    height:95px !important;
+
+    animation-duration:12s !important;
+
+}
+
+
+
+
+
+
+/* планеты */
+
+
+.planet{
+
+
+    position:absolute !important;
+
+
+    width:10px !important;
+
+    height:10px !important;
+
+
+    border-radius:50% !important;
+
+
+    background:white !important;
+
+
+    box-shadow:
+
+    0 0 12px white !important;
+
+
+}
+
+
+
+
+
+
+.circle-one .planet{
+
+    top:-5px !important;
+
+    left:50% !important;
+
+}
+
+
+
+.circle-two .planet{
+
+    right:-5px !important;
+
+    top:50% !important;
+
+}
+
+
+
+.circle-three .planet{
+
+    bottom:5px !important;
+
+    left:10px !important;
+
+}
+
+
+
+
+
+
+
+@keyframes orbitSpin{
+
+
+from{
+
+    rotate:0deg;
+
+}
+
+
+to{
+
+    rotate:360deg;
+
+}
+
+
+}
