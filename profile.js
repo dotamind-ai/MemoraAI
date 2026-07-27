@@ -3,19 +3,43 @@
 ===================================== */
 
 
-console.log("MEMORA PROFILE VERSION 2");
+console.log("MEMORA PROFILE FINAL");
 
 
 
 
 
 // ===============================
-// ЭЛЕМЕНТЫ
+// ELEMENTS
 // ===============================
+
+
+const memoraLogo =
+document.getElementById("memoraLogo");
+
+
+const profileMenu =
+document.getElementById("profileMenu");
+
+
+const profileOverlay =
+document.getElementById("profileOverlay");
+
+
+
+const editProfile =
+document.getElementById("editProfile");
+
+
+
+const loginButton =
+document.getElementById("loginButton");
+
 
 
 const profileName =
 document.getElementById("profileName");
+
 
 
 const profileAvatar =
@@ -38,43 +62,12 @@ document.getElementById("favoriteStat");
 
 
 
-const profileMenuButton =
-document.getElementById("profileMenuButton");
-
-
-
-const profileMenu =
-document.getElementById("profileMenu");
-
-
-
-const profileOverlay =
-document.getElementById("profileOverlay");
-
-
-
-
-
-const editProfile =
-document.getElementById("editProfile");
-
-
-
-
-
-const loginButton =
-document.getElementById("loginButton");
-
-
-
-
-
 
 
 
 
 // ===============================
-// ЗАГРУЗКА ПРОФИЛЯ
+// PROFILE DATA
 // ===============================
 
 
@@ -82,14 +75,15 @@ let userProfile = JSON.parse(
 
 localStorage.getItem("memoraProfile")
 
-) || {
+)
 
+||
+
+{
 
 name:"Гость",
 
-
 avatar:"👤"
-
 
 };
 
@@ -99,6 +93,11 @@ avatar:"👤"
 
 
 
+
+
+// ===============================
+// LOAD PROFILE
+// ===============================
 
 
 function loadProfile(){
@@ -138,7 +137,7 @@ userProfile.avatar;
 
 
 // ===============================
-// СТАТИСТИКА
+// STATISTICS
 // ===============================
 
 
@@ -150,7 +149,11 @@ let memories = JSON.parse(
 
 localStorage.getItem("memora")
 
-) || [];
+)
+
+||
+
+[];
 
 
 
@@ -160,7 +163,12 @@ let events = JSON.parse(
 
 localStorage.getItem("memoraEvents")
 
-) || [];
+)
+
+||
+
+[];
+
 
 
 
@@ -183,6 +191,7 @@ favorites++;
 
 
 });
+
 
 
 
@@ -254,11 +263,11 @@ favorites;
 
 
 // ===============================
-// ОТКРЫТИЕ МЕНЮ
+// MENU
 // ===============================
 
 
-function openProfileMenu(){
+function openMenu(){
 
 
 
@@ -286,8 +295,7 @@ profileOverlay.classList.add("show");
 
 
 
-
-function closeProfileMenu(){
+function closeMenu(){
 
 
 
@@ -306,6 +314,7 @@ profileOverlay.classList.remove("show");
 }
 
 
+
 }
 
 
@@ -316,13 +325,17 @@ profileOverlay.classList.remove("show");
 
 
 
-if(profileMenuButton){
+// LOGO BUTTON
 
 
-profileMenuButton.onclick = ()=>{
+if(memoraLogo){
 
 
-openProfileMenu();
+
+memoraLogo.onclick = ()=>{
+
+
+openMenu();
 
 
 };
@@ -335,6 +348,10 @@ openProfileMenu();
 
 
 
+
+
+
+// CLOSE OUTSIDE
 
 
 if(profileOverlay){
@@ -343,7 +360,7 @@ if(profileOverlay){
 profileOverlay.onclick = ()=>{
 
 
-closeProfileMenu();
+closeMenu();
 
 
 };
@@ -360,18 +377,18 @@ closeProfileMenu();
 
 
 // ===============================
-// ИЗМЕНИТЬ ПРОФИЛЬ
+// EDIT PROFILE
 // ===============================
 
 
 if(editProfile){
 
 
+
 editProfile.onclick = ()=>{
 
 
-
-let newName = prompt(
+let name = prompt(
 
 "Введите имя",
 
@@ -383,13 +400,13 @@ userProfile.name
 
 
 
-if(newName && newName.trim()!==""){
+
+if(name && name.trim()!==""){
 
 
 
 userProfile.name =
-newName.trim();
-
+name.trim();
 
 
 
@@ -403,7 +420,6 @@ JSON.stringify(userProfile)
 
 
 
-
 loadProfile();
 
 
@@ -412,12 +428,11 @@ loadProfile();
 
 
 
-closeProfileMenu();
+closeMenu();
 
 
 
 };
-
 
 
 }
@@ -431,30 +446,31 @@ closeProfileMenu();
 
 
 // ===============================
-// ВХОД / РЕГИСТРАЦИЯ
+// LOGIN
 // ===============================
 
 
 if(loginButton){
 
 
-loginButton.onclick = ()=>{
 
+loginButton.onclick = ()=>{
 
 
 alert(
 
-"Регистрация будет доступна после запуска сервера"
+"Регистрация появится позже"
 
 );
 
 
 
-closeProfileMenu();
+closeMenu();
 
 
 
 };
+
 
 
 }
@@ -468,20 +484,20 @@ closeProfileMenu();
 
 
 // ===============================
-// СМЕНА АВАТАРА
+// AVATAR
 // ===============================
 
 
 if(profileAvatar){
 
 
-profileAvatar.onclick = ()=>{
 
+profileAvatar.onclick = ()=>{
 
 
 let avatar = prompt(
 
-"Введите эмодзи аватара",
+"Введите символ аватара",
 
 userProfile.avatar
 
@@ -492,7 +508,6 @@ userProfile.avatar
 
 
 if(avatar){
-
 
 
 userProfile.avatar =
@@ -520,6 +535,7 @@ loadProfile();
 };
 
 
+
 }
 
 
@@ -531,7 +547,7 @@ loadProfile();
 
 
 // ===============================
-// НАВИГАЦИЯ
+// NAVIGATION
 // ===============================
 
 
@@ -558,7 +574,6 @@ window.location.href="calendar.html";
 
 
 
-
 function goEvents(){
 
 
@@ -570,7 +585,6 @@ window.location.href="events.html";
 
 
 
-
 function goProfile(){
 
 
@@ -578,7 +592,6 @@ window.location.href="profile.html";
 
 
 }
-
 
 
 
@@ -599,12 +612,9 @@ window.location.href="settings.html";
 
 
 
-// ===============================
 // START
-// ===============================
 
 
 loadProfile();
-
 
 loadStatistics();
