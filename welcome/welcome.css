@@ -2023,3 +2023,208 @@ to{
 
 
 }
+/* =====================================
+      MEMORA AI WOW BACKGROUND
+===================================== */
+
+
+/* движущиеся световые шары */
+
+.welcome-page .energy-ball{
+
+    position:fixed;
+
+    width:180px;
+    height:180px;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(180,120,255,.35),
+        transparent 70%
+    );
+
+
+    filter:blur(15px);
+
+
+    z-index:0;
+
+
+    pointer-events:none;
+
+
+    animation:
+    energyMove 15s ease-in-out infinite;
+
+}
+
+
+
+
+
+@keyframes energyMove{
+
+
+0%{
+
+    transform:
+    translate(-50px,0)
+    scale(1);
+
+}
+
+
+
+50%{
+
+    transform:
+    translate(200px,150px)
+    scale(1.4);
+
+}
+
+
+
+100%{
+
+    transform:
+    translate(-50px,0)
+    scale(1);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* сетка цифровой памяти */
+
+
+.welcome-page{
+
+background-image:
+
+
+linear-gradient(
+rgba(255,255,255,.025) 1px,
+transparent 1px
+),
+
+
+linear-gradient(
+90deg,
+rgba(255,255,255,.025) 1px,
+transparent 1px
+);
+
+
+background-size:
+
+60px 60px;
+
+
+}
+
+
+
+
+
+
+
+/* мерцающие звезды */
+
+
+.welcome-page .star{
+
+
+position:fixed;
+
+
+width:4px;
+
+height:4px;
+
+
+border-radius:50%;
+
+
+background:white;
+
+
+box-shadow:
+
+0 0 15px white;
+
+
+opacity:.5;
+
+
+animation:
+
+starBlink 3s infinite;
+
+
+z-index:1;
+
+}
+
+
+
+
+
+@keyframes starBlink{
+
+
+0%,100%{
+
+opacity:.2;
+
+transform:scale(1);
+
+}
+
+
+
+50%{
+
+opacity:1;
+
+transform:scale(2);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* плавная подсветка вокруг центра */
+
+
+.memora-logo{
+
+
+filter:
+
+drop-shadow(
+0 0 25px rgba(150,80,255,.5)
+);
+
+
+}
