@@ -788,7 +788,9 @@ rotate(360deg);
     ) !important;
 
 
-    overflow:hidden;
+    overflow-x:hidden;
+
+    overflow-y:auto;
 
 }
 
