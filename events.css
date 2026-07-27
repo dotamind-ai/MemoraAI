@@ -1,5 +1,5 @@
 /* =====================================
-        MEMORA EVENTS CLEAN STYLE
+        MEMORA EVENTS CLEAN CSS
 ===================================== */
 
 
@@ -31,7 +31,7 @@ body.events-page{
 
     radial-gradient(
         circle at top,
-        rgba(125,90,180,.35),
+        rgba(120,80,170,.35),
         transparent 45%
     ),
 
@@ -46,6 +46,7 @@ body.events-page{
     overflow-x:hidden;
 
 }
+
 
 
 
@@ -96,8 +97,10 @@ body.events-page{
 
 
 
+
+
 /* =====================================
-        NEW EVENT BUTTON
+        CREATE BUTTON
 ===================================== */
 
 
@@ -116,18 +119,17 @@ body.events-page{
     border-radius:28px;
 
 
-
     background:
 
     linear-gradient(
         135deg,
         #ffffff,
-        #d8c9ff
+        #d8ccff
     );
 
 
 
-    color:#17131f;
+    color:#15121c;
 
 
     font-size:17px;
@@ -139,8 +141,7 @@ body.events-page{
     cursor:pointer;
 
 
-
-    transition:.25s;
+    transition:.3s;
 
 
 
@@ -149,17 +150,15 @@ body.events-page{
     0 12px 30px
     rgba(255,255,255,.18);
 
+
 }
 
 
 
 .new-event:hover{
 
-
     transform:
-
     translateY(-3px);
-
 
 }
 
@@ -167,13 +166,12 @@ body.events-page{
 
 .new-event:active{
 
-
     transform:
-
     scale(.96);
 
-
 }
+
+
 
 
 
@@ -203,16 +201,16 @@ body.events-page{
     rgba(255,255,255,.08);
 
 
-
     border:
 
-    1px solid rgba(255,255,255,.18);
+    1px solid rgba(255,255,255,.15);
 
 
 
     backdrop-filter:
 
     blur(20px);
+
 
 }
 
@@ -227,6 +225,7 @@ body.events-page{
 
 
 
+
 .event-form input,
 .event-form textarea,
 .event-form select{
@@ -235,25 +234,25 @@ body.events-page{
     width:100%;
 
 
-    margin-bottom:12px;
-
-
     padding:14px;
+
+
+    margin-bottom:12px;
 
 
     border-radius:18px;
 
 
 
-    background:
-
-    rgba(255,255,255,.1);
-
-
-
     border:
 
     1px solid rgba(255,255,255,.15);
+
+
+
+    background:
+
+    rgba(255,255,255,.1);
 
 
 
@@ -269,9 +268,12 @@ body.events-page{
 
 .event-form textarea{
 
+
     height:110px;
 
+
     resize:none;
+
 
 }
 
@@ -281,9 +283,12 @@ body.events-page{
 
 .form-buttons{
 
+
     display:flex;
 
-    gap:10px;
+
+    gap:12px;
+
 
 }
 
@@ -318,7 +323,7 @@ body.events-page{
     background:white;
 
 
-    color:#16121d;
+    color:#15121c;
 
 
 }
@@ -347,7 +352,7 @@ body.events-page{
 
 
 /* =====================================
-        EVENTS GRID
+        EVENT GRID
 ===================================== */
 
 
@@ -375,6 +380,9 @@ body.events-page{
 
 
 
+
+
+
 /* =====================================
         CARD
 ===================================== */
@@ -386,14 +394,14 @@ body.events-page{
     position:relative;
 
 
-    min-height:160px;
+    min-height:165px;
 
 
     padding:16px;
 
 
-
     border-radius:22px;
+
 
 
     background:
@@ -404,7 +412,7 @@ body.events-page{
 
     border:
 
-    1px solid rgba(255,255,255,.18);
+    1px solid rgba(255,255,255,.15);
 
 
 
@@ -414,24 +422,19 @@ body.events-page{
 
 
 
-    box-shadow:
-
-
-    0 0 25px
-    rgba(255,255,255,.15);
-
-
-
     display:flex;
 
 
     flex-direction:column;
 
 
-    transition:.25s;
+
+    transition:.3s;
 
 
 }
+
+
 
 
 
@@ -444,14 +447,35 @@ body.events-page{
     translateY(-4px);
 
 
+}
+
+
+
+
+
+/* закрепленная карточка */
+
+
+.event-card.favorite{
+
+
+    border-color:
+
+    rgba(255,255,255,.45);
+
+
+
     box-shadow:
 
+    0 0 25px
 
-    0 0 35px
-    rgba(255,255,255,.25);
+    rgba(255,255,255,.35);
 
 
 }
+
+
+
 
 
 
@@ -484,21 +508,21 @@ body.events-page{
     height:30px;
 
 
-    border-radius:50%;
-
-
     display:flex;
-
-
-    align-items:center;
 
 
     justify-content:center;
 
 
+    align-items:center;
+
+
+    border-radius:50%;
+
+
     background:
 
-    rgba(255,255,255,.15);
+    rgba(255,255,255,.12);
 
 
 }
@@ -534,16 +558,16 @@ body.events-page{
 .event-card p{
 
 
+    margin:12px 0;
+
+
     font-size:12px;
 
 
     opacity:.75;
 
 
-    line-height:1.4;
-
-
-    margin:12px 0;
+    line-height:1.5;
 
 
 }
@@ -575,7 +599,7 @@ body.events-page{
 
 
 /* =====================================
-        PIN STAR
+        STAR PIN
 ===================================== */
 
 
@@ -591,42 +615,24 @@ body.events-page{
     right:10px;
 
 
-
-    width:34px;
-
-
-    height:34px;
-
-
-    border-radius:50%;
-
-
     border:none;
 
 
-    background:
+    background:none;
 
-    rgba(255,255,255,.1);
+
+    padding:0;
 
 
 
     color:white;
 
 
-    font-size:20px;
-
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
+    font-size:24px;
 
 
     cursor:pointer;
+
 
 
     transition:.3s;
@@ -641,12 +647,13 @@ body.events-page{
 .event-pin:hover{
 
 
-    background:
+    transform:
 
-    rgba(255,255,255,.2);
+    scale(1.15);
 
 
 }
+
 
 
 
@@ -654,13 +661,19 @@ body.events-page{
 .event-pin.active{
 
 
-    box-shadow:
+    color:white;
 
 
-    0 0 18px rgba(255,255,255,.8);
+    text-shadow:
+
+
+    0 0 8px white,
+
+    0 0 18px white;
 
 
 }
+
 
 
 
@@ -671,7 +684,7 @@ body.events-page{
 
 
 /* =====================================
-        CARD BUTTONS
+        CARD ICON ACTIONS
 ===================================== */
 
 
@@ -684,7 +697,10 @@ body.events-page{
     justify-content:center;
 
 
-    gap:12px;
+    align-items:center;
+
+
+    gap:18px;
 
 
     margin-top:12px;
@@ -695,35 +711,22 @@ body.events-page{
 
 
 
-
 .event-actions button{
-
-
-    width:36px;
-
-
-    height:36px;
 
 
     border:none;
 
 
-    border-radius:50%;
+    background:none;
 
 
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
+    padding:0;
 
 
     cursor:pointer;
 
 
-    font-size:17px;
+    font-size:22px;
 
 
     transition:.25s;
@@ -738,15 +741,28 @@ body.events-page{
 .event-edit{
 
 
-    background:
+    color:
 
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.75);
+
+
+}
+
+
+
+.event-edit:hover{
 
 
     color:white;
 
 
+    transform:
+
+    scale(1.15);
+
+
 }
+
 
 
 
@@ -754,12 +770,9 @@ body.events-page{
 .event-delete{
 
 
-    background:
+    color:
 
-    rgba(255,90,90,.18);
-
-
-    color:#ff8888;
+    rgba(255,120,120,.8);
 
 
 }
@@ -767,12 +780,15 @@ body.events-page{
 
 
 
-.event-actions button:hover{
+.event-delete:hover{
+
+
+    color:#ff9999;
 
 
     transform:
 
-    translateY(-3px);
+    scale(1.15);
 
 
 }
@@ -802,7 +818,9 @@ body.events-page{
     left:50%;
 
 
-    transform:translateX(-50%);
+    transform:
+
+    translateX(-50%);
 
 
 
@@ -812,8 +830,7 @@ body.events-page{
     max-width:90%;
 
 
-
-    height:70px;
+    height:72px;
 
 
 
@@ -846,7 +863,6 @@ body.events-page{
 
 
     align-items:center;
-
 
 
     z-index:100;
@@ -918,8 +934,6 @@ body.events-page{
 
 
 
-
-
 .nav-item small{
 
 
@@ -938,11 +952,20 @@ body.events-page{
 @media(max-width:400px){
 
 
-    .events-container{
+.event-list{
 
-        width:330px;
 
-    }
+    gap:10px;
+
+}
+
+
+
+.events-container{
+
+    width:330px;
+
+}
 
 
 }
