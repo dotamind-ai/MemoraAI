@@ -1677,3 +1677,349 @@ body{
 
 
 }
+/* =====================================
+        MEMORA AI BACKGROUND V2
+===================================== */
+
+
+/* глубокий космический слой */
+
+.welcome-page{
+
+    position:relative;
+
+    overflow-x:hidden;
+
+}
+
+
+
+/* фиолетовая дымка */
+
+.welcome-page::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:900px;
+
+    height:900px;
+
+
+    top:-350px;
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(150,80,255,.22),
+        transparent 65%
+    );
+
+
+    filter:blur(40px);
+
+
+    animation:
+
+    auraMove 18s ease-in-out infinite;
+
+
+    z-index:0;
+
+}
+
+
+
+@keyframes auraMove{
+
+
+0%,100%{
+
+    scale:1;
+
+    opacity:.6;
+
+}
+
+
+50%{
+
+    scale:1.35;
+
+    opacity:1;
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* синие волны */
+
+
+.welcome-page::after{
+
+
+    content:"";
+
+
+    position:fixed;
+
+
+    width:700px;
+
+    height:700px;
+
+
+    right:-250px;
+
+    bottom:-250px;
+
+
+
+    background:
+
+
+    radial-gradient(
+        circle,
+        rgba(50,120,255,.18),
+        transparent 65%
+    );
+
+
+
+    filter:blur(50px);
+
+
+    animation:
+
+    blueMove 20s ease infinite;
+
+
+    z-index:0;
+
+
+}
+
+
+
+
+@keyframes blueMove{
+
+
+0%,100%{
+
+    transform:translate(0,0);
+
+}
+
+
+
+50%{
+
+    transform:translate(-100px,-80px);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+        NEURAL NETWORK
+===================================== */
+
+
+.neuron{
+
+
+    position:fixed;
+
+
+    width:7px;
+
+    height:7px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 0 15px white,
+
+    0 0 30px rgba(140,80,255,.8);
+
+
+
+    opacity:.5;
+
+
+    z-index:1;
+
+
+}
+
+
+
+
+
+.neuron-line{
+
+
+    position:fixed;
+
+
+    height:1px;
+
+
+    background:
+
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.35),
+
+        transparent
+
+    );
+
+
+    transform-origin:left center;
+
+
+    opacity:.25;
+
+
+    z-index:1;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+        FLOATING PARTICLES
+===================================== */
+
+
+.ai-particle{
+
+
+    position:fixed;
+
+
+    width:3px;
+
+    height:3px;
+
+
+    background:white;
+
+
+    border-radius:50%;
+
+
+    opacity:.4;
+
+
+    box-shadow:
+
+    0 0 10px white;
+
+
+    animation:
+
+    particleRise linear infinite;
+
+
+    z-index:1;
+
+}
+
+
+
+@keyframes particleRise{
+
+
+from{
+
+
+    transform:
+
+    translateY(110vh)
+
+    translateX(0);
+
+
+}
+
+
+
+to{
+
+
+    transform:
+
+    translateY(-20vh)
+
+    translateX(100px);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* весь интерфейс выше фона */
+
+
+.home-container,
+.bottom-nav,
+.welcome-content{
+
+
+    position:relative;
+
+    z-index:5;
+
+
+}
