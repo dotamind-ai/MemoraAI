@@ -914,3 +914,47 @@ transform:translateY(-4px);
 
 
 }
+/* =====================================
+      MEMORA SVG NAV FIX
+===================================== */
+
+
+.nav-icon{
+
+    width:26px !important;
+
+    height:26px !important;
+
+    color:white !important;
+
+    transition:.3s ease !important;
+
+}
+
+
+
+
+
+.nav-item.active .nav-icon{
+
+
+    color:#a78bff !important;
+
+
+    filter:
+    drop-shadow(0 0 8px #a78bff) !important;
+
+
+}
+
+
+
+
+
+.nav-item:hover .nav-icon{
+
+
+    transform:translateY(-4px) !important;
+
+
+}
