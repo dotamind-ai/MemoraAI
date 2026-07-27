@@ -1,47 +1,52 @@
-/* =====================================
-        MEMORA PROFILE PAGE
-===================================== */
+*{
+    box-sizing:border-box;
+}
 
 
-.profile-page{
-
-margin:0;
-
-min-height:100vh;
-
-padding-top:35px;
-
-padding-bottom:120px;
-
-font-family:
-"Segoe UI",
-Arial,
-sans-serif;
-
-color:white;
 
 
-background:
-
-radial-gradient(
-circle at top,
-#402652 0%,
-transparent 45%
-),
-
-linear-gradient(
-160deg,
-#080810,
-#171321,
-#080810
-);
+body.profile-page{
 
 
-display:flex;
+    margin:0;
 
-justify-content:center;
 
-overflow-x:hidden;
+    min-height:100vh;
+
+
+    padding-top:40px;
+
+
+    padding-bottom:120px;
+
+
+    font-family:
+
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+
+
+    color:#ffffff;
+
+
+
+    background:
+
+
+    linear-gradient(
+        160deg,
+        #080808,
+        #161616,
+        #090909
+    );
+
+
+
+    overflow-x:hidden;
+
 
 }
 
@@ -49,103 +54,37 @@ overflow-x:hidden;
 
 
 
-/* =====================================
-        PROFILE CONTAINER
-===================================== */
+
+
+/* =========================
+        CONTAINER
+========================= */
 
 
 .profile-container{
 
-width:360px;
 
-max-width:90%;
-
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
+    width:360px;
 
 
-gap:20px;
+    max-width:90%;
 
 
-}
+    margin:auto;
 
 
 
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
 
 
 
-
-
-
-/* =====================================
-        AVATAR
-===================================== */
-
-
-.profile-avatar{
-
-
-margin-top:25px;
-
-
-width:140px;
-
-height:140px;
-
-
-border-radius:50%;
-
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-
-font-size:65px;
-
-
-
-background:
-
-linear-gradient(
-145deg,
-rgba(255,255,255,.22),
-rgba(255,255,255,.05)
-);
-
-
-
-border:
-
-2px solid rgba(255,255,255,.3);
-
-
-
-backdrop-filter:blur(20px);
-
-
-
-box-shadow:
-
-
-0 0 30px rgba(170,130,255,.7),
-
-0 0 70px rgba(80,180,255,.25);
-
-
-
-cursor:pointer;
-
-
-transition:.3s;
+    gap:22px;
 
 
 }
@@ -153,58 +92,76 @@ transition:.3s;
 
 
 
-.profile-avatar:hover{
-
-
-transform:scale(1.05);
-
-
-}
 
 
 
 
-
-
-
-
-
-/* =====================================
-        MEMORA LOGO BUTTON
-===================================== */
+/* =========================
+        LOGO BUTTON
+========================= */
 
 
 .memora-profile-logo{
 
 
-position:fixed;
+    position:fixed;
 
 
-top:22px;
+    top:20px;
 
 
-right:22px;
+    right:20px;
 
 
-width:48px;
+
+    width:42px;
 
 
-height:48px;
+    height:42px;
 
 
-display:flex;
+
+    border-radius:50%;
 
 
-align-items:center;
+
+    border:1px solid rgba(255,255,255,.25);
 
 
-justify-content:center;
+
+    background:#111;
 
 
-cursor:pointer;
+
+    display:flex;
 
 
-z-index:50;
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    cursor:pointer;
+
+
+
+    z-index:50;
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.memora-profile-logo:hover{
+
+
+    background:#1c1c1c;
 
 
 }
@@ -218,53 +175,16 @@ z-index:50;
 .logo-letter{
 
 
-width:32px;
+    font-size:20px;
 
 
-height:32px;
+    font-weight:800;
 
 
-border-radius:50%;
+    letter-spacing:1px;
 
 
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-
-font-size:22px;
-
-
-font-weight:bold;
-
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(255,255,255,.5),
-rgba(255,255,255,.05)
-);
-
-
-
-box-shadow:
-
-
-0 0 15px white,
-
-0 0 35px #916cff;
-
-
-
-z-index:3;
+    color:white;
 
 
 }
@@ -273,35 +193,75 @@ z-index:3;
 
 
 
-.logo-orbit{
-
-
-position:absolute;
-
-
-left:50%;
-
-
-top:50%;
-
-
-border-radius:50%;
-
-
-border:
-
-1px solid rgba(255,255,255,.35);
 
 
 
-transform:
 
-translate(-50%,-50%);
+/* =========================
+        AVATAR
+========================= */
 
 
-animation:
+.avatar-wrapper{
 
-logoSpin linear infinite;
+
+    position:relative;
+
+
+}
+
+
+
+.profile-avatar{
+
+
+    width:150px;
+
+
+    height:150px;
+
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    font-size:65px;
+
+
+
+    background:
+
+
+    #161616;
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    box-shadow:
+
+
+    0 15px 35px rgba(0,0,0,.6);
+
+
+
+    cursor:pointer;
 
 
 }
@@ -310,137 +270,47 @@ logoSpin linear infinite;
 
 
 
-.logo-orbit span{
+.avatar-camera{
 
 
-position:absolute;
+    position:absolute;
 
 
-width:5px;
+    right:5px;
 
 
-height:5px;
+    bottom:5px;
 
 
-border-radius:50%;
 
+    width:38px;
 
-background:white;
 
+    height:38px;
 
-box-shadow:
 
-0 0 12px white;
 
+    border-radius:50%;
 
-}
 
 
+    border:none;
 
 
 
-.orbit-a{
+    background:#ffffff;
 
-width:45px;
 
-height:45px;
 
-animation-duration:4s;
+    color:#111;
 
-}
 
 
+    font-size:24px;
 
-.orbit-a span{
 
-top:-3px;
 
-left:50%;
-
-}
-
-
-
-
-
-
-.orbit-b{
-
-width:60px;
-
-height:60px;
-
-animation-duration:6s;
-
-animation-direction:reverse;
-
-}
-
-
-
-
-.orbit-b span{
-
-right:-3px;
-
-top:50%;
-
-}
-
-
-
-
-
-.orbit-c{
-
-width:75px;
-
-height:75px;
-
-animation-duration:8s;
-
-}
-
-
-
-.orbit-c span{
-
-bottom:5px;
-
-left:15px;
-
-background:#80d7ff;
-
-}
-
-
-
-
-
-@keyframes logoSpin{
-
-
-from{
-
-transform:
-
-translate(-50%,-50%)
-rotate(0deg);
-
-}
-
-
-
-to{
-
-
-transform:
-
-translate(-50%,-50%)
-rotate(360deg);
-
-
-}
+    cursor:pointer;
 
 
 }
@@ -453,146 +323,55 @@ rotate(360deg);
 
 
 
-/* =====================================
+/* =========================
         NAME
-===================================== */
+========================= */
 
 
 .profile-name{
 
 
-margin:0;
-
-
-font-size:30px;
-
-
-font-weight:600;
-
-
-letter-spacing:1px;
-
-
-text-align:center;
+    margin:0;
 
 
 
-background:
-
-linear-gradient(
-90deg,
-#ffffff,
-#c9b8ff,
-#8fdcff
-);
+    font-size:32px;
 
 
 
--webkit-background-clip:text;
-
-
--webkit-text-fill-color:transparent;
+    font-weight:700;
 
 
 
-text-shadow:
-
-0 0 20px rgba(180,150,255,.35);
+    letter-spacing:.5px;
 
 
 }
 
 
 
-
-
-
-
-
-
-/* =====================================
-        STATUS
-===================================== */
 
 
 .profile-status{
 
 
-margin:0;
-
-
-font-size:16px;
-
-
-letter-spacing:3px;
-
-
-text-transform:uppercase;
-
-
-font-weight:300;
+    margin:-10px 0 0;
 
 
 
-background:
-
-linear-gradient(
-90deg,
-#ffffff,
-#b8a7ff,
-#7ed7ff
-);
+    color:#999;
 
 
 
--webkit-background-clip:text;
-
-
--webkit-text-fill-color:transparent;
+    font-size:14px;
 
 
 
-text-align:center;
-
-
-}
+    letter-spacing:3px;
 
 
 
-
-
-.profile-status::after{
-
-
-content:"";
-
-
-display:block;
-
-
-width:45px;
-
-
-height:2px;
-
-
-margin:10px auto 0;
-
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-#9c7cff,
-transparent
-);
-
-
-
-box-shadow:
-
-0 0 12px #9c7cff;
+    text-transform:uppercase;
 
 
 }
@@ -605,21 +384,22 @@ box-shadow:
 
 
 
-/* =====================================
-        STATISTICS
-===================================== */
+/* =========================
+        STATS
+========================= */
 
 
 .profile-stats{
 
 
-width:100%;
+    width:100%;
 
 
-display:flex;
+
+    display:flex;
 
 
-gap:10px;
+    gap:12px;
 
 
 }
@@ -630,37 +410,34 @@ gap:10px;
 .stat-card{
 
 
-flex:1;
-
-
-padding:15px 5px;
-
-
-border-radius:22px;
-
-
-background:
-
-rgba(255,255,255,.08);
+    flex:1;
 
 
 
-border:
-
-1px solid rgba(255,255,255,.18);
+    padding:18px 5px;
 
 
 
-backdrop-filter:blur(18px);
+    text-align:center;
 
 
 
-text-align:center;
+    border-radius:18px;
 
 
-box-shadow:
 
-0 10px 30px rgba(0,0,0,.35);
+    background:
+
+
+    #131313;
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.08);
+
 
 
 }
@@ -672,17 +449,18 @@ box-shadow:
 .stat-card span{
 
 
-display:block;
+    display:block;
 
 
-font-size:26px;
+
+    font-size:26px;
 
 
-font-weight:bold;
+
+    font-weight:700;
 
 
 }
-
 
 
 
@@ -690,7 +468,7 @@ font-weight:bold;
 .stat-card small{
 
 
-opacity:.65;
+    color:#888;
 
 
 }
@@ -703,43 +481,34 @@ opacity:.65;
 
 
 
-/* =====================================
+/* =========================
         LEVEL
-===================================== */
+========================= */
 
 
 .profile-level{
 
 
-width:100%;
-
-
-padding:20px;
-
-
-box-sizing:border-box;
-
-
-border-radius:25px;
-
-
-background:
-
-rgba(255,255,255,.08);
+    width:100%;
 
 
 
-border:
-
-1px solid rgba(255,255,255,.15);
+    padding:20px;
 
 
 
-backdrop-filter:blur(20px);
+    border-radius:22px;
 
 
 
-text-align:center;
+    background:#131313;
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.08);
 
 
 }
@@ -751,14 +520,14 @@ text-align:center;
 .profile-level h2{
 
 
-font-size:17px;
+    margin:0 0 15px;
 
 
-margin:0 0 15px;
+
+    font-size:18px;
 
 
 }
-
 
 
 
@@ -766,26 +535,22 @@ margin:0 0 15px;
 .level-bar{
 
 
-width:100%;
-
-
-height:12px;
-
-
-background:
-
-rgba(255,255,255,.12);
+    height:10px;
 
 
 
-border-radius:20px;
+    background:#222;
 
 
-overflow:hidden;
+
+    border-radius:20px;
+
+
+
+    overflow:hidden;
 
 
 }
-
 
 
 
@@ -793,28 +558,19 @@ overflow:hidden;
 .level-bar span{
 
 
-display:block;
-
-
-height:100%;
-
-
-width:35%;
-
-
-background:
-
-linear-gradient(
-90deg,
-#8c5cff,
-#65c7ff
-);
+    display:block;
 
 
 
-box-shadow:
+    height:100%;
 
-0 0 15px #8c5cff;
+
+
+    width:35%;
+
+
+
+    background:#ffffff;
 
 
 }
@@ -827,15 +583,15 @@ box-shadow:
 
 
 
-/* =====================================
+/* =========================
         ACHIEVEMENTS
-===================================== */
+========================= */
 
 
 .achievements{
 
 
-width:100%;
+    width:100%;
 
 
 }
@@ -847,10 +603,10 @@ width:100%;
 .achievements h2{
 
 
-font-size:21px;
+    font-size:22px;
 
 
-margin-bottom:12px;
+    margin-bottom:15px;
 
 
 }
@@ -862,48 +618,30 @@ margin-bottom:12px;
 .achievement-card{
 
 
-padding:15px;
-
-
-margin-bottom:10px;
-
-
-border-radius:20px;
-
-
-background:
-
-rgba(255,255,255,.08);
+    padding:16px;
 
 
 
-border:
-
-1px solid rgba(255,255,255,.15);
+    margin-bottom:12px;
 
 
 
-backdrop-filter:blur(18px);
-
-
-transition:.3s;
-
-
-}
+    border-radius:18px;
 
 
 
+    background:#131313;
 
 
-.achievement-card:hover{
+
+    border:
 
 
-transform:translateY(-3px);
+    1px solid rgba(255,255,255,.08);
 
 
-box-shadow:
 
-0 0 25px rgba(150,120,255,.4);
+    color:#ddd;
 
 
 }
@@ -916,145 +654,30 @@ box-shadow:
 
 
 
-/* =====================================
+/* =========================
         POPUP MENU
-===================================== */
+========================= */
 
 
 .profile-overlay{
 
 
-position:fixed;
+    position:fixed;
 
 
-inset:0;
+    inset:0;
 
 
-background:
 
-rgba(0,0,0,.55);
+    background:rgba(0,0,0,.55);
 
 
-display:none;
 
+    display:none;
 
-z-index:60;
 
 
-}
-
-
-
-
-
-
-.profile-menu{
-
-
-position:fixed;
-
-
-top:85px;
-
-
-right:20px;
-
-
-width:280px;
-
-
-padding:18px;
-
-
-border-radius:25px;
-
-
-
-background:
-
-rgba(255,255,255,.12);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.25);
-
-
-
-backdrop-filter:blur(25px);
-
-
-
-display:none;
-
-
-flex-direction:column;
-
-
-gap:12px;
-
-
-z-index:70;
-
-
-}
-
-
-
-
-
-.profile-menu button{
-
-
-height:50px;
-
-
-border:none;
-
-
-border-radius:25px;
-
-
-background:
-
-rgba(255,255,255,.15);
-
-
-
-color:white;
-
-
-font-size:16px;
-
-
-cursor:pointer;
-
-
-}
-
-
-
-
-
-.profile-menu button:hover{
-
-
-background:
-
-rgba(255,255,255,.25);
-
-
-}
-
-
-
-
-
-.profile-menu.show{
-
-
-display:flex;
+    z-index:60;
 
 
 }
@@ -1066,7 +689,125 @@ display:flex;
 .profile-overlay.show{
 
 
-display:block;
+    display:block;
+
+
+}
+
+
+
+
+
+.profile-menu{
+
+
+    position:fixed;
+
+
+
+    top:75px;
+
+
+    right:20px;
+
+
+
+    width:260px;
+
+
+
+    padding:15px;
+
+
+
+    border-radius:22px;
+
+
+
+    background:#151515;
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    display:none;
+
+
+
+    flex-direction:column;
+
+
+
+    gap:10px;
+
+
+
+    z-index:70;
+
+
+}
+
+
+
+
+
+.profile-menu.show{
+
+
+    display:flex;
+
+
+}
+
+
+
+
+
+.profile-menu button{
+
+
+    height:48px;
+
+
+
+    border:none;
+
+
+
+    border-radius:15px;
+
+
+
+    background:#202020;
+
+
+
+    color:white;
+
+
+
+    font-size:15px;
+
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+.profile-menu button:hover{
+
+
+    background:#2a2a2a;
 
 
 }
@@ -1079,9 +820,146 @@ display:block;
 
 
 
-/* =====================================
-        MOBILE
-===================================== */
+/* =========================
+        NAVIGATION
+========================= */
+
+
+.bottom-nav{
+
+
+    position:fixed;
+
+
+    bottom:18px;
+
+
+    left:50%;
+
+
+
+    transform:translateX(-50%);
+
+
+
+    width:350px;
+
+
+    max-width:90%;
+
+
+
+    height:72px;
+
+
+
+    display:flex;
+
+
+    justify-content:space-around;
+
+
+    align-items:center;
+
+
+
+    background:#111;
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.12);
+
+
+
+    border-radius:30px;
+
+
+}
+
+
+
+
+
+
+.nav-item{
+
+
+    border:none;
+
+
+    background:none;
+
+
+
+    color:white;
+
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+
+    opacity:.5;
+
+
+
+    gap:5px;
+
+
+}
+
+
+
+
+
+.nav-item.active{
+
+
+    opacity:1;
+
+
+}
+
+
+
+
+
+.nav-icon{
+
+
+    width:26px;
+
+
+    height:26px;
+
+
+}
+
+
+
+
+
+.nav-item small{
+
+
+    font-size:11px;
+
+
+}
+
+
+
+
+
 
 
 @media(max-width:400px){
@@ -1090,7 +968,7 @@ display:block;
 .profile-container{
 
 
-width:330px;
+    width:330px;
 
 
 }
@@ -1100,74 +978,14 @@ width:330px;
 .profile-avatar{
 
 
-width:125px;
-
-height:125px;
+    width:130px;
 
 
-font-size:55px;
+    height:130px;
 
 
 }
 
-
-
-.profile-name{
-
-
-font-size:26px;
-
-
-}
-
-
-
-}
-.nav-icon{
-
-
-width:26px;
-
-
-height:26px;
-
-
-color:white;
-
-
-transition:.3s;
-
-
-}
-
-
-
-
-
-.nav-item.active .nav-icon{
-
-
-color:#a78bff;
-
-
-filter:
-
-drop-shadow(
-0 0 8px #a78bff
-);
-
-
-}
-
-
-
-
-.nav-item:hover .nav-icon{
-
-
-transform:
-
-translateY(-4px);
 
 
 }
