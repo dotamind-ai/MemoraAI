@@ -11,9 +11,11 @@
 <title>Memora Profile</title>
 
 
+
 <link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet" href="profile.css">
+
 
 
 </head>
@@ -26,13 +28,56 @@
 
 
 
+<!-- Логотип Memora -->
+
+
+<div class="memora-profile-logo" id="memoraLogo">
+
+
+    <div class="logo-orbit orbit-a">
+        <span></span>
+    </div>
+
+
+    <div class="logo-orbit orbit-b">
+        <span></span>
+    </div>
+
+
+    <div class="logo-orbit orbit-c">
+        <span></span>
+    </div>
+
+
+
+    <div class="logo-letter">
+
+        M
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
 <div class="profile-container">
 
 
 
 
 
-    <!-- АВАТАР -->
+<!-- Аватар -->
+
+
+<div class="avatar-wrapper">
+
 
     <div 
     class="profile-avatar"
@@ -46,54 +91,52 @@
 
 
 
+    <button 
+    class="avatar-camera"
+    id="avatarCamera">
 
 
+        📷
 
 
+    </button>
 
-    <!-- МАЛЕНЬКИЙ ЛОГОТИП MEMORA -->
 
+</div>
 
-    <div 
-    class="memora-profile-logo"
-    id="profileMenuButton">
 
 
 
-        <div class="logo-letter">
 
-            M
 
-        </div>
 
 
 
+<!-- Имя -->
 
-        <div class="logo-orbit orbit-a">
 
-            <span></span>
+<h1 
+class="profile-name"
+id="profileName">
 
-        </div>
 
+    Гость
 
 
-        <div class="logo-orbit orbit-b">
+</h1>
 
-            <span></span>
 
-        </div>
 
 
 
-        <div class="logo-orbit orbit-c">
 
-            <span></span>
+<p class="profile-status">
 
-        </div>
+    Memory Keeper
 
+</p>
 
 
-    </div>
 
 
 
@@ -101,230 +144,77 @@
 
 
 
+<!-- Статистика -->
 
 
-    <!-- ИМЯ -->
+<div class="profile-stats">
 
 
-    <h1 
-    class="profile-name"
-    id="profileName">
 
+<div class="stat-card">
 
-        Гость
 
+<span id="memoryStat">
 
-    </h1>
+0
 
+</span>
 
 
+<small>
 
+Memories
 
-    <p class="profile-status">
+</small>
 
 
-         Memory Keeper
+</div>
 
 
-    </p>
 
 
 
+<div class="stat-card">
 
 
+<span id="eventStat">
 
+0
 
+</span>
 
 
-    <!-- СТАТИСТИКА -->
+<small>
 
+Events
 
-    <div class="profile-stats">
+</small>
 
 
+</div>
 
-        <div class="stat-card">
 
 
-            <span id="memoryStat">
 
-                0
 
-            </span>
+<div class="stat-card">
 
 
-            <small>
+<span id="favoriteStat">
 
-                Memories
+0
 
-            </small>
+</span>
 
 
-        </div>
+<small>
 
+Favorites
 
+</small>
 
 
-
-
-
-        <div class="stat-card">
-
-
-            <span id="eventStat">
-
-                0
-
-            </span>
-
-
-            <small>
-
-                Events
-
-            </small>
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="stat-card">
-
-
-            <span id="favoriteStat">
-
-                0
-
-            </span>
-
-
-            <small>
-
-                Favorites
-
-            </small>
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- УРОВЕНЬ -->
-
-
-    <div class="profile-level">
-
-
-
-        <h2>
-
-            MEMORA LEVEL 1
-
-        </h2>
-
-
-
-        <div class="level-bar">
-
-
-            <span></span>
-
-
-        </div>
-
-
-
-        <p>
-
-            35 XP / 100 XP
-
-        </p>
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- ДОСТИЖЕНИЯ -->
-
-
-    <div class="achievements">
-
-
-
-        <h2>
-
-            Achievements
-
-        </h2>
-
-
-
-
-
-        <div class="achievement-card">
-
-
-            ⭐ First Memory
-
-
-        </div>
-
-
-
-
-
-        <div class="achievement-card">
-
-
-            🌙 Night Creator
-
-
-        </div>
-
-
-
-
-
-        <div class="achievement-card">
-
-
-            📅 Event Master
-
-
-        </div>
-
-
-
-
-
-    </div>
-
-
-
-
+</div>
 
 
 
@@ -338,11 +228,28 @@
 
 
 
-<!-- Затемнение -->
+<!-- Уровень -->
 
-<div 
-class="profile-overlay"
-id="profileOverlay">
+
+<div class="profile-level">
+
+
+<h2>
+
+Memora Level 1
+
+</h2>
+
+
+
+<div class="level-bar">
+
+
+<span></span>
+
+
+</div>
+
 
 </div>
 
@@ -353,7 +260,59 @@ id="profileOverlay">
 
 
 
-<!-- МЕНЮ -->
+
+<!-- Достижения -->
+
+
+<div class="achievements">
+
+
+<h2>
+
+Achievements
+
+</h2>
+
+
+
+
+<div class="achievement-card">
+
+Memory Starter
+
+</div>
+
+
+
+
+<div class="achievement-card">
+
+First Event
+
+</div>
+
+
+
+
+<div class="achievement-card">
+
+Memory Collector
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Кнопка меню профиля -->
 
 
 <div 
@@ -361,42 +320,29 @@ class="profile-menu"
 id="profileMenu">
 
 
+<button>
+
+✏️ Edit Profile
+
+</button>
+
+
+<button onclick="goSettings()">
+
+Settings
+
+</button>
+
+
+<button id="loginButton">
+
+Login / Register
+
+</button>
 
 
 
-    <button id="editProfile">
-
-
-        ✏️ Edit Profile
-
-
-    </button>
-
-
-
-
-
-
-    <button onclick="goSettings()">
-
-
-        ⚙️ Settings
-
-
-    </button>
-
-
-
-
-
-
-    <button id="loginButton">
-
-
-        🔐 Login / Register
-
-
-    </button>
+</div>
 
 
 
@@ -412,15 +358,10 @@ id="profileMenu">
 
 
 
-
-
-
-<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+<!-- Нижняя навигация -->
 
 
 <nav class="bottom-nav">
-
-
 
 
 
@@ -430,17 +371,21 @@ onclick="goHome()">
 
 
 
-🏠
+<img 
+src="icons/memories.svg"
+class="nav-icon">
+
 
 
 <small>
 
-Home
+Memories
 
 </small>
 
 
 </button>
+
 
 
 
@@ -454,7 +399,10 @@ onclick="goCalendar()">
 
 
 
-📅
+<img 
+src="icons/calendar.svg"
+class="nav-icon">
+
 
 
 <small>
@@ -472,13 +420,17 @@ Calendar
 
 
 
+
 <button 
 class="nav-item"
 onclick="goEvents()">
 
 
 
-✨
+<img 
+src="icons/events.svg"
+class="nav-icon">
+
 
 
 <small>
@@ -496,13 +448,17 @@ Events
 
 
 
+
 <button 
 class="nav-item active"
 onclick="goProfile()">
 
 
 
-👤
+<img 
+src="icons/profile.svg"
+class="nav-icon">
+
 
 
 <small>
@@ -532,6 +488,5 @@ Profile
 
 
 </body>
-
 
 </html>
