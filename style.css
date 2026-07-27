@@ -1525,3 +1525,311 @@ to{
 
 
 }
+/* =====================================
+        MEMORA LOGO FINAL FIX
+===================================== */
+
+
+.memora-logo{
+
+
+    width:85px !important;
+
+    height:85px !important;
+
+
+    position:relative !important;
+
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+
+    flex-shrink:0 !important;
+
+
+    animation:
+
+    logoFloat 4s ease-in-out infinite !important;
+
+
+}
+
+
+
+
+
+
+.logo-m{
+
+
+    width:55px !important;
+
+    height:55px !important;
+
+
+    border-radius:50% !important;
+
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+
+    font-size:38px !important;
+
+
+    font-weight:800 !important;
+
+
+    color:white !important;
+
+
+
+    background:
+
+    rgba(255,255,255,.08) !important;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35) !important;
+
+
+
+    position:relative !important;
+
+
+    z-index:3 !important;
+
+
+
+    text-shadow:
+
+    0 0 15px rgba(255,255,255,.45) !important;
+
+
+}
+
+
+
+
+
+
+
+.logo-circle{
+
+
+    position:absolute !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18) !important;
+
+
+}
+
+
+
+.circle-one{
+
+
+    width:65px !important;
+
+    height:65px !important;
+
+
+    animation:
+
+    circleRotate 8s linear infinite !important;
+
+
+}
+
+
+
+
+
+.circle-two{
+
+
+    width:85px !important;
+
+    height:85px !important;
+
+
+    animation:
+
+    circleRotateReverse 12s linear infinite !important;
+
+
+}
+
+
+
+
+
+.circle-three{
+
+
+    width:105px !important;
+
+    height:105px !important;
+
+
+    border-style:dashed !important;
+
+
+    animation:
+
+    circleRotate 18s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+
+.memora-logo::after{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:6px !important;
+
+    height:6px !important;
+
+
+    background:white !important;
+
+
+    border-radius:50% !important;
+
+
+    top:8px !important;
+
+    right:15px !important;
+
+
+
+    animation:
+
+    dotMove 6s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+@keyframes logoFloat{
+
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+@keyframes circleRotate{
+
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+
+}
+
+
+
+
+
+@keyframes circleRotateReverse{
+
+
+    from{
+
+        transform:rotate(360deg);
+
+    }
+
+
+    to{
+
+        transform:rotate(0deg);
+
+    }
+
+
+}
+
+
+
+
+
+
+@keyframes dotMove{
+
+
+    0%{
+
+        transform:rotate(0deg) translateX(45px) rotate(0deg);
+
+    }
+
+
+    100%{
+
+        transform:rotate(360deg) translateX(45px) rotate(-360deg);
+
+    }
+
+
+}
