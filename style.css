@@ -4036,3 +4036,355 @@ to{
 
 
 }
+/* =====================================
+   MEMORA ORBIT FINAL ENGINE
+===================================== */
+
+
+/* контейнер */
+
+.memora-logo{
+
+    width:110px !important;
+    height:110px !important;
+
+    position:relative !important;
+
+}
+
+
+
+/* M */
+
+.logo-m{
+
+    position:absolute !important;
+
+    left:50% !important;
+    top:50% !important;
+
+
+    transform:translate(-50%,-50%) !important;
+
+
+    animation:none !important;
+
+
+    z-index:50 !important;
+
+}
+
+
+
+
+
+
+/* орбиты стоят на месте */
+
+
+.orbit{
+
+
+    position:absolute !important;
+
+
+    left:50% !important;
+    top:50% !important;
+
+
+    transform:translate(-50%,-50%) !important;
+
+
+    border-radius:50% !important;
+
+
+    border:1px solid rgba(255,255,255,.2) !important;
+
+
+}
+
+
+
+
+
+
+
+.orbit-one{
+
+
+    width:60px !important;
+
+    height:60px !important;
+
+
+}
+
+
+
+
+
+.orbit-two{
+
+
+    width:82px !important;
+
+    height:82px !important;
+
+
+}
+
+
+
+
+
+.orbit-three{
+
+
+    width:105px !important;
+
+    height:105px !important;
+
+
+}
+
+
+
+
+
+
+/* планеты */
+
+
+.planet{
+
+
+    position:absolute !important;
+
+
+    width:10px !important;
+
+    height:10px !important;
+
+
+    border-radius:50% !important;
+
+
+    background:white !important;
+
+
+    box-shadow:0 0 10px white !important;
+
+
+    animation:none !important;
+
+}
+
+
+
+
+
+
+/* первая планета */
+
+.planet-one{
+
+
+    top:-5px !important;
+
+    left:50% !important;
+
+
+}
+
+
+
+
+
+
+/* вторая */
+
+.planet-two{
+
+
+    right:-5px !important;
+
+    top:50% !important;
+
+
+}
+
+
+
+
+
+
+/* третья */
+
+.planet-three{
+
+
+    bottom:5px !important;
+
+    left:10px !important;
+
+
+}
+
+
+
+
+
+
+
+/*
+   вращаем только планету
+   вокруг центра орбиты
+*/
+
+
+.orbit-one .planet{
+
+
+    animation:
+
+    spinAround1 5s linear infinite !important;
+
+
+}
+
+
+
+
+
+.orbit-two .planet{
+
+
+    animation:
+
+    spinAround2 8s linear infinite !important;
+
+
+}
+
+
+
+
+
+.orbit-three .planet{
+
+
+    animation:
+
+    spinAround3 12s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+@keyframes spinAround1{
+
+
+from{
+
+    transform:
+
+    rotate(0deg)
+
+    translateX(30px)
+
+    rotate(0deg);
+
+}
+
+
+to{
+
+    transform:
+
+    rotate(360deg)
+
+    translateX(30px)
+
+    rotate(-360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+@keyframes spinAround2{
+
+
+from{
+
+    transform:
+
+    rotate(0deg)
+
+    translateX(41px)
+
+    rotate(0deg);
+
+}
+
+
+to{
+
+    transform:
+
+    rotate(360deg)
+
+    translateX(41px)
+
+    rotate(-360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+@keyframes spinAround3{
+
+
+from{
+
+    transform:
+
+    rotate(0deg)
+
+    translateX(52px)
+
+    rotate(0deg);
+
+}
+
+
+to{
+
+    transform:
+
+    rotate(360deg)
+
+    translateX(52px)
+
+    rotate(-360deg);
+
+}
+
+
+}
