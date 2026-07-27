@@ -1,9 +1,10 @@
 /* =====================================
-        MEMORA HOME JS V1
+        MEMORA HOME JS V2
 ===================================== */
 
 
-console.log("MEMORA HOME VERSION 1");
+console.log("MEMORA HOME VERSION 2");
+
 
 
 
@@ -12,34 +13,36 @@ console.log("MEMORA HOME VERSION 1");
 // ===============================
 
 
-const thoughtInput =
-document.getElementById("quickThought");
+const memoryInput =
+document.getElementById("memoryInput");
 
 
-const saveButton =
-document.getElementById("saveThought");
+const saveMemory =
+document.getElementById("saveMemory");
 
 
-const thoughtFeed =
-document.getElementById("thoughtFeed");
+const memoryList =
+document.getElementById("memoryList");
 
 
-const thoughtCount =
-document.getElementById("thoughtCount");
+
 
 
 
 
 // ===============================
-// ДАННЫЕ
+// ХРАНИЛИЩЕ
 // ===============================
 
 
-let thoughts = JSON.parse(
+let memories = JSON.parse(
 
-localStorage.getItem("memoraThoughts")
+localStorage.getItem("memora")
 
 ) || [];
+
+
+
 
 
 
@@ -55,9 +58,9 @@ function saveStorage(){
 
 localStorage.setItem(
 
-"memoraThoughts",
+"memora",
 
-JSON.stringify(thoughts)
+JSON.stringify(memories)
 
 );
 
@@ -69,37 +72,44 @@ JSON.stringify(thoughts)
 
 
 
+
+
 // ===============================
 // ОТОБРАЖЕНИЕ ЛЕНТЫ
 // ===============================
 
 
-function renderThoughts(){
+function renderMemories(){
 
 
-if(!thoughtFeed)
+
+if(!memoryList)
 return;
 
 
 
-thoughtFeed.innerHTML="";
+
+memoryList.innerHTML="";
 
 
 
 
 
-if(thoughts.length===0){
+if(memories.length===0){
 
 
-thoughtFeed.innerHTML=`
+memoryList.innerHTML=`
 
-<div class="empty-state">
+<div class="empty-memory">
 
-No thoughts yet
+No memories yet
 
 </div>
 
 `;
+
+
+return;
 
 
 }
@@ -110,7 +120,10 @@ No thoughts yet
 
 
 
-thoughts.slice(0,10).forEach((item,index)=>{
+
+memories
+.slice(0,10)
+.forEach((memory,index)=>{
 
 
 
@@ -120,45 +133,43 @@ document.createElement("div");
 
 
 card.className =
-"thought-card";
+"memory-card";
 
 
 
 
 
-card.innerHTML = `
-
-
-<div class="thought-content">
-
+card.innerHTML=`
 
 <p>
 
-${item.text}
+${memory.text}
 
 </p>
 
 
-<small>
 
-${item.date}
-
-</small>
+<div class="memory-footer">
 
 
-</div>
+<span>
+
+${memory.date}
+
+</span>
 
 
 
 <button 
-class="delete-thought"
-data-index="${index}">
-
+class="delete-memory">
 
 ×
 
 
 </button>
+
+
+</div>
 
 
 `;
@@ -168,21 +179,23 @@ data-index="${index}">
 
 
 
-const deleteBtn =
-card.querySelector(".delete-thought");
+
+const deleteButton =
+card.querySelector(".delete-memory");
 
 
 
-deleteBtn.onclick=()=>{
+deleteButton.onclick=()=>{
 
 
-thoughts.splice(index,1);
+memories.splice(index,1);
+
 
 
 saveStorage();
 
 
-renderThoughts();
+renderMemories();
 
 
 };
@@ -192,7 +205,8 @@ renderThoughts();
 
 
 
-thoughtFeed.appendChild(card);
+
+memoryList.appendChild(card);
 
 
 
@@ -202,9 +216,6 @@ thoughtFeed.appendChild(card);
 
 
 
-updateCount();
-
-
 }
 
 
@@ -216,48 +227,20 @@ updateCount();
 
 
 // ===============================
-// СЧЁТЧИК
+// ДОБАВЛЕНИЕ
 // ===============================
 
 
-function updateCount(){
-
-
-if(thoughtCount){
-
-
-thoughtCount.innerText =
-thoughts.length;
-
-
-}
-
-
-}
+if(saveMemory){
 
 
 
-
-
-
-
-
-
-// ===============================
-// ДОБАВЛЕНИЕ МЫСЛИ
-// ===============================
-
-
-if(saveButton){
-
-
-
-saveButton.onclick=()=>{
+saveMemory.onclick=()=>{
 
 
 
 const text =
-thoughtInput.value.trim();
+memoryInput.value.trim();
 
 
 
@@ -277,7 +260,7 @@ return;
 
 
 
-const newThought = {
+const newMemory={
 
 
 text:text,
@@ -306,7 +289,7 @@ month:"short"
 
 
 
-thoughts.unshift(newThought);
+memories.unshift(newMemory);
 
 
 
@@ -316,11 +299,11 @@ saveStorage();
 
 
 
-renderThoughts();
+renderMemories();
 
 
 
-thoughtInput.value="";
+memoryInput.value="";
 
 
 
@@ -340,34 +323,31 @@ thoughtInput.value="";
 
 
 // ===============================
-// ENTER ДЛЯ СОХРАНЕНИЯ
+// ENTER
 // ===============================
 
 
-if(thoughtInput){
+if(memoryInput){
 
 
-
-thoughtInput.addEventListener(
+memoryInput.addEventListener(
 
 "keydown",
 
-(e)=>{
+function(e){
 
 
 if(
-
 e.key==="Enter"
 &&
 !e.shiftKey
-
 ){
 
 
 e.preventDefault();
 
 
-saveButton.click();
+saveMemory.click();
 
 
 }
@@ -394,44 +374,34 @@ saveButton.click();
 // ===============================
 
 
-function goHome(){
 
+function goHome(){
 
 window.location.href="index.html";
 
-
 }
-
 
 
 
 function goCalendar(){
 
-
 window.location.href="calendar.html";
 
-
 }
-
 
 
 
 function goEvents(){
 
-
 window.location.href="events.html";
 
-
 }
-
 
 
 
 function goProfile(){
 
-
 window.location.href="profile.html";
-
 
 }
 
@@ -444,8 +414,8 @@ window.location.href="profile.html";
 
 
 // ===============================
-// ЗАПУСК
+// START
 // ===============================
 
 
-renderThoughts();
+renderMemories();
