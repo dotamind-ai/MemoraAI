@@ -1,10 +1,20 @@
-/* =================================
-        MEMORA GLOBAL
-================================= */
+/* =====================================
+        MEMORA STYLE
+        CLEAN BRUTAL VERSION
+===================================== */
+
+
+/* RESET */
 
 *{
     box-sizing:border-box;
 }
+
+
+html{
+    scroll-behavior:smooth;
+}
+
 
 
 body{
@@ -22,6 +32,12 @@ body{
 
 
 
+
+/* =====================================
+        HOME PAGE
+===================================== */
+
+
 .home-page{
 
     min-height:100vh;
@@ -35,15 +51,15 @@ body{
 
     radial-gradient(
         circle at top,
-        rgba(90,70,130,.35),
+        rgba(120,80,170,.22),
         transparent 45%
     ),
 
     linear-gradient(
         160deg,
-        #09090d,
-        #15141b,
-        #0b0b10
+        #08080c,
+        #15131c,
+        #09090d
     );
 
 
@@ -54,10 +70,6 @@ body{
 
 
 
-/* =================================
-        CONTAINER
-================================= */
-
 
 .home-container{
 
@@ -67,16 +79,17 @@ body{
 
     margin:auto;
 
-
 }
 
 
 
 
 
-/* =================================
+
+
+/* =====================================
         HEADER
-================================= */
+===================================== */
 
 
 .home-header{
@@ -90,6 +103,8 @@ body{
     margin-bottom:35px;
 
 }
+
+
 
 
 
@@ -107,13 +122,17 @@ body{
 
 
 
+
 .header-text p{
 
-    margin:5px 0 0;
+    margin:
 
-    opacity:.55;
+    6px 0 0;
+
 
     font-size:14px;
+
+    opacity:.55;
 
 }
 
@@ -121,68 +140,66 @@ body{
 
 
 
-/* =================================
-        LOGO
-================================= */
 
 
-.memora-logo{
+/* =====================================
+        MEMORA LOGO
+===================================== */
+
+
+
+.mini-logo{
+
 
     width:70px;
 
     height:70px;
 
+
+    flex-shrink:0;
+
+
     position:relative;
+
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
-}
-
-
-
-.logo-m{
-
-
-    width:45px;
-
-    height:45px;
+    justify-content:center;
 
 
     border-radius:50%;
 
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    font-size:28px;
-
-    font-weight:700;
-
 
     background:
 
-    rgba(255,255,255,.08);
+    rgba(255,255,255,.07);
+
 
 
     border:
 
-    1px solid rgba(255,255,255,.35);
+    1px solid rgba(255,255,255,.25);
 
 
-    z-index:3;
+
+    font-size:32px;
+
+
+    font-weight:700;
+
+
+    color:white;
+
+
+    z-index:2;
 
 
     animation:
 
-    logoPulse 4s infinite;
+    logoFloat 5s ease-in-out infinite;
 
 
 }
@@ -190,10 +207,25 @@ body{
 
 
 
-.logo-circle{
+
+
+
+/* первое спокойное кольцо */
+
+
+.mini-logo::before{
+
+
+    content:"";
 
 
     position:absolute;
+
+
+    width:88px;
+
+    height:88px;
+
 
     border-radius:50%;
 
@@ -203,56 +235,113 @@ body{
     1px solid rgba(255,255,255,.18);
 
 
+
     animation:
 
-    orbitMove linear infinite;
+    logoRotate 10s linear infinite;
 
 
 }
 
 
 
-.circle-one{
 
-    width:55px;
 
-    height:55px;
 
-    animation-duration:8s;
+
+/* второе кольцо */
+
+
+.mini-logo::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:105px;
+
+    height:105px;
+
+
+    border-radius:50%;
+
+
+    border:
+
+    1px dashed rgba(255,255,255,.12);
+
+
+
+    animation:
+
+    logoRotateReverse 15s linear infinite;
+
 
 }
 
 
 
-.circle-two{
 
-    width:65px;
 
-    height:65px;
 
-    animation-duration:12s;
 
-    animation-direction:reverse;
+/* маленькие точки на орбитах */
+
+
+.mini-logo span{
+
+
+    position:absolute;
+
+
+    width:6px;
+
+    height:6px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
 
 }
 
 
 
 
-.circle-three{
 
-    width:75px;
 
-    height:75px;
 
-    animation-duration:16s;
+@keyframes logoFloat{
+
+
+0%,100%{
+
+    transform:translateY(0);
+
+}
+
+
+50%{
+
+    transform:translateY(-4px);
+
+}
+
 
 }
 
 
 
 
-@keyframes orbitMove{
+
+
+
+@keyframes logoRotate{
 
 
 from{
@@ -274,34 +363,30 @@ to{
 
 
 
-@keyframes logoPulse{
 
 
-0%,100%{
 
-    transform:scale(1);
-
-}
+@keyframes logoRotateReverse{
 
 
-50%{
+from{
 
-    transform:scale(1.06);
+    transform:rotate(360deg);
 
 }
 
 
+to{
+
+    transform:rotate(0deg);
+
 }
 
 
-
-
-
-
-
-/* =================================
-        CAPTURE CARD
-================================= */
+}
+/* =====================================
+        QUICK THOUGHT
+===================================== */
 
 
 .capture-card{
@@ -318,9 +403,10 @@ to{
     rgba(255,255,255,.06);
 
 
+
     border:
 
-    1px solid rgba(255,255,255,.14);
+    1px solid rgba(255,255,255,.12);
 
 
 
@@ -329,7 +415,8 @@ to{
     blur(18px);
 
 
-    margin-bottom:25px;
+
+    margin-bottom:30px;
 
 
 }
@@ -340,22 +427,36 @@ to{
 
 .capture-card h2{
 
+
     margin:0;
+
 
     font-size:22px;
 
+
+    letter-spacing:.5px;
+
+
 }
+
 
 
 
 .capture-card p{
 
-    margin:6px 0 18px;
+
+    margin:
+
+    7px 0 18px;
+
 
     opacity:.55;
 
-}
 
+    font-size:14px;
+
+
+}
 
 
 
@@ -376,7 +477,9 @@ textarea{
     padding:16px;
 
 
+
     border-radius:18px;
+
 
 
     border:
@@ -387,7 +490,8 @@ textarea{
 
     background:
 
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.05);
+
 
 
     color:white;
@@ -399,14 +503,37 @@ textarea{
     font-size:15px;
 
 
+    font-family:inherit;
+
+
 }
+
+
+
+
+
+
+textarea:focus{
+
+
+    border-color:
+
+    rgba(255,255,255,.35);
+
+
+}
+
 
 
 
 
 textarea::placeholder{
 
-    color:rgba(255,255,255,.4);
+
+    color:
+
+    rgba(255,255,255,.35);
+
 
 }
 
@@ -414,9 +541,11 @@ textarea::placeholder{
 
 
 
-/* =================================
-        TYPES
-================================= */
+
+
+/* =====================================
+        MEMORY TYPES
+===================================== */
 
 
 .memory-types{
@@ -424,13 +553,20 @@ textarea::placeholder{
 
     display:flex;
 
-    gap:8px;
 
     flex-wrap:wrap;
 
+
+    gap:8px;
+
+
     margin-top:15px;
 
+
 }
+
+
+
 
 
 
@@ -439,30 +575,61 @@ textarea::placeholder{
 
     border:
 
+
     1px solid rgba(255,255,255,.15);
+
 
 
     background:
 
-    rgba(255,255,255,.06);
+    rgba(255,255,255,.05);
+
 
 
     color:white;
 
 
-    padding:8px 14px;
+
+    padding:
+
+    8px 14px;
 
 
-    border-radius:18px;
+
+    border-radius:20px;
 
 
-    font-size:11px;
+
+    font-size:12px;
 
 
-    letter-spacing:.5px;
+
+    cursor:pointer;
+
+
+
+    transition:.25s;
 
 
 }
+
+
+
+
+
+
+.type-btn:hover{
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+}
+
+
+
 
 
 
@@ -471,7 +638,9 @@ textarea::placeholder{
 
     background:white;
 
+
     color:#111;
+
 
 }
 
@@ -480,15 +649,14 @@ textarea::placeholder{
 
 
 
-/* =================================
+
+
+/* =====================================
         SAVE BUTTON
-================================= */
+===================================== */
 
 
 .save-button{
-
-
-    margin-top:18px;
 
 
     width:100%;
@@ -497,10 +665,13 @@ textarea::placeholder{
     height:52px;
 
 
+    margin-top:18px;
+
+
     border:none;
 
 
-    border-radius:25px;
+    border-radius:26px;
 
 
     background:white;
@@ -509,10 +680,10 @@ textarea::placeholder{
     color:#111;
 
 
-    font-weight:700;
-
-
     font-size:16px;
+
+
+    font-weight:700;
 
 
     cursor:pointer;
@@ -525,10 +696,15 @@ textarea::placeholder{
 
 
 
-.save-button:active{
 
 
-    transform:scale(.96);
+
+.save-button:hover{
+
+
+    transform:
+
+    translateY(-2px);
 
 
 }
@@ -537,9 +713,27 @@ textarea::placeholder{
 
 
 
-/* =================================
-        FEED
-================================= */
+
+.save-button:active{
+
+
+    transform:
+
+    scale(.96);
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+        MEMORY FEED
+===================================== */
+
 
 
 .feed-header{
@@ -547,20 +741,30 @@ textarea::placeholder{
 
     display:flex;
 
+
     align-items:center;
+
 
     justify-content:space-between;
 
+
 }
+
+
 
 
 
 .feed-header h2{
 
 
-    font-size:21px;
+    margin:0;
+
+
+    font-size:22px;
+
 
 }
+
 
 
 
@@ -569,7 +773,11 @@ textarea::placeholder{
 #memoryCount{
 
 
-    opacity:.5;
+    opacity:.45;
+
+
+    font-size:13px;
+
 
 }
 
@@ -577,16 +785,44 @@ textarea::placeholder{
 
 
 
+
+#memoryList{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:14px;
+
+
+    margin-top:18px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+        MEMORY CARD
+===================================== */
+
+
 .memory-item{
-
-
-    margin-top:15px;
 
 
     padding:18px;
 
 
     border-radius:22px;
+
 
 
     background:
@@ -597,15 +833,43 @@ textarea::placeholder{
 
     border:
 
-    1px solid rgba(255,255,255,.15);
+    1px solid rgba(255,255,255,.12);
+
 
 
     border-left:
 
-    3px solid rgba(255,255,255,.6);
+    3px solid rgba(255,255,255,.5);
+
+
+
+    transition:.3s;
+
+
+
+    animation:
+
+    memoryAppear .4s ease;
 
 
 }
+
+
+
+
+
+
+
+.memory-item:hover{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+}
+
 
 
 
@@ -630,6 +894,7 @@ textarea::placeholder{
 
 
 
+
 .memory-text{
 
 
@@ -643,7 +908,12 @@ textarea::placeholder{
 
 
 
+
+
 .memory-footer{
+
+
+    margin-top:14px;
 
 
     display:flex;
@@ -652,7 +922,8 @@ textarea::placeholder{
     justify-content:space-between;
 
 
-    margin-top:12px;
+    align-items:center;
+
 
 
     opacity:.45;
@@ -666,18 +937,24 @@ textarea::placeholder{
 
 
 
+
 .delete-memory{
 
 
     background:none;
 
+
     border:none;
+
 
     color:white;
 
+
     opacity:.5;
 
+
     cursor:pointer;
+
 
 }
 
@@ -685,9 +962,53 @@ textarea::placeholder{
 
 
 
-/* =================================
-        NAVIGATION
-================================= */
+.delete-memory:hover{
+
+
+    opacity:1;
+
+
+}
+
+
+
+
+
+@keyframes memoryAppear{
+
+
+from{
+
+
+    opacity:0;
+
+
+    transform:
+
+    translateY(20px);
+
+
+}
+
+
+to{
+
+
+    opacity:1;
+
+
+    transform:
+
+    translateY(0);
+
+
+}
+
+
+}
+/* =====================================
+        BOTTOM NAVIGATION
+===================================== */
 
 
 .bottom-nav{
@@ -696,13 +1017,14 @@ textarea::placeholder{
     position:fixed;
 
 
-    bottom:18px;
-
-
     left:50%;
 
 
+    bottom:18px;
+
+
     transform:translateX(-50%);
+
 
 
     width:350px;
@@ -711,10 +1033,9 @@ textarea::placeholder{
     max-width:90%;
 
 
-    height:70px;
 
+    height:72px;
 
-    border-radius:30px;
 
 
     display:flex;
@@ -727,9 +1048,19 @@ textarea::placeholder{
 
 
 
+    border-radius:32px;
+
+
+
     background:
 
     rgba(255,255,255,.08);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
 
 
 
@@ -738,9 +1069,15 @@ textarea::placeholder{
     blur(20px);
 
 
-    border:
 
-    1px solid rgba(255,255,255,.15);
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.45);
+
+
+
+    z-index:100;
+
 
 
 }
@@ -749,12 +1086,16 @@ textarea::placeholder{
 
 
 
+
+
 .nav-item{
+
+
+    border:none;
 
 
     background:none;
 
-    border:none;
 
     color:white;
 
@@ -771,10 +1112,25 @@ textarea::placeholder{
     align-items:center;
 
 
-    gap:4px;
+    justify-content:center;
+
+
+
+    gap:5px;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.25s;
 
 
 }
+
+
+
 
 
 
@@ -783,10 +1139,15 @@ textarea::placeholder{
 
     width:25px;
 
+
     height:25px;
 
 
+    transition:.25s;
+
+
 }
+
 
 
 
@@ -794,12 +1155,48 @@ textarea::placeholder{
 
 .nav-item small{
 
+
     font-size:11px;
+
 
 }
 
 
 
+
+
+
+
+.nav-item:hover{
+
+
+    opacity:.8;
+
+
+}
+
+
+
+
+
+
+.nav-item:hover img{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+/* активная страница */
 
 
 .nav-item.active{
@@ -807,7 +1204,9 @@ textarea::placeholder{
 
     opacity:1;
 
+
 }
+
 
 
 
@@ -815,104 +1214,84 @@ textarea::placeholder{
 .nav-item.active img{
 
 
+    transform:
+
+    translateY(-5px);
+
+
+
     filter:
 
-    brightness(2);
+    brightness(1.8);
 
 
 }
 
 
 
+
+
+
+
+
+
+/* =====================================
+        MOBILE
+===================================== */
 
 
 @media(max-width:400px){
 
 
-.home-container{
 
-    width:100%;
+.home-page{
+
+
+    padding-left:15px;
+
+    padding-right:15px;
+
 
 }
 
 
 
+
+
+
+.home-header{
+
+
+    gap:15px;
+
+
 }
-/* =================================
-        MINI MEMORA LOGO ANIMATION
-================================= */
+
+
+
+
+
+.header-text h1{
+
+
+    font-size:30px;
+
+
+}
+
+
+
 
 
 .mini-logo{
 
-    width:70px;
-    height:70px;
 
-    border-radius:50%;
+    width:65px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    height:65px;
 
 
-    font-size:32px;
-
-    font-weight:700;
-
-
-    background:
-
-    rgba(255,255,255,.08);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25);
-
-
-
-    position:relative;
-
-
-    z-index:2;
-
-
-    animation:
-
-    logoFloat 4s ease-in-out infinite;
-
-
-}
-
-
-
-
-.mini-logo::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:80px;
-
-    height:80px;
-
-
-    border-radius:50%;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.18);
-
-
-
-    animation:
-
-    logoRotate 10s linear infinite;
+    font-size:30px;
 
 
 }
@@ -921,181 +1300,11 @@ textarea::placeholder{
 
 
 
-.mini-logo::after{
 
+.capture-card{
 
-    content:"";
 
-
-    position:absolute;
-
-
-    width:90px;
-
-    height:90px;
-
-
-    border-radius:50%;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.08);
-
-
-
-    animation:
-
-    logoRotateReverse 14s linear infinite;
-
-
-}
-
-
-
-
-@keyframes logoFloat{
-
-
-0%,100%{
-
-    transform:translateY(0);
-
-}
-
-
-50%{
-
-    transform:translateY(-5px);
-
-}
-
-
-}
-
-
-
-
-@keyframes logoRotate{
-
-
-from{
-
-    transform:rotate(0deg);
-
-}
-
-
-to{
-
-    transform:rotate(360deg);
-
-}
-
-
-}
-
-
-
-
-@keyframes logoRotateReverse{
-
-
-from{
-
-    transform:rotate(360deg);
-
-}
-
-
-to{
-
-    transform:rotate(0deg);
-
-}
-
-
-}
-/* =================================
-   MEMORA MINI LOGO FINAL FIX
-================================= */
-
-
-.mini-logo{
-
-    width:70px !important;
-    height:70px !important;
-
-    display:flex !important;
-
-    align-items:center !important;
-    justify-content:center !important;
-
-
-    border-radius:50% !important;
-
-
-    font-size:32px !important;
-
-    font-weight:700 !important;
-
-
-    color:white !important;
-
-
-    background:
-
-    rgba(255,255,255,0.08) !important;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25) !important;
-
-
-    position:relative !important;
-
-
-    overflow:visible !important;
-
-
-    animation:
-
-    memoraFloat 4s ease-in-out infinite !important;
-
-
-}
-
-
-
-
-/* первое кольцо */
-
-.mini-logo::before{
-
-
-    content:"" !important;
-
-
-    position:absolute !important;
-
-
-    width:82px !important;
-
-    height:82px !important;
-
-
-    border-radius:50% !important;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25) !important;
-
-
-    animation:
-
-    memoraOrbit 8s linear infinite !important;
+    padding:18px;
 
 
 }
@@ -1105,308 +1314,16 @@ to{
 
 
 
-/* второе кольцо + точка */
-
-.mini-logo::after{
+.bottom-nav{
 
 
-    content:"•" !important;
+    width:
 
-
-    position:absolute !important;
-
-
-    width:100px !important;
-
-    height:100px !important;
-
-
-    border-radius:50% !important;
-
-
-    display:flex !important;
-
-    align-items:flex-start !important;
-
-    justify-content:center !important;
-
-
-    padding-top:-5px !important;
-
-
-    color:white !important;
-
-
-    font-size:16px !important;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.12) !important;
-
-
-    animation:
-
-    memoraOrbitReverse 12s linear infinite !important;
+    calc(100% - 30px);
 
 
 }
 
 
 
-
-
-
-
-
-@keyframes memoraFloat{
-
-
-0%,100%{
-
-transform:translateY(0);
-
 }
-
-
-50%{
-
-transform:translateY(-5px);
-
-}
-
-
-}
-
-
-
-
-
-
-@keyframes memoraOrbit{
-
-
-from{
-
-transform:rotate(0deg);
-
-}
-
-
-to{
-
-transform:rotate(360deg);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes memoraOrbitReverse{
-
-
-from{
-
-transform:rotate(360deg);
-
-}
-
-
-to{
-
-transform:rotate(0deg);
-
-}
-/* =====================================
-   MEMORA LOGO FORCE FIX
-===================================== */
-
-
-.home-header .mini-logo{
-
-    width:70px !important;
-    height:70px !important;
-
-    flex-shrink:0 !important;
-
-    display:flex !important;
-
-    align-items:center !important;
-    justify-content:center !important;
-
-
-    position:relative !important;
-
-
-    border-radius:50% !important;
-
-
-    color:white !important;
-
-
-    font-size:34px !important;
-
-    font-weight:700 !important;
-
-
-    background:
-
-    rgba(255,255,255,0.08) !important;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25) !important;
-
-
-    overflow:visible !important;
-
-
-    animation:
-
-    logoMove 5s ease-in-out infinite !important;
-
-
-}
-
-
-
-
-
-.home-header .mini-logo::before{
-
-
-    content:"" !important;
-
-
-    position:absolute !important;
-
-
-    width:90px !important;
-
-    height:90px !important;
-
-
-    border-radius:50% !important;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25) !important;
-
-
-    animation:
-
-    logoRotate 8s linear infinite !important;
-
-
-}
-
-
-
-
-
-.home-header .mini-logo::after{
-
-
-    content:"" !important;
-
-
-    position:absolute !important;
-
-
-    width:105px !important;
-
-    height:105px !important;
-
-
-    border-radius:50% !important;
-
-
-    border:
-
-    1px dashed rgba(255,255,255,.15) !important;
-
-
-    animation:
-
-    logoRotateReverse 12s linear infinite !important;
-
-
-}
-
-
-
-
-
-
-
-@keyframes logoMove{
-
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-
-50%{
-
-transform:translateY(-4px);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes logoRotate{
-
-
-from{
-
-transform:rotate(0deg);
-
-}
-
-
-to{
-
-transform:rotate(360deg);
-
-}
-
-
-}
-
-
-
-
-
-@keyframes logoRotateReverse{
-
-
-from{
-
-transform:rotate(360deg);
-
-}
-
-
-to{
-
-transform:rotate(0deg);
-
-}
-
-
-}
-
