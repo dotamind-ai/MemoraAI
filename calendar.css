@@ -855,3 +855,62 @@ transform:translateY(-4px);
 
 
 }
+/* =====================================
+        MEMORA SVG NAVIGATION
+===================================== */
+
+
+.nav-icon{
+
+    width:26px;
+
+    height:26px;
+
+    color:white;
+
+    transition:0.3s;
+
+}
+
+
+
+
+.nav-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+}
+
+
+
+
+.nav-item.active .nav-icon{
+
+
+    color:#a78bff;
+
+
+    filter:
+    drop-shadow(0 0 8px #a78bff);
+
+
+}
+
+
+
+
+.nav-item:hover .nav-icon{
+
+
+    transform:translateY(-4px);
+
+
+}
