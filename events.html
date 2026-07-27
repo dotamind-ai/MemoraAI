@@ -12,7 +12,6 @@
 
 
 <link rel="stylesheet" href="style.css">
-
 <link rel="stylesheet" href="events.css">
 
 
@@ -22,9 +21,7 @@
 <body class="events-page">
 
 
-
 <main class="events-container">
-
 
 
 <h1>
@@ -40,8 +37,6 @@ Your important moments
 
 
 
-<!-- КНОПКА СОЗДАНИЯ -->
-
 <button 
 class="new-event"
 id="newEvent">
@@ -56,28 +51,22 @@ id="newEvent">
 
 
 
-<!-- ФОРМА СОЗДАНИЯ -->
 
 <section 
 class="event-form hidden"
 id="eventForm">
 
 
-
 <input
 id="eventTitle"
-type="text"
 placeholder="Event title">
-
-
 
 
 
 <textarea
 id="eventText"
-placeholder="Description"></textarea>
-
-
+placeholder="Description">
+</textarea>
 
 
 
@@ -117,7 +106,6 @@ Personal
 
 
 
-
 <input
 id="eventDate"
 type="date">
@@ -126,28 +114,17 @@ type="date">
 
 
 
-
-
 <div class="form-buttons">
 
 
-<button 
-id="saveEvent">
-
+<button id="saveEvent">
 Save
-
 </button>
 
 
-
-
-<button
-id="cancelEvent">
-
+<button id="cancelEvent">
 Cancel
-
 </button>
-
 
 
 </div>
@@ -162,14 +139,13 @@ Cancel
 
 
 
-<!-- СПИСОК -->
 
-<section
+<section 
 id="eventList"
 class="event-list">
 
-</section>
 
+</section>
 
 
 
@@ -185,8 +161,6 @@ class="event-list">
 
 
 
-<!-- НИЖНЯЯ НАВИГАЦИЯ -->
-
 <nav class="bottom-nav">
 
 
@@ -196,7 +170,7 @@ class="nav-item"
 onclick="goHome()">
 
 
-<img 
+<img
 src="icons/memories.svg"
 class="nav-icon">
 
@@ -212,14 +186,12 @@ Memories
 
 
 
-
 <button 
 class="nav-item"
 onclick="goCalendar()">
 
 
-
-<img 
+<img
 src="icons/calendar.svg"
 class="nav-icon">
 
@@ -235,14 +207,13 @@ Calendar
 
 
 
-
 <button 
 class="nav-item active"
 onclick="goEvents()">
 
 
 
-<img 
+<img
 src="icons/events.svg"
 class="nav-icon">
 
@@ -258,15 +229,13 @@ Events
 
 
 
-
-
 <button 
 class="nav-item"
 onclick="goProfile()">
 
 
 
-<img 
+<img
 src="icons/profile.svg"
 class="nav-icon">
 
@@ -292,7 +261,6 @@ Profile
 
 
 <script src="events.js"></script>
-
 
 
 </body>
