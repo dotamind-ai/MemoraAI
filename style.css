@@ -1838,3 +1838,309 @@ to{
 
 
 }
+/* =====================================
+        MEMORA LOGO RESET FINAL
+===================================== */
+
+
+.home-header .memora-logo{
+
+    width:90px !important;
+    height:90px !important;
+
+    position:relative !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    flex-shrink:0 !important;
+
+    transform:none !important;
+
+}
+
+
+
+/* убиваем старые псевдоэлементы */
+
+.home-header .memora-logo::before,
+.home-header .memora-logo::after{
+
+    display:none !important;
+
+}
+
+
+
+/* сама буква */
+
+
+.home-header .logo-m{
+
+
+    width:55px !important;
+
+    height:55px !important;
+
+
+    border-radius:50% !important;
+
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+
+    position:absolute !important;
+
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    z-index:10 !important;
+
+
+
+    font-size:38px !important;
+
+
+    font-weight:800 !important;
+
+
+    color:white !important;
+
+
+
+    background:
+
+    rgba(255,255,255,.08) !important;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.3) !important;
+
+
+}
+
+
+
+
+
+
+
+/* сферы */
+
+
+.home-header .logo-circle{
+
+
+    position:absolute !important;
+
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    border-radius:50% !important;
+
+
+    transform-origin:center !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18) !important;
+
+
+}
+
+
+
+
+
+
+
+.home-header .circle-one{
+
+
+    width:70px !important;
+
+    height:70px !important;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    animation:
+
+    memoraSpin1 8s linear infinite !important;
+
+
+}
+
+
+
+
+.home-header .circle-two{
+
+
+    width:85px !important;
+
+    height:85px !important;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    animation:
+
+    memoraSpin2 12s linear infinite !important;
+
+
+}
+
+
+
+
+.home-header .circle-three{
+
+
+    width:100px !important;
+
+    height:100px !important;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    border-style:dashed !important;
+
+
+    animation:
+
+    memoraSpin1 18s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+@keyframes memoraSpin1{
+
+
+from{
+
+transform:
+
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+to{
+
+transform:
+
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes memoraSpin2{
+
+
+from{
+
+transform:
+
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+
+to{
+
+transform:
+
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* движение всего логотипа */
+
+
+.home-header .memora-logo{
+
+
+animation:
+
+memoraFloat 5s ease-in-out infinite !important;
+
+
+}
+
+
+
+
+@keyframes memoraFloat{
+
+
+0%,100%{
+
+top:0;
+
+}
+
+
+50%{
+
+top:-5px;
+
+}
+
+
+}
