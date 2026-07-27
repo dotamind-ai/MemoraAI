@@ -207,3 +207,103 @@ window.onload=function(){
 
 
 };
+/* =====================================
+        MEMORA NEURAL BACKGROUND
+===================================== */
+
+
+function createParticles(){
+
+
+    for(let i = 0; i < 25; i++){
+
+
+        let particle =
+        document.createElement("div");
+
+
+        particle.className =
+        "neural-particle";
+
+
+
+        particle.style.left =
+        Math.random()*100 + "vw";
+
+
+
+        particle.style.animationDuration =
+        (8 + Math.random()*12) + "s";
+
+
+
+        particle.style.animationDelay =
+        Math.random()*10 + "s";
+
+
+
+        document.body.appendChild(particle);
+
+
+    }
+
+}
+
+
+
+
+function createNeuralLines(){
+
+
+    for(let i = 0; i < 5; i++){
+
+
+        let line =
+        document.createElement("div");
+
+
+
+        line.className =
+        "neural-line";
+
+
+
+        line.style.top =
+        Math.random()*100 + "vh";
+
+
+
+        line.style.animationDuration =
+        (8 + Math.random()*8) + "s";
+
+
+
+        line.style.animationDelay =
+        Math.random()*5 + "s";
+
+
+
+        document.body.appendChild(line);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+    createParticles();
+
+    createNeuralLines();
+
+
+});
