@@ -1016,3 +1016,211 @@ to{
 
 
 }
+/* =================================
+   MEMORA MINI LOGO FINAL FIX
+================================= */
+
+
+.mini-logo{
+
+    width:70px !important;
+    height:70px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+
+    border-radius:50% !important;
+
+
+    font-size:32px !important;
+
+    font-weight:700 !important;
+
+
+    color:white !important;
+
+
+    background:
+
+    rgba(255,255,255,0.08) !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25) !important;
+
+
+    position:relative !important;
+
+
+    overflow:visible !important;
+
+
+    animation:
+
+    memoraFloat 4s ease-in-out infinite !important;
+
+
+}
+
+
+
+
+/* первое кольцо */
+
+.mini-logo::before{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:82px !important;
+
+    height:82px !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25) !important;
+
+
+    animation:
+
+    memoraOrbit 8s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+/* второе кольцо + точка */
+
+.mini-logo::after{
+
+
+    content:"•" !important;
+
+
+    position:absolute !important;
+
+
+    width:100px !important;
+
+    height:100px !important;
+
+
+    border-radius:50% !important;
+
+
+    display:flex !important;
+
+    align-items:flex-start !important;
+
+    justify-content:center !important;
+
+
+    padding-top:-5px !important;
+
+
+    color:white !important;
+
+
+    font-size:16px !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12) !important;
+
+
+    animation:
+
+    memoraOrbitReverse 12s linear infinite !important;
+
+
+}
+
+
+
+
+
+
+
+
+@keyframes memoraFloat{
+
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-5px);
+
+}
+
+
+}
+
+
+
+
+
+
+@keyframes memoraOrbit{
+
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes memoraOrbitReverse{
+
+
+from{
+
+transform:rotate(360deg);
+
+}
+
+
+to{
+
+transform:rotate(0deg);
+
+}
+
+
+}
