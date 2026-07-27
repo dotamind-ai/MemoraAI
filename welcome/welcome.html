@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>Welcome to Memora</title>
+<title>Welcome | Memora</title>
 
 
 <link rel="stylesheet" href="welcome.css">
@@ -17,8 +17,9 @@
 </head>
 
 
-
 <body class="welcome-page">
+
+
 
 
 
@@ -28,61 +29,40 @@
 
 
 
-<!-- LOGO AREA -->
+
+<!-- LOGO -->
+
+<div class="welcome-logo">
 
 
-<div class="hero-logo">
+    <div class="big-orbit orbit-one">
+
+        <span class="big-planet"></span>
+
+    </div>
 
 
+    <div class="big-orbit orbit-two">
 
-    <div class="hero-orbit orbit-one">
+        <span class="big-planet"></span>
 
-        <span class="hero-planet planet-one"></span>
+    </div>
+
+
+    <div class="big-orbit orbit-three">
+
+        <span class="big-planet"></span>
 
     </div>
 
 
 
 
-    <div class="hero-orbit orbit-two">
-
-        <span class="hero-planet planet-two"></span>
-
-    </div>
-
-
-
-
-
-    <div class="hero-orbit orbit-three">
-
-        <span class="hero-planet planet-three"></span>
-
-    </div>
-
-
-
-
-
-    <div class="hero-orbit orbit-four">
-
-        <span class="hero-planet planet-four"></span>
-
-    </div>
-
-
-
-
-
-
-
-    <div class="hero-core">
+    <div class="big-logo-m">
 
         M
 
     </div>
-
-
 
 
 
@@ -96,48 +76,81 @@
 
 
 
-
-<!-- TEXT -->
-
-
-<section class="welcome-text">
+<!-- TITLE -->
 
 
 <h1>
 
-Добро пожаловать в Memora
+Welcome to Memora
 
 </h1>
 
 
 
-<p>
+<p class="subtitle">
 
-Твоё цифровое пространство для мыслей, идей и воспоминаний
+Your personal memory space
 
 </p>
 
 
 
-</section>
 
 
 
 
 
 
+<!-- LOGIN -->
+
+
+<section class="auth-card">
+
+
+
+<h2>
+
+Войти
+
+</h2>
 
 
 
 
-<!-- BUTTONS -->
+<input
+
+id="loginLogin"
+
+type="text"
+
+placeholder="Логин"
+
+>
 
 
-<section class="auth-buttons">
 
 
 
-<button class="auth-login">
+<input
+
+id="loginPassword"
+
+type="password"
+
+placeholder="Пароль"
+
+>
+
+
+
+
+
+
+<button
+
+id="loginBtn"
+
+class="main-button">
 
 Войти
 
@@ -146,8 +159,66 @@
 
 
 
+</section>
 
-<button class="auth-register">
+
+
+
+
+
+
+
+
+<!-- REGISTER -->
+
+
+<section class="auth-card">
+
+
+
+<h2>
+
+Создать аккаунт
+
+</h2>
+
+
+
+
+<input
+
+id="registerLogin"
+
+type="text"
+
+placeholder="Придумайте логин"
+
+>
+
+
+
+
+
+<input
+
+id="registerPassword"
+
+type="password"
+
+placeholder="Придумайте пароль"
+
+>
+
+
+
+
+
+
+<button
+
+id="registerBtn"
+
+class="secondary-button">
 
 Создать аккаунт
 
@@ -155,10 +226,8 @@
 
 
 
+
 </section>
-
-
-
 
 
 
@@ -177,7 +246,7 @@
 <script src="auth.js"></script>
 
 
-</body>
 
+</body>
 
 </html>
