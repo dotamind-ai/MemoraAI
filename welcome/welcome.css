@@ -1621,3 +1621,59 @@ to{
 
 
 }
+/* =====================================
+      FIX WHITE BACKGROUND SCROLL
+===================================== */
+
+
+html,
+body{
+
+    margin:0;
+
+    min-height:100%;
+
+    background:#050507;
+
+}
+
+
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+
+
+.welcome-page{
+
+    min-height:100vh !important;
+
+    background:
+
+    radial-gradient(
+        circle at 50% 20%,
+        rgba(150,90,255,.25),
+        transparent 40%
+    ),
+
+    radial-gradient(
+        circle at 20% 80%,
+        rgba(70,120,255,.18),
+        transparent 35%
+    ),
+
+    linear-gradient(
+        160deg,
+        #050507,
+        #11111a,
+        #050507
+    ) !important;
+
+
+    color:white;
+
+
+}
