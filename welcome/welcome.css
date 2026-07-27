@@ -1281,3 +1281,343 @@ opacity:0;
 
 
 }
+/* =====================================
+      MEMORA NEURAL BACKGROUND
+===================================== */
+
+
+/* движущийся туман */
+
+.welcome-page::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:-50%;
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(150,90,255,.18),
+        transparent 35%
+    );
+
+    filter:blur(80px);
+
+
+    animation:
+
+    fogMove 18s ease-in-out infinite;
+
+
+    z-index:0;
+
+    pointer-events:none;
+
+}
+
+
+
+@keyframes fogMove{
+
+
+0%,100%{
+
+    transform:
+
+    translate(0,0)
+    scale(1);
+
+}
+
+
+50%{
+
+    transform:
+
+    translate(80px,-50px)
+    scale(1.2);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* второе свечение */
+
+
+.welcome-page::after{
+
+
+    content:"";
+
+
+    position:fixed;
+
+
+    width:500px;
+
+    height:500px;
+
+
+    left:-200px;
+
+    bottom:-200px;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(80,120,255,.15),
+        transparent 65%
+    );
+
+
+    filter:blur(60px);
+
+
+    animation:
+
+    bluePulse 12s ease-in-out infinite;
+
+
+    z-index:0;
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+@keyframes bluePulse{
+
+
+0%,100%{
+
+    transform:scale(1);
+
+    opacity:.5;
+
+}
+
+
+50%{
+
+    transform:scale(1.4);
+
+    opacity:1;
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* слой частиц */
+
+
+.neural-particle{
+
+
+    position:fixed;
+
+
+    width:5px;
+
+    height:5px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    opacity:.35;
+
+
+    box-shadow:
+
+    0 0 12px white;
+
+
+    z-index:1;
+
+
+    pointer-events:none;
+
+
+    animation:
+
+    particleFloat linear infinite;
+
+
+}
+
+
+
+
+
+@keyframes particleFloat{
+
+
+0%{
+
+
+    transform:
+
+    translateY(110vh)
+    translateX(0);
+
+
+    opacity:0;
+
+}
+
+
+
+20%{
+
+    opacity:.5;
+
+}
+
+
+
+80%{
+
+    opacity:.5;
+
+}
+
+
+
+100%{
+
+
+    transform:
+
+    translateY(-20vh)
+    translateX(80px);
+
+
+    opacity:0;
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* нейронные линии */
+
+.neural-line{
+
+
+    position:fixed;
+
+
+    height:1px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+
+    animation:
+
+    lineMove 10s linear infinite;
+
+
+    z-index:1;
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+@keyframes lineMove{
+
+
+from{
+
+    transform:
+
+    translateX(-100vw)
+    rotate(20deg);
+
+
+}
+
+
+
+to{
+
+
+    transform:
+
+    translateX(100vw)
+    rotate(20deg);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* весь контент выше фона */
+
+.home-container,
+.bottom-nav{
+
+
+    position:relative;
+
+    z-index:5;
+
+
+}
