@@ -2144,3 +2144,217 @@ top:-5px;
 
 
 }
+/* =====================================
+        MEMORA PLANETS LOGO
+===================================== */
+
+
+.logo-circle{
+
+    display:flex !important;
+
+    align-items:flex-start !important;
+
+    justify-content:center !important;
+
+}
+
+
+
+/* планеты */
+
+
+.planet{
+
+
+    position:absolute;
+
+
+    width:10px;
+
+    height:10px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 0 8px rgba(255,255,255,.5);
+
+
+
+}
+
+
+
+
+
+/* первая планета */
+
+
+.planet-one{
+
+
+    top:-5px;
+
+
+}
+
+
+
+
+
+
+/* вторая планета */
+
+
+.planet-two{
+
+
+    top:-5px;
+
+
+    width:8px;
+
+    height:8px;
+
+
+    opacity:.75;
+
+
+}
+
+
+
+
+
+
+
+/* третья планета */
+
+
+.planet-three{
+
+
+    top:-5px;
+
+
+    width:6px;
+
+    height:6px;
+
+
+    opacity:.55;
+
+
+}
+
+
+
+
+
+
+/* маленькие наклонные орбиты */
+
+
+.circle-one{
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(15deg) !important;
+
+}
+
+
+
+.circle-two{
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(-35deg) !important;
+
+}
+
+
+
+.circle-three{
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(70deg) !important;
+
+}
+
+
+
+
+
+
+
+/* чтобы планеты вращались вместе */
+
+
+.circle-one .planet{
+
+    animation:
+
+    planetPulse 3s infinite;
+
+}
+
+
+
+.circle-two .planet{
+
+    animation:
+
+    planetPulse 4s infinite;
+
+}
+
+
+
+.circle-three .planet{
+
+    animation:
+
+    planetPulse 5s infinite;
+
+}
+
+
+
+
+
+
+
+@keyframes planetPulse{
+
+
+0%,100%{
+
+    transform:scale(1);
+
+    opacity:.8;
+
+}
+
+
+
+50%{
+
+    transform:scale(1.35);
+
+    opacity:1;
+
+}
+
+
+}
