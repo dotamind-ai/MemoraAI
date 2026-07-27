@@ -307,3 +307,160 @@ window.addEventListener(
 
 
 });
+// =====================================
+// MEMORA AI PARTICLES
+// =====================================
+
+
+function createAIParticles(){
+
+
+    for(let i=0;i<60;i++){
+
+
+        let p=document.createElement("div");
+
+
+        p.className="ai-particle";
+
+
+        p.style.left=
+        Math.random()*100+"vw";
+
+
+        p.style.animationDuration=
+        (8+Math.random()*15)+"s";
+
+
+        p.style.animationDelay=
+        Math.random()*10+"s";
+
+
+        document.body.appendChild(p);
+
+
+    }
+
+
+}
+
+
+
+
+
+function createNeurons(){
+
+
+    let points=[];
+
+
+
+    for(let i=0;i<12;i++){
+
+
+        let n=document.createElement("div");
+
+
+        n.className="neuron";
+
+
+        n.style.left=
+        Math.random()*100+"vw";
+
+
+        n.style.top=
+        Math.random()*100+"vh";
+
+
+        document.body.appendChild(n);
+
+
+
+        points.push(n);
+
+
+    }
+
+
+
+
+
+    for(let i=0;i<points.length-1;i++){
+
+
+        let line=document.createElement("div");
+
+
+        line.className="neuron-line";
+
+
+        let x1=
+        points[i].offsetLeft;
+
+
+        let y1=
+        points[i].offsetTop;
+
+
+        let x2=
+        points[i+1].offsetLeft;
+
+
+        let y2=
+        points[i+1].offsetTop;
+
+
+        let length=
+        Math.sqrt(
+        (x2-x1)**2+
+        (y2-y1)**2
+        );
+
+
+        let angle=
+        Math.atan2(
+        y2-y1,
+        x2-x1
+        );
+
+
+        line.style.width=
+        length+"px";
+
+
+        line.style.left=
+        x1+"px";
+
+
+        line.style.top=
+        y1+"px";
+
+
+        line.style.transform=
+        `rotate(${angle}rad)`;
+
+
+        document.body.appendChild(line);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+    createAIParticles();
+
+    createNeurons();
+
+
+});
