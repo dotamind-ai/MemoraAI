@@ -1,23 +1,19 @@
-/* =====================================
-        MEMORA WELCOME PAGE
-        HERO SCREEN
-===================================== */
-
+/* ======================================================
+                    MEMORA WELCOME
+                PART 1 / 3
+====================================================== */
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
 
-
-html,
 body{
-
-    margin:0;
-
-    width:100%;
-
-    height:100%;
 
     font-family:
     "Segoe UI",
@@ -26,783 +22,738 @@ body{
 
     color:white;
 
+    overflow:hidden;
+
 }
 
-
-
-
-
-/* =====================================
-        BACKGROUND
-===================================== */
-
+/* ======================================================
+                    BACKGROUND
+====================================================== */
 
 .welcome-page{
 
-
-    min-height:100vh;
-
+    width:100vw;
+    height:100vh;
 
     display:flex;
-
-
-    align-items:center;
-
-
     justify-content:center;
-
-
+    align-items:center;
 
     overflow:hidden;
 
-
+    position:relative;
 
     background:
+        radial-gradient(circle at top,
+        rgba(130,90,255,.20),
+        transparent 45%),
 
+        radial-gradient(circle at bottom,
+        rgba(80,120,255,.12),
+        transparent 45%),
 
-    radial-gradient(
-        circle at center,
-        rgba(120,90,170,.22),
-        transparent 35%
-    ),
-
-
-    linear-gradient(
+        linear-gradient(
         160deg,
-        #07070b,
-        #111018,
-        #08080c
-    );
+        #07070a,
+        #11111a,
+        #07070a);
 
 }
 
-
-
-
-
-/* фоновые частицы */
+/* шум */
 
 .welcome-page::before{
 
-
     content:"";
 
+    position:absolute;
+    inset:0;
+
+    background-image:
+    radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+
+    background-size:40px 40px;
+
+    opacity:.12;
+
+}
+
+/* ======================================================
+                    PARTICLES
+====================================================== */
+
+.particles{
+
+    position:absolute;
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+.particle{
 
     position:absolute;
 
+    width:3px;
+    height:3px;
 
-    inset:0;
+    border-radius:50%;
 
-
-    background-image:
-
-
-    radial-gradient(
-        circle,
-        rgba(255,255,255,.15) 1px,
-        transparent 1px
-    );
-
-
-    background-size:
-
-    55px 55px;
-
+    background:white;
 
     opacity:.25;
 
-
-    animation:
-
-    starsMove 30s linear infinite;
-
+    animation:particleFloat linear infinite;
 
 }
 
+.particle:nth-child(1){
 
+    left:10%;
+    top:90%;
 
-
-
-@keyframes starsMove{
-
-
-from{
-
-    transform:translateY(0);
+    animation-duration:18s;
 
 }
 
+.particle:nth-child(2){
 
-to{
+    left:25%;
+    top:100%;
 
-    transform:translateY(-200px);
+    animation-duration:24s;
 
 }
 
+.particle:nth-child(3){
+
+    left:40%;
+    top:95%;
+
+    animation-duration:20s;
 
 }
 
+.particle:nth-child(4){
 
+    left:60%;
+    top:105%;
 
+    animation-duration:28s;
 
+}
 
+.particle:nth-child(5){
 
+    left:75%;
+    top:98%;
 
-/* =====================================
-        CONTAINER
-===================================== */
+    animation-duration:17s;
 
+}
+
+.particle:nth-child(6){
+
+    left:90%;
+    top:102%;
+
+    animation-duration:26s;
+
+}
+
+@keyframes particleFloat{
+
+    from{
+
+        transform:
+        translateY(0);
+
+        opacity:0;
+
+    }
+
+    10%{
+
+        opacity:.35;
+
+    }
+
+    90%{
+
+        opacity:.35;
+
+    }
+
+    to{
+
+        transform:
+        translateY(-120vh);
+
+        opacity:0;
+
+    }
+
+}
+
+/* ======================================================
+                MAIN CONTAINER
+====================================================== */
 
 .welcome-container{
 
-
-    width:100%;
-
-
-    max-width:500px;
-
+    width:420px;
+    max-width:92%;
 
     text-align:center;
 
-
     position:relative;
 
-
-    z-index:2;
-
-
-    padding:30px;
-
+    z-index:5;
 
 }
+/* ======================================================
+                    LOGO
+                PART 2 / 3
+====================================================== */
 
-
-
-
-
-
-
-
-
-/* =====================================
-        BIG LOGO
-===================================== */
-
-
-.hero-logo{
-
+.welcome-logo{
 
     width:260px;
-
-
     height:260px;
 
-
-    margin:0 auto 45px;
-
+    margin:0 auto 40px;
 
     position:relative;
 
-
     display:flex;
-
-
-    align-items:center;
-
-
     justify-content:center;
-
+    align-items:center;
 
 }
 
 
 
+/* =========================================
+            CENTER LOGO
+========================================= */
 
+.big-logo-m{
 
+    position:absolute;
 
-
-
-/* центральная M */
-
-
-.hero-core{
-
-
-    width:105px;
-
-
-    height:105px;
-
+    width:95px;
+    height:95px;
 
     border-radius:50%;
 
-
     display:flex;
-
-
+    justify-content:center;
     align-items:center;
 
+    background:
+    rgba(255,255,255,.08);
 
-    justify-content:center;
+    backdrop-filter:blur(20px);
 
+    border:
+    1px solid rgba(255,255,255,.25);
 
-
-    font-size:70px;
-
+    font-size:58px;
 
     font-weight:800;
 
+    color:white;
 
-
-    background:
-
-
-    rgba(255,255,255,.07);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.35);
-
-
-
-    box-shadow:
-
-
-    0 0 40px rgba(255,255,255,.15);
-
-
-
-    position:absolute;
-
+    text-shadow:
+    0 0 20px rgba(255,255,255,.45);
 
     z-index:20;
 
-
 }
 
 
 
+/* =========================================
+            ORBITS
+========================================= */
 
-
-
-
-
-
-/* =====================================
-        ORBITS
-===================================== */
-
-
-.hero-orbit{
-
+.big-orbit{
 
     position:absolute;
 
-
     left:50%;
-
-
     top:50%;
 
-
+    transform:
+    translate(-50%,-50%);
 
     border-radius:50%;
 
-
-
     border:
-
     1px solid rgba(255,255,255,.18);
-
-
-
-    transform:
-
-    translate(-50%,-50%);
-
-
-
-    animation:
-
-    heroRotate linear infinite;
-
-
 
 }
 
 
 
-
-
-
+/* первая */
 
 .orbit-one{
 
+    width:120px;
+    height:120px;
 
-    width:130px;
-
-
-    height:130px;
-
-
-    animation-duration:7s;
-
+    animation:
+    orbit1 6s linear infinite;
 
 }
 
-
-
-
+/* вторая */
 
 .orbit-two{
 
-
     width:170px;
-
-
     height:170px;
 
-
-    animation-duration:11s;
-
-
-    animation-direction:reverse;
-
+    animation:
+    orbit2 10s linear infinite reverse;
 
 }
 
-
-
-
+/* третья */
 
 .orbit-three{
 
-
-    width:210px;
-
-
-    height:210px;
-
-
-    animation-duration:15s;
-
-
-}
-
-
-
-
-
-.orbit-four{
-
-
-    width:245px;
-
-
-    height:245px;
-
+    width:220px;
+    height:220px;
 
     border-style:dashed;
 
-
-    animation-duration:22s;
-
-
-    animation-direction:reverse;
-
+    animation:
+    orbit3 15s linear infinite;
 
 }
 
 
 
+/* =========================================
+            PLANETS
+========================================= */
 
-
-
-
-@keyframes heroRotate{
-
-
-from{
-
-
-    transform:
-
-    translate(-50%,-50%)
-
-    rotate(0deg);
-
-
-}
-
-
-to{
-
-
-    transform:
-
-    translate(-50%,-50%)
-
-    rotate(360deg);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-        PLANETS
-===================================== */
-
-
-.hero-planet{
-
+.big-planet{
 
     position:absolute;
 
-
     border-radius:50%;
-
 
     background:white;
 
-
     box-shadow:
-
-
-    0 0 15px white;
-
-
+    0 0 20px rgba(255,255,255,.8);
 
 }
 
 
+/* белая */
 
-
-
-
-
-.planet-one{
-
-
-    width:14px;
-
-    height:14px;
-
-
-    top:-7px;
-
-
-    left:50%;
-
-
-    transform:translateX(-50%);
-
-
-}
-
-
-
-
-
-
-
-.planet-two{
-
-
-    width:18px;
-
-
-    height:18px;
-
-
-    right:-9px;
-
-
-    top:50%;
-
-
-    transform:translateY(-50%);
-
-
-
-}
-
-
-
-
-
-
-
-.planet-three{
-
+.orbit-one .big-planet{
 
     width:12px;
-
-
     height:12px;
 
+    left:50%;
+    top:-6px;
 
-    bottom:-6px;
+    transform:
+    translateX(-50%);
+
+}
 
 
-    left:35px;
+/* синяя */
+
+.orbit-two .big-planet{
+
+    width:14px;
+    height:14px;
+
+    right:-7px;
+    top:50%;
+
+    transform:
+    translateY(-50%);
+
+    background:#7ec8ff;
+
+    box-shadow:
+    0 0 25px #7ec8ff;
+
+}
 
 
+/* фиолетовая */
+
+.orbit-three .big-planet{
+
+    width:18px;
+    height:18px;
+
+    left:18px;
+    bottom:12px;
+
+    background:#b284ff;
+
+    box-shadow:
+    0 0 30px #b284ff;
 
 }
 
 
 
+/* =========================================
+        ORBIT ANIMATIONS
+========================================= */
 
+@keyframes orbit1{
 
+from{
 
-
-.planet-four{
-
-
-    width:9px;
-
-
-    height:9px;
-
-
-    top:20px;
-
-
-    left:25px;
-
-
+transform:
+translate(-50%,-50%)
+rotate(0deg);
 
 }
 
+to{
 
+transform:
+translate(-50%,-50%)
+rotate(360deg);
 
+}
 
+}
 
+@keyframes orbit2{
 
+from{
 
-/* =====================================
-        TEXT
-===================================== */
+transform:
+translate(-50%,-50%)
+rotate(360deg);
 
+}
 
-.welcome-text h1{
+to{
 
+transform:
+translate(-50%,-50%)
+rotate(0deg);
 
-    margin:0;
+}
 
+}
 
-    font-size:36px;
+@keyframes orbit3{
 
+from{
+
+transform:
+translate(-50%,-50%)
+rotate(0deg);
+
+}
+
+to{
+
+transform:
+translate(-50%,-50%)
+rotate(360deg);
+
+}
+
+}
+/* ======================================================
+                    TEXT
+                PART 3 / 3
+====================================================== */
+
+.welcome-container h1{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+
+    animation:titleAppear .8s ease;
+
+}
+
+.subtitle{
+
+    opacity:.55;
+
+    font-size:15px;
+
+    margin-bottom:40px;
+
+    animation:titleAppear 1s ease;
+
+}
+
+@keyframes titleAppear{
+
+    from{
+
+        opacity:0;
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ======================================================
+                    AUTH CARD
+====================================================== */
+
+.auth-card{
+
+    background:
+    rgba(255,255,255,.07);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:28px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    animation:cardAppear .9s ease;
+
+}
+
+.auth-card h2{
+
+    margin-bottom:18px;
+
+    font-size:22px;
 
     font-weight:700;
 
+}
 
-    letter-spacing:.5px;
+@keyframes cardAppear{
 
+    from{
+
+        opacity:0;
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
 
 }
 
+/* ======================================================
+                    INPUTS
+====================================================== */
 
-
-
-.welcome-text p{
-
-
-    margin-top:15px;
-
-
-    opacity:.6;
-
-
-    font-size:16px;
-
-
-    line-height:1.5;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-        BUTTONS
-===================================== */
-
-
-.auth-buttons{
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:15px;
-
-
-    margin-top:40px;
-
-
-}
-
-
-
-
-
-.auth-buttons button{
-
+.auth-card input{
 
     width:100%;
 
+    height:52px;
 
-    height:58px;
+    margin-bottom:14px;
 
+    padding:0 18px;
 
-    border-radius:30px;
-
-
-    font-size:17px;
-
-
-    font-weight:700;
-
-
-    cursor:pointer;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.auth-login{
-
-
-    background:white;
-
-
-    color:#111;
-
-
-    border:none;
-
-
-}
-
-
-
-
-
-
-
-.auth-register{
-
-
-    background:
-
-    rgba(255,255,255,.06);
-
-
-
-    color:white;
-
-
+    border-radius:18px;
 
     border:
 
-    1px solid rgba(255,255,255,.25);
+    1px solid rgba(255,255,255,.12);
 
+    background:
 
+    rgba(255,255,255,.05);
 
-}
+    color:white;
 
+    font-size:15px;
 
+    outline:none;
 
-
-
-
-
-
-.auth-buttons button:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
+    transition:.25s;
 
 }
 
+.auth-card input:focus{
 
+    border-color:
+    rgba(255,255,255,.35);
 
-
-
-
-
-
-.auth-buttons button:active{
-
-
-    transform:
-
-    scale(.96);
-
+    background:
+    rgba(255,255,255,.08);
 
 }
 
+.auth-card input::placeholder{
 
+    color:
+    rgba(255,255,255,.4);
 
+}
 
+/* ======================================================
+                    BUTTONS
+====================================================== */
 
+.main-button,
+.secondary-button{
 
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.main-button{
+
+    background:white;
+
+    color:#111;
+
+}
+
+.main-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 0 25px rgba(255,255,255,.35);
+
+}
+
+.secondary-button{
+
+    margin-top:4px;
+
+    background:
+
+    rgba(255,255,255,.10);
+
+    color:white;
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+}
+
+.secondary-button:hover{
+
+    transform:translateY(-2px);
+
+    background:
+
+    rgba(255,255,255,.16);
+
+}
+
+/* ======================================================
+                MOBILE
+====================================================== */
 
 @media(max-width:500px){
 
+.welcome-logo{
 
-
-.hero-logo{
-
-
-    width:230px;
-
-
-    height:230px;
-
+    width:210px;
+    height:210px;
 
 }
 
+.big-logo-m{
 
+    width:80px;
+    height:80px;
 
-.hero-text h1{
-
-
-    font-size:30px;
-
+    font-size:50px;
 
 }
 
+.orbit-one{
 
+    width:105px;
+    height:105px;
+
+}
+
+.orbit-two{
+
+    width:150px;
+    height:150px;
+
+}
+
+.orbit-three{
+
+    width:195px;
+    height:195px;
+
+}
+
+.welcome-container h1{
+
+    font-size:36px;
+
+}
+
+.subtitle{
+
+    font-size:14px;
+
+}
+
+.auth-card{
+
+    padding:18px;
+
+}
 
 }
