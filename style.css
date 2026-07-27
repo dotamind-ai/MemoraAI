@@ -1327,3 +1327,201 @@ to{
 
 
 }
+/* =====================================
+        MEMORA LOGO ADD FIX
+===================================== */
+
+
+.home-header .mini-logo{
+
+    width:75px !important;
+    height:75px !important;
+
+    flex-shrink:0 !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+
+    position:relative !important;
+
+    border-radius:50% !important;
+
+
+    color:white !important;
+
+    font-size:36px !important;
+
+    font-weight:700 !important;
+
+
+    background:
+
+    rgba(255,255,255,.08) !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35) !important;
+
+
+    text-shadow:
+
+    0 0 12px rgba(255,255,255,.35) !important;
+
+
+    overflow:visible !important;
+
+
+    animation:
+
+    memoraFloat 4s ease-in-out infinite !important;
+
+
+    z-index:5 !important;
+
+}
+
+
+
+
+
+.home-header .mini-logo::before{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:95px !important;
+
+    height:95px !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.22) !important;
+
+
+    animation:
+
+    memoraRotate 10s linear infinite !important;
+
+
+    z-index:-1 !important;
+
+
+}
+
+
+
+
+
+
+.home-header .mini-logo::after{
+
+
+    content:"" !important;
+
+
+    position:absolute !important;
+
+
+    width:115px !important;
+
+    height:115px !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px dashed rgba(255,255,255,.12) !important;
+
+
+    animation:
+
+    memoraRotateReverse 16s linear infinite !important;
+
+
+    z-index:-1 !important;
+
+
+}
+
+
+
+
+
+@keyframes memoraFloat{
+
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(-5px);
+
+    }
+
+
+}
+
+
+
+
+
+@keyframes memoraRotate{
+
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+
+}
+
+
+
+
+
+@keyframes memoraRotateReverse{
+
+
+    from{
+
+        transform:rotate(360deg);
+
+    }
+
+
+    to{
+
+        transform:rotate(0deg);
+
+    }
+
+
+}
