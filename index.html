@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Memora</title>
 
 
@@ -16,10 +17,7 @@
 </head>
 
 
-
 <body class="home-page">
-
-
 
 
 
@@ -27,53 +25,33 @@
 
 
 
-
-
-<!-- =========================
-        HEADER
-========================= -->
-
+<!-- HEADER -->
 
 <header class="home-header">
 
 
-
-<div class="memora-mark">
-
-
-    <div class="logo-orbit orbit-one">
-
-        <span></span>
-
-    </div>
+<div class="memora-logo">
 
 
+<div class="logo-circle circle-one"></div>
 
-    <div class="logo-orbit orbit-two">
+<div class="logo-circle circle-two"></div>
 
-        <span></span>
-
-    </div>
-
+<div class="logo-circle circle-three"></div>
 
 
-    <div class="logo-core">
+<div class="logo-m">
 
-        M
+M
 
-    </div>
-
+</div>
 
 
 </div>
 
 
 
-
-
-
-
-<div class="brand-text">
+<div class="header-text">
 
 
 <h1>
@@ -83,17 +61,14 @@ Memora
 </h1>
 
 
-
 <p>
 
-Save the moment
+Your memory space
 
 </p>
 
 
-
 </div>
-
 
 
 </header>
@@ -105,32 +80,81 @@ Save the moment
 
 
 
-
-<!-- =========================
-        QUICK THOUGHT
-========================= -->
+<!-- СОЗДАНИЕ МЫСЛИ -->
 
 
-<section class="thought-card">
-
-
-
-<div class="thought-header">
+<section class="capture-card">
 
 
 <h2>
 
-Quick Thought
+Capture
 
 </h2>
 
 
+<p>
 
-<span>
+Store what matters
 
-✦
+</p>
 
-</span>
+
+
+
+
+<textarea
+
+id="memoryInput"
+
+placeholder="Write your thought..."
+
+></textarea>
+
+
+
+
+
+<div class="memory-types">
+
+
+<button 
+class="type-btn active"
+data-type="idea">
+
+IDEA
+
+</button>
+
+
+
+<button 
+class="type-btn"
+data-type="note">
+
+NOTE
+
+</button>
+
+
+
+<button 
+class="type-btn"
+data-type="inspiration">
+
+INSPIRATION
+
+</button>
+
+
+
+<button 
+class="type-btn"
+data-type="goal">
+
+GOAL
+
+</button>
 
 
 
@@ -141,46 +165,17 @@ Quick Thought
 
 
 
-
-<p class="thought-description">
-
-Write down what came to your mind
-
-</p>
-
-
-
-
-
-
-
-<textarea
-
-id="memoryInput"
-
-placeholder="Your thought...">
-
-</textarea>
-
-
-
-
-
-
-
-
 <button
 
-id="saveMemory">
+id="saveMemory"
 
+class="save-button"
 
-Save Thought
+>
 
+Save Memory
 
 </button>
-
-
-
 
 
 
@@ -194,28 +189,31 @@ Save Thought
 
 
 
-<!-- =========================
-        MEMORY HISTORY
-========================= -->
-
+<!-- ЛЕНТА -->
 
 <section class="memory-feed">
 
 
-
-<div class="feed-title">
+<div class="feed-header">
 
 
 <h2>
 
-Recent Thoughts
+Recent Memories
 
 </h2>
 
 
 
-</div>
+<span id="memoryCount">
 
+0
+
+</span>
+
+
+
+</div>
 
 
 
@@ -229,12 +227,7 @@ Recent Thoughts
 
 
 
-
-
-
 </section>
-
-
 
 
 
@@ -252,32 +245,19 @@ Recent Thoughts
 
 
 
-
-<!-- =========================
-        BOTTOM NAVIGATION
-========================= -->
+<!-- NAVIGATION -->
 
 
 <nav class="bottom-nav">
 
 
-
-
-
-<button
-
+<button 
 class="nav-item active"
-
 onclick="goHome()">
 
 
 
-<img
-
-src="icons/memories.svg"
-
-class="nav-icon">
-
+<img src="icons/memories.svg">
 
 
 <small>
@@ -287,7 +267,6 @@ Memories
 </small>
 
 
-
 </button>
 
 
@@ -295,23 +274,13 @@ Memories
 
 
 
-
-
-
-<button
-
+<button 
 class="nav-item"
-
 onclick="goCalendar()">
 
 
 
-<img
-
-src="icons/calendar.svg"
-
-class="nav-icon">
-
+<img src="icons/calendar.svg">
 
 
 <small>
@@ -321,7 +290,6 @@ Calendar
 </small>
 
 
-
 </button>
 
 
@@ -330,22 +298,13 @@ Calendar
 
 
 
-
-
-<button
-
+<button 
 class="nav-item"
-
 onclick="goEvents()">
 
 
 
-<img
-
-src="icons/events.svg"
-
-class="nav-icon">
-
+<img src="icons/events.svg">
 
 
 <small>
@@ -355,7 +314,6 @@ Events
 </small>
 
 
-
 </button>
 
 
@@ -363,23 +321,13 @@ Events
 
 
 
-
-
-
-<button
-
+<button 
 class="nav-item"
-
 onclick="goProfile()">
 
 
 
-<img
-
-src="icons/profile.svg"
-
-class="nav-icon">
-
+<img src="icons/profile.svg">
 
 
 <small>
@@ -389,10 +337,7 @@ Profile
 </small>
 
 
-
 </button>
-
-
 
 
 
@@ -405,8 +350,8 @@ Profile
 
 
 
-<script src="app.js"></script>
 
+<script src="app.js"></script>
 
 
 </body>
