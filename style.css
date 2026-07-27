@@ -2931,3 +2931,48 @@ height:45px;
     transform: translateY(-7px) !important;
 
 }
+/* =====================================
+        MEMORA SVG NAVIGATION
+===================================== */
+
+
+.nav-icon{
+
+width:26px;
+
+height:26px;
+
+color:white;
+
+transition:.3s;
+
+}
+
+
+
+.nav-item.active .nav-icon{
+
+
+color:#a78bff;
+
+
+filter:
+
+drop-shadow(
+0 0 8px #a78bff
+);
+
+
+}
+
+
+
+.nav-item:hover .nav-icon{
+
+
+transform:
+
+translateY(-4px);
+
+
+}
