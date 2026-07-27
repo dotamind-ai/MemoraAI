@@ -2640,3 +2640,239 @@ to{
 
 
 }
+/* =====================================
+   MEMORA LOGO PLANETS REAL ROTATION FIX
+===================================== */
+
+
+/* ЛОГО НЕ ДВИГАЕТСЯ */
+
+.memora-logo{
+
+    position:relative !important;
+
+    width:100px !important;
+
+    height:100px !important;
+
+}
+
+
+
+.logo-m{
+
+    position:absolute !important;
+
+    left:50% !important;
+
+    top:50% !important;
+
+    transform:translate(-50%,-50%) !important;
+
+    animation:none !important;
+
+    z-index:10 !important;
+
+}
+
+
+
+
+
+
+/* ОРБИТЫ */
+
+.logo-circle{
+
+
+    position:absolute !important;
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    border-radius:50% !important;
+
+
+    transform-origin:center !important;
+
+
+    animation-name:rotatePlanet !important;
+
+
+    animation-timing-function:linear !important;
+
+
+    animation-iteration-count:infinite !important;
+
+
+}
+
+
+
+
+
+
+.circle-one{
+
+    width:55px !important;
+
+    height:55px !important;
+
+    animation-duration:5s !important;
+
+
+}
+
+
+
+
+
+.circle-two{
+
+    width:75px !important;
+
+    height:75px !important;
+
+    animation-duration:8s !important;
+
+    animation-direction:reverse !important;
+
+
+}
+
+
+
+
+
+.circle-three{
+
+    width:95px !important;
+
+    height:95px !important;
+
+    animation-duration:12s !important;
+
+
+}
+
+
+
+
+
+
+
+/* ПЛАНЕТЫ */
+
+.planet{
+
+
+    position:absolute !important;
+
+
+    width:10px !important;
+
+    height:10px !important;
+
+
+    border-radius:50% !important;
+
+
+    background:white !important;
+
+
+    box-shadow:
+
+    0 0 8px white !important;
+
+
+}
+
+
+
+
+
+
+
+/* положение планет на орбитах */
+
+
+.circle-one .planet{
+
+
+    top:-5px !important;
+
+    left:50% !important;
+
+    transform:translateX(-50%) !important;
+
+
+}
+
+
+
+
+.circle-two .planet{
+
+
+    right:-5px !important;
+
+    top:50% !important;
+
+    transform:translateY(-50%) !important;
+
+
+}
+
+
+
+
+.circle-three .planet{
+
+
+    bottom:5px !important;
+
+    left:10px !important;
+
+
+}
+
+
+
+
+
+
+
+/* вращение орбит */
+
+
+@keyframes rotatePlanet{
+
+
+from{
+
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(0deg);
+
+
+}
+
+
+
+to{
+
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(360deg);
+
+
+}
+
+
+}
