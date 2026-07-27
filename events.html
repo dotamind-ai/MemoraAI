@@ -7,57 +7,34 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA — События</title>
+
+<title>Memora Events</title>
 
 
-<link rel="stylesheet" href="events.css?v=68">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="events.css">
+
+
 
 </head>
+
 
 
 <body class="events-page">
 
 
 
-<!-- ЛОГО -->
-
-<div class="memora-logo">
-
-    <div class="orbit orbit1">
-        <span></span>
-    </div>
-
-    <div class="orbit orbit2">
-        <span></span>
-    </div>
-
-    <div class="orbit orbit3">
-        <span></span>
-    </div>
 
 
-    <div class="sun-logo">
-
-        <b>M</b>
-
-    </div>
-
-
-</div>
+<div class="events-container">
 
 
 
+<h1 class="page-title">
 
-
-
-
-<section class="events-container">
-
-
-
-<h1>
-
-События
+Events
 
 </h1>
 
@@ -65,17 +42,29 @@
 
 
 
+<p class="page-subtitle">
+
+Your important moments
+
+</p>
 
 
-<button id="newEvent" class="new-event">
 
-<span class="event-icon">
 
-✦
 
-</span>
 
-Новое событие
+
+
+
+<!-- Кнопка создания -->
+
+<button 
+class="new-event-button"
+id="newEvent">
+
+
++ New Event
+
 
 </button>
 
@@ -87,24 +76,18 @@
 
 
 
-<div id="eventForm" class="event-form hidden">
+<!-- Форма -->
+
+<div 
+class="event-form hidden"
+id="eventForm">
 
 
 
-
-
-
-<input
-
-id="eventTitle"
-
+<input 
 type="text"
-
-placeholder="Название события"
-
->
-
-
+id="eventTitle"
+placeholder="Event title">
 
 
 
@@ -112,41 +95,9 @@ placeholder="Название события"
 
 
 <textarea
-
 id="eventText"
-
-placeholder="Описание события"
-
-></textarea>
-
-
-
-
-
-
-
-
-<div class="date-box">
-
-
-<label>
-
-📅 Выбрать дату
-
-</label>
-
-
-<input
-
-id="eventDate"
-
-type="date"
-
->
-
-
-</div>
-
+placeholder="Description">
+</textarea>
 
 
 
@@ -159,42 +110,30 @@ type="date"
 
 <option value="idea">
 
-✦ Идея
+Idea
 
 </option>
-
 
 
 <option value="goal">
 
-◎ Цель
+Goal
 
 </option>
-
-
-
-<option value="note">
-
-▤ Заметка
-
-</option>
-
 
 
 <option value="project">
 
-◈ Проект
+Project
 
 </option>
-
 
 
 <option value="personal">
 
-◉ Личное
+Personal
 
 </option>
-
 
 
 </select>
@@ -205,10 +144,24 @@ type="date"
 
 
 
+<input 
+type="date"
+id="eventDate">
 
-<button id="saveEvent">
 
-Сохранить
+
+
+
+
+
+<div class="form-buttons">
+
+
+
+<button 
+id="saveEvent">
+
+Save
 
 </button>
 
@@ -216,12 +169,37 @@ type="date"
 
 
 
+<button 
+id="cancelEvent">
 
-<button id="cancelEvent">
-
-Отмена
+Cancel
 
 </button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Список событий -->
+
+<div 
+id="eventList"
+class="event-list">
+
+
+</div>
 
 
 
@@ -238,43 +216,27 @@ type="date"
 
 
 
-<div id="eventList">
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
+<!-- Нижняя навигация -->
 
 <nav class="bottom-nav">
 
 
 
-<button class="nav-item" onclick="goHome()">
+<button 
+class="nav-item"
+onclick="goHome()">
 
 
-<span>
 
-🏠
+<img
+src="icons/memories.svg"
+class="nav-icon">
 
-</span>
 
 
 <small>
 
-Главная
+Memories
 
 </small>
 
@@ -287,19 +249,21 @@ type="date"
 
 
 
-<button class="nav-item" onclick="goCalendar()">
+<button 
+class="nav-item"
+onclick="goCalendar()">
 
 
-<span>
 
-📅
+<img
+src="icons/calendar.svg"
+class="nav-icon">
 
-</span>
 
 
 <small>
 
-Календарь
+Calendar
 
 </small>
 
@@ -312,19 +276,21 @@ type="date"
 
 
 
-<button class="nav-item active" onclick="goEvents()">
+<button 
+class="nav-item active"
+onclick="goEvents()">
 
 
-<span>
 
-✨
+<img
+src="icons/events.svg"
+class="nav-icon">
 
-</span>
 
 
 <small>
 
-События
+Events
 
 </small>
 
@@ -337,11 +303,26 @@ type="date"
 
 
 
-<button class="nav-item" onclick="goProfile()">
-<span>👤</span>
-<small>Профиль</small>
-</button>
+<button 
+class="nav-item"
+onclick="goProfile()">
 
+
+
+<img
+src="icons/profile.svg"
+class="nav-icon">
+
+
+
+<small>
+
+Profile
+
+</small>
+
+
+</button>
 
 
 
@@ -357,7 +338,8 @@ type="date"
 
 
 
-<script src="events.js?v=112"></script>
+<script src="events.js"></script>
+
 
 
 </body>
