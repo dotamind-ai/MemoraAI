@@ -9,16 +9,23 @@
 
 <title>Memora</title>
 
+
 <link rel="stylesheet" href="style.css">
 
+
 </head>
+
 
 
 <body class="home-page">
 
 
 
+
+
 <div class="home-container">
+
+
 
 
 
@@ -50,7 +57,6 @@
 
 
 
-
     <div class="logo-core">
 
         M
@@ -60,6 +66,7 @@
 
 
 </div>
+
 
 
 
@@ -79,7 +86,7 @@ Memora
 
 <p>
 
-Your memory space
+Save the moment
 
 </p>
 
@@ -104,8 +111,11 @@ Your memory space
 ========================= -->
 
 
-<section class="quick-memory">
+<section class="thought-card">
 
+
+
+<div class="thought-header">
 
 
 <h2>
@@ -116,12 +126,28 @@ Quick Thought
 
 
 
+<span>
 
-<p>
+✦
 
-Capture your idea
+</span>
+
+
+
+</div>
+
+
+
+
+
+
+
+<p class="thought-description">
+
+Write down what came to your mind
 
 </p>
+
 
 
 
@@ -132,7 +158,7 @@ Capture your idea
 
 id="memoryInput"
 
-placeholder="Write something...">
+placeholder="Your thought...">
 
 </textarea>
 
@@ -141,11 +167,19 @@ placeholder="Write something...">
 
 
 
-<button id="saveMemory">
 
-Save
+
+<button
+
+id="saveMemory">
+
+
+Save Thought
+
 
 </button>
+
+
 
 
 
@@ -161,19 +195,27 @@ Save
 
 
 <!-- =========================
-        MEMORY FEED
+        MEMORY HISTORY
 ========================= -->
 
 
-<section class="feed">
+<section class="memory-feed">
 
+
+
+<div class="feed-title">
 
 
 <h2>
 
-Memory Feed
+Recent Thoughts
 
 </h2>
+
+
+
+</div>
+
 
 
 
@@ -189,7 +231,11 @@ Memory Feed
 
 
 
+
 </section>
+
+
+
 
 
 
@@ -206,8 +252,9 @@ Memory Feed
 
 
 
+
 <!-- =========================
-        NAVIGATION
+        BOTTOM NAVIGATION
 ========================= -->
 
 
@@ -225,7 +272,7 @@ onclick="goHome()">
 
 
 
-<img 
+<img
 
 src="icons/memories.svg"
 
@@ -259,7 +306,7 @@ onclick="goCalendar()">
 
 
 
-<img 
+<img
 
 src="icons/calendar.svg"
 
@@ -293,7 +340,7 @@ onclick="goEvents()">
 
 
 
-<img 
+<img
 
 src="icons/events.svg"
 
@@ -327,7 +374,7 @@ onclick="goProfile()">
 
 
 
-<img 
+<img
 
 src="icons/profile.svg"
 
@@ -349,9 +396,7 @@ Profile
 
 
 
-
 </nav>
-
 
 
 
