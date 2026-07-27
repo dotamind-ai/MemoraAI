@@ -1,31 +1,49 @@
 /* =====================================
-        MEMORA EVENTS JS CLEAN
+        MEMORA EVENTS CLEAN JS
 ===================================== */
 
 
-console.log("MEMORA EVENTS CLEAN VERSION");
+console.log("MEMORA EVENTS CLEAN");
 
 
 
-const newEventBtn = document.getElementById("newEvent");
-
-const eventForm = document.getElementById("eventForm");
-
-const saveEventBtn = document.getElementById("saveEvent");
-
-const cancelEventBtn = document.getElementById("cancelEvent");
-
-const eventList = document.getElementById("eventList");
+const newEventBtn =
+document.getElementById("newEvent");
 
 
+const eventForm =
+document.getElementById("eventForm");
 
-const titleInput = document.getElementById("eventTitle");
 
-const textInput = document.getElementById("eventText");
+const saveEventBtn =
+document.getElementById("saveEvent");
 
-const typeInput = document.getElementById("eventType");
 
-const dateInput = document.getElementById("eventDate");
+const cancelEventBtn =
+document.getElementById("cancelEvent");
+
+
+
+const eventList =
+document.getElementById("eventList");
+
+
+
+const titleInput =
+document.getElementById("eventTitle");
+
+
+const textInput =
+document.getElementById("eventText");
+
+
+const typeInput =
+document.getElementById("eventType");
+
+
+const dateInput =
+document.getElementById("eventDate");
+
 
 
 
@@ -33,27 +51,34 @@ let editIndex = null;
 
 
 
-let events =
-JSON.parse(
+let events = JSON.parse(
+
 localStorage.getItem("memoraEvents")
-)
-|| [];
+
+) || [];
 
 
 
 
 
-/* ===============================
-        STORAGE
-=============================== */
 
 
-function saveStorage(){
+// ===============================
+// SAVE
+// ===============================
+
+
+function saveEvents(){
+
 
 localStorage.setItem(
+
 "memoraEvents",
+
 JSON.stringify(events)
+
 );
+
 
 }
 
@@ -63,9 +88,10 @@ JSON.stringify(events)
 
 
 
-/* ===============================
-        ICONS
-=============================== */
+
+// ===============================
+// ICONS
+// ===============================
 
 
 function getIcon(type){
@@ -78,11 +104,15 @@ idea:"✦",
 
 goal:"◎",
 
+note:"▤",
+
 project:"◈",
 
 personal:"◉"
 
+
 };
+
 
 
 return icons[type] || "✦";
@@ -98,12 +128,13 @@ return icons[type] || "✦";
 
 
 
-/* ===============================
-        RENDER
-=============================== */
+// ===============================
+// RENDER
+// ===============================
 
 
 function renderEvents(){
+
 
 
 if(!eventList)
@@ -121,11 +152,18 @@ events.forEach((event,index)=>{
 
 
 
-const card=document.createElement("div");
+const card =
+document.createElement("article");
+
 
 
 card.className =
-"event-card " + event.type;
+
+"event-card " +
+
+(event.type || "idea");
+
+
 
 
 
@@ -134,11 +172,12 @@ card.className =
 card.innerHTML=`
 
 
-<button class="card-star">
+<button class="event-pin ${event.favorite ? "active":""}">
 
-${event.favorite ? "★" : "☆"}
+☆
 
 </button>
+
 
 
 
@@ -150,6 +189,7 @@ ${event.favorite ? "★" : "☆"}
 ${getIcon(event.type)}
 
 </span>
+
 
 
 <h2>
@@ -164,9 +204,10 @@ ${event.title}
 
 
 
+
 <p>
 
-${event.text || "No description"}
+${event.text || "Без описания"}
 
 </p>
 
@@ -176,22 +217,16 @@ ${event.text || "No description"}
 
 <div class="event-date">
 
-📅 ${event.eventDate || "No date"}
+📅 ${event.eventDate || "Дата не выбрана"}
 
 </div>
 
 
 
 
+
+
 <div class="event-actions">
-
-
-<button class="event-favorite">
-
-★
-
-</button>
-
 
 
 <button class="event-edit">
@@ -210,7 +245,6 @@ ${event.text || "No description"}
 </button>
 
 
-
 </div>
 
 
@@ -224,17 +258,22 @@ ${event.text || "No description"}
 
 
 
-/* избранное */
+
+// закрепить
 
 
-card.querySelector(".card-star")
+card
+.querySelector(".event-pin")
 .onclick=()=>{
 
 
-event.favorite=!event.favorite;
+events[index].favorite =
+
+!events[index].favorite;
 
 
-saveStorage();
+
+saveEvents();
 
 
 renderEvents();
@@ -249,36 +288,50 @@ renderEvents();
 
 
 
-/* редактирование */
+
+// редактирование
 
 
-card.querySelector(".event-edit")
+card
+.querySelector(".event-edit")
 .onclick=()=>{
 
 
 editIndex=index;
 
 
-titleInput.value=event.title;
+
+titleInput.value =
+event.title;
 
 
-textInput.value=event.text;
+textInput.value =
+event.text;
 
 
-typeInput.value=event.type;
+typeInput.value =
+event.type;
 
 
-dateInput.value=event.eventDate;
+dateInput.value =
+event.eventDate;
 
 
 
-eventForm.classList.remove("hidden");
+eventForm.classList.remove(
+"hidden"
+);
 
 
-newEventBtn.classList.add("hidden");
+
+newEventBtn.classList.add(
+"hidden"
+);
 
 
-saveEventBtn.innerText="Update";
+
+saveEventBtn.innerText =
+"Update";
 
 
 };
@@ -290,17 +343,20 @@ saveEventBtn.innerText="Update";
 
 
 
-/* удаление */
+
+// удаление
 
 
-card.querySelector(".event-delete")
+card
+.querySelector(".event-delete")
 .onclick=()=>{
 
 
 events.splice(index,1);
 
 
-saveStorage();
+
+saveEvents();
 
 
 renderEvents();
@@ -321,6 +377,7 @@ eventList.appendChild(card);
 });
 
 
+
 }
 
 
@@ -331,9 +388,9 @@ eventList.appendChild(card);
 
 
 
-/* ===============================
-        NEW EVENT
-=============================== */
+// ===============================
+// OPEN FORM
+// ===============================
 
 
 newEventBtn.onclick=()=>{
@@ -342,16 +399,20 @@ newEventBtn.onclick=()=>{
 editIndex=null;
 
 
-clearForm();
+eventForm.classList.remove(
+"hidden"
+);
 
 
-eventForm.classList.remove("hidden");
+newEventBtn.classList.add(
+"hidden"
+);
 
 
-newEventBtn.classList.add("hidden");
 
+saveEventBtn.innerText =
+"Save";
 
-saveEventBtn.innerText="Save";
 
 
 };
@@ -364,15 +425,52 @@ saveEventBtn.innerText="Save";
 
 
 
-/* ===============================
-        SAVE
-=============================== */
+// ===============================
+// CANCEL
+// ===============================
+
+
+cancelEventBtn.onclick=()=>{
+
+
+clearForm();
+
+
+eventForm.classList.add(
+"hidden"
+);
+
+
+
+newEventBtn.classList.remove(
+"hidden"
+);
+
+
+
+editIndex=null;
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// SAVE EVENT
+// ===============================
 
 
 saveEventBtn.onclick=()=>{
 
 
-let title =
+const title =
+
 titleInput.value.trim();
 
 
@@ -380,7 +478,9 @@ titleInput.value.trim();
 if(title===""){
 
 
-alert("Enter title");
+alert(
+"Введите название события"
+);
 
 
 return;
@@ -392,7 +492,7 @@ return;
 
 
 
-let data={
+const data={
 
 
 title:title,
@@ -413,8 +513,8 @@ favorite:false,
 created:Date.now()
 
 
-};
 
+};
 
 
 
@@ -424,15 +524,21 @@ created:Date.now()
 if(editIndex!==null){
 
 
+
 events[editIndex]={
 
 ...events[editIndex],
 
-...data,
+title:data.title,
 
-favorite:events[editIndex].favorite
+text:data.text,
+
+type:data.type,
+
+eventDate:data.eventDate
 
 };
+
 
 
 editIndex=null;
@@ -452,22 +558,29 @@ events.unshift(data);
 
 
 
+saveEvents();
 
-
-saveStorage();
 
 
 clearForm();
 
 
 
-eventForm.classList.add("hidden");
+eventForm.classList.add(
+"hidden"
+);
 
 
-newEventBtn.classList.remove("hidden");
+
+newEventBtn.classList.remove(
+"hidden"
+);
 
 
-saveEventBtn.innerText="Save";
+
+saveEventBtn.innerText =
+"Save";
+
 
 
 renderEvents();
@@ -484,34 +597,9 @@ renderEvents();
 
 
 
-/* ===============================
-        CANCEL
-=============================== */
-
-
-cancelEventBtn.onclick=()=>{
-
-
-clearForm();
-
-
-eventForm.classList.add("hidden");
-
-
-newEventBtn.classList.remove("hidden");
-
-
-editIndex=null;
-
-
-};
-
-
-
-
-
-
-
+// ===============================
+// CLEAR
+// ===============================
 
 
 function clearForm(){
@@ -536,35 +624,38 @@ dateInput.value="";
 
 
 
-/* ===============================
-        NAVIGATION
-=============================== */
+// ===============================
+// NAVIGATION
+// ===============================
 
 
 function goHome(){
 
-location.href="index.html";
+window.location.href="index.html";
 
 }
+
 
 
 function goCalendar(){
 
-location.href="calendar.html";
+window.location.href="calendar.html";
 
 }
+
 
 
 function goEvents(){
 
-location.href="events.html";
+window.location.href="events.html";
 
 }
+
 
 
 function goProfile(){
 
-location.href="profile.html";
+window.location.href="profile.html";
 
 }
 
@@ -573,6 +664,9 @@ location.href="profile.html";
 
 
 
+
+
+// START
 
 
 renderEvents();
