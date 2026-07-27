@@ -958,3 +958,27 @@ transform:translateY(-4px);
 
 
 }
+.calendar-grid{
+
+display:grid !important;
+
+grid-template-columns:repeat(7,1fr) !important;
+
+gap:8px !important;
+
+}
+
+
+
+
+.calendar-day{
+
+min-height:45px !important;
+
+display:flex !important;
+
+align-items:center !important;
+
+justify-content:center !important;
+
+}
