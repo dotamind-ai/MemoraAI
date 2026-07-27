@@ -7,62 +7,43 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MEMORA</title>
+<title>Memora</title>
 
-
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 
-<body>
+<body class="home-page">
 
 
-<div class="app">
+<div class="home-container">
 
 
+<!-- HEADER -->
 
-<header>
-
-
-<div class="logo">
+<header class="home-header">
 
 
-<div class="core">
+<div class="mini-logo">
 
-
-<div class="ring"></div>
-
-
-<div class="memory-letter">
 M
-</div>
-
-
-<div class="particle p1"></div>
-
-<div class="particle p2"></div>
-
-<div class="particle p3"></div>
-
-
-</div>
-
 
 </div>
 
 
 
+<div>
 
 <h1>
-MEMORA
+Memora
 </h1>
 
-
 <p>
-Твоя цифровая память
+Your memory space
 </p>
 
+</div>
 
 
 </header>
@@ -72,166 +53,35 @@ MEMORA
 
 
 
+<!-- БЫСТРАЯ МЫСЛЬ -->
 
 
-<section class="glass">
+<section class="quick-memory">
 
 
+<h2>
+Quick Thought
+</h2>
 
-<button id="addMemory">
 
-+ Новая память
+<p>
+Capture your idea
+</p>
 
-</button>
 
 
-
-
-
-
-
-<div id="memoryBox" class="hidden">
-
-
-
-
-
-
-<div class="memory-types">
-
-
-
-<button 
-class="type-button active"
-data-type="idea">
-
-◇ Идея
-
-</button>
-
-
-
-
-<button 
-class="type-button"
-data-type="goal">
-
-◎ Цель
-
-</button>
-
-
-
-
-<button 
-class="type-button"
-data-type="note">
-
-▤ Заметка
-
-</button>
-
-
-
-
-<button 
-class="type-button"
-data-type="project">
-
-◈ Проект
-
-</button>
-
-
-
-
-<button 
-class="type-button"
-data-type="personal">
-
-◉ Личное
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<input
-
-id="memoryTitle"
-
-type="text"
-
-placeholder="Название памяти"
-
->
-
-
-
-
-
-
-
-<textarea
-
-id="memoryText"
-
-placeholder="Запиши мысль..."
-
-></textarea>
-
-
-
-
-
-
-
-
-<input
-
-id="memoryType"
-
-type="hidden"
-
-value="idea"
-
->
-
-
-
-
+<textarea 
+id="memoryInput"
+placeholder="Write something...">
+</textarea>
 
 
 
 <button id="saveMemory">
 
-Сохранить
+Save
 
 </button>
-
-
-
-
-
-<button id="cancelEdit" class="hidden">
-
-Отмена
-
-</button>
-
-
-
-
-
-</div>
 
 
 
@@ -243,218 +93,37 @@ value="idea"
 
 
 
+<!-- ЛЕНТА -->
 
 
-<section class="memories">
+<section class="feed">
 
 
-
-
-
-
-
-<div class="topBar">
-
-    <input
-        id="searchMemory"
-        type="text"
-        placeholder="🔎 Поиск памяти..."
-    >
-
-    <button id="openFilters">
-        ⚙️
-    </button>
-
-</div>
-
-
-
-
-
-
-
-
-<div id="filterPanel" class="hidden filter-panel">
-
-
-
-<h3>
-
-Настройки памяти
-
-</h3>
-
-
-
-
-
-
-
-
-<div class="filters">
-
-
-
-<button
-
-class="filter-button active"
-
-data-filter="all">
-
-Все
-
-</button>
-
-
-
-
-<button
-
-class="filter-button"
-
-data-filter="idea">
-
-◇ Идеи
-
-</button>
-
-
-
-
-<button
-
-class="filter-button"
-
-data-filter="goal">
-
-◎ Цели
-
-</button>
-
-
-
-
-<button
-
-class="filter-button"
-
-data-filter="note">
-
-▤ Заметки
-
-</button>
-
-
-
-
-<button
-
-class="filter-button"
-
-data-filter="project">
-
-◈ Проекты
-
-</button>
-
-
-
-
-<button
-
-class="filter-button"
-
-data-filter="personal">
-
-◉ Личное
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<select id="sortMemory">
-
-
-<option value="new">
-
-Новые
-
-</option>
-
-
-<option value="old">
-
-Старые
-
-</option>
-
-
-<option value="favorite">
-
-Закреплённые
-
-</option>
-
-
-
-</select>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<h3 id="memoryCount">
-
-0 воспоминаний
-
-</h3>
-
-
-
-
-
-
+<h2>
+Memory Feed
+</h2>
 
 
 <div id="memoryList">
 
+
 </div>
-
-
-
-
-
 
 
 </section>
 
 
+
 </div>
 
 
 
-<!-- Нижняя стеклянная навигация -->
 
-<!-- Нижняя стеклянная навигация -->
+
+
+
+<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+
 
 <nav class="bottom-nav">
 
@@ -464,23 +133,15 @@ class="nav-item active"
 onclick="goHome()">
 
 
-
-<img
-src="icons/memories.svg"
-class="nav-icon">
-
+<img src="icons/memories.svg">
 
 
 <small>
-
 Memories
-
 </small>
 
 
 </button>
-
-
 
 
 
@@ -492,22 +153,15 @@ onclick="goCalendar()">
 
 
 
-<img
-src="icons/calendar.svg"
-class="nav-icon">
-
+<img src="icons/calendar.svg">
 
 
 <small>
-
 Calendar
-
 </small>
 
 
 </button>
-
-
 
 
 
@@ -519,22 +173,15 @@ onclick="goEvents()">
 
 
 
-<img
-src="icons/events.svg"
-class="nav-icon">
-
+<img src="icons/events.svg">
 
 
 <small>
-
 Events
-
 </small>
 
 
 </button>
-
-
 
 
 
@@ -546,16 +193,11 @@ onclick="goProfile()">
 
 
 
-<img
-src="icons/profile.svg"
-class="nav-icon">
-
+<img src="icons/profile.svg">
 
 
 <small>
-
 Profile
-
 </small>
 
 
@@ -564,8 +206,6 @@ Profile
 
 
 </nav>
-
-
 
 
 
