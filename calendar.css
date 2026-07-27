@@ -761,3 +761,30 @@ filter:brightness(1.5);
     transform:translateY(-4px);
 
 }
+/* FINAL CALENDAR FIX */
+
+
+.calendar-empty{
+
+height:38px !important;
+
+visibility:hidden !important;
+
+display:block !important;
+
+}
+
+
+
+
+.calendar-day{
+
+height:38px !important;
+
+display:flex !important;
+
+align-items:center !important;
+
+justify-content:center !important;
+
+}
