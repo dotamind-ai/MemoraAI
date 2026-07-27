@@ -2358,3 +2358,285 @@ top:-5px;
 
 
 }
+/* =====================================
+   MEMORA LOGO PLANETS ROTATION FIX
+===================================== */
+
+
+/* сами орбиты */
+
+.memora-logo .logo-circle{
+
+    position:absolute !important;
+
+    left:50% !important;
+
+    top:50% !important;
+
+    transform:translate(-50%,-50%) !important;
+
+    border-radius:50% !important;
+
+    border:1px solid rgba(255,255,255,.18) !important;
+
+
+    animation:
+    planetOrbit linear infinite !important;
+
+}
+
+
+
+
+
+/* планеты */
+
+.memora-logo .planet{
+
+
+    position:absolute !important;
+
+
+    display:block !important;
+
+
+    width:10px !important;
+
+    height:10px !important;
+
+
+    border-radius:50% !important;
+
+
+    background:white !important;
+
+
+    box-shadow:
+
+    0 0 10px white,
+
+    0 0 20px rgba(255,255,255,.5) !important;
+
+
+}
+
+
+
+
+
+
+/* первая орбита */
+
+
+.memora-logo .circle-one{
+
+
+    width:55px !important;
+
+    height:55px !important;
+
+
+    animation-duration:6s !important;
+
+
+}
+
+
+
+
+.memora-logo .circle-one .planet{
+
+
+    top:-5px !important;
+
+    left:50% !important;
+
+    transform:translateX(-50%) !important;
+
+
+}
+
+
+
+
+
+
+
+/* вторая орбита */
+
+
+.memora-logo .circle-two{
+
+
+    width:75px !important;
+
+    height:75px !important;
+
+
+    animation-duration:10s !important;
+
+
+    animation-direction:reverse !important;
+
+
+}
+
+
+
+
+.memora-logo .circle-two .planet{
+
+
+    right:-5px !important;
+
+    top:50% !important;
+
+
+    transform:translateY(-50%) !important;
+
+
+    width:12px !important;
+
+    height:12px !important;
+
+
+    background:#d7d7ff !important;
+
+
+}
+
+
+
+
+
+
+
+
+/* третья орбита */
+
+
+.memora-logo .circle-three{
+
+
+    width:95px !important;
+
+    height:95px !important;
+
+
+    animation-duration:14s !important;
+
+
+}
+
+
+
+
+
+.memora-logo .circle-three .planet{
+
+
+    bottom:5px !important;
+
+    left:15px !important;
+
+
+    width:14px !important;
+
+    height:14px !important;
+
+
+    background:#eeeeee !important;
+
+
+}
+
+
+
+
+
+/* движение орбит */
+
+
+@keyframes planetOrbit{
+
+
+from{
+
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(0deg);
+
+
+}
+
+
+to{
+
+
+    transform:
+
+    translate(-50%,-50%)
+    rotate(360deg);
+
+
+}
+
+
+}
+
+
+
+
+/* центральная M */
+
+
+.memora-logo .logo-m{
+
+
+    position:absolute !important;
+
+
+    z-index:5 !important;
+
+
+    width:45px !important;
+
+    height:45px !important;
+
+
+    border-radius:50% !important;
+
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+
+    font-size:28px !important;
+
+    font-weight:700 !important;
+
+
+    background:
+
+    rgba(255,255,255,.08) !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35) !important;
+
+
+    color:white !important;
+
+
+    box-shadow:
+
+    0 0 15px rgba(255,255,255,.25) !important;
+
+
+}
