@@ -1,16 +1,10 @@
-/* =====================================
-        MEMORA HOME JS V2
-===================================== */
+/* =================================
+        MEMORA APP JS V3
+================================= */
 
 
-console.log("MEMORA HOME VERSION 2");
+console.log("MEMORA HOME VERSION 3");
 
-
-
-
-// ===============================
-// ЭЛЕМЕНТЫ
-// ===============================
 
 
 const memoryInput =
@@ -25,21 +19,28 @@ const memoryList =
 document.getElementById("memoryList");
 
 
+const memoryCount =
+document.getElementById("memoryCount");
 
 
 
-// ===============================
-// ЗАГРУЗКА ПАМЯТИ
-// ===============================
+const typeButtons =
+document.querySelectorAll(".type-btn");
 
 
-let memories =
-JSON.parse(
+
+
+let selectedType = "idea";
+
+
+
+
+
+let memories = JSON.parse(
+
 localStorage.getItem("memora")
-)
-||
-[];
 
+) || [];
 
 
 
@@ -47,186 +48,168 @@ localStorage.getItem("memora")
 
 
 
-// ===============================
-// СОХРАНЕНИЕ
-// ===============================
 
 
-function saveMemories(){
+/* =================================
+        TYPE SELECT
+================================= */
 
 
-localStorage.setItem(
+typeButtons.forEach(button=>{
 
-"memora",
 
-JSON.stringify(memories)
+    button.onclick=()=>{
 
-);
 
+        typeButtons.forEach(btn=>{
 
-}
+            btn.classList.remove("active");
 
+        });
 
 
 
+        button.classList.add("active");
 
 
 
+        selectedType =
+        button.dataset.type;
 
 
-// ===============================
-// ОТОБРАЖЕНИЕ ЛЕНТЫ
-// ===============================
 
-
-function renderMemories(){
-
-
-
-if(!memoryList)
-return;
-
-
-
-
-
-memoryList.innerHTML="";
-
-
-
-
-
-
-if(memories.length===0){
-
-
-
-memoryList.innerHTML=`
-
-<div class="memory-item">
-
-
-<p>
-
-No thoughts yet...
-
-Your ideas will appear here.
-
-</p>
-
-
-</div>
-
-`;
-
-
-
-return;
-
-
-}
-
-
-
-
-
-
-
-
-
-memories.forEach((memory,index)=>{
-
-
-
-const item =
-document.createElement("div");
-
-
-
-item.className="memory-item";
-
-
-
-
-
-item.innerHTML=`
-
-<p>
-
-${memory.text}
-
-</p>
-
-
-
-<div style="
-margin-top:12px;
-font-size:11px;
-opacity:.45;
-display:flex;
-justify-content:space-between;
-">
-
-
-<span>
-
-${memory.date}
-
-</span>
-
-
-<button 
-class="delete-memory"
-data-index="${index}"
-style="
-background:none;
-border:none;
-color:white;
-opacity:.5;
-cursor:pointer;
-">
-
-×
-
-
-</button>
-
-
-</div>
-
-
-`;
-
-
-
-
-
-
-
-item
-.querySelector(".delete-memory")
-.onclick=()=>{
-
-
-deleteMemory(index);
-
-
-};
-
-
-
-
-
-
-
-memoryList.appendChild(item);
-
+    };
 
 
 });
 
 
 
+
+
+
+
+
+
+/* =================================
+        RENDER
+================================= */
+
+
+function renderMemories(){
+
+
+
+    if(!memoryList) return;
+
+
+
+    memoryList.innerHTML="";
+
+
+
+
+    memories.forEach((memory,index)=>{
+
+
+
+        const card =
+        document.createElement("div");
+
+
+
+        card.className =
+        "memory-item";
+
+
+
+
+        card.innerHTML = `
+
+
+        <div class="memory-type">
+
+        ${memory.type}
+
+        </div>
+
+
+
+        <div class="memory-text">
+
+        ${memory.text}
+
+        </div>
+
+
+
+        <div class="memory-footer">
+
+
+        <span>
+
+        ${memory.date}
+
+        </span>
+
+
+
+        <button 
+        class="delete-memory">
+
+        Delete
+
+        </button>
+
+
+
+        </div>
+
+
+
+        `;
+
+
+
+
+        card
+        .querySelector(".delete-memory")
+        .onclick=()=>{
+
+
+            memories.splice(index,1);
+
+
+            saveStorage();
+
+
+            renderMemories();
+
+
+        };
+
+
+
+
+
+        memoryList.appendChild(card);
+
+
+
+    });
+
+
+
+
+    if(memoryCount){
+
+        memoryCount.innerText =
+        memories.length;
+
+    }
+
+
+
 }
 
 
@@ -237,76 +220,67 @@ memoryList.appendChild(item);
 
 
 
-// ===============================
-// ДОБАВЛЕНИЕ МЫСЛИ
-// ===============================
+/* =================================
+        SAVE
+================================= */
 
 
 if(saveMemory){
 
 
+
 saveMemory.onclick=()=>{
 
 
-
-const text =
-
-memoryInput.value.trim();
+    const text =
+    memoryInput.value.trim();
 
 
 
 
 
-if(text===""){
+    if(text===""){
 
 
-alert(
-
-"Write something first"
-
-);
+        return;
 
 
-return;
-
-
-}
+    }
 
 
 
 
 
+    const memory={
 
 
-const memory={
+        text:text,
+
+
+        type:selectedType.toUpperCase(),
 
 
 
-text:text,
+        date:new Date()
+
+        .toLocaleString(
+            "ru-RU",
+            {
+
+            day:"2-digit",
+
+            month:"2-digit",
+
+            hour:"2-digit",
+
+            minute:"2-digit"
+
+            }
+
+        )
 
 
-date:
-
-new Date()
-
-.toLocaleString(
-"ru-RU",
-{
-
-day:"2-digit",
-
-month:"2-digit",
-
-hour:"2-digit",
-
-minute:"2-digit"
-
-}
-
-)
-
-
-};
+    };
 
 
 
@@ -314,33 +288,26 @@ minute:"2-digit"
 
 
 
-memories.unshift(memory);
+    memories.unshift(memory);
 
 
 
-
-
-saveMemories();
-
+    saveStorage();
 
 
 
-
-memoryInput.value="";
-
+    memoryInput.value="";
 
 
 
-
-renderMemories();
-
-
+    renderMemories();
 
 
 
 };
 
 
+
 }
 
 
@@ -351,31 +318,16 @@ renderMemories();
 
 
 
-// ===============================
-// УДАЛЕНИЕ
-// ===============================
+function saveStorage(){
 
 
-function deleteMemory(index){
+    localStorage.setItem(
 
+        "memora",
 
+        JSON.stringify(memories)
 
-memories.splice(
-
-index,
-
-1
-
-);
-
-
-
-saveMemories();
-
-
-
-renderMemories();
-
+    );
 
 
 }
@@ -388,10 +340,9 @@ renderMemories();
 
 
 
-// ===============================
-// НАВИГАЦИЯ
-// ===============================
-
+/* =================================
+        NAVIGATION
+================================= */
 
 
 function goHome(){
@@ -414,7 +365,6 @@ window.location.href="calendar.html";
 
 
 
-
 function goEvents(){
 
 
@@ -422,7 +372,6 @@ window.location.href="events.html";
 
 
 }
-
 
 
 
@@ -442,9 +391,9 @@ window.location.href="profile.html";
 
 
 
-// ===============================
-// START
-// ===============================
+/* =================================
+        START
+================================= */
 
 
 renderMemories();
