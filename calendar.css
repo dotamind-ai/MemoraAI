@@ -3,6 +3,7 @@
 }
 
 
+
 body.calendar-page{
 
     margin:0;
@@ -38,7 +39,7 @@ body.calendar-page{
 
     color:white;
 
-    overflow:hidden;
+    overflow-x:hidden;
 
 }
 
@@ -46,7 +47,11 @@ body.calendar-page{
 
 
 
-/* ===== LOGO ===== */
+
+
+/* =========================
+        LOGO
+========================= */
 
 
 .memora-logo{
@@ -59,15 +64,11 @@ body.calendar-page{
 
     transform:translateX(-50%);
 
-
     width:150px;
 
     height:150px;
 
 }
-
-
-
 
 
 
@@ -79,9 +80,7 @@ body.calendar-page{
 
     top:50%;
 
-
-    transform:
-    translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
 
     width:60px;
@@ -94,9 +93,9 @@ body.calendar-page{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
 
     background:
@@ -110,20 +109,14 @@ body.calendar-page{
 
     box-shadow:
 
-
     0 0 20px white,
 
     0 0 55px rgba(180,180,255,.45);
 
 
-
-    animation:
-
-    glow 3s infinite;
-
+    animation:glow 3s infinite;
 
 }
-
 
 
 
@@ -146,7 +139,6 @@ body.calendar-page{
 
 
 
-
 .orbit{
 
     position:absolute;
@@ -155,14 +147,10 @@ body.calendar-page{
 
     top:50%;
 
-
-    transform:
-    translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
 
 
     border-radius:50%;
-
 
 
     border:
@@ -170,8 +158,6 @@ body.calendar-page{
     1px solid rgba(255,255,255,.12);
 
 }
-
-
 
 
 
@@ -193,18 +179,13 @@ body.calendar-page{
 
 
 
-
-
 .orbit1{
 
     width:85px;
 
     height:85px;
 
-
-    animation:
-
-    rotate1 5s linear infinite;
+    animation:rotate1 5s linear infinite;
 
 }
 
@@ -215,7 +196,6 @@ body.calendar-page{
     width:6px;
 
     height:6px;
-
 
     top:-3px;
 
@@ -233,10 +213,7 @@ body.calendar-page{
 
     height:110px;
 
-
-    animation:
-
-    rotate2 8s linear infinite;
+    animation:rotate2 8s linear infinite;
 
 }
 
@@ -247,7 +224,6 @@ body.calendar-page{
     width:8px;
 
     height:8px;
-
 
     right:-4px;
 
@@ -265,10 +241,7 @@ body.calendar-page{
 
     height:135px;
 
-
-    animation:
-
-    rotate1 12s linear infinite;
+    animation:rotate1 12s linear infinite;
 
 }
 
@@ -280,11 +253,9 @@ body.calendar-page{
 
     height:9px;
 
-
     bottom:15px;
 
     left:15px;
-
 
     background:#9fd4ff;
 
@@ -294,8 +265,8 @@ body.calendar-page{
 
 
 
-@keyframes rotate1{
 
+@keyframes rotate1{
 
 from{
 
@@ -305,7 +276,6 @@ rotate(0deg);
 
 }
 
-
 to{
 
 transform:
@@ -313,7 +283,6 @@ translate(-50%,-50%)
 rotate(360deg);
 
 }
-
 
 }
 
@@ -323,7 +292,6 @@ rotate(360deg);
 
 @keyframes rotate2{
 
-
 from{
 
 transform:
@@ -331,7 +299,6 @@ translate(-50%,-50%)
 rotate(360deg);
 
 }
-
 
 to{
 
@@ -341,14 +308,13 @@ rotate(0deg);
 
 }
 
-
 }
 
 
 
 
-@keyframes glow{
 
+@keyframes glow{
 
 0%,100%{
 
@@ -356,14 +322,12 @@ filter:brightness(1);
 
 }
 
-
 50%{
 
 filter:brightness(1.5);
 
 }
 
-
 }
 
 
@@ -373,105 +337,99 @@ filter:brightness(1.5);
 
 
 
-/* ===== CALENDAR ===== */
+
+/* =========================
+        CALENDAR BOX
+========================= */
 
 
 .calendar-container{
 
-
     width:360px;
 
-
     max-width:85%;
-
 
 
     padding:18px;
 
 
-
     margin-top:20px;
-
 
 
     border-radius:25px;
 
 
-
     background:
-
 
     rgba(255,255,255,.06);
 
 
-
     backdrop-filter:
-
 
     blur(18px);
 
 
-
     border:
-
 
     1px solid rgba(255,255,255,.10);
 
 
-
     box-shadow:
-
 
     0 15px 40px rgba(0,0,0,.45);
 
-
 }
-
-
 
 
 
 
 .calendar-container h1{
 
-
     text-align:center;
 
+    margin:0 0 5px;
 
-    margin:0 0 18px;
-
-
-    font-size:25px;
+    font-size:28px;
 
 }
 
 
 
+.calendar-subtitle{
+
+    text-align:center;
+
+    opacity:.6;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+
+/* =========================
+        HEADER
+========================= */
 
 
 .calendar-header{
 
-
     display:flex;
-
 
     justify-content:space-between;
 
-
     align-items:center;
 
-
 }
-
-
 
 
 
 .calendar-header h2{
 
-
     margin:0;
-
 
     font-size:20px;
 
@@ -481,12 +439,9 @@ filter:brightness(1.5);
 
 
 
-
 .calendar-header button{
 
-
     width:40px;
-
 
     height:40px;
 
@@ -494,16 +449,12 @@ filter:brightness(1.5);
     border-radius:50%;
 
 
-
     border:none;
-
 
 
     background:
 
-
     rgba(255,255,255,.15);
-
 
 
     color:white;
@@ -511,7 +462,6 @@ filter:brightness(1.5);
 
     font-size:26px;
 
-
 }
 
 
@@ -520,16 +470,17 @@ filter:brightness(1.5);
 
 
 
-.week{
 
+/* =========================
+        WEEK
+========================= */
+
+
+.week{
 
     display:grid;
 
-
-    grid-template-columns:
-
-    repeat(7,1fr);
-
+    grid-template-columns:repeat(7,1fr);
 
 
     margin-top:18px;
@@ -537,16 +488,13 @@ filter:brightness(1.5);
 
     opacity:.65;
 
-
 }
 
 
 
 .week span{
 
-
     text-align:center;
-
 
     font-size:12px;
 
@@ -557,16 +505,18 @@ filter:brightness(1.5);
 
 
 
-.calendar-grid{
 
+
+/* =========================
+        DAYS
+========================= */
+
+
+.calendar-grid{
 
     display:grid;
 
-
-    grid-template-columns:
-
-    repeat(7,1fr);
-
+    grid-template-columns:repeat(7,1fr);
 
 
     gap:6px;
@@ -574,9 +524,7 @@ filter:brightness(1.5);
 
     margin-top:8px;
 
-
 }
-
 
 
 
@@ -585,9 +533,7 @@ filter:brightness(1.5);
 .calendar-day,
 .calendar-empty{
 
-
     height:38px;
-
 
 }
 
@@ -595,27 +541,19 @@ filter:brightness(1.5);
 
 
 
-
-
 .calendar-day{
-
 
     display:flex;
 
-
     justify-content:center;
 
-
     align-items:center;
-
 
 
     border-radius:12px;
 
 
-
     background:
-
 
     rgba(255,255,255,.09);
 
@@ -626,15 +564,9 @@ filter:brightness(1.5);
 
 
 
-
-
-
-
 .calendar-day:hover{
 
-
     background:
-
 
     rgba(255,255,255,.22);
 
@@ -643,9 +575,7 @@ filter:brightness(1.5);
 
 
 
-
 .calendar-empty{
-
 
     visibility:hidden;
 
@@ -654,51 +584,64 @@ filter:brightness(1.5);
 
 
 
-
-
 .today{
-
 
     background:white;
 
-
     color:#302038;
-
 
     font-weight:bold;
 
 
     box-shadow:
 
-
     0 0 15px white;
 
-
 }
-/* MEMORA NAVIGATION */
+
+
+
+
+
+
+
+
+/* =========================
+        BOTTOM NAV
+========================= */
 
 
 .bottom-nav{
 
     position:fixed;
 
+
     bottom:18px;
 
+
     left:50%;
+
 
     transform:translateX(-50%);
 
 
+
     width:350px;
 
+
     max-width:90%;
+
+
 
     height:72px;
 
 
+
     display:flex;
 
+
     justify-content:space-around;
+
 
     align-items:center;
 
@@ -707,6 +650,7 @@ filter:brightness(1.5);
     background:
 
     rgba(255,255,255,.07);
+
 
 
     backdrop-filter:
@@ -729,8 +673,8 @@ filter:brightness(1.5);
 
     0 15px 40px rgba(0,0,0,.5);
 
-
 }
+
 
 
 
@@ -740,6 +684,7 @@ filter:brightness(1.5);
 
     border:none;
 
+
     background:none;
 
 
@@ -748,34 +693,23 @@ filter:brightness(1.5);
 
     display:flex;
 
+
     flex-direction:column;
 
+
     align-items:center;
+
 
 
     gap:3px;
 
 
-
     opacity:.55;
 
-
-
-    font-size:22px;
-
-
-}
-
-
-
-
-.nav-item small{
 
     font-size:11px;
 
 }
-
-
 
 
 
@@ -786,78 +720,10 @@ filter:brightness(1.5);
 
     transform:translateY(-7px);
 
-
 }
 
 
 
-
-.nav-item.active span{
-
-    filter:
-
-    drop-shadow(0 0 10px white);
-
-
-}
-/* ===== Screens ===== */
-
-.screen{
-
-display:block;
-
-}
-
-
-.hidden{
-
-display:none;
-
-}
-/* SVG NAV ICONS */
-
-
-.nav-icon{
-
-width:26px;
-
-height:26px;
-
-color:white;
-
-transition:.3s;
-
-}
-
-
-
-.nav-item.active .nav-icon{
-
-
-color:#a78bff;
-
-
-filter:
-
-drop-shadow(
-0 0 8px #a78bff
-);
-
-
-}
-
-
-
-.nav-item:hover .nav-icon{
-
-
-transform:translateY(-4px);
-
-
-}
-/* =====================================
-        MEMORA SVG NAVIGATION
-===================================== */
 
 
 .nav-icon{
@@ -866,28 +732,11 @@ transform:translateY(-4px);
 
     height:26px;
 
-    color:white;
 
-    transition:0.3s;
-
-}
-
-
-
-
-.nav-item{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:5px;
+    transition:.3s ease;
 
 }
+
 
 
 
@@ -895,12 +744,11 @@ transform:translateY(-4px);
 .nav-item.active .nav-icon{
 
 
-    color:#a78bff;
-
-
     filter:
-    drop-shadow(0 0 8px #a78bff);
 
+    drop-shadow(
+    0 0 8px #a78bff
+    );
 
 }
 
@@ -911,143 +759,5 @@ transform:translateY(-4px);
 
 
     transform:translateY(-4px);
-
-
-}
-/* =====================================
-      MEMORA SVG NAV FIX
-===================================== */
-
-
-.nav-icon{
-
-    width:26px !important;
-
-    height:26px !important;
-
-    color:white !important;
-
-    transition:.3s ease !important;
-
-}
-
-
-
-
-
-.nav-item.active .nav-icon{
-
-
-    color:#a78bff !important;
-
-
-    filter:
-    drop-shadow(0 0 8px #a78bff) !important;
-
-
-}
-
-
-
-
-
-.nav-item:hover .nav-icon{
-
-
-    transform:translateY(-4px) !important;
-
-
-}
-.calendar-grid{
-
-display:grid !important;
-
-grid-template-columns:repeat(7,1fr) !important;
-
-gap:8px !important;
-
-}
-
-
-
-
-.calendar-day{
-
-min-height:45px !important;
-
-display:flex !important;
-
-align-items:center !important;
-
-justify-content:center !important;
-
-}
-/* =====================================
-        CALENDAR GRID FIX
-===================================== */
-
-
-.calendar-grid{
-
-display:grid !important;
-
-grid-template-columns:repeat(7, 1fr) !important;
-
-gap:6px !important;
-
-width:100% !important;
-
-}
-
-
-
-
-.calendar-day,
-.calendar-empty{
-
-height:42px !important;
-
-display:flex !important;
-
-align-items:center !important;
-
-justify-content:center !important;
-
-}
-
-
-
-
-.calendar-empty{
-
-visibility:hidden !important;
-
-}
-
-
-
-
-.week{
-
-display:grid !important;
-
-grid-template-columns:repeat(7, 1fr) !important;
-
-text-align:center !important;
-
-gap:6px !important;
-
-}
-
-
-
-
-.week span{
-
-display:flex !important;
-
-justify-content:center !important;
-
-align-items:center !important;
 
 }
