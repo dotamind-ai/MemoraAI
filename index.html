@@ -17,11 +17,14 @@
 </head>
 
 
+
 <body class="home-page">
 
 
 
 <div class="home-container">
+
+
 
 
 
@@ -31,13 +34,15 @@
 
 
 
+
+
+<!-- LOGO -->
+
 <div class="memora-logo">
 
 
 
-    <!-- Орбиты с планетами -->
-
-    <div class="logo-circle circle-one">
+    <div class="orbit orbit-one">
 
         <span class="planet planet-one"></span>
 
@@ -45,7 +50,7 @@
 
 
 
-    <div class="logo-circle circle-two">
+    <div class="orbit orbit-two">
 
         <span class="planet planet-two"></span>
 
@@ -53,7 +58,7 @@
 
 
 
-    <div class="logo-circle circle-three">
+    <div class="orbit orbit-three">
 
         <span class="planet planet-three"></span>
 
@@ -62,7 +67,6 @@
 
 
 
-    <!-- Центральная M -->
 
     <div class="logo-m">
 
@@ -78,6 +82,9 @@
 
 
 
+
+
+<!-- TITLE -->
 
 <div class="header-text">
 
@@ -100,6 +107,7 @@ Your memory space
 
 
 
+
 </header>
 
 
@@ -110,10 +118,11 @@ Your memory space
 
 
 
-<!-- СОЗДАНИЕ МЫСЛИ -->
+<!-- QUICK MEMORY -->
 
 
 <section class="capture-card">
+
 
 
 <h2>
@@ -121,6 +130,7 @@ Your memory space
 Capture
 
 </h2>
+
 
 
 <p>
@@ -145,12 +155,17 @@ placeholder="Write your thought..."
 
 
 
+
+
+
 <div class="memory-types">
 
 
 
-<button 
+<button
+
 class="type-btn active"
+
 data-type="idea">
 
 IDEA
@@ -160,9 +175,10 @@ IDEA
 
 
 
+<button
 
-<button 
 class="type-btn"
+
 data-type="note">
 
 NOTE
@@ -173,8 +189,10 @@ NOTE
 
 
 
-<button 
+<button
+
 class="type-btn"
+
 data-type="inspiration">
 
 INSPIRATION
@@ -185,13 +203,16 @@ INSPIRATION
 
 
 
-<button 
+<button
+
 class="type-btn"
+
 data-type="goal">
 
 GOAL
 
 </button>
+
 
 
 
@@ -202,13 +223,12 @@ GOAL
 
 
 
+
 <button
 
 id="saveMemory"
 
-class="save-button"
-
->
+class="save-button">
 
 Save Memory
 
@@ -226,7 +246,7 @@ Save Memory
 
 
 
-<!-- ЛЕНТА ПАМЯТИ -->
+<!-- MEMORY FEED -->
 
 
 <section class="memory-feed">
@@ -261,10 +281,12 @@ Recent Memories
 
 
 
+
 <div id="memoryList">
 
 
 </div>
+
 
 
 
@@ -286,15 +308,19 @@ Recent Memories
 
 
 
-<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+<!-- BOTTOM NAVIGATION -->
 
 
 <nav class="bottom-nav">
 
 
 
-<button 
+
+
+<button
+
 class="nav-item active"
+
 onclick="goHome()">
 
 
@@ -317,8 +343,10 @@ Memories
 
 
 
-<button 
+<button
+
 class="nav-item"
+
 onclick="goCalendar()">
 
 
@@ -341,8 +369,10 @@ Calendar
 
 
 
-<button 
+<button
+
 class="nav-item"
+
 onclick="goEvents()">
 
 
@@ -365,8 +395,10 @@ Events
 
 
 
-<button 
+<button
+
 class="nav-item"
+
 onclick="goProfile()">
 
 
@@ -396,8 +428,8 @@ Profile
 
 
 
-
 <script src="app.js"></script>
+
 
 
 </body>
