@@ -28,18 +28,17 @@ document.getElementById("memoryList");
 
 
 
-
-
 // ===============================
-// ХРАНИЛИЩЕ
+// ЗАГРУЗКА ПАМЯТИ
 // ===============================
 
 
-let memories = JSON.parse(
-
+let memories =
+JSON.parse(
 localStorage.getItem("memora")
-
-) || [];
+)
+||
+[];
 
 
 
@@ -53,7 +52,7 @@ localStorage.getItem("memora")
 // ===============================
 
 
-function saveStorage(){
+function saveMemories(){
 
 
 localStorage.setItem(
@@ -66,6 +65,7 @@ JSON.stringify(memories)
 
 
 }
+
 
 
 
@@ -89,7 +89,9 @@ return;
 
 
 
+
 memoryList.innerHTML="";
+
 
 
 
@@ -98,15 +100,25 @@ memoryList.innerHTML="";
 if(memories.length===0){
 
 
+
 memoryList.innerHTML=`
 
-<div class="empty-memory">
+<div class="memory-item">
 
-No memories yet
+
+<p>
+
+No thoughts yet...
+
+Your ideas will appear here.
+
+</p>
+
 
 </div>
 
 `;
+
 
 
 return;
@@ -121,25 +133,23 @@ return;
 
 
 
-memories
-.slice(0,10)
-.forEach((memory,index)=>{
+
+memories.forEach((memory,index)=>{
 
 
 
-const card =
+const item =
 document.createElement("div");
 
 
 
-card.className =
-"memory-card";
+item.className="memory-item";
 
 
 
 
 
-card.innerHTML=`
+item.innerHTML=`
 
 <p>
 
@@ -149,7 +159,13 @@ ${memory.text}
 
 
 
-<div class="memory-footer">
+<div style="
+margin-top:12px;
+font-size:11px;
+opacity:.45;
+display:flex;
+justify-content:space-between;
+">
 
 
 <span>
@@ -159,9 +175,16 @@ ${memory.date}
 </span>
 
 
-
 <button 
-class="delete-memory">
+class="delete-memory"
+data-index="${index}"
+style="
+background:none;
+border:none;
+color:white;
+opacity:.5;
+cursor:pointer;
+">
 
 ×
 
@@ -180,22 +203,12 @@ class="delete-memory">
 
 
 
-const deleteButton =
-card.querySelector(".delete-memory");
+item
+.querySelector(".delete-memory")
+.onclick=()=>{
 
 
-
-deleteButton.onclick=()=>{
-
-
-memories.splice(index,1);
-
-
-
-saveStorage();
-
-
-renderMemories();
+deleteMemory(index);
 
 
 };
@@ -206,13 +219,11 @@ renderMemories();
 
 
 
-memoryList.appendChild(card);
+memoryList.appendChild(item);
 
 
 
 });
-
-
 
 
 
@@ -227,12 +238,11 @@ memoryList.appendChild(card);
 
 
 // ===============================
-// ДОБАВЛЕНИЕ
+// ДОБАВЛЕНИЕ МЫСЛИ
 // ===============================
 
 
 if(saveMemory){
-
 
 
 saveMemory.onclick=()=>{
@@ -240,6 +250,7 @@ saveMemory.onclick=()=>{
 
 
 const text =
+
 memoryInput.value.trim();
 
 
@@ -247,6 +258,13 @@ memoryInput.value.trim();
 
 
 if(text===""){
+
+
+alert(
+
+"Write something first"
+
+);
 
 
 return;
@@ -260,21 +278,28 @@ return;
 
 
 
-const newMemory={
+const memory={
+
 
 
 text:text,
 
 
 date:
+
 new Date()
-.toLocaleDateString(
+
+.toLocaleString(
 "ru-RU",
 {
 
-day:"numeric",
+day:"2-digit",
 
-month:"short"
+month:"2-digit",
+
+hour:"2-digit",
+
+minute:"2-digit"
 
 }
 
@@ -289,17 +314,15 @@ month:"short"
 
 
 
-memories.unshift(newMemory);
+memories.unshift(memory);
 
 
 
 
 
-saveStorage();
+saveMemories();
 
 
-
-renderMemories();
 
 
 
@@ -307,11 +330,17 @@ memoryInput.value="";
 
 
 
+
+
+renderMemories();
+
+
+
+
+
 };
 
 
-
-
 }
 
 
@@ -323,40 +352,30 @@ memoryInput.value="";
 
 
 // ===============================
-// ENTER
+// УДАЛЕНИЕ
 // ===============================
 
 
-if(memoryInput){
+function deleteMemory(index){
 
 
-memoryInput.addEventListener(
 
-"keydown",
+memories.splice(
 
-function(e){
+index,
 
-
-if(
-e.key==="Enter"
-&&
-!e.shiftKey
-){
-
-
-e.preventDefault();
-
-
-saveMemory.click();
-
-
-}
-
-
-}
-
+1
 
 );
+
+
+
+saveMemories();
+
+
+
+renderMemories();
+
 
 
 }
@@ -377,7 +396,9 @@ saveMemory.click();
 
 function goHome(){
 
+
 window.location.href="index.html";
+
 
 }
 
@@ -385,23 +406,31 @@ window.location.href="index.html";
 
 function goCalendar(){
 
+
 window.location.href="calendar.html";
 
+
 }
+
 
 
 
 function goEvents(){
 
+
 window.location.href="events.html";
+
 
 }
 
 
 
+
 function goProfile(){
 
+
 window.location.href="profile.html";
+
 
 }
 
