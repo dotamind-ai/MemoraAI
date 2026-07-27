@@ -1,0 +1,808 @@
+/* =====================================
+        MEMORA WELCOME PAGE
+        HERO SCREEN
+===================================== */
+
+
+*{
+    box-sizing:border-box;
+}
+
+
+
+html,
+body{
+
+    margin:0;
+
+    width:100%;
+
+    height:100%;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    color:white;
+
+}
+
+
+
+
+
+/* =====================================
+        BACKGROUND
+===================================== */
+
+
+.welcome-page{
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    overflow:hidden;
+
+
+
+    background:
+
+
+    radial-gradient(
+        circle at center,
+        rgba(120,90,170,.22),
+        transparent 35%
+    ),
+
+
+    linear-gradient(
+        160deg,
+        #07070b,
+        #111018,
+        #08080c
+    );
+
+}
+
+
+
+
+
+/* фоновые частицы */
+
+.welcome-page::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background-image:
+
+
+    radial-gradient(
+        circle,
+        rgba(255,255,255,.15) 1px,
+        transparent 1px
+    );
+
+
+    background-size:
+
+    55px 55px;
+
+
+    opacity:.25;
+
+
+    animation:
+
+    starsMove 30s linear infinite;
+
+
+}
+
+
+
+
+
+@keyframes starsMove{
+
+
+from{
+
+    transform:translateY(0);
+
+}
+
+
+to{
+
+    transform:translateY(-200px);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+        CONTAINER
+===================================== */
+
+
+.welcome-container{
+
+
+    width:100%;
+
+
+    max-width:500px;
+
+
+    text-align:center;
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    padding:30px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+        BIG LOGO
+===================================== */
+
+
+.hero-logo{
+
+
+    width:260px;
+
+
+    height:260px;
+
+
+    margin:0 auto 45px;
+
+
+    position:relative;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+}
+
+
+
+
+
+
+
+
+/* центральная M */
+
+
+.hero-core{
+
+
+    width:105px;
+
+
+    height:105px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    font-size:70px;
+
+
+    font-weight:800;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.07);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35);
+
+
+
+    box-shadow:
+
+
+    0 0 40px rgba(255,255,255,.15);
+
+
+
+    position:absolute;
+
+
+    z-index:20;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+        ORBITS
+===================================== */
+
+
+.hero-orbit{
+
+
+    position:absolute;
+
+
+    left:50%;
+
+
+    top:50%;
+
+
+
+    border-radius:50%;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+
+    animation:
+
+    heroRotate linear infinite;
+
+
+
+}
+
+
+
+
+
+
+
+.orbit-one{
+
+
+    width:130px;
+
+
+    height:130px;
+
+
+    animation-duration:7s;
+
+
+}
+
+
+
+
+
+.orbit-two{
+
+
+    width:170px;
+
+
+    height:170px;
+
+
+    animation-duration:11s;
+
+
+    animation-direction:reverse;
+
+
+}
+
+
+
+
+
+.orbit-three{
+
+
+    width:210px;
+
+
+    height:210px;
+
+
+    animation-duration:15s;
+
+
+}
+
+
+
+
+
+.orbit-four{
+
+
+    width:245px;
+
+
+    height:245px;
+
+
+    border-style:dashed;
+
+
+    animation-duration:22s;
+
+
+    animation-direction:reverse;
+
+
+}
+
+
+
+
+
+
+
+@keyframes heroRotate{
+
+
+from{
+
+
+    transform:
+
+    translate(-50%,-50%)
+
+    rotate(0deg);
+
+
+}
+
+
+to{
+
+
+    transform:
+
+    translate(-50%,-50%)
+
+    rotate(360deg);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+        PLANETS
+===================================== */
+
+
+.hero-planet{
+
+
+    position:absolute;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    box-shadow:
+
+
+    0 0 15px white;
+
+
+
+}
+
+
+
+
+
+
+
+.planet-one{
+
+
+    width:14px;
+
+    height:14px;
+
+
+    top:-7px;
+
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+}
+
+
+
+
+
+
+
+.planet-two{
+
+
+    width:18px;
+
+
+    height:18px;
+
+
+    right:-9px;
+
+
+    top:50%;
+
+
+    transform:translateY(-50%);
+
+
+
+}
+
+
+
+
+
+
+
+.planet-three{
+
+
+    width:12px;
+
+
+    height:12px;
+
+
+    bottom:-6px;
+
+
+    left:35px;
+
+
+
+}
+
+
+
+
+
+
+
+.planet-four{
+
+
+    width:9px;
+
+
+    height:9px;
+
+
+    top:20px;
+
+
+    left:25px;
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+        TEXT
+===================================== */
+
+
+.welcome-text h1{
+
+
+    margin:0;
+
+
+    font-size:36px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:.5px;
+
+
+}
+
+
+
+
+.welcome-text p{
+
+
+    margin-top:15px;
+
+
+    opacity:.6;
+
+
+    font-size:16px;
+
+
+    line-height:1.5;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+        BUTTONS
+===================================== */
+
+
+.auth-buttons{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:15px;
+
+
+    margin-top:40px;
+
+
+}
+
+
+
+
+
+.auth-buttons button{
+
+
+    width:100%;
+
+
+    height:58px;
+
+
+    border-radius:30px;
+
+
+    font-size:17px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.auth-login{
+
+
+    background:white;
+
+
+    color:#111;
+
+
+    border:none;
+
+
+}
+
+
+
+
+
+
+
+.auth-register{
+
+
+    background:
+
+    rgba(255,255,255,.06);
+
+
+
+    color:white;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+}
+
+
+
+
+
+
+
+
+.auth-buttons button:hover{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+
+.auth-buttons button:active{
+
+
+    transform:
+
+    scale(.96);
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:500px){
+
+
+
+.hero-logo{
+
+
+    width:230px;
+
+
+    height:230px;
+
+
+}
+
+
+
+.hero-text h1{
+
+
+    font-size:30px;
+
+
+}
+
+
+
+}
