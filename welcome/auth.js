@@ -1,72 +1,170 @@
 // =====================================
 // MEMORA AUTH SYSTEM
+// LOCAL STORAGE VERSION
 // =====================================
 
 
-// Получаем элементы
+// регистрация
 
-const loginBtn = document.getElementById("loginBtn");
-const registerBtn = document.getElementById("registerBtn");
-
+function register(){
 
 
-
-// ==============================
-// РЕГИСТРАЦИЯ
-// ==============================
+    const login =
+    document.getElementById("newLogin").value.trim();
 
 
-if(registerBtn){
-
-    registerBtn.onclick = function(){
-
-
-        let login =
-        document.getElementById("registerLogin").value;
-
-
-        let password =
-        document.getElementById("registerPassword").value;
+    const password =
+    document.getElementById("newPassword").value.trim();
 
 
 
-        if(login === "" || password === ""){
+    if(login === "" || password === ""){
 
-            alert("Введите логин и пароль");
+        alert("Заполни логин и пароль");
 
-            return;
+        return;
 
-        }
+    }
 
 
 
-        let user = {
 
-            login: login,
+    const user = {
 
-            password: password
+        login: login,
 
-        };
+        password: password
 
+    };
+
+
+
+
+    localStorage.setItem(
+
+        "memora_user",
+
+        JSON.stringify(user)
+
+    );
+
+
+
+
+    alert("Аккаунт создан");
+
+
+
+    // очистка
+
+    document.getElementById("newLogin").value="";
+    document.getElementById("newPassword").value="";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// вход
+
+
+function login(){
+
+
+    const login =
+    document.getElementById("loginInput").value.trim();
+
+
+    const password =
+    document.getElementById("passwordInput").value.trim();
+
+
+
+
+
+    const savedUser =
+
+    JSON.parse(
+
+        localStorage.getItem("memora_user")
+
+    );
+
+
+
+
+
+
+    if(!savedUser){
+
+
+        alert("Сначала создай аккаунт");
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    if(
+
+        login === savedUser.login &&
+
+        password === savedUser.password
+
+    ){
+
+
+
+        // флаг авторизации
 
 
         localStorage.setItem(
-            "memora_user",
-            JSON.stringify(user)
+
+            "memora_inside",
+
+            "true"
+
         );
 
 
 
-        alert("Аккаунт создан");
 
 
-        // возвращаемся на вход
-
-        window.location.href="welcome.html";
+        // переход в приложение
 
 
+        window.location.href =
 
-    };
+        "../index.html";
+
+
+
+
+
+    }
+
+    else{
+
+
+        alert("Неверный логин или пароль");
+
+
+    }
+
 
 
 }
@@ -76,92 +174,36 @@ if(registerBtn){
 
 
 
-// ==============================
-// ВХОД
-// ==============================
-
-
-if(loginBtn){
-
-
-    loginBtn.onclick = function(){
-
-
-        let login =
-        document.getElementById("loginLogin").value;
 
 
 
-        let password =
-        document.getElementById("loginPassword").value;
+// если пользователь уже вошёл
+
+window.onload=function(){
+
+
+    if(
+
+        localStorage.getItem("memora_inside")
+
+        ===
+
+        "true"
+
+    ){
+
+
+        // можно сразу открыть приложение
+
+
+        // убери комментарий если хочешь авто вход
+
+
+        // window.location.href="../index.html";
+
+
+    }
 
 
 
-        let savedUser =
-        localStorage.getItem("memora_user");
-
-
-
-        if(!savedUser){
-
-
-            alert("Сначала создайте аккаунт");
-
-
-            return;
-
-
-        }
-
-
-
-
-        let user =
-        JSON.parse(savedUser);
-
-
-
-
-
-
-        if(
-            login === user.login &&
-            password === user.password
-        ){
-
-
-
-            // запоминаем вход
-
-
-            localStorage.setItem(
-                "memora_inside",
-                "true"
-            );
-
-
-
-            // переход в приложение
-
-
-            window.location.href =
-            "../index.html";
-
-
-
-        }
-
-        else{
-
-
-            alert("Неверный логин или пароль");
-
-
-        }
-
-
-
-    };
-
-
-}
+};
