@@ -11,15 +11,10 @@
 <title>Memora Profile</title>
 
 
-
-<link rel="stylesheet" href="style.css">
-
 <link rel="stylesheet" href="profile.css">
 
 
-
 </head>
-
 
 
 <body class="profile-page">
@@ -28,37 +23,21 @@
 
 
 
-<!-- Логотип Memora -->
+<!-- TOP LOGO BUTTON -->
+
+<button 
+class="memora-profile-logo"
+id="memoraLogo">
 
 
-<div class="memora-profile-logo" id="memoraLogo">
+<div class="logo-letter">
 
-
-    <div class="logo-orbit orbit-a">
-        <span></span>
-    </div>
-
-
-    <div class="logo-orbit orbit-b">
-        <span></span>
-    </div>
-
-
-    <div class="logo-orbit orbit-c">
-        <span></span>
-    </div>
-
-
-
-    <div class="logo-letter">
-
-        M
-
-    </div>
-
+M
 
 </div>
 
+
+</button>
 
 
 
@@ -73,33 +52,30 @@
 
 
 
-<!-- Аватар -->
+<!-- AVATAR -->
 
 
 <div class="avatar-wrapper">
 
 
-    <div 
-    class="profile-avatar"
-    id="profileAvatar">
+<div 
+class="profile-avatar"
+id="profileAvatar">
 
 
-        👤
+👤
 
 
-    </div>
+</div>
 
 
+<button 
+class="avatar-camera"
+id="avatarCamera">
 
-    <button 
-    class="avatar-camera"
-    id="avatarCamera">
++
 
-
-        📷
-
-
-    </button>
+</button>
 
 
 </div>
@@ -112,7 +88,7 @@
 
 
 
-<!-- Имя -->
+<!-- NAME -->
 
 
 <h1 
@@ -120,7 +96,7 @@ class="profile-name"
 id="profileName">
 
 
-    Гость
+Гость
 
 
 </h1>
@@ -129,10 +105,9 @@ id="profileName">
 
 
 
-
 <p class="profile-status">
 
-    Memory Keeper
+Memory Keeper
 
 </p>
 
@@ -144,7 +119,8 @@ id="profileName">
 
 
 
-<!-- Статистика -->
+
+<!-- STATS -->
 
 
 <div class="profile-stats">
@@ -228,7 +204,7 @@ Favorites
 
 
 
-<!-- Уровень -->
+<!-- LEVEL -->
 
 
 <div class="profile-level">
@@ -241,13 +217,10 @@ Memora Level 1
 </h2>
 
 
-
 <div class="level-bar">
-
 
 <span></span>
 
-
 </div>
 
 
@@ -261,7 +234,7 @@ Memora Level 1
 
 
 
-<!-- Достижения -->
+<!-- ACHIEVEMENTS -->
 
 
 <div class="achievements">
@@ -272,7 +245,6 @@ Memora Level 1
 Achievements
 
 </h2>
-
 
 
 
@@ -312,7 +284,17 @@ Memory Collector
 
 
 
-<!-- Кнопка меню профиля -->
+<!-- POPUP MENU -->
+
+
+<div 
+class="profile-overlay"
+id="profileOverlay">
+
+</div>
+
+
+
 
 
 <div 
@@ -320,11 +302,13 @@ class="profile-menu"
 id="profileMenu">
 
 
-<button>
 
-✏️ Edit Profile
+<button id="editProfile">
+
+Edit Profile
 
 </button>
+
 
 
 <button onclick="goSettings()">
@@ -332,6 +316,7 @@ id="profileMenu">
 Settings
 
 </button>
+
 
 
 <button id="loginButton">
@@ -348,6 +333,10 @@ Login / Register
 
 
 
+
+
+
+
 </div>
 
 
@@ -358,7 +347,7 @@ Login / Register
 
 
 
-<!-- Нижняя навигация -->
+<!-- NAVIGATION -->
 
 
 <nav class="bottom-nav">
@@ -371,7 +360,7 @@ onclick="goHome()">
 
 
 
-<img 
+<img
 src="icons/memories.svg"
 class="nav-icon">
 
@@ -392,14 +381,13 @@ Memories
 
 
 
-
 <button 
 class="nav-item"
 onclick="goCalendar()">
 
 
 
-<img 
+<img
 src="icons/calendar.svg"
 class="nav-icon">
 
@@ -420,14 +408,13 @@ Calendar
 
 
 
-
 <button 
 class="nav-item"
 onclick="goEvents()">
 
 
 
-<img 
+<img
 src="icons/events.svg"
 class="nav-icon">
 
@@ -448,14 +435,13 @@ Events
 
 
 
-
 <button 
 class="nav-item active"
 onclick="goProfile()">
 
 
 
-<img 
+<img
 src="icons/profile.svg"
 class="nav-icon">
 
@@ -473,7 +459,6 @@ Profile
 
 
 
-
 </nav>
 
 
@@ -484,7 +469,6 @@ Profile
 
 
 <script src="profile.js"></script>
-
 
 
 </body>
