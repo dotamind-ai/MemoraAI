@@ -1,13 +1,11 @@
 /* =====================================
-        MEMORA EVENTS JS V5
+        MEMORA EVENTS JS CLEAN
 ===================================== */
 
 
-console.log("MEMORA EVENTS VERSION 5");
+console.log("MEMORA EVENTS CLEAN VERSION");
 
 
-
-// ЭЛЕМЕНТЫ
 
 const newEventBtn = document.getElementById("newEvent");
 
@@ -35,28 +33,27 @@ let editIndex = null;
 
 
 
-let events = JSON.parse(
-
+let events =
+JSON.parse(
 localStorage.getItem("memoraEvents")
-
-) || [];
-
-
+)
+|| [];
 
 
 
 
-// ===============================
-// СОХРАНЕНИЕ
-// ===============================
+
+/* ===============================
+        STORAGE
+=============================== */
 
 
 function saveStorage(){
 
-    localStorage.setItem(
-        "memoraEvents",
-        JSON.stringify(events)
-    );
+localStorage.setItem(
+"memoraEvents",
+JSON.stringify(events)
+);
 
 }
 
@@ -66,29 +63,30 @@ function saveStorage(){
 
 
 
-// ===============================
-// ИКОНКИ
-// ===============================
+/* ===============================
+        ICONS
+=============================== */
 
 
 function getIcon(type){
 
-    const icons = {
 
-        idea:"✦",
-
-        goal:"◎",
-
-        note:"▤",
-
-        project:"◈",
-
-        personal:"◉"
-
-    };
+const icons={
 
 
-    return icons[type] || "✦";
+idea:"✦",
+
+goal:"◎",
+
+project:"◈",
+
+personal:"◉"
+
+};
+
+
+return icons[type] || "✦";
+
 
 }
 
@@ -99,220 +97,228 @@ function getIcon(type){
 
 
 
-// ===============================
-// ПОКАЗ СОБЫТИЙ
-// ===============================
+
+/* ===============================
+        RENDER
+=============================== */
 
 
 function renderEvents(){
 
 
-    if(!eventList) return;
+if(!eventList)
+return;
 
 
 
-    eventList.innerHTML="";
+eventList.innerHTML="";
 
 
 
-    events.forEach((event,index)=>{
 
 
+events.forEach((event,index)=>{
 
-        const card=document.createElement("div");
 
 
+const card=document.createElement("div");
 
-        card.className =
-        "event-card " + 
-        (event.type || "idea");
 
+card.className =
+"event-card " + event.type;
 
 
-        card.innerHTML = `
 
 
-        <button class="card-star">
 
-        ${event.favorite ? "★" : "☆"}
+card.innerHTML=`
 
-        </button>
 
+<button class="card-star">
 
+${event.favorite ? "★" : "☆"}
 
-        <div class="event-top">
+</button>
 
 
-            <span class="event-symbol">
 
-            ${getIcon(event.type)}
+<div class="event-top">
 
-            </span>
 
+<span class="event-symbol">
 
+${getIcon(event.type)}
 
-            <h2>
+</span>
 
-            ${event.title}
 
-            </h2>
+<h2>
 
+${event.title}
 
-        </div>
+</h2>
 
 
+</div>
 
 
-        <p>
 
-        ${event.text || "Без описания"}
 
-        </p>
+<p>
 
+${event.text || "No description"}
 
+</p>
 
 
-        <div class="event-date">
 
-        📅 ${event.eventDate || "Дата не выбрана"}
 
-        </div>
 
+<div class="event-date">
 
+📅 ${event.eventDate || "No date"}
 
+</div>
 
-        <div class="event-actions">
 
 
-            <button class="event-edit">
 
-            ✎
+<div class="event-actions">
 
-            </button>
 
+<button class="event-favorite">
 
+★
 
-            <button class="event-delete">
+</button>
 
-            🗑
 
-            </button>
 
+<button class="event-edit">
 
-        </div>
+✎
 
+</button>
 
-        `;
 
 
+<button class="event-delete">
 
+×
 
 
+</button>
 
-        // избранное
 
-        card.querySelector(".card-star")
-        .onclick=()=>{
 
+</div>
 
-            event.favorite =
-            !event.favorite;
 
 
-            saveStorage();
+`;
 
-            renderEvents();
 
 
-        };
 
 
 
 
 
+/* избранное */
 
-        // редактирование
 
-        card.querySelector(".event-edit")
-        .onclick=()=>{
+card.querySelector(".card-star")
+.onclick=()=>{
 
 
-            editIndex=index;
+event.favorite=!event.favorite;
 
 
+saveStorage();
 
-            if(titleInput)
-            titleInput.value=event.title;
 
+renderEvents();
 
 
-            if(textInput)
-            textInput.value=event.text;
+};
 
 
 
-            if(typeInput)
-            typeInput.value=event.type;
 
 
 
-            if(dateInput)
-            dateInput.value=event.eventDate;
 
 
+/* редактирование */
 
-            if(eventForm)
-            eventForm.classList.remove("hidden");
 
+card.querySelector(".event-edit")
+.onclick=()=>{
 
 
-            if(newEventBtn)
-            newEventBtn.classList.add("hidden");
+editIndex=index;
 
 
+titleInput.value=event.title;
 
-            if(saveEventBtn)
-            saveEventBtn.innerText="Обновить";
 
+textInput.value=event.text;
 
-        };
 
+typeInput.value=event.type;
 
 
+dateInput.value=event.eventDate;
 
 
 
+eventForm.classList.remove("hidden");
 
 
-        // удаление
+newEventBtn.classList.add("hidden");
 
 
-        card.querySelector(".event-delete")
-        .onclick=()=>{
+saveEventBtn.innerText="Update";
 
 
-            events.splice(index,1);
+};
 
 
-            saveStorage();
 
 
-            renderEvents();
 
 
-        };
 
 
+/* удаление */
 
 
+card.querySelector(".event-delete")
+.onclick=()=>{
 
 
-        eventList.appendChild(card);
+events.splice(index,1);
 
 
+saveStorage();
 
-    });
 
+renderEvents();
+
+
+};
+
+
+
+
+
+
+
+eventList.appendChild(card);
+
+
+
+});
 
 
 }
@@ -325,76 +331,32 @@ function renderEvents(){
 
 
 
-// ===============================
-// ОТКРЫТИЕ ФОРМЫ
-// ===============================
-
-
-if(newEventBtn){
+/* ===============================
+        NEW EVENT
+=============================== */
 
 
 newEventBtn.onclick=()=>{
 
 
-    editIndex=null;
+editIndex=null;
 
 
-    if(saveEventBtn)
-    saveEventBtn.innerText="Сохранить";
+clearForm();
 
 
-    if(eventForm)
-    eventForm.classList.remove("hidden");
+eventForm.classList.remove("hidden");
 
 
-    newEventBtn.classList.add("hidden");
+newEventBtn.classList.add("hidden");
 
 
-};
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// ===============================
-// ОТМЕНА
-// ===============================
-
-
-if(cancelEventBtn){
-
-
-cancelEventBtn.onclick=()=>{
-
-
-    editIndex=null;
-
-
-    clearForm();
-
-
-
-    if(eventForm)
-    eventForm.classList.add("hidden");
-
-
-    if(newEventBtn)
-    newEventBtn.classList.remove("hidden");
-
+saveEventBtn.innerText="Save";
 
 
 };
 
 
-}
 
 
 
@@ -402,152 +364,113 @@ cancelEventBtn.onclick=()=>{
 
 
 
-
-
-// ===============================
-// СОХРАНЕНИЕ СОБЫТИЯ
-// ===============================
-
-
-if(saveEventBtn){
+/* ===============================
+        SAVE
+=============================== */
 
 
 saveEventBtn.onclick=()=>{
 
 
-    const title =
-    titleInput?.value.trim() || "";
+let title =
+titleInput.value.trim();
 
 
 
-    const text =
-    textInput?.value.trim() || "";
+if(title===""){
 
 
+alert("Enter title");
 
-    const type =
-    typeInput?.value || "idea";
 
+return;
 
 
-    const eventDate =
-    dateInput?.value || "";
+}
 
 
 
 
 
+let data={
 
 
-    if(title===""){
+title:title,
 
 
-        alert("Введите название события");
+text:textInput.value.trim(),
 
 
-        return;
+type:typeInput.value,
 
 
-    }
+eventDate:dateInput.value,
 
 
+favorite:false,
 
 
+created:Date.now()
 
 
+};
 
-    const data={
 
 
-        title,
 
-        text,
 
-        type,
 
-        eventDate,
 
+if(editIndex!==null){
 
-        favorite:false,
 
+events[editIndex]={
 
-        created:
+...events[editIndex],
 
-        Date.now()
+...data,
 
+favorite:events[editIndex].favorite
 
-    };
+};
 
 
+editIndex=null;
 
 
 
+}
+else{
 
 
+events.unshift(data);
 
-    if(editIndex!==null){
 
+}
 
 
-        events[editIndex]={
 
-            ...events[editIndex],
 
-            title,
 
-            text,
 
-            type,
 
-            eventDate
+saveStorage();
 
 
-        };
+clearForm();
 
 
 
-        editIndex=null;
+eventForm.classList.add("hidden");
 
 
+newEventBtn.classList.remove("hidden");
 
-    }
 
-    else{
+saveEventBtn.innerText="Save";
 
 
-        events.unshift(data);
-
-
-    }
-
-
-
-
-
-
-    saveStorage();
-
-
-
-    clearForm();
-
-
-
-    if(eventForm)
-    eventForm.classList.add("hidden");
-
-
-
-    if(newEventBtn)
-    newEventBtn.classList.remove("hidden");
-
-
-
-    saveEventBtn.innerText="Сохранить";
-
-
-
-    renderEvents();
+renderEvents();
 
 
 
@@ -555,7 +478,33 @@ saveEventBtn.onclick=()=>{
 
 
 
-}
+
+
+
+
+
+
+/* ===============================
+        CANCEL
+=============================== */
+
+
+cancelEventBtn.onclick=()=>{
+
+
+clearForm();
+
+
+eventForm.classList.add("hidden");
+
+
+newEventBtn.classList.remove("hidden");
+
+
+editIndex=null;
+
+
+};
 
 
 
@@ -563,26 +512,18 @@ saveEventBtn.onclick=()=>{
 
 
 
-
-
-// ===============================
-// ОЧИСТКА
-// ===============================
 
 
 function clearForm(){
 
 
-    if(titleInput)
-    titleInput.value="";
+titleInput.value="";
 
 
-    if(textInput)
-    textInput.value="";
+textInput.value="";
 
 
-    if(dateInput)
-    dateInput.value="";
+dateInput.value="";
 
 
 }
@@ -595,38 +536,35 @@ function clearForm(){
 
 
 
-// ===============================
-// НАВИГАЦИЯ
-// ===============================
+/* ===============================
+        NAVIGATION
+=============================== */
 
 
 function goHome(){
 
-    window.location.href="index.html";
+location.href="index.html";
 
 }
-
 
 
 function goCalendar(){
 
-    window.location.href="calendar.html";
+location.href="calendar.html";
 
 }
-
 
 
 function goEvents(){
 
-    window.location.href="events.html";
+location.href="events.html";
 
 }
-
 
 
 function goProfile(){
 
-    window.location.href="profile.html";
+location.href="profile.html";
 
 }
 
@@ -635,10 +573,6 @@ function goProfile(){
 
 
 
-
-
-
-// СТАРТ
 
 
 renderEvents();
