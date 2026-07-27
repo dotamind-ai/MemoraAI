@@ -3107,3 +3107,355 @@ to{
 
 
 }
+/* =====================================
+   MEMORA LOGO FINAL OVERRIDE
+   FOR NEW HTML
+===================================== */
+
+
+/* контейнер */
+
+.memora-logo{
+
+    width:110px !important;
+    height:110px !important;
+
+    position:relative !important;
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+    flex-shrink:0 !important;
+
+}
+
+
+
+
+
+
+/* БУКВА M - СТОИТ НА МЕСТЕ */
+
+
+.logo-m{
+
+    position:absolute !important;
+
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    transform:translate(-50%,-50%) !important;
+
+
+    animation:none !important;
+
+
+    width:46px !important;
+
+    height:46px !important;
+
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+
+    border-radius:50% !important;
+
+
+    background:
+
+    rgba(255,255,255,0.08) !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35) !important;
+
+
+    color:white !important;
+
+
+    font-size:28px !important;
+
+    font-weight:700 !important;
+
+
+    z-index:20 !important;
+
+
+}
+
+
+
+
+
+
+
+
+/* ОРБИТЫ */
+
+
+.orbit{
+
+
+    position:absolute !important;
+
+
+    left:50% !important;
+
+    top:50% !important;
+
+
+    transform:
+
+    translate(-50%,-50%) !important;
+
+
+    border-radius:50% !important;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18) !important;
+
+
+    animation-name:memoraOrbit !important;
+
+    animation-timing-function:linear !important;
+
+    animation-iteration-count:infinite !important;
+
+
+}
+
+
+
+
+
+
+
+.orbit-one{
+
+
+    width:60px !important;
+
+    height:60px !important;
+
+
+    animation-duration:5s !important;
+
+
+}
+
+
+
+
+.orbit-two{
+
+
+    width:82px !important;
+
+    height:82px !important;
+
+
+    animation-duration:9s !important;
+
+
+    animation-direction:reverse !important;
+
+
+}
+
+
+
+
+
+.orbit-three{
+
+
+    width:105px !important;
+
+    height:105px !important;
+
+
+    animation-duration:14s !important;
+
+
+}
+
+
+
+
+
+
+
+
+/* ПЛАНЕТЫ */
+
+
+.planet{
+
+
+    position:absolute !important;
+
+
+    display:block !important;
+
+
+    width:10px !important;
+
+    height:10px !important;
+
+
+    border-radius:50% !important;
+
+
+    background:#fff !important;
+
+
+    box-shadow:
+
+    0 0 8px rgba(255,255,255,.7) !important;
+
+
+}
+
+
+
+
+
+
+
+.planet-one{
+
+
+    top:-5px !important;
+
+    left:50% !important;
+
+
+    transform:translateX(-50%) !important;
+
+
+}
+
+
+
+
+
+
+
+.planet-two{
+
+
+    right:-5px !important;
+
+    top:50% !important;
+
+
+    transform:translateY(-50%) !important;
+
+
+    width:12px !important;
+
+    height:12px !important;
+
+
+}
+
+
+
+
+
+
+
+.planet-three{
+
+
+    bottom:5px !important;
+
+    left:10px !important;
+
+
+    width:14px !important;
+
+    height:14px !important;
+
+
+}
+
+
+
+
+
+
+
+
+/* ВРАЩЕНИЕ */
+
+
+@keyframes memoraOrbit{
+
+
+from{
+
+
+    transform:
+
+    translate(-50%,-50%)
+
+    rotate(0deg);
+
+
+}
+
+
+
+to{
+
+
+    transform:
+
+    translate(-50%,-50%)
+
+    rotate(360deg);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* убираем старые движения */
+
+
+.home-header,
+.memora-logo,
+.logo-m{
+
+    animation-play-state:running !important;
+
+}
+
+
+
+.home-header .memora-logo{
+
+    animation:none !important;
+
+}
