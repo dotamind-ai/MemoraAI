@@ -1,49 +1,34 @@
 /* =====================================
-        MEMORA EVENTS CLEAN JS
+        MEMORA EVENTS JS CLEAN V1
 ===================================== */
 
 
-console.log("MEMORA EVENTS CLEAN");
+console.log("MEMORA EVENTS CLEAN VERSION");
 
 
+// ===============================
+// ELEMENTS
+// ===============================
 
-const newEventBtn =
-document.getElementById("newEvent");
+const newEventBtn = document.getElementById("newEvent");
 
+const eventForm = document.getElementById("eventForm");
 
-const eventForm =
-document.getElementById("eventForm");
+const saveEventBtn = document.getElementById("saveEvent");
 
-
-const saveEventBtn =
-document.getElementById("saveEvent");
-
-
-const cancelEventBtn =
-document.getElementById("cancelEvent");
+const cancelEventBtn = document.getElementById("cancelEvent");
 
 
-
-const eventList =
-document.getElementById("eventList");
+const eventList = document.getElementById("eventList");
 
 
+const titleInput = document.getElementById("eventTitle");
 
-const titleInput =
-document.getElementById("eventTitle");
+const textInput = document.getElementById("eventText");
 
+const typeInput = document.getElementById("eventType");
 
-const textInput =
-document.getElementById("eventText");
-
-
-const typeInput =
-document.getElementById("eventType");
-
-
-const dateInput =
-document.getElementById("eventDate");
-
+const dateInput = document.getElementById("eventDate");
 
 
 
@@ -51,13 +36,10 @@ let editIndex = null;
 
 
 
-let events = JSON.parse(
-
+let events =
+JSON.parse(
 localStorage.getItem("memoraEvents")
-
 ) || [];
-
-
 
 
 
@@ -70,20 +52,12 @@ localStorage.getItem("memoraEvents")
 
 function saveEvents(){
 
-
 localStorage.setItem(
-
 "memoraEvents",
-
 JSON.stringify(events)
-
 );
 
-
 }
-
-
-
 
 
 
@@ -96,33 +70,23 @@ JSON.stringify(events)
 
 function getIcon(type){
 
-
-const icons={
-
+const icons = {
 
 idea:"✦",
 
 goal:"◎",
 
-note:"▤",
-
 project:"◈",
 
 personal:"◉"
 
-
 };
-
 
 
 return icons[type] || "✦";
 
 
 }
-
-
-
-
 
 
 
@@ -136,15 +100,10 @@ return icons[type] || "✦";
 function renderEvents(){
 
 
-
-if(!eventList)
-return;
-
+if(!eventList) return;
 
 
 eventList.innerHTML="";
-
-
 
 
 
@@ -153,32 +112,25 @@ events.forEach((event,index)=>{
 
 
 const card =
-document.createElement("article");
+document.createElement("div");
 
 
 
 card.className =
-
-"event-card " +
-
-(event.type || "idea");
+"event-card " + event.type;
 
 
 
+if(event.favorite){
+
+card.classList.add("favorite");
+
+}
 
 
 
 
-card.innerHTML=`
-
-
-<button class="event-pin ${event.favorite ? "active":""}">
-
-☆
-
-</button>
-
-
+card.innerHTML = `
 
 
 <div class="event-top">
@@ -189,7 +141,6 @@ card.innerHTML=`
 ${getIcon(event.type)}
 
 </span>
-
 
 
 <h2>
@@ -204,7 +155,6 @@ ${event.title}
 
 
 
-
 <p>
 
 ${event.text || "Без описания"}
@@ -214,10 +164,9 @@ ${event.text || "Без описания"}
 
 
 
-
 <div class="event-date">
 
-📅 ${event.eventDate || "Дата не выбрана"}
+📅 ${event.eventDate || "Без даты"}
 
 </div>
 
@@ -225,8 +174,15 @@ ${event.text || "Без описания"}
 
 
 
-
 <div class="event-actions">
+
+
+<button class="event-favorite">
+
+${event.favorite ? "★" : "☆"}
+
+</button>
+
 
 
 <button class="event-edit">
@@ -239,14 +195,13 @@ ${event.text || "Без описания"}
 
 <button class="event-delete">
 
-×
-
+🗑
 
 </button>
 
 
-</div>
 
+</div>
 
 
 `;
@@ -256,21 +211,15 @@ ${event.text || "Без описания"}
 
 
 
+// FAVORITE
 
 
-
-// закрепить
-
-
-card
-.querySelector(".event-pin")
+card.querySelector(".event-favorite")
 .onclick=()=>{
 
 
-events[index].favorite =
-
-!events[index].favorite;
-
+event.favorite =
+!event.favorite;
 
 
 saveEvents();
@@ -288,17 +237,14 @@ renderEvents();
 
 
 
+// EDIT
 
-// редактирование
 
-
-card
-.querySelector(".event-edit")
+card.querySelector(".event-edit")
 .onclick=()=>{
 
 
 editIndex=index;
-
 
 
 titleInput.value =
@@ -314,19 +260,14 @@ event.type;
 
 
 dateInput.value =
-event.eventDate;
+event.eventDate || "";
 
 
 
-eventForm.classList.remove(
-"hidden"
-);
+eventForm.classList.remove("hidden");
 
 
-
-newEventBtn.classList.add(
-"hidden"
-);
+newEventBtn.classList.add("hidden");
 
 
 
@@ -343,17 +284,14 @@ saveEventBtn.innerText =
 
 
 
+// DELETE
 
-// удаление
 
-
-card
-.querySelector(".event-delete")
+card.querySelector(".event-delete")
 .onclick=()=>{
 
 
 events.splice(index,1);
-
 
 
 saveEvents();
@@ -363,7 +301,6 @@ renderEvents();
 
 
 };
-
 
 
 
@@ -389,7 +326,7 @@ eventList.appendChild(card);
 
 
 // ===============================
-// OPEN FORM
+// NEW EVENT
 // ===============================
 
 
@@ -399,19 +336,145 @@ newEventBtn.onclick=()=>{
 editIndex=null;
 
 
-eventForm.classList.remove(
-"hidden"
-);
+clearForm();
 
 
-newEventBtn.classList.add(
-"hidden"
-);
+eventForm.classList.remove("hidden");
 
+
+newEventBtn.classList.add("hidden");
 
 
 saveEventBtn.innerText =
 "Save";
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// SAVE BUTTON
+// ===============================
+
+
+saveEventBtn.onclick=()=>{
+
+
+
+let title =
+titleInput.value.trim();
+
+
+
+if(!title){
+
+alert("Enter event title");
+
+return;
+
+}
+
+
+
+
+const data={
+
+
+title:title,
+
+
+text:
+textInput.value.trim(),
+
+
+type:
+typeInput.value,
+
+
+eventDate:
+dateInput.value,
+
+
+favorite:false,
+
+
+created:
+Date.now()
+
+
+};
+
+
+
+
+
+
+
+if(editIndex!==null){
+
+
+events[editIndex]={
+
+
+...events[editIndex],
+
+
+title:data.title,
+
+text:data.text,
+
+type:data.type,
+
+eventDate:data.eventDate
+
+
+};
+
+
+
+editIndex=null;
+
+
+
+}
+
+else{
+
+
+events.unshift(data);
+
+
+}
+
+
+
+
+
+saveEvents();
+
+
+clearForm();
+
+
+
+eventForm.classList.add("hidden");
+
+
+newEventBtn.classList.remove("hidden");
+
+
+saveEventBtn.innerText="Save";
+
+
+
+renderEvents();
 
 
 
@@ -433,158 +496,16 @@ saveEventBtn.innerText =
 cancelEventBtn.onclick=()=>{
 
 
-clearForm();
-
-
-eventForm.classList.add(
-"hidden"
-);
-
-
-
-newEventBtn.classList.remove(
-"hidden"
-);
-
-
-
 editIndex=null;
-
-
-};
-
-
-
-
-
-
-
-
-
-// ===============================
-// SAVE EVENT
-// ===============================
-
-
-saveEventBtn.onclick=()=>{
-
-
-const title =
-
-titleInput.value.trim();
-
-
-
-if(title===""){
-
-
-alert(
-"Введите название события"
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-const data={
-
-
-title:title,
-
-
-text:textInput.value.trim(),
-
-
-type:typeInput.value,
-
-
-eventDate:dateInput.value,
-
-
-favorite:false,
-
-
-created:Date.now()
-
-
-
-};
-
-
-
-
-
-
-if(editIndex!==null){
-
-
-
-events[editIndex]={
-
-...events[editIndex],
-
-title:data.title,
-
-text:data.text,
-
-type:data.type,
-
-eventDate:data.eventDate
-
-};
-
-
-
-editIndex=null;
-
-
-
-}
-else{
-
-
-events.unshift(data);
-
-
-}
-
-
-
-
-
-saveEvents();
-
 
 
 clearForm();
 
 
-
-eventForm.classList.add(
-"hidden"
-);
+eventForm.classList.add("hidden");
 
 
-
-newEventBtn.classList.remove(
-"hidden"
-);
-
-
-
-saveEventBtn.innerText =
-"Save";
-
-
-
-renderEvents();
-
+newEventBtn.classList.remove("hidden");
 
 
 };
@@ -607,9 +528,7 @@ function clearForm(){
 
 titleInput.value="";
 
-
 textInput.value="";
-
 
 dateInput.value="";
 
@@ -636,7 +555,6 @@ window.location.href="index.html";
 }
 
 
-
 function goCalendar(){
 
 window.location.href="calendar.html";
@@ -644,13 +562,11 @@ window.location.href="calendar.html";
 }
 
 
-
 function goEvents(){
 
 window.location.href="events.html";
 
 }
-
 
 
 function goProfile(){
@@ -666,7 +582,7 @@ window.location.href="profile.html";
 
 
 
-// START
 
+// START
 
 renderEvents();
