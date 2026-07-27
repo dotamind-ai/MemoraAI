@@ -1,56 +1,72 @@
 // =====================================
-// MEMORA SIMPLE AUTH
+// MEMORA AUTH SYSTEM
 // =====================================
 
 
-const loginButton = document.getElementById("loginBtn");
-const registerButton = document.getElementById("registerBtn");
+// Получаем элементы
+
+const loginBtn = document.getElementById("loginBtn");
+const registerBtn = document.getElementById("registerBtn");
 
 
 
 
-// регистрация
-
-if(registerButton){
-
-registerButton.addEventListener("click", function(){
+// ==============================
+// РЕГИСТРАЦИЯ
+// ==============================
 
 
-    const login = document.getElementById("registerLogin").value;
-    const password = document.getElementById("registerPassword").value;
+if(registerBtn){
+
+    registerBtn.onclick = function(){
 
 
+        let login =
+        document.getElementById("registerLogin").value;
 
-    if(!login || !password){
 
-        alert("Заполните все поля");
-        return;
-
-    }
+        let password =
+        document.getElementById("registerPassword").value;
 
 
 
-    localStorage.setItem(
-        "memora_user",
-        JSON.stringify({
+        if(login === "" || password === ""){
+
+            alert("Введите логин и пароль");
+
+            return;
+
+        }
+
+
+
+        let user = {
 
             login: login,
+
             password: password
 
-        })
-
-    );
+        };
 
 
 
-    alert("Аккаунт создан");
+        localStorage.setItem(
+            "memora_user",
+            JSON.stringify(user)
+        );
 
 
-    window.location.href="welcome.html";
+
+        alert("Аккаунт создан");
+
+
+        // возвращаемся на вход
+
+        window.location.href="welcome.html";
 
 
 
-});
+    };
 
 
 }
@@ -60,65 +76,92 @@ registerButton.addEventListener("click", function(){
 
 
 
-// вход
-
-if(loginButton){
-
-
-loginButton.addEventListener("click", function(){
+// ==============================
+// ВХОД
+// ==============================
 
 
-    const login = document.getElementById("loginLogin").value;
-    const password = document.getElementById("loginPassword").value;
+if(loginBtn){
 
 
+    loginBtn.onclick = function(){
 
-    const user = JSON.parse(
-        localStorage.getItem("memora_user")
-    );
+
+        let login =
+        document.getElementById("loginLogin").value;
 
 
 
-    if(!user){
-
-        alert("Аккаунт не найден");
-        return;
-
-    }
+        let password =
+        document.getElementById("loginPassword").value;
 
 
 
-
-    if(
-        login === user.login &&
-        password === user.password
-    ){
-
-
-        sessionStorage.setItem(
-            "memora_inside",
-            "true"
-        );
+        let savedUser =
+        localStorage.getItem("memora_user");
 
 
 
-        window.location.href="../index.html";
+        if(!savedUser){
+
+
+            alert("Сначала создайте аккаунт");
+
+
+            return;
+
+
+        }
 
 
 
-    }
 
-    else{
-
-
-        alert("Неверный логин или пароль");
-
-
-    }
+        let user =
+        JSON.parse(savedUser);
 
 
 
-});
+
+
+
+        if(
+            login === user.login &&
+            password === user.password
+        ){
+
+
+
+            // запоминаем вход
+
+
+            localStorage.setItem(
+                "memora_inside",
+                "true"
+            );
+
+
+
+            // переход в приложение
+
+
+            window.location.href =
+            "../index.html";
+
+
+
+        }
+
+        else{
+
+
+            alert("Неверный логин или пароль");
+
+
+        }
+
+
+
+    };
 
 
 }
