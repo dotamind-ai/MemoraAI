@@ -1,195 +1,108 @@
-/* =====================================
-        MEMORA AUTH SYSTEM
-        LOCAL STORAGE VERSION
-===================================== */
+// =====================================
+// MEMORA SIMPLE AUTH
+// =====================================
 
 
-// Ключ для хранения пользователя
-
-const USER_KEY = "memora_user";
-
+const loginButton = document.getElementById("loginBtn");
+const registerButton = document.getElementById("registerBtn");
 
 
 
 
-// Кнопки
+// регистрация
 
-const loginButton = document.querySelector(".auth-login");
-
-const registerButton = document.querySelector(".auth-register");
-
-
-
-
-
-
-
-/* =====================================
-        CREATE ACCOUNT
-===================================== */
-
+if(registerButton){
 
 registerButton.addEventListener("click", function(){
 
 
-
-    const username = prompt(
-        "Введите логин:"
-    );
+    const login = document.getElementById("registerLogin").value;
+    const password = document.getElementById("registerPassword").value;
 
 
 
-    if(!username){
+    if(!login || !password){
 
+        alert("Заполните все поля");
         return;
 
     }
-
-
-
-
-
-    const password = prompt(
-        "Введите пароль:"
-    );
-
-
-
-    if(!password){
-
-        return;
-
-    }
-
-
-
-
-
-
-    const user = {
-
-
-        username: username,
-
-
-        password: password
-
-
-    };
-
-
 
 
 
     localStorage.setItem(
+        "memora_user",
+        JSON.stringify({
 
-        USER_KEY,
+            login: login,
+            password: password
 
-        JSON.stringify(user)
+        })
 
     );
 
 
 
+    alert("Аккаунт создан");
 
 
-
-    alert(
-        "Аккаунт создан"
-    );
-
-
-
-
-
-    openMemora();
-
+    window.location.href="welcome.html";
 
 
 
 });
 
 
+}
 
 
 
 
 
 
+// вход
 
-/* =====================================
-        LOGIN
-===================================== */
+if(loginButton){
 
 
 loginButton.addEventListener("click", function(){
 
 
-
-    const savedUser = localStorage.getItem(USER_KEY);
-
-
+    const login = document.getElementById("loginLogin").value;
+    const password = document.getElementById("loginPassword").value;
 
 
 
-    if(!savedUser){
+    const user = JSON.parse(
+        localStorage.getItem("memora_user")
+    );
 
 
-        alert(
-            "Аккаунт не найден. Создайте его."
-        );
 
+    if(!user){
 
+        alert("Аккаунт не найден");
         return;
-
 
     }
 
 
 
 
-
-    const user = JSON.parse(savedUser);
-
-
-
-
-
-
-
-    const username = prompt(
-
-        "Логин:"
-
-    );
-
-
-
-
-
-    const password = prompt(
-
-        "Пароль:"
-
-    );
-
-
-
-
-
-
-
     if(
-
-        username === user.username &&
-
+        login === user.login &&
         password === user.password
-
     ){
 
 
+        sessionStorage.setItem(
+            "memora_inside",
+            "true"
+        );
 
-        openMemora();
+
+
+        window.location.href="../index.html";
 
 
 
@@ -198,41 +111,14 @@ loginButton.addEventListener("click", function(){
     else{
 
 
-        alert(
-
-            "Неверный логин или пароль"
-
-        );
+        alert("Неверный логин или пароль");
 
 
     }
 
 
 
-
-
 });
-
-
-
-
-
-
-
-
-
-
-/* =====================================
-        OPEN APP
-===================================== */
-
-
-function openMemora(){
-
-
-
-    window.location.href = "../index.html";
-
 
 
 }
