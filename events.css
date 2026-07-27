@@ -1,289 +1,51 @@
+/* =====================================
+        MEMORA EVENTS
+        CLEAN VERSION
+===================================== */
+
+
+/* ===== ОСНОВА ===== */
+
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 
 body.events-page{
 
-margin:0;
+    margin:0;
 
-min-height:100vh;
+    min-height:100vh;
 
-padding-top:170px;
+    padding:40px 0 110px;
 
-display:flex;
 
-justify-content:center;
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
-align-items:flex-start;
 
-font-family:Arial,sans-serif;
+    color:white;
 
-color:white;
 
+    background:
 
-background:
+    radial-gradient(
+        circle at top,
+        rgba(110,70,150,.35),
+        transparent 45%
+    ),
 
-radial-gradient(
-circle at top,
-#302038,
-transparent 45%
-),
+    linear-gradient(
+        160deg,
+        #08080d,
+        #17131f,
+        #090910
+    );
 
-linear-gradient(
-160deg,
-#090910,
-#171522,
-#090910
-);
 
-
-overflow:hidden;
-
-}
-
-
-
-/* ===== ЛОГО ===== */
-
-
-.memora-logo{
-
-position:absolute;
-
-top:20px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-width:150px;
-
-height:150px;
-
-}
-
-
-
-.sun-logo{
-
-position:absolute;
-
-left:50%;
-
-top:50%;
-
-transform:translate(-50%,-50%);
-
-
-width:60px;
-
-height:60px;
-
-
-border-radius:50%;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(255,255,255,.35),
-rgba(255,255,255,.05)
-);
-
-
-
-box-shadow:
-
-0 0 25px white,
-
-0 0 70px rgba(180,180,255,.4);
-
-
-}
-
-
-
-.sun-logo b{
-
-font-size:38px;
-
-color:white;
-
-text-shadow:
-
-0 0 15px white;
-
-}
-
-
-
-
-
-/* ===== ОРБИТЫ ===== */
-
-
-.orbit{
-
-position:absolute;
-
-left:50%;
-
-top:50%;
-
-transform:translate(-50%,-50%);
-
-border-radius:50%;
-
-border:
-
-1px solid rgba(255,255,255,.12);
-
-}
-
-
-.orbit span{
-
-position:absolute;
-
-width:7px;
-
-height:7px;
-
-border-radius:50%;
-
-background:white;
-
-box-shadow:
-
-0 0 12px white;
-
-}
-
-
-
-.orbit1{
-
-width:90px;
-
-height:90px;
-
-animation:
-
-rotate1 5s linear infinite;
-
-}
-
-
-.orbit1 span{
-
-top:-4px;
-
-left:50%;
-
-}
-
-
-
-
-.orbit2{
-
-width:115px;
-
-height:115px;
-
-animation:
-
-rotate2 8s linear infinite;
-
-}
-
-
-.orbit2 span{
-
-right:-4px;
-
-top:50%;
-
-}
-
-
-
-
-
-.orbit3{
-
-width:140px;
-
-height:140px;
-
-animation:
-
-rotate1 12s linear infinite;
-
-}
-
-
-.orbit3 span{
-
-bottom:10px;
-
-left:15px;
-
-background:#9fd4ff;
-
-}
-
-
-
-@keyframes rotate1{
-
-from{
-
-transform:
-translate(-50%,-50%)
-rotate(0deg);
-
-}
-
-to{
-
-transform:
-translate(-50%,-50%)
-rotate(360deg);
-
-}
-
-}
-
-
-
-@keyframes rotate2{
-
-from{
-
-transform:
-translate(-50%,-50%)
-rotate(360deg);
-
-}
-
-to{
-
-transform:
-translate(-50%,-50%)
-rotate(0deg);
-
-}
+    overflow-x:hidden;
 
 }
 
@@ -297,136 +59,31 @@ rotate(0deg);
 
 .events-container{
 
-width:360px;
 
-max-width:90%;
+    width:360px;
 
-
-padding:20px;
+    max-width:92%;
 
 
-border-radius:25px;
-
-
-background:
-
-rgba(255,255,255,.07);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-box-shadow:
-
-0 15px 40px rgba(0,0,0,.5);
+    margin:auto;
 
 
 }
+
 
 
 
 
 .events-container h1{
 
-text-align:center;
 
-margin-top:0;
+    text-align:center;
 
-}
+    font-size:34px;
 
+    margin:20px 0 5px;
 
-
-
-
-
-/* ===== НОВАЯ КНОПКА СОБЫТИЯ ===== */
-
-
-.new-event{
-
-
-position:relative;
-
-
-width:100%;
-
-
-height:58px;
-
-
-border:none;
-
-
-border-radius:30px;
-
-
-overflow:hidden;
-
-
-cursor:pointer;
-
-
-
-color:white;
-
-
-font-size:17px;
-
-
-font-weight:700;
-
-
-
-
-background:
-
-
-linear-gradient(
-135deg,
-rgba(255,255,255,.25),
-rgba(170,130,255,.25)
-);
-
-
-
-
-backdrop-filter:
-
-blur(15px);
-
-
-
-
-border:
-
-1px solid rgba(255,255,255,.35);
-
-
-
-
-box-shadow:
-
-
-
-0 0 20px rgba(180,150,255,.45),
-
-
-inset 0 0 20px rgba(255,255,255,.15);
-
-
-
-
-transition:.35s;
+    font-weight:700;
 
 
 }
@@ -435,46 +92,20 @@ transition:.35s;
 
 
 
-.new-event::before{
+.subtitle{
 
 
-content:"";
+    text-align:center;
+
+    margin:0 0 30px;
 
 
-position:absolute;
+    color:
+
+    rgba(255,255,255,.55);
 
 
-top:0;
-
-
-left:-120%;
-
-
-width:80%;
-
-
-height:100%;
-
-
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.7),
-transparent
-);
-
-
-
-transform:skewX(-25deg);
-
-
-
-animation:
-
-buttonLight 3s infinite;
+    letter-spacing:1px;
 
 
 }
@@ -483,19 +114,54 @@ buttonLight 3s infinite;
 
 
 
-.new-event:hover{
+
+/* ===== КНОПКА СОЗДАНИЯ ===== */
 
 
-transform:
-
-translateY(-4px)
-scale(1.02);
+.create-event{
 
 
+    width:100%;
 
-box-shadow:
+    height:56px;
 
-0 0 35px rgba(200,170,255,.8);
+
+    border:none;
+
+    border-radius:28px;
+
+
+    cursor:pointer;
+
+
+    color:#111;
+
+
+    font-size:17px;
+
+    font-weight:700;
+
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #d9cfff
+    );
+
+
+
+    box-shadow:
+
+
+    0 10px 30px
+    rgba(255,255,255,.25);
+
+
+
+    transition:.25s;
 
 
 }
@@ -503,12 +169,21 @@ box-shadow:
 
 
 
-.new-event:active{
+
+.create-event:hover{
 
 
-transform:
+    transform:
 
-scale(.96);
+    translateY(-3px);
+
+
+
+    box-shadow:
+
+
+    0 15px 40px
+    rgba(255,255,255,.4);
 
 
 }
@@ -517,21 +192,12 @@ scale(.96);
 
 
 
-@keyframes buttonLight{
+.create-event:active{
 
 
-0%{
+    transform:
 
-left:-120%;
-
-}
-
-
-40%,100%{
-
-left:150%;
-
-}
+    scale(.96);
 
 
 }
@@ -547,1681 +213,8 @@ left:150%;
 
 .event-form{
 
-display:flex;
 
-flex-direction:column;
-
-gap:12px;
-
-margin-bottom:20px;
-
-}
-
-
-
-.event-form input,
-.event-form textarea{
-
-
-width:100%;
-
-
-padding:14px;
-
-
-border-radius:18px;
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-
-color:white;
-
-
-outline:none;
-
-
-}
-
-
-
-.event-form textarea{
-
-height:100px;
-
-resize:none;
-
-}
-
-
-
-.event-form button{
-
-
-height:45px;
-
-
-border:none;
-
-
-border-radius:22px;
-
-
-background:white;
-
-
-color:#302038;
-
-
-font-weight:bold;
-
-
-}
-
-
-
-
-
-
-/* ===== СОБЫТИЯ ===== */
-
-
-#eventList{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-}
-
-
-
-.saved-event{
-
-
-padding:15px;
-
-
-border-radius:20px;
-
-
-background:
-
-rgba(255,255,255,.09);
-
-
-animation:
-
-show .4s ease;
-
-
-}
-
-
-
-.saved-event h2{
-
-margin:0 0 8px;
-
-}
-
-
-.saved-event p{
-
-opacity:.7;
-
-}
-
-
-
-.saved-event button{
-
-
-margin-top:10px;
-
-
-border:none;
-
-
-border-radius:15px;
-
-
-padding:8px 15px;
-
-
-background:
-
-rgba(255,255,255,.15);
-
-
-color:white;
-
-
-}
-
-
-
-
-
-.hidden{
-
-display:none;
-
-}
-
-
-
-@keyframes show{
-
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-
-}
-
-
-
-
-
-
-
-/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
-
-
-.bottom-nav{
-
-
-position:fixed;
-
-
-bottom:18px;
-
-
-left:50%;
-
-
-transform:translateX(-50%);
-
-
-
-width:350px;
-
-
-max-width:90%;
-
-
-
-height:72px;
-
-
-
-display:flex;
-
-
-justify-content:space-around;
-
-
-align-items:center;
-
-
-
-background:
-
-rgba(255,255,255,.07);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-
-border-radius:30px;
-
-
-
-box-shadow:
-
-0 15px 40px rgba(0,0,0,.5);
-
-
-}
-
-
-
-
-
-.nav-item{
-
-
-border:none;
-
-
-background:none;
-
-
-color:white;
-
-
-display:flex;
-
-
-flex-direction:column;
-
-
-align-items:center;
-
-
-gap:3px;
-
-
-opacity:.55;
-
-
-font-size:22px;
-
-
-}
-
-
-
-
-.nav-item small{
-
-font-size:11px;
-
-}
-
-
-
-
-
-.nav-item.active{
-
-opacity:1;
-
-transform:translateY(-7px);
-
-}
-
-
-
-
-
-.nav-item.active span{
-
-filter:
-
-drop-shadow(0 0 10px white);
-
-}
-.new-event{
-
-background:red !important;
-
-color:white !important;
-
-height:70px !important;
-
-border-radius:40px !important;
-
-font-size:22px !important;
-
-}
-#newEvent.new-event{
-
-position:relative;
-
-
-width:100%;
-
-height:52px;
-
-
-border:none;
-
-
-border-radius:26px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#b58cff,
-#6f5cff
-);
-
-
-
-color:white;
-
-
-font-size:16px;
-
-
-font-weight:700;
-
-
-letter-spacing:.3px;
-
-
-box-shadow:
-
-0 8px 25px rgba(120,90,255,.45);
-
-
-
-transition:.3s;
-
-
-overflow:hidden;
-
-
-}
-
-
-
-
-
-#newEvent.new-event::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-inset:0;
-
-
-background:
-
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.35),
-transparent
-);
-
-
-
-transform:translateX(-120%);
-
-
-transition:.6s;
-
-
-}
-
-
-
-
-
-#newEvent.new-event:hover::before{
-
-
-transform:translateX(120%);
-
-
-}
-
-
-
-
-
-#newEvent.new-event:hover{
-
-
-transform:
-
-translateY(-3px);
-
-
-box-shadow:
-
-0 12px 35px rgba(120,90,255,.7);
-
-
-}
-
-
-
-
-
-#newEvent.new-event:active{
-
-
-transform:scale(.96);
-
-
-}
-.new-event{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:10px;
-
-
-width:100%;
-
-height:56px;
-
-
-border:none;
-
-border-radius:22px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#8b5cff,
-#5c7cff
-);
-
-
-color:white;
-
-
-font-size:17px;
-
-
-font-weight:700;
-
-
-box-shadow:
-
-0 10px 30px rgba(120,90,255,.45);
-
-
-cursor:pointer;
-
-
-transition:.3s;
-
-}
-
-
-.new-event:hover{
-
-transform:translateY(-3px);
-
-
-box-shadow:
-
-0 15px 40px rgba(120,90,255,.7);
-
-}
-
-
-
-.new-event:active{
-
-transform:scale(.96);
-
-}
-
-
-
-
-.event-icon{
-
-font-size:22px;
-
-
-color:#ffe58a;
-
-
-text-shadow:
-
-0 0 12px #ffe58a;
-
-
-animation:
-
-starGlow 2s infinite;
-
-}
-
-
-
-
-
-@keyframes starGlow{
-
-
-0%,100%{
-
-transform:scale(1);
-
-opacity:1;
-
-}
-
-
-50%{
-
-transform:scale(1.25);
-
-opacity:.7;
-
-}
-
-
-}
-#newEvent.new-event{
-
-background:linear-gradient(
-135deg,
-#8b5cff,
-#5c7cff
-) !important;
-
-
-color:white !important;
-
-
-width:100% !important;
-
-height:56px !important;
-
-
-border:none !important;
-
-border-radius:22px !important;
-
-
-font-size:17px !important;
-
-font-weight:700 !important;
-
-
-box-shadow:
-
-0 10px 30px rgba(120,90,255,.5) !important;
-
-
-display:flex !important;
-
-align-items:center !important;
-
-justify-content:center !important;
-
-gap:10px !important;
-
-}
-
-
-#newEvent .event-icon{
-
-color:#ffe58a !important;
-
-font-size:22px !important;
-
-
-text-shadow:
-
-0 0 12px #ffe58a;
-
-}
-/* ===== PREMIUM MEMORA EVENT BUTTON ===== */
-
-#newEvent.new-event{
-
-position:relative;
-
-height:56px;
-
-border-radius:28px;
-
-background:
-
-linear-gradient(
-135deg,
-#9b7cff,
-#5d5cff
-) !important;
-
-
-box-shadow:
-
-0 10px 30px rgba(120,100,255,.55),
-
-0 0 25px rgba(180,150,255,.25);
-
-
-overflow:hidden;
-
-
-transition:.35s;
-
-}
-
-
-
-/* световой проход */
-
-#newEvent.new-event::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:0;
-
-left:-120%;
-
-
-width:70%;
-
-
-height:100%;
-
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.65),
-transparent
-);
-
-
-transform:skewX(-25deg);
-
-
-animation:
-
-memoryShine 3.5s infinite;
-
-
-}
-
-
-
-
-
-#newEvent.new-event:hover{
-
-
-transform:
-
-translateY(-4px)
-scale(1.02);
-
-
-box-shadow:
-
-0 15px 40px rgba(140,110,255,.8);
-
-}
-
-
-
-
-
-#newEvent.new-event:active{
-
-
-transform:
-
-scale(.94);
-
-
-}
-
-
-
-
-
-
-
-.event-icon{
-
-
-font-size:24px;
-
-
-color:#ffe78a;
-
-
-filter:
-
-drop-shadow(0 0 8px #ffe78a);
-
-
-animation:
-
-starFloat 2s infinite;
-
-
-}
-
-
-
-
-
-@keyframes memoryShine{
-
-
-0%{
-
-left:-120%;
-
-}
-
-
-35%,
-100%{
-
-left:150%;
-
-}
-
-
-}
-
-
-
-
-
-
-@keyframes starFloat{
-
-
-0%,
-100%{
-
-transform:
-
-rotate(0deg)
-scale(1);
-
-}
-
-
-50%{
-
-transform:
-
-rotate(10deg)
-scale(1.2);
-
-}
-
-
-}
-/* ===== СВЕТЯЩАЯСЯ ЗВЕЗДА MEMORA ===== */
-
-.event-icon{
-
-position:relative;
-
-width:22px;
-
-height:22px;
-
-display:block;
-
-
-}
-
-
-/* форма звезды */
-
-.event-icon::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-left:50%;
-
-top:50%;
-
-
-width:14px;
-
-height:14px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#fff4a8,
-#ffd45c
-);
-
-
-
-transform:
-
-translate(-50%,-50%)
-rotate(45deg);
-
-
-
-clip-path:
-
-polygon(
-50% 0%,
-61% 38%,
-100% 50%,
-61% 62%,
-50% 100%,
-39% 62%,
-0% 50%,
-39% 38%
-);
-
-
-
-box-shadow:
-
-0 0 10px #ffe58a,
-
-0 0 25px rgba(255,220,120,.8);
-
-
-
-animation:
-
-starGlow 2s infinite;
-
-
-}
-
-
-
-
-
-@keyframes starGlow{
-
-
-0%,100%{
-
-transform:
-
-translate(-50%,-50%)
-scale(1)
-rotate(45deg);
-
-
-filter:brightness(1);
-
-
-}
-
-
-50%{
-
-transform:
-
-translate(-50%,-50%)
-scale(1.25)
-rotate(45deg);
-
-
-filter:brightness(1.5);
-
-
-}
-
-
-}
-/* ===== MEMORA EVENT FORM ===== */
-
-
-#eventForm.event-form{
-
-margin-top:20px;
-
-
-padding:20px;
-
-
-border-radius:28px;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.45);
-
-
-
-animation:
-
-formAppear .45s ease;
-
-
-}
-
-
-
-
-
-#eventForm input,
-#eventForm textarea{
-
-
-background:
-
-rgba(255,255,255,.1) !important;
-
-
-border:
-
-1px solid rgba(255,255,255,.18) !important;
-
-
-border-radius:18px !important;
-
-
-color:white !important;
-
-
-font-size:15px;
-
-
-padding:15px;
-
-
-}
-
-
-
-#eventForm input::placeholder,
-#eventForm textarea::placeholder{
-
-
-color:
-
-rgba(255,255,255,.55);
-
-
-}
-
-
-
-
-
-
-#eventForm textarea{
-
-
-min-height:110px;
-
-
-}
-
-
-
-
-
-/* кнопки формы */
-
-
-#saveEvent{
-
-
-background:
-
-linear-gradient(
-135deg,
-#9b7cff,
-#5d5cff
-) !important;
-
-
-
-color:white !important;
-
-
-box-shadow:
-
-0 8px 25px rgba(120,100,255,.5);
-
-
-}
-
-
-
-
-
-#cancelEvent{
-
-
-background:
-
-rgba(255,255,255,.12) !important;
-
-
-
-color:white !important;
-
-
-margin-top:8px;
-
-
-}
-
-
-
-
-
-
-
-#saveEvent,
-#cancelEvent{
-
-
-height:48px;
-
-
-border:none;
-
-
-border-radius:24px;
-
-
-font-size:16px;
-
-
-font-weight:bold;
-
-
-transition:.3s;
-
-
-}
-
-
-
-
-#saveEvent:hover,
-#cancelEvent:hover{
-
-
-transform:
-
-translateY(-3px);
-
-
-}
-
-
-
-
-
-
-@keyframes formAppear{
-
-
-from{
-
-
-opacity:0;
-
-
-transform:
-
-translateY(40px)
-scale(.95);
-
-
-}
-
-
-
-to{
-
-
-opacity:1;
-
-
-transform:
-
-translateY(0)
-scale(1);
-
-
-}
-
-
-}
-/* ===== КАРТОЧКИ СОБЫТИЙ MEMORA ===== */
-
-
-.event-card{
-
-
-padding:18px;
-
-
-border-radius:24px;
-
-
-background:
-
-rgba(255,255,255,.08);
-
-
-border:
-
-1px solid rgba(255,255,255,.12);
-
-
-
-backdrop-filter:
-
-blur(15px);
-
-
-
-box-shadow:
-
-0 15px 35px rgba(0,0,0,.35);
-
-
-
-animation:
-
-cardShow .45s ease;
-
-
-
-transition:.3s;
-
-
-}
-
-
-
-
-
-.event-card:hover{
-
-
-transform:
-
-translateY(-5px);
-
-
-
-box-shadow:
-
-0 20px 45px rgba(130,100,255,.35);
-
-
-}
-
-
-
-
-
-.event-card h2{
-
-
-margin:0 0 10px;
-
-
-font-size:20px;
-
-
-}
-
-
-
-
-.event-card p{
-
-
-opacity:.75;
-
-
-line-height:1.4;
-
-
-}
-
-
-
-
-.event-date{
-
-
-margin-top:12px;
-
-
-font-size:12px;
-
-
-opacity:.5;
-
-
-}
-
-
-
-
-
-.event-delete{
-
-
-margin-top:15px;
-
-
-border:none;
-
-
-padding:8px 18px;
-
-
-border-radius:20px;
-
-
-background:
-
-rgba(255,255,255,.12);
-
-
-
-color:white;
-
-
-}
-
-
-
-
-
-/* типы */
-
-
-.event-card.idea{
-
-border-left:
-
-4px solid #ffd966;
-
-}
-
-
-
-.event-card.goal{
-
-border-left:
-
-4px solid #7cff9b;
-
-}
-
-
-
-.event-card.note{
-
-border-left:
-
-4px solid #70b7ff;
-
-}
-
-
-
-.event-card.project{
-
-border-left:
-
-4px solid #c58cff;
-
-}
-
-
-
-.event-card.personal{
-
-border-left:
-
-4px solid #ff7c9d;
-
-}
-
-
-
-
-
-
-@keyframes cardShow{
-
-
-from{
-
-
-opacity:0;
-
-
-transform:
-
-translateY(30px);
-
-
-}
-
-
-
-to{
-
-
-opacity:1;
-
-
-transform:
-
-translateY(0);
-
-
-}
-
-
-}
-
-/* ПРОВЕРКА КАРТОЧЕК MEMORA */
-
-.event-card{
-
-display:block !important;
-
-margin-top:15px !important;
-
-padding:20px !important;
-
-border-radius:25px !important;
-
-background:rgba(120,90,255,.25) !important;
-
-border:2px solid rgba(255,255,255,.3) !important;
-
-color:white !important;
-
-box-shadow:
-0 0 30px rgba(140,100,255,.6) !important;
-
-}
-
-
-.event-card h2{
-
-font-size:22px !important;
-
-margin:0 0 10px !important;
-
-}
-
-
-.event-card p{
-
-font-size:15px !important;
-
-opacity:.8;
-
-}
-
-
-.event-date{
-
-font-size:12px;
-
-opacity:.6;
-
-margin-top:10px;
-
-}
-
-
-.event-delete{
-
-margin-top:15px;
-
-padding:10px 20px;
-
-border:none;
-
-border-radius:20px;
-
-background:#ff5c7a;
-
-color:white;
-
-}
-.event-card{
-
-border-left:5px solid white;
-
-}
-
-
-
-/* ИДЕЯ */
-
-.event-card.idea{
-
-border-left-color:#ffd966;
-
-}
-
-
-
-/* ЦЕЛЬ */
-
-.event-card.goal{
-
-border-left-color:#7cff9b;
-
-}
-
-
-
-/* ЗАМЕТКА */
-
-.event-card.note{
-
-border-left-color:#70b7ff;
-
-}
-
-
-
-/* ПРОЕКТ */
-
-.event-card.project{
-
-border-left-color:#b58cff;
-
-}
-
-
-
-/* ЛИЧНОЕ */
-
-.event-card.personal{
-
-border-left-color:#ff7ca8;
-
-}
-
-
-
-
-
-#eventType{
-
-width:100%;
-
-margin-top:15px;
-
-height:45px;
-
-border-radius:20px;
-
-border:1px solid rgba(255,255,255,.2);
-
-background:rgba(255,255,255,.1);
-
-color:white;
-
-padding:0 15px;
-
-}
-
-/* ===== ЦВЕТА КАРТОЧЕК ПО ТИПУ ===== */
-
-
-.event-card{
-
-border-left:5px solid rgba(255,255,255,.4);
-
-}
-
-
-
-
-.event-card.idea{
-
-border-left-color:#ffd45c;
-
-box-shadow:
-
-0 10px 35px rgba(255,212,92,.25);
-
-}
-
-
-
-
-.event-card.goal{
-
-border-left-color:#63ff9a;
-
-box-shadow:
-
-0 10px 35px rgba(99,255,154,.25);
-
-}
-
-
-
-
-.event-card.note{
-
-border-left-color:#65b7ff;
-
-box-shadow:
-
-0 10px 35px rgba(101,183,255,.25);
-
-}
-
-
-
-
-.event-card.project{
-
-border-left-color:#b58cff;
-
-box-shadow:
-
-0 10px 35px rgba(181,140,255,.3);
-
-}
-
-
-
-
-.event-card.personal{
-
-border-left-color:#ff7ca8;
-
-box-shadow:
-
-0 10px 35px rgba(255,124,168,.3);
-
-}
-/* ================================= */
-/* MEMORA EVENT CARDS FINAL STYLE */
-/* ================================= */
-
-
-.event-card{
-
-
-    margin-top:18px;
+    margin-top:25px;
 
 
     padding:20px;
@@ -2239,7 +232,246 @@ box-shadow:
 
     border:
 
-    1px solid rgba(255,255,255,.15);
+    1px solid rgba(255,255,255,.18);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    box-shadow:
+
+
+    0 15px 40px
+    rgba(0,0,0,.35);
+
+
+
+}
+
+
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+
+
+
+.event-form input,
+.event-form textarea,
+.event-form select{
+
+
+    width:100%;
+
+
+    margin-bottom:12px;
+
+
+    padding:14px;
+
+
+    border-radius:18px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.2);
+
+
+
+    outline:none;
+
+
+
+    color:white;
+
+
+    background:
+
+    rgba(255,255,255,.1);
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+.event-form textarea{
+
+
+    height:110px;
+
+    resize:none;
+
+
+}
+
+
+
+
+
+.event-form input::placeholder,
+.event-form textarea::placeholder{
+
+
+    color:
+
+    rgba(255,255,255,.5);
+
+
+}
+
+
+
+
+
+
+
+/* кнопки формы */
+
+
+.form-buttons{
+
+
+    display:flex;
+
+
+    gap:10px;
+
+
+}
+
+
+
+.form-buttons button{
+
+
+    flex:1;
+
+
+    height:45px;
+
+
+    border:none;
+
+
+    border-radius:22px;
+
+
+    cursor:pointer;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+#saveEvent{
+
+
+    background:white;
+
+    color:#17131f;
+
+
+}
+
+
+
+
+
+#cancelEvent{
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+
+
+/* ===== СПИСОК СОБЫТИЙ ===== */
+
+
+.event-list{
+
+
+    margin-top:25px;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+
+    gap:14px;
+
+
+}
+
+
+
+
+
+
+
+/* ===== КАРТОЧКА ===== */
+
+
+.event-card{
+
+
+    position:relative;
+
+
+    min-height:150px;
+
+
+    padding:15px;
+
+
+    border-radius:22px;
+
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.16);
 
 
 
@@ -2249,18 +481,21 @@ box-shadow:
 
 
 
-    color:white;
+    box-shadow:
+
+
+    0 0 25px
+    rgba(255,255,255,.12);
 
 
 
-    transition:.3s;
+    display:flex;
+
+    flex-direction:column;
 
 
 
-    animation:
-
-    cardAppear .4s ease;
-
+    transition:.25s;
 
 
 }
@@ -2277,436 +512,16 @@ box-shadow:
     translateY(-5px);
 
 
-
     box-shadow:
 
-    0 15px 40px rgba(0,0,0,.45);
+
+    0 0 35px
+    rgba(255,255,255,.25);
 
 
 }
 
 
-
-
-
-
-.event-card h2{
-
-
-    margin:0 0 10px;
-
-
-    font-size:22px;
-
-
-}
-
-
-
-
-
-
-.event-card p{
-
-
-    margin:0;
-
-
-    opacity:.8;
-
-
-    line-height:1.5;
-
-
-}
-
-
-
-
-
-
-.event-date{
-
-
-    margin-top:12px;
-
-
-    font-size:12px;
-
-
-    opacity:.55;
-
-
-}
-
-
-
-
-
-
-.event-delete{
-
-
-    margin-top:15px;
-
-
-    border:none;
-
-
-    padding:10px 20px;
-
-
-    border-radius:20px;
-
-
-
-    background:
-
-    rgba(255,255,255,.12);
-
-
-
-    color:white;
-
-
-
-    cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-/* ===== ТИПЫ СОБЫТИЙ ===== */
-
-
-
-.event-card.idea{
-
-
-    border-left:
-
-    5px solid #ffd45c;
-
-
-    box-shadow:
-
-    0 0 25px rgba(255,212,92,.25);
-
-
-}
-
-
-
-
-
-
-.event-card.goal{
-
-
-    border-left:
-
-    5px solid #63ff9a;
-
-
-    box-shadow:
-
-    0 0 25px rgba(99,255,154,.25);
-
-
-}
-
-
-
-
-
-
-.event-card.note{
-
-
-    border-left:
-
-    5px solid #65b7ff;
-
-
-    box-shadow:
-
-    0 0 25px rgba(101,183,255,.25);
-
-
-}
-
-
-
-
-
-
-.event-card.project{
-
-
-    border-left:
-
-    5px solid #b58cff;
-
-
-    box-shadow:
-
-    0 0 25px rgba(181,140,255,.3);
-
-
-}
-
-
-
-
-
-
-.event-card.personal{
-
-
-    border-left:
-
-    5px solid #ff7ca8;
-
-
-    box-shadow:
-
-    0 0 25px rgba(255,124,168,.3);
-
-
-}
-
-
-
-
-
-
-@keyframes cardAppear{
-
-
-from{
-
-
-opacity:0;
-
-
-transform:
-
-translateY(25px);
-
-
-}
-
-
-to{
-
-
-opacity:1;
-
-
-transform:
-
-translateY(0);
-
-
-}
-
-
-}
-.event-card.idea{
-    border-left:5px solid #ffd45c !important;
-    box-shadow:0 0 30px #ffd45c !important;
-}
-
-
-.event-card.goal{
-    border-left:5px solid #63ff9a !important;
-    box-shadow:0 0 30px #63ff9a !important;
-}
-
-
-.event-card.note{
-    border-left:5px solid #65b7ff !important;
-    box-shadow:0 0 30px #65b7ff !important;
-}
-
-
-.event-card.project{
-    border-left:5px solid #b58cff !important;
-    box-shadow:0 0 30px #b58cff !important;
-}
-
-
-.event-card.personal{
-    border-left:5px solid #ff7ca8 !important;
-    box-shadow:0 0 30px #ff7ca8 !important;
-}
-.event-actions{
-
-display:flex;
-
-align-items:center;
-
-margin-top:15px;
-
-}
-
-
-.event-favorite{
-
-border:none;
-
-background:rgba(255,255,255,.12);
-
-color:#ffd45c;
-
-width:42px;
-
-height:42px;
-
-border-radius:50%;
-
-font-size:24px;
-
-cursor:pointer;
-
-margin-right:10px;
-
-}
-
-
-.event-favorite:hover{
-
-box-shadow:0 0 20px #ffd45c;
-
-}
-.date-box{
-
-margin-top:12px;
-
-}
-
-
-.date-box label{
-
-display:block;
-
-margin-bottom:6px;
-
-font-size:13px;
-
-color:white;
-
-opacity:.75;
-
-}
-
-
-
-#eventDate{
-
-width:100%;
-
-height:42px;
-
-padding:8px 12px;
-
-border-radius:14px;
-
-border:none;
-
-background:
-
-rgba(255,255,255,.12);
-
-color:white;
-
-font-size:14px;
-
-box-sizing:border-box;
-
-backdrop-filter:blur(15px);
-
-}
-.date-box{
-
-    margin-top:8px !important;
-
-}
-
-
-
-.date-box label{
-
-    font-size:12px !important;
-
-    margin-bottom:4px !important;
-
-}
-
-
-
-#eventDate{
-
-    width:100% !important;
-
-    height:30px !important;
-
-    min-height:30px !important;
-
-    padding:3px 8px !important;
-
-    border-radius:10px !important;
-
-    font-size:12px !important;
-
-    line-height:30px !important;
-
-    box-sizing:border-box !important;
-
-}
-.event-list,
-#eventList{
-
-
-display:grid;
-
-
-grid-template-columns:repeat(2, 1fr);
-
-
-gap:12px;
-
-
-padding-bottom:100px;
-
-
-}
-
-
-
-
-
-.event-card{
-
-
-padding:12px !important;
-
-
-border-radius:18px !important;
-
-
-min-height:140px;
-
-
-overflow:hidden;
-
-
-}
 
 
 
@@ -2714,7 +529,12 @@ overflow:hidden;
 .event-top{
 
 
-gap:8px !important;
+    display:flex;
+
+    align-items:center;
+
+
+    gap:8px;
 
 
 }
@@ -2726,13 +546,27 @@ gap:8px !important;
 .event-symbol{
 
 
-width:30px !important;
+    width:30px;
+
+    height:30px;
 
 
-height:30px !important;
+    border-radius:50%;
 
 
-font-size:18px !important;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    font-size:16px;
 
 
 }
@@ -2744,16 +578,19 @@ font-size:18px !important;
 .event-card h2{
 
 
-font-size:15px !important;
+    font-size:16px;
 
 
-white-space:nowrap;
+    margin:0;
 
 
-overflow:hidden;
+    overflow:hidden;
 
 
-text-overflow:ellipsis;
+    white-space:nowrap;
+
+
+    text-overflow:ellipsis;
 
 
 }
@@ -2765,19 +602,28 @@ text-overflow:ellipsis;
 .event-card p{
 
 
-font-size:12px !important;
+    font-size:12px;
 
 
-display:-webkit-box;
+    line-height:1.4;
 
 
--webkit-line-clamp:3;
+    opacity:.75;
 
 
--webkit-box-orient:vertical;
+    margin:12px 0;
 
 
-overflow:hidden;
+    display:-webkit-box;
+
+
+    -webkit-line-clamp:3;
+
+
+    -webkit-box-orient:vertical;
+
+
+    overflow:hidden;
 
 
 }
@@ -2789,241 +635,87 @@ overflow:hidden;
 .event-date{
 
 
-font-size:10px !important;
+    margin-top:auto;
+
+
+    font-size:11px;
+
+
+    opacity:.5;
 
 
 }
 
 
 
+
+
+
+
+
+/* ===== ЗВЕЗДА ===== */
+
+
+.card-star{
+
+
+    position:absolute;
+
+
+    top:10px;
+
+    right:10px;
+
+
+    width:28px;
+
+
+    height:28px;
+
+
+    border:none;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+
+
+
+/* ===== ДЕЙСТВИЯ ===== */
 
 
 .event-actions{
 
 
-margin-top:8px !important;
+    display:flex;
 
 
-}
+    justify-content:center;
 
 
+    gap:10px;
 
 
+    margin-top:12px;
 
-.event-favorite,
-.event-edit{
-
-
-width:32px !important;
-
-
-height:32px !important;
-
-
-font-size:16px !important;
-
-
-}
-
-
-
-
-
-.event-delete{
-
-
-padding:6px 10px !important;
-
-
-font-size:11px !important;
-
-
-border-radius:14px !important;
-
-
-}
-.event-edit{
-
-
-width:30px !important;
-
-height:30px !important;
-
-
-border-radius:50%;
-
-
-border:none;
-
-
-background:rgba(255,255,255,.10);
-
-
-color:white;
-
-
-font-size:16px !important;
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-padding:0;
-
-
-opacity:.8;
-
-
-}
-
-
-.event-edit:hover{
-
-
-opacity:1;
-
-
-box-shadow:0 0 15px rgba(255,255,255,.5);
-
-
-}
-/* нижняя панель действий карточки */
-
-.event-actions{
-
-
-display:flex !important;
-
-
-align-items:center !important;
-
-
-justify-content:center !important;
-
-
-gap:12px !important;
-
-
-width:100%;
-
-
-margin-top:12px !important;
-
-
-}
-
-
-
-
-.event-favorite,
-.event-edit,
-.event-delete{
-
-
-width:32px !important;
-
-
-height:32px !important;
-
-
-padding:0 !important;
-
-
-display:flex !important;
-
-
-align-items:center !important;
-
-
-justify-content:center !important;
-
-
-border-radius:50% !important;
-
-
-font-size:16px !important;
-
-
-line-height:1;
-
-
-}
-
-
-
-
-.event-favorite{
-
-
-color:#ffd45c;
-
-
-}
-
-
-
-
-.event-edit{
-
-
-color:white;
-
-
-}
-
-
-
-
-.event-delete{
-
-
-background:rgba(255,80,80,.18) !important;
-
-
-color:#ff7777;
-
-
-border:none;
-
-
-}
-
-
-
-
-
-.event-delete:hover{
-
-
-box-shadow:0 0 15px #ff5555;
-
-
-}
-/* Нижняя панель кнопок карточки */
-
-.event-actions{
-
-    width:100% !important;
-
-    display:flex !important;
-
-    flex-direction:row !important;
-
-    justify-content:center !important;
-
-    align-items:center !important;
-
-    gap:10px !important;
-
-    margin-top:14px !important;
-
-    padding:0 !important;
 
 }
 
@@ -3033,74 +725,61 @@ box-shadow:0 0 15px #ff5555;
 
 .event-actions button{
 
-    position:relative !important;
 
-    flex:none !important;
+    width:32px;
 
-    display:flex !important;
 
-    justify-content:center !important;
+    height:32px;
 
-    align-items:center !important;
 
-    margin:0 !important;
+    border-radius:50%;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
 
 }
-
-
 
 
 
 .event-favorite,
-.event-edit,
-.event-delete{
-
-
-    width:34px !important;
-
-    height:34px !important;
-
-
-    padding:0 !important;
-
-
-    border-radius:50% !important;
-
-
-    line-height:1 !important;
-
-
-    font-size:17px !important;
-
-
-}
-
-
-
-
-
-.event-delete{
-
-
-    background:rgba(255,70,70,.18) !important;
-
-    color:#ff7777 !important;
-
-    border:none !important;
-
-
-}
-
-
-
-
-
 .event-edit{
 
 
-    background:rgba(255,255,255,.12) !important;
+    background:
 
-    color:white !important;
+    rgba(255,255,255,.12);
+
+
+    color:white;
+
+
+}
+
+
+
+
+.event-delete{
+
+
+    background:
+
+    rgba(255,80,80,.2);
+
+
+    color:#ff8888;
 
 
 }
@@ -3109,727 +788,183 @@ box-shadow:0 0 15px #ff5555;
 
 
 
-.event-favorite{
 
 
-    background:rgba(255,255,255,.12) !important;
 
-    color:#ffd45c !important;
+/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
 
-
-}
-.card-star{
-
-
-position:absolute;
-
-
-top:10px;
-
-
-right:10px;
-
-
-
-width:28px;
-
-
-height:28px;
-
-
-
-border-radius:50%;
-
-
-border:none;
-
-
-
-background:rgba(255,255,255,.12);
-
-
-
-color:#ffd45c;
-
-
-
-font-size:16px;
-
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-
-cursor:pointer;
-
-
-
-}
-
-
-
-.event-card{
-
-
-position:relative;
-
-
-}
-
-
-
-.card-star:hover{
-
-
-box-shadow:
-
-0 0 15px #ffd45c;
-
-
-}
-/* анимация появления карточек */
-
-.event-card{
-
-
-animation: cardShow .35s ease forwards;
-
-
-opacity:0;
-
-
-transform:translateY(15px);
-
-
-}
-
-
-
-
-
-@keyframes cardShow{
-
-
-from{
-
-
-opacity:0;
-
-
-transform:translateY(15px) scale(.96);
-
-
-}
-
-
-
-to{
-
-
-opacity:1;
-
-
-transform:translateY(0) scale(1);
-
-
-}
-
-
-}
-#eventList .event-card{
-
-
-    animation: memoraCardShow .45s ease forwards !important;
-
-
-    opacity:0 !important;
-
-
-    transform:translateY(20px) scale(.95) !important;
-
-
-}
-
-
-
-
-@keyframes memoraCardShow{
-
-
-    0%{
-
-
-        opacity:0;
-
-
-        transform:translateY(20px) scale(.95);
-
-
-    }
-
-
-
-    100%{
-
-
-        opacity:1;
-
-
-        transform:translateY(0) scale(1);
-
-
-    }
-
-
-}
-/* ===== MEMORA FINAL FIX ===== */
-
-
-/* Карточки должны быть видимыми */
-
-#eventList .event-card{
-
-    display:flex !important;
-
-    flex-direction:column !important;
-
-    opacity:1 !important;
-
-    transform:none !important;
-
-    visibility:visible !important;
-
-    position:relative !important;
-
-    padding:14px !important;
-
-    margin-top:12px !important;
-
-    border-radius:20px !important;
-
-    color:white !important;
-
-    overflow:hidden !important;
-
-}
-
-
-/* сетка карточек */
-
-#eventList{
-
-    display:grid !important;
-
-    grid-template-columns:repeat(2,1fr) !important;
-
-    gap:12px !important;
-
-    opacity:1 !important;
-
-    visibility:visible !important;
-
-}
-
-
-
-/* верх карточки */
-
-#eventList .event-top{
-
-    display:flex !important;
-
-    align-items:center !important;
-
-    gap:8px !important;
-
-}
-
-
-
-/* заголовок */
-
-#eventList h2{
-
-    margin:0 !important;
-
-    font-size:16px !important;
-
-}
-
-
-
-/* текст */
-
-#eventList p{
-
-    margin:8px 0 !important;
-
-    font-size:12px !important;
-
-    opacity:.8 !important;
-
-}
-
-
-
-/* дата */
-
-#eventList .event-date{
-
-    margin-top:auto !important;
-
-    font-size:10px !important;
-
-}
-
-
-
-/* кнопки снизу */
-
-#eventList .event-actions{
-
-    display:flex !important;
-
-    justify-content:center !important;
-
-    align-items:center !important;
-
-    gap:10px !important;
-
-    margin-top:12px !important;
-
-}
-
-
-
-/* все маленькие кнопки */
-
-#eventList .event-actions button{
-
-    width:32px !important;
-
-    height:32px !important;
-
-    padding:0 !important;
-
-    border-radius:50% !important;
-
-    display:flex !important;
-
-    align-items:center !important;
-
-    justify-content:center !important;
-
-    font-size:16px !important;
-
-}
-
-
-
-
-
-/* цвета карточек */
-
-
-#eventList .idea{
-
-    border-left:5px solid #ffd45c !important;
-
-    box-shadow:0 0 25px rgba(255,212,92,.4) !important;
-
-}
-
-
-
-#eventList .goal{
-
-    border-left:5px solid #63ff9a !important;
-
-    box-shadow:0 0 25px rgba(99,255,154,.4) !important;
-
-}
-
-
-
-#eventList .note{
-
-    border-left:5px solid #65b7ff !important;
-
-    box-shadow:0 0 25px rgba(101,183,255,.4) !important;
-
-}
-
-
-
-#eventList .project{
-
-    border-left:5px solid #b58cff !important;
-
-    box-shadow:0 0 25px rgba(181,140,255,.4) !important;
-
-}
-
-
-
-#eventList .personal{
-
-    border-left:5px solid #ff7ca8 !important;
-
-    box-shadow:0 0 25px rgba(255,124,168,.4) !important;
-
-}
-/* ===== MEMORA CARD OPEN PREMIUM ANIMATION ===== */
-
-
-#eventList .event-card{
-
-    opacity:1 !important;
-
-    visibility:visible !important;
-
-    animation:
-
-    memoraCardOpen .5s cubic-bezier(.22,1,.36,1) forwards !important;
-
-    transform-origin:center center !important;
-
-}
-
-
-
-
-@keyframes memoraCardOpen{
-
-
-    0%{
-
-        opacity:0 !important;
-
-        transform:
-
-        translateY(35px)
-        scale(.90) !important;
-
-
-        filter:blur(10px) !important;
-
-    }
-
-
-
-    60%{
-
-
-        opacity:1 !important;
-
-
-        transform:
-
-        translateY(-6px)
-        scale(1.03) !important;
-
-
-        filter:blur(0) !important;
-
-
-    }
-
-
-
-    100%{
-
-
-        opacity:1 !important;
-
-
-        transform:
-
-        translateY(0)
-        scale(1) !important;
-
-
-        filter:blur(0) !important;
-
-
-    }
-
-
-}
-
-
-
-
-/* появление по очереди */
-
-
-#eventList .event-card:nth-child(1){
-
-animation-delay:.05s !important;
-
-}
-
-
-#eventList .event-card:nth-child(2){
-
-animation-delay:.12s !important;
-
-}
-
-
-#eventList .event-card:nth-child(3){
-
-animation-delay:.18s !important;
-
-}
-
-
-#eventList .event-card:nth-child(4){
-
-animation-delay:.24s !important;
-
-}
-
-
-#eventList .event-card:nth-child(5){
-
-animation-delay:.30s !important;
-
-}
-
-
-/* лёгкий эффект при наведении */
-
-
-#eventList .event-card:hover{
-
-transform:
-
-translateY(-5px)
-scale(1.02) !important;
-
-
-transition:.3s !important;
-
-}
-/* ================================= */
-/* MEMORA FINAL CARD ANIMATION */
-/* ================================= */
-
-
-#eventList .event-card{
-
-    opacity:1 !important;
-
-    visibility:visible !important;
-
-    animation:
-
-    memoraCardAppear .6s cubic-bezier(.22,1,.36,1) both !important;
-
-    transform-origin:center !important;
-
-}
-
-
-
-
-@keyframes memoraCardAppear{
-
-
-    0%{
-
-
-        opacity:0 !important;
-
-
-        transform:
-
-        translateY(40px)
-        scale(.9) !important;
-
-
-        filter:blur(12px);
-
-
-    }
-
-
-
-    50%{
-
-
-        opacity:1 !important;
-
-
-        transform:
-
-        translateY(-8px)
-        scale(1.03) !important;
-
-
-        filter:blur(0);
-
-
-    }
-
-
-
-    100%{
-
-
-        opacity:1 !important;
-
-
-        transform:
-
-        translateY(0)
-        scale(1) !important;
-
-
-    }
-
-
-}
-
-
-
-
-
-/* задержка карточек */
-
-#eventList .event-card:nth-child(1){
-
-    animation-delay:.05s !important;
-
-}
-
-
-#eventList .event-card:nth-child(2){
-
-    animation-delay:.12s !important;
-
-}
-
-
-#eventList .event-card:nth-child(3){
-
-    animation-delay:.18s !important;
-
-}
-
-
-#eventList .event-card:nth-child(4){
-
-    animation-delay:.24s !important;
-
-}
-
-
-#eventList .event-card:nth-child(5){
-
-    animation-delay:.30s !important;
-
-}
-/* ===== FIX MOBILE SCROLL EVENTS ===== */
-
-html,
-body.events-page{
-
-    height:auto !important;
-    min-height:100% !important;
-
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-
-    touch-action:pan-y !important;
-
-}
-
-
-
-.events-page .events-container{
-
-    max-height:none !important;
-
-    overflow:visible !important;
-
-}
-
-
-
-#eventForm{
-
-    max-height:none !important;
-
-    overflow:visible !important;
-
-}
-
-
-
-.event-form{
-
-    padding-bottom:120px !important;
-
-}
-
-
-
-/* чтобы нижняя навигация не мешала */
 
 .bottom-nav{
 
-    position:fixed !important;
 
-    z-index:999 !important;
+    position:fixed;
+
+
+    bottom:18px;
+
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+
+    width:350px;
+
+
+    max-width:90%;
+
+
+
+    height:70px;
+
+
+
+    display:flex;
+
+
+    justify-content:space-around;
+
+
+    align-items:center;
+
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+
+
+    border-radius:30px;
+
+
+
+    box-shadow:
+
+
+    0 15px 40px
+    rgba(0,0,0,.45);
+
 
 }
-/* =====================================
-        MEMORA SVG NAV ICONS
-===================================== */
 
 
-.nav-icon{
 
-width:26px;
 
-height:26px;
 
-color:white;
+.nav-item{
 
-transition:.3s;
+
+    background:none;
+
+
+    border:none;
+
+
+    color:white;
+
+
+    opacity:.55;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:4px;
+
 
 }
 
 
 
 
-.nav-item.active .nav-icon{
+
+.nav-item img{
 
 
-color:#a78bff;
+    width:25px;
 
-
-filter:
-
-drop-shadow(0 0 8px #a78bff);
+    height:25px;
 
 
 }
 
 
 
-.nav-item:hover .nav-icon{
 
 
-transform:translateY(-4px);
+.nav-item.active{
+
+
+    opacity:1;
+
+
+    transform:
+
+    translateY(-6px);
+
+
+}
+
+
+
+
+
+.nav-item small{
+
+
+    font-size:11px;
+
+
+}
+
+
+
+
+
+
+
+/* ===== МОБИЛА ===== */
+
+
+@media(max-width:400px){
+
+
+.event-list{
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+}
+
+
+.events-container{
+
+    width:330px;
+
+}
+
 
 
 }
