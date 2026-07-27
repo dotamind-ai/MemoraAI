@@ -1,20 +1,15 @@
-/* =====================================
-        MEMORA MAIN STYLE V1
-===================================== */
-
+/* =================================
+        MEMORA GLOBAL
+================================= */
 
 *{
     box-sizing:border-box;
 }
 
 
-
-html,
 body{
 
     margin:0;
-
-    min-height:100%;
 
     font-family:
     "Segoe UI",
@@ -27,52 +22,50 @@ body{
 
 
 
-
-body.home-page{
+.home-page{
 
     min-height:100vh;
 
-    padding-bottom:120px;
+    padding:
+
+    35px 20px 120px;
 
 
     background:
 
     radial-gradient(
         circle at top,
-        rgba(100,70,150,.35),
+        rgba(90,70,130,.35),
         transparent 45%
     ),
 
     linear-gradient(
         160deg,
-        #0b0b12,
-        #171326,
-        #0b0b12
+        #09090d,
+        #15141b,
+        #0b0b10
     );
 
+
+    overflow-x:hidden;
 
 }
 
 
 
 
-
-
-/* =====================================
+/* =================================
         CONTAINER
-===================================== */
+================================= */
 
 
 .home-container{
 
-
     width:360px;
 
-    max-width:90%;
+    max-width:100%;
 
-    margin:0 auto;
-
-    padding-top:35px;
+    margin:auto;
 
 
 }
@@ -81,112 +74,82 @@ body.home-page{
 
 
 
-
-
-
-/* =====================================
+/* =================================
         HEADER
-===================================== */
+================================= */
 
 
 .home-header{
 
-
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:18px;
 
     margin-bottom:35px;
 
-
 }
 
 
 
-
-
-.brand-text h1{
-
+.header-text h1{
 
     margin:0;
 
-
-    font-size:30px;
-
+    font-size:34px;
 
     font-weight:700;
 
-
-    letter-spacing:.5px;
-
+    letter-spacing:1px;
 
 }
 
 
 
+.header-text p{
 
+    margin:5px 0 0;
 
-.brand-text p{
-
-
-    margin:4px 0 0;
-
-
-    color:
-
-    rgba(255,255,255,.55);
-
+    opacity:.55;
 
     font-size:14px;
 
-
 }
 
 
 
 
 
-
-
-
-
-
-/* =====================================
+/* =================================
         LOGO
-===================================== */
+================================= */
 
 
-.memora-mark{
+.memora-logo{
 
+    width:70px;
+
+    height:70px;
 
     position:relative;
 
-
-    width:48px;
-
-    height:48px;
-
-
     display:flex;
-
-    align-items:center;
 
     justify-content:center;
 
+    align-items:center;
 
 }
 
 
 
+.logo-m{
 
-.logo-core{
 
+    width:45px;
 
-    width:32px;
-
-    height:32px;
+    height:45px;
 
 
     border-radius:50%;
@@ -194,9 +157,14 @@ body.home-page{
 
     display:flex;
 
+    justify-content:center;
+
     align-items:center;
 
-    justify-content:center;
+
+    font-size:28px;
+
+    font-weight:700;
 
 
     background:
@@ -204,65 +172,28 @@ body.home-page{
     rgba(255,255,255,.08);
 
 
-
     border:
 
-    1px solid rgba(255,255,255,.25);
-
-
-    font-size:21px;
-
-    font-weight:700;
-
-
-    animation:
-
-    logoPulse 5s ease-in-out infinite;
+    1px solid rgba(255,255,255,.35);
 
 
     z-index:3;
 
 
-}
+    animation:
 
+    logoPulse 4s infinite;
 
-
-
-
-@keyframes logoPulse{
-
-
-    0%,100%{
-
-        transform:scale(1);
-
-    }
-
-
-    50%{
-
-        transform:scale(1.06);
-
-    }
 
 }
 
 
 
 
-
-
-
-.logo-orbit{
+.logo-circle{
 
 
     position:absolute;
-
-
-    left:50%;
-
-    top:50%;
-
 
     border-radius:50%;
 
@@ -270,11 +201,6 @@ body.home-page{
     border:
 
     1px solid rgba(255,255,255,.18);
-
-
-    transform:
-
-    translate(-50%,-50%);
 
 
     animation:
@@ -286,81 +212,42 @@ body.home-page{
 
 
 
-.logo-orbit span{
+.circle-one{
 
+    width:55px;
 
-    position:absolute;
+    height:55px;
 
-
-    width:5px;
-
-    height:5px;
-
-
-    border-radius:50%;
-
-
-    background:white;
-
+    animation-duration:8s;
 
 }
 
 
 
-.orbit-one{
+.circle-two{
 
+    width:65px;
 
-    width:42px;
+    height:65px;
 
-    height:42px;
-
-    animation-duration:6s;
-
-
-}
-
-
-
-.orbit-one span{
-
-
-    top:-3px;
-
-    left:50%;
-
-
-}
-
-
-
-
-.orbit-two{
-
-
-    width:60px;
-
-    height:60px;
-
-    animation-duration:10s;
+    animation-duration:12s;
 
     animation-direction:reverse;
 
-
 }
 
 
 
 
-.orbit-two span{
+.circle-three{
 
+    width:75px;
 
-    right:-3px;
+    height:75px;
 
-    top:50%;
-
+    animation-duration:16s;
 
 }
-
 
 
 
@@ -370,20 +257,36 @@ body.home-page{
 
 from{
 
-transform:
-
-translate(-50%,-50%)
-rotate(0deg);
+    transform:rotate(0deg);
 
 }
 
 
 to{
 
-transform:
+    transform:rotate(360deg);
 
-translate(-50%,-50%)
-rotate(360deg);
+}
+
+
+}
+
+
+
+
+@keyframes logoPulse{
+
+
+0%,100%{
+
+    transform:scale(1);
+
+}
+
+
+50%{
+
+    transform:scale(1.06);
 
 }
 
@@ -396,25 +299,84 @@ rotate(360deg);
 
 
 
+/* =================================
+        CAPTURE CARD
+================================= */
 
 
-/* =====================================
-        QUICK THOUGHT
-===================================== */
-
-
-.thought-card{
+.capture-card{
 
 
     padding:22px;
 
 
-    border-radius:28px;
+    border-radius:26px;
 
 
     background:
 
-    rgba(255,255,255,.08);
+    rgba(255,255,255,.06);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.14);
+
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.capture-card h2{
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+
+
+.capture-card p{
+
+    margin:6px 0 18px;
+
+    opacity:.55;
+
+}
+
+
+
+
+
+
+textarea{
+
+
+    width:100%;
+
+
+    height:120px;
+
+
+    resize:none;
+
+
+    padding:16px;
+
+
+    border-radius:18px;
 
 
     border:
@@ -423,122 +385,9 @@ rotate(360deg);
 
 
 
-    backdrop-filter:blur(18px);
-
-
-    box-shadow:
-
-    0 20px 45px rgba(0,0,0,.35);
-
-
-}
-
-
-
-
-
-
-.thought-header{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-}
-
-
-
-.thought-header h2{
-
-
-    margin:0;
-
-
-    font-size:22px;
-
-
-}
-
-
-
-
-.thought-header span{
-
-
-    color:white;
-
-
-    opacity:.7;
-
-
-    font-size:20px;
-
-
-}
-
-
-
-
-
-
-
-.thought-description{
-
-
-    margin:10px 0 18px;
-
-
-    color:
-
-    rgba(255,255,255,.55);
-
-
-    font-size:14px;
-
-
-}
-
-
-
-
-
-
-#memoryInput{
-
-
-    width:100%;
-
-
-    min-height:120px;
-
-
-    resize:none;
-
-
-
-    padding:16px;
-
-
-    border-radius:20px;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.18);
-
-
-
     background:
 
-    rgba(0,0,0,.2);
-
+    rgba(255,255,255,.07);
 
 
     color:white;
@@ -555,14 +404,74 @@ rotate(360deg);
 
 
 
+textarea::placeholder{
 
-#memoryInput::placeholder{
+    color:rgba(255,255,255,.4);
+
+}
 
 
-    color:
 
-    rgba(255,255,255,.4);
 
+
+/* =================================
+        TYPES
+================================= */
+
+
+.memory-types{
+
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+
+}
+
+
+
+.type-btn{
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+    background:
+
+    rgba(255,255,255,.06);
+
+
+    color:white;
+
+
+    padding:8px 14px;
+
+
+    border-radius:18px;
+
+
+    font-size:11px;
+
+
+    letter-spacing:.5px;
+
+
+}
+
+
+
+.type-btn.active{
+
+
+    background:white;
+
+    color:#111;
 
 }
 
@@ -571,17 +480,21 @@ rotate(360deg);
 
 
 
+/* =================================
+        SAVE BUTTON
+================================= */
 
-#saveMemory{
+
+.save-button{
+
+
+    margin-top:18px;
 
 
     width:100%;
 
 
     height:52px;
-
-
-    margin-top:15px;
 
 
     border:none;
@@ -593,13 +506,13 @@ rotate(360deg);
     background:white;
 
 
-    color:#171326;
-
-
-    font-size:16px;
+    color:#111;
 
 
     font-weight:700;
+
+
+    font-size:16px;
 
 
     cursor:pointer;
@@ -612,24 +525,10 @@ rotate(360deg);
 
 
 
+.save-button:active{
 
 
-#saveMemory:hover{
-
-
-    transform:translateY(-2px);
-
-
-}
-
-
-
-
-
-#saveMemory:active{
-
-
-    transform:scale(.97);
+    transform:scale(.96);
 
 
 }
@@ -638,54 +537,39 @@ rotate(360deg);
 
 
 
+/* =================================
+        FEED
+================================= */
 
 
-
-
-/* =====================================
-        MEMORY FEED
-===================================== */
-
-
-.memory-feed{
-
-
-    margin-top:30px;
-
-
-}
-
-
-
-
-
-.feed-title h2{
-
-
-    font-size:21px;
-
-
-    margin:0 0 15px;
-
-
-}
-
-
-
-
-
-
-#memoryList{
+.feed-header{
 
 
     display:flex;
 
+    align-items:center;
 
-    flex-direction:column;
+    justify-content:space-between;
+
+}
 
 
-    gap:12px;
 
+.feed-header h2{
+
+
+    font-size:21px;
+
+}
+
+
+
+
+
+#memoryCount{
+
+
+    opacity:.5;
 
 }
 
@@ -696,6 +580,9 @@ rotate(360deg);
 .memory-item{
 
 
+    margin-top:15px;
+
+
     padding:18px;
 
 
@@ -704,13 +591,18 @@ rotate(360deg);
 
     background:
 
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.06);
 
 
 
     border:
 
-    1px solid rgba(255,255,255,.12);
+    1px solid rgba(255,255,255,.15);
+
+
+    border-left:
+
+    3px solid rgba(255,255,255,.6);
 
 
 }
@@ -718,31 +610,84 @@ rotate(360deg);
 
 
 
-
-.memory-item p{
-
-
-    margin:0;
+.memory-type{
 
 
-    line-height:1.5;
+    font-size:10px;
+
+
+    letter-spacing:2px;
+
+
+    opacity:.45;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+
+.memory-text{
 
 
     font-size:15px;
 
 
+    line-height:1.5;
+
+
+}
+
+
+
+.memory-footer{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin-top:12px;
+
+
+    opacity:.45;
+
+
+    font-size:11px;
+
+
+}
+
+
+
+
+.delete-memory{
+
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    opacity:.5;
+
+    cursor:pointer;
+
 }
 
 
 
 
 
-
-
-
-/* =====================================
-        BOTTOM NAVIGATION
-===================================== */
+/* =================================
+        NAVIGATION
+================================= */
 
 
 .bottom-nav{
@@ -760,16 +705,16 @@ rotate(360deg);
     transform:translateX(-50%);
 
 
-
     width:350px;
 
 
     max-width:90%;
 
 
+    height:70px;
 
-    height:72px;
 
+    border-radius:30px;
 
 
     display:flex;
@@ -782,18 +727,15 @@ rotate(360deg);
 
 
 
-    border-radius:30px;
-
-
-
     background:
 
     rgba(255,255,255,.08);
 
 
 
-    backdrop-filter:blur(20px);
+    backdrop-filter:
 
+    blur(20px);
 
 
     border:
@@ -812,14 +754,12 @@ rotate(360deg);
 
     background:none;
 
-
     border:none;
-
 
     color:white;
 
 
-    opacity:.55;
+    opacity:.45;
 
 
     display:flex;
@@ -838,24 +778,23 @@ rotate(360deg);
 
 
 
+.nav-item img{
 
-.nav-icon{
 
+    width:25px;
 
-    width:26px;
-
-    height:26px;
+    height:25px;
 
 
 }
 
 
 
+
+
 .nav-item small{
 
-
     font-size:11px;
-
 
 }
 
@@ -868,31 +807,20 @@ rotate(360deg);
 
     opacity:1;
 
-
-    transform:translateY(-5px);
-
-
 }
 
 
 
 
-
-
-.nav-item.active .nav-icon{
+.nav-item.active img{
 
 
     filter:
 
-    drop-shadow(
-    0 0 6px rgba(255,255,255,.6)
-    );
+    brightness(2);
 
 
 }
-
-
-
 
 
 
@@ -903,9 +831,7 @@ rotate(360deg);
 
 .home-container{
 
-
-    width:330px;
-
+    width:100%;
 
 }
 
