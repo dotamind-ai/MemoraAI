@@ -12,6 +12,7 @@
 
 
 <link rel="stylesheet" href="style.css">
+
 <link rel="stylesheet" href="events.css">
 
 
@@ -21,7 +22,9 @@
 <body class="events-page">
 
 
+
 <main class="events-container">
+
 
 
 <h1>
@@ -29,14 +32,18 @@ Events
 </h1>
 
 
-<p class="subtitle">
+<p class="events-subtitle">
 Your important moments
 </p>
 
 
 
+
+
+<!-- КНОПКА СОЗДАНИЯ -->
+
 <button 
-class="create-event"
+class="new-event"
 id="newEvent">
 
 + New Event
@@ -47,9 +54,14 @@ id="newEvent">
 
 
 
-<div 
+
+
+<!-- ФОРМА СОЗДАНИЯ -->
+
+<section 
 class="event-form hidden"
 id="eventForm">
+
 
 
 <input
@@ -59,27 +71,40 @@ placeholder="Event title">
 
 
 
+
+
 <textarea
 id="eventText"
-placeholder="Description">
-</textarea>
+placeholder="Description"></textarea>
+
+
+
 
 
 
 
 <select id="eventType">
 
+
 <option value="idea">
 Idea
 </option>
+
 
 <option value="goal">
 Goal
 </option>
 
+
+<option value="note">
+Note
+</option>
+
+
 <option value="project">
 Project
 </option>
+
 
 <option value="personal">
 Personal
@@ -87,6 +112,7 @@ Personal
 
 
 </select>
+
 
 
 
@@ -100,10 +126,13 @@ type="date">
 
 
 
+
+
 <div class="form-buttons">
 
 
-<button id="saveEvent">
+<button 
+id="saveEvent">
 
 Save
 
@@ -111,28 +140,38 @@ Save
 
 
 
-<button id="cancelEvent">
+
+<button
+id="cancelEvent">
 
 Cancel
 
 </button>
 
 
-</div>
-
-
 
 </div>
 
 
 
+</section>
 
 
-<section 
+
+
+
+
+
+<!-- СПИСОК -->
+
+<section
 id="eventList"
 class="event-list">
 
 </section>
+
+
+
 
 
 
@@ -144,20 +183,32 @@ class="event-list">
 
 
 
+
+
+<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+
 <nav class="bottom-nav">
+
 
 
 <button 
 class="nav-item"
 onclick="goHome()">
 
-<img src="icons/memories.svg">
+
+<img 
+src="icons/memories.svg"
+class="nav-icon">
+
 
 <small>
 Memories
 </small>
 
+
 </button>
+
+
 
 
 
@@ -166,13 +217,21 @@ Memories
 class="nav-item"
 onclick="goCalendar()">
 
-<img src="icons/calendar.svg">
+
+
+<img 
+src="icons/calendar.svg"
+class="nav-icon">
+
 
 <small>
 Calendar
 </small>
 
+
 </button>
+
+
 
 
 
@@ -181,13 +240,22 @@ Calendar
 class="nav-item active"
 onclick="goEvents()">
 
-<img src="icons/events.svg">
+
+
+<img 
+src="icons/events.svg"
+class="nav-icon">
+
 
 <small>
 Events
 </small>
 
+
 </button>
+
+
+
 
 
 
@@ -196,13 +264,21 @@ Events
 class="nav-item"
 onclick="goProfile()">
 
-<img src="icons/profile.svg">
+
+
+<img 
+src="icons/profile.svg"
+class="nav-icon">
+
 
 <small>
 Profile
 </small>
 
+
 </button>
+
+
 
 
 
@@ -213,7 +289,10 @@ Profile
 
 
 
+
+
 <script src="events.js"></script>
+
 
 
 </body>
