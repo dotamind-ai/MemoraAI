@@ -7,62 +7,32 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>Memora</title>
-
 
 <link rel="stylesheet" href="style.css">
 
 
-</head>
+<script>
 
+window.location.href = "welcome/welcome.html";
+
+</script>
+
+
+</head>
 
 
 <body class="home-page">
 
 
 
-<script>
-
-
-// Проверяем, прошёл ли пользователь Welcome
-
-
-if(!sessionStorage.getItem("memora_inside")){
-
-
-    window.location.href="welcome/welcome.html";
-
-
-}
-
-
-
-</script>
-
-
-
-
-
-
 <div class="home-container">
 
-
-
-
-
-<!-- HEADER -->
 
 <header class="home-header">
 
 
-
-
-
-<!-- LOGO -->
-
 <div class="memora-logo">
-
 
 
     <div class="orbit orbit-one">
@@ -89,8 +59,6 @@ if(!sessionStorage.getItem("memora_inside")){
 
 
 
-
-
     <div class="logo-m">
 
         M
@@ -98,36 +66,25 @@ if(!sessionStorage.getItem("memora_inside")){
     </div>
 
 
-
 </div>
 
 
 
-
-
-
-
-<!-- TITLE -->
 
 <div class="header-text">
 
 
 <h1>
-
 Memora
-
 </h1>
 
 
 <p>
-
 Your memory space
-
 </p>
 
 
 </div>
-
 
 
 
@@ -138,31 +95,17 @@ Your memory space
 
 
 
-
-
-
-<!-- QUICK MEMORY -->
-
-
 <section class="capture-card">
 
 
-
 <h2>
-
 Capture
-
 </h2>
 
 
-
 <p>
-
 Store what matters
-
 </p>
-
-
 
 
 
@@ -178,70 +121,30 @@ placeholder="Write your thought..."
 
 
 
-
-
-
 <div class="memory-types">
 
 
-
-<button
-
-class="type-btn active"
-
-data-type="idea">
-
+<button class="type-btn active" data-type="idea">
 IDEA
-
 </button>
 
 
-
-
-<button
-
-class="type-btn"
-
-data-type="note">
-
+<button class="type-btn" data-type="note">
 NOTE
-
 </button>
 
 
-
-
-
-<button
-
-class="type-btn"
-
-data-type="inspiration">
-
+<button class="type-btn" data-type="inspiration">
 INSPIRATION
-
 </button>
 
 
-
-
-
-<button
-
-class="type-btn"
-
-data-type="goal">
-
+<button class="type-btn" data-type="goal">
 GOAL
-
 </button>
-
-
 
 
 </div>
-
-
 
 
 
@@ -266,50 +169,29 @@ Save Memory
 
 
 
-
-
-
-<!-- MEMORY FEED -->
-
-
 <section class="memory-feed">
-
 
 
 <div class="feed-header">
 
 
-
 <h2>
-
 Recent Memories
-
 </h2>
 
 
-
-
 <span id="memoryCount">
-
 0
-
 </span>
 
 
-
 </div>
-
-
-
-
 
 
 
 <div id="memoryList">
 
-
 </div>
-
 
 
 
@@ -318,9 +200,6 @@ Recent Memories
 
 
 
-
-
-
 </div>
 
 
@@ -329,123 +208,61 @@ Recent Memories
 
 
 
-
-
-<!-- BOTTOM NAVIGATION -->
-
-
 <nav class="bottom-nav">
 
 
-
-
-
-<button
-
-class="nav-item active"
-
-onclick="goHome()">
-
-
+<button class="nav-item active" onclick="goHome()">
 
 <img src="icons/memories.svg">
 
-
 <small>
-
 Memories
-
 </small>
-
 
 </button>
 
 
 
 
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goCalendar()">
-
-
+<button class="nav-item" onclick="goCalendar()">
 
 <img src="icons/calendar.svg">
 
-
 <small>
-
 Calendar
-
 </small>
-
 
 </button>
 
 
 
 
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goEvents()">
-
-
+<button class="nav-item" onclick="goEvents()">
 
 <img src="icons/events.svg">
 
-
 <small>
-
 Events
-
 </small>
-
 
 </button>
 
 
 
 
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goProfile()">
-
-
+<button class="nav-item" onclick="goProfile()">
 
 <img src="icons/profile.svg">
 
-
 <small>
-
 Profile
-
 </small>
 
-
 </button>
-
-
 
 
 
 </nav>
-
-
-
 
 
 
