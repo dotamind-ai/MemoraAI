@@ -29,7 +29,10 @@
 
     <div class="chat-glow glow-two"></div>
 
+    <div class="chat-grid"></div>
+
 </div>
+
 
 
 <main class="chat-container">
@@ -42,23 +45,42 @@
     <header class="chat-header">
 
 
-        <button
-            id="backButton"
-            class="back-button"
-            type="button"
-            aria-label="Back"
-        >
-            ←
-        </button>
+        <div class="chat-brand">
 
 
-        <div class="chat-title">
+            <div class="brand-mark">
+                M
+            </div>
 
-            <span>CHATS</span>
 
-            <small>PEOPLE YOU CARE ABOUT</small>
+            <div class="chat-brand-text">
+
+                <span>MEMORA</span>
+
+                <small>CHATS</small>
+
+            </div>
+
 
         </div>
+
+
+
+        <button
+            id="profileButton"
+            class="profile-button"
+            type="button"
+            aria-label="Open profile"
+        >
+
+            <div
+                id="myAvatar"
+                class="my-avatar"
+            >
+                M
+            </div>
+
+        </button>
 
 
     </header>
@@ -66,168 +88,158 @@
 
 
     <!-- =====================================
-            FRIEND SEARCH
+            FRIENDS VIEW
     ====================================== -->
 
     <section
-        id="friendsSection"
-        class="search-card"
+        id="friendsView"
+        class="friends-view"
     >
 
 
-        <div class="search-title">
+        <!-- SEARCH -->
+
+        <section class="search-card">
 
 
-            <span class="section-kicker">
-                FIND PEOPLE
-            </span>
+            <div class="section-heading-main">
+
+                <div>
+
+                    <span class="section-kicker">
+                        PEOPLE
+                    </span>
+
+                    <h1>
+                        Find a friend
+                    </h1>
+
+                </div>
+
+            </div>
 
 
-            <h1>
-                Add a friend
-            </h1>
+            <div class="search-row">
 
 
-        </div>
+                <input
+                    id="emailSearch"
+                    type="email"
+                    placeholder="Email address..."
+                    autocomplete="off"
+                >
 
 
+                <button
+                    id="searchButton"
+                    type="button"
+                >
 
-        <div class="search-row">
+                    Find
 
-
-            <input
-                id="emailSearch"
-                type="email"
-                placeholder="Email address..."
-                autocomplete="off"
-            >
-
-
-            <button
-                id="searchButton"
-                type="button"
-            >
-                Find
-            </button>
-
-
-        </div>
-
-
-
-        <div
-            id="searchMessage"
-            class="search-message"
-        ></div>
-
-
-
-        <div
-            id="searchResult"
-            class="search-result"
-        ></div>
-
-
-    </section>
-
-
-
-    <!-- =====================================
-            REQUESTS
-    ====================================== -->
-
-    <section
-        id="requestsSection"
-        class="chat-section"
-    >
-
-
-        <div class="section-heading">
-
-
-            <div>
-
-
-                <span class="section-kicker">
-                    REQUESTS
-                </span>
-
-
-                <h2>
-                    Friend requests
-                </h2>
+                </button>
 
 
             </div>
 
 
-            <span
-                id="requestCount"
-                class="count-badge"
-            >
-                0
-            </span>
+            <div
+                id="searchMessage"
+                class="search-message"
+            ></div>
 
 
-        </div>
+            <div
+                id="searchResult"
+                class="search-result"
+            ></div>
 
 
-
-        <div
-            id="requestList"
-            class="people-list"
-        ></div>
-
-
-    </section>
+        </section>
 
 
 
-    <!-- =====================================
-            FRIENDS
-    ====================================== -->
+        <!-- REQUESTS -->
 
-    <section
-        id="friendsListSection"
-        class="chat-section"
-    >
+        <section class="chat-section">
 
 
-        <div class="section-heading">
+            <div class="section-heading">
 
 
-            <div>
+                <div>
+
+                    <span class="section-kicker">
+                        REQUESTS
+                    </span>
+
+                    <h2>
+                        Friend requests
+                    </h2>
+
+                </div>
 
 
-                <span class="section-kicker">
-                    PEOPLE
+                <span
+                    id="requestCount"
+                    class="count-badge"
+                >
+                    0
                 </span>
-
-
-                <h2>
-                    Friends
-                </h2>
 
 
             </div>
 
 
-            <span
-                id="friendCount"
-                class="count-badge"
-            >
-                0
-            </span>
+            <div
+                id="requestList"
+                class="people-list"
+            ></div>
 
 
-        </div>
+        </section>
 
 
 
-        <div
-            id="friendList"
-            class="people-list"
-        ></div>
+        <!-- FRIENDS -->
+
+        <section class="chat-section friends-card">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <span class="section-kicker">
+                        CONTACTS
+                    </span>
+
+                    <h2>
+                        Friends
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="friendCount"
+                    class="count-badge"
+                >
+                    0
+                </span>
+
+
+            </div>
+
+
+            <div
+                id="friendList"
+                class="people-list"
+            ></div>
+
+
+        </section>
 
 
     </section>
@@ -235,12 +247,12 @@
 
 
     <!-- =====================================
-            CONVERSATION
+            CONVERSATION VIEW
     ====================================== -->
 
     <section
-        id="conversationSection"
-        class="conversation-card"
+        id="conversationView"
+        class="conversation-view"
     >
 
 
@@ -251,9 +263,11 @@
                 id="conversationBack"
                 class="conversation-back"
                 type="button"
+                aria-label="Back to chats"
             >
                 ←
             </button>
+
 
 
             <div
@@ -264,16 +278,17 @@
             </div>
 
 
+
             <div class="conversation-user">
 
 
                 <strong id="conversationName">
-                    Select a friend
+                    Friend
                 </strong>
 
 
                 <span id="conversationStatus">
-                    Private chat
+                    Private conversation
                 </span>
 
 
@@ -297,11 +312,11 @@
                 </div>
 
                 <div class="empty-title">
-                    Choose a friend
+                    No messages yet
                 </div>
 
                 <div class="empty-text">
-                    Select a friend above to start chatting.
+                    Start the conversation.
                 </div>
 
             </div>
@@ -328,7 +343,7 @@
             <button
                 id="sendMessageButton"
                 type="submit"
-                aria-label="Send"
+                aria-label="Send message"
             >
                 →
             </button>
