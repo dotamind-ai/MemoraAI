@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Memora — Chats</title>
+
+<link
+    rel="stylesheet"
+    href="chat.css"
+>
+
+</head>
+
+
+<body class="chat-page">
+
+
+<div class="chat-background">
+
+    <div class="chat-glow glow-one"></div>
+
+    <div class="chat-glow glow-two"></div>
+
+</div>
+
+
+
+<main class="chat-container">
+
+
+    <!-- HEADER -->
+
+    <header class="chat-header">
+
+
+        <button
+            id="backButton"
+            class="back-button"
+            type="button"
+        >
+            ←
+        </button>
+
+
+        <div class="chat-title">
+
+            <span>CHATS</span>
+
+            <small>PEOPLE YOU CARE ABOUT</small>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- SEARCH -->
+
+    <section class="search-card">
+
+
+        <div class="search-title">
+
+            <span class="section-kicker">
+                FIND PEOPLE
+            </span>
+
+            <h1>
+                Add a friend
+            </h1>
+
+        </div>
+
+
+        <div class="search-row">
+
+
+            <input
+                id="emailSearch"
+                type="email"
+                placeholder="Email address..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="searchButton"
+                type="button"
+            >
+                Find
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="searchMessage"
+            class="search-message"
+        ></div>
+
+
+        <div
+            id="searchResult"
+            class="search-result"
+        ></div>
+
+
+    </section>
+
+
+
+    <!-- REQUESTS -->
+
+    <section class="chat-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    REQUESTS
+                </span>
+
+                <h2>
+                    Friend requests
+                </h2>
+
+            </div>
+
+
+            <span
+                id="requestCount"
+                class="count-badge"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <div
+            id="requestList"
+            class="people-list"
+        ></div>
+
+
+    </section>
+
+
+
+    <!-- FRIENDS -->
+
+    <section class="chat-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    PEOPLE
+                </span>
+
+                <h2>
+                    Friends
+                </h2>
+
+            </div>
+
+
+            <span
+                id="friendCount"
+                class="count-badge"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <div
+            id="friendList"
+            class="people-list"
+        ></div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        class="nav-item"
+        id="homeNav"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ◉
+        </span>
+
+        <small>
+            Memories
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-item"
+        id="calendarNav"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ◫
+        </span>
+
+        <small>
+            Calendar
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-item"
+        id="timelineNav"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ◇
+        </span>
+
+        <small>
+            Timeline
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-item active"
+        id="chatNav"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ▱
+        </span>
+
+        <small>
+            Chats
+        </small>
+
+    </button>
+
+
+</nav>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="chat.js"></script>
+
+
+</body>
+
+</html>
