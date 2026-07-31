@@ -1992,22 +1992,18 @@ function subscribeToNotifications() {
                         )
                     ) {
 
-                        return;
-
-                    }
-
-
-                    notifications.unshift(
-                        notification
-                    );
+                        notifications.unshift(
+    notification
+);
 
 
-                    await attachFriendIdsToNotifications();
+await attachFriendIdsToNotifications();
 
-                    renderNotifications();
-                    animateNotificationBell();
+renderNotifications();
 
-                    renderFriends();
+renderFriends();
+
+animateNotificationBell();
 
 
                     if (
