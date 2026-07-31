@@ -1,6 +1,5 @@
 // =====================================================
 // MEMORA CHAT
-// FRIENDS + DIRECT MESSAGES + REALTIME
 // =====================================================
 
 
@@ -49,6 +48,12 @@ const friendCount =
 const backButton =
     document.getElementById("backButton");
 
+const profileButton =
+    document.getElementById("profileButton");
+
+const myAvatar =
+    document.getElementById("myAvatar");
+
 const homeNav =
     document.getElementById("homeNav");
 
@@ -58,63 +63,35 @@ const calendarNav =
 const timelineNav =
     document.getElementById("timelineNav");
 
-const conversationSection =
-    document.getElementById("conversationSection");
+const friendsView =
+    document.getElementById("friendsView");
+
+const conversationView =
+    document.getElementById("conversationView");
 
 const conversationBack =
-    document.getElementById(
-        "conversationBack"
-    );
+    document.getElementById("conversationBack");
 
 const conversationAvatar =
-    document.getElementById(
-        "conversationAvatar"
-    );
+    document.getElementById("conversationAvatar");
 
 const conversationName =
-    document.getElementById(
-        "conversationName"
-    );
+    document.getElementById("conversationName");
 
 const conversationStatus =
-    document.getElementById(
-        "conversationStatus"
-    );
+    document.getElementById("conversationStatus");
 
 const messageList =
-    document.getElementById(
-        "messageList"
-    );
+    document.getElementById("messageList");
 
 const messageForm =
-    document.getElementById(
-        "messageForm"
-    );
+    document.getElementById("messageForm");
 
 const messageInput =
-    document.getElementById(
-        "messageInput"
-    );
+    document.getElementById("messageInput");
 
 const sendMessageButton =
-    document.getElementById(
-        "sendMessageButton"
-    );
-
-const friendsSection =
-    document.getElementById(
-        "friendsSection"
-    );
-
-const requestsSection =
-    document.getElementById(
-        "requestsSection"
-    );
-
-const friendsListSection =
-    document.getElementById(
-        "friendsListSection"
-    );
+    document.getElementById("sendMessageButton");
 
 
 // =====================================================
@@ -146,77 +123,88 @@ document.addEventListener(
 
 async function initializeChats() {
 
-    const {
-        data,
-        error
-    } = await supabaseClient.auth.getUser();
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getUser();
 
 
-    if (
-        error ||
-        !data.user
-    ) {
+        if (
+            error ||
+            !data.user
+        ) {
 
-        redirectToWelcome();
+            redirectToWelcome();
 
-        return;
-
-    }
-
-
-    currentUser =
-        data.user;
-
-
-    setupNavigation();
-
-    setupSearch();
-
-    setupConversationEvents();
-
-
-    await loadFriends();
-
-    await loadRequests();
-
-
-    // Открываем друга из URL,
-    // если он указан.
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const friendId =
-        params.get(
-            "friend"
-        );
-
-
-    if (friendId) {
-
-        const friend =
-            friends.find(
-                function(item) {
-
-                    return (
-                        item.friend_id ===
-                        friendId
-                    );
-
-                }
-            );
-
-
-        if (friend) {
-
-            await openConversation(
-                friend
-            );
+            return;
 
         }
+
+
+        currentUser =
+            data.user;
+
+
+        setupNavigation();
+
+        setupSearch();
+
+        setupConversation();
+
+
+        await loadMyProfile();
+
+        await loadFriends();
+
+        await loadRequests();
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const friendId =
+            params.get("friend");
+
+
+        if (friendId) {
+
+            const friend =
+                friends.find(
+                    function(item) {
+
+                        return (
+                            item.friend_id ===
+                            friendId
+                        );
+
+                    }
+                );
+
+
+            if (friend) {
+
+                await openConversation(
+                    friend
+                );
+
+            }
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Chat initialization error:",
+            error
+        );
+
+        redirectToWelcome();
 
     }
 
@@ -229,12 +217,24 @@ async function initializeChats() {
 
 function setupNavigation() {
 
+
     backButton.addEventListener(
         "click",
         function() {
 
             window.location.href =
                 "index.html";
+
+        }
+    );
+
+
+    profileButton.addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "profile.html";
 
         }
     );
@@ -292,10 +292,74 @@ function setupNavigation() {
 
 
 // =====================================================
+// LOAD MY PROFILE
+// =====================================================
+
+async function loadMyProfile() {
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+
+        .from("profiles")
+
+        .select(
+            "display_name, avatar_url"
+        )
+
+        .eq(
+            "id",
+            currentUser.id
+        )
+
+        .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "My profile error:",
+            error
+        );
+
+        setMyAvatar(
+            currentUser.email,
+            null
+        );
+
+        return;
+
+    }
+
+
+    if (data) {
+
+        setMyAvatar(
+            data.display_name ||
+            currentUser.email,
+            data.avatar_url
+        );
+
+    } else {
+
+        setMyAvatar(
+            currentUser.email,
+            null
+        );
+
+    }
+
+}
+
+
+// =====================================================
 // SEARCH
 // =====================================================
 
 function setupSearch() {
+
 
     searchButton.addEventListener(
         "click",
@@ -324,6 +388,7 @@ function setupSearch() {
 
 
 async function searchUser() {
+
 
     const email =
         emailSearch.value.trim();
@@ -397,12 +462,8 @@ async function searchUser() {
         }
 
 
-        const user =
-            data[0];
-
-
         renderSearchResult(
-            user,
+            data[0],
             email
         );
 
@@ -441,6 +502,7 @@ function renderSearchResult(
     email
 ) {
 
+
     const card =
         document.createElement(
             "div"
@@ -452,7 +514,7 @@ function renderSearchResult(
 
 
     const avatar =
-        createAvatar(
+        createPersonAvatar(
             user.display_name,
             user.avatar_url
         );
@@ -499,7 +561,9 @@ function renderSearchResult(
 
     info.appendChild(name);
 
-    info.appendChild(emailElement);
+    info.appendChild(
+        emailElement
+    );
 
 
     const action =
@@ -533,14 +597,22 @@ function renderSearchResult(
     );
 
 
-    card.appendChild(avatar);
+    card.appendChild(
+        avatar
+    );
 
-    card.appendChild(info);
+    card.appendChild(
+        info
+    );
 
-    card.appendChild(action);
+    card.appendChild(
+        action
+    );
 
 
-    searchResult.appendChild(card);
+    searchResult.appendChild(
+        card
+    );
 
 }
 
@@ -554,8 +626,10 @@ async function sendFriendRequest(
     button
 ) {
 
+
     button.disabled =
         true;
+
 
     button.textContent =
         "...";
@@ -584,6 +658,7 @@ async function sendFriendRequest(
         button.textContent =
             "Sent";
 
+
         button.classList.remove(
             "primary"
         );
@@ -604,6 +679,7 @@ async function sendFriendRequest(
         button.disabled =
             false;
 
+
         button.textContent =
             "Add";
 
@@ -618,10 +694,11 @@ async function sendFriendRequest(
 
 
 // =====================================================
-// LOAD FRIENDS
+// FRIENDS
 // =====================================================
 
 async function loadFriends() {
+
 
     const {
         data,
@@ -638,12 +715,9 @@ async function loadFriends() {
             error
         );
 
-
         friends = [];
 
-
         renderFriends();
-
 
         return;
 
@@ -659,11 +733,158 @@ async function loadFriends() {
 }
 
 
+function renderFriends() {
+
+
+    friendList.innerHTML =
+        "";
+
+
+    friendCount.textContent =
+        friends.length;
+
+
+    if (!friends.length) {
+
+        friendList.innerHTML = `
+            <div class="empty-state">
+                No friends yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    friends.forEach(
+        function(friend) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "person-card";
+
+
+            const avatar =
+                createPersonAvatar(
+                    friend.display_name,
+                    friend.avatar_url
+                );
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "person-info";
+
+
+            const name =
+                document.createElement(
+                    "span"
+                );
+
+
+            name.className =
+                "person-name";
+
+
+            name.textContent =
+                friend.display_name ||
+                "Memora user";
+
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+
+            label.className =
+                "person-email";
+
+
+            label.textContent =
+                "Friend";
+
+
+            info.appendChild(
+                name
+            );
+
+            info.appendChild(
+                label
+            );
+
+
+            const action =
+                document.createElement(
+                    "button"
+                );
+
+
+            action.className =
+                "person-action primary";
+
+
+            action.type =
+                "button";
+
+
+            action.textContent =
+                "Chat";
+
+
+            action.addEventListener(
+                "click",
+                function() {
+
+                    openConversation(
+                        friend
+                    );
+
+                }
+            );
+
+
+            card.appendChild(
+                avatar
+            );
+
+            card.appendChild(
+                info
+            );
+
+            card.appendChild(
+                action
+            );
+
+
+            friendList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
 // =====================================================
-// LOAD REQUESTS
+// REQUESTS
 // =====================================================
 
 async function loadRequests() {
+
 
     const {
         data,
@@ -680,12 +901,9 @@ async function loadRequests() {
             error
         );
 
-
         requests = [];
 
-
         renderRequests();
-
 
         return;
 
@@ -701,11 +919,8 @@ async function loadRequests() {
 }
 
 
-// =====================================================
-// RENDER REQUESTS
-// =====================================================
-
 function renderRequests() {
+
 
     requestList.innerHTML =
         "";
@@ -731,6 +946,7 @@ function renderRequests() {
     requests.forEach(
         function(request) {
 
+
             const card =
                 document.createElement(
                     "div"
@@ -742,7 +958,7 @@ function renderRequests() {
 
 
             const avatar =
-                createAvatar(
+                createPersonAvatar(
                     request.display_name,
                     request.avatar_url
                 );
@@ -887,13 +1103,14 @@ function renderRequests() {
 
 
 // =====================================================
-// RESPOND TO REQUEST
+// REQUEST RESPONSE
 // =====================================================
 
 async function respondToRequest(
     requestId,
     accept
 ) {
+
 
     const functionName =
         accept
@@ -945,150 +1162,36 @@ async function respondToRequest(
 
 
 // =====================================================
-// RENDER FRIENDS
+// CONVERSATION
 // =====================================================
 
-function renderFriends() {
-
-    friendList.innerHTML =
-        "";
+function setupConversation() {
 
 
-    friendCount.textContent =
-        friends.length;
+    conversationBack.addEventListener(
+        "click",
+        closeConversation
+    );
 
 
-    if (!friends.length) {
-
-        friendList.innerHTML = `
-            <div class="empty-state">
-                No friends yet.
-            </div>
-        `;
-
-        return;
-
-    }
+    messageForm.addEventListener(
+        "submit",
+        sendMessage
+    );
 
 
-    friends.forEach(
-        function(friend) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "person-card";
-
-
-            const avatar =
-                createAvatar(
-                    friend.display_name,
-                    friend.avatar_url
-                );
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "person-info";
-
-
-            const name =
-                document.createElement(
-                    "span"
-                );
-
-
-            name.className =
-                "person-name";
-
-
-            name.textContent =
-                friend.display_name ||
-                "Memora user";
-
-
-            const label =
-                document.createElement(
-                    "span"
-                );
-
-
-            label.className =
-                "person-email";
-
-
-            label.textContent =
-                "Friend";
-
-
-            info.appendChild(name);
-
-            info.appendChild(label);
-
-
-            const action =
-                document.createElement(
-                    "button"
-                );
-
-
-            action.className =
-                "person-action primary";
-
-
-            action.type =
-                "button";
-
-
-            action.textContent =
-                "Chat";
-
-
-            action.addEventListener(
-                "click",
-                function() {
-
-                    openConversation(
-                        friend
-                    );
-
-                }
-            );
-
-
-            card.appendChild(avatar);
-
-            card.appendChild(info);
-
-            card.appendChild(action);
-
-
-            friendList.appendChild(
-                card
-            );
-
-        }
+    messageInput.addEventListener(
+        "input",
+        autoResizeInput
     );
 
 }
 
 
-// =====================================================
-// OPEN CONVERSATION
-// =====================================================
-
 async function openConversation(
     friend
 ) {
+
 
     activeFriend =
         friend;
@@ -1100,7 +1203,7 @@ async function openConversation(
 
 
     conversationStatus.textContent =
-        "Private chat";
+        "Private conversation";
 
 
     setConversationAvatar(
@@ -1109,34 +1212,26 @@ async function openConversation(
     );
 
 
-    friendsSection.style.display =
+    friendsView.style.display =
         "none";
 
 
-    requestsSection.style.display =
-        "none";
-
-
-    friendsListSection.style.display =
-        "none";
-
-
-    conversationSection.style.display =
+    conversationView.style.display =
         "flex";
 
 
-    history
-        .replaceState(
-            null,
-            "",
-            `chat.html?friend=${encodeURIComponent(friend.friend_id)}`
-        );
+    history.replaceState(
+        null,
+        "",
+        `chat.html?friend=${encodeURIComponent(friend.friend_id)}`
+    );
 
 
     setMessagesLoading();
 
 
     try {
+
 
         const {
             data,
@@ -1172,8 +1267,9 @@ async function openConversation(
 
     } catch (error) {
 
+
         console.error(
-            "Open chat error:",
+            "Open conversation error:",
             error
         );
 
@@ -1200,61 +1296,26 @@ async function openConversation(
 }
 
 
-// =====================================================
-// CONVERSATION BACK
-// =====================================================
-
-function setupConversationEvents() {
-
-    conversationSection.style.display =
-        "flex";
-
-
-    conversationBack.addEventListener(
-        "click",
-        closeConversation
-    );
-
-
-    messageForm.addEventListener(
-        "submit",
-        sendMessage
-    );
-
-
-    messageInput.addEventListener(
-        "input",
-        autoResizeMessageInput
-    );
-
-}
-
-
 function closeConversation() {
 
+
     stopRealtime();
-
-
-    activeConversationId =
-        null;
 
 
     activeFriend =
         null;
 
 
-    friendsSection.style.display =
-        "";
-
-    requestsSection.style.display =
-        "";
-
-    friendsListSection.style.display =
-        "";
+    activeConversationId =
+        null;
 
 
-    conversationSection.style.display =
+    conversationView.style.display =
         "none";
+
+
+    friendsView.style.display =
+        "block";
 
 
     history.replaceState(
@@ -1264,60 +1325,17 @@ function closeConversation() {
     );
 
 
-    resetConversationUI();
-
-}
-
-
-function resetConversationUI() {
-
-    conversationName.textContent =
-        "Select a friend";
-
-
-    conversationStatus.textContent =
-        "Private chat";
-
-
-    setConversationAvatar(
-        "M",
-        null
-    );
-
-
-    messageList.innerHTML = `
-        <div class="messages-empty">
-
-            <div class="empty-icon">
-                ◇
-            </div>
-
-            <div class="empty-title">
-                Choose a friend
-            </div>
-
-            <div class="empty-text">
-                Select a friend above to start chatting.
-            </div>
-
-        </div>
-    `;
-
-
-    messageInput.value =
-        "";
-
-
-    autoResizeMessageInput();
+    setMessagesLoading();
 
 }
 
 
 // =====================================================
-// LOAD MESSAGES
+// MESSAGES
 // =====================================================
 
 async function loadMessages() {
+
 
     if (!activeConversationId) {
 
@@ -1330,14 +1348,18 @@ async function loadMessages() {
         data,
         error
     } = await supabaseClient
+
         .from("messages")
+
         .select(
             "id, conversation_id, sender_id, content, created_at"
         )
+
         .eq(
             "conversation_id",
             activeConversationId
         )
+
         .order(
             "created_at",
             {
@@ -1360,13 +1382,10 @@ async function loadMessages() {
 }
 
 
-// =====================================================
-// RENDER MESSAGES
-// =====================================================
-
 function renderMessages(
     messages
 ) {
+
 
     messageList.innerHTML =
         "";
@@ -1402,20 +1421,15 @@ function renderMessages(
     );
 
 
-    scrollMessagesToBottom();
+    scrollMessages();
 
 }
 
-
-// =====================================================
-// APPEND MESSAGE
-// =====================================================
 
 function appendMessage(
     message
 ) {
 
-    // Защищаемся от дублей Realtime.
 
     if (
         document.querySelector(
@@ -1517,19 +1531,19 @@ function appendMessage(
 
 
 // =====================================================
-// SEND MESSAGE
+// SEND
 // =====================================================
 
 async function sendMessage(
     event
 ) {
 
+
     event.preventDefault();
 
 
     if (
-        !activeConversationId ||
-        !currentUser
+        !activeConversationId
     ) {
 
         return;
@@ -1554,11 +1568,14 @@ async function sendMessage(
 
     try {
 
+
         const {
             data,
             error
         } = await supabaseClient
+
             .from("messages")
+
             .insert({
 
                 conversation_id:
@@ -1571,9 +1588,11 @@ async function sendMessage(
                     content
 
             })
+
             .select(
                 "id, conversation_id, sender_id, content, created_at"
             )
+
             .single();
 
 
@@ -1588,19 +1607,15 @@ async function sendMessage(
             "";
 
 
-        autoResizeMessageInput();
+        autoResizeInput();
 
-
-        // Realtime обычно добавит его сам.
-        // Добавляем локально сразу,
-        // чтобы интерфейс ощущался мгновенным.
 
         appendMessage(
             data
         );
 
 
-        scrollMessagesToBottom();
+        scrollMessages();
 
 
     } catch (error) {
@@ -1621,7 +1636,6 @@ async function sendMessage(
         sendMessageButton.disabled =
             false;
 
-
         messageInput.focus();
 
     }
@@ -1635,6 +1649,7 @@ async function sendMessage(
 
 function subscribeToMessages() {
 
+
     stopRealtime();
 
 
@@ -1647,10 +1662,12 @@ function subscribeToMessages() {
 
     realtimeChannel =
         supabaseClient
+
             .channel(
-                "conversation-" +
+                "chat-" +
                 activeConversationId
             )
+
             .on(
                 "postgres_changes",
                 {
@@ -1665,26 +1682,24 @@ function subscribeToMessages() {
                 },
                 function(payload) {
 
+
                     appendMessage(
                         payload.new
                     );
 
 
-                    scrollMessagesToBottom();
+                    scrollMessages();
 
                 }
             )
-            .subscribe();
 
+            .subscribe();
 
 }
 
 
-// =====================================================
-// STOP REALTIME
-// =====================================================
-
 function stopRealtime() {
+
 
     if (
         realtimeChannel
@@ -1707,10 +1722,40 @@ function stopRealtime() {
 // AVATARS
 // =====================================================
 
-function createAvatar(
+function setMyAvatar(
     name,
     avatarUrl
 ) {
+
+
+    if (avatarUrl) {
+
+        myAvatar.textContent =
+            "";
+
+        myAvatar.style.backgroundImage =
+            `url("${avatarUrl}")`;
+
+        return;
+
+    }
+
+
+    myAvatar.style.backgroundImage =
+        "";
+
+
+    myAvatar.textContent =
+        getInitial(name);
+
+}
+
+
+function createPersonAvatar(
+    name,
+    avatarUrl
+) {
+
 
     const avatar =
         document.createElement(
@@ -1730,9 +1775,7 @@ function createAvatar(
     } else {
 
         avatar.textContent =
-            getInitial(
-                name
-            );
+            getInitial(name);
 
     }
 
@@ -1747,11 +1790,11 @@ function setConversationAvatar(
     avatarUrl
 ) {
 
+
     if (avatarUrl) {
 
         conversationAvatar.textContent =
             "";
-
 
         conversationAvatar.style.backgroundImage =
             `url("${avatarUrl}")`;
@@ -1766,14 +1809,13 @@ function setConversationAvatar(
 
 
     conversationAvatar.textContent =
-        getInitial(
-            name
-        );
+        getInitial(name);
 
 }
 
 
 function getInitial(name) {
+
 
     return (
         String(
@@ -1795,15 +1837,12 @@ function getInitial(name) {
 
 function setMessagesLoading() {
 
+
     messageList.innerHTML = `
         <div class="messages-empty">
 
-            <div class="empty-icon">
-                ◇
-            </div>
-
             <div class="empty-title">
-                Loading chat...
+                Loading...
             </div>
 
         </div>
@@ -1812,7 +1851,8 @@ function setMessagesLoading() {
 }
 
 
-function scrollMessagesToBottom() {
+function scrollMessages() {
+
 
     requestAnimationFrame(
         function() {
@@ -1826,7 +1866,8 @@ function scrollMessagesToBottom() {
 }
 
 
-function autoResizeMessageInput() {
+function autoResizeInput() {
+
 
     messageInput.style.height =
         "auto";
@@ -1836,7 +1877,8 @@ function autoResizeMessageInput() {
         Math.min(
             messageInput.scrollHeight,
             130
-        ) + "px";
+        ) +
+        "px";
 
 }
 
@@ -1849,13 +1891,10 @@ function formatTime(
     dateString
 ) {
 
-    const date =
-        new Date(
-            dateString
-        );
 
-
-    return date.toLocaleTimeString(
+    return new Date(
+        dateString
+    ).toLocaleTimeString(
         "ru-RU",
         {
             hour: "2-digit",
@@ -1871,6 +1910,7 @@ function formatTime(
 // =====================================================
 
 function escapeHtml(value) {
+
 
     const div =
         document.createElement(
