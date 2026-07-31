@@ -1,6 +1,6 @@
 // =====================================================
-// MEMORA CHATS
-// FRIEND SYSTEM
+// MEMORA CHAT
+// FRIENDS + DIRECT MESSAGES + REALTIME
 // =====================================================
 
 
@@ -58,6 +58,64 @@ const calendarNav =
 const timelineNav =
     document.getElementById("timelineNav");
 
+const conversationSection =
+    document.getElementById("conversationSection");
+
+const conversationBack =
+    document.getElementById(
+        "conversationBack"
+    );
+
+const conversationAvatar =
+    document.getElementById(
+        "conversationAvatar"
+    );
+
+const conversationName =
+    document.getElementById(
+        "conversationName"
+    );
+
+const conversationStatus =
+    document.getElementById(
+        "conversationStatus"
+    );
+
+const messageList =
+    document.getElementById(
+        "messageList"
+    );
+
+const messageForm =
+    document.getElementById(
+        "messageForm"
+    );
+
+const messageInput =
+    document.getElementById(
+        "messageInput"
+    );
+
+const sendMessageButton =
+    document.getElementById(
+        "sendMessageButton"
+    );
+
+const friendsSection =
+    document.getElementById(
+        "friendsSection"
+    );
+
+const requestsSection =
+    document.getElementById(
+        "requestsSection"
+    );
+
+const friendsListSection =
+    document.getElementById(
+        "friendsListSection"
+    );
+
 
 // =====================================================
 // STATE
@@ -69,9 +127,15 @@ let friends = [];
 
 let requests = [];
 
+let activeFriend = null;
+
+let activeConversationId = null;
+
+let realtimeChannel = null;
+
 
 // =====================================================
-// INITIALIZATION
+// INIT
 // =====================================================
 
 document.addEventListener(
@@ -96,6 +160,7 @@ async function initializeChats() {
         redirectToWelcome();
 
         return;
+
     }
 
 
@@ -107,9 +172,53 @@ async function initializeChats() {
 
     setupSearch();
 
+    setupConversationEvents();
+
+
     await loadFriends();
 
     await loadRequests();
+
+
+    // Открываем друга из URL,
+    // если он указан.
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const friendId =
+        params.get(
+            "friend"
+        );
+
+
+    if (friendId) {
+
+        const friend =
+            friends.find(
+                function(item) {
+
+                    return (
+                        item.friend_id ===
+                        friendId
+                    );
+
+                }
+            );
+
+
+        if (friend) {
+
+            await openConversation(
+                friend
+            );
+
+        }
+
+    }
 
 }
 
@@ -165,10 +274,7 @@ function setupNavigation() {
 
 
     supabaseClient.auth.onAuthStateChange(
-        function(
-            event,
-            session
-        ) {
+        function(event, session) {
 
             if (
                 event === "SIGNED_OUT" ||
@@ -205,6 +311,8 @@ function setupSearch() {
                 event.key === "Enter"
             ) {
 
+                event.preventDefault();
+
                 searchUser();
 
             }
@@ -223,7 +331,6 @@ async function searchUser() {
 
     searchResult.innerHTML =
         "";
-
 
     searchMessage.textContent =
         "";
@@ -295,14 +402,15 @@ async function searchUser() {
 
 
         renderSearchResult(
-            user
+            user,
+            email
         );
 
 
     } catch (error) {
 
         console.error(
-            "User search error:",
+            "Search error:",
             error
         );
 
@@ -328,7 +436,10 @@ async function searchUser() {
 // SEARCH RESULT
 // =====================================================
 
-function renderSearchResult(user) {
+function renderSearchResult(
+    user,
+    email
+) {
 
     const card =
         document.createElement(
@@ -372,23 +483,23 @@ function renderSearchResult(user) {
         "Memora user";
 
 
-    const email =
+    const emailElement =
         document.createElement(
             "span"
         );
 
 
-    email.className =
+    emailElement.className =
         "person-email";
 
 
-    email.textContent =
-        emailSearch.value.trim();
+    emailElement.textContent =
+        email;
 
 
     info.appendChild(name);
 
-    info.appendChild(email);
+    info.appendChild(emailElement);
 
 
     const action =
@@ -473,7 +584,6 @@ async function sendFriendRequest(
         button.textContent =
             "Sent";
 
-
         button.classList.remove(
             "primary"
         );
@@ -493,7 +603,6 @@ async function sendFriendRequest(
 
         button.disabled =
             false;
-
 
         button.textContent =
             "Add";
@@ -532,7 +641,9 @@ async function loadFriends() {
 
         friends = [];
 
+
         renderFriends();
+
 
         return;
 
@@ -572,7 +683,9 @@ async function loadRequests() {
 
         requests = [];
 
+
         renderRequests();
+
 
         return;
 
@@ -602,9 +715,7 @@ function renderRequests() {
         requests.length;
 
 
-    if (
-        requests.length === 0
-    ) {
+    if (!requests.length) {
 
         requestList.innerHTML = `
             <div class="empty-state">
@@ -619,7 +730,6 @@ function renderRequests() {
 
     requests.forEach(
         function(request) {
-
 
             const card =
                 document.createElement(
@@ -848,9 +958,7 @@ function renderFriends() {
         friends.length;
 
 
-    if (
-        friends.length === 0
-    ) {
+    if (!friends.length) {
 
         friendList.innerHTML = `
             <div class="empty-state">
@@ -865,7 +973,6 @@ function renderFriends() {
 
     friends.forEach(
         function(friend) {
-
 
             const card =
                 document.createElement(
@@ -923,13 +1030,9 @@ function renderFriends() {
                 "Friend";
 
 
-            info.appendChild(
-                name
-            );
+            info.appendChild(name);
 
-            info.appendChild(
-                label
-            );
+            info.appendChild(label);
 
 
             const action =
@@ -954,25 +1057,19 @@ function renderFriends() {
                 "click",
                 function() {
 
-                    alert(
-                        "Chat will be connected next."
+                    openConversation(
+                        friend
                     );
 
                 }
             );
 
 
-            card.appendChild(
-                avatar
-            );
+            card.appendChild(avatar);
 
-            card.appendChild(
-                info
-            );
+            card.appendChild(info);
 
-            card.appendChild(
-                action
-            );
+            card.appendChild(action);
 
 
             friendList.appendChild(
@@ -986,7 +1083,628 @@ function renderFriends() {
 
 
 // =====================================================
-// AVATAR
+// OPEN CONVERSATION
+// =====================================================
+
+async function openConversation(
+    friend
+) {
+
+    activeFriend =
+        friend;
+
+
+    conversationName.textContent =
+        friend.display_name ||
+        "Memora user";
+
+
+    conversationStatus.textContent =
+        "Private chat";
+
+
+    setConversationAvatar(
+        friend.display_name,
+        friend.avatar_url
+    );
+
+
+    friendsSection.style.display =
+        "none";
+
+
+    requestsSection.style.display =
+        "none";
+
+
+    friendsListSection.style.display =
+        "none";
+
+
+    conversationSection.style.display =
+        "flex";
+
+
+    history
+        .replaceState(
+            null,
+            "",
+            `chat.html?friend=${encodeURIComponent(friend.friend_id)}`
+        );
+
+
+    setMessagesLoading();
+
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.rpc(
+            "get_or_create_direct_chat",
+            {
+                other_user_id:
+                    friend.friend_id
+            }
+        );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        activeConversationId =
+            data;
+
+
+        await loadMessages();
+
+
+        subscribeToMessages();
+
+
+        messageInput.focus();
+
+
+    } catch (error) {
+
+        console.error(
+            "Open chat error:",
+            error
+        );
+
+
+        messageList.innerHTML = `
+            <div class="messages-empty">
+
+                <div class="empty-title">
+                    Unable to open chat
+                </div>
+
+                <div class="empty-text">
+                    ${escapeHtml(
+                        error.message ||
+                        "Please try again."
+                    )}
+                </div>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+// =====================================================
+// CONVERSATION BACK
+// =====================================================
+
+function setupConversationEvents() {
+
+    conversationSection.style.display =
+        "flex";
+
+
+    conversationBack.addEventListener(
+        "click",
+        closeConversation
+    );
+
+
+    messageForm.addEventListener(
+        "submit",
+        sendMessage
+    );
+
+
+    messageInput.addEventListener(
+        "input",
+        autoResizeMessageInput
+    );
+
+}
+
+
+function closeConversation() {
+
+    stopRealtime();
+
+
+    activeConversationId =
+        null;
+
+
+    activeFriend =
+        null;
+
+
+    friendsSection.style.display =
+        "";
+
+    requestsSection.style.display =
+        "";
+
+    friendsListSection.style.display =
+        "";
+
+
+    conversationSection.style.display =
+        "none";
+
+
+    history.replaceState(
+        null,
+        "",
+        "chat.html"
+    );
+
+
+    resetConversationUI();
+
+}
+
+
+function resetConversationUI() {
+
+    conversationName.textContent =
+        "Select a friend";
+
+
+    conversationStatus.textContent =
+        "Private chat";
+
+
+    setConversationAvatar(
+        "M",
+        null
+    );
+
+
+    messageList.innerHTML = `
+        <div class="messages-empty">
+
+            <div class="empty-icon">
+                ◇
+            </div>
+
+            <div class="empty-title">
+                Choose a friend
+            </div>
+
+            <div class="empty-text">
+                Select a friend above to start chatting.
+            </div>
+
+        </div>
+    `;
+
+
+    messageInput.value =
+        "";
+
+
+    autoResizeMessageInput();
+
+}
+
+
+// =====================================================
+// LOAD MESSAGES
+// =====================================================
+
+async function loadMessages() {
+
+    if (!activeConversationId) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("messages")
+        .select(
+            "id, conversation_id, sender_id, content, created_at"
+        )
+        .eq(
+            "conversation_id",
+            activeConversationId
+        )
+        .order(
+            "created_at",
+            {
+                ascending: true
+            }
+        );
+
+
+    if (error) {
+
+        throw error;
+
+    }
+
+
+    renderMessages(
+        data || []
+    );
+
+}
+
+
+// =====================================================
+// RENDER MESSAGES
+// =====================================================
+
+function renderMessages(
+    messages
+) {
+
+    messageList.innerHTML =
+        "";
+
+
+    if (!messages.length) {
+
+        messageList.innerHTML = `
+            <div class="messages-empty">
+
+                <div class="empty-icon">
+                    ◇
+                </div>
+
+                <div class="empty-title">
+                    No messages yet
+                </div>
+
+                <div class="empty-text">
+                    Start the conversation.
+                </div>
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    messages.forEach(
+        appendMessage
+    );
+
+
+    scrollMessagesToBottom();
+
+}
+
+
+// =====================================================
+// APPEND MESSAGE
+// =====================================================
+
+function appendMessage(
+    message
+) {
+
+    // Защищаемся от дублей Realtime.
+
+    if (
+        document.querySelector(
+            `[data-message-id="${message.id}"]`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+    row.className =
+        "message-bubble-row";
+
+
+    if (
+        message.sender_id ===
+        currentUser.id
+    ) {
+
+        row.classList.add(
+            "mine"
+        );
+
+    }
+
+
+    row.dataset.messageId =
+        message.id;
+
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+
+    bubble.className =
+        "message-bubble";
+
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+
+    text.className =
+        "message-text";
+
+
+    text.textContent =
+        message.content;
+
+
+    const time =
+        document.createElement(
+            "div"
+        );
+
+
+    time.className =
+        "message-time";
+
+
+    time.textContent =
+        formatTime(
+            message.created_at
+        );
+
+
+    bubble.appendChild(
+        text
+    );
+
+
+    bubble.appendChild(
+        time
+    );
+
+
+    row.appendChild(
+        bubble
+    );
+
+
+    messageList.appendChild(
+        row
+    );
+
+}
+
+
+// =====================================================
+// SEND MESSAGE
+// =====================================================
+
+async function sendMessage(
+    event
+) {
+
+    event.preventDefault();
+
+
+    if (
+        !activeConversationId ||
+        !currentUser
+    ) {
+
+        return;
+
+    }
+
+
+    const content =
+        messageInput.value.trim();
+
+
+    if (!content) {
+
+        return;
+
+    }
+
+
+    sendMessageButton.disabled =
+        true;
+
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("messages")
+            .insert({
+
+                conversation_id:
+                    activeConversationId,
+
+                sender_id:
+                    currentUser.id,
+
+                content:
+                    content
+
+            })
+            .select(
+                "id, conversation_id, sender_id, content, created_at"
+            )
+            .single();
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        messageInput.value =
+            "";
+
+
+        autoResizeMessageInput();
+
+
+        // Realtime обычно добавит его сам.
+        // Добавляем локально сразу,
+        // чтобы интерфейс ощущался мгновенным.
+
+        appendMessage(
+            data
+        );
+
+
+        scrollMessagesToBottom();
+
+
+    } catch (error) {
+
+        console.error(
+            "Send message error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to send message."
+        );
+
+    } finally {
+
+        sendMessageButton.disabled =
+            false;
+
+
+        messageInput.focus();
+
+    }
+
+}
+
+
+// =====================================================
+// REALTIME
+// =====================================================
+
+function subscribeToMessages() {
+
+    stopRealtime();
+
+
+    if (!activeConversationId) {
+
+        return;
+
+    }
+
+
+    realtimeChannel =
+        supabaseClient
+            .channel(
+                "conversation-" +
+                activeConversationId
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+
+                    schema: "public",
+
+                    table: "messages",
+
+                    filter:
+                        `conversation_id=eq.${activeConversationId}`
+                },
+                function(payload) {
+
+                    appendMessage(
+                        payload.new
+                    );
+
+
+                    scrollMessagesToBottom();
+
+                }
+            )
+            .subscribe();
+
+
+}
+
+
+// =====================================================
+// STOP REALTIME
+// =====================================================
+
+function stopRealtime() {
+
+    if (
+        realtimeChannel
+    ) {
+
+        supabaseClient.removeChannel(
+            realtimeChannel
+        );
+
+
+        realtimeChannel =
+            null;
+
+    }
+
+}
+
+
+// =====================================================
+// AVATARS
 // =====================================================
 
 function createAvatar(
@@ -1012,19 +1730,159 @@ function createAvatar(
     } else {
 
         avatar.textContent =
-            (
-                name ||
-                "M"
-            )
-            .trim()
-            .charAt(0)
-            .toUpperCase() ||
-            "M";
+            getInitial(
+                name
+            );
 
     }
 
 
     return avatar;
+
+}
+
+
+function setConversationAvatar(
+    name,
+    avatarUrl
+) {
+
+    if (avatarUrl) {
+
+        conversationAvatar.textContent =
+            "";
+
+
+        conversationAvatar.style.backgroundImage =
+            `url("${avatarUrl}")`;
+
+        return;
+
+    }
+
+
+    conversationAvatar.style.backgroundImage =
+        "";
+
+
+    conversationAvatar.textContent =
+        getInitial(
+            name
+        );
+
+}
+
+
+function getInitial(name) {
+
+    return (
+        String(
+            name ||
+            "M"
+        )
+        .trim()
+        .charAt(0)
+        .toUpperCase()
+        || "M"
+    );
+
+}
+
+
+// =====================================================
+// UI
+// =====================================================
+
+function setMessagesLoading() {
+
+    messageList.innerHTML = `
+        <div class="messages-empty">
+
+            <div class="empty-icon">
+                ◇
+            </div>
+
+            <div class="empty-title">
+                Loading chat...
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+function scrollMessagesToBottom() {
+
+    requestAnimationFrame(
+        function() {
+
+            messageList.scrollTop =
+                messageList.scrollHeight;
+
+        }
+    );
+
+}
+
+
+function autoResizeMessageInput() {
+
+    messageInput.style.height =
+        "auto";
+
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            130
+        ) + "px";
+
+}
+
+
+// =====================================================
+// TIME
+// =====================================================
+
+function formatTime(
+    dateString
+) {
+
+    const date =
+        new Date(
+            dateString
+        );
+
+
+    return date.toLocaleTimeString(
+        "ru-RU",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+// =====================================================
+// ESCAPE
+// =====================================================
+
+function escapeHtml(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
 
 }
 
