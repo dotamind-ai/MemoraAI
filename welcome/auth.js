@@ -1,59 +1,53 @@
-// ==================================================
-// MEMORA AUTH
-// LOCAL STORAGE
-// ==================================================
+// =====================================================
+// MEMORA AUTHENTICATION
+// welcome/auth.js
+// =====================================================
 
 
-const authTitle =
-    document.getElementById("authTitle");
+// Получаем элементы из welcome.html
+
+const authTitle = document.getElementById("authTitle");
+const authButton = document.getElementById("authButton");
+const switchButton = document.getElementById("switchButton");
+
+const loginInput = document.getElementById("loginInput");
+const passwordInput = document.getElementById("passwordInput");
+
+const authMessage = document.getElementById("authMessage");
 
 
-const authButton =
-    document.getElementById("authButton");
-
-
-const switchButton =
-    document.getElementById("switchButton");
-
-
-const loginInput =
-    document.getElementById("loginInput");
-
-
-const passwordInput =
-    document.getElementById("passwordInput");
-
-
-const authMessage =
-    document.getElementById("authMessage");
-
-
+// Текущий режим:
+// login     = вход
+// register  = регистрация
 
 let mode = "login";
 
 
 
-// ==================================================
-// SWITCH LOGIN / REGISTER
-// ==================================================
+// =====================================================
+// ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ
+// =====================================================
+
+function showMessage(text) {
+
+    authMessage.textContent = text;
+
+}
 
 
-switchButton.addEventListener("click", function(){
 
-    mode =
-        mode === "login"
-        ? "register"
-        : "login";
+// =====================================================
+// ПЕРЕКЛЮЧЕНИЕ ВХОД / РЕГИСТРАЦИЯ
+// =====================================================
 
-
-    loginInput.value = "";
-
-    passwordInput.value = "";
-
-    authMessage.textContent = "";
+switchButton.addEventListener("click", function () {
 
 
-    if(mode === "register"){
+    if (mode === "login") {
+
+
+        mode = "register";
+
 
         authTitle.textContent =
             "Create account";
@@ -66,12 +60,12 @@ switchButton.addEventListener("click", function(){
         switchButton.textContent =
             "Already have an account";
 
-        passwordInput.autocomplete =
-            "new-password";
 
-    }
+    } else {
 
-    else{
+
+        mode = "login";
+
 
         authTitle.textContent =
             "Welcome back";
@@ -84,21 +78,28 @@ switchButton.addEventListener("click", function(){
         switchButton.textContent =
             "Create account";
 
-        passwordInput.autocomplete =
-            "current-password";
-
     }
+
+
+
+    // очищаем поля
+
+    loginInput.value = "";
+
+    passwordInput.value = "";
+
+    showMessage("");
 
 });
 
 
 
-// ==================================================
-// MAIN BUTTON
-// ==================================================
+// =====================================================
+// ОСНОВНАЯ КНОПКА
+// =====================================================
 
+authButton.addEventListener("click", function () {
 
-authButton.addEventListener("click", function(){
 
     const login =
         loginInput.value.trim();
@@ -108,10 +109,16 @@ authButton.addEventListener("click", function(){
         passwordInput.value;
 
 
-    if(!login || !password){
 
-        authMessage.textContent =
-            "Enter login and password";
+    // Проверяем поля
+
+    if (login === "" || password === "") {
+
+
+        showMessage(
+            "Enter login and password"
+        );
+
 
         return;
 
@@ -119,66 +126,110 @@ authButton.addEventListener("click", function(){
 
 
 
-    // ==============================================
-    // REGISTER
-    // ==============================================
+    // =================================================
+    // РЕГИСТРАЦИЯ
+    // =================================================
+
+    if (mode === "register") {
 
 
-    if(mode === "register"){
+        // Проверяем, существует ли пользователь
 
-        const saved =
+        const savedUser =
             localStorage.getItem("memoraUser");
 
 
-        if(saved){
 
-            const existing =
-                JSON.parse(saved);
+        if (savedUser) {
 
 
-            if(existing.login === login){
+            try {
 
-                authMessage.textContent =
-                    "This login is already registered";
 
-                return;
+                const existingUser =
+                    JSON.parse(savedUser);
+
+
+
+                if (existingUser.login === login) {
+
+
+                    showMessage(
+                        "This login is already registered"
+                    );
+
+
+                    return;
+
+                }
+
+
+            } catch (error) {
+
+
+                localStorage.removeItem(
+                    "memoraUser"
+                );
 
             }
 
         }
 
 
+
+        // Создаём пользователя
+
         const user = {
 
-            login:login,
+            login: login,
 
-            password:password
+            password: password
 
         };
 
 
+
+        // Сохраняем данные
+
         localStorage.setItem(
+
             "memoraUser",
+
             JSON.stringify(user)
+
         );
 
+
+
+        // Ставим флаг авторизации
 
         localStorage.setItem(
+
             "memoraAuth",
+
             "true"
+
         );
 
 
-        authMessage.textContent =
-            "Account created";
+
+        showMessage(
+            "Account created"
+        );
 
 
-        setTimeout(function(){
+
+        // Переходим на основную Memora
+
+        setTimeout(function () {
+
 
             window.location.href =
                 "../index.html";
 
-        },500);
+
+        }, 500);
+
 
 
         return;
@@ -187,59 +238,131 @@ authButton.addEventListener("click", function(){
 
 
 
-    // ==============================================
-    // LOGIN
-    // ==============================================
+    // =================================================
+    // ВХОД
+    // =================================================
 
-
-    const saved =
+    const savedUser =
         localStorage.getItem("memoraUser");
 
 
-    if(!saved){
 
-        authMessage.textContent =
-            "Create an account first";
+    // Если аккаунта нет
+
+    if (!savedUser) {
+
+
+        showMessage(
+            "Create an account first"
+        );
+
 
         return;
 
     }
 
 
-    const user =
-        JSON.parse(saved);
+
+    let user;
 
 
-    if(
-        user.login === login &&
-        user.password === password
-    ){
 
-        localStorage.setItem(
-            "memoraAuth",
-            "true"
+    try {
+
+
+        user =
+            JSON.parse(savedUser);
+
+
+    } catch (error) {
+
+
+        showMessage(
+            "Account data is corrupted"
         );
 
 
-        authMessage.textContent =
-            "Login successful";
+        localStorage.removeItem(
+            "memoraUser"
+        );
 
 
-        setTimeout(function(){
+        return;
+
+    }
+
+
+
+    // Проверяем логин и пароль
+
+    if (
+
+        user.login === login &&
+
+        user.password === password
+
+    ) {
+
+
+        // Авторизация успешна
+
+        localStorage.setItem(
+
+            "memoraAuth",
+
+            "true"
+
+        );
+
+
+
+        showMessage(
+            "Login successful"
+        );
+
+
+
+        // Переходим из /welcome/
+        // обратно в корневой index.html
+
+        setTimeout(function () {
+
 
             window.location.href =
                 "../index.html";
 
-        },300);
+
+        }, 300);
 
 
-    }
 
-    else{
+    } else {
 
-        authMessage.textContent =
-            "Wrong login or password";
+
+        showMessage(
+            "Wrong login or password"
+        );
+
 
     }
 
 });
+
+
+
+// =====================================================
+// ENTER НА КЛАВИАТУРЕ
+// =====================================================
+
+passwordInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            authButton.click();
+
+        }
+
+    }
+);
