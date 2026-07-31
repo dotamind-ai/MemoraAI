@@ -3,17 +3,19 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
+    <title>Memora — Calendar</title>
 
-<title>Memora Calendar</title>
-
-
-<link rel="stylesheet" href="calendar.css?v=40">
-
-
+    <link
+        rel="stylesheet"
+        href="calendar.css"
+    >
 
 </head>
 
@@ -21,253 +23,314 @@
 <body class="calendar-page">
 
 
+    <!-- =========================================
+            BACKGROUND
+    ========================================== -->
 
+    <div class="calendar-background">
 
+        <div class="calendar-glow glow-one"></div>
 
-<!-- MEMORA LOGO -->
+        <div class="calendar-glow glow-two"></div>
 
-<div class="memora-logo">
+        <div class="calendar-grid"></div>
 
+    </div>
 
-<div class="orbit orbit1">
-<span></span>
-</div>
 
 
-<div class="orbit orbit2">
-<span></span>
-</div>
+    <!-- =========================================
+            MAIN
+    ========================================== -->
 
+    <main class="calendar-container">
 
-<div class="orbit orbit3">
-<span></span>
-</div>
 
+        <!-- =====================================
+                HEADER
+        ====================================== -->
 
+        <header class="calendar-header">
 
-<div class="sun-logo">
 
-<b>M</b>
+            <button
+                id="backButton"
+                class="icon-button"
+                type="button"
+                aria-label="Back"
+            >
 
-</div>
+                ←
 
+            </button>
 
-</div>
 
+            <div class="calendar-title">
 
+                <span>CALENDAR</span>
 
+                <small>YOUR MEMORY DATES</small>
 
+            </div>
 
 
+            <button
+                id="todayButton"
+                class="today-button"
+                type="button"
+            >
 
+                Today
 
+            </button>
 
-<!-- CALENDAR -->
 
-<div class="calendar-container">
+        </header>
 
 
 
-<h1>
+        <!-- =====================================
+                MONTH CONTROLS
+        ====================================== -->
 
-Calendar
+        <section class="month-controls">
 
-</h1>
 
+            <button
+                id="previousMonth"
+                class="month-arrow"
+                type="button"
+                aria-label="Previous month"
+            >
 
-<p class="calendar-subtitle">
+                ‹
 
-Your memories timeline
+            </button>
 
-</p>
 
+            <div class="month-title">
 
+                <h1 id="monthName">
+                    Loading...
+                </h1>
 
+                <span id="memoryMonthCount">
+                    0 memories
+                </span>
 
+            </div>
 
-<div class="calendar-header">
 
+            <button
+                id="nextMonth"
+                class="month-arrow"
+                type="button"
+                aria-label="Next month"
+            >
 
-<button id="prevMonth">
+                ›
 
-‹
+            </button>
 
-</button>
 
+        </section>
 
 
 
-<h2 id="monthTitle">
+        <!-- =====================================
+                WEEK DAYS
+        ====================================== -->
 
-</h2>
+        <section class="calendar-card">
 
 
+            <div class="weekdays">
 
+                <span>MON</span>
+                <span>TUE</span>
+                <span>WED</span>
+                <span>THU</span>
+                <span>FRI</span>
+                <span>SAT</span>
+                <span>SUN</span>
 
-<button id="nextMonth">
+            </div>
 
-›
 
-</button>
+            <div
+                id="calendarGrid"
+                class="calendar-grid-days"
+            >
 
+            </div>
 
 
-</div>
+        </section>
 
 
 
+        <!-- =====================================
+                SELECTED DAY
+        ====================================== -->
 
+        <section
+            id="dayPanel"
+            class="day-panel"
+        >
 
 
+            <div class="day-panel-header">
 
 
-<div class="week">
+                <div>
 
+                    <span class="section-kicker">
+                        SELECTED DAY
+                    </span>
 
-<div>Mon</div>
 
-<div>Tue</div>
+                    <h2 id="selectedDate">
+                        Choose a day
+                    </h2>
 
-<div>Wed</div>
+                </div>
 
-<div>Thu</div>
 
-<div>Fri</div>
+                <span
+                    id="selectedCount"
+                    class="selected-count"
+                >
+                    0
+                </span>
 
-<div>Sat</div>
 
-<div>Sun</div>
+            </div>
 
 
-</div>
 
+            <div
+                id="dayMemories"
+                class="day-memories"
+            >
 
+                <div class="day-empty">
 
+                    <div class="empty-icon">
+                        ◇
+                    </div>
 
+                    <div class="empty-title">
+                        Choose a date
+                    </div>
 
+                    <div class="empty-text">
+                        Select a day in the calendar to see your memories.
+                    </div>
 
-<div 
-id="calendarGrid"
-class="calendar-grid">
+                </div>
 
-</div>
+            </div>
 
 
+        </section>
 
 
+    </main>
 
 
-</div>
 
+    <!-- =========================================
+            BOTTOM NAVIGATION
+    ========================================== -->
 
+    <nav class="bottom-nav">
 
 
+        <button
+            class="nav-item"
+            id="homeNav"
+            type="button"
+        >
 
+            <span class="nav-icon">
+                ◉
+            </span>
 
+            <small>
+                Memories
+            </small>
 
+        </button>
 
 
-<!-- NAVIGATION -->
 
-<nav class="bottom-nav">
+        <button
+            class="nav-item active"
+            id="calendarNav"
+            type="button"
+        >
 
+            <span class="nav-icon">
+                ◫
+            </span>
 
-<button 
-class="nav-item"
-onclick="goHome()">
+            <small>
+                Calendar
+            </small>
 
+        </button>
 
 
-<img 
-src="icons/memories.svg"
-class="nav-icon">
 
+        <button
+            class="nav-item"
+            id="timelineNav"
+            type="button"
+        >
 
-<small>
-Memories
-</small>
+            <span class="nav-icon">
+                ◇
+            </span>
 
+            <small>
+                Timeline
+            </small>
 
-</button>
+        </button>
 
 
 
+        <button
+            class="nav-item"
+            id="profileNav"
+            type="button"
+        >
 
+            <span class="nav-icon">
+                ●
+            </span>
 
-<button 
-class="nav-item active"
-onclick="goCalendar()">
+            <small>
+                Profile
+            </small>
 
+        </button>
 
 
-<img 
-src="icons/calendar.svg"
-class="nav-icon">
+    </nav>
 
 
-<small>
-Calendar
-</small>
 
+    <!-- =========================================
+            SUPABASE
+    ========================================== -->
 
-</button>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
 
-
-
-
-<button 
-class="nav-item"
-onclick="goEvents()">
-
-
-
-<img 
-src="icons/events.svg"
-class="nav-icon">
-
-
-<small>
-Events
-</small>
-
-
-</button>
-
-
-
-
-
-<button 
-class="nav-item"
-onclick="goProfile()">
-
-
-
-<img 
-src="icons/profile.svg"
-class="nav-icon">
-
-
-<small>
-Profile
-</small>
-
-
-</button>
-
-
-
-</nav>
-
-
-
-
-
-
-
-
-<script src="calendar.js?v=101"></script>
+    <script src="calendar.js"></script>
 
 
 </body>
