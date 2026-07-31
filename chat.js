@@ -60,14 +60,8 @@ const closeAddFriendPanel =
         "closeAddFriendPanel"
     );
 
-const requestList =
-    document.getElementById("requestList");
-
 const friendList =
     document.getElementById("friendList");
-
-const requestCount =
-    document.getElementById("requestCount");
 
 const friendCount =
     document.getElementById("friendCount");
@@ -78,7 +72,9 @@ const chatSearchInput =
     );
 
 const profileButton =
-    document.getElementById("profileButton");
+    document.getElementById(
+        "profileButton"
+    );
 
 const myAvatar =
     document.getElementById("myAvatar");
@@ -133,11 +129,6 @@ const sendMessageButton =
         "sendMessageButton"
     );
 
-const backButton =
-    document.getElementById(
-        "backButton"
-    );
-
 const homeNav =
     document.getElementById(
         "homeNav"
@@ -151,11 +142,6 @@ const calendarNav =
 const timelineNav =
     document.getElementById(
         "timelineNav"
-    );
-
-const chatSearch =
-    document.getElementById(
-        "chatSearchInput"
     );
 
 
@@ -299,25 +285,11 @@ function setupNavigation() {
             function(event) {
 
                 event.preventDefault();
+
                 event.stopPropagation();
 
                 window.location.href =
                     "profile.html";
-
-            }
-        );
-
-    }
-
-
-    if (backButton) {
-
-        backButton.addEventListener(
-            "click",
-            function() {
-
-                window.location.href =
-                    "index.html";
 
             }
         );
@@ -405,7 +377,10 @@ function setupPanels() {
             addFriendPanel.hidden =
                 !addFriendPanel.hidden;
 
-            if (!addFriendPanel.hidden) {
+
+            if (
+                !addFriendPanel.hidden
+            ) {
 
                 emailSearch.focus();
 
@@ -498,7 +473,7 @@ function closeAddFriend() {
 
 
 // =====================================================
-// PROFILE
+// MY PROFILE
 // =====================================================
 
 async function loadMyProfile() {
@@ -536,18 +511,21 @@ async function loadMyProfile() {
 
 
     setMyAvatar(
+
         data?.display_name ||
         currentUser.email ||
         "M",
+
         data?.avatar_url ||
         null
+
     );
 
 }
 
 
 // =====================================================
-// SEARCH FRIEND
+// SEARCH
 // =====================================================
 
 function setupSearch() {
@@ -576,12 +554,12 @@ function setupSearch() {
     );
 
 
-    chatSearch.addEventListener(
+    chatSearchInput.addEventListener(
         "input",
         function() {
 
             currentChatSearch =
-                chatSearch.value
+                chatSearchInput.value
                     .trim()
                     .toLowerCase();
 
@@ -628,6 +606,7 @@ async function searchUser() {
 
     searchButton.disabled =
         true;
+
 
     searchButton.textContent =
         "...";
@@ -679,6 +658,7 @@ async function searchUser() {
             "Search error:",
             error
         );
+
 
         searchMessage.textContent =
             error.message ||
@@ -796,14 +776,22 @@ function renderSearchResult(
     );
 
 
-    card.appendChild(avatar);
+    card.appendChild(
+        avatar
+    );
 
-    card.appendChild(info);
+    card.appendChild(
+        info
+    );
 
-    card.appendChild(action);
+    card.appendChild(
+        action
+    );
 
 
-    searchResult.appendChild(card);
+    searchResult.appendChild(
+        card
+    );
 
 }
 
@@ -930,7 +918,9 @@ function renderFriends() {
         friends.filter(
             function(friend) {
 
-                if (!currentChatSearch) {
+                if (
+                    !currentChatSearch
+                ) {
 
                     return true;
 
@@ -1032,9 +1022,13 @@ function renderFriends() {
                 "Start a conversation";
 
 
-            info.appendChild(name);
+            info.appendChild(
+                name
+            );
 
-            info.appendChild(label);
+            info.appendChild(
+                label
+            );
 
 
             const action =
@@ -1071,11 +1065,9 @@ function renderFriends() {
                 avatar
             );
 
-
             card.appendChild(
                 info
             );
-
 
             card.appendChild(
                 action
@@ -1141,24 +1133,12 @@ function renderNotifications() {
         requests.length;
 
 
-    if (notificationBadge) {
-
-        notificationBadge.textContent =
-            count;
+    notificationBadge.textContent =
+        count;
 
 
-        notificationBadge.hidden =
-            count === 0;
-
-    }
-
-
-    if (requestCount) {
-
-        requestCount.textContent =
-            count;
-
-    }
+    notificationBadge.hidden =
+        count === 0;
 
 
     notificationList.innerHTML =
@@ -1249,9 +1229,13 @@ function renderNotifications() {
                 "Wants to connect with you.";
 
 
-            info.appendChild(name);
+            info.appendChild(
+                name
+            );
 
-            info.appendChild(text);
+            info.appendChild(
+                text
+            );
 
 
             const actions =
@@ -1404,7 +1388,7 @@ async function respondToRequest(
     } catch (error) {
 
         console.error(
-            "Friend request update error:",
+            "Request update error:",
             error
         );
 
@@ -1510,7 +1494,6 @@ async function openConversation(
 
         await loadMessages();
 
-
         subscribeToMessages();
 
 
@@ -1597,18 +1580,14 @@ async function loadMessages() {
         data,
         error
     } = await supabaseClient
-
         .from("messages")
-
         .select(
             "id, conversation_id, sender_id, content, created_at"
         )
-
         .eq(
             "conversation_id",
             activeConversationId
         )
-
         .order(
             "created_at",
             {
@@ -1778,7 +1757,7 @@ function appendMessage(
 
 
 // =====================================================
-// SEND
+// SEND MESSAGE
 // =====================================================
 
 async function sendMessage(
@@ -1903,12 +1882,10 @@ function subscribeToMessages() {
 
     realtimeChannel =
         supabaseClient
-
             .channel(
                 "conversation-" +
                 activeConversationId
             )
-
             .on(
                 "postgres_changes",
                 {
@@ -1933,7 +1910,6 @@ function subscribeToMessages() {
 
                 }
             )
-
             .subscribe();
 
 }
@@ -2126,9 +2102,7 @@ function scrollMessagesToBottom() {
     requestAnimationFrame(
         function() {
 
-            if (
-                messageList
-            ) {
+            if (messageList) {
 
                 messageList.scrollTop =
                     messageList.scrollHeight;
@@ -2158,7 +2132,8 @@ function autoResizeMessageInput() {
         Math.min(
             messageInput.scrollHeight,
             125
-        ) + "px";
+        ) +
+        "px";
 
 }
 
