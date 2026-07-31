@@ -5,25 +5,19 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Memora</title>
 
-<link rel="stylesheet" href="style.css">
 
+<link
+    rel="stylesheet"
+    href="style.css"
+>
 
-<script>
-
-    // Проверяем авторизацию
-
-    if (localStorage.getItem("memoraAuth") !== "true") {
-
-        window.location.href =
-            "welcome/welcome.html";
-
-    }
-
-</script>
 
 </head>
 
@@ -82,6 +76,7 @@
             Memora
         </h1>
 
+
         <p>
             Your memory space
         </p>
@@ -90,6 +85,8 @@
 
 
 </header>
+
+
 
 
 
@@ -110,10 +107,12 @@
     </p>
 
 
+
     <textarea
         id="memoryInput"
         placeholder="Write your thought..."
     ></textarea>
+
 
 
     <div class="memory-types">
@@ -128,6 +127,7 @@
         </button>
 
 
+
         <button
             class="type-btn"
             data-type="note"
@@ -137,6 +137,7 @@
         </button>
 
 
+
         <button
             class="type-btn"
             data-type="inspiration"
@@ -144,6 +145,7 @@
         >
             INSPIRATION
         </button>
+
 
 
         <button
@@ -158,6 +160,7 @@
     </div>
 
 
+
     <button
         id="saveMemory"
         class="save-button"
@@ -168,6 +171,8 @@
 
 
 </section>
+
+
 
 
 
@@ -194,6 +199,7 @@
     </div>
 
 
+
     <div id="memoryList"></div>
 
 
@@ -201,6 +207,8 @@
 
 
 </div>
+
+
 
 
 
@@ -217,7 +225,10 @@
         type="button"
     >
 
-        <img src="icons/memories.svg">
+        <img
+            src="icons/memories.svg"
+            alt="Memories"
+        >
 
         <small>
             Memories
@@ -227,13 +238,17 @@
 
 
 
+
     <button
         class="nav-item"
         onclick="goCalendar()"
         type="button"
     >
 
-        <img src="icons/calendar.svg">
+        <img
+            src="icons/calendar.svg"
+            alt="Calendar"
+        >
 
         <small>
             Calendar
@@ -243,13 +258,17 @@
 
 
 
+
     <button
         class="nav-item"
         onclick="goEvents()"
         type="button"
     >
 
-        <img src="icons/events.svg">
+        <img
+            src="icons/events.svg"
+            alt="Events"
+        >
 
         <small>
             Events
@@ -259,13 +278,17 @@
 
 
 
+
     <button
         class="nav-item"
         onclick="goProfile()"
         type="button"
     >
 
-        <img src="icons/profile.svg">
+        <img
+            src="icons/profile.svg"
+            alt="Profile"
+        >
 
         <small>
             Profile
@@ -277,6 +300,22 @@
 </nav>
 
 
+
+
+
+<!-- =====================================
+        SUPABASE
+===================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+
+<!-- =====================================
+        APP
+===================================== -->
 
 <script src="app.js"></script>
 
