@@ -1,6 +1,6 @@
 // =====================================================
 // MEMORA CHAT
-// FRIENDS + DIRECT MESSAGES + REALTIME
+// Friends + Direct Messages + Realtime
 // =====================================================
 
 const SUPABASE_URL =
@@ -8,7 +8,6 @@ const SUPABASE_URL =
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -99,20 +98,15 @@ const sendMessageButton =
 // =====================================================
 
 let currentUser = null;
-
 let friends = [];
-
 let requests = [];
-
 let activeFriend = null;
-
 let activeConversationId = null;
-
 let realtimeChannel = null;
 
 
 // =====================================================
-// INIT
+// INITIALIZATION
 // =====================================================
 
 document.addEventListener(
@@ -124,9 +118,6 @@ document.addEventListener(
 async function initializeChats() {
 
     try {
-
-        // Сначала берём готовую сессию.
-        // Это стабильнее для GitHub Pages.
 
         const {
             data,
@@ -141,26 +132,16 @@ async function initializeChats() {
                 error
             );
 
-            showFatalError(
-                "Unable to connect to account."
-            );
-
             return;
-
         }
 
 
         if (!data.session) {
 
-            // Не делаем мгновенный redirect.
-            // Просто показываем сообщение.
-
-            showFatalError(
-                "Your session has expired. Please log in again."
-            );
+            window.location.href =
+                "welcome/welcome.html";
 
             return;
-
         }
 
 
@@ -169,20 +150,16 @@ async function initializeChats() {
 
 
         setupNavigation();
-
         setupSearch();
-
-        setupConversation();
-
+        setupConversationEvents();
 
         await loadMyProfile();
-
         await loadFriends();
-
         await loadRequests();
 
 
-        // Проверяем URL.
+        // Open chat from URL:
+        // chat.html?friend=USER_ID
 
         const params =
             new URLSearchParams(
@@ -227,135 +204,6 @@ async function initializeChats() {
             error
         );
 
-        showFatalError(
-            "Unable to open Chats."
-        );
-
-    }
-
-}
-
-
-// =====================================================
-// FATAL ERROR
-// =====================================================
-
-function showFatalError(
-    message
-) {
-
-    if (!document.body) {
-        return;
-    }
-
-
-    const box =
-        document.createElement(
-            "div"
-        );
-
-
-    box.style.position =
-        "fixed";
-
-
-    box.style.inset =
-        "20px";
-
-
-    box.style.display =
-        "flex";
-
-
-    box.style.alignItems =
-        "center";
-
-
-    box.style.justifyContent =
-        "center";
-
-
-    box.style.textAlign =
-        "center";
-
-
-    box.style.padding =
-        "30px";
-
-
-    box.style.color =
-        "white";
-
-
-    box.style.zIndex =
-        "9999";
-
-
-    box.innerHTML = `
-        <div>
-
-            <div
-                style="
-                    font-size:18px;
-                    font-weight:700;
-                    margin-bottom:10px;
-                "
-            >
-                Memora Chats
-            </div>
-
-            <div
-                style="
-                    color:rgba(255,255,255,.45);
-                    font-size:12px;
-                    margin-bottom:20px;
-                "
-            >
-                ${escapeHtml(message)}
-            </div>
-
-            <button
-                id="chatLoginButton"
-                style="
-                    border:0;
-                    border-radius:14px;
-                    padding:12px 18px;
-                    background:white;
-                    color:#101014;
-                    font-weight:700;
-                    cursor:pointer;
-                "
-            >
-                Open login
-            </button>
-
-        </div>
-    `;
-
-
-    document.body.appendChild(
-        box
-    );
-
-
-    const loginButton =
-        document.getElementById(
-            "chatLoginButton"
-        );
-
-
-    if (loginButton) {
-
-        loginButton.addEventListener(
-            "click",
-            function() {
-
-                window.location.href =
-                    "welcome/welcome.html";
-
-            }
-        );
-
     }
 
 }
@@ -367,60 +215,160 @@ function showFatalError(
 
 function setupNavigation() {
 
+    if (backButton) {
 
-    backButton.addEventListener(
-        "click",
-        function() {
+        backButton.addEventListener(
+            "click",
+            function() {
 
-            window.location.href =
-                "index.html";
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+    }
+
+
+    if (profileButton) {
+
+        profileButton.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                window.location.href =
+                    "profile.html";
+
+            }
+        );
+
+    }
+
+
+    if (homeNav) {
+
+        homeNav.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+    }
+
+
+    if (calendarNav) {
+
+        calendarNav.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "calendar.html";
+
+            }
+        );
+
+    }
+
+
+    if (timelineNav) {
+
+        timelineNav.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "events.html";
+
+            }
+        );
+
+    }
+
+
+    supabaseClient.auth.onAuthStateChange(
+        function(event) {
+
+            if (
+                event === "SIGNED_OUT"
+            ) {
+
+                window.location.href =
+                    "welcome/welcome.html";
+
+            }
 
         }
     );
 
-
-    profileButton.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "profile.html";
-
-        }
-    );
+}
 
 
-    homeNav.addEventListener(
-        "click",
-        function() {
+// =====================================================
+// MY PROFILE
+// =====================================================
 
-            window.location.href =
-                "index.html";
+async function loadMyProfile() {
 
-        }
-    );
-
-
-    calendarNav.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "calendar.html";
-
-        }
-    );
+    if (!currentUser) {
+        return;
+    }
 
 
-    timelineNav.addEventListener(
-        "click",
-        function() {
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("profiles")
+        .select(
+            "display_name, avatar_url"
+        )
+        .eq(
+            "id",
+            currentUser.id
+        )
+        .maybeSingle();
 
-            window.location.href =
-                "events.html";
 
-        }
-    );
+    if (error) {
+
+        console.error(
+            "Profile load error:",
+            error
+        );
+
+        setMyAvatar(
+            currentUser.email,
+            null
+        );
+
+        return;
+    }
+
+
+    if (data) {
+
+        setMyAvatar(
+            data.display_name ||
+            currentUser.email,
+            data.avatar_url
+        );
+
+    } else {
+
+        setMyAvatar(
+            currentUser.email,
+            null
+        );
+
+    }
 
 }
 
@@ -431,6 +379,10 @@ function setupNavigation() {
 
 function setupSearch() {
 
+    if (!searchButton) {
+        return;
+    }
+
 
     searchButton.addEventListener(
         "click",
@@ -438,22 +390,26 @@ function setupSearch() {
     );
 
 
-    emailSearch.addEventListener(
-        "keydown",
-        function(event) {
+    if (emailSearch) {
 
-            if (
-                event.key === "Enter"
-            ) {
+        emailSearch.addEventListener(
+            "keydown",
+            function(event) {
 
-                event.preventDefault();
+                if (
+                    event.key === "Enter"
+                ) {
 
-                searchUser();
+                    event.preventDefault();
+
+                    searchUser();
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 }
 
@@ -477,7 +433,6 @@ async function searchUser() {
             "Enter an email address.";
 
         return;
-
     }
 
 
@@ -487,7 +442,6 @@ async function searchUser() {
             "Enter a valid email address.";
 
         return;
-
     }
 
 
@@ -513,9 +467,7 @@ async function searchUser() {
 
 
         if (error) {
-
             throw error;
-
         }
 
 
@@ -528,7 +480,6 @@ async function searchUser() {
                 "User not found.";
 
             return;
-
         }
 
 
@@ -544,7 +495,6 @@ async function searchUser() {
             "Search error:",
             error
         );
-
 
         searchMessage.textContent =
             error.message ||
@@ -629,10 +579,7 @@ function renderSearchResult(
 
 
     info.appendChild(name);
-
-    info.appendChild(
-        emailElement
-    );
+    info.appendChild(emailElement);
 
 
     const action =
@@ -667,9 +614,7 @@ function renderSearchResult(
 
 
     card.appendChild(avatar);
-
     card.appendChild(info);
-
     card.appendChild(action);
 
 
@@ -679,7 +624,7 @@ function renderSearchResult(
 
 
 // =====================================================
-// SEND FRIEND REQUEST
+// FRIEND REQUEST
 // =====================================================
 
 async function sendFriendRequest(
@@ -708,14 +653,13 @@ async function sendFriendRequest(
 
 
         if (error) {
-
             throw error;
-
         }
 
 
         button.textContent =
             "Sent";
+
 
         button.classList.remove(
             "primary"
@@ -751,66 +695,6 @@ async function sendFriendRequest(
 
 
 // =====================================================
-// MY PROFILE
-// =====================================================
-
-async function loadMyProfile() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from("profiles")
-
-        .select(
-            "display_name, avatar_url"
-        )
-
-        .eq(
-            "id",
-            currentUser.id
-        )
-
-        .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "My profile error:",
-            error
-        );
-
-
-        setMyAvatar(
-            currentUser.email,
-            null
-        );
-
-
-        return;
-
-    }
-
-
-    setMyAvatar(
-
-        data
-            ? data.display_name ||
-              currentUser.email
-            : currentUser.email,
-
-        data
-            ? data.avatar_url
-            : null
-
-    );
-
-}
-
-
-// =====================================================
 // FRIENDS
 // =====================================================
 
@@ -837,7 +721,6 @@ async function loadFriends() {
         renderFriends();
 
         return;
-
     }
 
 
@@ -852,12 +735,21 @@ async function loadFriends() {
 
 function renderFriends() {
 
+    if (!friendList) {
+        return;
+    }
+
+
     friendList.innerHTML =
         "";
 
 
-    friendCount.textContent =
-        friends.length;
+    if (friendCount) {
+
+        friendCount.textContent =
+            friends.length;
+
+    }
 
 
     if (!friends.length) {
@@ -869,7 +761,6 @@ function renderFriends() {
         `;
 
         return;
-
     }
 
 
@@ -933,7 +824,6 @@ function renderFriends() {
 
 
             info.appendChild(name);
-
             info.appendChild(label);
 
 
@@ -957,7 +847,9 @@ function renderFriends() {
 
             action.addEventListener(
                 "click",
-                function() {
+                function(event) {
+
+                    event.preventDefault();
 
                     openConversation(
                         friend
@@ -968,9 +860,7 @@ function renderFriends() {
 
 
             card.appendChild(avatar);
-
             card.appendChild(info);
-
             card.appendChild(action);
 
 
@@ -1009,7 +899,6 @@ async function loadRequests() {
         renderRequests();
 
         return;
-
     }
 
 
@@ -1024,12 +913,21 @@ async function loadRequests() {
 
 function renderRequests() {
 
+    if (!requestList) {
+        return;
+    }
+
+
     requestList.innerHTML =
         "";
 
 
-    requestCount.textContent =
-        requests.length;
+    if (requestCount) {
+
+        requestCount.textContent =
+            requests.length;
+
+    }
 
 
     if (!requests.length) {
@@ -1041,7 +939,6 @@ function renderRequests() {
         `;
 
         return;
-
     }
 
 
@@ -1101,7 +998,6 @@ function renderRequests() {
 
             actions.style.display =
                 "flex";
-
 
             actions.style.gap =
                 "6px";
@@ -1170,14 +1066,11 @@ function renderRequests() {
 
 
             actions.appendChild(accept);
-
             actions.appendChild(reject);
 
 
             card.appendChild(avatar);
-
             card.appendChild(info);
-
             card.appendChild(actions);
 
 
@@ -1190,7 +1083,7 @@ function renderRequests() {
 
 
 // =====================================================
-// REQUEST RESPONSE
+// ACCEPT / REJECT
 // =====================================================
 
 async function respondToRequest(
@@ -1218,9 +1111,7 @@ async function respondToRequest(
 
 
         if (error) {
-
             throw error;
-
         }
 
 
@@ -1248,46 +1139,79 @@ async function respondToRequest(
 
 
 // =====================================================
-// CONVERSATION
+// CONVERSATION EVENTS
 // =====================================================
 
-function setupConversation() {
+function setupConversationEvents() {
 
-    conversationBack.addEventListener(
-        "click",
-        closeConversation
-    );
+    if (conversationBack) {
 
+        conversationBack.addEventListener(
+            "click",
+            closeConversation
+        );
 
-    messageForm.addEventListener(
-        "submit",
-        sendMessage
-    );
+    }
 
 
-    messageInput.addEventListener(
-        "input",
-        autoResizeInput
-    );
+    if (messageForm) {
+
+        messageForm.addEventListener(
+            "submit",
+            sendMessage
+        );
+
+    }
+
+
+    if (messageInput) {
+
+        messageInput.addEventListener(
+            "input",
+            autoResizeMessageInput
+        );
+
+    }
 
 }
 
+
+// =====================================================
+// OPEN CONVERSATION
+// =====================================================
 
 async function openConversation(
     friend
 ) {
 
+    if (
+        !friend ||
+        !friend.friend_id
+    ) {
+
+        return;
+    }
+
+
     activeFriend =
         friend;
 
 
-    conversationName.textContent =
-        friend.display_name ||
-        "Memora user";
+    if (conversationName) {
+
+        conversationName.textContent =
+            friend.display_name ||
+            "Memora user";
+
+    }
 
 
-    conversationStatus.textContent =
-        "Private conversation";
+    if (conversationStatus) {
+
+        conversationStatus.textContent =
+            "Private conversation";
+
+    }
 
 
     setConversationAvatar(
@@ -1296,18 +1220,33 @@ async function openConversation(
     );
 
 
-    friendsView.style.display =
-        "none";
+    if (friendsView) {
+
+        friendsView.style.display =
+            "none";
+
+    }
 
 
-    conversationView.style.display =
-        "flex";
+    if (conversationView) {
+
+        conversationView.style.display =
+            "flex";
+
+    }
 
 
-    history.replaceState(
+    const nextUrl =
+        "chat.html?friend=" +
+        encodeURIComponent(
+            friend.friend_id
+        );
+
+
+    window.history.replaceState(
         null,
         "",
-        `chat.html?friend=${encodeURIComponent(friend.friend_id)}`
+        nextUrl
     );
 
 
@@ -1329,9 +1268,7 @@ async function openConversation(
 
 
         if (error) {
-
             throw error;
-
         }
 
 
@@ -1341,11 +1278,14 @@ async function openConversation(
 
         await loadMessages();
 
-
         subscribeToMessages();
 
 
-        messageInput.focus();
+        if (messageInput) {
+
+            messageInput.focus();
+
+        }
 
 
     } catch (error) {
@@ -1354,10 +1294,6 @@ async function openConversation(
             "Open conversation error:",
             error
         );
-
-
-        conversationView.style.display =
-            "flex";
 
 
         messageList.innerHTML = `
@@ -1382,6 +1318,10 @@ async function openConversation(
 }
 
 
+// =====================================================
+// CLOSE CONVERSATION
+// =====================================================
+
 function closeConversation() {
 
     stopRealtime();
@@ -1394,15 +1334,23 @@ function closeConversation() {
         null;
 
 
-    conversationView.style.display =
-        "none";
+    if (conversationView) {
+
+        conversationView.style.display =
+            "none";
+
+    }
 
 
-    friendsView.style.display =
-        "block";
+    if (friendsView) {
+
+        friendsView.style.display =
+            "block";
+
+    }
 
 
-    history.replaceState(
+    window.history.replaceState(
         null,
         "",
         "chat.html"
@@ -1415,15 +1363,13 @@ function closeConversation() {
 
 
 // =====================================================
-// MESSAGES
+// LOAD MESSAGES
 // =====================================================
 
 async function loadMessages() {
 
     if (!activeConversationId) {
-
         return;
-
     }
 
 
@@ -1431,18 +1377,14 @@ async function loadMessages() {
         data,
         error
     } = await supabaseClient
-
         .from("messages")
-
         .select(
             "id, conversation_id, sender_id, content, created_at"
         )
-
         .eq(
             "conversation_id",
             activeConversationId
         )
-
         .order(
             "created_at",
             {
@@ -1452,9 +1394,7 @@ async function loadMessages() {
 
 
     if (error) {
-
         throw error;
-
     }
 
 
@@ -1465,9 +1405,18 @@ async function loadMessages() {
 }
 
 
+// =====================================================
+// RENDER MESSAGES
+// =====================================================
+
 function renderMessages(
     messages
 ) {
+
+    if (!messageList) {
+        return;
+    }
+
 
     messageList.innerHTML =
         "";
@@ -1494,7 +1443,6 @@ function renderMessages(
         `;
 
         return;
-
     }
 
 
@@ -1503,14 +1451,23 @@ function renderMessages(
     );
 
 
-    scrollMessages();
+    scrollMessagesToBottom();
 
 }
 
 
+// =====================================================
+// APPEND MESSAGE
+// =====================================================
+
 function appendMessage(
     message
 ) {
+
+    if (!messageList) {
+        return;
+    }
+
 
     if (
         document.querySelector(
@@ -1519,7 +1476,6 @@ function appendMessage(
     ) {
 
         return;
-
     }
 
 
@@ -1590,7 +1546,6 @@ function appendMessage(
 
 
     bubble.appendChild(text);
-
     bubble.appendChild(time);
 
     row.appendChild(bubble);
@@ -1602,7 +1557,7 @@ function appendMessage(
 
 
 // =====================================================
-// SEND
+// SEND MESSAGE
 // =====================================================
 
 async function sendMessage(
@@ -1612,10 +1567,12 @@ async function sendMessage(
     event.preventDefault();
 
 
-    if (!activeConversationId) {
+    if (
+        !activeConversationId ||
+        !currentUser
+    ) {
 
         return;
-
     }
 
 
@@ -1624,9 +1581,7 @@ async function sendMessage(
 
 
     if (!content) {
-
         return;
-
     }
 
 
@@ -1640,9 +1595,7 @@ async function sendMessage(
             data,
             error
         } = await supabaseClient
-
             .from("messages")
-
             .insert({
 
                 conversation_id:
@@ -1655,18 +1608,14 @@ async function sendMessage(
                     content
 
             })
-
             .select(
                 "id, conversation_id, sender_id, content, created_at"
             )
-
             .single();
 
 
         if (error) {
-
             throw error;
-
         }
 
 
@@ -1674,13 +1623,15 @@ async function sendMessage(
             "";
 
 
-        autoResizeInput();
+        autoResizeMessageInput();
 
 
-        appendMessage(data);
+        appendMessage(
+            data
+        );
 
 
-        scrollMessages();
+        scrollMessagesToBottom();
 
 
     } catch (error) {
@@ -1701,6 +1652,7 @@ async function sendMessage(
         sendMessageButton.disabled =
             false;
 
+
         messageInput.focus();
 
     }
@@ -1718,31 +1670,25 @@ function subscribeToMessages() {
 
 
     if (!activeConversationId) {
-
         return;
-
     }
 
 
     realtimeChannel =
         supabaseClient
-
             .channel(
-                "chat-" +
+                "conversation-" +
                 activeConversationId
             )
-
             .on(
                 "postgres_changes",
                 {
                     event: "INSERT",
-
                     schema: "public",
-
                     table: "messages",
-
                     filter:
-                        `conversation_id=eq.${activeConversationId}`
+                        "conversation_id=eq." +
+                        activeConversationId
                 },
                 function(payload) {
 
@@ -1751,31 +1697,33 @@ function subscribeToMessages() {
                     );
 
 
-                    scrollMessages();
+                    scrollMessagesToBottom();
 
                 }
             )
-
             .subscribe();
 
 }
 
 
+// =====================================================
+// STOP REALTIME
+// =====================================================
+
 function stopRealtime() {
 
-    if (
-        realtimeChannel
-    ) {
-
-        supabaseClient.removeChannel(
-            realtimeChannel
-        );
-
-
-        realtimeChannel =
-            null;
-
+    if (!realtimeChannel) {
+        return;
     }
+
+
+    supabaseClient.removeChannel(
+        realtimeChannel
+    );
+
+
+    realtimeChannel =
+        null;
 
 }
 
@@ -1789,6 +1737,11 @@ function setMyAvatar(
     avatarUrl
 ) {
 
+    if (!myAvatar) {
+        return;
+    }
+
+
     if (avatarUrl) {
 
         myAvatar.textContent =
@@ -1798,16 +1751,16 @@ function setMyAvatar(
             `url("${avatarUrl}")`;
 
         return;
-
     }
 
 
     myAvatar.style.backgroundImage =
         "";
 
-
     myAvatar.textContent =
-        getInitial(name);
+        getInitial(
+            name
+        );
 
 }
 
@@ -1835,7 +1788,9 @@ function createPersonAvatar(
     } else {
 
         avatar.textContent =
-            getInitial(name);
+            getInitial(
+                name
+            );
 
     }
 
@@ -1850,6 +1805,11 @@ function setConversationAvatar(
     avatarUrl
 ) {
 
+    if (!conversationAvatar) {
+        return;
+    }
+
+
     if (avatarUrl) {
 
         conversationAvatar.textContent =
@@ -1859,21 +1819,23 @@ function setConversationAvatar(
             `url("${avatarUrl}")`;
 
         return;
-
     }
 
 
     conversationAvatar.style.backgroundImage =
         "";
 
-
     conversationAvatar.textContent =
-        getInitial(name);
+        getInitial(
+            name
+        );
 
 }
 
 
-function getInitial(name) {
+function getInitial(
+    name
+) {
 
     return (
         String(
@@ -1883,7 +1845,8 @@ function getInitial(name) {
         .trim()
         .charAt(0)
         .toUpperCase()
-        || "M"
+        ||
+        "M"
     );
 
 }
@@ -1894,6 +1857,11 @@ function getInitial(name) {
 // =====================================================
 
 function setMessagesLoading() {
+
+    if (!messageList) {
+        return;
+    }
+
 
     messageList.innerHTML = `
         <div class="messages-empty">
@@ -1912,13 +1880,17 @@ function setMessagesLoading() {
 }
 
 
-function scrollMessages() {
+function scrollMessagesToBottom() {
 
     requestAnimationFrame(
         function() {
 
-            messageList.scrollTop =
-                messageList.scrollHeight;
+            if (messageList) {
+
+                messageList.scrollTop =
+                    messageList.scrollHeight;
+
+            }
 
         }
     );
@@ -1926,7 +1898,12 @@ function scrollMessages() {
 }
 
 
-function autoResizeInput() {
+function autoResizeMessageInput() {
+
+    if (!messageInput) {
+        return;
+    }
+
 
     messageInput.style.height =
         "auto";
@@ -1936,7 +1913,8 @@ function autoResizeInput() {
         Math.min(
             messageInput.scrollHeight,
             130
-        ) + "px";
+        ) +
+        "px";
 
 }
 
@@ -1981,17 +1959,5 @@ function escapeHtml(
 
 
     return div.innerHTML;
-
-}
-
-
-// =====================================================
-// REDIRECT
-// =====================================================
-
-function redirectToWelcome() {
-
-    window.location.href =
-        "welcome/welcome.html";
 
 }
