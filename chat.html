@@ -47,7 +47,7 @@
 
 
             <div class="brand-mark">
-                M
+                <span>M</span>
             </div>
 
 
@@ -71,6 +71,8 @@
         <div class="header-actions">
 
 
+            <!-- ADD FRIEND -->
+
             <button
                 id="addFriendButton"
                 class="header-button"
@@ -78,13 +80,29 @@
                 aria-label="Add friend"
             >
 
-                <span class="plus-icon">
-                    +
-                </span>
+                <svg
+                    class="header-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M12 5V19"
+                    />
+
+                    <path
+                        d="M5 12H19"
+                    />
+
+                </svg>
 
             </button>
 
 
+
+            <!-- NOTIFICATIONS -->
 
             <button
                 id="notificationButton"
@@ -93,9 +111,23 @@
                 aria-label="Notifications"
             >
 
-                <span class="bell-icon">
-                    ◇
-                </span>
+                <svg
+                    class="bell-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M18 9.5C18 6.46 16.21 4 12 4C7.79 4 6 6.46 6 9.5C6 14.5 4 16 4 17H20C20 16 18 14.5 18 9.5Z"
+                    />
+
+                    <path
+                        d="M9.5 20C10.15 20.63 11.02 21 12 21C12.98 21 13.85 20.63 14.5 20"
+                    />
+
+                </svg>
 
 
                 <span
@@ -109,6 +141,8 @@
             </button>
 
 
+
+            <!-- PROFILE -->
 
             <button
                 id="profileButton"
@@ -165,6 +199,7 @@
                 id="closeNotificationPanel"
                 class="panel-close"
                 type="button"
+                aria-label="Close"
             >
                 ×
             </button>
@@ -214,6 +249,7 @@
                 id="closeAddFriendPanel"
                 class="panel-close"
                 type="button"
+                aria-label="Close"
             >
                 ×
             </button>
@@ -298,14 +334,30 @@
 
 
 
-        <!-- Search chats -->
+        <!-- SEARCH CHATS -->
 
         <div class="chat-search">
 
 
-            <span class="search-mark">
-                /
-            </span>
+            <svg
+                class="search-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+            >
+
+                <circle
+                    cx="10.8"
+                    cy="10.8"
+                    r="6.8"
+                />
+
+                <path
+                    d="M16 16L21 21"
+                />
+
+            </svg>
 
 
             <input
@@ -349,7 +401,20 @@
                 type="button"
                 aria-label="Back"
             >
-                ←
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M15 18L9 12L15 6"
+                    />
+
+                </svg>
+
             </button>
 
 
@@ -414,7 +479,24 @@
                 type="submit"
                 aria-label="Send"
             >
-                →
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M5 12H19"
+                    />
+
+                    <path
+                        d="M13 6L19 12L13 18"
+                    />
+
+                </svg>
+
             </button>
 
 
@@ -422,7 +504,6 @@
 
 
     </section>
-
 
 
 </main>
