@@ -2005,6 +2005,7 @@ function subscribeToNotifications() {
                     await attachFriendIdsToNotifications();
 
                     renderNotifications();
+                    animateNotificationBell();
 
                     renderFriends();
 
