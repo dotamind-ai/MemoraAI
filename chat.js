@@ -3706,3 +3706,38 @@ function injectToastStyles() {
     );
 
 }
+function animateNotificationBell() {
+
+    if (!notificationButton) {
+        return;
+    }
+
+
+    notificationButton.classList.remove(
+        "bell-active"
+    );
+
+
+    // Перезапускаем animation даже если
+    // новое уведомление пришло подряд.
+
+    void notificationButton.offsetWidth;
+
+
+    notificationButton.classList.add(
+        "bell-active"
+    );
+
+
+    setTimeout(
+        function() {
+
+            notificationButton.classList.remove(
+                "bell-active"
+            );
+
+        },
+        700
+    );
+
+}
