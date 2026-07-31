@@ -1,6 +1,6 @@
 // =====================================================
 // MEMORA CHAT
-// Friends + Direct Messages + Realtime
+// Friends + Notifications + Direct Messages
 // =====================================================
 
 const SUPABASE_URL =
@@ -32,6 +32,34 @@ const searchMessage =
 const searchResult =
     document.getElementById("searchResult");
 
+const notificationButton =
+    document.getElementById("notificationButton");
+
+const notificationBadge =
+    document.getElementById("notificationBadge");
+
+const notificationPanel =
+    document.getElementById("notificationPanel");
+
+const notificationList =
+    document.getElementById("notificationList");
+
+const closeNotificationPanel =
+    document.getElementById(
+        "closeNotificationPanel"
+    );
+
+const addFriendButton =
+    document.getElementById("addFriendButton");
+
+const addFriendPanel =
+    document.getElementById("addFriendPanel");
+
+const closeAddFriendPanel =
+    document.getElementById(
+        "closeAddFriendPanel"
+    );
+
 const requestList =
     document.getElementById("requestList");
 
@@ -44,8 +72,10 @@ const requestCount =
 const friendCount =
     document.getElementById("friendCount");
 
-const backButton =
-    document.getElementById("backButton");
+const chatSearchInput =
+    document.getElementById(
+        "chatSearchInput"
+    );
 
 const profileButton =
     document.getElementById("profileButton");
@@ -53,44 +83,80 @@ const profileButton =
 const myAvatar =
     document.getElementById("myAvatar");
 
-const homeNav =
-    document.getElementById("homeNav");
-
-const calendarNav =
-    document.getElementById("calendarNav");
-
-const timelineNav =
-    document.getElementById("timelineNav");
-
 const friendsView =
-    document.getElementById("friendsView");
+    document.getElementById(
+        "friendsView"
+    );
 
 const conversationView =
-    document.getElementById("conversationView");
+    document.getElementById(
+        "conversationView"
+    );
 
 const conversationBack =
-    document.getElementById("conversationBack");
+    document.getElementById(
+        "conversationBack"
+    );
 
 const conversationAvatar =
-    document.getElementById("conversationAvatar");
+    document.getElementById(
+        "conversationAvatar"
+    );
 
 const conversationName =
-    document.getElementById("conversationName");
+    document.getElementById(
+        "conversationName"
+    );
 
 const conversationStatus =
-    document.getElementById("conversationStatus");
+    document.getElementById(
+        "conversationStatus"
+    );
 
 const messageList =
-    document.getElementById("messageList");
+    document.getElementById(
+        "messageList"
+    );
 
 const messageForm =
-    document.getElementById("messageForm");
+    document.getElementById(
+        "messageForm"
+    );
 
 const messageInput =
-    document.getElementById("messageInput");
+    document.getElementById(
+        "messageInput"
+    );
 
 const sendMessageButton =
-    document.getElementById("sendMessageButton");
+    document.getElementById(
+        "sendMessageButton"
+    );
+
+const backButton =
+    document.getElementById(
+        "backButton"
+    );
+
+const homeNav =
+    document.getElementById(
+        "homeNav"
+    );
+
+const calendarNav =
+    document.getElementById(
+        "calendarNav"
+    );
+
+const timelineNav =
+    document.getElementById(
+        "timelineNav"
+    );
+
+const chatSearch =
+    document.getElementById(
+        "chatSearchInput"
+    );
 
 
 // =====================================================
@@ -98,24 +164,31 @@ const sendMessageButton =
 // =====================================================
 
 let currentUser = null;
+
 let friends = [];
+
 let requests = [];
+
 let activeFriend = null;
+
 let activeConversationId = null;
+
 let realtimeChannel = null;
+
+let currentChatSearch = "";
 
 
 // =====================================================
-// INITIALIZATION
+// INIT
 // =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
-    initializeChats
+    initializeChat
 );
 
 
-async function initializeChats() {
+async function initializeChat() {
 
     try {
 
@@ -150,16 +223,20 @@ async function initializeChats() {
 
 
         setupNavigation();
+
+        setupPanels();
+
         setupSearch();
+
         setupConversationEvents();
 
+
         await loadMyProfile();
+
         await loadFriends();
+
         await loadRequests();
 
-
-        // Open chat from URL:
-        // chat.html?friend=USER_ID
 
         const params =
             new URLSearchParams(
@@ -215,21 +292,6 @@ async function initializeChats() {
 
 function setupNavigation() {
 
-    if (backButton) {
-
-        backButton.addEventListener(
-            "click",
-            function() {
-
-                window.location.href =
-                    "index.html";
-
-            }
-        );
-
-    }
-
-
     if (profileButton) {
 
         profileButton.addEventListener(
@@ -241,6 +303,21 @@ function setupNavigation() {
 
                 window.location.href =
                     "profile.html";
+
+            }
+        );
+
+    }
+
+
+    if (backButton) {
+
+        backButton.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "index.html";
 
             }
         );
@@ -312,15 +389,119 @@ function setupNavigation() {
 
 
 // =====================================================
-// MY PROFILE
+// PANELS
+// =====================================================
+
+function setupPanels() {
+
+    addFriendButton.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            closeNotifications();
+
+            addFriendPanel.hidden =
+                !addFriendPanel.hidden;
+
+            if (!addFriendPanel.hidden) {
+
+                emailSearch.focus();
+
+            }
+
+        }
+    );
+
+
+    closeAddFriendPanel.addEventListener(
+        "click",
+        closeAddFriend
+    );
+
+
+    notificationButton.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            closeAddFriend();
+
+            notificationPanel.hidden =
+                !notificationPanel.hidden;
+
+        }
+    );
+
+
+    closeNotificationPanel.addEventListener(
+        "click",
+        closeNotifications
+    );
+
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !notificationPanel.hidden &&
+                !notificationPanel.contains(
+                    event.target
+                ) &&
+                !notificationButton.contains(
+                    event.target
+                )
+            ) {
+
+                closeNotifications();
+
+            }
+
+
+            if (
+                !addFriendPanel.hidden &&
+                !addFriendPanel.contains(
+                    event.target
+                ) &&
+                !addFriendButton.contains(
+                    event.target
+                )
+            ) {
+
+                closeAddFriend();
+
+            }
+
+        }
+    );
+
+}
+
+
+function closeNotifications() {
+
+    notificationPanel.hidden =
+        true;
+
+}
+
+
+function closeAddFriend() {
+
+    addFriendPanel.hidden =
+        true;
+
+}
+
+
+// =====================================================
+// PROFILE
 // =====================================================
 
 async function loadMyProfile() {
-
-    if (!currentUser) {
-        return;
-    }
-
 
     const {
         data,
@@ -340,7 +521,7 @@ async function loadMyProfile() {
     if (error) {
 
         console.error(
-            "Profile load error:",
+            "Profile error:",
             error
         );
 
@@ -350,39 +531,26 @@ async function loadMyProfile() {
         );
 
         return;
-    }
-
-
-    if (data) {
-
-        setMyAvatar(
-            data.display_name ||
-            currentUser.email,
-            data.avatar_url
-        );
-
-    } else {
-
-        setMyAvatar(
-            currentUser.email,
-            null
-        );
 
     }
+
+
+    setMyAvatar(
+        data?.display_name ||
+        currentUser.email ||
+        "M",
+        data?.avatar_url ||
+        null
+    );
 
 }
 
 
 // =====================================================
-// SEARCH
+// SEARCH FRIEND
 // =====================================================
 
 function setupSearch() {
-
-    if (!searchButton) {
-        return;
-    }
-
 
     searchButton.addEventListener(
         "click",
@@ -390,26 +558,37 @@ function setupSearch() {
     );
 
 
-    if (emailSearch) {
+    emailSearch.addEventListener(
+        "keydown",
+        function(event) {
 
-        emailSearch.addEventListener(
-            "keydown",
-            function(event) {
+            if (
+                event.key === "Enter"
+            ) {
 
-                if (
-                    event.key === "Enter"
-                ) {
+                event.preventDefault();
 
-                    event.preventDefault();
-
-                    searchUser();
-
-                }
+                searchUser();
 
             }
-        );
 
-    }
+        }
+    );
+
+
+    chatSearch.addEventListener(
+        "input",
+        function() {
+
+            currentChatSearch =
+                chatSearch.value
+                    .trim()
+                    .toLowerCase();
+
+            renderFriends();
+
+        }
+    );
 
 }
 
@@ -433,6 +612,7 @@ async function searchUser() {
             "Enter an email address.";
 
         return;
+
     }
 
 
@@ -442,6 +622,7 @@ async function searchUser() {
             "Enter a valid email address.";
 
         return;
+
     }
 
 
@@ -467,7 +648,9 @@ async function searchUser() {
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -480,6 +663,7 @@ async function searchUser() {
                 "User not found.";
 
             return;
+
         }
 
 
@@ -512,10 +696,6 @@ async function searchUser() {
 
 }
 
-
-// =====================================================
-// SEARCH RESULT
-// =====================================================
 
 function renderSearchResult(
     user,
@@ -579,7 +759,10 @@ function renderSearchResult(
 
 
     info.appendChild(name);
-    info.appendChild(emailElement);
+
+    info.appendChild(
+        emailElement
+    );
 
 
     const action =
@@ -614,7 +797,9 @@ function renderSearchResult(
 
 
     card.appendChild(avatar);
+
     card.appendChild(info);
+
     card.appendChild(action);
 
 
@@ -624,7 +809,7 @@ function renderSearchResult(
 
 
 // =====================================================
-// FRIEND REQUEST
+// SEND FRIEND REQUEST
 // =====================================================
 
 async function sendFriendRequest(
@@ -653,7 +838,9 @@ async function sendFriendRequest(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -667,13 +854,13 @@ async function sendFriendRequest(
 
 
         searchMessage.textContent =
-            "Friend request sent.";
+            "Request sent.";
 
 
     } catch (error) {
 
         console.error(
-            "Friend request error:",
+            "Request error:",
             error
         );
 
@@ -715,12 +902,12 @@ async function loadFriends() {
             error
         );
 
-
         friends = [];
 
         renderFriends();
 
         return;
+
     }
 
 
@@ -735,36 +922,58 @@ async function loadFriends() {
 
 function renderFriends() {
 
-    if (!friendList) {
-        return;
-    }
-
-
     friendList.innerHTML =
         "";
 
 
-    if (friendCount) {
+    const filtered =
+        friends.filter(
+            function(friend) {
 
-        friendCount.textContent =
-            friends.length;
+                if (!currentChatSearch) {
 
-    }
+                    return true;
+
+                }
 
 
-    if (!friends.length) {
+                const name =
+                    (
+                        friend.display_name ||
+                        ""
+                    ).toLowerCase();
+
+
+                return name.includes(
+                    currentChatSearch
+                );
+
+            }
+        );
+
+
+    friendCount.textContent =
+        friends.length;
+
+
+    if (!filtered.length) {
 
         friendList.innerHTML = `
             <div class="empty-state">
-                No friends yet.
+                ${
+                    friends.length
+                        ? "No chats found."
+                        : "No friends yet."
+                }
             </div>
         `;
 
         return;
+
     }
 
 
-    friends.forEach(
+    filtered.forEach(
         function(friend) {
 
             const card =
@@ -820,10 +1029,11 @@ function renderFriends() {
 
 
             label.textContent =
-                "Friend";
+                "Start a conversation";
 
 
             info.appendChild(name);
+
             info.appendChild(label);
 
 
@@ -847,9 +1057,7 @@ function renderFriends() {
 
             action.addEventListener(
                 "click",
-                function(event) {
-
-                    event.preventDefault();
+                function() {
 
                     openConversation(
                         friend
@@ -859,12 +1067,24 @@ function renderFriends() {
             );
 
 
-            card.appendChild(avatar);
-            card.appendChild(info);
-            card.appendChild(action);
+            card.appendChild(
+                avatar
+            );
 
 
-            friendList.appendChild(card);
+            card.appendChild(
+                info
+            );
+
+
+            card.appendChild(
+                action
+            );
+
+
+            friendList.appendChild(
+                card
+            );
 
         }
     );
@@ -893,12 +1113,12 @@ async function loadRequests() {
             error
         );
 
-
         requests = [];
 
-        renderRequests();
+        renderNotifications();
 
         return;
+
     }
 
 
@@ -906,39 +1126,55 @@ async function loadRequests() {
         data || [];
 
 
-    renderRequests();
+    renderNotifications();
 
 }
 
 
-function renderRequests() {
+// =====================================================
+// NOTIFICATIONS
+// =====================================================
 
-    if (!requestList) {
-        return;
+function renderNotifications() {
+
+    const count =
+        requests.length;
+
+
+    if (notificationBadge) {
+
+        notificationBadge.textContent =
+            count;
+
+
+        notificationBadge.hidden =
+            count === 0;
+
     }
-
-
-    requestList.innerHTML =
-        "";
 
 
     if (requestCount) {
 
         requestCount.textContent =
-            requests.length;
+            count;
 
     }
 
 
-    if (!requests.length) {
+    notificationList.innerHTML =
+        "";
 
-        requestList.innerHTML = `
-            <div class="empty-state">
-                No pending requests.
+
+    if (!count) {
+
+        notificationList.innerHTML = `
+            <div class="notification-empty">
+                No new notifications.
             </div>
         `;
 
         return;
+
     }
 
 
@@ -952,14 +1188,34 @@ function renderRequests() {
 
 
             card.className =
-                "person-card";
+                "notification-card";
 
 
             const avatar =
-                createPersonAvatar(
-                    request.display_name,
-                    request.avatar_url
+                document.createElement(
+                    "div"
                 );
+
+
+            avatar.className =
+                "notification-avatar";
+
+
+            if (
+                request.avatar_url
+            ) {
+
+                avatar.style.backgroundImage =
+                    `url("${request.avatar_url}")`;
+
+            } else {
+
+                avatar.textContent =
+                    getInitial(
+                        request.display_name
+                    );
+
+            }
 
 
             const info =
@@ -969,17 +1225,13 @@ function renderRequests() {
 
 
             info.className =
-                "person-info";
+                "notification-info";
 
 
             const name =
                 document.createElement(
-                    "span"
+                    "strong"
                 );
-
-
-            name.className =
-                "person-name";
 
 
             name.textContent =
@@ -987,7 +1239,19 @@ function renderRequests() {
                 "Memora user";
 
 
+            const text =
+                document.createElement(
+                    "span"
+                );
+
+
+            text.textContent =
+                "Wants to connect with you.";
+
+
             info.appendChild(name);
+
+            info.appendChild(text);
 
 
             const actions =
@@ -996,11 +1260,8 @@ function renderRequests() {
                 );
 
 
-            actions.style.display =
-                "flex";
-
-            actions.style.gap =
-                "6px";
+            actions.className =
+                "notification-actions";
 
 
             const accept =
@@ -1009,12 +1270,12 @@ function renderRequests() {
                 );
 
 
-            accept.className =
-                "person-action primary";
-
-
             accept.type =
                 "button";
+
+
+            accept.className =
+                "notification-action accept";
 
 
             accept.textContent =
@@ -1040,12 +1301,12 @@ function renderRequests() {
                 );
 
 
-            reject.className =
-                "person-action";
-
-
             reject.type =
                 "button";
+
+
+            reject.className =
+                "notification-action";
 
 
             reject.textContent =
@@ -1065,16 +1326,34 @@ function renderRequests() {
             );
 
 
-            actions.appendChild(accept);
-            actions.appendChild(reject);
+            actions.appendChild(
+                accept
+            );
 
 
-            card.appendChild(avatar);
-            card.appendChild(info);
-            card.appendChild(actions);
+            actions.appendChild(
+                reject
+            );
 
 
-            requestList.appendChild(card);
+            card.appendChild(
+                avatar
+            );
+
+
+            card.appendChild(
+                info
+            );
+
+
+            card.appendChild(
+                actions
+            );
+
+
+            notificationList.appendChild(
+                card
+            );
 
         }
     );
@@ -1111,7 +1390,9 @@ async function respondToRequest(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -1123,14 +1404,8 @@ async function respondToRequest(
     } catch (error) {
 
         console.error(
-            "Friend response error:",
+            "Friend request update error:",
             error
-        );
-
-
-        alert(
-            error.message ||
-            "Unable to update request."
         );
 
     }
@@ -1139,79 +1414,46 @@ async function respondToRequest(
 
 
 // =====================================================
-// CONVERSATION EVENTS
+// CONVERSATION
 // =====================================================
 
 function setupConversationEvents() {
 
-    if (conversationBack) {
-
-        conversationBack.addEventListener(
-            "click",
-            closeConversation
-        );
-
-    }
+    conversationBack.addEventListener(
+        "click",
+        closeConversation
+    );
 
 
-    if (messageForm) {
-
-        messageForm.addEventListener(
-            "submit",
-            sendMessage
-        );
-
-    }
+    messageForm.addEventListener(
+        "submit",
+        sendMessage
+    );
 
 
-    if (messageInput) {
-
-        messageInput.addEventListener(
-            "input",
-            autoResizeMessageInput
-        );
-
-    }
+    messageInput.addEventListener(
+        "input",
+        autoResizeMessageInput
+    );
 
 }
 
-
-// =====================================================
-// OPEN CONVERSATION
-// =====================================================
 
 async function openConversation(
     friend
 ) {
 
-    if (
-        !friend ||
-        !friend.friend_id
-    ) {
-
-        return;
-    }
-
-
     activeFriend =
         friend;
 
 
-    if (conversationName) {
-
-        conversationName.textContent =
-            friend.display_name ||
-            "Memora user";
-
-    }
+    conversationName.textContent =
+        friend.display_name ||
+        "Memora user";
 
 
-    if (conversationStatus) {
-
-        conversationStatus.textContent =
-            "Private conversation";
-
-    }
+    conversationStatus.textContent =
+        "Private conversation";
 
 
     setConversationAvatar(
@@ -1220,33 +1462,21 @@ async function openConversation(
     );
 
 
-    if (friendsView) {
-
-        friendsView.style.display =
-            "none";
-
-    }
+    friendsView.style.display =
+        "none";
 
 
-    if (conversationView) {
-
-        conversationView.style.display =
-            "flex";
-
-    }
+    conversationView.style.display =
+        "flex";
 
 
-    const nextUrl =
+    history.replaceState(
+        null,
+        "",
         "chat.html?friend=" +
         encodeURIComponent(
             friend.friend_id
-        );
-
-
-    window.history.replaceState(
-        null,
-        "",
-        nextUrl
+        )
     );
 
 
@@ -1268,7 +1498,9 @@ async function openConversation(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -1278,20 +1510,17 @@ async function openConversation(
 
         await loadMessages();
 
+
         subscribeToMessages();
 
 
-        if (messageInput) {
-
-            messageInput.focus();
-
-        }
+        messageInput.focus();
 
 
     } catch (error) {
 
         console.error(
-            "Open conversation error:",
+            "Open chat error:",
             error
         );
 
@@ -1318,10 +1547,6 @@ async function openConversation(
 }
 
 
-// =====================================================
-// CLOSE CONVERSATION
-// =====================================================
-
 function closeConversation() {
 
     stopRealtime();
@@ -1330,27 +1555,20 @@ function closeConversation() {
     activeFriend =
         null;
 
+
     activeConversationId =
         null;
 
 
-    if (conversationView) {
-
-        conversationView.style.display =
-            "none";
-
-    }
+    conversationView.style.display =
+        "none";
 
 
-    if (friendsView) {
-
-        friendsView.style.display =
-            "block";
-
-    }
+    friendsView.style.display =
+        "block";
 
 
-    window.history.replaceState(
+    history.replaceState(
         null,
         "",
         "chat.html"
@@ -1363,13 +1581,15 @@ function closeConversation() {
 
 
 // =====================================================
-// LOAD MESSAGES
+// MESSAGES
 // =====================================================
 
 async function loadMessages() {
 
     if (!activeConversationId) {
+
         return;
+
     }
 
 
@@ -1377,14 +1597,18 @@ async function loadMessages() {
         data,
         error
     } = await supabaseClient
+
         .from("messages")
+
         .select(
             "id, conversation_id, sender_id, content, created_at"
         )
+
         .eq(
             "conversation_id",
             activeConversationId
         )
+
         .order(
             "created_at",
             {
@@ -1394,7 +1618,9 @@ async function loadMessages() {
 
 
     if (error) {
+
         throw error;
+
     }
 
 
@@ -1405,18 +1631,9 @@ async function loadMessages() {
 }
 
 
-// =====================================================
-// RENDER MESSAGES
-// =====================================================
-
 function renderMessages(
     messages
 ) {
-
-    if (!messageList) {
-        return;
-    }
-
 
     messageList.innerHTML =
         "";
@@ -1443,6 +1660,7 @@ function renderMessages(
         `;
 
         return;
+
     }
 
 
@@ -1456,18 +1674,9 @@ function renderMessages(
 }
 
 
-// =====================================================
-// APPEND MESSAGE
-// =====================================================
-
 function appendMessage(
     message
 ) {
-
-    if (!messageList) {
-        return;
-    }
-
 
     if (
         document.querySelector(
@@ -1476,6 +1685,7 @@ function appendMessage(
     ) {
 
         return;
+
     }
 
 
@@ -1545,19 +1755,30 @@ function appendMessage(
         );
 
 
-    bubble.appendChild(text);
-    bubble.appendChild(time);
+    bubble.appendChild(
+        text
+    );
 
-    row.appendChild(bubble);
+
+    bubble.appendChild(
+        time
+    );
 
 
-    messageList.appendChild(row);
+    row.appendChild(
+        bubble
+    );
+
+
+    messageList.appendChild(
+        row
+    );
 
 }
 
 
 // =====================================================
-// SEND MESSAGE
+// SEND
 // =====================================================
 
 async function sendMessage(
@@ -1568,11 +1789,11 @@ async function sendMessage(
 
 
     if (
-        !activeConversationId ||
-        !currentUser
+        !activeConversationId
     ) {
 
         return;
+
     }
 
 
@@ -1581,7 +1802,9 @@ async function sendMessage(
 
 
     if (!content) {
+
         return;
+
     }
 
 
@@ -1615,7 +1838,9 @@ async function sendMessage(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -1670,22 +1895,29 @@ function subscribeToMessages() {
 
 
     if (!activeConversationId) {
+
         return;
+
     }
 
 
     realtimeChannel =
         supabaseClient
+
             .channel(
                 "conversation-" +
                 activeConversationId
             )
+
             .on(
                 "postgres_changes",
                 {
                     event: "INSERT",
+
                     schema: "public",
+
                     table: "messages",
+
                     filter:
                         "conversation_id=eq." +
                         activeConversationId
@@ -1701,19 +1933,18 @@ function subscribeToMessages() {
 
                 }
             )
+
             .subscribe();
 
 }
 
 
-// =====================================================
-// STOP REALTIME
-// =====================================================
-
 function stopRealtime() {
 
     if (!realtimeChannel) {
+
         return;
+
     }
 
 
@@ -1738,7 +1969,9 @@ function setMyAvatar(
 ) {
 
     if (!myAvatar) {
+
         return;
+
     }
 
 
@@ -1747,15 +1980,19 @@ function setMyAvatar(
         myAvatar.textContent =
             "";
 
+
         myAvatar.style.backgroundImage =
             `url("${avatarUrl}")`;
 
+
         return;
+
     }
 
 
     myAvatar.style.backgroundImage =
         "";
+
 
     myAvatar.textContent =
         getInitial(
@@ -1806,7 +2043,9 @@ function setConversationAvatar(
 ) {
 
     if (!conversationAvatar) {
+
         return;
+
     }
 
 
@@ -1815,15 +2054,19 @@ function setConversationAvatar(
         conversationAvatar.textContent =
             "";
 
+
         conversationAvatar.style.backgroundImage =
             `url("${avatarUrl}")`;
 
+
         return;
+
     }
 
 
     conversationAvatar.style.backgroundImage =
         "";
+
 
     conversationAvatar.textContent =
         getInitial(
@@ -1859,16 +2102,14 @@ function getInitial(
 function setMessagesLoading() {
 
     if (!messageList) {
+
         return;
+
     }
 
 
     messageList.innerHTML = `
         <div class="messages-empty">
-
-            <div class="empty-icon">
-                ◇
-            </div>
 
             <div class="empty-title">
                 Loading...
@@ -1885,7 +2126,9 @@ function scrollMessagesToBottom() {
     requestAnimationFrame(
         function() {
 
-            if (messageList) {
+            if (
+                messageList
+            ) {
 
                 messageList.scrollTop =
                     messageList.scrollHeight;
@@ -1901,7 +2144,9 @@ function scrollMessagesToBottom() {
 function autoResizeMessageInput() {
 
     if (!messageInput) {
+
         return;
+
     }
 
 
@@ -1912,9 +2157,8 @@ function autoResizeMessageInput() {
     messageInput.style.height =
         Math.min(
             messageInput.scrollHeight,
-            130
-        ) +
-        "px";
+            125
+        ) + "px";
 
 }
 
