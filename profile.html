@@ -5,14 +5,17 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
+<title>Memora — Profile</title>
 
-<title>Memora Profile</title>
-
-
-<link rel="stylesheet" href="profile.css">
-
+<link
+    rel="stylesheet"
+    href="profile.css"
+>
 
 </head>
 
@@ -20,452 +23,384 @@
 <body class="profile-page">
 
 
+<div class="profile-background">
 
+    <div class="glow glow-one"></div>
 
+    <div class="glow glow-two"></div>
 
-<!-- TOP LOGO BUTTON -->
-
-<button 
-class="memora-profile-logo"
-id="memoraLogo">
-
-
-<div class="logo-letter">
-
-M
-
-</div>
-
-
-</button>
-
-
-
-
-
-
-
-
-<div class="profile-container">
-
-
-
-
-
-<!-- AVATAR -->
-
-
-<div class="avatar-wrapper">
-
-
-<div 
-class="profile-avatar"
-id="profileAvatar">
-
-
-👤
-
-
-</div>
-
-
-<button 
-class="avatar-camera"
-id="avatarCamera">
-
-+
-
-</button>
-
+    <div class="stars"></div>
 
 </div>
 
 
 
+<main class="profile-container">
 
 
+    <!-- =====================================
+            TOP BAR
+    ====================================== -->
 
+    <header class="profile-header">
 
 
+        <button
+            id="backButton"
+            class="back-button"
+            type="button"
+            aria-label="Back"
+        >
 
-<!-- NAME -->
+            <span>←</span>
 
+        </button>
 
-<h1 
-class="profile-name"
-id="profileName">
 
 
-Гость
+        <div class="profile-header-title">
 
+            <span>PROFILE</span>
 
-</h1>
+            <small>YOUR MEMORY SPACE</small>
 
+        </div>
 
 
+    </header>
 
 
-<p class="profile-status">
 
-Memory Keeper
+    <!-- =====================================
+            PROFILE HERO
+    ====================================== -->
 
-</p>
+    <section class="profile-hero">
 
 
+        <div class="profile-orbit">
 
 
+            <div class="profile-orbit-ring ring-one"></div>
 
+            <div class="profile-orbit-ring ring-two"></div>
 
+            <div class="profile-orbit-ring ring-three"></div>
 
 
+            <div class="profile-avatar">
 
+                M
 
-<!-- STATS -->
+            </div>
 
 
-<div class="profile-stats">
+        </div>
 
 
 
-<div class="stat-card">
+        <h1 id="profileEmail">
 
+            Loading...
 
-<span id="memoryStat">
+        </h1>
 
-0
 
-</span>
+        <p>
 
+            Memora member
 
-<small>
+        </p>
 
-Memories
 
-</small>
 
+        <div
+            id="accountStatus"
+            class="account-status"
+        >
 
-</div>
+            <span class="status-dot"></span>
 
+            Account connected
 
+        </div>
 
 
+    </section>
 
-<div class="stat-card">
 
 
-<span id="eventStat">
+    <!-- =====================================
+            STATISTICS
+    ====================================== -->
 
-0
+    <section class="profile-stats">
 
-</span>
 
+        <div class="stat-card">
 
-<small>
 
-Events
+            <span
+                id="memoryTotal"
+                class="stat-number"
+            >
+                0
+            </span>
 
-</small>
 
+            <span class="stat-label">
+                Memories
+            </span>
 
-</div>
 
+        </div>
 
 
 
+        <div class="stat-card">
 
-<div class="stat-card">
 
+            <span
+                id="accountDate"
+                class="stat-number small-number"
+            >
+                —
+            </span>
 
-<span id="favoriteStat">
 
-0
+            <span class="stat-label">
+                Joined
+            </span>
 
-</span>
 
+        </div>
 
-<small>
 
-Favorites
 
-</small>
+    </section>
 
 
-</div>
 
+    <!-- =====================================
+            ACCOUNT INFO
+    ====================================== -->
 
+    <section class="settings-card">
 
-</div>
 
+        <div class="card-heading">
 
 
+            <div>
 
+                <span class="card-kicker">
+                    ACCOUNT
+                </span>
 
 
+                <h2>
+                    Account information
+                </h2>
 
+            </div>
 
 
-<!-- LEVEL -->
+            <span class="card-icon">
+                ◈
+            </span>
 
 
-<div class="profile-level">
+        </div>
 
 
-<h2>
 
-Memora Level 1
+        <div class="info-row">
 
-</h2>
 
+            <div class="info-left">
 
-<div class="level-bar">
+                <span class="info-label">
+                    Email
+                </span>
 
-<span></span>
+                <span
+                    id="emailValue"
+                    class="info-value"
+                >
+                    Loading...
+                </span>
 
-</div>
+            </div>
 
 
-</div>
+            <span class="verified-badge">
+                VERIFIED
+            </span>
 
 
+        </div>
 
 
 
+        <div class="info-row">
 
 
+            <div class="info-left">
 
+                <span class="info-label">
+                    Authentication
+                </span>
 
-<!-- ACHIEVEMENTS -->
+                <span class="info-value">
+                    Supabase
+                </span>
 
+            </div>
 
-<div class="achievements">
 
+            <span class="secure-badge">
+                SECURE
+            </span>
 
-<h2>
 
-Achievements
+        </div>
 
-</h2>
 
+    </section>
 
 
-<div class="achievement-card">
 
-Memory Starter
+    <!-- =====================================
+            ACTIONS
+    ====================================== -->
 
-</div>
+    <section class="actions-card">
 
 
+        <button
+            id="logoutButton"
+            class="logout-button"
+            type="button"
+        >
 
+            <span class="logout-icon">
+                ↪
+            </span>
 
-<div class="achievement-card">
 
-First Event
+            <span class="logout-text">
 
-</div>
+                <strong>
+                    Log out
+                </strong>
 
+                <small>
+                    Sign out of this device
+                </small>
 
+            </span>
 
 
-<div class="achievement-card">
+            <span class="logout-arrow">
+                →
+            </span>
 
-Memory Collector
+        </button>
 
-</div>
 
+    </section>
 
 
-</div>
 
+</main>
 
 
 
-
-
-
-
-
-<!-- POPUP MENU -->
-
-
-<div 
-class="profile-overlay"
-id="profileOverlay">
-
-</div>
-
-
-
-
-
-<div 
-class="profile-menu"
-id="profileMenu">
-
-
-
-<button id="editProfile">
-
-Edit Profile
-
-</button>
-
-
-
-<button onclick="goSettings()">
-
-Settings
-
-</button>
-
-
-
-<button id="loginButton">
-
-Login / Register
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- NAVIGATION -->
-
+<!-- =====================================
+            BOTTOM NAV
+====================================== -->
 
 <nav class="bottom-nav">
 
 
+    <button
+        class="nav-item"
+        id="homeNav"
+        type="button"
+    >
 
-<button 
-class="nav-item"
-onclick="goHome()">
+        <span class="nav-icon">
+            ◉
+        </span>
 
+        <small>
+            Memories
+        </small>
 
+    </button>
 
-<img
-src="icons/memories.svg"
-class="nav-icon">
 
 
+    <button
+        class="nav-item"
+        id="calendarNav"
+        type="button"
+    >
 
-<small>
+        <span class="nav-icon">
+            ◫
+        </span>
 
-Memories
+        <small>
+            Calendar
+        </small>
 
-</small>
+    </button>
 
 
-</button>
 
+    <button
+        class="nav-item"
+        id="eventsNav"
+        type="button"
+    >
 
+        <span class="nav-icon">
+            ◇
+        </span>
 
+        <small>
+            Events
+        </small>
 
+    </button>
 
 
 
-<button 
-class="nav-item"
-onclick="goCalendar()">
+    <button
+        class="nav-item active"
+        id="profileNav"
+        type="button"
+    >
 
+        <span class="nav-icon">
+            ●
+        </span>
 
+        <small>
+            Profile
+        </small>
 
-<img
-src="icons/calendar.svg"
-class="nav-icon">
-
-
-
-<small>
-
-Calendar
-
-</small>
-
-
-</button>
-
-
-
-
-
-
-
-<button 
-class="nav-item"
-onclick="goEvents()">
-
-
-
-<img
-src="icons/events.svg"
-class="nav-icon">
-
-
-
-<small>
-
-Events
-
-</small>
-
-
-</button>
-
-
-
-
-
-
-
-<button 
-class="nav-item active"
-onclick="goProfile()">
-
-
-
-<img
-src="icons/profile.svg"
-class="nav-icon">
-
-
-
-<small>
-
-Profile
-
-</small>
-
-
-</button>
-
-
+    </button>
 
 
 </nav>
 
 
 
-
-
-
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
 
 <script src="profile.js"></script>
