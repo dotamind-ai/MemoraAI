@@ -29,8 +29,6 @@
 
     <div class="glow glow-two"></div>
 
-    <div class="stars"></div>
-
 </div>
 
 
@@ -39,7 +37,7 @@
 
 
     <!-- =====================================
-            TOP BAR
+            HEADER
     ====================================== -->
 
     <header class="profile-header">
@@ -51,11 +49,8 @@
             type="button"
             aria-label="Back"
         >
-
-            <span>←</span>
-
+            ←
         </button>
-
 
 
         <div class="profile-header-title">
@@ -80,7 +75,6 @@
 
         <div class="profile-orbit">
 
-
             <div class="profile-orbit-ring ring-one"></div>
 
             <div class="profile-orbit-ring ring-two"></div>
@@ -88,7 +82,10 @@
             <div class="profile-orbit-ring ring-three"></div>
 
 
-            <div class="profile-avatar">
+            <div
+                id="avatarPreview"
+                class="profile-avatar"
+            >
 
                 M
 
@@ -98,26 +95,34 @@
         </div>
 
 
+        <input
+            id="avatarInput"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            hidden
+        >
 
-        <h1 id="profileEmail">
 
+        <button
+            id="changeAvatarButton"
+            class="change-avatar-button"
+            type="button"
+        >
+            Change avatar
+        </button>
+
+
+        <h1 id="profileName">
             Loading...
-
         </h1>
 
 
-        <p>
-
-            Memora member
-
+        <p id="profileEmail">
+            Loading...
         </p>
 
 
-
-        <div
-            id="accountStatus"
-            class="account-status"
-        >
+        <div class="account-status">
 
             <span class="status-dot"></span>
 
@@ -131,58 +136,7 @@
 
 
     <!-- =====================================
-            STATISTICS
-    ====================================== -->
-
-    <section class="profile-stats">
-
-
-        <div class="stat-card">
-
-
-            <span
-                id="memoryTotal"
-                class="stat-number"
-            >
-                0
-            </span>
-
-
-            <span class="stat-label">
-                Memories
-            </span>
-
-
-        </div>
-
-
-
-        <div class="stat-card">
-
-
-            <span
-                id="accountDate"
-                class="stat-number small-number"
-            >
-                —
-            </span>
-
-
-            <span class="stat-label">
-                Joined
-            </span>
-
-
-        </div>
-
-
-
-    </section>
-
-
-
-    <!-- =====================================
-            ACCOUNT INFO
+            ACCOUNT CARD
     ====================================== -->
 
     <section class="settings-card">
@@ -197,9 +151,8 @@
                     ACCOUNT
                 </span>
 
-
                 <h2>
-                    Account information
+                    Personal information
                 </h2>
 
             </div>
@@ -214,18 +167,40 @@
 
 
 
-        <div class="info-row">
+        <div class="form-group">
 
 
-            <div class="info-left">
+            <label for="displayNameInput">
+                Display name
+            </label>
+
+
+            <input
+                id="displayNameInput"
+                type="text"
+                maxlength="40"
+                placeholder="Your name"
+                autocomplete="name"
+            >
+
+
+        </div>
+
+
+
+        <div class="email-row">
+
+
+            <div class="email-info">
 
                 <span class="info-label">
                     Email
                 </span>
 
+
                 <span
                     id="emailValue"
-                    class="info-value"
+                    class="email-value"
                 >
                     Loading...
                 </span>
@@ -242,18 +217,48 @@
 
 
 
-        <div class="info-row">
+        <div
+            id="profileMessage"
+            class="profile-message"
+        ></div>
 
 
-            <div class="info-left">
 
-                <span class="info-label">
+        <button
+            id="saveProfileButton"
+            class="save-profile-button"
+            type="button"
+        >
+            Save changes
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+            ACCOUNT STATUS
+    ====================================== -->
+
+    <section class="account-card">
+
+
+        <div class="account-row">
+
+
+            <div class="account-left">
+
+
+                <span class="account-label">
                     Authentication
                 </span>
 
-                <span class="info-value">
+
+                <strong>
                     Supabase
-                </span>
+                </strong>
+
 
             </div>
 
@@ -266,12 +271,35 @@
         </div>
 
 
+
+        <div class="account-row">
+
+
+            <div class="account-left">
+
+
+                <span class="account-label">
+                    Member since
+                </span>
+
+
+                <strong id="accountDate">
+                    —
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
     </section>
 
 
 
     <!-- =====================================
-            ACTIONS
+            LOGOUT
     ====================================== -->
 
     <section class="actions-card">
@@ -283,6 +311,7 @@
             type="button"
         >
 
+
             <span class="logout-icon">
                 ↪
             </span>
@@ -290,13 +319,16 @@
 
             <span class="logout-text">
 
+
                 <strong>
                     Log out
                 </strong>
 
+
                 <small>
                     Sign out of this device
                 </small>
+
 
             </span>
 
@@ -305,11 +337,11 @@
                 →
             </span>
 
+
         </button>
 
 
     </section>
-
 
 
 </main>
@@ -361,7 +393,7 @@
 
     <button
         class="nav-item"
-        id="eventsNav"
+        id="timelineNav"
         type="button"
     >
 
@@ -370,7 +402,7 @@
         </span>
 
         <small>
-            Events
+            Timeline
         </small>
 
     </button>
