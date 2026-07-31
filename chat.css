@@ -6448,3 +6448,73 @@ function injectToastStyles() {
     );
 
 }
+/* =====================================================
+   NOTIFICATION BELL ANIMATION
+===================================================== */
+
+.notification-button.bell-active {
+    border-color:
+        rgba(167, 139, 250, .28);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(167, 139, 250, .08),
+
+        0 0 22px
+        rgba(139, 92, 246, .16);
+}
+
+
+.notification-button.bell-active .bell-svg {
+    stroke:
+        #ffffff;
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(167, 139, 250, .65)
+        );
+
+    animation:
+        memoraBellShake .55s ease-in-out;
+}
+
+
+@keyframes memoraBellShake {
+
+    0% {
+        transform:
+            rotate(0deg);
+    }
+
+    15% {
+        transform:
+            rotate(-12deg);
+    }
+
+    30% {
+        transform:
+            rotate(10deg);
+    }
+
+    45% {
+        transform:
+            rotate(-7deg);
+    }
+
+    60% {
+        transform:
+            rotate(5deg);
+    }
+
+    75% {
+        transform:
+            rotate(-2deg);
+    }
+
+    100% {
+        transform:
+            rotate(0deg);
+    }
+
+}
