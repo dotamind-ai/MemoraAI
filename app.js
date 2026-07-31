@@ -1,11 +1,5 @@
 // =====================================================
 // MEMORA MAIN APP
-// app.js
-// =====================================================
-
-
-// =====================================================
-// SUPABASE CONFIG
 // =====================================================
 
 const SUPABASE_URL =
@@ -14,10 +8,6 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
 
-
-// =====================================================
-// SUPABASE CLIENT
-// =====================================================
 
 const supabaseClient =
     window.supabase.createClient(
@@ -65,7 +55,7 @@ let selectedType = "idea";
 
 
 // =====================================================
-// INITIALIZATION
+// INIT
 // =====================================================
 
 document.addEventListener(
@@ -84,34 +74,18 @@ async function initializeApp() {
         } = await supabaseClient.auth.getSession();
 
 
-        if (error) {
-
-            console.error(
-                "Supabase session error:",
-                error
-            );
+        if (error || !data.session) {
 
             redirectToWelcome();
 
             return;
-        }
 
-
-        if (!data.session) {
-
-            redirectToWelcome();
-
-            return;
         }
 
 
         currentUser =
             data.session.user;
 
-
-        // Поддерживаем старый флаг,
-        // чтобы существующая защита index.html
-        // продолжала работать.
 
         localStorage.setItem(
             "memoraAuth",
@@ -124,8 +98,6 @@ async function initializeApp() {
 
         await loadMemoryStats();
 
-
-        // Следим за выходом из аккаунта
 
         supabaseClient.auth.onAuthStateChange(
             function(event, session) {
@@ -157,18 +129,6 @@ async function initializeApp() {
         redirectToWelcome();
 
     }
-
-}
-
-
-// =====================================================
-// REDIRECT
-// =====================================================
-
-function redirectToWelcome() {
-
-    window.location.href =
-        "welcome/welcome.html";
 
 }
 
@@ -217,44 +177,13 @@ function setupMemoryTypes() {
 
 
 // =====================================================
-// NORMALIZE TYPE
-// =====================================================
-
-function normalizeType(type) {
-
-    const value =
-        String(
-            type || "idea"
-        ).toLowerCase();
-
-
-    if (
-        value === "idea" ||
-        value === "note" ||
-        value === "inspiration" ||
-        value === "goal"
-    ) {
-
-        return value;
-
-    }
-
-
-    return "idea";
-
-}
-
-
-// =====================================================
-// LOAD MEMORY STATISTICS
+// STATS
 // =====================================================
 
 async function loadMemoryStats() {
 
     if (!currentUser) {
-
         return;
-
     }
 
 
@@ -277,54 +206,20 @@ async function loadMemoryStats() {
             error
         );
 
-
-        setStat(
-            memoryCount,
-            0
-        );
-
-        setStat(
-            ideaCount,
-            0
-        );
-
-        setStat(
-            noteCount,
-            0
-        );
-
-        setStat(
-            inspirationCount,
-            0
-        );
-
-        setStat(
-            goalCount,
-            0
-        );
-
         return;
+
     }
 
 
-    const rows =
-        data || [];
-
-
     const stats = {
-
         idea: 0,
-
         note: 0,
-
         inspiration: 0,
-
         goal: 0
-
     };
 
 
-    rows.forEach(
+    (data || []).forEach(
         function(memory) {
 
             const type =
@@ -350,27 +245,23 @@ async function loadMemoryStats() {
 
     setStat(
         memoryCount,
-        rows.length
+        data.length
     );
-
 
     setStat(
         ideaCount,
         stats.idea
     );
 
-
     setStat(
         noteCount,
         stats.note
     );
 
-
     setStat(
         inspirationCount,
         stats.inspiration
     );
-
 
     setStat(
         goalCount,
@@ -380,26 +271,14 @@ async function loadMemoryStats() {
 }
 
 
-// =====================================================
-// SET STATISTIC VALUE
-// =====================================================
+function setStat(element, value) {
 
-function setStat(
-    element,
-    value
-) {
+    if (element) {
 
-    if (!element) {
-
-        return;
+        element.textContent =
+            String(value);
 
     }
-
-
-    element.textContent =
-        String(
-            value
-        );
 
 }
 
@@ -449,9 +328,6 @@ async function saveMemory() {
         "Saving...";
 
 
-    // Автоматически делаем заголовок
-    // из первой строки текста.
-
     const title =
         content
             .split(/\r?\n/)[0]
@@ -462,7 +338,6 @@ async function saveMemory() {
     try {
 
         const {
-            data,
             error
         } = await supabaseClient
             .from("memories")
@@ -480,39 +355,18 @@ async function saveMemory() {
                 content:
                     content
 
-            })
-            .select(
-                "id, user_id, title, type, content, created_at"
-            )
-            .single();
+            });
 
 
         if (error) {
 
-            console.error(
-                "Save memory error:",
-                error
-            );
+            throw error;
 
-
-            showMessage(
-                error.message ||
-                "Unable to save memory"
-            );
-
-
-            restoreSaveButton();
-
-            return;
         }
 
 
-        // Очищаем поле.
-
         memoryInput.value = "";
 
-
-        // Обновляем статистику.
 
         await loadMemoryStats();
 
@@ -524,9 +378,6 @@ async function saveMemory() {
             "Saved to Timeline"
         );
 
-
-        // После создания сразу открываем
-        // третью вкладку.
 
         setTimeout(
             function() {
@@ -542,12 +393,13 @@ async function saveMemory() {
     } catch (error) {
 
         console.error(
-            "Unexpected save error:",
+            "Save memory error:",
             error
         );
 
 
         showMessage(
+            error.message ||
             "Unable to save memory"
         );
 
@@ -560,7 +412,7 @@ async function saveMemory() {
 
 
 // =====================================================
-// RESTORE SAVE BUTTON
+// BUTTON
 // =====================================================
 
 function restoreSaveButton() {
@@ -637,6 +489,7 @@ function showMessage(message) {
         box.style.transition =
             "opacity .25s ease";
 
+
         document.body.appendChild(
             box
         );
@@ -672,6 +525,35 @@ function showMessage(message) {
 
 
 // =====================================================
+// TYPE
+// =====================================================
+
+function normalizeType(type) {
+
+    const value =
+        String(
+            type || "idea"
+        ).toLowerCase();
+
+
+    if (
+        value === "idea" ||
+        value === "note" ||
+        value === "inspiration" ||
+        value === "goal"
+    ) {
+
+        return value;
+
+    }
+
+
+    return "idea";
+
+}
+
+
+// =====================================================
 // NAVIGATION
 // =====================================================
 
@@ -699,6 +581,14 @@ function goEvents() {
 }
 
 
+function goChats() {
+
+    window.location.href =
+        "chat.html";
+
+}
+
+
 function goProfile() {
 
     window.location.href =
@@ -706,9 +596,6 @@ function goProfile() {
 
 }
 
-
-// Делаем функции доступными
-// для onclick в index.html.
 
 window.goHome =
     goHome;
@@ -719,5 +606,13 @@ window.goCalendar =
 window.goEvents =
     goEvents;
 
+window.goChats =
+    goChats;
+
 window.goProfile =
     goProfile;
+
+
+// =====================================================
+// END
+// =====================================================
