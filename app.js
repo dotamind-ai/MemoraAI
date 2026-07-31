@@ -1,6 +1,7 @@
 // =====================================================
 // MEMORA APP
-// SUPABASE MEMORY SYSTEM
+// MAIN PAGE
+// SUPABASE
 // =====================================================
 
 
@@ -16,15 +17,12 @@ const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
 
 
-// =====================================================
-// SUPABASE CLIENT
-// =====================================================
-
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
     );
+
 
 
 // =====================================================
@@ -39,16 +37,17 @@ const saveMemoryButton =
     document.getElementById("saveMemory");
 
 
-const memoryList =
-    document.getElementById("memoryList");
-
-
 const memoryCount =
     document.getElementById("memoryCount");
 
 
+const memoryList =
+    document.getElementById("memoryList");
+
+
 const typeButtons =
     document.querySelectorAll(".type-btn");
+
 
 
 // =====================================================
@@ -59,11 +58,10 @@ let selectedType = "idea";
 
 let currentUser = null;
 
-let memories = [];
 
 
 // =====================================================
-// INITIALIZATION
+// INITIALIZE
 // =====================================================
 
 document.addEventListener(
@@ -74,7 +72,8 @@ document.addEventListener(
 
 async function initializeApp() {
 
-    // Проверяем текущую Supabase-сессию
+
+    // Получаем текущую Supabase-сессию
 
     const {
         data,
@@ -82,32 +81,18 @@ async function initializeApp() {
     } = await supabaseClient.auth.getSession();
 
 
-    if (error) {
+    if (
+        error ||
+        !data.session
+    ) {
 
-        console.error(
-            "Session error:",
-            error
-        );
-
-        redirectToWelcome();
-
-        return;
-
-    }
-
-
-    // Пользователь не авторизован
-
-    if (!data.session) {
-
-        redirectToWelcome();
+        window.location.href =
+            "welcome/welcome.html";
 
         return;
 
     }
 
-
-    // Текущий пользователь
 
     currentUser =
         data.session.user;
@@ -118,41 +103,29 @@ async function initializeApp() {
     setupMemoryTypes();
 
 
-    // Загружаем Memories
+    // =================================================
+    // ВАЖНО
+    //
+    // На главной больше НЕ загружаем список Memories.
+    // Все сохранённые записи показываются в Timeline.
+    // =================================================
 
-    await loadMemories();
+    if (memoryCount) {
+
+        memoryCount.textContent = "0";
+
+    }
 
 
-    // Следим за изменением авторизации
+    if (memoryList) {
 
-    supabaseClient.auth.onAuthStateChange(
-        function (event, session) {
+        memoryList.innerHTML = "";
 
-            if (
-                event === "SIGNED_OUT" ||
-                !session
-            ) {
+    }
 
-                redirectToWelcome();
-
-            }
-
-        }
-    );
 
 }
 
-
-// =====================================================
-// REDIRECT TO WELCOME
-// =====================================================
-
-function redirectToWelcome() {
-
-    window.location.href =
-        "welcome/welcome.html";
-
-}
 
 
 // =====================================================
@@ -161,19 +134,18 @@ function redirectToWelcome() {
 
 function setupMemoryTypes() {
 
+
     typeButtons.forEach(
-        function (button) {
+        function(button) {
 
 
             button.addEventListener(
                 "click",
-                function () {
+                function() {
 
-
-                    // Убираем active
 
                     typeButtons.forEach(
-                        function (item) {
+                        function(item) {
 
                             item.classList.remove(
                                 "active"
@@ -183,14 +155,10 @@ function setupMemoryTypes() {
                     );
 
 
-                    // Добавляем active
-
                     button.classList.add(
                         "active"
                     );
 
-
-                    // Запоминаем выбранный тип
 
                     selectedType =
                         button.dataset.type ||
@@ -199,269 +167,11 @@ function setupMemoryTypes() {
                 }
             );
 
-
         }
     );
 
 }
 
-
-// =====================================================
-// LOAD MEMORIES
-// =====================================================
-
-async function loadMemories() {
-
-
-    if (!currentUser) {
-
-        return;
-
-    }
-
-
-    memoryList.innerHTML = "";
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("memories")
-        .select(
-            "id, user_id, type, content, created_at"
-        )
-        .eq(
-            "user_id",
-            currentUser.id
-        )
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
-
-
-    if (error) {
-
-        console.error(
-            "Load memories error:",
-            error
-        );
-
-
-        showTemporaryMessage(
-            "Не удалось загрузить воспоминания"
-        );
-
-
-        return;
-
-    }
-
-
-    memories = data || [];
-
-
-    renderMemories();
-
-}
-
-
-// =====================================================
-// RENDER MEMORIES
-// =====================================================
-
-function renderMemories() {
-
-
-    memoryList.innerHTML = "";
-
-
-    memoryCount.textContent =
-        memories.length;
-
-
-    if (memories.length === 0) {
-
-        const empty =
-            document.createElement("div");
-
-
-        empty.className =
-            "memory-empty";
-
-
-        empty.textContent =
-            "No memories yet";
-
-
-        memoryList.appendChild(
-            empty
-        );
-
-
-        return;
-
-    }
-
-
-    memories.forEach(
-        function (memory) {
-
-
-            const card =
-                createMemoryCard(
-                    memory
-                );
-
-
-            memoryList.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// CREATE MEMORY CARD
-// =====================================================
-
-function createMemoryCard(memory) {
-
-
-    const article =
-        document.createElement("article");
-
-
-    article.className =
-        "memory-item";
-
-
-    article.dataset.id =
-        memory.id;
-
-
-
-    // TYPE
-
-    const type =
-        document.createElement("div");
-
-
-    type.className =
-        "memory-type";
-
-
-    type.textContent =
-        String(
-            memory.type || "idea"
-        ).toUpperCase();
-
-
-
-    // TEXT
-
-    const text =
-        document.createElement("div");
-
-
-    text.className =
-        "memory-text";
-
-
-    // textContent защищает от HTML/JS
-
-    text.textContent =
-        memory.content || "";
-
-
-
-    // FOOTER
-
-    const footer =
-        document.createElement("div");
-
-
-    footer.className =
-        "memory-footer";
-
-
-
-    const date =
-        document.createElement("span");
-
-
-    date.textContent =
-        formatDate(
-            memory.created_at
-        );
-
-
-
-    // DELETE
-
-    const deleteButton =
-        document.createElement("button");
-
-
-    deleteButton.className =
-        "delete-memory";
-
-
-    deleteButton.type =
-        "button";
-
-
-    deleteButton.textContent =
-        "Delete";
-
-
-    deleteButton.addEventListener(
-        "click",
-        function () {
-
-            deleteMemory(
-                memory.id
-            );
-
-        }
-    );
-
-
-
-    footer.appendChild(
-        date
-    );
-
-
-    footer.appendChild(
-        deleteButton
-    );
-
-
-    article.appendChild(
-        type
-    );
-
-
-    article.appendChild(
-        text
-    );
-
-
-    article.appendChild(
-        footer
-    );
-
-
-    return article;
-
-}
 
 
 // =====================================================
@@ -477,23 +187,32 @@ saveMemoryButton.addEventListener(
 async function saveMemory() {
 
 
+    // Проверяем пользователя
+
     if (!currentUser) {
 
-        redirectToWelcome();
+        window.location.href =
+            "welcome/welcome.html";
 
         return;
 
     }
 
 
+
+    // Получаем текст
+
     const content =
         memoryInput.value.trim();
 
 
+
+    // Пустая заметка
+
     if (!content) {
 
 
-        showTemporaryMessage(
+        showMessage(
             "Write something first"
         );
 
@@ -518,6 +237,22 @@ async function saveMemory() {
 
 
 
+    // -------------------------------------------------
+    // Создаём автоматический заголовок
+    // -------------------------------------------------
+
+    const title =
+        content
+            .split(/\r?\n/)[0]
+            .trim()
+            .slice(0, 120);
+
+
+
+    // -------------------------------------------------
+    // Сохраняем в Supabase
+    // -------------------------------------------------
+
     const {
         data,
         error
@@ -528,6 +263,9 @@ async function saveMemory() {
             user_id:
                 currentUser.id,
 
+            title:
+                title || null,
+
             type:
                 selectedType,
 
@@ -536,13 +274,16 @@ async function saveMemory() {
 
         })
         .select(
-            "id, user_id, type, content, created_at"
+            "id, user_id, title, type, content, created_at"
         )
         .single();
 
 
 
+    // Ошибка
+
     if (error) {
+
 
         console.error(
             "Save memory error:",
@@ -550,8 +291,8 @@ async function saveMemory() {
         );
 
 
-        showTemporaryMessage(
-            "Не удалось сохранить"
+        showMessage(
+            "Unable to save memory"
         );
 
 
@@ -564,38 +305,45 @@ async function saveMemory() {
 
 
 
-    // Добавляем новую запись сверху
-
-    memories.unshift(
-        data
-    );
-
-
-    // Очищаем поле
+    // -------------------------------------------------
+    // Успешно
+    // -------------------------------------------------
 
     memoryInput.value = "";
-
-
-    // Обновляем экран
-
-    renderMemories();
 
 
     restoreSaveButton();
 
 
-    showTemporaryMessage(
-        "Memory saved"
+    showMessage(
+        "Saved to Timeline"
+    );
+
+
+
+    // Небольшая пауза,
+    // затем открываем Timeline
+
+    setTimeout(
+        function() {
+
+            window.location.href =
+                "events.html";
+
+        },
+        500
     );
 
 }
 
 
+
 // =====================================================
-// RESTORE SAVE BUTTON
+// RESTORE BUTTON
 // =====================================================
 
 function restoreSaveButton() {
+
 
     saveMemoryButton.disabled =
         false;
@@ -607,153 +355,12 @@ function restoreSaveButton() {
 }
 
 
-// =====================================================
-// DELETE MEMORY
-// =====================================================
-
-async function deleteMemory(memoryId) {
-
-
-    if (!memoryId) {
-
-        return;
-
-    }
-
-
-    const confirmed =
-        window.confirm(
-            "Delete this memory?"
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-
-    const {
-        error
-    } = await supabaseClient
-        .from("memories")
-        .delete()
-        .eq(
-            "id",
-            memoryId
-        )
-        .eq(
-            "user_id",
-            currentUser.id
-        );
-
-
-
-    if (error) {
-
-
-        console.error(
-            "Delete memory error:",
-            error
-        );
-
-
-        showTemporaryMessage(
-            "Не удалось удалить"
-        );
-
-
-        return;
-
-    }
-
-
-
-    // Удаляем из локального массива
-
-    memories =
-        memories.filter(
-            function (memory) {
-
-                return memory.id !== memoryId;
-
-            }
-        );
-
-
-
-    // Перерисовываем
-
-    renderMemories();
-
-
-    showTemporaryMessage(
-        "Memory deleted"
-    );
-
-}
-
 
 // =====================================================
-// DATE FORMAT
+// MESSAGE
 // =====================================================
 
-function formatDate(dateString) {
-
-
-    if (!dateString) {
-
-        return "";
-
-    }
-
-
-    const date =
-        new Date(
-            dateString
-        );
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "";
-
-    }
-
-
-    return date.toLocaleString(
-        "ru-RU",
-        {
-
-            day: "2-digit",
-
-            month: "2-digit",
-
-            year: "numeric",
-
-            hour: "2-digit",
-
-            minute: "2-digit"
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// TEMPORARY MESSAGE
-// =====================================================
-
-function showTemporaryMessage(
-    message
-) {
+function showMessage(message) {
 
 
     let box =
@@ -800,11 +407,11 @@ function showTemporaryMessage(
 
 
         box.style.background =
-            "rgba(255,255,255,.12)";
+            "rgba(255,255,255,.10)";
 
 
         box.style.border =
-            "1px solid rgba(255,255,255,.18)";
+            "1px solid rgba(255,255,255,.16)";
 
 
         box.style.backdropFilter =
@@ -845,7 +452,7 @@ function showTemporaryMessage(
 
     box._timer =
         setTimeout(
-            function () {
+            function() {
 
                 box.style.opacity =
                     "0";
@@ -855,6 +462,7 @@ function showTemporaryMessage(
         );
 
 }
+
 
 
 // =====================================================
@@ -891,3 +499,21 @@ function goProfile() {
         "profile.html";
 
 }
+
+
+// Для HTML onclick
+
+window.goHome =
+    goHome;
+
+
+window.goCalendar =
+    goCalendar;
+
+
+window.goEvents =
+    goEvents;
+
+
+window.goProfile =
+    goProfile;
