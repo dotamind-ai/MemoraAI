@@ -1,11 +1,12 @@
 // =====================================================
-// MEMORA + SUPABASE AUTH
+// MEMORA
+// SUPABASE AUTHENTICATION
 // =====================================================
 
 
-// -----------------------------------------------------
+// =====================================================
 // SUPABASE CONFIG
-// -----------------------------------------------------
+// =====================================================
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
@@ -25,9 +26,9 @@ const supabaseClient =
 
 
 
-// -----------------------------------------------------
-// ELEMENTS
-// -----------------------------------------------------
+// =====================================================
+// HTML ELEMENTS
+// =====================================================
 
 const authTitle =
     document.getElementById("authTitle");
@@ -54,13 +55,17 @@ const authMessage =
 
 
 
+// =====================================================
+// CURRENT MODE
+// =====================================================
+
 let mode = "login";
 
 
 
-// -----------------------------------------------------
+// =====================================================
 // MESSAGE
-// -----------------------------------------------------
+// =====================================================
 
 function showMessage(message) {
 
@@ -70,9 +75,9 @@ function showMessage(message) {
 
 
 
-// -----------------------------------------------------
-// SWITCH LOGIN / REGISTER
-// -----------------------------------------------------
+// =====================================================
+// LOGIN / REGISTER SWITCH
+// =====================================================
 
 switchButton.addEventListener(
     "click",
@@ -97,18 +102,13 @@ switchButton.addEventListener(
                 "Already have an account";
 
 
-            loginInput.value = "";
-
-            passwordInput.value = "";
-
-            showMessage("");
-
-
             passwordInput.autocomplete =
                 "new-password";
 
 
-        } else {
+        }
+
+        else {
 
 
             mode = "login";
@@ -126,26 +126,26 @@ switchButton.addEventListener(
                 "Create account";
 
 
-            loginInput.value = "";
-
-            passwordInput.value = "";
-
-            showMessage("");
-
-
             passwordInput.autocomplete =
                 "current-password";
 
         }
+
+
+        loginInput.value = "";
+
+        passwordInput.value = "";
+
+        showMessage("");
 
     }
 );
 
 
 
-// -----------------------------------------------------
+// =====================================================
 // MAIN AUTH BUTTON
-// -----------------------------------------------------
+// =====================================================
 
 authButton.addEventListener(
     "click",
@@ -161,21 +161,20 @@ authButton.addEventListener(
 
 
 
-        // Проверяем поля
+        // ---------------------------------------------
+        // Проверка Email
+        // ---------------------------------------------
 
-        if (!email || !password) {
+        if (!email) {
 
             showMessage(
-                "Enter email and password"
+                "Enter your email"
             );
 
             return;
 
         }
 
-
-
-        // Простая проверка email
 
         if (!email.includes("@")) {
 
@@ -189,9 +188,36 @@ authButton.addEventListener(
 
 
 
-        // =============================================
+        // ---------------------------------------------
+        // Проверка пароля
+        // ---------------------------------------------
+
+        if (!password) {
+
+            showMessage(
+                "Enter your password"
+            );
+
+            return;
+
+        }
+
+
+        if (password.length < 6) {
+
+            showMessage(
+                "Password must be at least 6 characters"
+            );
+
+            return;
+
+        }
+
+
+
+        // =================================================
         // REGISTER
-        // =============================================
+        // =================================================
 
         if (mode === "register") {
 
@@ -204,33 +230,48 @@ authButton.addEventListener(
             try {
 
 
-                const {
-                    data,
-                    error
-                } = await supabaseClient.auth.signUp({
+                const result =
+                    await supabaseClient.auth.signUp({
 
-                    email: email,
+                        email: email,
 
-                    password: password,
+                        password: password,
 
-                    options: {
+                        options: {
 
-                        emailRedirectTo:
-                            "https://dotamind-ai.github.io/MemoraAI/welcome/welcome.html"
+                            emailRedirectTo:
+                                "https://dotamind-ai.github.io/MemoraAI/welcome/welcome.html"
 
-                    }
+                        }
 
-                });
+                    });
 
 
+
+                const data =
+                    result.data;
+
+
+                const error =
+                    result.error;
+
+
+
+                // Ошибка Supabase
 
                 if (error) {
 
-                    console.error(error);
+
+                    console.error(
+                        "Supabase registration error:",
+                        error
+                    );
+
 
                     showMessage(
                         error.message
                     );
+
 
                     return;
 
@@ -238,14 +279,15 @@ authButton.addEventListener(
 
 
 
-                // Если подтверждение email включено,
-                // session обычно отсутствует.
+                // -----------------------------------------
+                // Email confirmation включён
+                // -----------------------------------------
 
                 if (!data.session) {
 
 
                     showMessage(
-                        "Account created. Check your email to confirm your account."
+                        "Account created. Check your email and confirm your account."
                     );
 
 
@@ -260,8 +302,9 @@ authButton.addEventListener(
 
 
 
-                // На случай если confirmation
-                // отключён
+                // -----------------------------------------
+                // Если подтверждение не требуется
+                // -----------------------------------------
 
                 localStorage.setItem(
                     "memoraAuth",
@@ -269,8 +312,20 @@ authButton.addEventListener(
                 );
 
 
-                window.location.href =
-                    "https://dotamind-ai.github.io/MemoraAI/";
+                showMessage(
+                    "Account created"
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "https://dotamind-ai.github.io/MemoraAI/";
+
+                    },
+                    500
+                );
 
 
             }
@@ -278,7 +333,10 @@ authButton.addEventListener(
             catch (error) {
 
 
-                console.error(error);
+                console.error(
+                    "Registration error:",
+                    error
+                );
 
 
                 showMessage(
@@ -294,9 +352,9 @@ authButton.addEventListener(
 
 
 
-        // =============================================
+        // =================================================
         // LOGIN
-        // =============================================
+        // =================================================
 
         showMessage(
             "Signing in..."
@@ -306,46 +364,67 @@ authButton.addEventListener(
         try {
 
 
-            const {
-                data,
-                error
-            } = await supabaseClient.auth.signInWithPassword({
+            const result =
+                await supabaseClient.auth.signInWithPassword({
 
-                email: email,
+                    email: email,
 
-                password: password
+                    password: password
 
-            });
+                });
 
 
+
+            const data =
+                result.data;
+
+
+            const error =
+                result.error;
+
+
+
+            // Ошибка
 
             if (error) {
 
-                console.error(error);
+
+                console.error(
+                    "Supabase login error:",
+                    error
+                );
+
 
                 showMessage(
                     error.message
                 );
 
+
                 return;
 
             }
 
 
 
+            // Нет сессии
+
             if (!data.session) {
+
 
                 showMessage(
                     "Login failed"
                 );
 
+
                 return;
 
             }
 
 
 
-            // Авторизация успешна
+            // -----------------------------------------
+            // Успешный вход
+            // -----------------------------------------
 
             localStorage.setItem(
                 "memoraAuth",
@@ -353,14 +432,12 @@ authButton.addEventListener(
             );
 
 
-
             showMessage(
                 "Login successful"
             );
 
 
-
-            // Переход в основную Memora
+            // Переходим на основную Memora
 
             setTimeout(
                 function () {
@@ -378,7 +455,10 @@ authButton.addEventListener(
         catch (error) {
 
 
-            console.error(error);
+            console.error(
+                "Login error:",
+                error
+            );
 
 
             showMessage(
@@ -392,13 +472,14 @@ authButton.addEventListener(
 
 
 
-// -----------------------------------------------------
+// =====================================================
 // ENTER KEY
-// -----------------------------------------------------
+// =====================================================
 
 passwordInput.addEventListener(
     "keydown",
     function (event) {
+
 
         if (event.key === "Enter") {
 
@@ -411,23 +492,26 @@ passwordInput.addEventListener(
 
 
 
-// -----------------------------------------------------
-// CHECK EXISTING SUPABASE SESSION
-// -----------------------------------------------------
+// =====================================================
+// CHECK EXISTING SESSION
+// =====================================================
 
-async function checkExistingSession() {
+async function checkSession() {
 
 
     try {
 
 
-        const {
-            data
-        } = await supabaseClient.auth.getSession();
+        const result =
+            await supabaseClient.auth.getSession();
+
+
+        const session =
+            result.data.session;
 
 
 
-        if (data.session) {
+        if (session) {
 
 
             localStorage.setItem(
@@ -436,20 +520,19 @@ async function checkExistingSession() {
             );
 
 
-            // Если пользователь уже авторизован,
-            // можно сразу открыть Memora.
-
             window.location.href =
                 "https://dotamind-ai.github.io/MemoraAI/";
 
         }
 
+
     }
 
     catch (error) {
 
+
         console.error(
-            "Session check error:",
+            "Session error:",
             error
         );
 
@@ -458,4 +541,4 @@ async function checkExistingSession() {
 }
 
 
-checkExistingSession();
+checkSession();
