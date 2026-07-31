@@ -12,12 +12,28 @@
 
 <title>Memora</title>
 
-
 <link
     rel="stylesheet"
     href="style.css"
 >
 
+
+<!-- =====================================
+        AUTH CHECK
+===================================== -->
+
+<script>
+
+if (
+    localStorage.getItem("memoraAuth") !== "true"
+) {
+
+    window.location.href =
+        "welcome/welcome.html";
+
+}
+
+</script>
 
 </head>
 
@@ -72,6 +88,7 @@
 
     <div class="header-text">
 
+
         <h1>
             Memora
         </h1>
@@ -81,12 +98,11 @@
             Your memory space
         </p>
 
+
     </div>
 
 
 </header>
-
-
 
 
 
@@ -127,7 +143,6 @@
         </button>
 
 
-
         <button
             class="type-btn"
             data-type="note"
@@ -137,7 +152,6 @@
         </button>
 
 
-
         <button
             class="type-btn"
             data-type="inspiration"
@@ -145,7 +159,6 @@
         >
             INSPIRATION
         </button>
-
 
 
         <button
@@ -166,7 +179,9 @@
         class="save-button"
         type="button"
     >
+
         Save Memory
+
     </button>
 
 
@@ -174,10 +189,8 @@
 
 
 
-
-
 <!-- =====================================
-        MEMORY FEED
+        MEMORY STATISTICS
 ===================================== -->
 
 <section class="memory-feed">
@@ -200,15 +213,174 @@
 
 
 
-    <div id="memoryList"></div>
+    <div class="memory-stats">
+
+
+        <!-- IDEA -->
+
+        <div class="memory-stat-card stat-idea">
+
+
+            <div class="stat-icon">
+
+                ◇
+
+            </div>
+
+
+            <div class="stat-info">
+
+
+                <span
+                    class="stat-number"
+                    id="ideaCount"
+                >
+
+                    0
+
+                </span>
+
+
+                <span class="stat-label">
+
+                    IDEA
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- NOTE -->
+
+        <div class="memory-stat-card stat-note">
+
+
+            <div class="stat-icon">
+
+                ≡
+
+            </div>
+
+
+            <div class="stat-info">
+
+
+                <span
+                    class="stat-number"
+                    id="noteCount"
+                >
+
+                    0
+
+                </span>
+
+
+                <span class="stat-label">
+
+                    NOTE
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- INSPIRATION -->
+
+        <div
+            class="memory-stat-card stat-inspiration"
+        >
+
+
+            <div class="stat-icon">
+
+                ✦
+
+            </div>
+
+
+            <div class="stat-info">
+
+
+                <span
+                    class="stat-number"
+                    id="inspirationCount"
+                >
+
+                    0
+
+                </span>
+
+
+                <span class="stat-label">
+
+                    INSPIRATION
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- GOAL -->
+
+        <div class="memory-stat-card stat-goal">
+
+
+            <div class="stat-icon">
+
+                □
+
+            </div>
+
+
+            <div class="stat-info">
+
+
+                <span
+                    class="stat-number"
+                    id="goalCount"
+                >
+
+                    0
+
+                </span>
+
+
+                <span class="stat-label">
+
+                    GOAL
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
 
 
 </section>
 
 
+
 </div>
-
-
 
 
 
@@ -219,25 +391,33 @@
 <nav class="bottom-nav">
 
 
+    <!-- MEMORIES -->
+
     <button
         class="nav-item active"
         onclick="goHome()"
         type="button"
     >
 
+
         <img
             src="icons/memories.svg"
             alt="Memories"
         >
 
+
         <small>
+
             Memories
+
         </small>
+
 
     </button>
 
 
 
+    <!-- CALENDAR -->
 
     <button
         class="nav-item"
@@ -245,19 +425,25 @@
         type="button"
     >
 
+
         <img
             src="icons/calendar.svg"
             alt="Calendar"
         >
 
+
         <small>
+
             Calendar
+
         </small>
+
 
     </button>
 
 
 
+    <!-- TIMELINE -->
 
     <button
         class="nav-item"
@@ -265,19 +451,25 @@
         type="button"
     >
 
+
         <img
             src="icons/events.svg"
-            alt="Events"
+            alt="Timeline"
         >
 
+
         <small>
-            Events
+
+            Timeline
+
         </small>
+
 
     </button>
 
 
 
+    <!-- PROFILE -->
 
     <button
         class="nav-item"
@@ -285,21 +477,24 @@
         type="button"
     >
 
+
         <img
             src="icons/profile.svg"
             alt="Profile"
         >
 
+
         <small>
+
             Profile
+
         </small>
+
 
     </button>
 
 
 </nav>
-
-
 
 
 
@@ -314,7 +509,7 @@
 
 
 <!-- =====================================
-        APP
+        MAIN APP
 ===================================== -->
 
 <script src="app.js"></script>
