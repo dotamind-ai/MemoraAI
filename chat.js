@@ -152,6 +152,7 @@ async function initializeChat() {
     try {
 
         createToastContainer();
+
         injectToastStyles();
 
 
@@ -235,6 +236,7 @@ function setupNavigation() {
             function(event) {
 
                 event.preventDefault();
+
                 event.stopPropagation();
 
                 window.location.href =
@@ -509,7 +511,9 @@ async function clearAllNotifications() {
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -517,6 +521,7 @@ async function clearAllNotifications() {
 
 
         renderNotifications();
+
         renderFriends();
 
 
@@ -669,20 +674,28 @@ async function searchUser() {
 
 
     if (searchResult) {
-        searchResult.innerHTML = "";
+
+        searchResult.innerHTML =
+            "";
+
     }
 
 
     if (searchMessage) {
-        searchMessage.textContent = "";
+
+        searchMessage.textContent =
+            "";
+
     }
 
 
     if (!email) {
 
         if (searchMessage) {
+
             searchMessage.textContent =
                 "Enter an email address.";
+
         }
 
         return;
@@ -693,8 +706,10 @@ async function searchUser() {
     if (!email.includes("@")) {
 
         if (searchMessage) {
+
             searchMessage.textContent =
                 "Enter a valid email address.";
+
         }
 
         return;
@@ -724,7 +739,9 @@ async function searchUser() {
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -734,8 +751,10 @@ async function searchUser() {
         ) {
 
             if (searchMessage) {
+
                 searchMessage.textContent =
                     "User not found.";
+
             }
 
             return;
@@ -765,6 +784,7 @@ async function searchUser() {
 
         }
 
+
     } finally {
 
         searchButton.disabled =
@@ -784,7 +804,9 @@ function renderSearchResult(
 ) {
 
     if (!searchResult) {
+
         return;
+
     }
 
 
@@ -845,6 +867,7 @@ function renderSearchResult(
 
 
     info.appendChild(name);
+
     info.appendChild(mail);
 
 
@@ -880,7 +903,9 @@ function renderSearchResult(
 
 
     card.appendChild(avatar);
+
     card.appendChild(info);
+
     card.appendChild(action);
 
 
@@ -919,7 +944,9 @@ async function sendFriendRequest(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -933,8 +960,10 @@ async function sendFriendRequest(
 
 
         if (searchMessage) {
+
             searchMessage.textContent =
                 "Request sent.";
+
         }
 
 
@@ -1010,7 +1039,9 @@ function getUnreadCountForFriend(
 ) {
 
     if (!friendId) {
+
         return 0;
+
     }
 
 
@@ -1021,9 +1052,7 @@ function getUnreadCountForFriend(
                 notification.type ===
                 "new_message" &&
 
-                getConversationFriendId(
-                    notification
-                ) ===
+                notification._friendId ===
                 friendId
             );
 
@@ -1033,66 +1062,86 @@ function getUnreadCountForFriend(
 }
 
 
-function getConversationFriendId(
-    notification
-) {
+async function attachFriendIdsToNotifications() {
 
-    if (
-        !notification ||
-        !notification.related_id
-    ) {
+    const messageNotifications =
+        notifications.filter(
+            function(notification) {
 
-        return null;
-
-    }
-
-
-    // We don't store friend_id directly
-    // inside notifications.
-    //
-    // Therefore this function first checks
-    // whether the currently known friend
-    // already has this conversation cached.
-
-    if (
-        notification._friendId
-    ) {
-
-        return notification._friendId;
-
-    }
-
-
-    return null;
-
-}
-
-
-function refreshUnreadCounts() {
-
-    notifications.forEach(
-        function(notification) {
-
-            if (
-                notification.type !==
-                "new_message"
-            ) {
-
-                return;
+                return (
+                    notification.type ===
+                    "new_message" &&
+                    notification.related_id
+                );
 
             }
+        );
 
 
-            if (
-                notification._friendId
-            ) {
+    for (
+        const notification
+        of messageNotifications
+    ) {
 
-                return;
+        if (
+            notification._friendId
+        ) {
 
-            }
+            continue;
 
         }
-    );
+
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .from("conversation_members")
+                .select(
+                    "user_id"
+                )
+                .eq(
+                    "conversation_id",
+                    notification.related_id
+                )
+                .neq(
+                    "user_id",
+                    currentUser.id
+                )
+                .maybeSingle();
+
+
+            if (error) {
+
+                console.error(
+                    "Unread mapping error:",
+                    error
+                );
+
+                continue;
+
+            }
+
+
+            if (data) {
+
+                notification._friendId =
+                    data.user_id;
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unread mapping error:",
+                error
+            );
+
+        }
+
+    }
 
 }
 
@@ -1100,7 +1149,9 @@ function refreshUnreadCounts() {
 function renderFriends() {
 
     if (!friendList) {
+
         return;
+
     }
 
 
@@ -1326,11 +1377,9 @@ function renderFriends() {
                 avatar
             );
 
-
             card.appendChild(
                 info
             );
-
 
             card.appendChild(
                 action
@@ -1372,7 +1421,8 @@ async function loadNotifications() {
         .order(
             "created_at",
             {
-                ascending: false
+                ascending:
+                    false
             }
         );
 
@@ -1384,10 +1434,10 @@ async function loadNotifications() {
             error
         );
 
-        notifications =
-            [];
+        notifications = [];
 
         renderNotifications();
+
         renderFriends();
 
         return;
@@ -1399,71 +1449,11 @@ async function loadNotifications() {
         data || [];
 
 
-    renderNotifications();
     await attachFriendIdsToNotifications();
+
+    renderNotifications();
+
     renderFriends();
-
-}
-
-
-async function attachFriendIdsToNotifications() {
-
-    const messageNotifications =
-        notifications.filter(
-            function(notification) {
-
-                return (
-                    notification.type ===
-                    "new_message" &&
-                    notification.related_id
-                );
-
-            }
-        );
-
-
-    for (
-        const notification
-        of messageNotifications
-    ) {
-
-        try {
-
-            const {
-                data
-            } = await supabaseClient
-                .from("conversation_members")
-                .select(
-                    "user_id"
-                )
-                .eq(
-                    "conversation_id",
-                    notification.related_id
-                )
-                .neq(
-                    "user_id",
-                    currentUser.id
-                )
-                .maybeSingle();
-
-
-            if (data) {
-
-                notification._friendId =
-                    data.user_id;
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Unread mapping error:",
-                error
-            );
-
-        }
-
-    }
 
 }
 
@@ -1476,6 +1466,7 @@ function renderNotifications() {
     ) {
 
         return;
+
     }
 
 
@@ -1500,6 +1491,7 @@ function renderNotifications() {
         `;
 
         return;
+
     }
 
 
@@ -1518,10 +1510,12 @@ function renderNotifications() {
 
             const displayName =
                 notification.type ===
-                    "new_message"
+                "new_message"
+
                     ? getSenderName(
                         notification.body
                     )
+
                     : "Memora user";
 
 
@@ -1577,7 +1571,6 @@ function renderNotifications() {
                 title
             );
 
-
             info.appendChild(
                 body
             );
@@ -1586,7 +1579,6 @@ function renderNotifications() {
             card.appendChild(
                 avatar
             );
-
 
             card.appendChild(
                 info
@@ -1718,6 +1710,7 @@ function addFriendRequestActions(
         accept
     );
 
+
     actions.appendChild(
         reject
     );
@@ -1823,7 +1816,9 @@ async function openMessageNotification(
 
 
     if (!data) {
+
         return;
+
     }
 
 
@@ -1872,7 +1867,8 @@ async function markNotificationRead(
     } = await supabaseClient
         .from("notifications")
         .update({
-            read: true
+            read:
+                true
         })
         .eq(
             "id",
@@ -1925,7 +1921,9 @@ async function markNotificationRead(
 function subscribeToNotifications() {
 
     if (!currentUser) {
+
         return;
+
     }
 
 
@@ -1944,19 +1942,24 @@ function subscribeToNotifications() {
                 "memora-notifications-" +
                 currentUser.id
             )
+
             .on(
                 "postgres_changes",
                 {
-                    event: "INSERT",
+                    event:
+                        "INSERT",
 
-                    schema: "public",
+                    schema:
+                        "public",
 
-                    table: "notifications",
+                    table:
+                        "notifications",
 
                     filter:
                         "user_id=eq." +
                         currentUser.id
                 },
+
                 async function(payload) {
 
                     const notification =
@@ -1966,6 +1969,7 @@ function subscribeToNotifications() {
                     if (
                         notification.type ===
                             "new_message" &&
+
                         notification.related_id ===
                             activeConversationId
                     ) {
@@ -1979,7 +1983,7 @@ function subscribeToNotifications() {
                     }
 
 
-                    if (
+                    const exists =
                         notifications.some(
                             function(item) {
 
@@ -1989,21 +1993,27 @@ function subscribeToNotifications() {
                                 );
 
                             }
-                        )
-                    ) {
-
-                        notifications.unshift(
-    notification
-);
+                        );
 
 
-await attachFriendIdsToNotifications();
+                    if (exists) {
 
-renderNotifications();
+                        return;
 
-renderFriends();
+                    }
 
-animateNotificationBell();
+
+                    notifications.unshift(
+                        notification
+                    );
+
+
+                    await attachFriendIdsToNotifications();
+
+
+                    renderNotifications();
+
+                    renderFriends();
 
 
                     if (
@@ -2019,6 +2029,7 @@ animateNotificationBell();
 
                 }
             )
+
             .subscribe();
 
 }
@@ -2037,7 +2048,8 @@ async function markDatabaseNotificationRead(
     } = await supabaseClient
         .from("notifications")
         .update({
-            read: true
+            read:
+                true
         })
         .eq(
             "id",
@@ -2136,7 +2148,9 @@ async function openFriendFromUrl() {
 
 
     if (!friendId) {
+
         return;
+
     }
 
 
@@ -2245,6 +2259,7 @@ async function openConversation(
 
         await loadMessages();
 
+
         await markCurrentConversationNotifications();
 
 
@@ -2291,7 +2306,9 @@ async function openConversation(
 async function markCurrentConversationNotifications() {
 
     if (!activeConversationId) {
+
         return;
+
     }
 
 
@@ -2302,6 +2319,7 @@ async function markCurrentConversationNotifications() {
                 return (
                     notification.type ===
                     "new_message" &&
+
                     notification.related_id ===
                     activeConversationId
                 );
@@ -2318,7 +2336,8 @@ async function markCurrentConversationNotifications() {
         await supabaseClient
             .from("notifications")
             .update({
-                read: true
+                read:
+                    true
             })
             .eq(
                 "id",
@@ -2339,6 +2358,7 @@ async function markCurrentConversationNotifications() {
                 return !(
                     notification.type ===
                     "new_message" &&
+
                     notification.related_id ===
                     activeConversationId
                 );
@@ -2396,7 +2416,9 @@ function closeConversation() {
 async function loadMessages() {
 
     if (!activeConversationId) {
+
         return;
+
     }
 
 
@@ -2438,6 +2460,13 @@ async function loadMessages() {
 function renderMessages(
     messages
 ) {
+
+    if (!messageList) {
+
+        return;
+
+    }
+
 
     messageList.innerHTML =
         "";
@@ -2481,6 +2510,13 @@ function renderMessages(
 function appendMessage(
     message
 ) {
+
+    if (!messageList) {
+
+        return;
+
+    }
+
 
     if (
         document.querySelector(
@@ -2607,7 +2643,9 @@ async function sendMessage(
 
 
     if (!content) {
+
         return;
+
     }
 
 
@@ -2699,7 +2737,9 @@ function subscribeToMessages() {
 
 
     if (!activeConversationId) {
+
         return;
+
     }
 
 
@@ -2709,6 +2749,7 @@ function subscribeToMessages() {
                 "memora-messages-" +
                 activeConversationId
             )
+
             .on(
                 "postgres_changes",
                 {
@@ -2725,6 +2766,7 @@ function subscribeToMessages() {
                         "conversation_id=eq." +
                         activeConversationId
                 },
+
                 function(payload) {
 
                     appendMessage(
@@ -2734,11 +2776,11 @@ function subscribeToMessages() {
 
                     scrollMessagesToBottom();
 
-
                     markCurrentConversationNotifications();
 
                 }
             )
+
             .subscribe();
 
 }
@@ -2747,7 +2789,9 @@ function subscribeToMessages() {
 function stopMessageRealtime() {
 
     if (!messageChannel) {
+
         return;
+
     }
 
 
@@ -2769,7 +2813,9 @@ function stopMessageRealtime() {
 function createToastContainer() {
 
     if (toastContainer) {
+
         return;
+
     }
 
 
@@ -2795,7 +2841,9 @@ function showMessageToast(
 ) {
 
     if (!toastContainer) {
+
         createToastContainer();
+
     }
 
 
@@ -2903,6 +2951,7 @@ function showMessageToast(
         function(event) {
 
             event.preventDefault();
+
             event.stopPropagation();
 
             removeToast(
@@ -3022,7 +3071,9 @@ function setMyAvatar(
 ) {
 
     if (!myAvatar) {
+
         return;
+
     }
 
 
@@ -3094,7 +3145,9 @@ function setConversationAvatar(
 ) {
 
     if (!conversationAvatar) {
+
         return;
+
     }
 
 
@@ -3234,9 +3287,9 @@ function getInitial(
             name ||
             "M"
         )
-        .trim()
-        .charAt(0)
-        .toUpperCase()
+            .trim()
+            .charAt(0)
+            .toUpperCase()
         ||
         "M"
     );
@@ -3247,7 +3300,9 @@ function getInitial(
 function setMessagesLoading() {
 
     if (!messageList) {
+
         return;
+
     }
 
 
@@ -3285,7 +3340,9 @@ function scrollMessagesToBottom() {
 function autoResizeMessageInput() {
 
     if (!messageInput) {
+
         return;
+
     }
 
 
@@ -3373,11 +3430,14 @@ function injectToastStyles() {
 
         #memora-chat-toast-container {
 
-            position: fixed;
+            position:
+                fixed;
 
-            top: 12px;
+            top:
+                12px;
 
-            left: 50%;
+            left:
+                50%;
 
             transform:
                 translateX(-50%);
@@ -3700,73 +3760,6 @@ function injectToastStyles() {
 
     document.head.appendChild(
         style
-    );
-
-}
-function animateNotificationBell() {
-
-    if (!notificationButton) {
-        return;
-    }
-
-
-    notificationButton.classList.remove(
-        "bell-active"
-    );
-
-
-    // Перезапускаем animation даже если
-    // новое уведомление пришло подряд.
-
-    void notificationButton.offsetWidth;
-
-
-    notificationButton.classList.add(
-        "bell-active"
-    );
-
-
-    setTimeout(
-        function() {
-
-            notificationButton.classList.remove(
-                "bell-active"
-            );
-
-        },
-        700
-    );
-
-}
-function animateNotificationBell() {
-
-    if (!notificationButton) {
-        return;
-    }
-
-
-    notificationButton.classList.remove(
-        "bell-active"
-    );
-
-
-    void notificationButton.offsetWidth;
-
-
-    notificationButton.classList.add(
-        "bell-active"
-    );
-
-
-    setTimeout(
-        function() {
-
-            notificationButton.classList.remove(
-                "bell-active"
-            );
-
-        },
-        700
     );
 
 }
