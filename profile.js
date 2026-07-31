@@ -1,6 +1,7 @@
 // =====================================================
 // MEMORA PROFILE
 // SUPABASE
+// AVATAR -> COMPRESSED WEBP
 // =====================================================
 
 
@@ -97,6 +98,30 @@ let selectedAvatarFile = null;
 
 
 // =====================================================
+// CONSTANTS
+// =====================================================
+
+// Максимальное разрешение аватара.
+
+const AVATAR_MAX_SIZE = 512;
+
+
+// Качество WebP.
+// 0.8 даёт хороший баланс между качеством
+// и размером.
+
+const AVATAR_QUALITY = 0.8;
+
+
+// Максимальный размер итогового файла.
+
+// 700 KB.
+
+const AVATAR_MAX_BYTES =
+    700 * 1024;
+
+
+// =====================================================
 // INITIALIZE
 // =====================================================
 
@@ -133,7 +158,6 @@ async function initializeProfile() {
 
 
         renderUserEmail();
-
 
         renderAccountDate();
 
@@ -246,11 +270,11 @@ async function loadProfile() {
             error
         );
 
+        applyDefaultProfile();
+
         showMessage(
             "Unable to load profile"
         );
-
-        applyDefaultProfile();
 
         return;
 
@@ -348,7 +372,7 @@ async function createProfile() {
 
 
 // =====================================================
-// APPLY PROFILE
+// APPLY PROFILE DATA
 // =====================================================
 
 function applyDefaultProfile() {
@@ -426,7 +450,7 @@ function applyProfileData() {
 
 
 // =====================================================
-// AVATAR
+// DEFAULT AVATAR
 // =====================================================
 
 function setAvatarDefault(name) {
@@ -457,6 +481,10 @@ function setAvatarDefault(name) {
 
 }
 
+
+// =====================================================
+// IMAGE AVATAR
+// =====================================================
 
 function setAvatarImage(url) {
 
@@ -515,9 +543,20 @@ function setupEvents() {
 
             if (value) {
 
-                setAvatarDefault(
-                    value
-                );
+                // Если пользователь ещё
+                // не выбрал фотографию,
+                // показываем первую букву имени.
+
+                if (
+                    !selectedAvatarFile &&
+                    !currentProfile.avatar_url
+                ) {
+
+                    setAvatarDefault(
+                        value
+                    );
+
+                }
 
             }
 
@@ -597,7 +636,7 @@ function setupEvents() {
 
 
 // =====================================================
-// AVATAR FILE SELECTION
+// SELECT AVATAR
 // =====================================================
 
 function handleAvatarSelection(event) {
@@ -614,34 +653,14 @@ function handleAvatarSelection(event) {
     }
 
 
-    const maxSize =
-        5 * 1024 * 1024;
-
-
-    if (file.size > maxSize) {
-
-        showMessage(
-            "Avatar must be smaller than 5 MB"
-        );
-
-
-        avatarInput.value =
-            "";
-
-
-        selectedAvatarFile =
-            null;
-
-
-        return;
-
-    }
-
-
     const allowedTypes = [
+
         "image/jpeg",
+
         "image/png",
+
         "image/webp"
+
     ];
 
 
@@ -659,6 +678,35 @@ function handleAvatarSelection(event) {
         avatarInput.value =
             "";
 
+        selectedAvatarFile =
+            null;
+
+
+        return;
+
+    }
+
+
+    // Ограничиваем исходный файл.
+    // 15 MB достаточно даже для
+    // фотографии с телефона.
+
+    const maxInputSize =
+        15 * 1024 * 1024;
+
+
+    if (
+        file.size >
+        maxInputSize
+    ) {
+
+        showMessage(
+            "Image is too large"
+        );
+
+
+        avatarInput.value =
+            "";
 
         selectedAvatarFile =
             null;
@@ -673,6 +721,8 @@ function handleAvatarSelection(event) {
         file;
 
 
+    // Показываем быстрый preview.
+
     const previewUrl =
         URL.createObjectURL(
             file
@@ -685,7 +735,357 @@ function handleAvatarSelection(event) {
 
 
     showMessage(
-        "Avatar selected"
+        "Image selected"
+    );
+
+}
+
+
+// =====================================================
+// COMPRESS IMAGE TO WEBP
+// =====================================================
+
+async function compressAvatar(
+    file
+) {
+
+    const image =
+        await loadImage(
+            file
+        );
+
+
+    // Исходные размеры.
+
+    const originalWidth =
+        image.naturalWidth ||
+        image.width;
+
+
+    const originalHeight =
+        image.naturalHeight ||
+        image.height;
+
+
+    // Центрируем квадратный crop.
+
+    const sourceSize =
+        Math.min(
+            originalWidth,
+            originalHeight
+        );
+
+
+    const sourceX =
+        Math.floor(
+            (
+                originalWidth -
+                sourceSize
+            ) / 2
+        );
+
+
+    const sourceY =
+        Math.floor(
+            (
+                originalHeight -
+                sourceSize
+            ) / 2
+        );
+
+
+    // Canvas.
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        AVATAR_MAX_SIZE;
+
+
+    canvas.height =
+        AVATAR_MAX_SIZE;
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    if (!ctx) {
+
+        throw new Error(
+            "Canvas is not supported"
+        );
+
+    }
+
+
+    // Более качественный resize.
+
+    ctx.imageSmoothingEnabled =
+        true;
+
+
+    ctx.imageSmoothingQuality =
+        "high";
+
+
+    // Белый фон на случай,
+    // если исходник имеет прозрачность.
+
+    ctx.fillStyle =
+        "#111116";
+
+
+    ctx.fillRect(
+        0,
+        0,
+        AVATAR_MAX_SIZE,
+        AVATAR_MAX_SIZE
+    );
+
+
+    // Рисуем квадратный crop.
+
+    ctx.drawImage(
+
+        image,
+
+        sourceX,
+        sourceY,
+        sourceSize,
+        sourceSize,
+
+        0,
+        0,
+        AVATAR_MAX_SIZE,
+        AVATAR_MAX_SIZE
+
+    );
+
+
+    // Получаем WebP.
+
+    let blob =
+        await canvasToBlob(
+            canvas,
+            "image/webp",
+            AVATAR_QUALITY
+        );
+
+
+    if (!blob) {
+
+        throw new Error(
+            "Unable to convert image"
+        );
+
+    }
+
+
+    // Если WebP всё ещё слишком большой,
+    // постепенно уменьшаем качество.
+
+    let quality =
+        AVATAR_QUALITY;
+
+
+    while (
+        blob.size >
+            AVATAR_MAX_BYTES &&
+        quality > .45
+    ) {
+
+        quality -= .1;
+
+
+        blob =
+            await canvasToBlob(
+                canvas,
+                "image/webp",
+                quality
+            );
+
+    }
+
+
+    if (
+        blob.size >
+        AVATAR_MAX_BYTES
+    ) {
+
+        // Последняя попытка —
+        // уменьшаем canvas.
+
+        const smallCanvas =
+            document.createElement(
+                "canvas"
+            );
+
+
+        smallCanvas.width =
+            384;
+
+
+        smallCanvas.height =
+            384;
+
+
+        const smallCtx =
+            smallCanvas.getContext(
+                "2d"
+            );
+
+
+        smallCtx.imageSmoothingEnabled =
+            true;
+
+
+        smallCtx.imageSmoothingQuality =
+            "high";
+
+
+        smallCtx.drawImage(
+
+            canvas,
+
+            0,
+            0,
+            384,
+            384
+
+        );
+
+
+        blob =
+            await canvasToBlob(
+                smallCanvas,
+                "image/webp",
+                .65
+            );
+
+    }
+
+
+    if (!blob) {
+
+        throw new Error(
+            "Unable to compress image"
+        );
+
+    }
+
+
+    // Создаём новый File.
+
+    return new File(
+
+        [blob],
+
+        "avatar.webp",
+
+        {
+            type:
+                "image/webp"
+        }
+
+    );
+
+}
+
+
+// =====================================================
+// LOAD IMAGE
+// =====================================================
+
+function loadImage(file) {
+
+    return new Promise(
+        function(resolve, reject) {
+
+
+            const image =
+                new Image();
+
+
+            const url =
+                URL.createObjectURL(
+                    file
+                );
+
+
+            image.onload =
+                function() {
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+
+                    resolve(
+                        image
+                    );
+
+                };
+
+
+            image.onerror =
+                function() {
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+
+                    reject(
+                        new Error(
+                            "Unable to read image"
+                        )
+                    );
+
+                };
+
+
+            image.src =
+                url;
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// CANVAS TO BLOB
+// =====================================================
+
+function canvasToBlob(
+    canvas,
+    type,
+    quality
+) {
+
+    return new Promise(
+        function(resolve) {
+
+            canvas.toBlob(
+                function(blob) {
+
+                    resolve(
+                        blob
+                    );
+
+                },
+                type,
+                quality
+            );
+
+        }
     );
 
 }
@@ -695,20 +1095,14 @@ function handleAvatarSelection(event) {
 // UPLOAD AVATAR
 // =====================================================
 
-async function uploadAvatar(file) {
+async function uploadAvatar(
+    file
+) {
 
-    const extension =
-        getFileExtension(
-            file.name,
-            file.type
-        );
-
-
-    // Один и тот же путь позволяет обновлять
-    // существующий файл.
+    // Всегда один и тот же файл.
 
     const filePath =
-        `${currentUser.id}/avatar.${extension}`;
+        `${currentUser.id}/avatar.webp`;
 
 
     const {
@@ -718,13 +1112,22 @@ async function uploadAvatar(file) {
         .from("avatars")
 
         .upload(
+
             filePath,
+
             file,
+
             {
-                cacheControl: "3600",
-                upsert: true,
-                contentType: file.type
+                cacheControl:
+                    "3600",
+
+                upsert:
+                    true,
+
+                contentType:
+                    "image/webp"
             }
+
         );
 
 
@@ -746,7 +1149,10 @@ async function uploadAvatar(file) {
         );
 
 
-    if (!data.publicUrl) {
+    if (
+        !data ||
+        !data.publicUrl
+    ) {
 
         throw new Error(
             "Unable to get avatar URL"
@@ -755,68 +1161,15 @@ async function uploadAvatar(file) {
     }
 
 
+    // Добавляем timestamp,
+    // чтобы браузер не показывал
+    // старую закэшированную фотографию.
+
     return (
         data.publicUrl +
         "?t=" +
         Date.now()
     );
-
-}
-
-
-// =====================================================
-// FILE EXTENSION
-// =====================================================
-
-function getFileExtension(
-    filename,
-    mimeType
-) {
-
-    const filenameExtension =
-        filename
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    if (
-        [
-            "jpg",
-            "jpeg",
-            "png",
-            "webp"
-        ].includes(
-            filenameExtension
-        )
-    ) {
-
-        return filenameExtension;
-
-    }
-
-
-    if (
-        mimeType ===
-        "image/png"
-    ) {
-
-        return "png";
-
-    }
-
-
-    if (
-        mimeType ===
-        "image/webp"
-    ) {
-
-        return "webp";
-
-    }
-
-
-    return "jpg";
 
 }
 
@@ -841,7 +1194,8 @@ async function saveProfile() {
 
 
     if (
-        displayName.length > 40
+        displayName.length >
+        40
     ) {
 
         showMessage(
@@ -863,6 +1217,7 @@ async function saveProfile() {
 
     try {
 
+
         let avatarUrl =
             currentProfile
                 ? currentProfile.avatar_url
@@ -870,21 +1225,39 @@ async function saveProfile() {
 
 
         // ---------------------------------------------
-        // Upload selected avatar
+        // COMPRESS + UPLOAD
         // ---------------------------------------------
 
         if (selectedAvatarFile) {
 
+
+            showMessage(
+                "Compressing image..."
+            );
+
+
+            const compressedFile =
+                await compressAvatar(
+                    selectedAvatarFile
+                );
+
+
+            showMessage(
+                "Uploading avatar..."
+            );
+
+
             avatarUrl =
                 await uploadAvatar(
-                    selectedAvatarFile
+                    compressedFile
                 );
 
         }
 
 
+
         // ---------------------------------------------
-        // Upsert profile
+        // SAVE PROFILE
         // ---------------------------------------------
 
         const {
@@ -917,6 +1290,7 @@ async function saveProfile() {
             .single();
 
 
+
         if (error) {
 
             throw error;
@@ -936,12 +1310,21 @@ async function saveProfile() {
             "";
 
 
-        profileName.textContent =
+        // Имя
+
+        const finalName =
             displayName ||
             currentUser.email
                 .split("@")[0] ||
             "Member";
 
+
+        profileName.textContent =
+            finalName;
+
+
+
+        // Avatar
 
         if (avatarUrl) {
 
@@ -952,7 +1335,7 @@ async function saveProfile() {
         } else {
 
             setAvatarDefault(
-                profileName.textContent
+                finalName
             );
 
         }
@@ -964,6 +1347,7 @@ async function saveProfile() {
 
 
     } catch (error) {
+
 
         console.error(
             "Save profile error:",
@@ -978,6 +1362,7 @@ async function saveProfile() {
 
 
     } finally {
+
 
         saveProfileButton.disabled =
             false;
@@ -1022,6 +1407,7 @@ async function logout() {
 
     if (error) {
 
+
         console.error(
             "Logout error:",
             error
@@ -1064,7 +1450,9 @@ async function logout() {
 // MESSAGE
 // =====================================================
 
-function showMessage(message) {
+function showMessage(
+    message
+) {
 
     profileMessage.textContent =
         message;
