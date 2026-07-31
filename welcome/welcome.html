@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Memora</title>
+<title>Memora Welcome</title>
 
 <link rel="stylesheet" href="welcome.css">
 
@@ -16,6 +16,8 @@
 
 <body class="welcome-page">
 
+
+<!-- ФОНОВЫЕ ЧАСТИЦЫ -->
 
 <div class="particles">
 
@@ -33,7 +35,9 @@
 <div class="welcome-container">
 
 
-    <!-- LOGO -->
+    <!-- =========================================
+                    LOGO
+    ========================================== -->
 
     <div class="welcome-logo">
 
@@ -45,7 +49,6 @@
         </div>
 
 
-
         <div class="big-orbit orbit-two">
 
             <span class="big-planet"></span>
@@ -53,13 +56,11 @@
         </div>
 
 
-
         <div class="big-orbit orbit-three">
 
             <span class="big-planet"></span>
 
         </div>
-
 
 
         <div class="big-logo-m">
@@ -73,9 +74,9 @@
 
 
 
-
-    <!-- TEXT -->
-
+    <!-- =========================================
+                    TEXT
+    ========================================== -->
 
     <h1>
 
@@ -92,9 +93,9 @@
 
 
 
-
-    <!-- AUTH -->
-
+    <!-- =========================================
+                    AUTH
+    ========================================== -->
 
     <div class="auth-card" id="authCard">
 
@@ -106,19 +107,17 @@
         </h2>
 
 
-
         <input
 
             id="loginInput"
 
-            type="text"
+            type="email"
 
-            placeholder="Login"
+            placeholder="Email"
 
-            autocomplete="username"
+            autocomplete="email"
 
         >
-
 
 
         <input
@@ -132,7 +131,6 @@
             autocomplete="current-password"
 
         >
-
 
 
         <button
@@ -150,7 +148,6 @@
         </button>
 
 
-
         <button
 
             id="switchButton"
@@ -166,7 +163,6 @@
         </button>
 
 
-
         <p id="authMessage"></p>
 
 
@@ -177,7 +173,19 @@
 
 
 
+<!-- =========================================
+            SUPABASE JS LIBRARY
+========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- =========================================
+                    AUTH JS
+========================================== -->
+
 <script src="auth.js"></script>
+
 
 </body>
 
