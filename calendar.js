@@ -1,16 +1,9 @@
 // =====================================================
 // MEMORA CALENDAR
-// SUPABASE + MEMORIES
-// =====================================================
-
-
-// =====================================================
-// SUPABASE
 // =====================================================
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
-
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
@@ -24,83 +17,47 @@ const supabaseClient =
 
 
 // =====================================================
-// ELEMENTS
+// DOM
 // =====================================================
 
 const monthName =
     document.getElementById("monthName");
 
-
 const memoryMonthCount =
-    document.getElementById(
-        "memoryMonthCount"
-    );
-
+    document.getElementById("memoryMonthCount");
 
 const calendarGrid =
-    document.getElementById(
-        "calendarGrid"
-    );
-
+    document.getElementById("calendarGrid");
 
 const selectedDateElement =
-    document.getElementById(
-        "selectedDate"
-    );
-
+    document.getElementById("selectedDate");
 
 const selectedCount =
-    document.getElementById(
-        "selectedCount"
-    );
-
+    document.getElementById("selectedCount");
 
 const dayMemories =
-    document.getElementById(
-        "dayMemories"
-    );
-
+    document.getElementById("dayMemories");
 
 const previousMonth =
-    document.getElementById(
-        "previousMonth"
-    );
-
+    document.getElementById("previousMonth");
 
 const nextMonth =
-    document.getElementById(
-        "nextMonth"
-    );
-
+    document.getElementById("nextMonth");
 
 const todayButton =
-    document.getElementById(
-        "todayButton"
-    );
-
+    document.getElementById("todayButton");
 
 const backButton =
-    document.getElementById(
-        "backButton"
-    );
-
+    document.getElementById("backButton");
 
 const homeNav =
-    document.getElementById(
-        "homeNav"
-    );
-
+    document.getElementById("homeNav");
 
 const timelineNav =
-    document.getElementById(
-        "timelineNav"
-    );
+    document.getElementById("timelineNav");
 
-
-const profileNav =
-    document.getElementById(
-        "profileNav"
-    );
+const chatNav =
+    document.getElementById("chatNav");
 
 
 // =====================================================
@@ -115,8 +72,6 @@ let currentMonth = new Date();
 
 let selectedDate = null;
 
-
-// Normalize month to first day
 
 currentMonth =
     new Date(
@@ -137,7 +92,6 @@ document.addEventListener(
 
 
 async function initializeCalendar() {
-
 
     const {
         data,
@@ -171,14 +125,10 @@ async function initializeCalendar() {
     renderCalendar();
 
 
-    // Сегодня выбираем автоматически
-
-    const today =
-        new Date();
-
-
     selectedDate =
-        makeDateKey(today);
+        makeDateKey(
+            new Date()
+        );
 
 
     renderSelectedDay();
@@ -191,7 +141,6 @@ async function initializeCalendar() {
 // =====================================================
 
 async function loadMemories() {
-
 
     const {
         data,
@@ -219,15 +168,12 @@ async function loadMemories() {
 
     if (error) {
 
-
         console.error(
             "Calendar memories error:",
             error
         );
 
-
         memories = [];
-
 
         return;
 
@@ -249,8 +195,7 @@ function setupNavigation() {
 
     previousMonth.addEventListener(
         "click",
-        function () {
-
+        function() {
 
             currentMonth =
                 new Date(
@@ -259,12 +204,9 @@ function setupNavigation() {
                     1
                 );
 
-
-            renderCalendar();
-
-
             selectedDate = null;
 
+            renderCalendar();
 
             renderSelectedDay();
 
@@ -272,11 +214,9 @@ function setupNavigation() {
     );
 
 
-
     nextMonth.addEventListener(
         "click",
-        function () {
-
+        function() {
 
             currentMonth =
                 new Date(
@@ -285,12 +225,9 @@ function setupNavigation() {
                     1
                 );
 
-
-            renderCalendar();
-
-
             selectedDate = null;
 
+            renderCalendar();
 
             renderSelectedDay();
 
@@ -298,15 +235,12 @@ function setupNavigation() {
     );
 
 
-
     todayButton.addEventListener(
         "click",
-        function () {
-
+        function() {
 
             const today =
                 new Date();
-
 
             currentMonth =
                 new Date(
@@ -315,13 +249,10 @@ function setupNavigation() {
                     1
                 );
 
-
             selectedDate =
                 makeDateKey(today);
 
-
             renderCalendar();
-
 
             renderSelectedDay();
 
@@ -329,22 +260,20 @@ function setupNavigation() {
     );
 
 
-
     backButton.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "index.html";
 
         }
     );
-
 
 
     homeNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "index.html";
@@ -353,10 +282,9 @@ function setupNavigation() {
     );
 
 
-
     timelineNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "events.html";
@@ -365,13 +293,29 @@ function setupNavigation() {
     );
 
 
-
-    profileNav.addEventListener(
+    chatNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
-                "profile.html";
+                "chat.html";
+
+        }
+    );
+
+
+    supabaseClient.auth.onAuthStateChange(
+        function(event, session) {
+
+            if (
+                event === "SIGNED_OUT" ||
+                !session
+            ) {
+
+                window.location.href =
+                    "welcome/welcome.html";
+
+            }
 
         }
     );
@@ -380,22 +324,20 @@ function setupNavigation() {
 
 
 // =====================================================
-// RENDER CALENDAR
+// CALENDAR
 // =====================================================
 
 function renderCalendar() {
 
-
     const year =
         currentMonth.getFullYear();
-
 
     const month =
         currentMonth.getMonth();
 
 
-    const monthFormatter =
-        new Intl.DateTimeFormat(
+    monthName.textContent =
+        currentMonth.toLocaleDateString(
             "en-US",
             {
                 month: "long",
@@ -404,24 +346,14 @@ function renderCalendar() {
         );
 
 
-    monthName.textContent =
-        monthFormatter.format(
-            currentMonth
-        );
-
-
-    // Memories within current month
-
     const monthMemories =
         memories.filter(
-            function (memory) {
-
+            function(memory) {
 
                 const date =
                     new Date(
                         memory.created_at
                     );
-
 
                 return (
                     date.getFullYear() === year &&
@@ -436,17 +368,13 @@ function renderCalendar() {
         monthMemories.length +
         (
             monthMemories.length === 1
-            ? " memory"
-            : " memories"
+                ? " memory"
+                : " memories"
         );
-
 
 
     calendarGrid.innerHTML = "";
 
-
-
-    // First day of month
 
     const firstDay =
         new Date(
@@ -456,20 +384,15 @@ function renderCalendar() {
         );
 
 
-    // Monday = 0
-
     let startDay =
         firstDay.getDay();
 
 
     startDay =
         startDay === 0
-        ? 6
-        : startDay - 1;
+            ? 6
+            : startDay - 1;
 
-
-
-    // Number of days
 
     const daysInMonth =
         new Date(
@@ -479,9 +402,7 @@ function renderCalendar() {
         ).getDate();
 
 
-    // Previous month days
-
-    const daysInPreviousMonth =
+    const previousMonthDays =
         new Date(
             year,
             month,
@@ -489,14 +410,13 @@ function renderCalendar() {
         ).getDate();
 
 
-
-    // Total cells
-
     const totalCells =
         Math.ceil(
-            (startDay + daysInMonth) / 7
+            (
+                startDay +
+                daysInMonth
+            ) / 7
         ) * 7;
-
 
 
     for (
@@ -504,7 +424,6 @@ function renderCalendar() {
         index < totalCells;
         index++
     ) {
-
 
         let dayNumber;
 
@@ -514,16 +433,15 @@ function renderCalendar() {
             false;
 
 
-
-        if (index < startDay) {
-
+        if (
+            index < startDay
+        ) {
 
             dayNumber =
-                daysInPreviousMonth -
+                previousMonthDays -
                 startDay +
                 index +
                 1;
-
 
             cellDate =
                 new Date(
@@ -531,7 +449,6 @@ function renderCalendar() {
                     month - 1,
                     dayNumber
                 );
-
 
             isOtherMonth = true;
 
@@ -541,13 +458,11 @@ function renderCalendar() {
             startDay + daysInMonth
         ) {
 
-
             dayNumber =
                 index -
                 startDay -
                 daysInMonth +
                 1;
-
 
             cellDate =
                 new Date(
@@ -556,18 +471,15 @@ function renderCalendar() {
                     dayNumber
                 );
 
-
             isOtherMonth = true;
 
 
         } else {
 
-
             dayNumber =
                 index -
                 startDay +
                 1;
-
 
             cellDate =
                 new Date(
@@ -579,18 +491,16 @@ function renderCalendar() {
         }
 
 
-
         const key =
             makeDateKey(
                 cellDate
             );
 
 
-        const dayMemories =
+        const dayItems =
             getMemoriesForDate(
                 key
             );
-
 
 
         const button =
@@ -601,7 +511,6 @@ function renderCalendar() {
 
         button.type =
             "button";
-
 
         button.className =
             "calendar-day";
@@ -616,11 +525,8 @@ function renderCalendar() {
         }
 
 
-
         if (
-            isToday(
-                cellDate
-            )
+            isToday(cellDate)
         ) {
 
             button.classList.add(
@@ -628,7 +534,6 @@ function renderCalendar() {
             );
 
         }
-
 
 
         if (
@@ -642,18 +547,13 @@ function renderCalendar() {
         }
 
 
-
-        // Number
-
         const number =
             document.createElement(
                 "span"
             );
 
-
         number.className =
             "day-number";
-
 
         number.textContent =
             dayNumber;
@@ -664,41 +564,33 @@ function renderCalendar() {
         );
 
 
-
-        // Dots
-
         if (
-            dayMemories.length > 0
+            dayItems.length
         ) {
-
 
             const dots =
                 document.createElement(
                     "div"
                 );
 
-
             dots.className =
                 "day-dots";
-
 
 
             const types =
                 [
                     ...new Set(
-                        dayMemories
-                            .map(
-                                function(memory) {
+                        dayItems.map(
+                            function(memory) {
 
-                                    return normalizeType(
-                                        memory.type
-                                    );
+                                return normalizeType(
+                                    memory.type
+                                );
 
-                                }
-                            )
+                            }
+                        )
                     )
                 ];
-
 
 
             types
@@ -706,17 +598,14 @@ function renderCalendar() {
                 .forEach(
                     function(type) {
 
-
                         const dot =
                             document.createElement(
                                 "span"
                             );
 
-
                         dot.className =
                             "day-dot " +
                             type;
-
 
                         dots.appendChild(
                             dot
@@ -726,37 +615,6 @@ function renderCalendar() {
                 );
 
 
-
-            if (
-                dayMemories.length > 4
-            ) {
-
-
-                const more =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                more.className =
-                    "day-more";
-
-
-                more.textContent =
-                    "+" +
-                    (
-                        dayMemories.length - 4
-                    );
-
-
-                dots.appendChild(
-                    more
-                );
-
-            }
-
-
-
             button.appendChild(
                 dots
             );
@@ -764,26 +622,19 @@ function renderCalendar() {
         }
 
 
-
-        // Click
-
         button.addEventListener(
             "click",
             function() {
 
-
                 selectedDate =
                     key;
 
-
                 renderCalendar();
-
 
                 renderSelectedDay();
 
             }
         );
-
 
 
         calendarGrid.appendChild(
@@ -801,29 +652,17 @@ function renderCalendar() {
 
 function renderSelectedDay() {
 
-
     if (!selectedDate) {
-
 
         selectedDateElement.textContent =
             "Choose a day";
 
-
         selectedCount.textContent =
             "0";
-
-
-        dayMemories.innerHTML =
-            emptyDayHtml(
-                "Choose a date",
-                "Select a day in the calendar to see your memories."
-            );
-
 
         return;
 
     }
-
 
 
     const date =
@@ -844,7 +683,6 @@ function renderSelectedDay() {
         );
 
 
-
     const items =
         getMemoriesForDate(
             selectedDate
@@ -855,32 +693,36 @@ function renderSelectedDay() {
         items.length;
 
 
+    if (!items.length) {
 
-    if (
-        items.length === 0
-    ) {
+        dayMemories.innerHTML = `
+            <div class="day-empty">
 
+                <div class="empty-icon">
+                    ◇
+                </div>
 
-        dayMemories.innerHTML =
-            emptyDayHtml(
-                "Nothing saved this day",
-                "Create a memory on the main page and it will appear here."
-            );
+                <div class="empty-title">
+                    Nothing saved this day
+                </div>
 
+                <div class="empty-text">
+                    Create a memory on the main page and it will appear here.
+                </div>
+
+            </div>
+        `;
 
         return;
 
     }
 
 
-
     dayMemories.innerHTML = "";
-
 
 
     items.forEach(
         function(memory) {
-
 
             const item =
                 document.createElement(
@@ -890,7 +732,6 @@ function renderSelectedDay() {
 
             item.className =
                 "day-memory";
-
 
 
             const type =
@@ -906,7 +747,6 @@ function renderSelectedDay() {
                 );
 
 
-
             const body =
                 document.createElement(
                     "div"
@@ -915,7 +755,6 @@ function renderSelectedDay() {
 
             body.className =
                 "day-memory-body";
-
 
 
             const title =
@@ -933,7 +772,6 @@ function renderSelectedDay() {
                 "Untitled memory";
 
 
-
             const content =
                 document.createElement(
                     "div"
@@ -945,8 +783,8 @@ function renderSelectedDay() {
 
 
             content.textContent =
-                memory.content || "";
-
+                memory.content ||
+                "";
 
 
             const time =
@@ -965,11 +803,9 @@ function renderSelectedDay() {
                 );
 
 
-
             body.appendChild(
                 title
             );
-
 
             body.appendChild(
                 content
@@ -980,32 +816,24 @@ function renderSelectedDay() {
                 type
             );
 
-
             item.appendChild(
                 body
             );
-
 
             item.appendChild(
                 time
             );
 
 
-
             item.addEventListener(
                 "click",
                 function() {
-
-
-                    // Открываем Timeline,
-                    // где запись можно редактировать
 
                     window.location.href =
                         "events.html";
 
                 }
             );
-
 
 
             dayMemories.appendChild(
@@ -1026,10 +854,8 @@ function getMemoriesForDate(
     dateKey
 ) {
 
-
     return memories.filter(
         function(memory) {
-
 
             return (
                 makeDateKey(
@@ -1047,7 +873,6 @@ function getMemoriesForDate(
 
 function makeDateKey(date) {
 
-
     return [
         date.getFullYear(),
         String(
@@ -1063,7 +888,6 @@ function makeDateKey(date) {
 
 function parseDateKey(key) {
 
-
     const parts =
         key.split("-");
 
@@ -1078,7 +902,6 @@ function parseDateKey(key) {
 
 
 function isToday(date) {
-
 
     const today =
         new Date();
@@ -1098,10 +921,7 @@ function isToday(date) {
 }
 
 
-function formatTime(
-    dateString
-) {
-
+function formatTime(dateString) {
 
     const date =
         new Date(
@@ -1121,7 +941,6 @@ function formatTime(
 
 
 function normalizeType(type) {
-
 
     const value =
         String(
@@ -1144,32 +963,5 @@ function normalizeType(type) {
 
 
     return "note";
-
-}
-
-
-function emptyDayHtml(
-    title,
-    text
-) {
-
-
-    return `
-        <div class="day-empty">
-
-            <div class="empty-icon">
-                ◇
-            </div>
-
-            <div class="empty-title">
-                ${title}
-            </div>
-
-            <div class="empty-text">
-                ${text}
-            </div>
-
-        </div>
-    `;
 
 }
