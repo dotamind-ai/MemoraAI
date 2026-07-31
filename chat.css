@@ -1,3 +1,8 @@
+/* =====================================================
+        MEMORA CHAT
+===================================================== */
+
+
 * {
     margin: 0;
     padding: 0;
@@ -23,6 +28,10 @@ body {
     background: #050507;
 }
 
+
+/* =====================================================
+        PAGE
+===================================================== */
 
 .chat-page {
     min-height: 100vh;
@@ -56,6 +65,10 @@ body {
         );
 }
 
+
+/* =====================================================
+        BACKGROUND
+===================================================== */
 
 .chat-background {
     position: fixed;
@@ -142,6 +155,10 @@ body {
 }
 
 
+/* =====================================================
+        CONTAINER
+===================================================== */
+
 .chat-container {
     position: relative;
 
@@ -154,6 +171,10 @@ body {
     margin: 0 auto;
 }
 
+
+/* =====================================================
+        HEADER
+===================================================== */
 
 .chat-header {
     display: flex;
@@ -184,6 +205,17 @@ body {
     font-size: 22px;
 
     cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.back-button:hover {
+    background:
+        rgba(255,255,255,.10);
+
+    transform:
+        translateX(-2px);
 }
 
 
@@ -215,10 +247,13 @@ body {
 }
 
 
-/* SEARCH */
+/* =====================================================
+        GLASS CARDS
+===================================================== */
 
 .search-card,
-.chat-section {
+.chat-section,
+.conversation-card {
     padding: 21px;
 
     margin-bottom: 15px;
@@ -241,6 +276,10 @@ body {
 }
 
 
+/* =====================================================
+        LABELS
+===================================================== */
+
 .section-kicker {
     display: block;
 
@@ -256,6 +295,10 @@ body {
     letter-spacing: 2px;
 }
 
+
+/* =====================================================
+        SEARCH
+===================================================== */
 
 .search-title h1 {
     margin-bottom: 18px;
@@ -348,7 +391,19 @@ body {
 }
 
 
-/* SEARCH RESULT */
+/* =====================================================
+        SEARCH RESULT / PEOPLE
+===================================================== */
+
+.search-result,
+.people-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
 
 .search-result {
     margin-top: 10px;
@@ -372,6 +427,19 @@ body {
     border:
         1px solid
         rgba(255,255,255,.08);
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.person-card:hover {
+    background:
+        rgba(255,255,255,.06);
+
+    transform:
+        translateY(-1px);
 }
 
 
@@ -402,15 +470,15 @@ body {
     font-weight: 800;
 
     background-position: center;
-
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 
 .person-info {
-    min-width: 0;
-
     flex: 1;
+
+    min-width: 0;
 
     display: flex;
 
@@ -448,10 +516,12 @@ body {
 
 
 .person-action {
+    min-width: 74px;
+
     height: 38px;
 
     padding:
-        0 12px;
+        0 11px;
 
     flex-shrink: 0;
 
@@ -462,7 +532,7 @@ body {
         rgba(255,255,255,.10);
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.055);
 
     color: white;
 
@@ -485,7 +555,14 @@ body {
 }
 
 
-/* SECTIONS */
+/* =====================================================
+        SECTION
+===================================================== */
+
+.chat-section {
+    padding-bottom: 17px;
+}
+
 
 .section-heading {
     display: flex;
@@ -532,18 +609,9 @@ body {
 }
 
 
-.people-list {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-}
-
-
 .empty-state {
     padding:
-        25px
+        23px
         10px;
 
     text-align: center;
@@ -555,7 +623,319 @@ body {
 }
 
 
-/* BOTTOM NAV */
+/* =====================================================
+        CONVERSATION
+===================================================== */
+
+.conversation-card {
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 620px;
+
+    padding: 0;
+
+    overflow: hidden;
+}
+
+
+.conversation-header {
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding:
+        12px 15px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+.conversation-back {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:
+        rgba(255,255,255,.6);
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+.conversation-avatar {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.conversation-user {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.conversation-user strong {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+}
+
+
+.conversation-user span {
+    color:
+        rgba(255,255,255,.30);
+
+    font-size: 9px;
+}
+
+
+.message-list {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    padding: 18px;
+
+    overflow-y: auto;
+}
+
+
+.messages-empty {
+    min-height: 430px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    text-align: center;
+}
+
+
+.message-bubble-row {
+    display: flex;
+
+    width: 100%;
+}
+
+
+.message-bubble-row.mine {
+    justify-content: flex-end;
+}
+
+
+.message-bubble {
+    max-width: min(80%, 520px);
+
+    padding:
+        10px 13px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.08);
+}
+
+
+.message-bubble-row.mine .message-bubble {
+    background:
+        rgba(150,100,255,.16);
+
+    border-color:
+        rgba(165,120,255,.19);
+
+}
+
+
+.message-text {
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+.message-time {
+    margin-top: 5px;
+
+    text-align: right;
+
+    color:
+        rgba(255,255,255,.25);
+
+    font-size: 8px;
+}
+
+
+.message-form {
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 9px;
+
+    padding: 12px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+
+#messageInput {
+    flex: 1;
+
+    min-height: 46px;
+    max-height: 130px;
+
+    resize: none;
+
+    padding:
+        12px 14px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.045);
+
+    color: white;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+#messageInput:focus {
+    border-color:
+        rgba(165,120,255,.35);
+}
+
+
+#messageInput::placeholder {
+    color:
+        rgba(255,255,255,.25);
+}
+
+
+#sendMessageButton {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: white;
+
+    color: #101014;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+#sendMessageButton:disabled {
+    opacity: .5;
+
+    cursor: default;
+}
+
+
+/* =====================================================
+        BOTTOM NAV
+===================================================== */
 
 .bottom-nav {
     position: fixed;
@@ -642,7 +1022,9 @@ body {
 }
 
 
-/* MOBILE */
+/* =====================================================
+        MOBILE
+===================================================== */
 
 @media(max-width:600px) {
 
@@ -671,6 +1053,21 @@ body {
         width: 100%;
 
         height: 48px;
+    }
+
+
+    .conversation-card {
+        min-height: 560px;
+    }
+
+
+    .message-bubble {
+        max-width: 88%;
+    }
+
+
+    .message-list {
+        padding: 13px;
     }
 
 }
