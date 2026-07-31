@@ -1,16 +1,9 @@
 // =====================================================
 // MEMORA TIMELINE
-// SUPABASE
-// =====================================================
-
-
-// =====================================================
-// SUPABASE CONFIG
 // =====================================================
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
-
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
@@ -24,73 +17,56 @@ const supabaseClient =
 
 
 // =====================================================
-// ELEMENTS
+// DOM
 // =====================================================
 
 const timelineList =
     document.getElementById("timelineList");
 
-
 const timelineCount =
     document.getElementById("timelineCount");
-
 
 const searchInput =
     document.getElementById("searchInput");
 
-
 const filterButtons =
     document.querySelectorAll(".filter-button");
-
 
 const editModal =
     document.getElementById("editModal");
 
-
 const closeModal =
     document.getElementById("closeModal");
-
 
 const editTitle =
     document.getElementById("editTitle");
 
-
 const editType =
     document.getElementById("editType");
-
 
 const editContent =
     document.getElementById("editContent");
 
-
 const editMessage =
     document.getElementById("editMessage");
-
 
 const saveEditButton =
     document.getElementById("saveEditButton");
 
-
 const deleteButton =
     document.getElementById("deleteButton");
-
 
 const backButton =
     document.getElementById("backButton");
 
-
-// Bottom nav
-
 const homeNav =
     document.getElementById("homeNav");
-
 
 const calendarNav =
     document.getElementById("calendarNav");
 
-
-const profileNav =
-    document.getElementById("profileNav");
+const chatNav =
+    document.getElementById("chatNav");
 
 
 // =====================================================
@@ -120,7 +96,6 @@ document.addEventListener(
 
 async function initializeTimeline() {
 
-
     const {
         data,
         error
@@ -132,8 +107,7 @@ async function initializeTimeline() {
         !data.user
     ) {
 
-        window.location.href =
-            "welcome/welcome.html";
+        redirectToWelcome();
 
         return;
 
@@ -152,7 +126,7 @@ async function initializeTimeline() {
 
 
 // =====================================================
-// SETUP EVENTS
+// EVENTS
 // =====================================================
 
 function setupEvents() {
@@ -160,7 +134,7 @@ function setupEvents() {
 
     searchInput.addEventListener(
         "input",
-        function () {
+        function() {
 
             currentSearch =
                 searchInput.value
@@ -173,16 +147,15 @@ function setupEvents() {
     );
 
 
-
     filterButtons.forEach(
-        function (button) {
+        function(button) {
 
             button.addEventListener(
                 "click",
-                function () {
+                function() {
 
                     filterButtons.forEach(
-                        function (item) {
+                        function(item) {
 
                             item.classList.remove(
                                 "active"
@@ -211,17 +184,15 @@ function setupEvents() {
     );
 
 
-
     closeModal.addEventListener(
         "click",
         closeEditor
     );
 
 
-
     editModal.addEventListener(
         "click",
-        function (event) {
+        function(event) {
 
             if (
                 event.target === editModal
@@ -235,12 +206,10 @@ function setupEvents() {
     );
 
 
-
     saveEditButton.addEventListener(
         "click",
         saveEditedMemory
     );
-
 
 
     deleteButton.addEventListener(
@@ -249,22 +218,20 @@ function setupEvents() {
     );
 
 
-
     backButton.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "index.html";
 
         }
     );
-
 
 
     homeNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "index.html";
@@ -273,10 +240,9 @@ function setupEvents() {
     );
 
 
-
     calendarNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
                 "calendar.html";
@@ -285,22 +251,20 @@ function setupEvents() {
     );
 
 
-
-    profileNav.addEventListener(
+    chatNav.addEventListener(
         "click",
-        function () {
+        function() {
 
             window.location.href =
-                "profile.html";
+                "chat.html";
 
         }
     );
 
 
-
     document.addEventListener(
         "keydown",
-        function (event) {
+        function(event) {
 
             if (
                 event.key === "Escape"
@@ -313,16 +277,14 @@ function setupEvents() {
         }
     );
 
-
 }
 
 
 // =====================================================
-// LOAD MEMORIES
+// LOAD
 // =====================================================
 
 async function loadMemories() {
-
 
     timelineList.innerHTML = `
         <div class="timeline-loading">
@@ -354,7 +316,6 @@ async function loadMemories() {
 
     if (error) {
 
-
         console.error(
             "Timeline load error:",
             error
@@ -363,19 +324,7 @@ async function loadMemories() {
 
         timelineList.innerHTML = `
             <div class="timeline-empty">
-
-                <div class="empty-icon">
-                    !
-                </div>
-
-                <div class="empty-title">
-                    Unable to load memories
-                </div>
-
-                <div class="empty-text">
-                    Please refresh the page and try again.
-                </div>
-
+                Unable to load memories.
             </div>
         `;
 
@@ -400,23 +349,19 @@ async function loadMemories() {
 
 function getFilteredMemories() {
 
-
     return memories.filter(
-        function (memory) {
+        function(memory) {
 
-
-            const filterMatches =
+            const typeMatches =
                 currentFilter === "all" ||
                 memory.type === currentFilter;
 
 
-
-            if (!filterMatches) {
+            if (!typeMatches) {
 
                 return false;
 
             }
-
 
 
             if (!currentSearch) {
@@ -424,7 +369,6 @@ function getFilteredMemories() {
                 return true;
 
             }
-
 
 
             const title =
@@ -441,10 +385,7 @@ function getFilteredMemories() {
 
             return (
                 title.includes(currentSearch) ||
-                content.includes(currentSearch) ||
-                String(memory.type || "")
-                    .toLowerCase()
-                    .includes(currentSearch)
+                content.includes(currentSearch)
             );
 
         }
@@ -459,7 +400,6 @@ function getFilteredMemories() {
 
 function renderTimeline() {
 
-
     const filtered =
         getFilteredMemories();
 
@@ -468,9 +408,7 @@ function renderTimeline() {
         filtered.length;
 
 
-
-    if (filtered.length === 0) {
-
+    if (!filtered.length) {
 
         timelineList.innerHTML = `
             <div class="timeline-empty">
@@ -482,29 +420,25 @@ function renderTimeline() {
                 <div class="empty-title">
                     ${
                         memories.length === 0
-                        ? "Your timeline is empty"
-                        : "Nothing found"
+                            ? "Your timeline is empty"
+                            : "Nothing found"
                     }
                 </div>
 
                 <div class="empty-text">
-
                     ${
                         memories.length === 0
-                        ? "Create a memory on the main page and it will appear here."
-                        : "Try another search or filter."
+                            ? "Create a memory on the main page and it will appear here."
+                            : "Try another search or filter."
                     }
-
                 </div>
 
             </div>
         `;
 
-
         return;
 
     }
-
 
 
     const grouped =
@@ -514,10 +448,8 @@ function renderTimeline() {
     timelineList.innerHTML = "";
 
 
-
     Object.keys(grouped).forEach(
-        function (dayKey) {
-
+        function(dayKey) {
 
             const daySection =
                 document.createElement(
@@ -527,7 +459,6 @@ function renderTimeline() {
 
             daySection.className =
                 "timeline-day";
-
 
 
             const dayLabel =
@@ -551,25 +482,17 @@ function renderTimeline() {
             );
 
 
-
             grouped[dayKey].forEach(
-                function (memory) {
-
-
-                    const card =
-                        createMemoryCard(
-                            memory
-                        );
-
+                function(memory) {
 
                     daySection.appendChild(
-                        card
+                        createMemoryCard(
+                            memory
+                        )
                     );
-
 
                 }
             );
-
 
 
             timelineList.appendChild(
@@ -583,19 +506,16 @@ function renderTimeline() {
 
 
 // =====================================================
-// GROUP BY DAY
+// GROUP
 // =====================================================
 
 function groupByDay(items) {
 
-
     const groups = {};
 
 
-
     items.forEach(
-        function (memory) {
-
+        function(memory) {
 
             const date =
                 new Date(
@@ -615,13 +535,11 @@ function groupByDay(items) {
                 ].join("-");
 
 
-
             if (!groups[key]) {
 
                 groups[key] = [];
 
             }
-
 
 
             groups[key].push(
@@ -643,7 +561,6 @@ function groupByDay(items) {
 
 function formatDayLabel(dayKey) {
 
-
     const date =
         new Date(
             dayKey + "T00:00:00"
@@ -663,7 +580,6 @@ function formatDayLabel(dayKey) {
     );
 
 
-
     if (
         date.toDateString() ===
         today.toDateString()
@@ -674,7 +590,6 @@ function formatDayLabel(dayKey) {
     }
 
 
-
     if (
         date.toDateString() ===
         yesterday.toDateString()
@@ -683,7 +598,6 @@ function formatDayLabel(dayKey) {
         return "YESTERDAY";
 
     }
-
 
 
     return date.toLocaleDateString(
@@ -699,11 +613,10 @@ function formatDayLabel(dayKey) {
 
 
 // =====================================================
-// CREATE CARD
+// CARD
 // =====================================================
 
 function createMemoryCard(memory) {
-
 
     const card =
         document.createElement(
@@ -715,15 +628,6 @@ function createMemoryCard(memory) {
         "memory-card";
 
 
-    card.dataset.id =
-        memory.id;
-
-
-
-    // ---------------------------
-    // TOP
-    // ---------------------------
-
     const top =
         document.createElement(
             "div"
@@ -732,7 +636,6 @@ function createMemoryCard(memory) {
 
     top.className =
         "memory-top";
-
 
 
     const type =
@@ -761,7 +664,6 @@ function createMemoryCard(memory) {
         normalizedType.toUpperCase();
 
 
-
     const actions =
         document.createElement(
             "div"
@@ -772,67 +674,55 @@ function createMemoryCard(memory) {
         "memory-actions";
 
 
-
-    const editButton =
+    const edit =
         document.createElement(
             "button"
         );
 
 
-    editButton.className =
+    edit.className =
         "card-action";
 
 
-    editButton.type =
+    edit.type =
         "button";
 
 
-    editButton.textContent =
+    edit.textContent =
         "✎";
 
 
-    editButton.title =
-        "Edit";
-
-
-    editButton.addEventListener(
+    edit.addEventListener(
         "click",
-        function () {
+        function() {
 
-            openEditor(
-                memory
-            );
+            openEditor(memory);
 
         }
     );
 
 
-
-    const deleteAction =
+    const remove =
         document.createElement(
             "button"
         );
 
 
-    deleteAction.className =
+    remove.className =
         "card-action delete";
 
 
-    deleteAction.type =
+    remove.type =
         "button";
 
 
-    deleteAction.textContent =
+    remove.textContent =
         "×";
 
 
-    deleteAction.title =
-        "Delete";
-
-
-    deleteAction.addEventListener(
+    remove.addEventListener(
         "click",
-        function () {
+        function() {
 
             deleteMemory(
                 memory.id
@@ -842,16 +732,14 @@ function createMemoryCard(memory) {
     );
 
 
-
     actions.appendChild(
-        editButton
+        edit
     );
 
 
     actions.appendChild(
-        deleteAction
+        remove
     );
-
 
 
     top.appendChild(
@@ -869,13 +757,7 @@ function createMemoryCard(memory) {
     );
 
 
-
-    // ---------------------------
-    // TITLE
-    // ---------------------------
-
     if (memory.title) {
-
 
         const title =
             document.createElement(
@@ -898,11 +780,6 @@ function createMemoryCard(memory) {
     }
 
 
-
-    // ---------------------------
-    // CONTENT
-    // ---------------------------
-
     const content =
         document.createElement(
             "div"
@@ -922,11 +799,6 @@ function createMemoryCard(memory) {
     );
 
 
-
-    // ---------------------------
-    // FOOTER
-    // ---------------------------
-
     const footer =
         document.createElement(
             "div"
@@ -937,7 +809,6 @@ function createMemoryCard(memory) {
         "memory-footer";
 
 
-
     const date =
         document.createElement(
             "span"
@@ -945,8 +816,17 @@ function createMemoryCard(memory) {
 
 
     date.textContent =
-        formatTime(
+        new Date(
             memory.created_at
+        ).toLocaleString(
+            "ru-RU",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
         );
 
 
@@ -960,74 +840,16 @@ function createMemoryCard(memory) {
     );
 
 
-
     return card;
 
 }
 
 
 // =====================================================
-// NORMALIZE TYPE
-// =====================================================
-
-function normalizeType(type) {
-
-
-    const value =
-        String(
-            type || "note"
-        ).toLowerCase();
-
-
-    if (
-        [
-            "idea",
-            "note",
-            "inspiration",
-            "goal"
-        ].includes(value)
-    ) {
-
-        return value;
-
-    }
-
-
-    return "note";
-
-}
-
-
-// =====================================================
-// TIME
-// =====================================================
-
-function formatTime(dateString) {
-
-
-    const date =
-        new Date(
-            dateString
-        );
-
-
-    return date.toLocaleTimeString(
-        "ru-RU",
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-
-}
-
-
-// =====================================================
-// OPEN EDITOR
+// EDIT
 // =====================================================
 
 function openEditor(memory) {
-
 
     editingMemoryId =
         memory.id;
@@ -1056,24 +878,12 @@ function openEditor(memory) {
     );
 
 
-    setTimeout(
-        function () {
-
-            editTitle.focus();
-
-        },
-        100
-    );
+    editTitle.focus();
 
 }
 
 
-// =====================================================
-// CLOSE EDITOR
-// =====================================================
-
 function closeEditor() {
-
 
     editingMemoryId =
         null;
@@ -1082,10 +892,6 @@ function closeEditor() {
     editModal.classList.remove(
         "show"
     );
-
-
-    editMessage.textContent =
-        "";
 
 }
 
@@ -1096,7 +902,6 @@ function closeEditor() {
 
 async function saveEditedMemory() {
 
-
     if (!editingMemoryId) {
 
         return;
@@ -1104,30 +909,18 @@ async function saveEditedMemory() {
     }
 
 
-    const title =
-        editTitle.value.trim();
-
-
-    const type =
-        editType.value;
-
-
     const content =
         editContent.value.trim();
 
 
-
     if (!content) {
-
 
         editMessage.textContent =
             "Content cannot be empty.";
 
-
         return;
 
     }
-
 
 
     saveEditButton.disabled =
@@ -1138,53 +931,39 @@ async function saveEditedMemory() {
         "Saving...";
 
 
-
     const {
         data,
         error
     } = await supabaseClient
-
         .from("memories")
-
         .update({
 
             title:
-                title || null,
+                editTitle.value.trim() ||
+                null,
 
             type:
-                type,
+                editType.value,
 
             content:
                 content
 
         })
-
         .eq(
             "id",
             editingMemoryId
         )
-
         .eq(
             "user_id",
             currentUser.id
         )
-
         .select(
             "id, user_id, title, type, content, created_at"
         )
-
         .single();
 
 
-
     if (error) {
-
-
-        console.error(
-            "Update memory error:",
-            error
-        );
-
 
         editMessage.textContent =
             error.message;
@@ -1203,31 +982,22 @@ async function saveEditedMemory() {
     }
 
 
-
-    // Обновляем локальный массив
-
     memories =
         memories.map(
-            function (memory) {
+            function(memory) {
 
-                if (
+                return (
                     memory.id ===
                     editingMemoryId
-                ) {
-
-                    return data;
-
-                }
-
-                return memory;
+                )
+                    ? data
+                    : memory;
 
             }
         );
 
 
-
     renderTimeline();
-
 
     closeEditor();
 
@@ -1243,11 +1013,10 @@ async function saveEditedMemory() {
 
 
 // =====================================================
-// DELETE FROM EDITOR
+// DELETE
 // =====================================================
 
 async function deleteEditedMemory() {
-
 
     if (!editingMemoryId) {
 
@@ -1256,72 +1025,20 @@ async function deleteEditedMemory() {
     }
 
 
-    const confirmed =
-        window.confirm(
+    if (
+        !window.confirm(
             "Delete this memory?"
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } = await supabaseClient
-
-        .from("memories")
-
-        .delete()
-
-        .eq(
-            "id",
-            editingMemoryId
         )
-
-        .eq(
-            "user_id",
-            currentUser.id
-        );
-
-
-
-    if (error) {
-
-
-        console.error(
-            "Delete error:",
-            error
-        );
-
-
-        editMessage.textContent =
-            error.message;
-
+    ) {
 
         return;
 
     }
 
 
-
-    memories =
-        memories.filter(
-            function (memory) {
-
-                return (
-                    memory.id !==
-                    editingMemoryId
-                );
-
-            }
-        );
-
-
-    renderTimeline();
+    await deleteMemory(
+        editingMemoryId
+    );
 
 
     closeEditor();
@@ -1329,70 +1046,48 @@ async function deleteEditedMemory() {
 }
 
 
-// =====================================================
-// DELETE FROM CARD
-// =====================================================
-
 async function deleteMemory(memoryId) {
 
-
-    const confirmed =
-        window.confirm(
+    if (
+        !window.confirm(
             "Delete this memory?"
-        );
-
-
-    if (!confirmed) {
+        )
+    ) {
 
         return;
 
     }
 
 
-
     const {
         error
     } = await supabaseClient
-
         .from("memories")
-
         .delete()
-
         .eq(
             "id",
             memoryId
         )
-
         .eq(
             "user_id",
             currentUser.id
         );
 
 
-
     if (error) {
-
-
-        console.error(
-            "Delete memory error:",
-            error
-        );
-
 
         alert(
             error.message
         );
-
 
         return;
 
     }
 
 
-
     memories =
         memories.filter(
-            function (memory) {
+            function(memory) {
 
                 return (
                     memory.id !==
@@ -1409,28 +1104,36 @@ async function deleteMemory(memoryId) {
 
 
 // =====================================================
-// NAVIGATION
+// TYPE
 // =====================================================
 
-window.goHome = function () {
+function normalizeType(type) {
+
+    const value =
+        String(
+            type || "note"
+        ).toLowerCase();
+
+
+    return [
+        "idea",
+        "note",
+        "inspiration",
+        "goal"
+    ].includes(value)
+        ? value
+        : "note";
+
+}
+
+
+// =====================================================
+// AUTH
+// =====================================================
+
+function redirectToWelcome() {
 
     window.location.href =
-        "index.html";
+        "welcome/welcome.html";
 
-};
-
-
-window.goCalendar = function () {
-
-    window.location.href =
-        "calendar.html";
-
-};
-
-
-window.goProfile = function () {
-
-    window.location.href =
-        "profile.html";
-
-};
+}
