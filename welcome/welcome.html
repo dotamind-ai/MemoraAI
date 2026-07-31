@@ -3,13 +3,19 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Memora Welcome</title>
+    <title>Memora</title>
 
-<link rel="stylesheet" href="welcome.css">
+    <link
+        rel="stylesheet"
+        href="welcome.css"
+    >
 
 </head>
 
@@ -17,55 +23,160 @@
 <body class="welcome-page">
 
 
-<!-- ФОНОВЫЕ ЧАСТИЦЫ -->
+    <!-- =========================================
+                    BACKGROUND PARTICLES
+    ========================================== -->
 
-<div class="particles">
+    <div class="particles">
 
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
 
-</div>
+    </div>
 
-
-
-<div class="welcome-container">
 
 
     <!-- =========================================
-                    LOGO
+                    MAIN CONTAINER
     ========================================== -->
 
-    <div class="welcome-logo">
+    <div class="welcome-container">
 
 
-        <div class="big-orbit orbit-one">
+        <!-- =====================================
+                    LOGO
+        ====================================== -->
 
-            <span class="big-planet"></span>
+        <div class="welcome-logo">
+
+
+            <div class="big-orbit orbit-one">
+
+                <span class="big-planet"></span>
+
+            </div>
+
+
+            <div class="big-orbit orbit-two">
+
+                <span class="big-planet"></span>
+
+            </div>
+
+
+            <div class="big-orbit orbit-three">
+
+                <span class="big-planet"></span>
+
+            </div>
+
+
+            <div class="big-logo-m">
+
+                M
+
+            </div>
+
 
         </div>
 
 
-        <div class="big-orbit orbit-two">
 
-            <span class="big-planet"></span>
+        <!-- =====================================
+                    TEXT
+        ====================================== -->
 
-        </div>
+        <h1>
 
+            Welcome to Memora
 
-        <div class="big-orbit orbit-three">
-
-            <span class="big-planet"></span>
-
-        </div>
+        </h1>
 
 
-        <div class="big-logo-m">
+        <p class="subtitle">
 
-            M
+            Your personal memory space
+
+        </p>
+
+
+
+        <!-- =====================================
+                    AUTH CARD
+        ====================================== -->
+
+        <div
+            class="auth-card"
+            id="authCard"
+        >
+
+
+            <h2 id="authTitle">
+
+                Welcome back
+
+            </h2>
+
+
+
+            <!-- EMAIL -->
+
+            <input
+                id="loginInput"
+                type="email"
+                placeholder="Email address"
+                autocomplete="email"
+            >
+
+
+
+            <!-- PASSWORD -->
+
+            <input
+                id="passwordInput"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+
+
+            <!-- MAIN BUTTON -->
+
+            <button
+                id="authButton"
+                class="main-button"
+                type="button"
+            >
+
+                Login
+
+            </button>
+
+
+
+            <!-- SWITCH BUTTON -->
+
+            <button
+                id="switchButton"
+                class="secondary-button"
+                type="button"
+            >
+
+                Create account
+
+            </button>
+
+
+
+            <!-- MESSAGE -->
+
+            <p id="authMessage"></p>
+
 
         </div>
 
@@ -75,21 +186,12 @@
 
 
     <!-- =========================================
-                    TEXT
+                    SUPABASE
     ========================================== -->
 
-    <h1>
-
-        Welcome to Memora
-
-    </h1>
-
-
-    <p class="subtitle">
-
-        Your personal memory space
-
-    </p>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
 
 
@@ -97,94 +199,7 @@
                     AUTH
     ========================================== -->
 
-    <div class="auth-card" id="authCard">
-
-
-        <h2 id="authTitle">
-
-            Welcome back
-
-        </h2>
-
-
-        <input
-
-            id="loginInput"
-
-            type="email"
-
-            placeholder="Email"
-
-            autocomplete="email"
-
-        >
-
-
-        <input
-
-            id="passwordInput"
-
-            type="password"
-
-            placeholder="Password"
-
-            autocomplete="current-password"
-
-        >
-
-
-        <button
-
-            id="authButton"
-
-            class="main-button"
-
-            type="button"
-
-        >
-
-            Login
-
-        </button>
-
-
-        <button
-
-            id="switchButton"
-
-            class="secondary-button"
-
-            type="button"
-
-        >
-
-            Create account
-
-        </button>
-
-
-        <p id="authMessage"></p>
-
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =========================================
-            SUPABASE JS LIBRARY
-========================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<!-- =========================================
-                    AUTH JS
-========================================== -->
-
-<script src="auth.js"></script>
+    <script src="auth.js"></script>
 
 
 </body>
