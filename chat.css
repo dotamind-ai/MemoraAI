@@ -161,36 +161,94 @@ body {
 
 
 .brand-mark {
-    width: 39px;
-    height: 39px;
+    width: 42px;
+    height: 42px;
+
+    position: relative;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 50%;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.11),
-            rgba(255,255,255,.035)
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.035) 65%
         );
 
     border:
         1px solid
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.16);
 
-    color: white;
+    box-shadow:
+        0 0 0 1px
+        rgba(167,139,250,.06),
 
-    font-size: 18px;
+        0 0 24px
+        rgba(139,92,246,.12);
+
+    overflow: hidden;
+}
+
+
+.brand-mark::before {
+    content: "";
+
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(167,139,250,.28);
+}
+
+
+.brand-mark::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    top: 5px;
+    right: 5px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(190,165,255,.75);
+
+    box-shadow:
+        0 0 10px
+        rgba(167,139,250,.65);
+}
+
+
+.brand-mark span {
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 15px;
 
     font-weight: 900;
 
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.25);
+    letter-spacing: -.5px;
+
+    color: white;
+
+    text-shadow:
+        0 0 14px
+        rgba(255,255,255,.22);
 }
 
 
@@ -263,8 +321,11 @@ body {
 
     cursor: pointer;
 
-    -webkit-appearance: none;
-    appearance: none;
+    -webkit-appearance:
+        none;
+
+    appearance:
+        none;
 
     transition:
         .18s ease;
@@ -291,41 +352,100 @@ body {
 }
 
 
-.plus-icon {
-    font-size: 22px;
+.header-svg {
+    width: 18px;
+    height: 18px;
 
-    font-weight: 300;
+    stroke:
+        rgba(255,255,255,.66);
 
-    line-height: 1;
+    stroke-width:
+        1.5;
+
+    stroke-linecap:
+        round;
+
+    transition:
+        .18s ease;
 }
 
 
-.bell-icon {
-    font-size: 18px;
+.header-button:hover .header-svg {
+    stroke:
+        white;
+}
+
+
+.bell-svg {
+    width: 19px;
+    height: 19px;
+
+    display:
+        block;
+
+    stroke:
+        rgba(255,255,255,.68);
+
+    stroke-width:
+        1.45;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
+
+    transition:
+        stroke .18s ease,
+        transform .18s ease,
+        filter .18s ease;
+}
+
+
+.notification-button:hover .bell-svg {
+    stroke:
+        white;
 
     transform:
-        rotate(45deg);
+        translateY(-1px);
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(167,139,250,.55)
+        );
 }
 
 
 .notification-badge {
     position: absolute;
 
-    right: -3px;
-    top: -4px;
+    right:
+        -3px;
 
-    min-width: 17px;
-    height: 17px;
+    top:
+        -4px;
+
+    min-width:
+        17px;
+
+    height:
+        17px;
 
     padding:
         0 4px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
-    justify-content: center;
+    align-items:
+        center;
 
-    border-radius: 999px;
+    justify-content:
+        center;
+
+    border-radius:
+        999px;
 
     background:
         #a78bfa;
@@ -333,9 +453,11 @@ body {
     color:
         #110d1a;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 900;
+    font-weight:
+        900;
 
     border:
         2px solid
@@ -344,20 +466,29 @@ body {
 
 
 .profile-button {
-    border-radius: 50%;
+    border-radius:
+        50%;
 }
 
 
 .my-avatar {
-    width: 100%;
-    height: 100%;
+    width:
+        100%;
 
-    display: flex;
+    height:
+        100%;
 
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    overflow: hidden;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
 
     background:
         rgba(255,255,255,.06);
@@ -371,11 +502,14 @@ body {
     background-repeat:
         no-repeat;
 
-    color: white;
+    color:
+        white;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 }
 
 
@@ -384,21 +518,29 @@ body {
 ===================================================== */
 
 .friends-view {
-    display: block;
+    display:
+        block;
 }
 
 
 .conversation-view {
-    display: none;
+    display:
+        none;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    position: fixed;
+    position:
+        fixed;
 
-    top: 16px;
-    bottom: 94px;
+    top:
+        16px;
 
-    left: 50%;
+    bottom:
+        94px;
+
+    left:
+        50%;
 
     width:
         min(
@@ -406,16 +548,23 @@ body {
             calc(100vw - 36px)
         );
 
-    height: auto;
+    height:
+        auto;
+
+    min-height:
+        0;
+
+    margin:
+        0;
 
     transform:
         translateX(-50%);
 
-    margin: 0;
+    overflow:
+        hidden;
 
-    overflow: hidden;
-
-    border-radius: 25px;
+    border-radius:
+        25px;
 
     background:
         rgba(11,11,15,.92);
@@ -431,31 +580,40 @@ body {
     backdrop-filter:
         blur(28px);
 
-    z-index: 40;
+    z-index:
+        40;
 }
 
 
 /* =====================================================
-   NOTIFICATION / ADD FRIEND PANELS
+   PANELS
 ===================================================== */
 
 .notification-panel,
 .add-friend-panel {
-    position: fixed;
+    position:
+        fixed;
 
-    top: 78px;
-    right: 20px;
+    top:
+        78px;
 
-    width: 370px;
+    right:
+        20px;
+
+    width:
+        370px;
 
     max-width:
         calc(100vw - 28px);
 
-    z-index: 100;
+    z-index:
+        100;
 
-    padding: 17px;
+    padding:
+        17px;
 
-    border-radius: 21px;
+    border-radius:
+        21px;
 
     background:
         rgba(18,18,23,.94);
@@ -474,7 +632,8 @@ body {
 
 
 .add-friend-panel {
-    right: 66px;
+    right:
+        66px;
 }
 
 
@@ -483,29 +642,38 @@ body {
 ===================================================== */
 
 .panel-header {
-    display: flex;
+    display:
+        flex;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    margin-bottom: 14px;
+    margin-bottom:
+        14px;
 }
 
 
 .panel-kicker {
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 4px;
+    margin-bottom:
+        4px;
 
     color:
         #b59aff;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 
     letter-spacing:
         1.8px;
@@ -513,17 +681,23 @@ body {
 
 
 .panel-header h2 {
-    font-size: 17px;
+    font-size:
+        17px;
 }
 
 
 .panel-close {
-    width: 31px;
-    height: 31px;
+    width:
+        31px;
 
-    border: none;
+    height:
+        31px;
 
-    border-radius: 10px;
+    border:
+        none;
+
+    border-radius:
+        10px;
 
     background:
         rgba(255,255,255,.055);
@@ -531,9 +705,11 @@ body {
     color:
         rgba(255,255,255,.55);
 
-    font-size: 19px;
+    font-size:
+        19px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 }
 
 
@@ -542,28 +718,38 @@ body {
 ===================================================== */
 
 .notification-list {
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    max-height: 60vh;
+    max-height:
+        60vh;
 
-    overflow-y: auto;
+    overflow-y:
+        auto;
 }
 
 
 .notification-card {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 10px;
+    gap:
+        10px;
 
-    padding: 11px;
+    padding:
+        11px;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     background:
         rgba(255,255,255,.045);
@@ -575,19 +761,29 @@ body {
 
 
 .notification-avatar {
-    width: 39px;
-    height: 39px;
+    width:
+        39px;
 
-    flex-shrink: 0;
+    height:
+        39px;
 
-    display: flex;
+    flex-shrink:
+        0;
 
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    border-radius: 50%;
+    align-items:
+        center;
 
-    overflow: hidden;
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    overflow:
+        hidden;
 
     background:
         rgba(255,255,255,.075);
@@ -598,35 +794,47 @@ body {
     background-size:
         cover;
 
-    color: white;
+    color:
+        white;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 }
 
 
 .notification-info {
-    flex: 1;
+    flex:
+        1;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 3px;
+    gap:
+        3px;
 }
 
 
 .notification-info strong {
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    text-overflow: ellipsis;
+    text-overflow:
+        ellipsis;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
-    font-size: 11px;
+    font-size:
+        11px;
 }
 
 
@@ -634,26 +842,32 @@ body {
     color:
         rgba(255,255,255,.34);
 
-    font-size: 9px;
+    font-size:
+        9px;
 
-    line-height: 1.35;
+    line-height:
+        1.35;
 }
 
 
 .notification-actions {
-    display: flex;
+    display:
+        flex;
 
-    gap: 5px;
+    gap:
+        5px;
 }
 
 
 .notification-action {
-    height: 30px;
+    height:
+        30px;
 
     padding:
         0 9px;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
     border:
         1px solid
@@ -665,13 +879,17 @@ body {
     color:
         rgba(255,255,255,.72);
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 }
 
 
@@ -688,14 +906,17 @@ body {
 
 
 .notification-empty {
-    padding: 22px;
+    padding:
+        22px;
 
-    text-align: center;
+    text-align:
+        center;
 
     color:
         rgba(255,255,255,.28);
 
-    font-size: 10px;
+    font-size:
+        10px;
 }
 
 
@@ -704,13 +925,17 @@ body {
 ===================================================== */
 
 .add-friend-row {
-    display: flex;
+    display:
+        flex;
 
-    gap: 6px;
+    gap:
+        6px;
 
-    padding: 4px;
+    padding:
+        4px;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
     background:
         rgba(255,255,255,.045);
@@ -722,27 +947,35 @@ body {
 
 
 .add-friend-row input {
-    flex: 1;
+    flex:
+        1;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    height: 39px;
+    height:
+        39px;
 
     padding:
         0 11px;
 
-    border: none;
+    border:
+        none;
 
-    outline: none;
+    outline:
+        none;
 
     background:
         transparent;
 
-    color: white;
+    color:
+        white;
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 11px;
+    font-size:
+        11px;
 }
 
 
@@ -753,13 +986,17 @@ body {
 
 
 .add-friend-row button {
-    width: 61px;
+    width:
+        61px;
 
-    height: 39px;
+    height:
+        39px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
     background:
         #f5f5f7;
@@ -767,30 +1004,38 @@ body {
     color:
         #111116;
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 }
 
 
 .search-message {
-    min-height: 16px;
+    min-height:
+        16px;
 
-    margin-top: 7px;
+    margin-top:
+        7px;
 
     color:
         rgba(255,255,255,.38);
 
-    font-size: 9px;
+    font-size:
+        9px;
 }
 
 
 .search-result {
-    margin-top: 7px;
+    margin-top:
+        7px;
 }
 
 
@@ -799,29 +1044,38 @@ body {
 ===================================================== */
 
 .page-heading {
-    display: flex;
+    display:
+        flex;
 
-    align-items: flex-end;
+    align-items:
+        flex-end;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        13px;
 }
 
 
 .heading-kicker {
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 5px;
+    margin-bottom:
+        5px;
 
     color:
         rgba(167,139,250,.80);
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 
     letter-spacing:
         1.8px;
@@ -829,9 +1083,11 @@ body {
 
 
 .page-heading h1 {
-    font-size: 26px;
+    font-size:
+        26px;
 
-    line-height: 1;
+    line-height:
+        1;
 
     letter-spacing:
         -.8px;
@@ -839,10 +1095,14 @@ body {
 
 
 .heading-count {
-    min-width: 32px;
-    height: 29px;
+    min-width:
+        32px;
 
-    display: flex;
+    height:
+        29px;
+
+    display:
+        flex;
 
     align-items:
         center;
@@ -850,7 +1110,8 @@ body {
     justify-content:
         center;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
     background:
         rgba(255,255,255,.045);
@@ -862,31 +1123,39 @@ body {
     color:
         rgba(255,255,255,.42);
 
-    font-size: 9px;
+    font-size:
+        9px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 }
 
 
 /* =====================================================
-   SEARCH CHATS
+   CHAT SEARCH
 ===================================================== */
 
 .chat-search {
-    height: 44px;
+    height:
+        44px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 9px;
+    gap:
+        9px;
 
-    margin-bottom: 20px;
+    margin-bottom:
+        20px;
 
     padding:
         0 13px;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     background:
         rgba(255,255,255,.045);
@@ -897,36 +1166,57 @@ body {
 }
 
 
-.search-mark {
-    color:
+.search-svg {
+    width:
+        16px;
+
+    height:
+        16px;
+
+    flex-shrink:
+        0;
+
+    stroke:
         rgba(255,255,255,.27);
 
-    font-size: 15px;
+    stroke-width:
+        1.6;
 
-    transform:
-        rotate(45deg);
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
 }
 
 
 .chat-search input {
-    flex: 1;
+    flex:
+        1;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    height: 100%;
+    height:
+        100%;
 
-    border: none;
+    border:
+        none;
 
-    outline: none;
+    outline:
+        none;
 
     background:
         transparent;
 
-    color: white;
+    color:
+        white;
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 11px;
+    font-size:
+        11px;
 }
 
 
@@ -941,27 +1231,35 @@ body {
 ===================================================== */
 
 .friend-list {
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 7px;
+    gap:
+        7px;
 }
 
 
 .person-card {
-    min-height: 67px;
+    min-height:
+        67px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        12px;
 
     padding:
         9px;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 
     background:
         rgba(255,255,255,.045);
@@ -994,12 +1292,17 @@ body {
 
 
 .person-avatar {
-    width: 45px;
-    height: 45px;
+    width:
+        45px;
 
-    flex-shrink: 0;
+    height:
+        45px;
 
-    display: flex;
+    flex-shrink:
+        0;
+
+    display:
+        flex;
 
     align-items:
         center;
@@ -1007,7 +1310,8 @@ body {
     justify-content:
         center;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border-radius:
         50%;
@@ -1040,24 +1344,32 @@ body {
 
 
 .person-info {
-    flex: 1;
+    flex:
+        1;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 3px;
+    gap:
+        3px;
 }
 
 
 .person-name {
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    text-overflow: ellipsis;
+    text-overflow:
+        ellipsis;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
     font-size:
         13px;
@@ -1068,11 +1380,14 @@ body {
 
 
 .person-email {
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    text-overflow: ellipsis;
+    text-overflow:
+        ellipsis;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
     color:
         rgba(255,255,255,.27);
@@ -1164,16 +1479,23 @@ body {
 ===================================================== */
 
 .conversation-view {
-    display: none;
+    display:
+        none;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    position: fixed;
+    position:
+        fixed;
 
-    top: 16px;
-    bottom: 94px;
+    top:
+        16px;
 
-    left: 50%;
+    bottom:
+        94px;
+
+    left:
+        50%;
 
     width:
         min(
@@ -1181,18 +1503,23 @@ body {
             calc(100vw - 36px)
         );
 
-    height: auto;
+    height:
+        auto;
 
-    min-height: 0;
+    min-height:
+        0;
 
-    margin: 0;
+    margin:
+        0;
 
     transform:
         translateX(-50%);
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    border-radius: 25px;
+    border-radius:
+        25px;
 
     background:
         rgba(11,11,15,.92);
@@ -1214,9 +1541,11 @@ body {
 
 
 .conversation-header {
-    height: 71px;
+    height:
+        71px;
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
     display:
         flex;
@@ -1249,6 +1578,15 @@ body {
     flex-shrink:
         0;
 
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
     border-radius:
         11px;
 
@@ -1262,11 +1600,29 @@ body {
     color:
         rgba(255,255,255,.65);
 
-    font-size:
-        17px;
-
     cursor:
         pointer;
+}
+
+
+.conversation-back svg {
+    width:
+        18px;
+
+    height:
+        18px;
+
+    stroke:
+        rgba(255,255,255,.68);
+
+    stroke-width:
+        1.6;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
 }
 
 
@@ -1627,6 +1983,15 @@ body {
     flex-shrink:
         0;
 
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
     border:
         none;
 
@@ -1639,14 +2004,32 @@ body {
     color:
         #111116;
 
-    font-size:
-        20px;
-
     cursor:
         pointer;
 
     transition:
         .18s ease;
+}
+
+
+.send-button svg {
+    width:
+        18px;
+
+    height:
+        18px;
+
+    stroke:
+        #111116;
+
+    stroke-width:
+        1.7;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
 }
 
 
@@ -1814,40 +2197,99 @@ body {
     }
 
 
+    .brand-mark {
+        width:
+            40px;
+
+        height:
+            40px;
+    }
+
+
+    .brand-mark::before {
+        width:
+            25px;
+
+        height:
+            25px;
+    }
+
+
+    .brand-copy strong {
+        font-size:
+            12px;
+    }
+
+
+    .brand-copy span {
+        font-size:
+            7px;
+    }
+
+
+    .header-button,
+    .profile-button {
+        width:
+            39px;
+
+        height:
+            39px;
+    }
+
+
+    .header-actions {
+        gap:
+            5px;
+    }
+
+
     .page-heading h1 {
         font-size:
             23px;
     }
 
 
-    /* Notifications */
+    /* Panels */
 
     .notification-panel,
     .add-friend-panel {
 
-        position: fixed;
+        position:
+            fixed;
 
-        top: 67px;
+        top:
+            67px;
 
-        left: 12px;
-        right: 12px;
+        left:
+            12px;
 
-        width: auto;
+        right:
+            12px;
 
-        max-width: none;
+        width:
+            auto;
 
-        margin: 0;
+        max-width:
+            none;
+
+        margin:
+            0;
 
     }
 
 
     .add-friend-panel {
-        left: 12px;
-        right: 12px;
+
+        left:
+            12px;
+
+        right:
+            12px;
+
     }
 
 
-    /* Contacts */
+    /* Friends */
 
     .person-card {
         min-height:
@@ -1870,36 +2312,48 @@ body {
     }
 
 
-    /* =============================================
-       MOBILE CONVERSATION
-    ============================================== */
+    /* Conversation */
 
     .conversation-view {
 
-        position: fixed;
+        position:
+            fixed;
 
-        top: 10px;
-        right: 10px;
-        bottom: 88px;
-        left: 10px;
+        top:
+            10px;
 
-        width: auto;
+        right:
+            10px;
 
-        max-width: none;
+        bottom:
+            88px;
 
-        height: auto;
+        left:
+            10px;
 
-        min-height: 0;
+        width:
+            auto;
 
-        margin: 0;
+        max-width:
+            none;
 
-        transform: none;
+        height:
+            auto;
+
+        min-height:
+            0;
+
+        margin:
+            0;
+
+        transform:
+            none;
 
         border-radius:
             21px;
 
-        z-index: 40;
-
+        z-index:
+            40;
     }
 
 
