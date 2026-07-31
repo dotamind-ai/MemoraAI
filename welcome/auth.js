@@ -1,25 +1,31 @@
-// ================================
-// MEMORA SIMPLE AUTH
-// ================================
+// ==================================================
+// MEMORA AUTH
+// LOCAL STORAGE
+// ==================================================
 
 
-let loginBtn = document.getElementById("loginBtn");
-
-let registerBtn = document.getElementById("registerBtn");
-
-let authWindow = document.getElementById("authWindow");
-
-let authTitle = document.getElementById("authTitle");
-
-let submitAuth = document.getElementById("submitAuth");
+const authTitle =
+    document.getElementById("authTitle");
 
 
-let username =
-document.getElementById("username");
+const authButton =
+    document.getElementById("authButton");
 
 
-let password =
-document.getElementById("password");
+const switchButton =
+    document.getElementById("switchButton");
+
+
+const loginInput =
+    document.getElementById("loginInput");
+
+
+const passwordInput =
+    document.getElementById("passwordInput");
+
+
+const authMessage =
+    document.getElementById("authMessage");
 
 
 
@@ -27,202 +33,213 @@ let mode = "login";
 
 
 
+// ==================================================
+// SWITCH LOGIN / REGISTER
+// ==================================================
 
 
-// открыть вход
+switchButton.addEventListener("click", function(){
 
-loginBtn.onclick = function(){
+    mode =
+        mode === "login"
+        ? "register"
+        : "login";
 
-    mode="login";
 
-    authTitle.innerHTML="Войти";
+    loginInput.value = "";
 
-    submitAuth.innerHTML="Войти";
+    passwordInput.value = "";
 
-    authWindow.classList.add("show");
+    authMessage.textContent = "";
 
-};
 
+    if(mode === "register"){
 
+        authTitle.textContent =
+            "Create account";
 
 
+        authButton.textContent =
+            "Create account";
 
 
-// открыть регистрацию
+        switchButton.textContent =
+            "Already have an account";
 
-registerBtn.onclick = function(){
+        passwordInput.autocomplete =
+            "new-password";
 
-    mode="register";
+    }
 
-    authTitle.innerHTML="Создать аккаунт";
+    else{
 
-    submitAuth.innerHTML="Создать";
+        authTitle.textContent =
+            "Welcome back";
 
-    authWindow.classList.add("show");
 
-};
+        authButton.textContent =
+            "Login";
 
 
+        switchButton.textContent =
+            "Create account";
 
+        passwordInput.autocomplete =
+            "current-password";
 
+    }
 
+});
 
 
 
-// кнопка продолжить
+// ==================================================
+// MAIN BUTTON
+// ==================================================
 
-submitAuth.onclick=function(){
 
+authButton.addEventListener("click", function(){
 
+    const login =
+        loginInput.value.trim();
 
-let login=username.value.trim();
 
-let pass=password.value.trim();
+    const password =
+        passwordInput.value;
 
 
+    if(!login || !password){
 
-if(login==="" || pass===""){
+        authMessage.textContent =
+            "Enter login and password";
 
-alert("Заполни логин и пароль");
+        return;
 
-return;
+    }
 
-}
 
 
+    // ==============================================
+    // REGISTER
+    // ==============================================
 
 
+    if(mode === "register"){
 
+        const saved =
+            localStorage.getItem("memoraUser");
 
 
-// РЕГИСТРАЦИЯ
+        if(saved){
 
+            const existing =
+                JSON.parse(saved);
 
-if(mode==="register"){
 
+            if(existing.login === login){
 
+                authMessage.textContent =
+                    "This login is already registered";
 
-let user={
+                return;
 
-login:login,
+            }
 
-password:pass
+        }
 
-};
 
+        const user = {
 
+            login:login,
 
-localStorage.setItem(
+            password:password
 
-"memoraUser",
+        };
 
-JSON.stringify(user)
 
-);
+        localStorage.setItem(
+            "memoraUser",
+            JSON.stringify(user)
+        );
 
 
+        localStorage.setItem(
+            "memoraAuth",
+            "true"
+        );
 
-alert("Аккаунт создан");
 
+        authMessage.textContent =
+            "Account created";
 
 
-authWindow.classList.remove("show");
+        setTimeout(function(){
 
+            window.location.href =
+                "../index.html";
 
+        },500);
 
-username.value="";
 
-password.value="";
+        return;
 
+    }
 
 
-return;
 
+    // ==============================================
+    // LOGIN
+    // ==============================================
 
-}
 
+    const saved =
+        localStorage.getItem("memoraUser");
 
 
+    if(!saved){
 
+        authMessage.textContent =
+            "Create an account first";
 
+        return;
 
+    }
 
 
-// ВХОД
+    const user =
+        JSON.parse(saved);
 
 
-if(mode==="login"){
+    if(
+        user.login === login &&
+        user.password === password
+    ){
 
+        localStorage.setItem(
+            "memoraAuth",
+            "true"
+        );
 
 
-let savedUser =
+        authMessage.textContent =
+            "Login successful";
 
-JSON.parse(
 
-localStorage.getItem("memoraUser")
+        setTimeout(function(){
 
-);
+            window.location.href =
+                "../index.html";
 
+        },300);
 
 
+    }
 
-if(!savedUser){
+    else{
 
+        authMessage.textContent =
+            "Wrong login or password";
 
-alert("Сначала создай аккаунт");
+    }
 
-
-return;
-
-
-}
-
-
-
-
-if(
-
-savedUser.login===login &&
-
-savedUser.password===pass
-
-){
-
-
-localStorage.setItem(
-
-"memoraAuth",
-
-"true"
-
-);
-
-
-
-
-// переход в приложение
-
-window.location.href=
-
-"app/index.html";
-
-
-
-}
-
-else{
-
-
-alert("Неверный логин или пароль");
-
-
-}
-
-
-
-}
-
-
-
-
-};
+});
