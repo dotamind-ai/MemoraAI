@@ -27,6 +27,7 @@ body {
     background: #07070a;
 }
 
+
 /* =====================================================
    PAGE
 ===================================================== */
@@ -62,6 +63,7 @@ body {
         );
 }
 
+
 /* =====================================================
    BACKGROUND
 ===================================================== */
@@ -78,6 +80,7 @@ body {
     z-index: 0;
 }
 
+
 .background-glow {
     position: absolute;
 
@@ -85,6 +88,7 @@ body {
 
     filter: blur(100px);
 }
+
 
 .glow-one {
     width: 520px;
@@ -100,6 +104,7 @@ body {
         rgba(153, 92, 255, .12);
 }
 
+
 .glow-two {
     width: 380px;
     height: 380px;
@@ -110,6 +115,7 @@ body {
     background:
         rgba(77, 70, 170, .08);
 }
+
 
 /* =====================================================
    CONTAINER
@@ -127,6 +133,7 @@ body {
     margin: 0 auto;
 }
 
+
 /* =====================================================
    HEADER
 ===================================================== */
@@ -143,6 +150,7 @@ body {
     margin-bottom: 22px;
 }
 
+
 .brand {
     display: flex;
 
@@ -150,6 +158,7 @@ body {
 
     gap: 11px;
 }
+
 
 .brand-mark {
     width: 39px;
@@ -184,6 +193,7 @@ body {
         rgba(0,0,0,.25);
 }
 
+
 .brand-copy {
     display: flex;
 
@@ -192,12 +202,14 @@ body {
     gap: 1px;
 }
 
+
 .brand-copy strong {
     font-size: 13px;
 
     letter-spacing:
         1.8px;
 }
+
 
 .brand-copy span {
     font-size: 8px;
@@ -208,6 +220,7 @@ body {
     letter-spacing:
         1.5px;
 }
+
 
 /* =====================================================
    HEADER ACTIONS
@@ -220,6 +233,7 @@ body {
 
     gap: 7px;
 }
+
 
 .header-button,
 .profile-button {
@@ -249,9 +263,13 @@ body {
 
     cursor: pointer;
 
+    -webkit-appearance: none;
+    appearance: none;
+
     transition:
         .18s ease;
 }
+
 
 .header-button:hover,
 .profile-button:hover {
@@ -265,11 +283,13 @@ body {
         translateY(-1px);
 }
 
+
 .header-button:active,
 .profile-button:active {
     transform:
         scale(.96);
 }
+
 
 .plus-icon {
     font-size: 22px;
@@ -279,12 +299,14 @@ body {
     line-height: 1;
 }
 
+
 .bell-icon {
     font-size: 18px;
 
     transform:
         rotate(45deg);
 }
+
 
 .notification-badge {
     position: absolute;
@@ -320,9 +342,11 @@ body {
         #08080b;
 }
 
+
 .profile-button {
     border-radius: 50%;
 }
+
 
 .my-avatar {
     width: 100%;
@@ -354,6 +378,63 @@ body {
     font-weight: 850;
 }
 
+
+/* =====================================================
+   VIEWS
+===================================================== */
+
+.friends-view {
+    display: block;
+}
+
+
+.conversation-view {
+    display: none;
+
+    flex-direction: column;
+
+    position: fixed;
+
+    top: 16px;
+    bottom: 94px;
+
+    left: 50%;
+
+    width:
+        min(
+            760px,
+            calc(100vw - 36px)
+        );
+
+    height: auto;
+
+    transform:
+        translateX(-50%);
+
+    margin: 0;
+
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    background:
+        rgba(11,11,15,.92);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 35px 100px
+        rgba(0,0,0,.50);
+
+    backdrop-filter:
+        blur(28px);
+
+    z-index: 40;
+}
+
+
 /* =====================================================
    NOTIFICATION / ADD FRIEND PANELS
 ===================================================== */
@@ -377,7 +458,7 @@ body {
     border-radius: 21px;
 
     background:
-        rgba(18,18,23,.92);
+        rgba(18,18,23,.94);
 
     border:
         1px solid
@@ -391,9 +472,15 @@ body {
         rgba(0,0,0,.45);
 }
 
+
 .add-friend-panel {
     right: 66px;
 }
+
+
+/* =====================================================
+   PANEL HEADER
+===================================================== */
 
 .panel-header {
     display: flex;
@@ -406,6 +493,7 @@ body {
 
     margin-bottom: 14px;
 }
+
 
 .panel-kicker {
     display: block;
@@ -423,9 +511,11 @@ body {
         1.8px;
 }
 
+
 .panel-header h2 {
     font-size: 17px;
 }
+
 
 .panel-close {
     width: 31px;
@@ -446,6 +536,11 @@ body {
     cursor: pointer;
 }
 
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
 .notification-list {
     display: flex;
 
@@ -457,6 +552,7 @@ body {
 
     overflow-y: auto;
 }
+
 
 .notification-card {
     display: flex;
@@ -476,6 +572,7 @@ body {
         1px solid
         rgba(255,255,255,.07);
 }
+
 
 .notification-avatar {
     width: 39px;
@@ -508,6 +605,7 @@ body {
     font-weight: 850;
 }
 
+
 .notification-info {
     flex: 1;
 
@@ -520,9 +618,17 @@ body {
     gap: 3px;
 }
 
+
 .notification-info strong {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
     font-size: 11px;
 }
+
 
 .notification-info span {
     color:
@@ -533,11 +639,13 @@ body {
     line-height: 1.35;
 }
 
+
 .notification-actions {
     display: flex;
 
     gap: 5px;
 }
+
 
 .notification-action {
     height: 30px;
@@ -566,6 +674,7 @@ body {
     cursor: pointer;
 }
 
+
 .notification-action.accept {
     background:
         rgba(139,92,246,.18);
@@ -577,6 +686,7 @@ body {
         #eee8ff;
 }
 
+
 .notification-empty {
     padding: 22px;
 
@@ -587,6 +697,7 @@ body {
 
     font-size: 10px;
 }
+
 
 /* =====================================================
    ADD FRIEND
@@ -608,6 +719,7 @@ body {
         1px solid
         rgba(255,255,255,.07);
 }
+
 
 .add-friend-row input {
     flex: 1;
@@ -633,10 +745,12 @@ body {
     font-size: 11px;
 }
 
+
 .add-friend-row input::placeholder {
     color:
         rgba(255,255,255,.24);
 }
+
 
 .add-friend-row button {
     width: 61px;
@@ -662,6 +776,7 @@ body {
     cursor: pointer;
 }
 
+
 .search-message {
     min-height: 16px;
 
@@ -673,31 +788,28 @@ body {
     font-size: 9px;
 }
 
+
 .search-result {
     margin-top: 7px;
 }
 
-/* =====================================================
-   FRIENDS PAGE
-===================================================== */
 
-.friends-view {
-    display: block;
-}
+/* =====================================================
+   PAGE HEADING
+===================================================== */
 
 .page-heading {
     display: flex;
 
-    align-items:
-        flex-end;
+    align-items: flex-end;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
     gap: 15px;
 
     margin-bottom: 13px;
 }
+
 
 .heading-kicker {
     display: block;
@@ -711,8 +823,10 @@ body {
 
     font-weight: 850;
 
-    letter-spacing: 1.8px;
+    letter-spacing:
+        1.8px;
 }
+
 
 .page-heading h1 {
     font-size: 26px;
@@ -722,6 +836,7 @@ body {
     letter-spacing:
         -.8px;
 }
+
 
 .heading-count {
     min-width: 32px;
@@ -752,8 +867,9 @@ body {
     font-weight: 850;
 }
 
+
 /* =====================================================
-   CHAT SEARCH
+   SEARCH CHATS
 ===================================================== */
 
 .chat-search {
@@ -780,6 +896,7 @@ body {
         rgba(255,255,255,.07);
 }
 
+
 .search-mark {
     color:
         rgba(255,255,255,.27);
@@ -789,6 +906,7 @@ body {
     transform:
         rotate(45deg);
 }
+
 
 .chat-search input {
     flex: 1;
@@ -801,7 +919,8 @@ body {
 
     outline: none;
 
-    background: transparent;
+    background:
+        transparent;
 
     color: white;
 
@@ -810,10 +929,16 @@ body {
     font-size: 11px;
 }
 
+
 .chat-search input::placeholder {
     color:
         rgba(255,255,255,.23);
 }
+
+
+/* =====================================================
+   FRIEND LIST
+===================================================== */
 
 .friend-list {
     display: flex;
@@ -822,6 +947,7 @@ body {
 
     gap: 7px;
 }
+
 
 .person-card {
     min-height: 67px;
@@ -849,8 +975,11 @@ body {
         rgba(0,0,0,.12);
 
     transition:
-        .18s ease;
+        background .18s ease,
+        border-color .18s ease,
+        transform .18s ease;
 }
+
 
 .person-card:hover {
     background:
@@ -862,6 +991,7 @@ body {
     transform:
         translateY(-1px);
 }
+
 
 .person-avatar {
     width: 45px;
@@ -895,12 +1025,19 @@ body {
     background-size:
         cover;
 
-    color: white;
+    background-repeat:
+        no-repeat;
 
-    font-size: 13px;
+    color:
+        white;
 
-    font-weight: 850;
+    font-size:
+        13px;
+
+    font-weight:
+        850;
 }
+
 
 .person-info {
     flex: 1;
@@ -914,6 +1051,7 @@ body {
     gap: 3px;
 }
 
+
 .person-name {
     overflow: hidden;
 
@@ -921,10 +1059,13 @@ body {
 
     white-space: nowrap;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 750;
+    font-weight:
+        750;
 }
+
 
 .person-email {
     overflow: hidden;
@@ -936,12 +1077,17 @@ body {
     color:
         rgba(255,255,255,.27);
 
-    font-size: 9px;
+    font-size:
+        9px;
 }
 
+
 .person-action {
-    min-width: 66px;
-    height: 34px;
+    min-width:
+        66px;
+
+    height:
+        34px;
 
     padding:
         0 10px;
@@ -959,14 +1105,32 @@ body {
     color:
         rgba(255,255,255,.68);
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 850;
+    font-weight:
+        850;
 
-    cursor: pointer;
+    cursor:
+        pointer;
+
+    transition:
+        background .18s ease,
+        transform .18s ease;
 }
+
+
+.person-action:hover {
+    background:
+        rgba(255,255,255,.08);
+
+    transform:
+        translateY(-1px);
+}
+
 
 .person-action.primary {
     background:
@@ -979,17 +1143,21 @@ body {
         #f0ebff;
 }
 
+
 .empty-state {
     padding:
         26px 10px;
 
-    text-align: center;
+    text-align:
+        center;
 
     color:
         rgba(255,255,255,.24);
 
-    font-size: 10px;
+    font-size:
+        10px;
 }
+
 
 /* =====================================================
    CONVERSATION
@@ -1002,26 +1170,22 @@ body {
 
     position: fixed;
 
-    inset:
-        16px
-        18px
-        94px;
+    top: 16px;
+    bottom: 94px;
+
+    left: 50%;
 
     width:
-        min(760px, calc(100vw - 36px));
+        min(
+            760px,
+            calc(100vw - 36px)
+        );
 
-    max-width:
-        760px;
-
-    height:
-        auto;
+    height: auto;
 
     min-height: 0;
 
-    margin:
-        0 auto;
-
-    left: 50%;
+    margin: 0;
 
     transform:
         translateX(-50%);
@@ -1044,19 +1208,24 @@ body {
     backdrop-filter:
         blur(28px);
 
-    z-index: 40;
+    z-index:
+        40;
 }
+
 
 .conversation-header {
     height: 71px;
 
     flex-shrink: 0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 10px;
+    gap:
+        10px;
 
     padding:
         10px 13px;
@@ -1069,13 +1238,19 @@ body {
         rgba(255,255,255,.06);
 }
 
+
 .conversation-back {
-    width: 35px;
-    height: 35px;
+    width:
+        35px;
 
-    flex-shrink: 0;
+    height:
+        35px;
 
-    border-radius: 11px;
+    flex-shrink:
+        0;
+
+    border-radius:
+        11px;
 
     border:
         1px solid
@@ -1087,26 +1262,38 @@ body {
     color:
         rgba(255,255,255,.65);
 
-    font-size: 17px;
+    font-size:
+        17px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 }
 
+
 .conversation-avatar {
-    width: 43px;
-    height: 43px;
+    width:
+        43px;
 
-    flex-shrink: 0;
+    height:
+        43px;
 
-    display: flex;
+    flex-shrink:
+        0;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: center;
+    align-items:
+        center;
 
-    overflow: hidden;
+    justify-content:
+        center;
 
-    border-radius: 50%;
+    overflow:
+        hidden;
+
+    border-radius:
+        50%;
 
     background:
         rgba(255,255,255,.065);
@@ -1121,54 +1308,78 @@ body {
     background-size:
         cover;
 
-    color: white;
+    background-repeat:
+        no-repeat;
 
-    font-size: 13px;
+    color:
+        white;
 
-    font-weight: 850;
+    font-size:
+        13px;
+
+    font-weight:
+        850;
 }
+
 
 .conversation-user {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 3px;
+    gap:
+        3px;
 }
+
 
 .conversation-user strong {
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    text-overflow: ellipsis;
+    text-overflow:
+        ellipsis;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
-    font-size: 14px;
+    font-size:
+        14px;
 }
+
 
 .conversation-user span {
     color:
         rgba(255,255,255,.25);
 
-    font-size: 9px;
+    font-size:
+        9px;
 }
+
 
 /* =====================================================
    MESSAGES
 ===================================================== */
 
 .message-list {
-    flex: 1;
+    flex:
+        1;
 
-    overflow-y: auto;
+    overflow-y:
+        auto;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    gap: 7px;
+    gap:
+        7px;
 
     padding:
         17px;
@@ -1181,64 +1392,91 @@ body {
         transparent;
 }
 
+
 .messages-empty {
-    flex: 1;
+    flex:
+        1;
 
-    min-height: 350px;
+    min-height:
+        350px;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 7px;
+    gap:
+        7px;
 
-    text-align: center;
+    text-align:
+        center;
 }
+
 
 .messages-empty .empty-icon {
     color:
         rgba(255,255,255,.18);
 
-    font-size: 28px;
+    font-size:
+        28px;
 }
 
+
 .messages-empty .empty-title {
-    font-size: 14px;
+    font-size:
+        14px;
 
     color:
         rgba(255,255,255,.54);
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
+
 .messages-empty .empty-text {
-    max-width: 290px;
+    max-width:
+        290px;
 
     color:
         rgba(255,255,255,.23);
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 }
+
 
 .message-bubble-row {
-    display: flex;
+    display:
+        flex;
 
-    width: 100%;
+    width:
+        100%;
 }
+
 
 .message-bubble-row.mine {
-    justify-content: flex-end;
+    justify-content:
+        flex-end;
 }
+
 
 .message-bubble {
     max-width:
-        min(76%, 520px);
+        min(
+            76%,
+            520px
+        );
 
     padding:
         9px 12px;
@@ -1254,6 +1492,7 @@ body {
         rgba(255,255,255,.06);
 }
 
+
 .message-bubble-row.mine
 .message-bubble {
     border-radius:
@@ -1266,6 +1505,7 @@ body {
         rgba(167,139,250,.18);
 }
 
+
 .message-text {
     white-space:
         pre-wrap;
@@ -1273,11 +1513,13 @@ body {
     word-break:
         break-word;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
     line-height:
         1.5;
 }
+
 
 .message-time {
     margin-top:
@@ -1293,16 +1535,20 @@ body {
         8px;
 }
 
+
 /* =====================================================
-   INPUT
+   MESSAGE FORM
 ===================================================== */
 
 .message-form {
-    display: flex;
+    display:
+        flex;
 
-    align-items: flex-end;
+    align-items:
+        flex-end;
 
-    gap: 8px;
+    gap:
+        8px;
 
     padding:
         10px;
@@ -1315,8 +1561,10 @@ body {
         rgba(255,255,255,.06);
 }
 
+
 #messageInput {
-    flex: 1;
+    flex:
+        1;
 
     min-height:
         45px;
@@ -1356,15 +1604,18 @@ body {
         1.45;
 }
 
+
 #messageInput:focus {
     border-color:
         rgba(167,139,250,.28);
 }
 
+
 #messageInput::placeholder {
     color:
         rgba(255,255,255,.22);
 }
+
 
 .send-button {
     width:
@@ -1398,15 +1649,18 @@ body {
         .18s ease;
 }
 
+
 .send-button:hover {
     transform:
         translateY(-1px);
 }
 
+
 .send-button:active {
     transform:
         scale(.95);
 }
+
 
 .send-button:disabled {
     opacity:
@@ -1415,6 +1669,7 @@ body {
     cursor:
         default;
 }
+
 
 /* =====================================================
    BOTTOM NAV
@@ -1472,6 +1727,7 @@ body {
         rgba(0,0,0,.38);
 }
 
+
 .nav-item {
     min-height:
         56px;
@@ -1510,6 +1766,7 @@ body {
         .18s ease;
 }
 
+
 .nav-item.active {
     background:
         rgba(255,255,255,.07);
@@ -1518,20 +1775,24 @@ body {
         white;
 }
 
+
 .nav-item:hover {
     color:
         rgba(255,255,255,.70);
 }
+
 
 .nav-icon {
     font-size:
         16px;
 }
 
+
 .nav-item small {
     font-size:
         8px;
 }
+
 
 /* =====================================================
    MOBILE
@@ -1546,40 +1807,53 @@ body {
             104px;
     }
 
+
     .chat-header {
         margin-bottom:
             16px;
     }
+
 
     .page-heading h1 {
         font-size:
             23px;
     }
 
+
+    /* Notifications */
+
     .notification-panel,
     .add-friend-panel {
-        top:
-            67px;
 
-        right:
-            12px;
+        position: fixed;
 
-        width:
-            calc(100vw - 24px);
+        top: 67px;
 
-        max-width:
-            none;
+        left: 12px;
+        right: 12px;
+
+        width: auto;
+
+        max-width: none;
+
+        margin: 0;
+
     }
+
 
     .add-friend-panel {
-        right:
-            12px;
+        left: 12px;
+        right: 12px;
     }
+
+
+    /* Contacts */
 
     .person-card {
         min-height:
             63px;
     }
+
 
     .person-avatar {
         width:
@@ -1589,32 +1863,127 @@ body {
             43px;
     }
 
+
     .person-action {
         min-width:
             62px;
     }
 
-    .conversation-view {
-        inset:
-            10px
-            10px
-            88px;
 
-        width:
-            calc(100vw - 20px);
+    /* =============================================
+       MOBILE CONVERSATION
+    ============================================== */
+
+    .conversation-view {
+
+        position: fixed;
+
+        top: 10px;
+        right: 10px;
+        bottom: 88px;
+        left: 10px;
+
+        width: auto;
+
+        max-width: none;
+
+        height: auto;
+
+        min-height: 0;
+
+        margin: 0;
+
+        transform: none;
 
         border-radius:
             21px;
+
+        z-index: 40;
+
     }
+
+
+    .conversation-header {
+
+        height:
+            68px;
+
+        padding:
+            10px 11px;
+
+    }
+
+
+    .conversation-back {
+
+        width:
+            35px;
+
+        height:
+            35px;
+
+    }
+
+
+    .conversation-avatar {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+    }
+
+
+    .conversation-user strong {
+
+        font-size:
+            13px;
+
+    }
+
 
     .message-list {
+
         padding:
             12px;
+
     }
 
+
     .message-bubble {
+
         max-width:
             88%;
+
+    }
+
+
+    .message-form {
+
+        padding:
+            9px;
+
+    }
+
+
+    #messageInput {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .send-button {
+
+        width:
+            44px;
+
+        height:
+            44px;
+
     }
 
 }
