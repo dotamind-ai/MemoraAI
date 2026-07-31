@@ -3738,3 +3738,35 @@ function animateNotificationBell() {
     );
 
 }
+function animateNotificationBell() {
+
+    if (!notificationButton) {
+        return;
+    }
+
+
+    notificationButton.classList.remove(
+        "bell-active"
+    );
+
+
+    void notificationButton.offsetWidth;
+
+
+    notificationButton.classList.add(
+        "bell-active"
+    );
+
+
+    setTimeout(
+        function() {
+
+            notificationButton.classList.remove(
+                "bell-active"
+            );
+
+        },
+        700
+    );
+
+}
