@@ -32,11 +32,12 @@
 </div>
 
 
-
 <main class="chat-container">
 
 
-    <!-- HEADER -->
+    <!-- =====================================
+            HEADER
+    ====================================== -->
 
     <header class="chat-header">
 
@@ -45,6 +46,7 @@
             id="backButton"
             class="back-button"
             type="button"
+            aria-label="Back"
         >
             ←
         </button>
@@ -63,22 +65,31 @@
 
 
 
-    <!-- SEARCH -->
+    <!-- =====================================
+            FRIEND SEARCH
+    ====================================== -->
 
-    <section class="search-card">
+    <section
+        id="friendsSection"
+        class="search-card"
+    >
 
 
         <div class="search-title">
+
 
             <span class="section-kicker">
                 FIND PEOPLE
             </span>
 
+
             <h1>
                 Add a friend
             </h1>
 
+
         </div>
+
 
 
         <div class="search-row">
@@ -103,10 +114,12 @@
         </div>
 
 
+
         <div
             id="searchMessage"
             class="search-message"
         ></div>
+
 
 
         <div
@@ -119,22 +132,31 @@
 
 
 
-    <!-- REQUESTS -->
+    <!-- =====================================
+            REQUESTS
+    ====================================== -->
 
-    <section class="chat-section">
+    <section
+        id="requestsSection"
+        class="chat-section"
+    >
 
 
         <div class="section-heading">
 
+
             <div>
+
 
                 <span class="section-kicker">
                     REQUESTS
                 </span>
 
+
                 <h2>
                     Friend requests
                 </h2>
+
 
             </div>
 
@@ -146,7 +168,9 @@
                 0
             </span>
 
+
         </div>
+
 
 
         <div
@@ -159,22 +183,31 @@
 
 
 
-    <!-- FRIENDS -->
+    <!-- =====================================
+            FRIENDS
+    ====================================== -->
 
-    <section class="chat-section">
+    <section
+        id="friendsListSection"
+        class="chat-section"
+    >
 
 
         <div class="section-heading">
 
+
             <div>
+
 
                 <span class="section-kicker">
                     PEOPLE
                 </span>
 
+
                 <h2>
                     Friends
                 </h2>
+
 
             </div>
 
@@ -186,7 +219,9 @@
                 0
             </span>
 
+
         </div>
+
 
 
         <div
@@ -198,11 +233,120 @@
     </section>
 
 
+
+    <!-- =====================================
+            CONVERSATION
+    ====================================== -->
+
+    <section
+        id="conversationSection"
+        class="conversation-card"
+    >
+
+
+        <header class="conversation-header">
+
+
+            <button
+                id="conversationBack"
+                class="conversation-back"
+                type="button"
+            >
+                ←
+            </button>
+
+
+            <div
+                id="conversationAvatar"
+                class="conversation-avatar"
+            >
+                M
+            </div>
+
+
+            <div class="conversation-user">
+
+
+                <strong id="conversationName">
+                    Select a friend
+                </strong>
+
+
+                <span id="conversationStatus">
+                    Private chat
+                </span>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <div
+            id="messageList"
+            class="message-list"
+        >
+
+
+            <div class="messages-empty">
+
+                <div class="empty-icon">
+                    ◇
+                </div>
+
+                <div class="empty-title">
+                    Choose a friend
+                </div>
+
+                <div class="empty-text">
+                    Select a friend above to start chatting.
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <form
+            id="messageForm"
+            class="message-form"
+        >
+
+
+            <textarea
+                id="messageInput"
+                rows="1"
+                maxlength="4000"
+                placeholder="Write a message..."
+            ></textarea>
+
+
+            <button
+                id="sendMessageButton"
+                type="submit"
+                aria-label="Send"
+            >
+                →
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
 </main>
 
 
 
-<!-- BOTTOM NAV -->
+<!-- =====================================
+        BOTTOM NAV
+===================================== -->
 
 <nav class="bottom-nav">
 
@@ -282,7 +426,10 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
 
 <script src="chat.js"></script>
 
