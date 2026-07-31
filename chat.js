@@ -1,7 +1,6 @@
 // =====================================================
 // MEMORA CHAT
 // Friends + Notifications + Messages + Realtime
-// + Floating message notifications
 // =====================================================
 
 const SUPABASE_URL =
@@ -9,7 +8,6 @@ const SUPABASE_URL =
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -22,17 +20,10 @@ const supabaseClient =
 // DOM
 // =====================================================
 
-const emailSearch =
-    document.getElementById("emailSearch");
-
-const searchButton =
-    document.getElementById("searchButton");
-
-const searchMessage =
-    document.getElementById("searchMessage");
-
-const searchResult =
-    document.getElementById("searchResult");
+const emailSearch = document.getElementById("emailSearch");
+const searchButton = document.getElementById("searchButton");
+const searchMessage = document.getElementById("searchMessage");
+const searchResult = document.getElementById("searchResult");
 
 const notificationButton =
     document.getElementById("notificationButton");
@@ -47,9 +38,7 @@ const notificationList =
     document.getElementById("notificationList");
 
 const closeNotificationPanel =
-    document.getElementById(
-        "closeNotificationPanel"
-    );
+    document.getElementById("closeNotificationPanel");
 
 const addFriendButton =
     document.getElementById("addFriendButton");
@@ -58,9 +47,7 @@ const addFriendPanel =
     document.getElementById("addFriendPanel");
 
 const closeAddFriendPanel =
-    document.getElementById(
-        "closeAddFriendPanel"
-    );
+    document.getElementById("closeAddFriendPanel");
 
 const friendList =
     document.getElementById("friendList");
@@ -141,7 +128,7 @@ let toastContainer = null;
 
 
 // =====================================================
-// INITIALIZATION
+// INIT
 // =====================================================
 
 document.addEventListener(
@@ -206,9 +193,7 @@ async function initializeChat() {
 
         await loadNotifications();
 
-
         subscribeToNotifications();
-
 
         await openFriendFromUrl();
 
@@ -238,7 +223,6 @@ function setupNavigation() {
             function(event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
                 window.location.href =
@@ -400,10 +384,10 @@ function setupPanels() {
             if (
                 notificationPanel &&
                 !notificationPanel.hidden &&
+                notificationButton &&
                 !notificationPanel.contains(
                     event.target
                 ) &&
-                notificationButton &&
                 !notificationButton.contains(
                     event.target
                 )
@@ -417,10 +401,10 @@ function setupPanels() {
             if (
                 addFriendPanel &&
                 !addFriendPanel.hidden &&
+                addFriendButton &&
                 !addFriendPanel.contains(
                     event.target
                 ) &&
-                addFriendButton &&
                 !addFriendButton.contains(
                     event.target
                 )
@@ -569,15 +553,28 @@ function setupSearch() {
 
 async function searchUser() {
 
+    if (
+        !emailSearch ||
+        !searchButton
+    ) {
+
+        return;
+
+    }
+
+
     const email =
         emailSearch.value.trim();
 
 
-    searchResult.innerHTML =
-        "";
+    if (searchResult) {
+        searchResult.innerHTML = "";
+    }
 
-    searchMessage.textContent =
-        "";
+
+    if (searchMessage) {
+        searchMessage.textContent = "";
+    }
 
 
     if (!email) {
@@ -682,10 +679,6 @@ function renderSearchResult(
     }
 
 
-    searchResult.innerHTML =
-        "";
-
-
     const card =
         document.createElement(
             "div"
@@ -780,28 +773,18 @@ function renderSearchResult(
     );
 
 
-    card.appendChild(
-        avatar
-    );
-
-    card.appendChild(
-        info
-    );
-
-    card.appendChild(
-        action
-    );
+    card.appendChild(avatar);
+    card.appendChild(info);
+    card.appendChild(action);
 
 
-    searchResult.appendChild(
-        card
-    );
+    searchResult.appendChild(card);
 
 }
 
 
 // =====================================================
-// FRIEND REQUEST
+// SEND FRIEND REQUEST
 // =====================================================
 
 async function sendFriendRequest(
@@ -859,6 +842,7 @@ async function sendFriendRequest(
 
         button.disabled =
             false;
+
 
         button.textContent =
             "Add";
@@ -1036,7 +1020,6 @@ function renderFriends() {
 
 
             info.appendChild(name);
-
             info.appendChild(label);
 
 
@@ -1070,22 +1053,12 @@ function renderFriends() {
             );
 
 
-            card.appendChild(
-                avatar
-            );
-
-            card.appendChild(
-                info
-            );
-
-            card.appendChild(
-                action
-            );
+            card.appendChild(avatar);
+            card.appendChild(info);
+            card.appendChild(action);
 
 
-            friendList.appendChild(
-                card
-            );
+            friendList.appendChild(card);
 
         }
     );
@@ -1098,11 +1071,6 @@ function renderFriends() {
 // =====================================================
 
 async function loadNotifications() {
-
-    if (!currentUser) {
-        return;
-    }
-
 
     const {
         data,
@@ -1123,7 +1091,8 @@ async function loadNotifications() {
         .order(
             "created_at",
             {
-                ascending: false
+                ascending:
+                    false
             }
         );
 
@@ -1135,10 +1104,7 @@ async function loadNotifications() {
             error
         );
 
-
-        notifications =
-            [];
-
+        notifications = [];
 
         renderNotifications();
 
@@ -1194,225 +1160,222 @@ function renderNotifications() {
 
 
     notifications.forEach(
-        renderSingleNotification
-    );
+        function(notification) {
 
-}
-
-
-function renderSingleNotification(
-    notification
-) {
-
-    const card =
-        document.createElement(
-            "div"
-        );
-
-
-    card.className =
-        "notification-card";
-
-
-    const display =
-        getNotificationDisplay(
-            notification
-        );
-
-
-    const avatar =
-        document.createElement(
-            "div"
-        );
-
-
-    avatar.className =
-        "notification-avatar";
-
-
-    if (display.avatarUrl) {
-
-        avatar.style.backgroundImage =
-            `url("${display.avatarUrl}")`;
-
-    } else {
-
-        avatar.textContent =
-            getInitial(
-                display.name
-            );
-
-    }
-
-
-    const info =
-        document.createElement(
-            "div"
-        );
-
-
-    info.className =
-        "notification-info";
-
-
-    const title =
-        document.createElement(
-            "strong"
-        );
-
-
-    title.textContent =
-        notification.title ||
-        "Notification";
-
-
-    const body =
-        document.createElement(
-            "span"
-        );
-
-
-    body.textContent =
-        notification.body ||
-        "";
-
-
-    info.appendChild(title);
-
-    info.appendChild(body);
-
-
-    card.appendChild(avatar);
-
-    card.appendChild(info);
-
-
-    if (
-        notification.type ===
-        "friend_request"
-    ) {
-
-        const actions =
-            document.createElement(
-                "div"
-            );
-
-
-        actions.className =
-            "notification-actions";
-
-
-        const accept =
-            document.createElement(
-                "button"
-            );
-
-
-        accept.type =
-            "button";
-
-
-        accept.className =
-            "notification-action accept";
-
-
-        accept.textContent =
-            "Accept";
-
-
-        accept.addEventListener(
-            "click",
-            async function(event) {
-
-                event.stopPropagation();
-
-                await handleFriendRequest(
-                    notification,
-                    true
+            const card =
+                document.createElement(
+                    "div"
                 );
 
-            }
-        );
+
+            card.className =
+                "notification-card";
 
 
-        const reject =
-            document.createElement(
-                "button"
-            );
-
-
-        reject.type =
-            "button";
-
-
-        reject.className =
-            "notification-action";
-
-
-        reject.textContent =
-            "Reject";
-
-
-        reject.addEventListener(
-            "click",
-            async function(event) {
-
-                event.stopPropagation();
-
-                await handleFriendRequest(
-                    notification,
-                    false
-                );
-
-            }
-        );
-
-
-        actions.appendChild(
-            accept
-        );
-
-        actions.appendChild(
-            reject
-        );
-
-
-        card.appendChild(
-            actions
-        );
-
-    } else {
-
-        card.style.cursor =
-            "pointer";
-
-
-        card.addEventListener(
-            "click",
-            function() {
-
-                openMessageNotification(
+            const display =
+                getNotificationDisplay(
                     notification
                 );
 
+
+            const avatar =
+                document.createElement(
+                    "div"
+                );
+
+
+            avatar.className =
+                "notification-avatar";
+
+
+            if (
+                display.avatarUrl
+            ) {
+
+                avatar.style.backgroundImage =
+                    `url("${display.avatarUrl}")`;
+
+            } else {
+
+                avatar.textContent =
+                    getInitial(
+                        display.name
+                    );
+
             }
-        );
-
-    }
 
 
-    notificationList.appendChild(
-        card
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "notification-info";
+
+
+            const title =
+                document.createElement(
+                    "strong"
+                );
+
+
+            title.textContent =
+                notification.title ||
+                "Notification";
+
+
+            const body =
+                document.createElement(
+                    "span"
+                );
+
+
+            body.textContent =
+                notification.body ||
+                "";
+
+
+            info.appendChild(title);
+            info.appendChild(body);
+
+
+            card.appendChild(avatar);
+            card.appendChild(info);
+
+
+            if (
+                notification.type ===
+                "friend_request"
+            ) {
+
+                addFriendRequestActions(
+                    card,
+                    notification
+                );
+
+            } else {
+
+                card.style.cursor =
+                    "pointer";
+
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        openMessageNotification(
+                            notification
+                        );
+
+                    }
+                );
+
+            }
+
+
+            notificationList.appendChild(
+                card
+            );
+
+        }
     );
 
 }
 
 
-// =====================================================
-// FRIEND REQUEST ACTION
-// =====================================================
+function addFriendRequestActions(
+    card,
+    notification
+) {
 
-async function handleFriendRequest(
+    const actions =
+        document.createElement(
+            "div"
+        );
+
+
+    actions.className =
+        "notification-actions";
+
+
+    const accept =
+        document.createElement(
+            "button"
+        );
+
+
+    accept.type =
+        "button";
+
+
+    accept.className =
+        "notification-action accept";
+
+
+    accept.textContent =
+        "Accept";
+
+
+    accept.addEventListener(
+        "click",
+        async function(event) {
+
+            event.stopPropagation();
+
+            await friendRequestAction(
+                notification,
+                true
+            );
+
+        }
+    );
+
+
+    const reject =
+        document.createElement(
+            "button"
+        );
+
+
+    reject.type =
+        "button";
+
+
+    reject.className =
+        "notification-action";
+
+
+    reject.textContent =
+        "Reject";
+
+
+    reject.addEventListener(
+        "click",
+        async function(event) {
+
+            event.stopPropagation();
+
+            await friendRequestAction(
+                notification,
+                false
+            );
+
+        }
+    );
+
+
+    actions.appendChild(accept);
+    actions.appendChild(reject);
+
+
+    card.appendChild(actions);
+
+}
+
+
+async function friendRequestAction(
     notification,
     accepted
 ) {
@@ -1457,7 +1420,7 @@ async function handleFriendRequest(
 
 
 // =====================================================
-// MESSAGE NOTIFICATION CLICK
+// MESSAGE NOTIFICATION
 // =====================================================
 
 async function openMessageNotification(
@@ -1527,17 +1490,16 @@ async function openMessageNotification(
     );
 
 
-    if (!friend) {
-        return;
-    }
-
-
     closeNotifications();
 
 
-    await openConversation(
-        friend
-    );
+    if (friend) {
+
+        await openConversation(
+            friend
+        );
+
+    }
 
 }
 
@@ -1555,7 +1517,8 @@ async function markNotificationRead(
     } = await supabaseClient
         .from("notifications")
         .update({
-            read: true
+            read:
+                true
         })
         .eq(
             "id",
@@ -1570,7 +1533,7 @@ async function markNotificationRead(
     if (error) {
 
         console.error(
-            "Notification read error:",
+            "Read notification error:",
             error
         );
 
@@ -1620,7 +1583,7 @@ function subscribeToNotifications() {
     notificationChannel =
         supabaseClient
             .channel(
-                "notification-feed-" +
+                "notifications-" +
                 currentUser.id
             )
             .on(
@@ -1652,11 +1615,7 @@ function subscribeToNotifications() {
 }
 
 
-// =====================================================
-// INCOMING NOTIFICATION
-// =====================================================
-
-function handleIncomingNotification(
+async function handleIncomingNotification(
     notification
 ) {
 
@@ -1665,73 +1624,24 @@ function handleIncomingNotification(
     }
 
 
+    // Если мы уже находимся
+    // в этом диалоге — не показываем
+    // всплывающее уведомление.
+
     if (
         notification.type ===
-        "new_message"
+        "new_message" &&
+        notification.related_id ===
+        activeConversationId
     ) {
 
-        // Если мы уже открыли этот диалог,
-        // уведомление нам не нужно.
-
-        if (
-            notification.related_id ===
-            activeConversationId
-        ) {
-
-            markDatabaseNotificationReadDirect(
-                notification.id
-            );
-
-            return;
-
-        }
-
-
-        addNotification(
-            notification
-        );
-
-
-        showMessageToast(
-            notification
+        await markDatabaseNotificationReadDirect(
+            notification.id
         );
 
 
         return;
 
-    }
-
-
-    addNotification(
-        notification
-    );
-
-}
-
-
-// =====================================================
-// ADD NOTIFICATION
-// =====================================================
-
-function addNotification(
-    notification
-) {
-
-    const exists =
-        notifications.some(
-            function(item) {
-
-                return (
-                    item.id ===
-                    notification.id
-                );
-
-            }
-        );
-
-
-    if (exists) {
-        return;
     }
 
 
@@ -1741,6 +1651,18 @@ function addNotification(
 
 
     renderNotifications();
+
+
+    if (
+        notification.type ===
+        "new_message"
+    ) {
+
+        showMessageToast(
+            notification
+        );
+
+    }
 
 }
 
@@ -1758,7 +1680,8 @@ async function markDatabaseNotificationReadDirect(
     } = await supabaseClient
         .from("notifications")
         .update({
-            read: true
+            read:
+                true
         })
         .eq(
             "id",
@@ -1773,11 +1696,12 @@ async function markDatabaseNotificationReadDirect(
     if (error) {
 
         console.error(
-            "Notification read error:",
+            "Direct read error:",
             error
         );
 
         return;
+
     }
 
 
@@ -1898,13 +1822,21 @@ async function openConversation(
         friend;
 
 
-    conversationName.textContent =
-        friend.display_name ||
-        "Memora user";
+    if (conversationName) {
+
+        conversationName.textContent =
+            friend.display_name ||
+            "Memora user";
+
+    }
 
 
-    conversationStatus.textContent =
-        "Private conversation";
+    if (conversationStatus) {
+
+        conversationStatus.textContent =
+            "Private conversation";
+
+    }
 
 
     setConversationAvatar(
@@ -1949,7 +1881,9 @@ async function openConversation(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -2001,10 +1935,6 @@ async function openConversation(
 }
 
 
-// =====================================================
-// MARK OPEN CONVERSATION NOTIFICATIONS
-// =====================================================
-
 async function markOpenConversationNotificationsRead() {
 
     if (!activeConversationId) {
@@ -2035,7 +1965,8 @@ async function markOpenConversationNotificationsRead() {
         await supabaseClient
             .from("notifications")
             .update({
-                read: true
+                read:
+                    true
             })
             .eq(
                 "id",
@@ -2128,13 +2059,16 @@ async function loadMessages() {
         .order(
             "created_at",
             {
-                ascending: true
+                ascending:
+                    true
             }
         );
 
 
     if (error) {
+
         throw error;
+
     }
 
 
@@ -2148,11 +2082,6 @@ async function loadMessages() {
 function renderMessages(
     messages
 ) {
-
-    if (!messageList) {
-        return;
-    }
-
 
     messageList.innerHTML =
         "";
@@ -2179,6 +2108,7 @@ function renderMessages(
         `;
 
         return;
+
     }
 
 
@@ -2196,11 +2126,6 @@ function appendMessage(
     message
 ) {
 
-    if (!messageList) {
-        return;
-    }
-
-
     if (
         document.querySelector(
             `[data-message-id="${message.id}"]`
@@ -2208,6 +2133,7 @@ function appendMessage(
     ) {
 
         return;
+
     }
 
 
@@ -2277,14 +2203,9 @@ function appendMessage(
         );
 
 
-    bubble.appendChild(
-        text
-    );
+    bubble.appendChild(text);
 
-
-    bubble.appendChild(
-        time
-    );
+    bubble.appendChild(time);
 
 
     row.appendChild(
@@ -2359,7 +2280,9 @@ async function sendMessage(
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -2405,7 +2328,7 @@ async function sendMessage(
 
 
 // =====================================================
-// MESSAGE REALTIME
+// REALTIME MESSAGES
 // =====================================================
 
 function subscribeToMessages() {
@@ -2422,9 +2345,7 @@ function subscribeToMessages() {
         supabaseClient
             .channel(
                 "messages-" +
-                activeConversationId +
-                "-" +
-                Date.now()
+                activeConversationId
             )
             .on(
                 "postgres_changes",
@@ -2450,6 +2371,7 @@ function subscribeToMessages() {
 
 
                     scrollMessagesToBottom();
+
 
                     markOpenConversationNotificationsRead();
 
@@ -2479,7 +2401,7 @@ function stopMessageRealtime() {
 
 
 // =====================================================
-// FLOATING TOAST
+// TOAST CONTAINER
 // =====================================================
 
 function createToastContainer() {
@@ -2496,44 +2418,35 @@ function createToastContainer() {
 
 
     toastContainer.id =
-        "memoraToastContainer";
+        "memora-toast-container";
 
 
     toastContainer.style.position =
         "fixed";
 
-
     toastContainer.style.top =
         "12px";
-
 
     toastContainer.style.left =
         "50%";
 
-
     toastContainer.style.transform =
         "translateX(-50%)";
-
 
     toastContainer.style.width =
         "min(430px, calc(100vw - 24px))";
 
-
     toastContainer.style.zIndex =
         "9999";
-
 
     toastContainer.style.display =
         "flex";
 
-
     toastContainer.style.flexDirection =
         "column";
 
-
     toastContainer.style.gap =
         "8px";
-
 
     toastContainer.style.pointerEvents =
         "none";
@@ -2545,6 +2458,10 @@ function createToastContainer() {
 
 }
 
+
+// =====================================================
+// MESSAGE TOAST
+// =====================================================
 
 function showMessageToast(
     notification
@@ -2574,74 +2491,56 @@ function showMessageToast(
     toast.style.width =
         "100%";
 
-
     toast.style.minHeight =
         "66px";
-
 
     toast.style.display =
         "flex";
 
-
     toast.style.alignItems =
         "center";
-
 
     toast.style.gap =
         "10px";
 
-
     toast.style.padding =
         "9px 10px";
-
 
     toast.style.border =
         "1px solid rgba(255,255,255,.12)";
 
-
     toast.style.borderRadius =
         "18px";
-
 
     toast.style.background =
         "rgba(18,18,24,.95)";
 
-
     toast.style.backdropFilter =
         "blur(24px)";
-
 
     toast.style.boxShadow =
         "0 20px 60px rgba(0,0,0,.40), 0 0 35px rgba(139,92,246,.10)";
 
-
     toast.style.color =
-        "white";
-
+        "#ffffff";
 
     toast.style.textAlign =
         "left";
 
-
     toast.style.fontFamily =
         "inherit";
-
 
     toast.style.cursor =
         "pointer";
 
-
     toast.style.pointerEvents =
         "auto";
-
 
     toast.style.opacity =
         "0";
 
-
     toast.style.transform =
         "translateY(-18px) scale(.97)";
-
 
     toast.style.transition =
         "opacity .24s ease, transform .24s ease";
@@ -2656,49 +2555,41 @@ function showMessageToast(
     avatar.style.width =
         "44px";
 
-
     avatar.style.height =
         "44px";
-
 
     avatar.style.flexShrink =
         "0";
 
-
     avatar.style.display =
         "flex";
-
 
     avatar.style.alignItems =
         "center";
 
-
     avatar.style.justifyContent =
         "center";
-
 
     avatar.style.borderRadius =
         "50%";
 
-
     avatar.style.overflow =
         "hidden";
-
 
     avatar.style.background =
         "rgba(255,255,255,.07)";
 
-
     avatar.style.border =
         "1px solid rgba(255,255,255,.10)";
-
 
     avatar.style.backgroundPosition =
         "center";
 
-
     avatar.style.backgroundSize =
         "cover";
+
+    avatar.style.backgroundRepeat =
+        "no-repeat";
 
 
     if (display.avatarUrl) {
@@ -2725,18 +2616,14 @@ function showMessageToast(
     content.style.flex =
         "1";
 
-
     content.style.minWidth =
         "0";
-
 
     content.style.display =
         "flex";
 
-
     content.style.flexDirection =
         "column";
-
 
     content.style.gap =
         "3px";
@@ -2774,18 +2661,14 @@ function showMessageToast(
     text.style.fontSize =
         "10px";
 
-
     text.style.color =
         "rgba(255,255,255,.43)";
-
 
     text.style.overflow =
         "hidden";
 
-
     text.style.textOverflow =
         "ellipsis";
-
 
     text.style.whiteSpace =
         "nowrap";
@@ -2794,7 +2677,6 @@ function showMessageToast(
     content.appendChild(
         title
     );
-
 
     content.appendChild(
         text
@@ -2812,35 +2694,34 @@ function showMessageToast(
 
 
     close.style.width =
-        "26px";
-
+        "27px";
 
     close.style.height =
-        "26px";
+        "27px";
 
+    close.style.flexShrink =
+        "0";
 
     close.style.display =
         "flex";
 
-
     close.style.alignItems =
         "center";
-
 
     close.style.justifyContent =
         "center";
 
-
     close.style.borderRadius =
         "9px";
-
 
     close.style.background =
         "rgba(255,255,255,.05)";
 
-
     close.style.color =
         "rgba(255,255,255,.45)";
+
+    close.style.fontSize =
+        "17px";
 
 
     close.addEventListener(
@@ -2863,11 +2744,9 @@ function showMessageToast(
         avatar
     );
 
-
     toast.appendChild(
         content
     );
-
 
     toast.appendChild(
         close
@@ -2902,7 +2781,6 @@ function showMessageToast(
             toast.style.opacity =
                 "1";
 
-
             toast.style.transform =
                 "translateY(0) scale(1)";
 
@@ -2934,13 +2812,11 @@ function removeToast(
     ) {
 
         return;
-
     }
 
 
     toast.style.opacity =
         "0";
-
 
     toast.style.transform =
         "translateY(-14px) scale(.98)";
@@ -2965,143 +2841,8 @@ function removeToast(
 
 
 // =====================================================
-// HELPERS
+// AVATARS
 // =====================================================
-
-function parseSenderFromBody(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return {
-            name:
-                "New message"
-        };
-
-    }
-
-
-    return {
-        name:
-            text
-                .slice(
-                    0,
-                    separator
-                )
-                .trim()
-    };
-
-}
-
-
-function getNotificationDisplay(
-    notification
-) {
-
-    let name =
-        "Memora user";
-
-
-    let avatarUrl =
-        null;
-
-
-    if (
-        notification.type ===
-        "new_message"
-    ) {
-
-        const parsed =
-            parseSenderFromBody(
-                notification.body
-            );
-
-
-        name =
-            parsed.name;
-
-    }
-
-
-    return {
-        name,
-        avatarUrl
-    };
-
-}
-
-
-function extractMessage(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return text;
-
-    }
-
-
-    return text
-        .slice(
-            separator + 1
-        )
-        .trim();
-
-}
-
-
-function truncate(
-    text,
-    maxLength
-) {
-
-    if (
-        text.length <=
-        maxLength
-    ) {
-
-        return text;
-
-    }
-
-
-    return (
-        text.slice(
-            0,
-            maxLength - 1
-        )
-        +
-        "…"
-    );
-
-}
-
 
 function setMyAvatar(
     name,
@@ -3190,10 +2931,8 @@ function setConversationAvatar(
         conversationAvatar.textContent =
             "";
 
-
         conversationAvatar.style.backgroundImage =
             `url("${avatarUrl}")`;
-
 
         return;
 
@@ -3203,11 +2942,60 @@ function setConversationAvatar(
     conversationAvatar.style.backgroundImage =
         "";
 
-
     conversationAvatar.textContent =
         getInitial(
             name
         );
+
+}
+
+
+function getNotificationDisplay(
+    notification
+) {
+
+    let name =
+        "Memora user";
+
+
+    let avatarUrl =
+        null;
+
+
+    if (
+        notification.type ===
+        "new_message"
+    ) {
+
+        const separator =
+            String(
+                notification.body || ""
+            ).indexOf(":");
+
+
+        if (
+            separator !== -1
+        ) {
+
+            name =
+                String(
+                    notification.body
+                )
+                .slice(
+                    0,
+                    separator
+                )
+                .trim();
+
+        }
+
+    }
+
+
+    return {
+        name,
+        avatarUrl
+    };
 
 }
 
@@ -3230,6 +3018,72 @@ function getInitial(
 
 }
 
+
+// =====================================================
+// MESSAGE HELPERS
+// =====================================================
+
+function extractMessage(
+    body
+) {
+
+    const text =
+        String(
+            body || ""
+        );
+
+
+    const separator =
+        text.indexOf(":");
+
+
+    if (
+        separator === -1
+    ) {
+
+        return text;
+
+    }
+
+
+    return text
+        .slice(
+            separator + 1
+        )
+        .trim();
+
+}
+
+
+function truncate(
+    text,
+    maxLength
+) {
+
+    if (
+        text.length <=
+        maxLength
+    ) {
+
+        return text;
+
+    }
+
+
+    return (
+        text.slice(
+            0,
+            maxLength - 1
+        ) +
+        "…"
+    );
+
+}
+
+
+// =====================================================
+// UI HELPERS
+// =====================================================
 
 function setMessagesLoading() {
 
@@ -3256,9 +3110,7 @@ function scrollMessagesToBottom() {
     requestAnimationFrame(
         function() {
 
-            if (
-                messageList
-            ) {
+            if (messageList) {
 
                 messageList.scrollTop =
                     messageList.scrollHeight;
@@ -3327,5 +3179,147 @@ function escapeHtml(
 
 
     return div.innerHTML;
+
+}
+
+
+// =====================================================
+// TOAST STYLES
+// =====================================================
+
+function injectToastStyles() {
+
+    if (
+        document.getElementById(
+            "memora-toast-styles"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.id =
+        "memora-toast-styles";
+
+
+    style.textContent = `
+        #memora-toast-container {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(430px, calc(100vw - 24px));
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .memora-message-toast {
+            width: 100%;
+            min-height: 66px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 18px;
+            background: rgba(18,18,24,.95);
+            color: #fff;
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.40),
+                0 0 35px rgba(139,92,246,.10);
+            backdrop-filter: blur(24px);
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(-18px) scale(.97);
+            transition:
+                opacity .24s ease,
+                transform .24s ease;
+        }
+
+        .memora-message-toast.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .memora-toast-avatar {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 50%;
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.10);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-size: 13px;
+            font-weight: 850;
+        }
+
+        .memora-toast-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .memora-toast-content strong {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .memora-toast-content span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: rgba(255,255,255,.43);
+            font-size: 10px;
+        }
+
+        .memora-toast-close {
+            width: 27px;
+            height: 27px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: rgba(255,255,255,.05);
+            color: rgba(255,255,255,.45);
+            font-size: 17px;
+        }
+
+        @media (max-width: 600px) {
+            #memora-toast-container {
+                top: 10px;
+                width: calc(100vw - 20px);
+            }
+        }
+    `;
+
+
+    document.head.appendChild(
+        style
+    );
 
 }
