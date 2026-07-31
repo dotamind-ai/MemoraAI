@@ -1,7 +1,7 @@
 // =====================================================
 // MEMORA CHAT
+// FRIENDS + DIRECT MESSAGES + REALTIME
 // =====================================================
-
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
@@ -125,18 +125,39 @@ async function initializeChats() {
 
     try {
 
+        // Сначала берём готовую сессию.
+        // Это стабильнее для GitHub Pages.
+
         const {
             data,
             error
-        } = await supabaseClient.auth.getUser();
+        } = await supabaseClient.auth.getSession();
 
 
-        if (
-            error ||
-            !data.user
-        ) {
+        if (error) {
 
-            redirectToWelcome();
+            console.error(
+                "Session error:",
+                error
+            );
+
+            showFatalError(
+                "Unable to connect to account."
+            );
+
+            return;
+
+        }
+
+
+        if (!data.session) {
+
+            // Не делаем мгновенный redirect.
+            // Просто показываем сообщение.
+
+            showFatalError(
+                "Your session has expired. Please log in again."
+            );
 
             return;
 
@@ -144,7 +165,7 @@ async function initializeChats() {
 
 
         currentUser =
-            data.user;
+            data.session.user;
 
 
         setupNavigation();
@@ -160,6 +181,8 @@ async function initializeChats() {
 
         await loadRequests();
 
+
+        // Проверяем URL.
 
         const params =
             new URLSearchParams(
@@ -204,7 +227,134 @@ async function initializeChats() {
             error
         );
 
-        redirectToWelcome();
+        showFatalError(
+            "Unable to open Chats."
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// FATAL ERROR
+// =====================================================
+
+function showFatalError(
+    message
+) {
+
+    if (!document.body) {
+        return;
+    }
+
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.style.position =
+        "fixed";
+
+
+    box.style.inset =
+        "20px";
+
+
+    box.style.display =
+        "flex";
+
+
+    box.style.alignItems =
+        "center";
+
+
+    box.style.justifyContent =
+        "center";
+
+
+    box.style.textAlign =
+        "center";
+
+
+    box.style.padding =
+        "30px";
+
+
+    box.style.color =
+        "white";
+
+
+    box.style.zIndex =
+        "9999";
+
+
+    box.innerHTML = `
+        <div>
+
+            <div
+                style="
+                    font-size:18px;
+                    font-weight:700;
+                    margin-bottom:10px;
+                "
+            >
+                Memora Chats
+            </div>
+
+            <div
+                style="
+                    color:rgba(255,255,255,.45);
+                    font-size:12px;
+                    margin-bottom:20px;
+                "
+            >
+                ${escapeHtml(message)}
+            </div>
+
+            <button
+                id="chatLoginButton"
+                style="
+                    border:0;
+                    border-radius:14px;
+                    padding:12px 18px;
+                    background:white;
+                    color:#101014;
+                    font-weight:700;
+                    cursor:pointer;
+                "
+            >
+                Open login
+            </button>
+
+        </div>
+    `;
+
+
+    document.body.appendChild(
+        box
+    );
+
+
+    const loginButton =
+        document.getElementById(
+            "chatLoginButton"
+        );
+
+
+    if (loginButton) {
+
+        loginButton.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "welcome/welcome.html";
+
+            }
+        );
 
     }
 
@@ -272,85 +422,6 @@ function setupNavigation() {
         }
     );
 
-
-    supabaseClient.auth.onAuthStateChange(
-        function(event, session) {
-
-            if (
-                event === "SIGNED_OUT" ||
-                !session
-            ) {
-
-                redirectToWelcome();
-
-            }
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// LOAD MY PROFILE
-// =====================================================
-
-async function loadMyProfile() {
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from("profiles")
-
-        .select(
-            "display_name, avatar_url"
-        )
-
-        .eq(
-            "id",
-            currentUser.id
-        )
-
-        .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "My profile error:",
-            error
-        );
-
-        setMyAvatar(
-            currentUser.email,
-            null
-        );
-
-        return;
-
-    }
-
-
-    if (data) {
-
-        setMyAvatar(
-            data.display_name ||
-            currentUser.email,
-            data.avatar_url
-        );
-
-    } else {
-
-        setMyAvatar(
-            currentUser.email,
-            null
-        );
-
-    }
-
 }
 
 
@@ -388,7 +459,6 @@ function setupSearch() {
 
 
 async function searchUser() {
-
 
     const email =
         emailSearch.value.trim();
@@ -502,7 +572,6 @@ function renderSearchResult(
     email
 ) {
 
-
     const card =
         document.createElement(
             "div"
@@ -597,22 +666,14 @@ function renderSearchResult(
     );
 
 
-    card.appendChild(
-        avatar
-    );
+    card.appendChild(avatar);
 
-    card.appendChild(
-        info
-    );
+    card.appendChild(info);
 
-    card.appendChild(
-        action
-    );
+    card.appendChild(action);
 
 
-    searchResult.appendChild(
-        card
-    );
+    searchResult.appendChild(card);
 
 }
 
@@ -626,10 +687,8 @@ async function sendFriendRequest(
     button
 ) {
 
-
     button.disabled =
         true;
-
 
     button.textContent =
         "...";
@@ -658,7 +717,6 @@ async function sendFriendRequest(
         button.textContent =
             "Sent";
 
-
         button.classList.remove(
             "primary"
         );
@@ -679,7 +737,6 @@ async function sendFriendRequest(
         button.disabled =
             false;
 
-
         button.textContent =
             "Add";
 
@@ -694,11 +751,70 @@ async function sendFriendRequest(
 
 
 // =====================================================
+// MY PROFILE
+// =====================================================
+
+async function loadMyProfile() {
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+
+        .from("profiles")
+
+        .select(
+            "display_name, avatar_url"
+        )
+
+        .eq(
+            "id",
+            currentUser.id
+        )
+
+        .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "My profile error:",
+            error
+        );
+
+
+        setMyAvatar(
+            currentUser.email,
+            null
+        );
+
+
+        return;
+
+    }
+
+
+    setMyAvatar(
+
+        data
+            ? data.display_name ||
+              currentUser.email
+            : currentUser.email,
+
+        data
+            ? data.avatar_url
+            : null
+
+    );
+
+}
+
+
+// =====================================================
 // FRIENDS
 // =====================================================
 
 async function loadFriends() {
-
 
     const {
         data,
@@ -714,6 +830,7 @@ async function loadFriends() {
             "Friends error:",
             error
         );
+
 
         friends = [];
 
@@ -734,7 +851,6 @@ async function loadFriends() {
 
 
 function renderFriends() {
-
 
     friendList.innerHTML =
         "";
@@ -759,7 +875,6 @@ function renderFriends() {
 
     friends.forEach(
         function(friend) {
-
 
             const card =
                 document.createElement(
@@ -817,13 +932,9 @@ function renderFriends() {
                 "Friend";
 
 
-            info.appendChild(
-                name
-            );
+            info.appendChild(name);
 
-            info.appendChild(
-                label
-            );
+            info.appendChild(label);
 
 
             const action =
@@ -856,22 +967,14 @@ function renderFriends() {
             );
 
 
-            card.appendChild(
-                avatar
-            );
+            card.appendChild(avatar);
 
-            card.appendChild(
-                info
-            );
+            card.appendChild(info);
 
-            card.appendChild(
-                action
-            );
+            card.appendChild(action);
 
 
-            friendList.appendChild(
-                card
-            );
+            friendList.appendChild(card);
 
         }
     );
@@ -884,7 +987,6 @@ function renderFriends() {
 // =====================================================
 
 async function loadRequests() {
-
 
     const {
         data,
@@ -900,6 +1002,7 @@ async function loadRequests() {
             "Requests error:",
             error
         );
+
 
         requests = [];
 
@@ -920,7 +1023,6 @@ async function loadRequests() {
 
 
 function renderRequests() {
-
 
     requestList.innerHTML =
         "";
@@ -945,7 +1047,6 @@ function renderRequests() {
 
     requests.forEach(
         function(request) {
-
 
             const card =
                 document.createElement(
@@ -989,9 +1090,7 @@ function renderRequests() {
                 "Memora user";
 
 
-            info.appendChild(
-                name
-            );
+            info.appendChild(name);
 
 
             const actions =
@@ -1070,31 +1169,19 @@ function renderRequests() {
             );
 
 
-            actions.appendChild(
-                accept
-            );
+            actions.appendChild(accept);
 
-            actions.appendChild(
-                reject
-            );
+            actions.appendChild(reject);
 
 
-            card.appendChild(
-                avatar
-            );
+            card.appendChild(avatar);
 
-            card.appendChild(
-                info
-            );
+            card.appendChild(info);
 
-            card.appendChild(
-                actions
-            );
+            card.appendChild(actions);
 
 
-            requestList.appendChild(
-                card
-            );
+            requestList.appendChild(card);
 
         }
     );
@@ -1110,7 +1197,6 @@ async function respondToRequest(
     requestId,
     accept
 ) {
-
 
     const functionName =
         accept
@@ -1167,7 +1253,6 @@ async function respondToRequest(
 
 function setupConversation() {
 
-
     conversationBack.addEventListener(
         "click",
         closeConversation
@@ -1191,7 +1276,6 @@ function setupConversation() {
 async function openConversation(
     friend
 ) {
-
 
     activeFriend =
         friend;
@@ -1232,7 +1316,6 @@ async function openConversation(
 
     try {
 
-
         const {
             data,
             error
@@ -1267,11 +1350,14 @@ async function openConversation(
 
     } catch (error) {
 
-
         console.error(
             "Open conversation error:",
             error
         );
+
+
+        conversationView.style.display =
+            "flex";
 
 
         messageList.innerHTML = `
@@ -1298,13 +1384,11 @@ async function openConversation(
 
 function closeConversation() {
 
-
     stopRealtime();
 
 
     activeFriend =
         null;
-
 
     activeConversationId =
         null;
@@ -1335,7 +1419,6 @@ function closeConversation() {
 // =====================================================
 
 async function loadMessages() {
-
 
     if (!activeConversationId) {
 
@@ -1386,7 +1469,6 @@ function renderMessages(
     messages
 ) {
 
-
     messageList.innerHTML =
         "";
 
@@ -1429,7 +1511,6 @@ function renderMessages(
 function appendMessage(
     message
 ) {
-
 
     if (
         document.querySelector(
@@ -1508,24 +1589,14 @@ function appendMessage(
         );
 
 
-    bubble.appendChild(
-        text
-    );
+    bubble.appendChild(text);
+
+    bubble.appendChild(time);
+
+    row.appendChild(bubble);
 
 
-    bubble.appendChild(
-        time
-    );
-
-
-    row.appendChild(
-        bubble
-    );
-
-
-    messageList.appendChild(
-        row
-    );
+    messageList.appendChild(row);
 
 }
 
@@ -1538,13 +1609,10 @@ async function sendMessage(
     event
 ) {
 
-
     event.preventDefault();
 
 
-    if (
-        !activeConversationId
-    ) {
+    if (!activeConversationId) {
 
         return;
 
@@ -1567,7 +1635,6 @@ async function sendMessage(
 
 
     try {
-
 
         const {
             data,
@@ -1610,9 +1677,7 @@ async function sendMessage(
         autoResizeInput();
 
 
-        appendMessage(
-            data
-        );
+        appendMessage(data);
 
 
         scrollMessages();
@@ -1649,7 +1714,6 @@ async function sendMessage(
 
 function subscribeToMessages() {
 
-
     stopRealtime();
 
 
@@ -1682,7 +1746,6 @@ function subscribeToMessages() {
                 },
                 function(payload) {
 
-
                     appendMessage(
                         payload.new
                     );
@@ -1699,7 +1762,6 @@ function subscribeToMessages() {
 
 
 function stopRealtime() {
-
 
     if (
         realtimeChannel
@@ -1726,7 +1788,6 @@ function setMyAvatar(
     name,
     avatarUrl
 ) {
-
 
     if (avatarUrl) {
 
@@ -1755,7 +1816,6 @@ function createPersonAvatar(
     name,
     avatarUrl
 ) {
-
 
     const avatar =
         document.createElement(
@@ -1790,7 +1850,6 @@ function setConversationAvatar(
     avatarUrl
 ) {
 
-
     if (avatarUrl) {
 
         conversationAvatar.textContent =
@@ -1816,7 +1875,6 @@ function setConversationAvatar(
 
 function getInitial(name) {
 
-
     return (
         String(
             name ||
@@ -1837,9 +1895,12 @@ function getInitial(name) {
 
 function setMessagesLoading() {
 
-
     messageList.innerHTML = `
         <div class="messages-empty">
+
+            <div class="empty-icon">
+                ◇
+            </div>
 
             <div class="empty-title">
                 Loading...
@@ -1852,7 +1913,6 @@ function setMessagesLoading() {
 
 
 function scrollMessages() {
-
 
     requestAnimationFrame(
         function() {
@@ -1868,7 +1928,6 @@ function scrollMessages() {
 
 function autoResizeInput() {
 
-
     messageInput.style.height =
         "auto";
 
@@ -1877,8 +1936,7 @@ function autoResizeInput() {
         Math.min(
             messageInput.scrollHeight,
             130
-        ) +
-        "px";
+        ) + "px";
 
 }
 
@@ -1890,7 +1948,6 @@ function autoResizeInput() {
 function formatTime(
     dateString
 ) {
-
 
     return new Date(
         dateString
@@ -1909,8 +1966,9 @@ function formatTime(
 // ESCAPE
 // =====================================================
 
-function escapeHtml(value) {
-
+function escapeHtml(
+    value
+) {
 
     const div =
         document.createElement(
