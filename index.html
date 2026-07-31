@@ -2,495 +2,283 @@
 <html lang="ru">
 
 <head>
-    <script>
-
-if(localStorage.getItem("memoraAuth") !== "true"){
-
-    window.location.href = "welcome/welcome.html";
-
-}
-
-</script>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>Memora</title>
-
 
 <link rel="stylesheet" href="style.css">
 
 
-
 <script>
 
+    // Проверяем авторизацию
 
+    if (localStorage.getItem("memoraAuth") !== "true") {
 
-// Проверка авторизации
+        window.location.href =
+            "welcome/welcome.html";
 
-if(localStorage.getItem("memora_inside") !== "true"){
-
-
-    window.location.href =
-    "welcome/welcome.html";
-
-
-}
-
-
+    }
 
 </script>
 
-
-
 </head>
-
-
 
 
 <body class="home-page">
 
 
-
-
-
 <div class="home-container">
 
 
-
-
-
-
-
-<!-- HEADER -->
+<!-- =====================================
+        HEADER
+===================================== -->
 
 <header class="home-header">
 
 
+    <div class="memora-logo">
 
 
+        <div class="orbit orbit-one">
 
-<!-- LOGO -->
+            <span class="planet planet-one"></span>
 
-<div class="memora-logo">
+        </div>
 
 
+        <div class="orbit orbit-two">
 
-    <div class="orbit orbit-one">
+            <span class="planet planet-two"></span>
 
-        <span class="planet planet-one"></span>
+        </div>
+
+
+        <div class="orbit orbit-three">
+
+            <span class="planet planet-three"></span>
+
+        </div>
+
+
+        <div class="logo-m">
+
+            M
+
+        </div>
+
 
     </div>
 
 
 
-    <div class="orbit orbit-two">
+    <div class="header-text">
 
-        <span class="planet planet-two"></span>
+        <h1>
+            Memora
+        </h1>
 
-    </div>
-
-
-
-    <div class="orbit orbit-three">
-
-        <span class="planet planet-three"></span>
+        <p>
+            Your memory space
+        </p>
 
     </div>
-
-
-
-
-    <div class="logo-m">
-
-        M
-
-    </div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- TITLE -->
-
-<div class="header-text">
-
-
-<h1>
-
-Memora
-
-</h1>
-
-
-
-<p>
-
-Your memory space
-
-</p>
-
-
-
-</div>
-
-
-
 
 
 </header>
 
 
 
-
-
-
-
-
-
-<!-- CREATE MEMORY -->
+<!-- =====================================
+        CREATE MEMORY
+===================================== -->
 
 <section class="capture-card">
 
 
+    <h2>
+        Capture
+    </h2>
 
-<h2>
 
-Capture
+    <p>
+        Store what matters
+    </p>
 
-</h2>
 
+    <textarea
+        id="memoryInput"
+        placeholder="Write your thought..."
+    ></textarea>
 
 
-<p>
+    <div class="memory-types">
 
-Store what matters
 
-</p>
+        <button
+            class="type-btn active"
+            data-type="idea"
+            type="button"
+        >
+            IDEA
+        </button>
 
 
+        <button
+            class="type-btn"
+            data-type="note"
+            type="button"
+        >
+            NOTE
+        </button>
 
 
+        <button
+            class="type-btn"
+            data-type="inspiration"
+            type="button"
+        >
+            INSPIRATION
+        </button>
 
 
-<textarea
+        <button
+            class="type-btn"
+            data-type="goal"
+            type="button"
+        >
+            GOAL
+        </button>
 
-id="memoryInput"
 
-placeholder="Write your thought..."
+    </div>
 
-></textarea>
 
-
-
-
-
-
-
-
-<div class="memory-types">
-
-
-
-<button
-
-class="type-btn active"
-
-data-type="idea">
-
-IDEA
-
-</button>
-
-
-
-
-
-<button
-
-class="type-btn"
-
-data-type="note">
-
-NOTE
-
-</button>
-
-
-
-
-
-<button
-
-class="type-btn"
-
-data-type="inspiration">
-
-INSPIRATION
-
-</button>
-
-
-
-
-
-<button
-
-class="type-btn"
-
-data-type="goal">
-
-GOAL
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<button
-
-id="saveMemory"
-
-class="save-button">
-
-Save Memory
-
-</button>
-
-
-
+    <button
+        id="saveMemory"
+        class="save-button"
+        type="button"
+    >
+        Save Memory
+    </button>
 
 
 </section>
 
 
 
-
-
-
-
-
-
-<!-- MEMORY FEED -->
-
+<!-- =====================================
+        MEMORY FEED
+===================================== -->
 
 <section class="memory-feed">
 
 
-
-<div class="feed-header">
-
+    <div class="feed-header">
 
 
-<h2>
-
-Recent Memories
-
-</h2>
+        <h2>
+            Recent Memories
+        </h2>
 
 
+        <span id="memoryCount">
+            0
+        </span>
 
 
-<span id="memoryCount">
-
-0
-
-</span>
+    </div>
 
 
-
-
-</div>
-
-
-
-
-
-
-
-
-<div id="memoryList">
-
-
-
-</div>
-
-
-
-
+    <div id="memoryList"></div>
 
 
 </section>
 
 
-
-
-
-
-
 </div>
 
 
 
-
-
-
-
-
-
-<!-- BOTTOM NAVIGATION -->
-
-
+<!-- =====================================
+        BOTTOM NAVIGATION
+===================================== -->
 
 <nav class="bottom-nav">
 
 
+    <button
+        class="nav-item active"
+        onclick="goHome()"
+        type="button"
+    >
 
+        <img src="icons/memories.svg">
 
+        <small>
+            Memories
+        </small>
 
+    </button>
 
-<button
 
-class="nav-item active"
 
-onclick="goHome()">
+    <button
+        class="nav-item"
+        onclick="goCalendar()"
+        type="button"
+    >
 
+        <img src="icons/calendar.svg">
 
+        <small>
+            Calendar
+        </small>
 
-<img src="icons/memories.svg">
+    </button>
 
 
 
-<small>
+    <button
+        class="nav-item"
+        onclick="goEvents()"
+        type="button"
+    >
 
-Memories
+        <img src="icons/events.svg">
 
-</small>
+        <small>
+            Events
+        </small>
 
+    </button>
 
 
-</button>
 
+    <button
+        class="nav-item"
+        onclick="goProfile()"
+        type="button"
+    >
 
+        <img src="icons/profile.svg">
 
+        <small>
+            Profile
+        </small>
 
-
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goCalendar()">
-
-
-
-<img src="icons/calendar.svg">
-
-
-
-<small>
-
-Calendar
-
-</small>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goEvents()">
-
-
-
-<img src="icons/events.svg">
-
-
-
-<small>
-
-Events
-
-</small>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-<button
-
-class="nav-item"
-
-onclick="goProfile()">
-
-
-
-<img src="icons/profile.svg">
-
-
-
-<small>
-
-Profile
-
-</small>
-
-
-
-</button>
-
-
-
-
+    </button>
 
 
 </nav>
 
 
 
-
-
-
-
-
 <script src="app.js"></script>
-
-
 
 
 </body>
