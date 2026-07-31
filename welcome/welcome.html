@@ -7,22 +7,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-<title>Memora Welcome</title>
-
+<title>Memora</title>
 
 <link rel="stylesheet" href="welcome.css">
-
 
 </head>
 
 
-
 <body class="welcome-page">
 
-
-
-<!-- фоновые частицы -->
 
 <div class="particles">
 
@@ -37,209 +30,155 @@
 
 
 
-
-
-
-
 <div class="welcome-container">
 
 
+    <!-- LOGO -->
+
+    <div class="welcome-logo">
+
+
+        <div class="big-orbit orbit-one">
+
+            <span class="big-planet"></span>
+
+        </div>
 
 
 
+        <div class="big-orbit orbit-two">
+
+            <span class="big-planet"></span>
+
+        </div>
 
 
-<!-- ЛОГО -->
 
-<div class="welcome-logo">
+        <div class="big-orbit orbit-three">
+
+            <span class="big-planet"></span>
+
+        </div>
 
 
 
-    <div class="big-orbit orbit-one">
+        <div class="big-logo-m">
 
-        <span class="big-planet"></span>
+            M
+
+        </div>
+
 
     </div>
 
 
 
-    <div class="big-orbit orbit-two">
 
-        <span class="big-planet"></span>
+    <!-- TEXT -->
+
+
+    <h1>
+
+        Welcome to Memora
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Your personal memory space
+
+    </p>
+
+
+
+
+    <!-- AUTH -->
+
+
+    <div class="auth-card" id="authCard">
+
+
+        <h2 id="authTitle">
+
+            Welcome back
+
+        </h2>
+
+
+
+        <input
+
+            id="loginInput"
+
+            type="text"
+
+            placeholder="Login"
+
+            autocomplete="username"
+
+        >
+
+
+
+        <input
+
+            id="passwordInput"
+
+            type="password"
+
+            placeholder="Password"
+
+            autocomplete="current-password"
+
+        >
+
+
+
+        <button
+
+            id="authButton"
+
+            class="main-button"
+
+            type="button"
+
+        >
+
+            Login
+
+        </button>
+
+
+
+        <button
+
+            id="switchButton"
+
+            class="secondary-button"
+
+            type="button"
+
+        >
+
+            Create account
+
+        </button>
+
+
+
+        <p id="authMessage"></p>
+
 
     </div>
-
-
-
-    <div class="big-orbit orbit-three">
-
-        <span class="big-planet"></span>
-
-    </div>
-
-
-
-
-    <div class="big-logo-m">
-
-        M
-
-    </div>
-
 
 
 </div>
 
 
 
-
-
-
-
-
-
-<h1>
-
-Welcome to Memora
-
-</h1>
-
-
-
-<p class="subtitle">
-
-Your personal memory space
-
-</p>
-
-
-
-
-
-
-
-
-
-<!-- ФОРМА -->
-
-<div class="auth-card" id="authCard">
-
-
-
-
-
-<h2 id="authTitle">
-
-Welcome back
-
-</h2>
-
-
-
-
-
-
-
-<input
-
-id="loginInput"
-
-type="text"
-
-placeholder="Login"
-
->
-
-
-
-
-
-
-
-<input
-
-id="passwordInput"
-
-type="password"
-
-placeholder="Password"
-
->
-
-
-
-
-
-
-
-<button
-
-id="authButton"
-
-class="main-button">
-
-Login
-
-</button>
-
-
-
-
-
-
-
-
-<button
-
-id="switchButton"
-
-class="secondary-button">
-
-Create account
-
-</button>
-
-
-
-
-
-
-
-<p id="authMessage">
-
-</p>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<script src="welcome.js"></script>
-
-
+<script src="auth.js"></script>
 
 </body>
-
 
 </html>
