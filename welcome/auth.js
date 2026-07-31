@@ -1,181 +1,461 @@
 // =====================================================
-// MEMORA AUTH
-// welcome/auth.js
+// MEMORA + SUPABASE AUTH
 // =====================================================
 
-const authTitle = document.getElementById("authTitle");
-const authButton = document.getElementById("authButton");
-const switchButton = document.getElementById("switchButton");
 
-const loginInput = document.getElementById("loginInput");
-const passwordInput = document.getElementById("passwordInput");
+// -----------------------------------------------------
+// SUPABASE CONFIG
+// -----------------------------------------------------
 
-const authMessage = document.getElementById("authMessage");
+const SUPABASE_URL =
+    "https://eabfkvqeveipwpomtjst.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
+
+
+// Создаём Supabase client
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+
+// -----------------------------------------------------
+// ELEMENTS
+// -----------------------------------------------------
+
+const authTitle =
+    document.getElementById("authTitle");
+
+
+const authButton =
+    document.getElementById("authButton");
+
+
+const switchButton =
+    document.getElementById("switchButton");
+
+
+const loginInput =
+    document.getElementById("loginInput");
+
+
+const passwordInput =
+    document.getElementById("passwordInput");
+
+
+const authMessage =
+    document.getElementById("authMessage");
+
+
 
 let mode = "login";
 
 
-// =====================================================
-// ПЕРЕКЛЮЧЕНИЕ LOGIN / REGISTER
-// =====================================================
 
-switchButton.addEventListener("click", function () {
+// -----------------------------------------------------
+// MESSAGE
+// -----------------------------------------------------
 
-    if (mode === "login") {
+function showMessage(message) {
 
-        mode = "register";
+    authMessage.textContent = message;
 
-        authTitle.textContent = "Create account";
-        authButton.textContent = "Create account";
-        switchButton.textContent = "Already have an account";
+}
 
-    } else {
 
-        mode = "login";
 
-        authTitle.textContent = "Welcome back";
-        authButton.textContent = "Login";
-        switchButton.textContent = "Create account";
+// -----------------------------------------------------
+// SWITCH LOGIN / REGISTER
+// -----------------------------------------------------
+
+switchButton.addEventListener(
+    "click",
+    function () {
+
+
+        if (mode === "login") {
+
+
+            mode = "register";
+
+
+            authTitle.textContent =
+                "Create account";
+
+
+            authButton.textContent =
+                "Create account";
+
+
+            switchButton.textContent =
+                "Already have an account";
+
+
+            loginInput.value = "";
+
+            passwordInput.value = "";
+
+            showMessage("");
+
+
+            passwordInput.autocomplete =
+                "new-password";
+
+
+        } else {
+
+
+            mode = "login";
+
+
+            authTitle.textContent =
+                "Welcome back";
+
+
+            authButton.textContent =
+                "Login";
+
+
+            switchButton.textContent =
+                "Create account";
+
+
+            loginInput.value = "";
+
+            passwordInput.value = "";
+
+            showMessage("");
+
+
+            passwordInput.autocomplete =
+                "current-password";
+
+        }
 
     }
-
-    loginInput.value = "";
-    passwordInput.value = "";
-    authMessage.textContent = "";
-
-});
+);
 
 
-// =====================================================
-// ОСНОВНАЯ КНОПКА
-// =====================================================
 
-authButton.addEventListener("click", function () {
+// -----------------------------------------------------
+// MAIN AUTH BUTTON
+// -----------------------------------------------------
 
-    const login = loginInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!login || !password) {
-
-        authMessage.textContent =
-            "Enter login and password";
-
-        return;
-
-    }
+authButton.addEventListener(
+    "click",
+    async function () {
 
 
-    // =================================================
-    // РЕГИСТРАЦИЯ
-    // =================================================
-
-    if (mode === "register") {
-
-        const user = {
-            login: login,
-            password: password
-        };
+        const email =
+            loginInput.value.trim();
 
 
-        localStorage.setItem(
-            "memoraUser",
-            JSON.stringify(user)
+        const password =
+            passwordInput.value;
+
+
+
+        // Проверяем поля
+
+        if (!email || !password) {
+
+            showMessage(
+                "Enter email and password"
+            );
+
+            return;
+
+        }
+
+
+
+        // Простая проверка email
+
+        if (!email.includes("@")) {
+
+            showMessage(
+                "Enter a valid email"
+            );
+
+            return;
+
+        }
+
+
+
+        // =============================================
+        // REGISTER
+        // =============================================
+
+        if (mode === "register") {
+
+
+            showMessage(
+                "Creating account..."
+            );
+
+
+            try {
+
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+
+                        emailRedirectTo:
+                            "https://dotamind-ai.github.io/MemoraAI/welcome/welcome.html"
+
+                    }
+
+                });
+
+
+
+                if (error) {
+
+                    console.error(error);
+
+                    showMessage(
+                        error.message
+                    );
+
+                    return;
+
+                }
+
+
+
+                // Если подтверждение email включено,
+                // session обычно отсутствует.
+
+                if (!data.session) {
+
+
+                    showMessage(
+                        "Account created. Check your email to confirm your account."
+                    );
+
+
+                    loginInput.value = "";
+
+                    passwordInput.value = "";
+
+
+                    return;
+
+                }
+
+
+
+                // На случай если confirmation
+                // отключён
+
+                localStorage.setItem(
+                    "memoraAuth",
+                    "true"
+                );
+
+
+                window.location.href =
+                    "https://dotamind-ai.github.io/MemoraAI/";
+
+
+            }
+
+            catch (error) {
+
+
+                console.error(error);
+
+
+                showMessage(
+                    "Registration error"
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+
+        // =============================================
+        // LOGIN
+        // =============================================
+
+        showMessage(
+            "Signing in..."
         );
 
 
-        // Ставим флаг авторизации
-
-        localStorage.setItem(
-            "memoraAuth",
-            "true"
-        );
+        try {
 
 
-        authMessage.textContent =
-            "Account created";
+            const {
+                data,
+                error
+            } = await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
 
 
-        setTimeout(function () {
 
-            window.location.href =
-                "https://dotamind-ai.github.io/MemoraAI/";
+            if (error) {
 
-        }, 500);
+                console.error(error);
+
+                showMessage(
+                    error.message
+                );
+
+                return;
+
+            }
 
 
-        return;
+
+            if (!data.session) {
+
+                showMessage(
+                    "Login failed"
+                );
+
+                return;
+
+            }
+
+
+
+            // Авторизация успешна
+
+            localStorage.setItem(
+                "memoraAuth",
+                "true"
+            );
+
+
+
+            showMessage(
+                "Login successful"
+            );
+
+
+
+            // Переход в основную Memora
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "https://dotamind-ai.github.io/MemoraAI/";
+
+                },
+                500
+            );
+
+
+        }
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            showMessage(
+                "Login error"
+            );
+
+        }
 
     }
+);
 
 
-    // =================================================
-    // LOGIN
-    // =================================================
 
-    const savedUser =
-        localStorage.getItem("memoraUser");
+// -----------------------------------------------------
+// ENTER KEY
+// -----------------------------------------------------
 
+passwordInput.addEventListener(
+    "keydown",
+    function (event) {
 
-    if (!savedUser) {
+        if (event.key === "Enter") {
 
-        authMessage.textContent =
-            "Create an account first";
+            authButton.click();
 
-        return;
+        }
 
     }
+);
 
 
-    let user;
+
+// -----------------------------------------------------
+// CHECK EXISTING SUPABASE SESSION
+// -----------------------------------------------------
+
+async function checkExistingSession() {
+
 
     try {
 
-        user = JSON.parse(savedUser);
 
-    } catch (error) {
-
-        localStorage.removeItem("memoraUser");
-
-        authMessage.textContent =
-            "Account data is invalid";
-
-        return;
-
-    }
+        const {
+            data
+        } = await supabaseClient.auth.getSession();
 
 
-    if (
-        user.login === login &&
-        user.password === password
-    ) {
 
-        // Авторизация успешна
-
-        localStorage.setItem(
-            "memoraAuth",
-            "true"
-        );
+        if (data.session) {
 
 
-        authMessage.textContent =
-            "Login successful";
+            localStorage.setItem(
+                "memoraAuth",
+                "true"
+            );
 
 
-        // Переход на ОСНОВНУЮ MEMORA
-
-        setTimeout(function () {
+            // Если пользователь уже авторизован,
+            // можно сразу открыть Memora.
 
             window.location.href =
                 "https://dotamind-ai.github.io/MemoraAI/";
 
-        }, 500);
-
-
-    } else {
-
-        authMessage.textContent =
-            "Wrong login or password";
+        }
 
     }
 
-});
+    catch (error) {
+
+        console.error(
+            "Session check error:",
+            error
+        );
+
+    }
+
+}
+
+
+checkExistingSession();
