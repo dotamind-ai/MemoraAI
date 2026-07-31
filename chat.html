@@ -25,11 +25,9 @@
 
 <div class="chat-background">
 
-    <div class="chat-glow glow-one"></div>
+    <div class="background-glow glow-one"></div>
 
-    <div class="chat-glow glow-two"></div>
-
-    <div class="chat-grid"></div>
+    <div class="background-glow glow-two"></div>
 
 </div>
 
@@ -38,14 +36,14 @@
 <main class="chat-container">
 
 
-    <!-- =====================================
+    <!-- =========================================
             HEADER
-    ====================================== -->
+    ========================================== -->
 
     <header class="chat-header">
 
 
-        <div class="chat-brand">
+        <div class="brand">
 
 
             <div class="brand-mark">
@@ -53,11 +51,15 @@
             </div>
 
 
-            <div class="chat-brand-text">
+            <div class="brand-copy">
 
-                <span>MEMORA</span>
+                <strong>
+                    MEMORA
+                </strong>
 
-                <small>CHATS</small>
+                <span>
+                    CHATS
+                </span>
 
             </div>
 
@@ -66,30 +68,201 @@
 
 
 
-        <button
-            id="profileButton"
-            class="profile-button"
-            type="button"
-            aria-label="Open profile"
-        >
+        <div class="header-actions">
 
-            <div
-                id="myAvatar"
-                class="my-avatar"
+
+            <button
+                id="addFriendButton"
+                class="header-button"
+                type="button"
+                aria-label="Add friend"
             >
-                M
-            </div>
 
-        </button>
+                <span class="plus-icon">
+                    +
+                </span>
+
+            </button>
+
+
+
+            <button
+                id="notificationButton"
+                class="header-button notification-button"
+                type="button"
+                aria-label="Notifications"
+            >
+
+                <span class="bell-icon">
+                    ◇
+                </span>
+
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                    hidden
+                >
+                    0
+                </span>
+
+            </button>
+
+
+
+            <button
+                id="profileButton"
+                class="profile-button"
+                type="button"
+                aria-label="Profile"
+            >
+
+                <div
+                    id="myAvatar"
+                    class="my-avatar"
+                >
+                    M
+                </div>
+
+            </button>
+
+
+        </div>
 
 
     </header>
 
 
 
-    <!-- =====================================
-            FRIENDS VIEW
-    ====================================== -->
+    <!-- =========================================
+            NOTIFICATIONS
+    ========================================== -->
+
+    <div
+        id="notificationPanel"
+        class="notification-panel"
+        hidden
+    >
+
+
+        <div class="panel-header">
+
+
+            <div>
+
+                <span class="panel-kicker">
+                    ACTIVITY
+                </span>
+
+                <h2>
+                    Notifications
+                </h2>
+
+            </div>
+
+
+            <button
+                id="closeNotificationPanel"
+                class="panel-close"
+                type="button"
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="notificationList"
+            class="notification-list"
+        ></div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+            ADD FRIEND
+    ========================================== -->
+
+    <div
+        id="addFriendPanel"
+        class="add-friend-panel"
+        hidden
+    >
+
+
+        <div class="panel-header">
+
+
+            <div>
+
+                <span class="panel-kicker">
+                    CONNECTION
+                </span>
+
+                <h2>
+                    Add friend
+                </h2>
+
+            </div>
+
+
+            <button
+                id="closeAddFriendPanel"
+                class="panel-close"
+                type="button"
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+        <div class="add-friend-row">
+
+
+            <input
+                id="emailSearch"
+                type="email"
+                placeholder="Email address..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="searchButton"
+                type="button"
+            >
+                Find
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="searchMessage"
+            class="search-message"
+        ></div>
+
+
+        <div
+            id="searchResult"
+            class="search-result"
+        ></div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+            FRIENDS / CHATS
+    ========================================== -->
 
     <section
         id="friendsView"
@@ -97,158 +270,69 @@
     >
 
 
-        <!-- SEARCH -->
-
-        <section class="search-card">
+        <div class="page-heading">
 
 
-            <div class="section-heading-main">
+            <div>
 
-                <div>
-
-                    <span class="section-kicker">
-                        PEOPLE
-                    </span>
-
-                    <h1>
-                        Find a friend
-                    </h1>
-
-                </div>
-
-            </div>
-
-
-            <div class="search-row">
-
-
-                <input
-                    id="emailSearch"
-                    type="email"
-                    placeholder="Email address..."
-                    autocomplete="off"
-                >
-
-
-                <button
-                    id="searchButton"
-                    type="button"
-                >
-
-                    Find
-
-                </button>
-
-
-            </div>
-
-
-            <div
-                id="searchMessage"
-                class="search-message"
-            ></div>
-
-
-            <div
-                id="searchResult"
-                class="search-result"
-            ></div>
-
-
-        </section>
-
-
-
-        <!-- REQUESTS -->
-
-        <section class="chat-section">
-
-
-            <div class="section-heading">
-
-
-                <div>
-
-                    <span class="section-kicker">
-                        REQUESTS
-                    </span>
-
-                    <h2>
-                        Friend requests
-                    </h2>
-
-                </div>
-
-
-                <span
-                    id="requestCount"
-                    class="count-badge"
-                >
-                    0
+                <span class="heading-kicker">
+                    MESSENGER
                 </span>
 
+                <h1>
+                    Conversations
+                </h1>
 
             </div>
 
 
-            <div
-                id="requestList"
-                class="people-list"
-            ></div>
+            <span
+                id="friendCount"
+                class="heading-count"
+            >
+                0
+            </span>
 
 
-        </section>
+        </div>
 
 
 
-        <!-- FRIENDS -->
+        <!-- Search chats -->
 
-        <section class="chat-section friends-card">
-
-
-            <div class="section-heading">
+        <div class="chat-search">
 
 
-                <div>
-
-                    <span class="section-kicker">
-                        CONTACTS
-                    </span>
-
-                    <h2>
-                        Friends
-                    </h2>
-
-                </div>
+            <span class="search-mark">
+                /
+            </span>
 
 
-                <span
-                    id="friendCount"
-                    class="count-badge"
-                >
-                    0
-                </span>
+            <input
+                id="chatSearchInput"
+                type="search"
+                placeholder="Search chats..."
+                autocomplete="off"
+            >
 
 
-            </div>
+        </div>
 
 
-            <div
-                id="friendList"
-                class="people-list"
-            ></div>
 
-
-        </section>
+        <div
+            id="friendList"
+            class="friend-list"
+        ></div>
 
 
     </section>
 
 
 
-    <!-- =====================================
-            CONVERSATION VIEW
-    ====================================== -->
+    <!-- =========================================
+            CONVERSATION
+    ========================================== -->
 
     <section
         id="conversationView"
@@ -263,7 +347,7 @@
                 id="conversationBack"
                 class="conversation-back"
                 type="button"
-                aria-label="Back to chats"
+                aria-label="Back"
             >
                 ←
             </button>
@@ -282,12 +366,16 @@
             <div class="conversation-user">
 
 
-                <strong id="conversationName">
+                <strong
+                    id="conversationName"
+                >
                     Friend
                 </strong>
 
 
-                <span id="conversationStatus">
+                <span
+                    id="conversationStatus"
+                >
                     Private conversation
                 </span>
 
@@ -302,27 +390,7 @@
         <div
             id="messageList"
             class="message-list"
-        >
-
-
-            <div class="messages-empty">
-
-                <div class="empty-icon">
-                    ◇
-                </div>
-
-                <div class="empty-title">
-                    No messages yet
-                </div>
-
-                <div class="empty-text">
-                    Start the conversation.
-                </div>
-
-            </div>
-
-
-        </div>
+        ></div>
 
 
 
@@ -342,8 +410,9 @@
 
             <button
                 id="sendMessageButton"
+                class="send-button"
                 type="submit"
-                aria-label="Send message"
+                aria-label="Send"
             >
                 →
             </button>
@@ -355,13 +424,14 @@
     </section>
 
 
+
 </main>
 
 
 
-<!-- =====================================
-        BOTTOM NAV
-===================================== -->
+<!-- =========================================
+        BOTTOM NAVIGATION
+========================================== -->
 
 <nav class="bottom-nav">
 
