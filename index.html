@@ -18,10 +18,6 @@
 >
 
 
-<!-- =====================================
-        AUTH CHECK
-===================================== -->
-
 <script>
 
 if (
@@ -88,16 +84,13 @@ if (
 
     <div class="header-text">
 
-
         <h1>
             Memora
         </h1>
 
-
         <p>
             Your memory space
         </p>
-
 
     </div>
 
@@ -123,12 +116,10 @@ if (
     </p>
 
 
-
     <textarea
         id="memoryInput"
         placeholder="Write your thought..."
     ></textarea>
-
 
 
     <div class="memory-types">
@@ -173,7 +164,6 @@ if (
     </div>
 
 
-
     <button
         id="saveMemory"
         class="save-button"
@@ -216,159 +206,101 @@ if (
     <div class="memory-stats">
 
 
-        <!-- IDEA -->
-
         <div class="memory-stat-card stat-idea">
 
-
             <div class="stat-icon">
-
                 ◇
-
             </div>
 
-
             <div class="stat-info">
-
 
                 <span
                     class="stat-number"
                     id="ideaCount"
                 >
-
                     0
-
                 </span>
-
 
                 <span class="stat-label">
-
                     IDEA
-
                 </span>
 
-
             </div>
-
 
         </div>
 
 
 
-        <!-- NOTE -->
-
         <div class="memory-stat-card stat-note">
 
-
             <div class="stat-icon">
-
                 ≡
-
             </div>
 
-
             <div class="stat-info">
-
 
                 <span
                     class="stat-number"
                     id="noteCount"
                 >
-
                     0
-
                 </span>
-
 
                 <span class="stat-label">
-
                     NOTE
-
                 </span>
 
-
             </div>
-
 
         </div>
 
 
 
-        <!-- INSPIRATION -->
-
-        <div
-            class="memory-stat-card stat-inspiration"
-        >
-
+        <div class="memory-stat-card stat-inspiration">
 
             <div class="stat-icon">
-
                 ✦
-
             </div>
 
-
             <div class="stat-info">
-
 
                 <span
                     class="stat-number"
                     id="inspirationCount"
                 >
-
                     0
-
                 </span>
-
 
                 <span class="stat-label">
-
                     INSPIRATION
-
                 </span>
 
-
             </div>
-
 
         </div>
 
 
 
-        <!-- GOAL -->
-
         <div class="memory-stat-card stat-goal">
 
-
             <div class="stat-icon">
-
                 □
-
             </div>
 
-
             <div class="stat-info">
-
 
                 <span
                     class="stat-number"
                     id="goalCount"
                 >
-
                     0
-
                 </span>
-
 
                 <span class="stat-label">
-
                     GOAL
-
                 </span>
 
-
             </div>
-
 
         </div>
 
@@ -377,7 +309,6 @@ if (
 
 
 </section>
-
 
 
 </div>
@@ -391,33 +322,24 @@ if (
 <nav class="bottom-nav">
 
 
-    <!-- MEMORIES -->
-
     <button
         class="nav-item active"
         onclick="goHome()"
         type="button"
     >
 
-
         <img
             src="icons/memories.svg"
             alt="Memories"
         >
 
-
         <small>
-
             Memories
-
         </small>
-
 
     </button>
 
 
-
-    <!-- CALENDAR -->
 
     <button
         class="nav-item"
@@ -425,25 +347,18 @@ if (
         type="button"
     >
 
-
         <img
             src="icons/calendar.svg"
             alt="Calendar"
         >
 
-
         <small>
-
             Calendar
-
         </small>
-
 
     </button>
 
 
-
-    <!-- TIMELINE -->
 
     <button
         class="nav-item"
@@ -451,45 +366,32 @@ if (
         type="button"
     >
 
-
         <img
             src="icons/events.svg"
             alt="Timeline"
         >
 
-
         <small>
-
             Timeline
-
         </small>
-
 
     </button>
 
 
 
-    <!-- PROFILE -->
-
     <button
         class="nav-item"
-        onclick="goProfile()"
+        onclick="goChats()"
         type="button"
     >
 
-
-        <img
-            src="icons/profile.svg"
-            alt="Profile"
-        >
-
+        <span class="nav-chat-icon">
+            ▱
+        </span>
 
         <small>
-
-            Profile
-
+            Chats
         </small>
-
 
     </button>
 
@@ -498,19 +400,10 @@ if (
 
 
 
-<!-- =====================================
-        SUPABASE
-===================================== -->
-
 <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
 ></script>
 
-
-
-<!-- =====================================
-        MAIN APP
-===================================== -->
 
 <script src="app.js"></script>
 
