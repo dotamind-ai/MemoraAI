@@ -564,3 +564,202 @@ function getInitial(
 
 
 }
+/* =====================================================
+   NOTIFICATIONS
+   PART 3
+===================================================== */
+
+
+async function loadNotifications(){
+
+
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "notifications"
+                )
+                .select(
+                    `
+                    id,
+                    user_id,
+                    type,
+                    title,
+                    body,
+                    related_id,
+                    read,
+                    created_at
+                    `
+                )
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .eq(
+                    "read",
+                    false
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                );
+
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+
+        notifications =
+            data || [];
+
+
+
+        console.log(
+            "Notifications loaded:",
+            notifications
+        );
+
+
+
+        renderNotifications();
+
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Notifications error:",
+            error
+        );
+
+
+        notifications =
+            [];
+
+
+        renderNotifications();
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+function renderNotifications(){
+
+
+    if(
+        notificationBadge
+    ){
+
+        notificationBadge.textContent =
+            notifications.length;
+
+
+        notificationBadge.hidden =
+            notifications.length === 0;
+
+    }
+
+
+
+
+    if(
+        !notificationList
+    ){
+
+        return;
+
+    }
+
+
+
+    notificationList.innerHTML =
+        "";
+
+
+
+    if(
+        notifications.length === 0
+    ){
+
+
+        notificationList.innerHTML = `
+
+            <div class="notification-empty">
+
+                No notifications
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+
+    notifications.forEach(
+        function(notification){
+
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+
+            item.className =
+                "notification-card";
+
+
+
+            item.innerHTML = `
+
+                <strong>
+                    ${notification.title || "Notification"}
+                </strong>
+
+                <span>
+                    ${notification.body || ""}
+                </span>
+
+            `;
+
+
+
+            notificationList.appendChild(
+                item
+            );
+
+
+        }
+    );
+
+
+}
