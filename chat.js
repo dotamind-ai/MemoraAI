@@ -1326,11 +1326,9 @@ function renderFriends() {
 
 
             status.textContent =
-                unread > 0
-                    ? unread === 1
-                        ? "1 unread message"
-                        : `${unread} unread messages`
-                    : "Start a conversation";
+    friend.is_online
+        ? "В сети"
+        : "Не в сети";
 
 
             info.appendChild(
