@@ -203,6 +203,7 @@ async function initializeChat() {
         await loadMyProfile();
 
         await loadFriends();
+        subscribeToFriendStatus();
 
         await loadNotifications();
 
@@ -1031,6 +1032,43 @@ async function loadFriends() {
     }
 
 
+    friends = (data || []).map(
+        function(friend) {
+
+            return {
+
+                ...friend,
+
+                is_online:
+                    friend.is_online === true
+
+            };
+
+        }
+    );
+
+
+    renderFriends();
+
+}
+
+
+    if (error) {
+
+        console.error(
+            "Friends error:",
+            error
+        );
+
+        friends = [];
+
+        renderFriends();
+
+        return;
+
+    }
+
+
     friends =
         data || [];
 
@@ -1331,10 +1369,25 @@ function renderFriends() {
                 "person-email";
 
 
-            status.textContent =
-    friend.is_online
-        ? "В сети"
-        : "Не в сети";
+if (friend.is_online) {
+
+    status.textContent =
+        "🟢 В сети";
+
+    status.classList.add(
+        "online"
+    );
+
+} else {
+
+    status.textContent =
+        "⚫ Не в сети";
+
+    status.classList.remove(
+        "online"
+    );
+
+}
 
 
             info.appendChild(
@@ -1767,6 +1820,7 @@ async function answerFriendRequest(
 
 
     await loadFriends();
+
 
 }
 
@@ -3765,5 +3819,75 @@ function injectToastStyles() {
     document.head.appendChild(
         style
     );
+
+}
+// =====================================================
+// FRIEND ONLINE REALTIME
+// =====================================================
+
+function subscribeToFriendStatus() {
+
+
+    supabaseClient
+
+        .channel(
+            "friends-online-status"
+        )
+
+        .on(
+            "postgres_changes",
+            {
+                event:
+                    "UPDATE",
+
+                schema:
+                    "public",
+
+                table:
+                    "profiles"
+            },
+
+            function(payload) {
+
+
+                const updated =
+                    payload.new;
+
+
+                const friend =
+                    friends.find(
+                        function(item){
+
+                            return (
+                                item.friend_id ===
+                                updated.id
+                            );
+
+                        }
+                    );
+
+
+                if(friend){
+
+
+                    friend.is_online =
+                        updated.is_online;
+
+
+                    friend.last_seen =
+                        updated.last_seen;
+
+
+                    renderFriends();
+
+                }
+
+
+            }
+
+        )
+
+        .subscribe();
+
 
 }
