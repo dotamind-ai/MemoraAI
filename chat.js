@@ -1383,3 +1383,120 @@ function renderMessages(messages){
 
 
 }
+// =====================================================
+// MESSAGE REALTIME
+// =====================================================
+
+
+function subscribeToMessages() {
+
+
+    if (
+        !activeConversationId
+    ) {
+
+        console.warn(
+            "No active conversation"
+        );
+
+        return;
+
+    }
+
+
+    stopMessageRealtime();
+
+
+    console.log(
+        "Starting message realtime:",
+        activeConversationId
+    );
+
+
+    messageChannel =
+        supabaseClient
+            .channel(
+                "memora-messages-" +
+                activeConversationId
+            )
+            .on(
+                "postgres_changes",
+                {
+
+                    event:
+                        "INSERT",
+
+                    schema:
+                        "public",
+
+                    table:
+                        "messages",
+
+                    filter:
+                        "conversation_id=eq." +
+                        activeConversationId
+
+                },
+
+                function(payload) {
+
+
+                    console.log(
+                        "Realtime new message:",
+                        payload.new
+                    );
+
+
+                    appendMessage(
+                        payload.new
+                    );
+
+
+                    scrollMessagesToBottom();
+
+
+                }
+
+            )
+            .subscribe(
+                function(status) {
+
+
+                    console.log(
+                        "Message realtime:",
+                        status
+                    );
+
+
+                }
+            );
+
+
+}
+
+
+
+
+
+function stopMessageRealtime() {
+
+
+    if (
+        !messageChannel
+    ) {
+
+        return;
+
+    }
+
+
+    supabaseClient.removeChannel(
+        messageChannel
+    );
+
+
+    messageChannel =
+        null;
+
+
+}
