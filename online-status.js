@@ -1,5 +1,5 @@
 // ============================================
-// MEMORA ONLINE STATUS TEST
+// MEMORA ONLINE STATUS
 // ============================================
 
 
@@ -19,7 +19,7 @@ const supabaseClient =
 
 
 
-let userId = null;
+let currentUserId = null;
 
 
 
@@ -27,19 +27,14 @@ let userId = null;
 // START
 // ============================================
 
-
 document.addEventListener(
     "DOMContentLoaded",
-    startOnlineStatus
+    initOnlineStatus
 );
 
 
 
-async function startOnlineStatus() {
-
-
-    alert("ONLINE SCRIPT START");
-
+async function initOnlineStatus() {
 
 
     const {
@@ -50,45 +45,85 @@ async function startOnlineStatus() {
 
 
 
-    if (error) {
-
-        alert(
-            "SESSION ERROR"
-        );
-
-        return;
-
-    }
-
-
-
     if (
+        error ||
         !data.session
     ) {
 
-        alert(
-            "NO USER SESSION"
-        );
-
         return;
 
     }
 
 
 
-    userId =
+    currentUserId =
         data.session.user.id;
 
 
 
-    alert(
-        "USER ID: " + userId
+    // сразу ставим онлайн
+
+    await updateOnlineStatus(true);
+
+
+
+    // каждые 30 секунд подтверждаем присутствие
+
+    setInterval(
+        function() {
+
+            updateOnlineStatus(true);
+
+        },
+        30000
     );
 
 
 
-    await setOnline();
+    // когда вкладка скрыта
 
+    document.addEventListener(
+        "visibilitychange",
+        function() {
+
+
+            if (
+                document.hidden
+            ) {
+
+                updateOnlineStatus(false);
+
+            } else {
+
+                updateOnlineStatus(true);
+
+            }
+
+
+        }
+    );
+
+
+
+    // выход из аккаунта
+
+    supabaseClient.auth.onAuthStateChange(
+        function(
+            event
+        ) {
+
+
+            if (
+                event === "SIGNED_OUT"
+            ) {
+
+                updateOnlineStatus(false);
+
+            }
+
+
+        }
+    );
 
 
 }
@@ -96,14 +131,17 @@ async function startOnlineStatus() {
 
 
 // ============================================
-// SET ONLINE
+// UPDATE STATUS
 // ============================================
 
+async function updateOnlineStatus(
+    status
+) {
 
-async function setOnline() {
 
-
-    if (!userId) {
+    if (
+        !currentUserId
+    ) {
 
         return;
 
@@ -111,48 +149,70 @@ async function setOnline() {
 
 
 
-    const {
-        error
-    } =
     await supabaseClient
 
         .from("profiles")
 
         .update({
 
-            is_online: true,
+            is_online:
+                status,
+
 
             last_seen:
                 new Date()
                 .toISOString()
 
+
         })
 
         .eq(
             "id",
-            userId
+            currentUserId
         );
-
-
-
-    if (error) {
-
-
-        alert(
-            "UPDATE ERROR: " +
-            error.message
-        );
-
-
-        return;
-
-    }
-
-
-
-    alert(
-        "ONLINE TRUE SAVED"
-    );
 
 
 }
+
+
+
+// ============================================
+// BEFORE CLOSE
+// ============================================
+
+window.addEventListener(
+    "beforeunload",
+    function() {
+
+
+        if (
+            currentUserId
+        ) {
+
+            supabaseClient
+
+                .from("profiles")
+
+                .update({
+
+                    is_online:
+                        false,
+
+
+                    last_seen:
+                        new Date()
+                        .toISOString()
+
+                })
+
+                .eq(
+                    "id",
+                    currentUserId
+                );
+
+
+        }
+
+
+    }
+);
