@@ -1,7 +1,7 @@
 // =====================================
 // MEMORA ONLINE STATUS
 // =====================================
-
+console.log("ONLINE STATUS LOADED");
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
