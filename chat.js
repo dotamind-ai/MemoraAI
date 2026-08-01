@@ -921,3 +921,125 @@ async function openConversation(
 
 
 }
+/* =====================================================
+   CONVERSATION SETUP
+   PART 5
+===================================================== */
+
+
+function setupConversation(){
+
+
+    console.log(
+        "Conversation setup"
+    );
+
+
+
+    if(
+        conversationBack
+    ){
+
+        conversationBack.addEventListener(
+            "click",
+            function(){
+
+                closeConversation();
+
+            }
+        );
+
+    }
+
+
+
+
+    if(
+        messageForm
+    ){
+
+        messageForm.addEventListener(
+            "submit",
+            function(event){
+
+                sendMessage(
+                    event
+                );
+
+            }
+        );
+
+    }
+
+
+
+
+    if(
+        messageInput
+    ){
+
+        messageInput.addEventListener(
+            "input",
+            function(){
+
+                autoResizeMessageInput();
+
+            }
+        );
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   CLOSE CHAT
+===================================================== */
+
+
+function closeConversation(){
+
+
+    console.log(
+        "Close conversation"
+    );
+
+
+
+    activeFriend =
+        null;
+
+
+    activeConversationId =
+        null;
+
+
+
+    if(
+        conversationView
+    ){
+
+        conversationView.style.display =
+            "none";
+
+    }
+
+
+
+    if(
+        friendsView
+    ){
+
+        friendsView.style.display =
+            "block";
+
+    }
+
+
+
+}
