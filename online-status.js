@@ -3,7 +3,7 @@
 // SUPABASE
 // =====================================================
 
-
+alert("online-status.js loaded");
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
