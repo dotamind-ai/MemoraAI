@@ -27,6 +27,7 @@ let userId = null;
 // ===============================
 
 async function startOnlineStatus() {
+    alert("ONLINE SCRIPT WORKS");
 
 
     console.log(
