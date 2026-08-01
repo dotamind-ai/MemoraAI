@@ -4,24 +4,13 @@
 ===================================================== */
 
 
+
 /* =====================================================
    SUPABASE
 ===================================================== */
 
-
-const supabaseUrl =
-    "https://eabfkvqeveipwpomtjst.supabase.co";
-
-
-const supabaseKey =
-    "ТВОЙ_ANON_KEY";
-
-
-const supabaseClient =
-    supabase.createClient(
-        supabaseUrl,
-        supabaseKey
-    );
+// supabaseClient уже создан в отдельном файле
+// НЕ СОЗДАВАТЬ ЕГО ЗДЕСЬ
 
 
 
@@ -88,15 +77,15 @@ const notificationBadge =
     );
 
 
-const conversationView =
-    document.getElementById(
-        "conversationView"
-    );
-
-
 const friendsView =
     document.getElementById(
         "friendsView"
+    );
+
+
+const conversationView =
+    document.getElementById(
+        "conversationView"
     );
 
 
@@ -150,21 +139,20 @@ const conversationBack =
 
 
 /* =====================================================
-   START APP
+   START
 ===================================================== */
 
 
 document.addEventListener(
     "DOMContentLoaded",
-    async function(){
+    function(){
 
         console.log(
-            "Memora chat starting..."
+            "Memora chat loaded"
         );
 
 
-        await initChat();
-
+        initChat();
 
     }
 );
@@ -172,69 +160,85 @@ document.addEventListener(
 
 
 /* =====================================================
-   INIT
+   INIT CHAT
 ===================================================== */
 
 
 async function initChat(){
 
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.getSession();
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getSession();
 
 
 
-    if(error){
+        if(error){
+
+            throw error;
+
+        }
+
+
+
+        if(
+            !data.session
+        ){
+
+            console.error(
+                "User is not logged in"
+            );
+
+            return;
+
+        }
+
+
+
+        currentUser =
+            data.session.user;
+
+
+
+        console.log(
+            "Logged user:",
+            currentUser.id
+        );
+
+
+
+        await loadFriends();
+
+
+
+        await loadNotifications();
+
+
+
+        subscribeToNotifications();
+
+
+
+        setupConversation();
+
+
+
+    }
+    catch(error){
+
 
         console.error(
+            "Chat init error:",
             error
         );
 
-        return;
 
     }
-
-
-
-    if(
-        !data.session
-    ){
-
-        console.error(
-            "No session"
-        );
-
-        return;
-
-    }
-
-
-
-    currentUser =
-        data.session.user;
-
-
-
-    console.log(
-        "Current user:",
-        currentUser.id
-    );
-
-
-
-    await loadFriends();
-
-
-    await loadNotifications();
-
-
-    subscribeToNotifications();
-
-
-    setupConversation();
 
 
 }
