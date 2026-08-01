@@ -27,9 +27,7 @@ async function startOnlineStatus() {
     } = await supabaseClient.auth.getSession();
 
 
-    if (
-        !data.session
-    ) {
+    if (!data.session) {
 
         return;
 
@@ -40,24 +38,41 @@ async function startOnlineStatus() {
         data.session.user.id;
 
 
-    await setOnline(true);
+    await setOnline();
 
 
-
-    // проверка каждые 30 секунд
+    // обновляем только время активности
     setInterval(
         async () => {
 
-            await setOnline(true);
+            await updateLastSeen();
 
         },
         30000
     );
 
 
-    // когда закрыли страницу
+    // выход из аккаунта
+    supabaseClient.auth.onAuthStateChange(
+        async function(event) {
+
+
+            if (
+                event === "SIGNED_OUT"
+            ) {
+
+                await setOffline();
+
+            }
+
+
+        }
+    );
+
+
+    // закрытие страницы
     window.addEventListener(
-        "beforeunload",
+        "pagehide",
         function() {
 
             setOffline();
@@ -65,26 +80,6 @@ async function startOnlineStatus() {
         }
     );
 
-
-    // когда вкладка скрыта
-    document.addEventListener(
-        "visibilitychange",
-        function() {
-
-            if (
-                document.hidden
-            ) {
-
-                setOffline();
-
-            } else {
-
-                setOnline(true);
-
-            }
-
-        }
-    );
 
 }
 
@@ -94,9 +89,8 @@ async function startOnlineStatus() {
 // ONLINE
 // =====================================
 
-async function setOnline(
-    value
-) {
+async function setOnline() {
+
 
     if (!userId) {
 
@@ -109,8 +103,38 @@ async function setOnline(
         .from("profiles")
         .update({
 
-            is_online:
-                value,
+            is_online: true,
+
+            last_seen:
+                new Date()
+
+        })
+        .eq(
+            "id",
+            userId
+        );
+
+}
+
+
+
+// =====================================
+// UPDATE TIME
+// =====================================
+
+async function updateLastSeen() {
+
+
+    if (!userId) {
+
+        return;
+
+    }
+
+
+    await supabaseClient
+        .from("profiles")
+        .update({
 
             last_seen:
                 new Date()
@@ -131,6 +155,7 @@ async function setOnline(
 
 async function setOffline() {
 
+
     if (!userId) {
 
         return;
@@ -142,8 +167,7 @@ async function setOffline() {
         .from("profiles")
         .update({
 
-            is_online:
-                false,
+            is_online: false,
 
             last_seen:
                 new Date()
@@ -158,7 +182,8 @@ async function setOffline() {
 
 
 
-// запуск после загрузки
+// запуск
+
 document.addEventListener(
     "DOMContentLoaded",
     startOnlineStatus
