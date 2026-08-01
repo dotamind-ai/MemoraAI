@@ -1403,7 +1403,16 @@ async function logout() {
     const {
         error
     } = await supabaseClient.auth.signOut();
-
+await supabaseClient
+    .from("profiles")
+    .update({
+        is_online: false,
+        last_seen: new Date()
+    })
+    .eq(
+        "id",
+        currentUser.id
+    );
 
     if (error) {
 
