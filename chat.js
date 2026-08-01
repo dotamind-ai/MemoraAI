@@ -1811,3 +1811,28 @@ function formatTime(
     );
 
 }
+// =====================================================
+// SCROLL MESSAGES TO BOTTOM
+// =====================================================
+
+function scrollMessagesToBottom() {
+
+    if(
+        !messageList
+    ){
+
+        return;
+
+    }
+
+
+    requestAnimationFrame(
+        function(){
+
+            messageList.scrollTop =
+                messageList.scrollHeight;
+
+        }
+    );
+
+}
