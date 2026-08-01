@@ -1,8 +1,3 @@
-// =====================================
-// MEMORA ONLINE STATUS
-// =====================================
-
-
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
@@ -18,13 +13,12 @@ const supabaseClient =
     );
 
 
-let currentUserId = null;
+let userId = null;
 
 
-
-// =====================================
+// ================================
 // START
-// =====================================
+// ================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -32,196 +26,112 @@ document.addEventListener(
 );
 
 
-
-async function startOnlineStatus() {
-
+async function startOnlineStatus(){
 
     const {
-        data,
-        error
+        data
     } =
     await supabaseClient.auth.getSession();
-
-
-
-    if(error){
-
-        console.log(
-            "Session error",
-            error
-        );
-
-        return;
-
-    }
-
 
 
     if(
         !data.session
     ){
 
-        console.log(
-            "No user"
-        );
-
         return;
 
     }
 
 
-
-    currentUserId =
+    userId =
         data.session.user.id;
 
 
-
-    console.log(
-        "Online user:",
-        currentUserId
-    );
+    // вошёл
+    await updateOnline(true);
 
 
 
-    // сразу онлайн
-
-    await setOnline();
-
-
-
-    // обновляем время каждые 30 секунд
-
+    // каждые 30 секунд обновляем время
     setInterval(
-        async function(){
+        async ()=>{
 
-            await setOnline();
+            if(userId){
+
+                await updateOnline(true);
+
+            }
 
         },
         30000
     );
 
 
-}
+
+    // выход из аккаунта
+    supabaseClient.auth.onAuthStateChange(
+        async(event)=>{
 
 
+            if(
+                event === "SIGNED_OUT"
+            ){
 
-// =====================================
-// SET ONLINE
-// =====================================
+                await updateOnline(false);
 
-async function setOnline(){
+            }
 
-
-    if(!currentUserId){
-
-        return;
-
-    }
-
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-        .from("profiles")
-        .update({
-
-            is_online:
-                true,
-
-            last_seen:
-                new Date().toISOString()
-
-        })
-        .eq(
-            "id",
-            currentUserId
-        );
-
-
-
-    if(error){
-
-        console.log(
-            "Online error:",
-            error
-        );
-
-    }
-
-}
-
-
-
-// =====================================
-// SET OFFLINE
-// =====================================
-
-async function setOffline(){
-
-
-    if(!currentUserId){
-
-        return;
-
-    }
-
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-        .from("profiles")
-        .update({
-
-            is_online:
-                false,
-
-            last_seen:
-                new Date().toISOString()
-
-        })
-        .eq(
-            "id",
-            currentUserId
-        );
-
-
-
-    if(error){
-
-        console.log(
-            "Offline error:",
-            error
-        );
-
-    }
-
-}
-
-
-
-// =====================================
-// LOGOUT SUPPORT
-// =====================================
-
-supabaseClient.auth.onAuthStateChange(
-    async function(
-        event
-    ){
-
-
-        if(
-            event ===
-            "SIGNED_OUT"
-        ){
-
-            await setOffline();
 
         }
+    );
 
+}
+
+
+// ================================
+// UPDATE
+// ================================
+
+async function updateOnline(value){
+
+
+    if(
+        !userId
+    ){
+
+        return;
 
     }
-);
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("profiles")
+        .update({
+
+            is_online:value,
+
+            last_seen:
+                new Date().toISOString()
+
+        })
+        .eq(
+            "id",
+            userId
+        );
+
+
+
+    if(error){
+
+        console.error(
+            "ONLINE ERROR",
+            error
+        );
+
+    }
+
+
+}
