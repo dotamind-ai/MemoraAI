@@ -1646,3 +1646,135 @@ async function sendMessage(event) {
     }
 
 }
+// =====================================================
+// APPEND SINGLE MESSAGE
+// =====================================================
+
+function appendMessage(
+    message
+) {
+
+
+    if(
+        !messageList ||
+        !message
+    ){
+
+        return;
+
+    }
+
+
+
+    if(
+        document.querySelector(
+            `[data-message-id="${message.id}"]`
+        )
+    ){
+
+        return;
+
+    }
+
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+
+    row.className =
+        "message-bubble-row";
+
+
+
+    row.dataset.messageId =
+        message.id;
+
+
+
+    if(
+        message.sender_id ===
+        currentUser.id
+    ){
+
+        row.classList.add(
+            "mine"
+        );
+
+    }
+
+
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+
+
+    bubble.className =
+        "message-bubble";
+
+
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+
+
+    text.className =
+        "message-text";
+
+
+
+    text.textContent =
+        message.content;
+
+
+
+    const time =
+        document.createElement(
+            "div"
+        );
+
+
+
+    time.className =
+        "message-time";
+
+
+
+    time.textContent =
+        formatTime(
+            message.created_at
+        );
+
+
+
+    bubble.appendChild(
+        text
+    );
+
+
+    bubble.appendChild(
+        time
+    );
+
+
+
+    row.appendChild(
+        bubble
+    );
+
+
+
+    messageList.appendChild(
+        row
+    );
+
+}
