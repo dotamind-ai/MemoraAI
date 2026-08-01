@@ -3,7 +3,6 @@
 // SUPABASE
 // =====================================================
 
-alert("ONLINE STATUS LOADED");
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
