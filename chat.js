@@ -1503,3 +1503,31 @@ function stopMessageRealtime() {
 
 
 }
+// =====================================================
+// MESSAGE INPUT RESIZE
+// =====================================================
+
+function autoResizeMessageInput() {
+
+    if (
+        !messageInput
+    ) {
+
+        return;
+
+    }
+
+
+    messageInput.style.height =
+        "auto";
+
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            125
+        )
+        +
+        "px";
+
+}
