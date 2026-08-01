@@ -7,7 +7,19 @@
 // ===============================
 // SUPABASE
 // ===============================
+let currentUser = null;
 
+let friends = [];
+
+let notifications = [];
+
+let activeFriend = null;
+
+let activeConversationId = null;
+
+let messageChannel = null;
+
+let notificationChannel = null;
 
 const SUPABASE_URL =
     "ТВОЙ_SUPABASE_URL";
