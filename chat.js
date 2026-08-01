@@ -1043,3 +1043,343 @@ function closeConversation(){
 
 
 }
+/* =====================================================
+   OPEN CONVERSATION
+   PART 6
+===================================================== */
+
+
+async function openConversation(friend){
+
+
+    if(
+        !friend ||
+        !friend.friend_id
+    ){
+
+        console.error(
+            "Invalid friend",
+            friend
+        );
+
+        return;
+
+    }
+
+
+
+    console.log(
+        "Opening conversation with:",
+        friend
+    );
+
+
+
+    activeFriend =
+        friend;
+
+
+
+    if(
+        conversationName
+    ){
+
+        conversationName.textContent =
+            friend.display_name ||
+            "Memora user";
+
+    }
+
+
+
+    if(
+        friendsView
+    ){
+
+        friendsView.style.display =
+            "none";
+
+    }
+
+
+
+    if(
+        conversationView
+    ){
+
+        conversationView.style.display =
+            "flex";
+
+    }
+
+
+
+    console.log(
+        "Chat window opened"
+    );
+
+
+
+    try{
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient.rpc(
+            "get_or_create_direct_chat",
+            {
+
+                other_user_id:
+                    friend.friend_id
+
+            }
+        );
+
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+
+        activeConversationId =
+            data;
+
+
+
+        console.log(
+            "Conversation id:",
+            activeConversationId
+        );
+
+
+
+        await loadMessages();
+
+
+
+        subscribeToMessages();
+
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Open conversation error:",
+            error
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   LOAD MESSAGES
+===================================================== */
+
+
+async function loadMessages(){
+
+
+    if(
+        !activeConversationId
+    ){
+
+        console.warn(
+            "No conversation id"
+        );
+
+        return;
+
+    }
+
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from(
+            "messages"
+        )
+        .select(
+            "id,conversation_id,sender_id,content,created_at"
+        )
+        .eq(
+            "conversation_id",
+            activeConversationId
+        )
+        .order(
+            "created_at",
+            {
+                ascending:true
+            }
+        );
+
+
+
+    if(error){
+
+        throw error;
+
+    }
+
+
+
+    console.log(
+        "Messages loaded:",
+        data
+    );
+
+
+
+    renderMessages(
+        data || []
+    );
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   RENDER MESSAGES
+===================================================== */
+
+
+function renderMessages(messages){
+
+
+    if(
+        !messageList
+    ){
+
+        console.error(
+            "messageList missing"
+        );
+
+        return;
+
+    }
+
+
+
+    messageList.innerHTML =
+        "";
+
+
+
+    if(
+        messages.length === 0
+    ){
+
+        messageList.innerHTML = `
+
+            <div class="messages-empty">
+
+                <div class="empty-title">
+                    No messages yet
+                </div>
+
+                <div class="empty-text">
+                    Start conversation
+                </div>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+
+    messages.forEach(
+        function(message){
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+
+            row.className =
+                "message-bubble-row";
+
+
+
+            if(
+                message.sender_id ===
+                currentUser.id
+            ){
+
+                row.classList.add(
+                    "mine"
+                );
+
+            }
+
+
+
+            const bubble =
+                document.createElement(
+                    "div"
+                );
+
+
+
+            bubble.className =
+                "message-bubble";
+
+
+
+            bubble.textContent =
+                message.content;
+
+
+
+            row.appendChild(
+                bubble
+            );
+
+
+
+            messageList.appendChild(
+                row
+            );
+
+
+
+        }
+    );
+
+
+
+    messageList.scrollTop =
+        messageList.scrollHeight;
+
+
+}
