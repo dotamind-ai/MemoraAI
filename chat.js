@@ -556,13 +556,19 @@ async function clearAllNotifications() {
 async function loadMyProfile() {
 
     const {
-        data,
-        error
-    } = await supabaseClient
-        .from("profiles")
-        .select(
-            "display_name, avatar_url"
-        )
+    data,
+    error
+} = await supabaseClient
+    .from("profiles")
+    .select(
+        `
+        id,
+        display_name,
+        avatar_url,
+        is_online,
+        last_seen
+        `
+    );
         .eq(
             "id",
             currentUser.id
