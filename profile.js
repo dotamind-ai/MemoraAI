@@ -1,7 +1,6 @@
 // =====================================================
 // MEMORA PROFILE
-// SUPABASE
-// AVATAR -> COMPRESSED WEBP
+// Supabase + Profile + Avatar + Logout
 // =====================================================
 
 
@@ -20,65 +19,97 @@ const supabaseClient =
     );
 
 
+
 // =====================================================
-// ELEMENTS
+// DOM
 // =====================================================
+
 
 const avatarPreview =
-    document.getElementById("avatarPreview");
+    document.getElementById(
+        "avatarPreview"
+    );
+
 
 const avatarInput =
-    document.getElementById("avatarInput");
+    document.getElementById(
+        "avatarInput"
+    );
+
 
 const changeAvatarButton =
     document.getElementById(
         "changeAvatarButton"
     );
 
+
 const profileName =
-    document.getElementById("profileName");
+    document.getElementById(
+        "profileName"
+    );
+
 
 const profileEmail =
-    document.getElementById("profileEmail");
+    document.getElementById(
+        "profileEmail"
+    );
+
 
 const displayNameInput =
     document.getElementById(
         "displayNameInput"
     );
 
+
 const emailValue =
-    document.getElementById("emailValue");
+    document.getElementById(
+        "emailValue"
+    );
+
 
 const accountDate =
-    document.getElementById("accountDate");
+    document.getElementById(
+        "accountDate"
+    );
+
 
 const profileMessage =
     document.getElementById(
         "profileMessage"
     );
 
+
 const saveProfileButton =
     document.getElementById(
         "saveProfileButton"
     );
+
 
 const logoutButton =
     document.getElementById(
         "logoutButton"
     );
 
+
 const backButton =
     document.getElementById(
         "backButton"
     );
 
+
+// Навигация
+
 const homeNav =
-    document.getElementById("homeNav");
+    document.getElementById(
+        "homeNav"
+    );
+
 
 const calendarNav =
     document.getElementById(
         "calendarNav"
     );
+
 
 const timelineNav =
     document.getElementById(
@@ -86,44 +117,31 @@ const timelineNav =
     );
 
 
+
+
 // =====================================================
 // STATE
 // =====================================================
 
-let currentUser = null;
 
-let currentProfile = null;
-
-let selectedAvatarFile = null;
+let currentUser =
+    null;
 
 
-// =====================================================
-// CONSTANTS
-// =====================================================
-
-// Максимальное разрешение аватара.
-
-const AVATAR_MAX_SIZE = 512;
+let currentProfile =
+    null;
 
 
-// Качество WebP.
-// 0.8 даёт хороший баланс между качеством
-// и размером.
-
-const AVATAR_QUALITY = 0.8;
+let selectedAvatarFile =
+    null;
 
 
-// Максимальный размер итогового файла.
-
-// 700 KB.
-
-const AVATAR_MAX_BYTES =
-    700 * 1024;
 
 
 // =====================================================
-// INITIALIZE
+// START
 // =====================================================
+
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -131,20 +149,25 @@ document.addEventListener(
 );
 
 
-async function initializeProfile() {
 
-    try {
+async function initializeProfile(){
+
+
+    try{
+
 
         const {
             data,
             error
-        } = await supabaseClient.auth.getUser();
+        } =
+        await supabaseClient.auth.getUser();
 
 
-        if (
+
+        if(
             error ||
             !data.user
-        ) {
+        ){
 
             redirectToWelcome();
 
@@ -153,11 +176,14 @@ async function initializeProfile() {
         }
 
 
+
         currentUser =
             data.user;
 
 
-        renderUserEmail();
+
+        renderEmail();
+
 
         renderAccountDate();
 
@@ -168,308 +194,281 @@ async function initializeProfile() {
         setupEvents();
 
 
-    } catch (error) {
+
+    }
+    catch(error){
+
 
         console.error(
-            "Profile initialization error:",
+            "Profile start error:",
             error
         );
 
-        redirectToWelcome();
 
     }
 
+
 }
+
+
 
 
 // =====================================================
 // EMAIL
 // =====================================================
 
-function renderUserEmail() {
+
+function renderEmail(){
+
 
     const email =
         currentUser.email ||
         "No email";
 
 
-    profileEmail.textContent =
-        email;
+
+    if(profileEmail){
+
+        profileEmail.textContent =
+            email;
+
+    }
 
 
-    emailValue.textContent =
-        email;
+
+    if(emailValue){
+
+        emailValue.textContent =
+            email;
+
+    }
+
 
 }
 
 
+
+
 // =====================================================
-// ACCOUNT DATE
+// DATE
 // =====================================================
 
-function renderAccountDate() {
 
-    if (!currentUser.created_at) {
+function renderAccountDate(){
 
-        accountDate.textContent =
-            "—";
+
+    if(
+        !accountDate ||
+        !currentUser.created_at
+    ){
 
         return;
 
     }
 
 
-    const date =
-        new Date(
-            currentUser.created_at
-        );
-
 
     accountDate.textContent =
-        date.toLocaleDateString(
-            "ru-RU",
-            {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            }
+        new Date(
+            currentUser.created_at
+        )
+        .toLocaleDateString(
+            "ru-RU"
         );
 
+
 }
-
-
 // =====================================================
 // LOAD PROFILE
 // =====================================================
 
-async function loadProfile() {
+
+async function loadProfile(){
+
 
     const {
         data,
         error
-    } = await supabaseClient
-
+    } =
+    await supabaseClient
         .from("profiles")
-
         .select(
-            "id, display_name, avatar_url, updated_at"
+            "id,display_name,avatar_url,updated_at"
         )
-
         .eq(
             "id",
             currentUser.id
         )
-
         .maybeSingle();
 
 
-    if (error) {
+
+    if(error){
+
 
         console.error(
             "Load profile error:",
             error
         );
 
-        applyDefaultProfile();
-
-        showMessage(
-            "Unable to load profile"
-        );
 
         return;
 
     }
 
 
-    if (!data) {
-
-        currentProfile = {
-
-            id:
-                currentUser.id,
-
-            display_name:
-                "",
-
-            avatar_url:
-                null,
-
-            updated_at:
-                null
-
-        };
 
 
-        await createProfile();
+    if(!data){
 
 
-        applyDefaultProfile();
+        const {
+            data:newProfile,
+            error:createError
+        } =
+        await supabaseClient
+            .from("profiles")
+            .insert({
+
+                id:
+                    currentUser.id,
+
+                display_name:
+                    "",
+
+                avatar_url:
+                    null,
+
+                is_online:
+                    true,
+
+                last_seen:
+                    new Date().toISOString()
+
+            })
+            .select()
+            .single();
 
 
-        return;
+
+        if(createError){
+
+            console.error(
+                "Create profile error:",
+                createError
+            );
+
+            return;
+
+        }
+
+
+
+        currentProfile =
+            newProfile;
+
+
+    }
+    else{
+
+
+        currentProfile =
+            data;
+
 
     }
 
 
-    currentProfile =
-        data;
 
+    applyProfile();
 
-    applyProfileData();
 
 }
 
 
-// =====================================================
-// CREATE PROFILE
-// =====================================================
-
-async function createProfile() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from("profiles")
-
-        .insert({
-
-            id:
-                currentUser.id,
-
-            display_name:
-                "",
-
-            avatar_url:
-                null
-
-        })
-
-        .select(
-            "id, display_name, avatar_url, updated_at"
-        )
-
-        .single();
 
 
-    if (error) {
-
-        console.error(
-            "Create profile error:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    currentProfile =
-        data;
-
-}
 
 
 // =====================================================
-// APPLY PROFILE DATA
+// APPLY PROFILE
 // =====================================================
 
-function applyDefaultProfile() {
+
+function applyProfile(){
+
+
 
     const email =
         currentUser.email ||
-        "Member";
+        "member";
 
-
-    const fallbackName =
-        email.split("@")[0] ||
-        "Member";
-
-
-    displayNameInput.value =
-        fallbackName;
-
-
-    profileName.textContent =
-        fallbackName;
-
-
-    setAvatarDefault(
-        fallbackName
-    );
-
-}
-
-
-function applyProfileData() {
-
-    const email =
-        currentUser.email ||
-        "Member";
-
-
-    const savedName =
-        (
-            currentProfile.display_name ||
-            ""
-        ).trim();
 
 
     const name =
-        savedName ||
-        email.split("@")[0] ||
-        "Member";
+        currentProfile.display_name ||
+        email.split("@")[0];
 
 
-    displayNameInput.value =
-        savedName;
+
+    if(displayNameInput){
+
+        displayNameInput.value =
+            currentProfile.display_name ||
+            "";
+
+    }
 
 
-    profileName.textContent =
-        name;
+
+    if(profileName){
+
+        profileName.textContent =
+            name;
+
+    }
 
 
-    if (
+
+    if(
         currentProfile.avatar_url
-    ) {
+    ){
 
         setAvatarImage(
             currentProfile.avatar_url
         );
 
-    } else {
+    }
+    else{
 
-        setAvatarDefault(
+        setAvatarLetter(
             name
         );
 
     }
 
+
 }
 
 
+
+
+
+
 // =====================================================
-// DEFAULT AVATAR
+// AVATAR
 // =====================================================
 
-function setAvatarDefault(name) {
 
-    const letter =
-        (
-            name ||
-            "M"
-        )
-        .trim()
-        .charAt(0)
-        .toUpperCase() ||
-        "M";
+function setAvatarLetter(name){
 
 
-    avatarPreview
-        .classList.remove(
-            "has-image"
-        );
+    if(!avatarPreview){
+
+        return;
+
+    }
+
 
 
     avatarPreview.style.backgroundImage =
@@ -477,803 +476,260 @@ function setAvatarDefault(name) {
 
 
     avatarPreview.textContent =
-        letter;
+        (
+            name ||
+            "M"
+        )
+        .charAt(0)
+        .toUpperCase();
+
+
 
 }
 
 
-// =====================================================
-// IMAGE AVATAR
-// =====================================================
 
-function setAvatarImage(url) {
+function setAvatarImage(url){
 
-    avatarPreview
-        .classList.add(
-            "has-image"
-        );
+
+    if(!avatarPreview){
+
+        return;
+
+    }
+
+
+
+    avatarPreview.textContent =
+        "";
 
 
     avatarPreview.style.backgroundImage =
         `url("${url}")`;
 
 
-    avatarPreview.textContent =
-        "";
-
 }
+
+
+
+
 
 
 // =====================================================
 // EVENTS
 // =====================================================
 
-function setupEvents() {
+
+function setupEvents(){
 
 
-    changeAvatarButton.addEventListener(
-        "click",
-        function() {
 
-            avatarInput.click();
-
-        }
-    );
+    if(changeAvatarButton){
 
 
-    avatarInput.addEventListener(
-        "change",
-        handleAvatarSelection
-    );
+        changeAvatarButton.addEventListener(
+            "click",
+            ()=>{
+
+                avatarInput.click();
+
+            }
+        );
+
+    }
 
 
-    saveProfileButton.addEventListener(
-        "click",
-        saveProfile
-    );
 
 
-    displayNameInput.addEventListener(
-        "input",
-        function() {
-
-            const value =
-                displayNameInput.value.trim();
+    if(avatarInput){
 
 
-            if (value) {
+        avatarInput.addEventListener(
+            "change",
+            function(event){
 
-                // Если пользователь ещё
-                // не выбрал фотографию,
-                // показываем первую букву имени.
 
-                if (
-                    !selectedAvatarFile &&
-                    !currentProfile.avatar_url
-                ) {
+                const file =
+                    event.target.files[0];
 
-                    setAvatarDefault(
-                        value
-                    );
+
+                if(!file){
+
+                    return;
 
                 }
 
-            }
 
-        }
-    );
+                selectedAvatarFile =
+                    file;
 
 
-    logoutButton.addEventListener(
-        "click",
-        logout
-    );
 
+                const url =
+                    URL.createObjectURL(
+                        file
+                    );
 
-    backButton.addEventListener(
-        "click",
-        function() {
 
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-    homeNav.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-    calendarNav.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "calendar.html";
-
-        }
-    );
-
-
-    timelineNav.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "events.html";
-
-        }
-    );
-
-
-    supabaseClient.auth.onAuthStateChange(
-        function(
-            event,
-            session
-        ) {
-
-            if (
-                event === "SIGNED_OUT" ||
-                !session
-            ) {
-
-                redirectToWelcome();
-
-            }
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// SELECT AVATAR
-// =====================================================
-
-function handleAvatarSelection(event) {
-
-    const file =
-        event.target.files &&
-        event.target.files[0];
-
-
-    if (!file) {
-
-        return;
-
-    }
-
-
-    const allowedTypes = [
-
-        "image/jpeg",
-
-        "image/png",
-
-        "image/webp"
-
-    ];
-
-
-    if (
-        !allowedTypes.includes(
-            file.type
-        )
-    ) {
-
-        showMessage(
-            "Use JPG, PNG or WebP"
-        );
-
-
-        avatarInput.value =
-            "";
-
-        selectedAvatarFile =
-            null;
-
-
-        return;
-
-    }
-
-
-    // Ограничиваем исходный файл.
-    // 15 MB достаточно даже для
-    // фотографии с телефона.
-
-    const maxInputSize =
-        15 * 1024 * 1024;
-
-
-    if (
-        file.size >
-        maxInputSize
-    ) {
-
-        showMessage(
-            "Image is too large"
-        );
-
-
-        avatarInput.value =
-            "";
-
-        selectedAvatarFile =
-            null;
-
-
-        return;
-
-    }
-
-
-    selectedAvatarFile =
-        file;
-
-
-    // Показываем быстрый preview.
-
-    const previewUrl =
-        URL.createObjectURL(
-            file
-        );
-
-
-    setAvatarImage(
-        previewUrl
-    );
-
-
-    showMessage(
-        "Image selected"
-    );
-
-}
-
-
-// =====================================================
-// COMPRESS IMAGE TO WEBP
-// =====================================================
-
-async function compressAvatar(
-    file
-) {
-
-    const image =
-        await loadImage(
-            file
-        );
-
-
-    // Исходные размеры.
-
-    const originalWidth =
-        image.naturalWidth ||
-        image.width;
-
-
-    const originalHeight =
-        image.naturalHeight ||
-        image.height;
-
-
-    // Центрируем квадратный crop.
-
-    const sourceSize =
-        Math.min(
-            originalWidth,
-            originalHeight
-        );
-
-
-    const sourceX =
-        Math.floor(
-            (
-                originalWidth -
-                sourceSize
-            ) / 2
-        );
-
-
-    const sourceY =
-        Math.floor(
-            (
-                originalHeight -
-                sourceSize
-            ) / 2
-        );
-
-
-    // Canvas.
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    canvas.width =
-        AVATAR_MAX_SIZE;
-
-
-    canvas.height =
-        AVATAR_MAX_SIZE;
-
-
-    const ctx =
-        canvas.getContext(
-            "2d"
-        );
-
-
-    if (!ctx) {
-
-        throw new Error(
-            "Canvas is not supported"
-        );
-
-    }
-
-
-    // Более качественный resize.
-
-    ctx.imageSmoothingEnabled =
-        true;
-
-
-    ctx.imageSmoothingQuality =
-        "high";
-
-
-    // Белый фон на случай,
-    // если исходник имеет прозрачность.
-
-    ctx.fillStyle =
-        "#111116";
-
-
-    ctx.fillRect(
-        0,
-        0,
-        AVATAR_MAX_SIZE,
-        AVATAR_MAX_SIZE
-    );
-
-
-    // Рисуем квадратный crop.
-
-    ctx.drawImage(
-
-        image,
-
-        sourceX,
-        sourceY,
-        sourceSize,
-        sourceSize,
-
-        0,
-        0,
-        AVATAR_MAX_SIZE,
-        AVATAR_MAX_SIZE
-
-    );
-
-
-    // Получаем WebP.
-
-    let blob =
-        await canvasToBlob(
-            canvas,
-            "image/webp",
-            AVATAR_QUALITY
-        );
-
-
-    if (!blob) {
-
-        throw new Error(
-            "Unable to convert image"
-        );
-
-    }
-
-
-    // Если WebP всё ещё слишком большой,
-    // постепенно уменьшаем качество.
-
-    let quality =
-        AVATAR_QUALITY;
-
-
-    while (
-        blob.size >
-            AVATAR_MAX_BYTES &&
-        quality > .45
-    ) {
-
-        quality -= .1;
-
-
-        blob =
-            await canvasToBlob(
-                canvas,
-                "image/webp",
-                quality
-            );
-
-    }
-
-
-    if (
-        blob.size >
-        AVATAR_MAX_BYTES
-    ) {
-
-        // Последняя попытка —
-        // уменьшаем canvas.
-
-        const smallCanvas =
-            document.createElement(
-                "canvas"
-            );
-
-
-        smallCanvas.width =
-            384;
-
-
-        smallCanvas.height =
-            384;
-
-
-        const smallCtx =
-            smallCanvas.getContext(
-                "2d"
-            );
-
-
-        smallCtx.imageSmoothingEnabled =
-            true;
-
-
-        smallCtx.imageSmoothingQuality =
-            "high";
-
-
-        smallCtx.drawImage(
-
-            canvas,
-
-            0,
-            0,
-            384,
-            384
-
-        );
-
-
-        blob =
-            await canvasToBlob(
-                smallCanvas,
-                "image/webp",
-                .65
-            );
-
-    }
-
-
-    if (!blob) {
-
-        throw new Error(
-            "Unable to compress image"
-        );
-
-    }
-
-
-    // Создаём новый File.
-
-    return new File(
-
-        [blob],
-
-        "avatar.webp",
-
-        {
-            type:
-                "image/webp"
-        }
-
-    );
-
-}
-
-
-// =====================================================
-// LOAD IMAGE
-// =====================================================
-
-function loadImage(file) {
-
-    return new Promise(
-        function(resolve, reject) {
-
-
-            const image =
-                new Image();
-
-
-            const url =
-                URL.createObjectURL(
-                    file
+                setAvatarImage(
+                    url
                 );
 
 
-            image.onload =
-                function() {
-
-                    URL.revokeObjectURL(
-                        url
-                    );
-
-
-                    resolve(
-                        image
-                    );
-
-                };
-
-
-            image.onerror =
-                function() {
-
-                    URL.revokeObjectURL(
-                        url
-                    );
-
-
-                    reject(
-                        new Error(
-                            "Unable to read image"
-                        )
-                    );
-
-                };
-
-
-            image.src =
-                url;
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// CANVAS TO BLOB
-// =====================================================
-
-function canvasToBlob(
-    canvas,
-    type,
-    quality
-) {
-
-    return new Promise(
-        function(resolve) {
-
-            canvas.toBlob(
-                function(blob) {
-
-                    resolve(
-                        blob
-                    );
-
-                },
-                type,
-                quality
-            );
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// UPLOAD AVATAR
-// =====================================================
-
-async function uploadAvatar(
-    file
-) {
-
-    // Всегда один и тот же файл.
-
-    const filePath =
-        `${currentUser.id}/avatar.webp`;
-
-
-    const {
-        error
-    } = await supabaseClient.storage
-
-        .from("avatars")
-
-        .upload(
-
-            filePath,
-
-            file,
-
-            {
-                cacheControl:
-                    "3600",
-
-                upsert:
-                    true,
-
-                contentType:
-                    "image/webp"
             }
-
-        );
-
-
-    if (error) {
-
-        throw error;
-
-    }
-
-
-    const {
-        data
-    } = supabaseClient.storage
-
-        .from("avatars")
-
-        .getPublicUrl(
-            filePath
-        );
-
-
-    if (
-        !data ||
-        !data.publicUrl
-    ) {
-
-        throw new Error(
-            "Unable to get avatar URL"
         );
 
     }
 
 
-    // Добавляем timestamp,
-    // чтобы браузер не показывал
-    // старую закэшированную фотографию.
 
-    return (
-        data.publicUrl +
-        "?t=" +
-        Date.now()
-    );
+
+
+
+    if(saveProfileButton){
+
+
+        saveProfileButton.addEventListener(
+            "click",
+            saveProfile
+        );
+
+    }
+
+
+
+
+
+
+    if(logoutButton){
+
+
+        logoutButton.addEventListener(
+            "click",
+            logout
+        );
+
+    }
+
+
+
+
+
+    if(backButton){
+
+
+        backButton.addEventListener(
+            "click",
+            ()=>{
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+    }
+
+
+
+
+
+    if(homeNav){
+
+        homeNav.onclick =
+            ()=>location.href =
+            "index.html";
+
+    }
+
+
+
+    if(calendarNav){
+
+        calendarNav.onclick =
+            ()=>location.href =
+            "calendar.html";
+
+    }
+
+
+
+    if(timelineNav){
+
+        timelineNav.onclick =
+            ()=>location.href =
+            "events.html";
+
+    }
+
 
 }
+
+
+
+
+
 
 
 // =====================================================
 // SAVE PROFILE
 // =====================================================
 
-async function saveProfile() {
 
-    if (!currentUser) {
+async function saveProfile(){
 
-        redirectToWelcome();
+
+
+    if(!currentUser){
 
         return;
 
     }
 
 
-    const displayName =
+
+    const name =
         displayNameInput.value.trim();
 
 
-    if (
-        displayName.length >
-        40
-    ) {
 
-        showMessage(
-            "Name is too long"
-        );
+    try{
 
-        return;
-
-    }
-
-
-    saveProfileButton.disabled =
-        true;
-
-
-    saveProfileButton.textContent =
-        "Saving...";
-
-
-    try {
 
 
         let avatarUrl =
-            currentProfile
-                ? currentProfile.avatar_url
-                : null;
+            currentProfile.avatar_url;
 
 
-        // ---------------------------------------------
-        // COMPRESS + UPLOAD
-        // ---------------------------------------------
-
-        if (selectedAvatarFile) {
 
 
-            showMessage(
-                "Compressing image..."
-            );
-
-
-            const compressedFile =
-                await compressAvatar(
-                    selectedAvatarFile
-                );
-
-
-            showMessage(
-                "Uploading avatar..."
-            );
+        if(selectedAvatarFile){
 
 
             avatarUrl =
                 await uploadAvatar(
-                    compressedFile
+                    selectedAvatarFile
                 );
+
 
         }
 
 
 
-        // ---------------------------------------------
-        // SAVE PROFILE
-        // ---------------------------------------------
 
         const {
             data,
             error
-        } = await supabaseClient
-
+        } =
+        await supabaseClient
             .from("profiles")
-
             .upsert({
 
                 id:
                     currentUser.id,
 
                 display_name:
-                    displayName || null,
+                    name,
 
                 avatar_url:
                     avatarUrl,
@@ -1282,63 +738,29 @@ async function saveProfile() {
                     new Date().toISOString()
 
             })
-
-            .select(
-                "id, display_name, avatar_url, updated_at"
-            )
-
+            .select()
             .single();
 
 
 
-        if (error) {
+
+        if(error){
 
             throw error;
 
         }
 
 
+
         currentProfile =
             data;
 
 
-        selectedAvatarFile =
-            null;
-
-
-        avatarInput.value =
-            "";
-
-
-        // Имя
-
-        const finalName =
-            displayName ||
-            currentUser.email
-                .split("@")[0] ||
-            "Member";
-
 
         profileName.textContent =
-            finalName;
+            name ||
+            currentUser.email.split("@")[0];
 
-
-
-        // Avatar
-
-        if (avatarUrl) {
-
-            setAvatarImage(
-                avatarUrl
-            );
-
-        } else {
-
-            setAvatarDefault(
-                finalName
-            );
-
-        }
 
 
         showMessage(
@@ -1346,75 +768,188 @@ async function saveProfile() {
         );
 
 
-    } catch (error) {
+
+    }
+    catch(error){
 
 
         console.error(
-            "Save profile error:",
             error
         );
 
 
         showMessage(
-            error.message ||
-            "Unable to save profile"
+            error.message
         );
 
 
-    } finally {
+    }
 
 
-        saveProfileButton.disabled =
-            false;
+}
+// =====================================================
+// UPLOAD AVATAR
+// =====================================================
 
 
-        saveProfileButton.textContent =
-            "Save changes";
+async function uploadAvatar(file){
+
+
+    const filePath =
+        `${currentUser.id}/avatar-${Date.now()}.webp`;
+
+
+
+    const {
+        error
+    } =
+    await supabaseClient.storage
+        .from("avatars")
+        .upload(
+
+            filePath,
+
+            file,
+
+            {
+                upsert:
+                    true,
+
+                contentType:
+                    file.type
+            }
+
+        );
+
+
+
+    if(error){
+
+        throw error;
 
     }
 
+
+
+
+    const {
+        data
+    } =
+    supabaseClient.storage
+        .from("avatars")
+        .getPublicUrl(
+            filePath
+        );
+
+
+
+    return data.publicUrl;
+
+
 }
+
+
+
+
 
 
 // =====================================================
 // LOGOUT
 // =====================================================
 
-async function logout() {
 
-    logoutButton.disabled =
-        true;
+async function logout(){
 
 
-    const strong =
-        logoutButton.querySelector(
-            ".logout-text strong"
-        );
+    if(
+        !currentUser
+    ){
 
-
-    if (strong) {
-
-        strong.textContent =
-            "Logging out...";
+        return;
 
     }
 
 
-    const {
-        error
-    } = await supabaseClient.auth.signOut();
-await supabaseClient
-    .from("profiles")
-    .update({
-        is_online: false,
-        last_seen: new Date()
-    })
-    .eq(
-        "id",
-        currentUser.id
-    );
 
-    if (error) {
+    try{
+
+
+        console.log(
+            "Setting offline..."
+        );
+
+
+
+        // Сначала меняем статус
+
+        const {
+            error:offlineError
+        } =
+        await supabaseClient
+            .from("profiles")
+            .update({
+
+                is_online:
+                    false,
+
+                last_seen:
+                    new Date().toISOString()
+
+            })
+            .eq(
+                "id",
+                currentUser.id
+            );
+
+
+
+
+        if(offlineError){
+
+
+            console.error(
+                "Offline error:",
+                offlineError
+            );
+
+
+        }
+
+
+
+
+        // Потом выходим
+
+
+        const {
+            error
+        } =
+        await supabaseClient.auth.signOut();
+
+
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+
+        localStorage.removeItem(
+            "memoraAuth"
+        );
+
+
+
+        window.location.href =
+            "welcome/welcome.html";
+
+
+
+    }
+    catch(error){
 
 
         console.error(
@@ -1423,80 +958,72 @@ await supabaseClient
         );
 
 
-        logoutButton.disabled =
-            false;
-
-
-        if (strong) {
-
-            strong.textContent =
-                "Log out";
-
-        }
-
-
         showMessage(
-            "Unable to log out"
+            error.message ||
+            "Logout error"
         );
 
-
-        return;
 
     }
 
 
-    localStorage.removeItem(
-        "memoraAuth"
-    );
-
-
-    redirectToWelcome();
-
 }
+
+
+
+
+
 
 
 // =====================================================
 // MESSAGE
 // =====================================================
 
-function showMessage(
-    message
-) {
+
+function showMessage(text){
+
+
+    if(!profileMessage){
+
+        return;
+
+    }
+
+
 
     profileMessage.textContent =
-        message;
+        text;
 
 
-    profileMessage.style.opacity =
-        "1";
 
+    setTimeout(
+        ()=>{
 
-    clearTimeout(
-        profileMessage._timer
+            profileMessage.textContent =
+                "";
+
+        },
+        3000
     );
 
 
-    profileMessage._timer =
-        setTimeout(
-            function() {
-
-                profileMessage.style.opacity =
-                    "0";
-
-            },
-            2500
-        );
-
 }
+
+
+
+
 
 
 // =====================================================
 // REDIRECT
 // =====================================================
 
-function redirectToWelcome() {
+
+function redirectToWelcome(){
+
 
     window.location.href =
         "welcome/welcome.html";
+
 
 }
