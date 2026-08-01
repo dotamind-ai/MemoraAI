@@ -1,5 +1,15 @@
+// =====================================================
+// MEMORA ONLINE STATUS
+// =====================================================
+// Управляет:
+// - статусом пользователя в сети
+// - временем последнего посещения
+// =====================================================
+
+
 const ONLINE_SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
+
 
 const ONLINE_SUPABASE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
@@ -15,9 +25,9 @@ const onlineSupabase =
 let onlineUser = null;
 
 
-// ===============================
+// =====================================================
 // START
-// ===============================
+// =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -25,62 +35,111 @@ document.addEventListener(
 );
 
 
+
 async function startOnlineStatus() {
 
-
-    const {
-        data
-    } =
-    await onlineSupabase
-        .auth
-        .getSession();
+    try {
 
 
-    if (
-        !data.session
-    ) {
+        const {
+            data,
+            error
+        } =
+        await onlineSupabase
+            .auth
+            .getSession();
 
-        return;
+
+
+        if (error) {
+
+            console.error(
+                "Online session error:",
+                error
+            );
+
+            return;
+
+        }
+
+
+
+        if (
+            !data.session
+        ) {
+
+            return;
+
+        }
+
+
+
+        onlineUser =
+            data.session.user;
+
+
+
+        await setOnline();
+
+
+
+        // Когда вкладка закрывается
+        window.addEventListener(
+            "beforeunload",
+            function() {
+
+                setOffline();
+
+            }
+        );
+
+
+        // Если вкладка стала активной
+        document.addEventListener(
+            "visibilitychange",
+            function() {
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    setOnline();
+
+                }
+
+            }
+        );
+
+
+
+    } catch(error) {
+
+        console.error(
+            "Online status error:",
+            error
+        );
 
     }
-
-
-    onlineUser =
-        data.session.user;
-
-
-    setOnline();
-
-
-    // проверка каждые 30 секунд
-
-    setInterval(
-        setOnline,
-        30000
-    );
-
-
-    window.addEventListener(
-        "beforeunload",
-        setOffline
-    );
 
 }
 
 
 
-// ===============================
+// =====================================================
 // ONLINE
-// ===============================
+// =====================================================
 
 async function setOnline() {
-
 
     if (!onlineUser) {
         return;
     }
 
 
+    const {
+        error
+    } =
     await onlineSupabase
         .from("profiles")
         .update({
@@ -98,23 +157,31 @@ async function setOnline() {
         );
 
 
+    if(error) {
+
+        console.error(
+            "Set online error:",
+            error
+        );
+
+    }
+
 }
 
 
 
-// ===============================
+// =====================================================
 // OFFLINE
-// ===============================
+// =====================================================
 
-async function setOffline() {
-
+function setOffline() {
 
     if (!onlineUser) {
         return;
     }
 
 
-    await onlineSupabase
+    onlineSupabase
         .from("profiles")
         .update({
 
