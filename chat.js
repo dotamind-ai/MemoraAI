@@ -1778,3 +1778,36 @@ function appendMessage(
     );
 
 }
+// =====================================================
+// FORMAT TIME
+// =====================================================
+
+function formatTime(
+    dateString
+) {
+
+
+    if(
+        !dateString
+    ){
+
+        return "";
+
+    }
+
+
+    return new Date(
+        dateString
+    )
+    .toLocaleTimeString(
+        "ru-RU",
+        {
+            hour:
+                "2-digit",
+
+            minute:
+                "2-digit"
+        }
+    );
+
+}
