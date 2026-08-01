@@ -1,13 +1,21 @@
 // =====================================================
 // MEMORA CHAT
-// Friends + Notifications + Messages + Unread Counters
+// PART 1/3
+// Core + Auth + Profile + Friends + Search
+// =====================================================
+
+
+// =====================================================
+// SUPABASE
 // =====================================================
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -21,120 +29,113 @@ const supabaseClient =
 // =====================================================
 
 const emailSearch =
-    document.getElementById("emailSearch");
+    document.getElementById(
+        "emailSearch"
+    );
+
 
 const searchButton =
-    document.getElementById("searchButton");
+    document.getElementById(
+        "searchButton"
+    );
+
 
 const searchMessage =
-    document.getElementById("searchMessage");
+    document.getElementById(
+        "searchMessage"
+    );
+
 
 const searchResult =
-    document.getElementById("searchResult");
+    document.getElementById(
+        "searchResult"
+    );
 
-const notificationButton =
-    document.getElementById("notificationButton");
-
-const notificationBadge =
-    document.getElementById("notificationBadge");
-
-const notificationPanel =
-    document.getElementById("notificationPanel");
-
-const notificationList =
-    document.getElementById("notificationList");
-
-const clearNotificationsButton =
-    document.getElementById("clearNotificationsButton");
-
-const closeNotificationPanel =
-    document.getElementById("closeNotificationPanel");
 
 const addFriendButton =
-    document.getElementById("addFriendButton");
+    document.getElementById(
+        "addFriendButton"
+    );
+
 
 const addFriendPanel =
-    document.getElementById("addFriendPanel");
+    document.getElementById(
+        "addFriendPanel"
+    );
+
 
 const closeAddFriendPanel =
-    document.getElementById("closeAddFriendPanel");
+    document.getElementById(
+        "closeAddFriendPanel"
+    );
+
 
 const friendList =
-    document.getElementById("friendList");
+    document.getElementById(
+        "friendList"
+    );
+
 
 const friendCount =
-    document.getElementById("friendCount");
+    document.getElementById(
+        "friendCount"
+    );
+
 
 const chatSearchInput =
-    document.getElementById("chatSearchInput");
+    document.getElementById(
+        "chatSearchInput"
+    );
+
 
 const profileButton =
-    document.getElementById("profileButton");
+    document.getElementById(
+        "profileButton"
+    );
+
 
 const myAvatar =
-    document.getElementById("myAvatar");
+    document.getElementById(
+        "myAvatar"
+    );
 
-const friendsView =
-    document.getElementById("friendsView");
-
-const conversationView =
-    document.getElementById("conversationView");
-
-const conversationBack =
-    document.getElementById("conversationBack");
-
-const conversationAvatar =
-    document.getElementById("conversationAvatar");
-
-const conversationName =
-    document.getElementById("conversationName");
-
-const conversationStatus =
-    document.getElementById("conversationStatus");
-
-const messageList =
-    document.getElementById("messageList");
-
-const messageForm =
-    document.getElementById("messageForm");
-
-const messageInput =
-    document.getElementById("messageInput");
-
-const sendMessageButton =
-    document.getElementById("sendMessageButton");
 
 const homeNav =
-    document.getElementById("homeNav");
+    document.getElementById(
+        "homeNav"
+    );
+
 
 const calendarNav =
-    document.getElementById("calendarNav");
+    document.getElementById(
+        "calendarNav"
+    );
+
 
 const timelineNav =
-    document.getElementById("timelineNav");
+    document.getElementById(
+        "timelineNav"
+    );
 
 
 // =====================================================
 // STATE
 // =====================================================
 
-let currentUser = null;
+let currentUser =
+    null;
 
-let friends = [];
 
-let notifications = [];
+let friends =
+    [];
 
-let activeFriend = null;
 
-let activeConversationId = null;
+let currentChatSearch =
+    "";
 
-let messageChannel = null;
 
-let notificationChannel = null;
-
-let currentChatSearch = "";
-
-let toastContainer = null;
+let friendStatusChannel =
+    null;
 
 
 // =====================================================
@@ -147,22 +148,21 @@ document.addEventListener(
 );
 
 
-async function initializeChat() {
 
-    try {
+async function initializeChat(){
 
-        createToastContainer();
-
-        injectToastStyles();
+    try{
 
 
         const {
             data,
             error
-        } = await supabaseClient.auth.getSession();
+        } =
+        await supabaseClient.auth.getSession();
 
 
-        if (error) {
+
+        if(error){
 
             console.error(
                 "Session error:",
@@ -174,10 +174,10 @@ async function initializeChat() {
         }
 
 
-        if (
-            !data ||
+
+        if(
             !data.session
-        ) {
+        ){
 
             window.location.href =
                 "welcome/welcome.html";
@@ -187,35 +187,33 @@ async function initializeChat() {
         }
 
 
+
         currentUser =
             data.session.user;
 
 
+
         setupNavigation();
 
-        setupPanels();
+        setupFriendPanel();
 
         setupSearch();
-
-        setupConversation();
 
 
         await loadMyProfile();
 
         await loadFriends();
+
+
         subscribeToFriendStatus();
 
-        await loadNotifications();
-
-        subscribeToNotifications();
-
-        await openFriendFromUrl();
 
 
-    } catch (error) {
+    }
+    catch(error){
 
         console.error(
-            "Chat initialization error:",
+            "Chat init error:",
             error
         );
 
@@ -224,83 +222,78 @@ async function initializeChat() {
 }
 
 
+
 // =====================================================
 // NAVIGATION
 // =====================================================
 
-function setupNavigation() {
 
-    if (profileButton) {
+function setupNavigation(){
 
-        profileButton.addEventListener(
-            "click",
-            function(event) {
 
-                event.preventDefault();
+    if(profileButton){
 
-                event.stopPropagation();
+        profileButton.onclick =
+        function(){
 
-                window.location.href =
-                    "profile.html";
+            window.location.href =
+                "profile.html";
 
-            }
-        );
+        };
 
     }
 
 
-    if (homeNav) {
 
-        homeNav.addEventListener(
-            "click",
-            function() {
+    if(homeNav){
 
-                window.location.href =
-                    "index.html";
+        homeNav.onclick =
+        function(){
 
-            }
-        );
+            window.location.href =
+                "index.html";
 
-    }
-
-
-    if (calendarNav) {
-
-        calendarNav.addEventListener(
-            "click",
-            function() {
-
-                window.location.href =
-                    "calendar.html";
-
-            }
-        );
+        };
 
     }
 
 
-    if (timelineNav) {
 
-        timelineNav.addEventListener(
-            "click",
-            function() {
+    if(calendarNav){
 
-                window.location.href =
-                    "events.html";
+        calendarNav.onclick =
+        function(){
 
-            }
-        );
+            window.location.href =
+                "calendar.html";
+
+        };
 
     }
+
+
+
+    if(timelineNav){
+
+        timelineNav.onclick =
+        function(){
+
+            window.location.href =
+                "events.html";
+
+        };
+
+    }
+
 
 
     supabaseClient.auth.onAuthStateChange(
-        function(event) {
+        function(event){
 
-            if (
+            if(
                 event ===
                 "SIGNED_OUT"
-            ) {
+            ){
 
                 window.location.href =
                     "welcome/welcome.html";
@@ -310,266 +303,44 @@ function setupNavigation() {
         }
     );
 
-}
-
-
-// =====================================================
-// PANELS
-// =====================================================
-
-function setupPanels() {
-
-    if (
-        addFriendButton &&
-        addFriendPanel
-    ) {
-
-        addFriendButton.addEventListener(
-            "click",
-            function(event) {
-
-                event.stopPropagation();
-
-                closeNotifications();
-
-                addFriendPanel.hidden =
-                    !addFriendPanel.hidden;
-
-
-                if (
-                    !addFriendPanel.hidden &&
-                    emailSearch
-                ) {
-
-                    emailSearch.focus();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (closeAddFriendPanel) {
-
-        closeAddFriendPanel.addEventListener(
-            "click",
-            closeAddFriend
-        );
-
-    }
-
-
-    if (
-        notificationButton &&
-        notificationPanel
-    ) {
-
-        notificationButton.addEventListener(
-            "click",
-            function(event) {
-
-                event.stopPropagation();
-
-                closeAddFriend();
-
-                notificationPanel.hidden =
-                    !notificationPanel.hidden;
-
-            }
-        );
-
-    }
-
-
-    if (closeNotificationPanel) {
-
-        closeNotificationPanel.addEventListener(
-            "click",
-            closeNotifications
-        );
-
-    }
-
-
-    if (clearNotificationsButton) {
-
-        clearNotificationsButton.addEventListener(
-            "click",
-            clearAllNotifications
-        );
-
-    }
-
-
-    document.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                notificationPanel &&
-                !notificationPanel.hidden &&
-                notificationButton &&
-                !notificationPanel.contains(
-                    event.target
-                ) &&
-                !notificationButton.contains(
-                    event.target
-                )
-            ) {
-
-                closeNotifications();
-
-            }
-
-
-            if (
-                addFriendPanel &&
-                !addFriendPanel.hidden &&
-                addFriendButton &&
-                !addFriendPanel.contains(
-                    event.target
-                ) &&
-                !addFriendButton.contains(
-                    event.target
-                )
-            ) {
-
-                closeAddFriend();
-
-            }
-
-        }
-    );
 
 }
 
-
-function closeNotifications() {
-
-    if (notificationPanel) {
-
-        notificationPanel.hidden =
-            true;
-
-    }
-
-}
-
-
-function closeAddFriend() {
-
-    if (addFriendPanel) {
-
-        addFriendPanel.hidden =
-            true;
-
-    }
-
-}
-
-
-// =====================================================
-// CLEAR NOTIFICATIONS
-// =====================================================
-
-async function clearAllNotifications() {
-
-    if (!currentUser) {
-        return;
-    }
-
-
-    if (clearNotificationsButton) {
-
-        clearNotificationsButton.disabled =
-            true;
-
-        clearNotificationsButton.textContent =
-            "...";
-
-    }
-
-
-    try {
-
-        const {
-            error
-        } = await supabaseClient
-            .from("notifications")
-            .update({
-                read: true
-            })
-            .eq(
-                "user_id",
-                currentUser.id
-            )
-            .eq(
-                "read",
-                false
-            );
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-        notifications = [];
-
-
-        renderNotifications();
-
-        renderFriends();
-
-
-    } catch (error) {
-
-        console.error(
-            "Clear notifications error:",
-            error
-        );
-
-    } finally {
-
-        if (clearNotificationsButton) {
-
-            clearNotificationsButton.disabled =
-                false;
-
-            clearNotificationsButton.textContent =
-                "Clear";
-
-        }
-
-    }
-
-}
 
 
 // =====================================================
 // PROFILE
 // =====================================================
 
-async function loadMyProfile() {
+
+async function loadMyProfile(){
+
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
 
     const {
-    data,
-    error
-} = await supabaseClient
-    .from("profiles")
-    .select(
-        `
-        id,
-        display_name,
-        avatar_url,
-        is_online,
-        last_seen
-        `
-    );
+        data,
+        error
+    } =
+    await supabaseClient
+        .from(
+            "profiles"
+        )
+        .select(
+            `
+            id,
+            display_name,
+            avatar_url,
+            is_online,
+            last_seen
+            `
+        )
         .eq(
             "id",
             currentUser.id
@@ -577,59 +348,105 @@ async function loadMyProfile() {
         .maybeSingle();
 
 
-    if (error) {
+
+    if(error){
 
         console.error(
             "Profile error:",
             error
         );
 
-        setMyAvatar(
+
+        setAvatar(
             currentUser.email,
             null
         );
+
 
         return;
 
     }
 
 
-    setMyAvatar(
+
+    setAvatar(
         data?.display_name ||
-        currentUser.email ||
-        "M",
-        data?.avatar_url ||
-        null
+        currentUser.email,
+        data?.avatar_url
     );
 
+
 }
+
+
+
+
+function setAvatar(
+    name,
+    url
+){
+
+    if(!myAvatar){
+
+        return;
+
+    }
+
+
+
+    if(url){
+
+        myAvatar.style.backgroundImage =
+            `url("${url}")`;
+
+        myAvatar.textContent =
+            "";
+
+        return;
+
+    }
+
+
+
+    myAvatar.style.backgroundImage =
+        "";
+
+
+    myAvatar.textContent =
+        getInitial(name);
+
+}
+
+
 
 
 // =====================================================
 // SEARCH
 // =====================================================
 
-function setupSearch() {
 
-    if (
+function setupSearch(){
+
+
+    if(
         searchButton &&
         emailSearch
-    ) {
+    ){
 
-        searchButton.addEventListener(
-            "click",
-            searchUser
-        );
+
+        searchButton.onclick =
+            searchUser;
+
 
 
         emailSearch.addEventListener(
             "keydown",
-            function(event) {
+            function(event){
 
-                if (
+                if(
                     event.key ===
                     "Enter"
-                ) {
+                ){
 
                     event.preventDefault();
 
@@ -640,103 +457,70 @@ function setupSearch() {
             }
         );
 
-    }
-
-
-    if (chatSearchInput) {
-
-        chatSearchInput.addEventListener(
-            "input",
-            function() {
-
-                currentChatSearch =
-                    chatSearchInput.value
-                        .trim()
-                        .toLowerCase();
-
-                renderFriends();
-
-            }
-        );
 
     }
+
+
+
+    if(chatSearchInput){
+
+
+        chatSearchInput.oninput =
+        function(){
+
+            currentChatSearch =
+                chatSearchInput.value
+                .trim()
+                .toLowerCase();
+
+
+            renderFriends();
+
+        };
+
+
+    }
+
 
 }
 
 
-async function searchUser() {
 
-    if (
-        !emailSearch ||
-        !searchButton
-    ) {
 
-        return;
-
-    }
+async function searchUser(){
 
 
     const email =
-        emailSearch.value.trim();
+        emailSearch.value
+        .trim();
 
 
-    if (searchResult) {
 
-        searchResult.innerHTML =
-            "";
+    if(!email){
 
-    }
-
-
-    if (searchMessage) {
-
-        searchMessage.textContent =
-            "";
-
-    }
-
-
-    if (!email) {
-
-        if (searchMessage) {
-
-            searchMessage.textContent =
-                "Enter an email address.";
-
-        }
+        showSearchMessage(
+            "Введите email"
+        );
 
         return;
 
     }
 
-
-    if (!email.includes("@")) {
-
-        if (searchMessage) {
-
-            searchMessage.textContent =
-                "Enter a valid email address.";
-
-        }
-
-        return;
-
-    }
 
 
     searchButton.disabled =
         true;
 
-    searchButton.textContent =
-        "...";
 
 
-    try {
+    try{
+
 
         const {
             data,
             error
-        } = await supabaseClient.rpc(
+        } =
+        await supabaseClient.rpc(
             "find_user_by_email",
             {
                 search_email:
@@ -745,203 +529,150 @@ async function searchUser() {
         );
 
 
-        if (error) {
+
+        if(error){
 
             throw error;
 
         }
 
 
-        if (
+
+        if(
             !data ||
             data.length === 0
-        ) {
+        ){
 
-            if (searchMessage) {
-
-                searchMessage.textContent =
-                    "User not found.";
-
-            }
+            showSearchMessage(
+                "Пользователь не найден"
+            );
 
             return;
 
         }
 
 
+
         renderSearchResult(
-            data[0],
-            email
+            data[0]
         );
 
 
-    } catch (error) {
+    }
+    catch(error){
 
         console.error(
-            "Search error:",
             error
         );
 
 
-        if (searchMessage) {
-
-            searchMessage.textContent =
-                error.message ||
-                "Search failed.";
-
-        }
+        showSearchMessage(
+            error.message
+        );
 
 
-    } finally {
+    }
+    finally{
 
         searchButton.disabled =
             false;
 
-        searchButton.textContent =
-            "Find";
+    }
+
+
+}
+
+
+
+
+function showSearchMessage(
+    text
+){
+
+    if(searchMessage){
+
+        searchMessage.textContent =
+            text;
 
     }
 
 }
 
 
-function renderSearchResult(
-    user,
-    email
-) {
 
-    if (!searchResult) {
+
+function renderSearchResult(
+    user
+){
+
+
+    if(!searchResult){
 
         return;
 
     }
 
 
-    const card =
-        document.createElement(
-            "div"
-        );
+
+    searchResult.innerHTML =
+        "";
 
 
-    card.className =
-        "person-card";
 
-
-    const avatar =
-        createPersonAvatar(
-            user.display_name,
-            user.avatar_url
-        );
-
-
-    const info =
-        document.createElement(
-            "div"
-        );
-
-
-    info.className =
-        "person-info";
-
-
-    const name =
-        document.createElement(
-            "span"
-        );
-
-
-    name.className =
-        "person-name";
-
-
-    name.textContent =
-        user.display_name ||
-        "Memora user";
-
-
-    const mail =
-        document.createElement(
-            "span"
-        );
-
-
-    mail.className =
-        "person-email";
-
-
-    mail.textContent =
-        email;
-
-
-    info.appendChild(name);
-
-    info.appendChild(mail);
-
-
-    const action =
+    const button =
         document.createElement(
             "button"
         );
 
 
-    action.type =
-        "button";
+    button.textContent =
+        "Добавить";
 
 
-    action.className =
-        "person-action primary";
+    button.onclick =
+    function(){
+
+        sendFriendRequest(
+            user.id,
+            button
+        );
+
+    };
 
 
-    action.textContent =
-        "Add";
 
-
-    action.addEventListener(
-        "click",
-        function() {
-
-            sendFriendRequest(
-                user.id,
-                action
-            );
-
-        }
+    searchResult.append(
+        user.display_name ||
+        "Memora user",
+        button
     );
 
-
-    card.appendChild(avatar);
-
-    card.appendChild(info);
-
-    card.appendChild(action);
-
-
-    searchResult.appendChild(card);
-
 }
+
 
 
 // =====================================================
 // FRIEND REQUEST
 // =====================================================
 
+
 async function sendFriendRequest(
     userId,
     button
-) {
+){
+
 
     button.disabled =
         true;
 
-    button.textContent =
-        "...";
 
+    try{
 
-    try {
 
         const {
             error
-        } = await supabaseClient.rpc(
+        } =
+        await supabaseClient.rpc(
             "send_friend_request",
             {
                 target_user_id:
@@ -950,34 +681,23 @@ async function sendFriendRequest(
         );
 
 
-        if (error) {
+
+        if(error){
 
             throw error;
 
         }
 
 
+
         button.textContent =
-            "Sent";
+            "Отправлено";
 
 
-        button.classList.remove(
-            "primary"
-        );
-
-
-        if (searchMessage) {
-
-            searchMessage.textContent =
-                "Request sent.";
-
-        }
-
-
-    } catch (error) {
+    }
+    catch(error){
 
         console.error(
-            "Friend request error:",
             error
         );
 
@@ -985,19 +705,12 @@ async function sendFriendRequest(
         button.disabled =
             false;
 
+
         button.textContent =
-            "Add";
-
-
-        if (searchMessage) {
-
-            searchMessage.textContent =
-                error.message ||
-                "Unable to send request.";
-
-        }
+            "Добавить";
 
     }
+
 
 }
 
@@ -1006,232 +719,106 @@ async function sendFriendRequest(
 // FRIENDS
 // =====================================================
 
-async function loadFriends() {
+
+async function loadFriends(){
+
 
     const {
         data,
         error
-    } = await supabaseClient.rpc(
+    } =
+    await supabaseClient.rpc(
         "get_my_friends"
     );
 
 
-    if (error) {
+
+    if(error){
 
         console.error(
             "Friends error:",
             error
         );
 
-        friends = [];
+
+        friends =
+            [];
+
 
         renderFriends();
+
 
         return;
 
     }
 
-
-    friends = (data || []).map(
-        function(friend) {
-
-            return {
-
-                ...friend,
-
-                is_online:
-                    friend.is_online === true
-
-            };
-
-        }
-    );
-
-
-    renderFriends();
-
-}
-
-
-    if (error) {
-
-        console.error(
-            "Friends error:",
-            error
-        );
-
-        friends = [];
-
-        renderFriends();
-
-        return;
-
-    }
 
 
     friends =
-        data || [];
+        (data || []).map(
+            friend => ({
+                ...friend,
+                is_online:
+                    friend.is_online === true
+            })
+        );
+
 
 
     renderFriends();
 
-}
-
-
-function getUnreadCountForFriend(
-    friendId
-) {
-
-    if (!friendId) {
-
-        return 0;
-
-    }
-
-
-    return notifications.filter(
-        function(notification) {
-
-            return (
-                notification.type ===
-                "new_message" &&
-
-                notification._friendId ===
-                friendId
-            );
-
-        }
-    ).length;
 
 }
 
 
-async function attachFriendIdsToNotifications() {
-
-    const messageNotifications =
-        notifications.filter(
-            function(notification) {
-
-                return (
-                    notification.type ===
-                    "new_message" &&
-                    notification.related_id
-                );
-
-            }
-        );
 
 
-    for (
-        const notification
-        of messageNotifications
-    ) {
-
-        if (
-            notification._friendId
-        ) {
-
-            continue;
-
-        }
+function renderFriends(){
 
 
-        try {
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .from("conversation_members")
-                .select(
-                    "user_id"
-                )
-                .eq(
-                    "conversation_id",
-                    notification.related_id
-                )
-                .neq(
-                    "user_id",
-                    currentUser.id
-                )
-                .maybeSingle();
-
-
-            if (error) {
-
-                console.error(
-                    "Unread mapping error:",
-                    error
-                );
-
-                continue;
-
-            }
-
-
-            if (data) {
-
-                notification._friendId =
-                    data.user_id;
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Unread mapping error:",
-                error
-            );
-
-        }
-
-    }
-
-}
-
-
-function renderFriends() {
-
-    if (!friendList) {
+    if(!friendList){
 
         return;
 
     }
+
 
 
     friendList.innerHTML =
         "";
 
 
-    const filtered =
-        friends.filter(
-            function(friend) {
 
-                if (
+    const list =
+        friends.filter(
+            friend => {
+
+
+                if(
                     !currentChatSearch
-                ) {
+                ){
 
                     return true;
 
                 }
 
 
-                const name =
-                    (
-                        friend.display_name ||
-                        ""
-                    ).toLowerCase();
-
-
-                return name.includes(
+                return (
+                    friend.display_name ||
+                    ""
+                )
+                .toLowerCase()
+                .includes(
                     currentChatSearch
                 );
+
 
             }
         );
 
 
-    if (friendCount) {
+
+    if(friendCount){
 
         friendCount.textContent =
             friends.length;
@@ -1239,233 +826,344 @@ function renderFriends() {
     }
 
 
-    if (!filtered.length) {
 
-        friendList.innerHTML = `
-            <div class="empty-state">
-                ${
-                    friends.length
-                        ? "No chats found."
-                        : "No friends yet."
+    list.forEach(
+        friend => {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "person-card";
+
+
+            item.textContent =
+                friend.display_name ||
+                "User";
+
+
+
+            friendList.append(
+                item
+            );
+
+
+        }
+    );
+
+
+}
+
+
+
+
+function setupFriendPanel(){
+
+
+    if(
+        addFriendButton &&
+        addFriendPanel
+    ){
+
+        addFriendButton.onclick =
+        function(){
+
+            addFriendPanel.hidden =
+                !addFriendPanel.hidden;
+
+        };
+
+    }
+
+
+
+    if(closeAddFriendPanel){
+
+        closeAddFriendPanel.onclick =
+        function(){
+
+            addFriendPanel.hidden =
+                true;
+
+        };
+
+    }
+
+
+}
+
+
+
+// =====================================================
+// ONLINE STATUS REALTIME
+// =====================================================
+
+
+function subscribeToFriendStatus(){
+
+
+    if(friendStatusChannel){
+
+        supabaseClient.removeChannel(
+            friendStatusChannel
+        );
+
+    }
+
+
+
+    friendStatusChannel =
+        supabaseClient
+        .channel(
+            "friends-status"
+        )
+        .on(
+            "postgres_changes",
+            {
+                event:
+                    "UPDATE",
+
+                schema:
+                    "public",
+
+                table:
+                    "profiles"
+            },
+            payload => {
+
+
+                const updated =
+                    payload.new;
+
+
+
+                const friend =
+                    friends.find(
+                        f =>
+                        f.friend_id ===
+                        updated.id
+                    );
+
+
+
+                if(friend){
+
+                    friend.is_online =
+                        updated.is_online;
+
+
+                    renderFriends();
+
                 }
-            </div>
-        `;
+
+
+            }
+        )
+        .subscribe();
+
+
+}
+
+
+
+// =====================================================
+// HELPERS
+// =====================================================
+
+
+function getInitial(
+    name
+){
+
+    return String(
+        name ||
+        "M"
+    )
+    .charAt(0)
+    .toUpperCase();
+
+
+}
+// =====================================================
+// PART 2/3
+// Notifications + Conversations + Messages
+// =====================================================
+
+
+// =====================================================
+// STATE
+// =====================================================
+
+
+let notifications =
+    [];
+
+
+let activeFriend =
+    null;
+
+
+let activeConversationId =
+    null;
+
+
+let messageChannel =
+    null;
+
+
+let notificationChannel =
+    null;
+
+
+// =====================================================
+// DOM
+// =====================================================
+
+
+const notificationButton =
+    document.getElementById(
+        "notificationButton"
+    );
+
+
+const notificationBadge =
+    document.getElementById(
+        "notificationBadge"
+    );
+
+
+const notificationPanel =
+    document.getElementById(
+        "notificationPanel"
+    );
+
+
+const notificationList =
+    document.getElementById(
+        "notificationList"
+    );
+
+
+const clearNotificationsButton =
+    document.getElementById(
+        "clearNotificationsButton"
+    );
+
+
+const closeNotificationPanel =
+    document.getElementById(
+        "closeNotificationPanel"
+    );
+
+
+const conversationView =
+    document.getElementById(
+        "conversationView"
+    );
+
+
+const friendsView =
+    document.getElementById(
+        "friendsView"
+    );
+
+
+const conversationBack =
+    document.getElementById(
+        "conversationBack"
+    );
+
+
+const conversationName =
+    document.getElementById(
+        "conversationName"
+    );
+
+
+const conversationAvatar =
+    document.getElementById(
+        "conversationAvatar"
+    );
+
+
+const messageList =
+    document.getElementById(
+        "messageList"
+    );
+
+
+const messageForm =
+    document.getElementById(
+        "messageForm"
+    );
+
+
+const messageInput =
+    document.getElementById(
+        "messageInput"
+    );
+
+
+
+
+// =====================================================
+// NOTIFICATIONS INIT
+// =====================================================
+
+
+async function initNotifications(){
+
+
+    await loadNotifications();
+
+
+    subscribeToNotifications();
+
+
+}
+
+
+
+
+// =====================================================
+// LOAD NOTIFICATIONS
+// =====================================================
+
+
+async function loadNotifications(){
+
+
+    if(!currentUser){
 
         return;
 
     }
 
 
-    filtered.forEach(
-        function(friend) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "person-card";
-
-
-            const avatar =
-                createPersonAvatar(
-                    friend.display_name,
-                    friend.avatar_url
-                );
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "person-info";
-
-
-            const nameRow =
-                document.createElement(
-                    "div"
-                );
-
-
-            nameRow.style.display =
-                "flex";
-
-            nameRow.style.alignItems =
-                "center";
-
-            nameRow.style.gap =
-                "7px";
-
-
-            const name =
-                document.createElement(
-                    "span"
-                );
-
-
-            name.className =
-                "person-name";
-
-
-            name.textContent =
-                friend.display_name ||
-                "Memora user";
-
-
-            const unread =
-                getUnreadCountForFriend(
-                    friend.friend_id
-                );
-
-
-            if (unread > 0) {
-
-                const badge =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                badge.className =
-                    "chat-unread-badge";
-
-
-                badge.textContent =
-                    unread > 99
-                        ? "99+"
-                        : unread;
-
-
-                nameRow.appendChild(
-                    name
-                );
-
-
-                nameRow.appendChild(
-                    badge
-                );
-
-            } else {
-
-                nameRow.appendChild(
-                    name
-                );
-
-            }
-
-
-            const status =
-                document.createElement(
-                    "span"
-                );
-
-
-            status.className =
-                "person-email";
-
-
-if (friend.is_online) {
-
-    status.textContent =
-        "🟢 В сети";
-
-    status.classList.add(
-        "online"
-    );
-
-} else {
-
-    status.textContent =
-        "⚫ Не в сети";
-
-    status.classList.remove(
-        "online"
-    );
-
-}
-
-
-            info.appendChild(
-                nameRow
-            );
-
-
-            info.appendChild(
-                status
-            );
-
-
-            const action =
-                document.createElement(
-                    "button"
-                );
-
-
-            action.type =
-                "button";
-
-
-            action.className =
-                "person-action primary";
-
-
-            action.textContent =
-                "Chat";
-
-
-            action.addEventListener(
-                "click",
-                function() {
-
-                    openConversation(
-                        friend
-                    );
-
-                }
-            );
-
-
-            card.appendChild(
-                avatar
-            );
-
-            card.appendChild(
-                info
-            );
-
-            card.appendChild(
-                action
-            );
-
-
-            friendList.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-// =====================================================
-// NOTIFICATIONS
-// =====================================================
-
-async function loadNotifications() {
 
     const {
         data,
         error
-    } = await supabaseClient
-        .from("notifications")
+    } =
+    await supabaseClient
+        .from(
+            "notifications"
+        )
         .select(
-            "id,user_id,type,title,body,related_id,read,created_at"
+            `
+            id,
+            user_id,
+            type,
+            title,
+            body,
+            related_id,
+            read,
+            created_at
+            `
         )
         .eq(
             "user_id",
@@ -1478,514 +1176,166 @@ async function loadNotifications() {
         .order(
             "created_at",
             {
-                ascending:
-                    false
+                ascending:false
             }
         );
 
 
-    if (error) {
+
+    if(error){
 
         console.error(
-            "Notifications error:",
+            "Notification load error",
             error
         );
-
-        notifications = [];
-
-        renderNotifications();
-
-        renderFriends();
 
         return;
 
     }
+
 
 
     notifications =
         data || [];
 
 
-    await attachFriendIdsToNotifications();
 
     renderNotifications();
 
-    renderFriends();
 
 }
 
 
-function renderNotifications() {
 
-    if (
-        !notificationList ||
-        !notificationBadge
-    ) {
+
+// =====================================================
+// RENDER NOTIFICATIONS
+// =====================================================
+
+
+function renderNotifications(){
+
+
+    if(!notificationList){
 
         return;
 
     }
 
-
-    notificationBadge.textContent =
-        notifications.length;
-
-
-    notificationBadge.hidden =
-        notifications.length === 0;
 
 
     notificationList.innerHTML =
         "";
 
 
-    if (!notifications.length) {
 
-        notificationList.innerHTML = `
-            <div class="notification-empty">
-                No new notifications.
-            </div>
+    if(notificationBadge){
+
+
+        notificationBadge.textContent =
+            notifications.length;
+
+
+        notificationBadge.hidden =
+            notifications.length === 0;
+
+
+    }
+
+
+
+    if(
+        notifications.length === 0
+    ){
+
+
+        notificationList.innerHTML =
+        `
+        <div class="notification-empty">
+            Нет новых уведомлений
+        </div>
         `;
+
 
         return;
 
     }
+
 
 
     notifications.forEach(
-        function(notification) {
+        notification => {
 
-            const card =
+
+            const item =
                 document.createElement(
                     "div"
                 );
 
 
-            card.className =
+            item.className =
                 "notification-card";
 
 
-            const displayName =
-                notification.type ===
-                "new_message"
 
-                    ? getSenderName(
-                        notification.body
-                    )
-
-                    : "Memora user";
-
-
-            const avatar =
-                document.createElement(
-                    "div"
-                );
-
-
-            avatar.className =
-                "notification-avatar";
-
-
-            avatar.textContent =
-                getInitial(
-                    displayName
-                );
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "notification-info";
-
-
-            const title =
-                document.createElement(
-                    "strong"
-                );
-
-
-            title.textContent =
+            item.textContent =
                 notification.title ||
-                "Notification";
-
-
-            const body =
-                document.createElement(
-                    "span"
-                );
-
-
-            body.textContent =
                 notification.body ||
-                "";
+                "Новое уведомление";
 
 
-            info.appendChild(
-                title
+
+            item.onclick =
+            function(){
+
+
+                if(
+                    notification.type ===
+                    "new_message"
+                ){
+
+                    openMessageNotification(
+                        notification
+                    );
+
+                }
+
+
+            };
+
+
+
+            notificationList.append(
+                item
             );
 
-            info.appendChild(
-                body
-            );
-
-
-            card.appendChild(
-                avatar
-            );
-
-            card.appendChild(
-                info
-            );
-
-
-            if (
-                notification.type ===
-                "friend_request"
-            ) {
-
-                addFriendRequestActions(
-                    card,
-                    notification
-                );
-
-            } else {
-
-                card.style.cursor =
-                    "pointer";
-
-
-                card.addEventListener(
-                    "click",
-                    function() {
-
-                        openMessageNotification(
-                            notification
-                        );
-
-                    }
-                );
-
-            }
-
-
-            notificationList.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-function addFriendRequestActions(
-    card,
-    notification
-) {
-
-    const actions =
-        document.createElement(
-            "div"
-        );
-
-
-    actions.className =
-        "notification-actions";
-
-
-    const accept =
-        document.createElement(
-            "button"
-        );
-
-
-    accept.type =
-        "button";
-
-
-    accept.className =
-        "notification-action accept";
-
-
-    accept.textContent =
-        "Accept";
-
-
-    accept.addEventListener(
-        "click",
-        async function(event) {
-
-            event.stopPropagation();
-
-            await answerFriendRequest(
-                notification,
-                true
-            );
 
         }
     );
 
 
-    const reject =
-        document.createElement(
-            "button"
-        );
-
-
-    reject.type =
-        "button";
-
-
-    reject.className =
-        "notification-action";
-
-
-    reject.textContent =
-        "Reject";
-
-
-    reject.addEventListener(
-        "click",
-        async function(event) {
-
-            event.stopPropagation();
-
-            await answerFriendRequest(
-                notification,
-                false
-            );
-
-        }
-    );
-
-
-    actions.appendChild(
-        accept
-    );
-
-
-    actions.appendChild(
-        reject
-    );
-
-
-    card.appendChild(
-        actions
-    );
-
 }
 
 
-async function answerFriendRequest(
-    notification,
-    accepted
-) {
-
-    const functionName =
-        accepted
-            ? "accept_friend_request"
-            : "reject_friend_request";
-
-
-    const {
-        error
-    } = await supabaseClient.rpc(
-        functionName,
-        {
-            request_id:
-                notification.related_id
-        }
-    );
-
-
-    if (error) {
-
-        console.error(
-            "Friend request error:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    await markNotificationRead(
-        notification
-    );
-
-
-    await loadFriends();
-
-
-}
-
-
-// =====================================================
-// OPEN MESSAGE NOTIFICATION
-// =====================================================
-
-async function openMessageNotification(
-    notification
-) {
-
-    if (
-        !notification.related_id
-    ) {
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("conversation_members")
-        .select(
-            "user_id"
-        )
-        .eq(
-            "conversation_id",
-            notification.related_id
-        )
-        .neq(
-            "user_id",
-            currentUser.id
-        )
-        .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "Conversation member error:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    if (!data) {
-
-        return;
-
-    }
-
-
-    const friend =
-        friends.find(
-            function(item) {
-
-                return (
-                    item.friend_id ===
-                    data.user_id
-                );
-
-            }
-        );
-
-
-    await markNotificationRead(
-        notification
-    );
-
-
-    closeNotifications();
-
-
-    if (friend) {
-
-        await openConversation(
-            friend
-        );
-
-    }
-
-}
-
-
-// =====================================================
-// MARK READ
-// =====================================================
-
-async function markNotificationRead(
-    notification
-) {
-
-    const {
-        error
-    } = await supabaseClient
-        .from("notifications")
-        .update({
-            read:
-                true
-        })
-        .eq(
-            "id",
-            notification.id
-        )
-        .eq(
-            "user_id",
-            currentUser.id
-        );
-
-
-    if (error) {
-
-        console.error(
-            "Mark notification read error:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    notifications =
-        notifications.filter(
-            function(item) {
-
-                return (
-                    item.id !==
-                    notification.id
-                );
-
-            }
-        );
-
-
-    renderNotifications();
-
-    await attachFriendIdsToNotifications();
-
-    renderFriends();
-
-}
 
 
 // =====================================================
 // REALTIME NOTIFICATIONS
 // =====================================================
 
-function subscribeToNotifications() {
 
-    if (!currentUser) {
+function subscribeToNotifications(){
+
+
+    if(!currentUser){
 
         return;
 
     }
 
 
-    if (notificationChannel) {
+
+    if(notificationChannel){
 
         supabaseClient.removeChannel(
             notificationChannel
@@ -1994,124 +1344,82 @@ function subscribeToNotifications() {
     }
 
 
+
     notificationChannel =
         supabaseClient
-            .channel(
-                "memora-notifications-" +
-                currentUser.id
-            )
+        .channel(
+            "notifications-" +
+            currentUser.id
+        )
+        .on(
+            "postgres_changes",
+            {
 
-            .on(
-                "postgres_changes",
-                {
-                    event:
-                        "INSERT",
+                event:
+                    "INSERT",
 
-                    schema:
-                        "public",
+                schema:
+                    "public",
 
-                    table:
-                        "notifications",
+                table:
+                    "notifications",
 
-                    filter:
-                        "user_id=eq." +
-                        currentUser.id
-                },
+                filter:
+                    "user_id=eq." +
+                    currentUser.id
 
-                async function(payload) {
+            },
 
-                    const notification =
-                        payload.new;
+            payload => {
 
 
-                    if (
-                        notification.type ===
-                            "new_message" &&
 
-                        notification.related_id ===
-                            activeConversationId
-                    ) {
-
-                        await markDatabaseNotificationRead(
-                            notification.id
-                        );
-
-                        return;
-
-                    }
+                notifications.unshift(
+                    payload.new
+                );
 
 
-                    const exists =
-                        notifications.some(
-                            function(item) {
 
-                                return (
-                                    item.id ===
-                                    notification.id
-                                );
-
-                            }
-                        );
+                renderNotifications();
 
 
-                    if (exists) {
 
-                        return;
+            }
 
-                    }
-
-
-                    notifications.unshift(
-                        notification
-                    );
+        )
+        .subscribe();
 
 
-                    await attachFriendIdsToNotifications();
-
-
-                    renderNotifications();
-
-                    renderFriends();
-
-
-                    if (
-                        notification.type ===
-                        "new_message"
-                    ) {
-
-                        showMessageToast(
-                            notification
-                        );
-
-                    }
-
-                }
-            )
-
-            .subscribe();
 
 }
 
 
+
+
 // =====================================================
-// DIRECT READ
+// CLEAR NOTIFICATIONS
 // =====================================================
 
-async function markDatabaseNotificationRead(
-    notificationId
-) {
 
-    const {
-        error
-    } = await supabaseClient
-        .from("notifications")
-        .update({
-            read:
-                true
-        })
-        .eq(
-            "id",
-            notificationId
+async function clearNotifications(){
+
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+
+    await supabaseClient
+        .from(
+            "notifications"
+        )
+        .update(
+            {
+                read:true
+            }
         )
         .eq(
             "user_id",
@@ -2119,374 +1427,148 @@ async function markDatabaseNotificationRead(
         );
 
 
-    if (error) {
-
-        console.error(
-            "Direct notification read error:",
-            error
-        );
-
-        return;
-
-    }
-
 
     notifications =
-        notifications.filter(
-            function(item) {
-
-                return (
-                    item.id !==
-                    notificationId
-                );
-
-            }
-        );
+        [];
 
 
     renderNotifications();
 
-    await attachFriendIdsToNotifications();
-
-    renderFriends();
 
 }
+
+
 
 
 // =====================================================
-// CONVERSATION
+// OPEN CHAT
 // =====================================================
-
-function setupConversation() {
-
-    if (conversationBack) {
-
-        conversationBack.addEventListener(
-            "click",
-            closeConversation
-        );
-
-    }
-
-
-    if (messageForm) {
-
-        messageForm.addEventListener(
-            "submit",
-            sendMessage
-        );
-
-    }
-
-
-    if (messageInput) {
-
-        messageInput.addEventListener(
-            "input",
-            autoResizeMessageInput
-        );
-
-    }
-
-}
-
-
-async function openFriendFromUrl() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const friendId =
-        params.get(
-            "friend"
-        );
-
-
-    if (!friendId) {
-
-        return;
-
-    }
-
-
-    const friend =
-        friends.find(
-            function(item) {
-
-                return (
-                    item.friend_id ===
-                    friendId
-                );
-
-            }
-        );
-
-
-    if (friend) {
-
-        await openConversation(
-            friend
-        );
-
-    }
-
-}
 
 
 async function openConversation(
     friend
-) {
+){
 
-    if (
+
+    if(
         !friend ||
         !friend.friend_id
-    ) {
+    ){
 
         return;
 
     }
+
 
 
     activeFriend =
         friend;
 
 
-    conversationName.textContent =
-        friend.display_name ||
-        "Memora user";
 
+    if(conversationName){
 
-    conversationStatus.textContent =
-        "Private conversation";
-
-
-    setConversationAvatar(
-        friend.display_name,
-        friend.avatar_url
-    );
-
-
-    friendsView.style.display =
-        "none";
-
-
-    conversationView.style.display =
-        "flex";
-
-
-    window.history.replaceState(
-        null,
-        "",
-        "chat.html?friend=" +
-        encodeURIComponent(
-            friend.friend_id
-        )
-    );
-
-
-    setMessagesLoading();
-
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabaseClient.rpc(
-            "get_or_create_direct_chat",
-            {
-                other_user_id:
-                    friend.friend_id
-            }
-        );
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-        activeConversationId =
-            data;
-
-
-        await loadMessages();
-
-
-        await markCurrentConversationNotifications();
-
-
-        subscribeToMessages();
-
-
-        if (messageInput) {
-
-            messageInput.focus();
-
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "Open conversation error:",
-            error
-        );
-
-
-        messageList.innerHTML = `
-            <div class="messages-empty">
-
-                <div class="empty-title">
-                    Unable to open chat
-                </div>
-
-                <div class="empty-text">
-                    ${escapeHtml(
-                        error.message ||
-                        "Please try again."
-                    )}
-                </div>
-
-            </div>
-        `;
+        conversationName.textContent =
+            friend.display_name ||
+            "User";
 
     }
 
-}
 
 
-async function markCurrentConversationNotifications() {
+    if(friendsView){
 
-    if (!activeConversationId) {
+        friendsView.style.display =
+            "none";
+
+    }
+
+
+
+    if(conversationView){
+
+        conversationView.style.display =
+            "flex";
+
+    }
+
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.rpc(
+        "get_or_create_direct_chat",
+        {
+            other_user_id:
+                friend.friend_id
+        }
+    );
+
+
+
+    if(error){
+
+        console.error(
+            error
+        );
 
         return;
 
     }
 
 
-    const matches =
-        notifications.filter(
-            function(notification) {
-
-                return (
-                    notification.type ===
-                    "new_message" &&
-
-                    notification.related_id ===
-                    activeConversationId
-                );
-
-            }
-        );
-
-
-    for (
-        const notification
-        of matches
-    ) {
-
-        await supabaseClient
-            .from("notifications")
-            .update({
-                read:
-                    true
-            })
-            .eq(
-                "id",
-                notification.id
-            )
-            .eq(
-                "user_id",
-                currentUser.id
-            );
-
-    }
-
-
-    notifications =
-        notifications.filter(
-            function(notification) {
-
-                return !(
-                    notification.type ===
-                    "new_message" &&
-
-                    notification.related_id ===
-                    activeConversationId
-                );
-
-            }
-        );
-
-
-    renderNotifications();
-
-    await attachFriendIdsToNotifications();
-
-    renderFriends();
-
-}
-
-
-function closeConversation() {
-
-    stopMessageRealtime();
-
-
-    activeFriend =
-        null;
-
 
     activeConversationId =
-        null;
+        data;
 
 
-    conversationView.style.display =
-        "none";
+
+    await loadMessages();
 
 
-    friendsView.style.display =
-        "block";
+    subscribeToMessages();
 
-
-    window.history.replaceState(
-        null,
-        "",
-        "chat.html"
-    );
-
-
-    setMessagesLoading();
 
 }
+
+
 
 
 // =====================================================
 // LOAD MESSAGES
 // =====================================================
 
-async function loadMessages() {
 
-    if (!activeConversationId) {
+async function loadMessages(){
+
+
+    if(
+        !activeConversationId
+    ){
 
         return;
 
     }
 
 
+
     const {
         data,
         error
-    } = await supabaseClient
-        .from("messages")
+    } =
+    await supabaseClient
+        .from(
+            "messages"
+        )
         .select(
-            "id,conversation_id,sender_id,content,created_at"
+            `
+            id,
+            sender_id,
+            content,
+            created_at
+            `
         )
         .eq(
             "conversation_id",
@@ -2495,64 +1577,55 @@ async function loadMessages() {
         .order(
             "created_at",
             {
-                ascending:
-                    true
+                ascending:true
             }
         );
 
 
-    if (error) {
 
-        throw error;
+    if(error){
+
+        console.error(
+            error
+        );
+
+        return;
 
     }
+
 
 
     renderMessages(
         data || []
     );
 
+
 }
+
+
+
+
+// =====================================================
+// RENDER MESSAGES
+// =====================================================
 
 
 function renderMessages(
     messages
-) {
+){
 
-    if (!messageList) {
+
+    if(!messageList){
 
         return;
 
     }
+
 
 
     messageList.innerHTML =
         "";
 
-
-    if (!messages.length) {
-
-        messageList.innerHTML = `
-            <div class="messages-empty">
-
-                <div class="empty-icon">
-                    ◇
-                </div>
-
-                <div class="empty-title">
-                    No messages yet
-                </div>
-
-                <div class="empty-text">
-                    Start the conversation.
-                </div>
-
-            </div>
-        `;
-
-        return;
-
-    }
 
 
     messages.forEach(
@@ -2560,67 +1633,672 @@ function renderMessages(
     );
 
 
-    scrollMessagesToBottom();
+
+    scrollMessages();
+
 
 }
 
 
+
+
 function appendMessage(
     message
-) {
-
-    if (!messageList) {
-
-        return;
-
-    }
+){
 
 
-    if (
-        document.querySelector(
-            `[data-message-id="${message.id}"]`
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const row =
+    const div =
         document.createElement(
             "div"
         );
 
 
-    row.className =
-        "message-bubble-row";
+
+    div.className =
+        "message-bubble";
 
 
-    if (
+
+    if(
         message.sender_id ===
         currentUser.id
-    ) {
+    ){
 
-        row.classList.add(
+        div.classList.add(
             "mine"
         );
 
     }
 
 
-    row.dataset.messageId =
-        message.id;
+
+    div.textContent =
+        message.content;
 
 
-    const bubble =
+
+    messageList.append(
+        div
+    );
+
+
+}
+
+
+
+
+// =====================================================
+// SEND MESSAGE
+// =====================================================
+
+
+if(messageForm){
+
+
+messageForm.addEventListener(
+"submit",
+async function(event){
+
+
+event.preventDefault();
+
+
+
+const text =
+    messageInput.value.trim();
+
+
+
+if(!text){
+
+    return;
+
+}
+
+
+
+const {
+    data,
+    error
+}
+=
+await supabaseClient
+.from(
+    "messages"
+)
+.insert(
+{
+    conversation_id:
+        activeConversationId,
+
+    sender_id:
+        currentUser.id,
+
+    content:
+        text
+}
+)
+.select()
+.single();
+
+
+
+if(error){
+
+    console.error(
+        error
+    );
+
+    return;
+
+}
+
+
+
+messageInput.value =
+    "";
+
+
+appendMessage(
+    data
+);
+
+
+scrollMessages();
+
+
+
+});
+
+}
+
+
+
+// =====================================================
+// REALTIME MESSAGES
+// =====================================================
+
+
+function subscribeToMessages(){
+
+
+    if(messageChannel){
+
+        supabaseClient.removeChannel(
+            messageChannel
+        );
+
+    }
+
+
+
+    messageChannel =
+        supabaseClient
+        .channel(
+            "messages-" +
+            activeConversationId
+        )
+        .on(
+            "postgres_changes",
+            {
+
+                event:
+                    "INSERT",
+
+                schema:
+                    "public",
+
+                table:
+                    "messages"
+
+            },
+
+            payload => {
+
+
+                if(
+                    payload.new.conversation_id ===
+                    activeConversationId
+                ){
+
+                    appendMessage(
+                        payload.new
+                    );
+
+
+                    scrollMessages();
+
+                }
+
+
+            }
+
+        )
+        .subscribe();
+
+
+
+}
+
+
+
+
+// =====================================================
+// CLOSE CHAT
+// =====================================================
+
+
+if(conversationBack){
+
+
+conversationBack.onclick =
+function(){
+
+
+if(messageChannel){
+
+    supabaseClient.removeChannel(
+        messageChannel
+    );
+
+}
+
+
+activeConversationId =
+    null;
+
+
+
+if(conversationView){
+
+    conversationView.style.display =
+        "none";
+
+}
+
+
+if(friendsView){
+
+    friendsView.style.display =
+        "block";
+
+}
+
+
+};
+
+
+}
+
+
+
+// =====================================================
+// HELPERS
+// =====================================================
+
+
+function scrollMessages(){
+
+
+if(messageList){
+
+
+messageList.scrollTop =
+    messageList.scrollHeight;
+
+
+}
+
+
+}
+// =====================================================
+// PART 3/3
+// UI + Toast + Helpers + Protection
+// =====================================================
+
+
+// =====================================================
+// TOAST SYSTEM
+// =====================================================
+
+
+let toastContainer = null;
+
+
+
+function createToastContainer(){
+
+
+    if(toastContainer){
+
+        return;
+
+    }
+
+
+
+    toastContainer =
         document.createElement(
             "div"
         );
 
 
-    bubble.className =
+    toastContainer.id =
+        "memora-toast-container";
+
+
+    document.body.append(
+        toastContainer
+    );
+
+
+}
+
+
+
+
+function showToast(
+    title,
+    text
+){
+
+
+    createToastContainer();
+
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+
+    toast.className =
+        "memora-toast";
+
+
+
+    toast.innerHTML =
+    `
+        <strong>
+            ${escapeHtml(title)}
+        </strong>
+
+        <span>
+            ${escapeHtml(text)}
+        </span>
+    `;
+
+
+
+    toastContainer.append(
+        toast
+    );
+
+
+
+    setTimeout(
+        ()=>{
+
+            toast.classList.add(
+                "show"
+            );
+
+        },
+        50
+    );
+
+
+
+    setTimeout(
+        ()=>{
+
+            toast.remove();
+
+        },
+        4000
+    );
+
+
+}
+
+
+
+// =====================================================
+// MESSAGE TOAST
+// =====================================================
+
+
+function showMessageToast(
+    notification
+){
+
+
+    if(
+        !notification
+    ){
+
+        return;
+
+    }
+
+
+
+    showToast(
+        notification.title ||
+        "Новое сообщение",
+
+        notification.body ||
+        ""
+    );
+
+
+}
+
+
+
+// =====================================================
+// AVATARS
+// =====================================================
+
+
+function createAvatar(
+    name,
+    url
+){
+
+
+    const avatar =
+        document.createElement(
+            "div"
+        );
+
+
+
+    avatar.className =
+        "memora-avatar";
+
+
+
+    if(url){
+
+
+        avatar.style.backgroundImage =
+            `url("${url}")`;
+
+
+    }
+    else{
+
+
+        avatar.textContent =
+            getInitial(
+                name
+            );
+
+
+    }
+
+
+
+    return avatar;
+
+
+}
+
+
+
+
+function updateAvatar(
+    element,
+    name,
+    url
+){
+
+
+    if(
+        !element
+    ){
+
+        return;
+
+    }
+
+
+
+    if(url){
+
+
+        element.style.backgroundImage =
+            `url("${url}")`;
+
+
+        element.textContent =
+            "";
+
+
+    }
+    else{
+
+
+        element.style.backgroundImage =
+            "";
+
+
+        element.textContent =
+            getInitial(
+                name
+            );
+
+
+    }
+
+
+}
+
+
+
+
+// =====================================================
+// UNREAD COUNTERS
+// =====================================================
+
+
+function getUnreadMessages(
+    friendId
+){
+
+
+    if(
+        !friendId
+    ){
+
+        return 0;
+
+    }
+
+
+
+    return notifications.filter(
+        notification => {
+
+
+            return (
+
+                notification.type ===
+                "new_message"
+
+                &&
+
+                notification.sender_id ===
+                friendId
+
+            );
+
+
+        }
+
+    ).length;
+
+
+}
+
+
+
+// =====================================================
+// MESSAGE DUPLICATE PROTECTION
+// =====================================================
+
+
+function messageAlreadyExists(
+    id
+){
+
+
+    if(
+        !messageList ||
+        !id
+    ){
+
+        return false;
+
+    }
+
+
+
+    return Boolean(
+        messageList.querySelector(
+            `[data-id="${id}"]`
+        )
+    );
+
+
+}
+
+
+
+
+// Улучшенная версия appendMessage
+// заменяет старую
+
+
+function appendMessage(
+    message
+){
+
+
+    if(
+        !messageList ||
+        !message
+    ){
+
+        return;
+
+    }
+
+
+
+    if(
+        messageAlreadyExists(
+            message.id
+        )
+    ){
+
+        return;
+
+    }
+
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+
+    div.dataset.id =
+        message.id;
+
+
+
+    div.className =
         "message-bubble";
+
+
+
+    if(
+        message.sender_id ===
+        currentUser.id
+    ){
+
+        div.classList.add(
+            "mine"
+        );
+
+    }
+
 
 
     const text =
@@ -2637,9 +2315,10 @@ function appendMessage(
         message.content;
 
 
+
     const time =
         document.createElement(
-            "div"
+            "small"
         );
 
 
@@ -2653,778 +2332,47 @@ function appendMessage(
         );
 
 
-    bubble.appendChild(
-        text
-    );
 
-
-    bubble.appendChild(
+    div.append(
+        text,
         time
     );
 
 
-    row.appendChild(
-        bubble
+
+    messageList.append(
+        div
     );
 
-
-    messageList.appendChild(
-        row
-    );
 
 }
+
 
 
 // =====================================================
-// SEND MESSAGE
+// FORMAT TIME
 // =====================================================
-
-async function sendMessage(
-    event
-) {
-
-    event.preventDefault();
-
-
-    if (
-        !activeConversationId ||
-        !messageInput
-    ) {
-
-        return;
-
-    }
-
-
-    const content =
-        messageInput.value.trim();
-
-
-    if (!content) {
-
-        return;
-
-    }
-
-
-    sendMessageButton.disabled =
-        true;
-
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabaseClient
-            .from("messages")
-            .insert({
-
-                conversation_id:
-                    activeConversationId,
-
-                sender_id:
-                    currentUser.id,
-
-                content:
-                    content
-
-            })
-            .select(
-                "id,conversation_id,sender_id,content,created_at"
-            )
-            .single();
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-        messageInput.value =
-            "";
-
-
-        autoResizeMessageInput();
-
-
-        appendMessage(
-            data
-        );
-
-
-        scrollMessagesToBottom();
-
-
-    } catch (error) {
-
-        console.error(
-            "Send message error:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Unable to send message."
-        );
-
-
-    } finally {
-
-        sendMessageButton.disabled =
-            false;
-
-
-        messageInput.focus();
-
-    }
-
-}
-
-
-// =====================================================
-// MESSAGE REALTIME
-// =====================================================
-
-function subscribeToMessages() {
-
-    stopMessageRealtime();
-
-
-    if (!activeConversationId) {
-
-        return;
-
-    }
-
-
-    messageChannel =
-        supabaseClient
-            .channel(
-                "memora-messages-" +
-                activeConversationId
-            )
-
-            .on(
-                "postgres_changes",
-                {
-                    event:
-                        "INSERT",
-
-                    schema:
-                        "public",
-
-                    table:
-                        "messages",
-
-                    filter:
-                        "conversation_id=eq." +
-                        activeConversationId
-                },
-
-                function(payload) {
-
-                    appendMessage(
-                        payload.new
-                    );
-
-
-                    scrollMessagesToBottom();
-
-                    markCurrentConversationNotifications();
-
-                }
-            )
-
-            .subscribe();
-
-}
-
-
-function stopMessageRealtime() {
-
-    if (!messageChannel) {
-
-        return;
-
-    }
-
-
-    supabaseClient.removeChannel(
-        messageChannel
-    );
-
-
-    messageChannel =
-        null;
-
-}
-
-
-// =====================================================
-// TOAST
-// =====================================================
-
-function createToastContainer() {
-
-    if (toastContainer) {
-
-        return;
-
-    }
-
-
-    toastContainer =
-        document.createElement(
-            "div"
-        );
-
-
-    toastContainer.id =
-        "memora-chat-toast-container";
-
-
-    document.body.appendChild(
-        toastContainer
-    );
-
-}
-
-
-function showMessageToast(
-    notification
-) {
-
-    if (!toastContainer) {
-
-        createToastContainer();
-
-    }
-
-
-    const sender =
-        getSenderName(
-            notification.body
-        );
-
-
-    const message =
-        getMessageText(
-            notification.body
-        );
-
-
-    const toast =
-        document.createElement(
-            "button"
-        );
-
-
-    toast.type =
-        "button";
-
-
-    toast.className =
-        "memora-chat-toast";
-
-
-    const avatar =
-        document.createElement(
-            "div"
-        );
-
-
-    avatar.className =
-        "memora-chat-toast-avatar";
-
-
-    avatar.textContent =
-        getInitial(
-            sender
-        );
-
-
-    const content =
-        document.createElement(
-            "div"
-        );
-
-
-    content.className =
-        "memora-chat-toast-content";
-
-
-    const title =
-        document.createElement(
-            "strong"
-        );
-
-
-    title.textContent =
-        sender;
-
-
-    const text =
-        document.createElement(
-            "span"
-        );
-
-
-    text.textContent =
-        truncate(
-            message,
-            90
-        );
-
-
-    content.appendChild(
-        title
-    );
-
-
-    content.appendChild(
-        text
-    );
-
-
-    const close =
-        document.createElement(
-            "span"
-        );
-
-
-    close.className =
-        "memora-chat-toast-close";
-
-
-    close.textContent =
-        "×";
-
-
-    close.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-            removeToast(
-                toast
-            );
-
-        }
-    );
-
-
-    toast.appendChild(
-        avatar
-    );
-
-
-    toast.appendChild(
-        content
-    );
-
-
-    toast.appendChild(
-        close
-    );
-
-
-    toast.addEventListener(
-        "click",
-        function() {
-
-            openMessageNotification(
-                notification
-            );
-
-
-            removeToast(
-                toast
-            );
-
-        }
-    );
-
-
-    toastContainer.appendChild(
-        toast
-    );
-
-
-    requestAnimationFrame(
-        function() {
-
-            toast.classList.add(
-                "show"
-            );
-
-        }
-    );
-
-
-    setTimeout(
-        function() {
-
-            removeToast(
-                toast
-            );
-
-        },
-        5000
-    );
-
-}
-
-
-function removeToast(
-    toast
-) {
-
-    if (
-        !toast ||
-        !toast.parentNode
-    ) {
-
-        return;
-
-    }
-
-
-    toast.classList.remove(
-        "show"
-    );
-
-
-    setTimeout(
-        function() {
-
-            if (
-                toast.parentNode
-            ) {
-
-                toast.remove();
-
-            }
-
-        },
-        250
-    );
-
-}
-
-
-// =====================================================
-// AVATARS
-// =====================================================
-
-function setMyAvatar(
-    name,
-    avatarUrl
-) {
-
-    if (!myAvatar) {
-
-        return;
-
-    }
-
-
-    if (avatarUrl) {
-
-        myAvatar.textContent =
-            "";
-
-
-        myAvatar.style.backgroundImage =
-            `url("${avatarUrl}")`;
-
-
-        return;
-
-    }
-
-
-    myAvatar.style.backgroundImage =
-        "";
-
-
-    myAvatar.textContent =
-        getInitial(
-            name
-        );
-
-}
-
-
-function createPersonAvatar(
-    name,
-    avatarUrl
-) {
-
-    const avatar =
-        document.createElement(
-            "div"
-        );
-
-
-    avatar.className =
-        "person-avatar";
-
-
-    if (avatarUrl) {
-
-        avatar.style.backgroundImage =
-            `url("${avatarUrl}")`;
-
-    } else {
-
-        avatar.textContent =
-            getInitial(
-                name
-            );
-
-    }
-
-
-    return avatar;
-
-}
-
-
-function setConversationAvatar(
-    name,
-    avatarUrl
-) {
-
-    if (!conversationAvatar) {
-
-        return;
-
-    }
-
-
-    if (avatarUrl) {
-
-        conversationAvatar.textContent =
-            "";
-
-
-        conversationAvatar.style.backgroundImage =
-            `url("${avatarUrl}")`;
-
-
-        return;
-
-    }
-
-
-    conversationAvatar.style.backgroundImage =
-        "";
-
-
-    conversationAvatar.textContent =
-        getInitial(
-            name
-        );
-
-}
-
-
-// =====================================================
-// HELPERS
-// =====================================================
-
-function getSenderName(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return "Memora user";
-
-    }
-
-
-    return (
-        text
-            .slice(
-                0,
-                separator
-            )
-            .trim()
-        ||
-        "Memora user"
-    );
-
-}
-
-
-function getMessageText(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return text;
-
-    }
-
-
-    return text
-        .slice(
-            separator + 1
-        )
-        .trim();
-
-}
-
-
-function truncate(
-    text,
-    maxLength
-) {
-
-    if (
-        text.length <=
-        maxLength
-    ) {
-
-        return text;
-
-    }
-
-
-    return (
-        text.slice(
-            0,
-            maxLength - 1
-        )
-        +
-        "…"
-    );
-
-}
-
-
-function getInitial(
-    name
-) {
-
-    return (
-        String(
-            name ||
-            "M"
-        )
-            .trim()
-            .charAt(0)
-            .toUpperCase()
-        ||
-        "M"
-    );
-
-}
-
-
-function setMessagesLoading() {
-
-    if (!messageList) {
-
-        return;
-
-    }
-
-
-    messageList.innerHTML = `
-        <div class="messages-empty">
-
-            <div class="empty-title">
-                Loading...
-            </div>
-
-        </div>
-    `;
-
-}
-
-
-function scrollMessagesToBottom() {
-
-    requestAnimationFrame(
-        function() {
-
-            if (messageList) {
-
-                messageList.scrollTop =
-                    messageList.scrollHeight;
-
-            }
-
-        }
-    );
-
-}
-
-
-function autoResizeMessageInput() {
-
-    if (!messageInput) {
-
-        return;
-
-    }
-
-
-    messageInput.style.height =
-        "auto";
-
-
-    messageInput.style.height =
-        Math.min(
-            messageInput.scrollHeight,
-            125
-        ) +
-        "px";
-
-}
 
 
 function formatTime(
-    dateString
-) {
+    date
+){
+
+
+    if(
+        !date
+    ){
+
+        return "";
+
+    }
+
+
 
     return new Date(
-        dateString
-    ).toLocaleTimeString(
+        date
+    )
+    .toLocaleTimeString(
         "ru-RU",
         {
             hour:
@@ -3435,459 +2383,426 @@ function formatTime(
         }
     );
 
+
 }
+
+
+
+
+// =====================================================
+// AUTO RESIZE MESSAGE INPUT
+// =====================================================
+
+
+if(messageInput){
+
+
+messageInput.addEventListener(
+"input",
+function(){
+
+
+messageInput.style.height =
+    "auto";
+
+
+messageInput.style.height =
+    Math.min(
+        messageInput.scrollHeight,
+        140
+    )
+    +
+    "px";
+
+
+});
+
+
+}
+
+
+
+
+// =====================================================
+// PANELS CLOSE
+// =====================================================
+
+
+document.addEventListener(
+"click",
+function(event){
+
+
+
+if(
+    notificationPanel
+    &&
+    notificationButton
+){
+
+
+if(
+
+    !notificationPanel.contains(
+        event.target
+    )
+
+    &&
+
+    !notificationButton.contains(
+        event.target
+    )
+
+){
+
+
+notificationPanel.hidden =
+    true;
+
+
+}
+
+
+
+}
+
+
+
+
+if(
+    addFriendPanel
+    &&
+    addFriendButton
+){
+
+
+if(
+
+    !addFriendPanel.contains(
+        event.target
+    )
+
+    &&
+
+    !addFriendButton.contains(
+        event.target
+    )
+
+){
+
+
+addFriendPanel.hidden =
+    true;
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+// =====================================================
+// HTML SECURITY
+// =====================================================
 
 
 function escapeHtml(
-    value
-) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
+    text
+){
 
 
-    div.textContent =
-        value;
+const div =
+    document.createElement(
+        "div"
+    );
 
 
-    return div.innerHTML;
+div.textContent =
+    text || "";
+
+
+
+return div.innerHTML;
+
 
 }
 
 
+
 // =====================================================
-// TOAST STYLES
+// INITIAL LETTER
 // =====================================================
 
-function injectToastStyles() {
 
-    if (
-        document.getElementById(
-            "memora-chat-toast-styles"
-        )
-    ) {
+function getInitial(
+    name
+){
 
-        return;
 
-    }
+return (
 
+String(
+    name ||
+    "M"
+)
 
-    const style =
-        document.createElement(
-            "style"
-        );
+.trim()
 
+.charAt(
+    0
+)
 
-    style.id =
-        "memora-chat-toast-styles";
+.toUpperCase()
 
 
-    style.textContent = `
+||
+"M"
 
-        #memora-chat-toast-container {
+);
 
-            position:
-                fixed;
 
-            top:
-                12px;
+}
 
-            left:
-                50%;
 
-            transform:
-                translateX(-50%);
 
-            width:
-                min(
-                    430px,
-                    calc(100vw - 24px)
-                );
+// =====================================================
+// CLEANUP
+// =====================================================
 
-            z-index:
-                999999;
 
-            display:
-                flex;
+window.addEventListener(
+"beforeunload",
+function(){
 
-            flex-direction:
-                column;
 
-            gap:
-                8px;
 
-            pointer-events:
-                none;
+if(messageChannel){
 
-        }
-
-
-        .memora-chat-toast {
-
-            width:
-                100%;
-
-            min-height:
-                66px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            padding:
-                9px 10px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.12);
-
-            border-radius:
-                18px;
-
-            background:
-                rgba(18,18,24,.96);
-
-            color:
-                #ffffff;
-
-            box-shadow:
-                0 20px 60px
-                rgba(0,0,0,.40);
-
-            backdrop-filter:
-                blur(24px);
-
-            font-family:
-                inherit;
-
-            text-align:
-                left;
-
-            cursor:
-                pointer;
-
-            pointer-events:
-                auto;
-
-            opacity:
-                0;
-
-            transform:
-                translateY(-18px)
-                scale(.97);
-
-            transition:
-                opacity .24s ease,
-                transform .24s ease;
-
-        }
-
-
-        .memora-chat-toast.show {
-
-            opacity:
-                1;
-
-            transform:
-                translateY(0)
-                scale(1);
-
-        }
-
-
-        .memora-chat-toast-avatar {
-
-            width:
-                44px;
-
-            height:
-                44px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                50%;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(139,92,246,.22),
-                    rgba(255,255,255,.055)
-                );
-
-            border:
-                1px solid
-                rgba(167,139,250,.24);
-
-            color:
-                #ffffff;
-
-            font-size:
-                13px;
-
-            font-weight:
-                850;
-
-        }
-
-
-        .memora-chat-toast-content {
-
-            flex:
-                1;
-
-            min-width:
-                0;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                3px;
-
-        }
-
-
-        .memora-chat-toast-content strong {
-
-            overflow:
-                hidden;
-
-            text-overflow:
-                ellipsis;
-
-            white-space:
-                nowrap;
-
-            font-size:
-                12px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .memora-chat-toast-content span {
-
-            overflow:
-                hidden;
-
-            text-overflow:
-                ellipsis;
-
-            white-space:
-                nowrap;
-
-            color:
-                rgba(255,255,255,.43);
-
-            font-size:
-                10px;
-
-        }
-
-
-        .memora-chat-toast-close {
-
-            width:
-                27px;
-
-            height:
-                27px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                9px;
-
-            background:
-                rgba(255,255,255,.05);
-
-            color:
-                rgba(255,255,255,.45);
-
-            font-size:
-                17px;
-
-        }
-
-
-        .chat-unread-badge {
-
-            min-width:
-                19px;
-
-            height:
-                19px;
-
-            padding:
-                0 5px;
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                999px;
-
-            background:
-                rgba(167,139,250,.20);
-
-            border:
-                1px solid
-                rgba(167,139,250,.30);
-
-            color:
-                #eee8ff;
-
-            font-size:
-                8px;
-
-            font-weight:
-                850;
-
-            line-height:
-                1;
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            #memora-chat-toast-container {
-
-                top:
-                    10px;
-
-                width:
-                    calc(100vw - 20px);
-
-            }
-
-
-            .chat-unread-badge {
-
-                min-width:
-                    18px;
-
-                height:
-                    18px;
-
-            }
-
-        }
-
-    `;
-
-
-    document.head.appendChild(
-        style
+    supabaseClient.removeChannel(
+        messageChannel
     );
 
 }
+
+
+
+if(notificationChannel){
+
+    supabaseClient.removeChannel(
+        notificationChannel
+    );
+
+}
+
+
+
+});
+
+
+
 // =====================================================
-// FRIEND ONLINE REALTIME
+// TOAST CSS
 // =====================================================
 
-function subscribeToFriendStatus() {
+
+const toastStyle =
+document.createElement(
+"style"
+);
 
 
-    supabaseClient
-
-        .channel(
-            "friends-online-status"
-        )
-
-        .on(
-            "postgres_changes",
-            {
-                event:
-                    "UPDATE",
-
-                schema:
-                    "public",
-
-                table:
-                    "profiles"
-            },
-
-            function(payload) {
+toastStyle.textContent = `
 
 
-                const updated =
-                    payload.new;
+#memora-toast-container{
 
 
-                const friend =
-                    friends.find(
-                        function(item){
-
-                            return (
-                                item.friend_id ===
-                                updated.id
-                            );
-
-                        }
-                    );
+position:
+fixed;
 
 
-                if(friend){
+top:
+20px;
 
 
-                    friend.is_online =
-                        updated.is_online;
+left:
+50%;
 
 
-                    friend.last_seen =
-                        updated.last_seen;
+transform:
+translateX(-50%);
 
 
-                    renderFriends();
+z-index:
+99999;
 
-                }
+
+display:
+flex;
 
 
-            }
+flex-direction:
+column;
 
-        )
 
-        .subscribe();
+gap:
+10px;
+
+
+width:
+min(
+400px,
+90vw
+);
 
 
 }
+
+
+
+.memora-toast{
+
+
+background:
+rgba(
+20,
+20,
+25,
+0.95
+);
+
+
+border:
+1px solid
+rgba(
+255,
+255,
+255,
+0.1
+);
+
+
+border-radius:
+18px;
+
+
+padding:
+14px;
+
+
+color:
+white;
+
+
+display:
+flex;
+
+
+flex-direction:
+column;
+
+
+gap:
+5px;
+
+
+opacity:
+0;
+
+
+transform:
+translateY(-20px);
+
+
+transition:
+0.25s;
+
+
+backdrop-filter:
+blur(20px);
+
+
+}
+
+
+
+.memora-toast.show{
+
+
+opacity:
+1;
+
+
+transform:
+translateY(0);
+
+
+}
+
+
+
+.memora-toast strong{
+
+
+font-size:
+14px;
+
+
+}
+
+
+
+.memora-toast span{
+
+
+font-size:
+12px;
+
+
+color:
+rgba(
+255,
+255,
+255,.55
+);
+
+
+}
+
+
+
+.message-time{
+
+
+display:block;
+
+
+font-size:
+10px;
+
+
+opacity:
+.45;
+
+
+margin-top:
+5px;
+
+
+}
+
+
+
+`;
+
+
+document.head.append(
+toastStyle
+);
