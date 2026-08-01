@@ -1,727 +1,219 @@
 // =====================================================
 // MEMORA GLOBAL NOTIFICATIONS
-// =====================================================
-// Отвечает только за:
-// - новые сообщения
-// - всплывающие уведомления сверху
-//
-// Не управляет чатами, друзьями и профилем.
+// Работает только вне chat.html
+// Не трогает chat.js
 // =====================================================
 
 
-const MEMORA_SUPABASE_URL =
+const GLOBAL_SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
-const MEMORA_SUPABASE_KEY =
+
+const GLOBAL_SUPABASE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
 
 
-// =====================================================
-// SUPABASE
-// =====================================================
-
-const memoraSupabase =
+const globalSupabase =
     window.supabase.createClient(
-        MEMORA_SUPABASE_URL,
-        MEMORA_SUPABASE_KEY
+        GLOBAL_SUPABASE_URL,
+        GLOBAL_SUPABASE_KEY
     );
 
 
-// =====================================================
-// STATE
-// =====================================================
 
-let memoraNotificationUser = null;
+let globalUser = null;
+let globalChannel = null;
 
-let memoraNotificationChannel = null;
-
-let memoraToastContainer = null;
 
 
 // =====================================================
-// INIT
+// START
 // =====================================================
+
 
 document.addEventListener(
     "DOMContentLoaded",
-    initGlobalNotifications
+    startGlobalNotifications
 );
 
 
-async function initGlobalNotifications() {
 
-    try {
-
-        // На странице Chats у нас уже есть
-        // собственная система уведомлений chat.js.
-        // Чтобы не получить две одинаковые всплывашки,
-        // глобальный listener там не запускаем.
-
-        if (isChatPage()) {
-
-            return;
-
-        }
+async function startGlobalNotifications() {
 
 
-        const {
-            data,
-            error
-        } =
-            await memoraSupabase
-                .auth
-                .getSession();
+    // На чате ничего не делаем
+    if (
+        window.location.pathname.includes(
+            "chat.html"
+        )
+    ) {
 
-
-        if (error) {
-
-            console.error(
-                "Global notifications session error:",
-                error
-            );
-
-            return;
-
-        }
-
-
-        if (
-            !data ||
-            !data.session
-        ) {
-
-            return;
-
-        }
-
-
-        memoraNotificationUser =
-            data.session.user;
-
-
-        createToastContainer();
-
-        injectToastStyles();
-
-        subscribeToGlobalNotifications();
-
-
-    } catch (error) {
-
-        console.error(
-            "Global notification error:",
-            error
-        );
+        return;
 
     }
 
+
+
+    const {
+        data,
+        error
+    } =
+    await globalSupabase
+        .auth
+        .getSession();
+
+
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+
+    if (
+        !data.session
+    ) {
+
+        return;
+
+    }
+
+
+
+    globalUser =
+        data.session.user;
+
+
+
+    createGlobalToast();
+
+
+    subscribeGlobalMessages();
+
+
 }
 
 
-// =====================================================
-// CHECK PAGE
-// =====================================================
 
-function isChatPage() {
-
-    const file =
-        window.location.pathname
-            .split("/")
-            .pop()
-            .toLowerCase();
-
-
-    return (
-        file === "chat.html"
-    );
-
-}
 
 
 // =====================================================
 // REALTIME
 // =====================================================
 
-function subscribeToGlobalNotifications() {
 
-    if (
-        !memoraNotificationUser
-    ) {
+function subscribeGlobalMessages(){
 
+
+    if(!globalUser){
         return;
-
     }
 
 
-    if (
-        memoraNotificationChannel
-    ) {
 
-        memoraSupabase
-            .removeChannel(
-                memoraNotificationChannel
-            );
+    globalChannel =
+        globalSupabase
 
-    }
+        .channel(
+            "global-message-" +
+            globalUser.id
+        )
 
 
-    memoraNotificationChannel =
-        memoraSupabase
+        .on(
+            "postgres_changes",
 
-            .channel(
-                "global-notifications-" +
-                memoraNotificationUser.id
-            )
+            {
 
-            .on(
-                "postgres_changes",
-                {
-                    event: "INSERT",
+                event:"INSERT",
 
-                    schema: "public",
+                schema:"public",
 
-                    table: "notifications",
+                table:"notifications",
 
-                    filter:
-                        "user_id=eq." +
-                        memoraNotificationUser.id
-                },
+                filter:
+                "user_id=eq." +
+                globalUser.id
 
-                function(payload) {
+            },
 
-                    handleGlobalNotification(
-                        payload.new
-                    );
+
+            function(payload){
+
+
+                const notification =
+                    payload.new;
+
+
+
+                if(
+                    notification.type !==
+                    "new_message"
+                ){
+
+                    return;
 
                 }
 
-            )
 
-            .subscribe(
 
-                function(status) {
+                showGlobalToast(
+                    notification
+                );
 
-                    if (
-                        status ===
-                        "SUBSCRIBED"
-                    ) {
-
-                        console.log(
-                            "Memora global notifications connected"
-                        );
-
-                    }
-
-                }
-
-            );
-
-}
-
-
-// =====================================================
-// HANDLE
-// =====================================================
-
-function handleGlobalNotification(
-    notification
-) {
-
-    if (
-        !notification
-    ) {
-
-        return;
-
-    }
-
-
-    // Нас интересуют сообщения.
-    // Заявки остаются в колокольчике.
-
-    if (
-        notification.type !==
-        "new_message"
-    ) {
-
-        return;
-
-    }
-
-
-    showMessageToast(
-        notification
-    );
-
-}
-
-
-// =====================================================
-// TOAST CONTAINER
-// =====================================================
-
-function createToastContainer() {
-
-    if (
-        memoraToastContainer
-    ) {
-
-        return;
-
-    }
-
-
-    memoraToastContainer =
-        document.createElement(
-            "div"
-        );
-
-
-    memoraToastContainer.id =
-        "memora-global-toast-container";
-
-
-    document.body.appendChild(
-        memoraToastContainer
-    );
-
-}
-
-
-// =====================================================
-// SHOW MESSAGE
-// =====================================================
-
-function showMessageToast(
-    notification
-) {
-
-    if (
-        !memoraToastContainer
-    ) {
-
-        createToastContainer();
-
-    }
-
-
-    const sender =
-        getSenderName(
-            notification.body
-        );
-
-
-    const message =
-        getMessageText(
-            notification.body
-        );
-
-
-    const toast =
-        document.createElement(
-            "button"
-        );
-
-
-    toast.type =
-        "button";
-
-
-    toast.className =
-        "memora-global-toast";
-
-
-    // =================================================
-    // AVATAR
-    // =================================================
-
-    const avatar =
-        document.createElement(
-            "div"
-        );
-
-
-    avatar.className =
-        "memora-global-toast-avatar";
-
-
-    avatar.textContent =
-        getInitial(
-            sender
-        );
-
-
-    // =================================================
-    // CONTENT
-    // =================================================
-
-    const content =
-        document.createElement(
-            "div"
-        );
-
-
-    content.className =
-        "memora-global-toast-content";
-
-
-    const name =
-        document.createElement(
-            "strong"
-        );
-
-
-    name.textContent =
-        sender;
-
-
-    const text =
-        document.createElement(
-            "span"
-        );
-
-
-    text.textContent =
-        truncate(
-            message,
-            100
-        );
-
-
-    content.appendChild(
-        name
-    );
-
-
-    content.appendChild(
-        text
-    );
-
-
-    // =================================================
-    // CLOSE
-    // =================================================
-
-    const close =
-        document.createElement(
-            "span"
-        );
-
-
-    close.className =
-        "memora-global-toast-close";
-
-
-    close.textContent =
-        "×";
-
-
-    close.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-            removeToast(
-                toast
-            );
-
-        }
-    );
-
-
-    // =================================================
-    // BUILD
-    // =================================================
-
-    toast.appendChild(
-        avatar
-    );
-
-
-    toast.appendChild(
-        content
-    );
-
-
-    toast.appendChild(
-        close
-    );
-
-
-    // =================================================
-    // CLICK
-    // =================================================
-
-    toast.addEventListener(
-        "click",
-        function() {
-
-            openMessageFromToast(
-                notification
-            );
-
-        }
-    );
-
-
-    memoraToastContainer.appendChild(
-        toast
-    );
-
-
-    // Animation
-
-    requestAnimationFrame(
-        function() {
-
-            toast.classList.add(
-                "show"
-            );
-
-        }
-    );
-
-
-    // Auto remove
-
-    window.setTimeout(
-        function() {
-
-            removeToast(
-                toast
-            );
-
-        },
-        5000
-    );
-
-}
-
-
-// =====================================================
-// OPEN MESSAGE
-// =====================================================
-
-function openMessageFromToast(
-    notification
-) {
-
-    if (
-        !notification ||
-        !notification.related_id
-    ) {
-
-        return;
-
-    }
-
-
-    // related_id у new_message =
-    // conversation_id.
-
-    const url =
-        "chat.html?conversation=" +
-        encodeURIComponent(
-            notification.related_id
-        );
-
-
-    window.location.href =
-        url;
-
-}
-
-
-// =====================================================
-// REMOVE TOAST
-// =====================================================
-
-function removeToast(
-    toast
-) {
-
-    if (
-        !toast ||
-        !toast.parentNode
-    ) {
-
-        return;
-
-    }
-
-
-    toast.classList.remove(
-        "show"
-    );
-
-
-    window.setTimeout(
-        function() {
-
-            if (
-                toast.parentNode
-            ) {
-
-                toast.remove();
 
             }
 
-        },
-        250
-    );
-
-}
-
-
-// =====================================================
-// PARSE SENDER
-// =====================================================
-
-function getSenderName(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return "Memora user";
-
-    }
-
-
-    return (
-        text
-            .slice(
-                0,
-                separator
-            )
-            .trim()
-        ||
-        "Memora user"
-    );
-
-}
-
-
-// =====================================================
-// PARSE MESSAGE
-// =====================================================
-
-function getMessageText(
-    body
-) {
-
-    const text =
-        String(
-            body || ""
-        );
-
-
-    const separator =
-        text.indexOf(":");
-
-
-    if (
-        separator === -1
-    ) {
-
-        return text;
-
-    }
-
-
-    return text
-        .slice(
-            separator + 1
         )
-        .trim();
+
+
+        .subscribe();
+
+
 
 }
 
 
-// =====================================================
-// INITIAL
-// =====================================================
 
-function getInitial(
-    name
-) {
 
-    return (
-        String(
-            name ||
-            "M"
-        )
-            .trim()
-            .charAt(0)
-            .toUpperCase()
-        ||
-        "M"
-    );
-
-}
 
 
 // =====================================================
-// TRUNCATE
+// TOAST
 // =====================================================
 
-function truncate(
-    text,
-    maxLength
-) {
 
-    if (
-        text.length <=
-        maxLength
-    ) {
-
-        return text;
-
-    }
+function createGlobalToast(){
 
 
-    return (
-        text.slice(
-            0,
-            maxLength - 1
-        )
-        +
-        "…"
-    );
-
-}
-
-
-// =====================================================
-// STYLES
-// =====================================================
-
-function injectToastStyles() {
-
-    if (
+    if(
         document.getElementById(
-            "memora-global-toast-styles"
+            "globalToastBox"
         )
-    ) {
-
+    ){
         return;
-
     }
+
+
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.id =
+        "globalToastBox";
+
+
+    document.body.appendChild(
+        box
+    );
+
 
 
     const style =
@@ -730,290 +222,298 @@ function injectToastStyles() {
         );
 
 
-    style.id =
-        "memora-global-toast-styles";
-
 
     style.textContent = `
 
-        #memora-global-toast-container {
 
-            position: fixed;
+#globalToastBox{
 
-            top: 12px;
+position:fixed;
 
-            left: 50%;
+top:15px;
 
-            transform:
-                translateX(-50%);
+left:50%;
 
-            width:
-                min(
-                    430px,
-                    calc(100vw - 24px)
-                );
+transform:translateX(-50%);
 
-            z-index: 999999;
+width:min(420px,calc(100vw - 30px));
 
-            display:
-                flex;
+z-index:999999;
 
-            flex-direction:
-                column;
+}
 
-            gap: 8px;
 
-            pointer-events:
-                none;
+.global-toast{
 
-        }
+background:
+rgba(20,20,25,.96);
 
+border:
 
-        .memora-global-toast {
+1px solid rgba(255,255,255,.12);
 
-            width: 100%;
+border-radius:18px;
 
-            min-height: 68px;
+padding:14px;
 
-            display:
-                flex;
+color:white;
 
-            align-items:
-                center;
+display:flex;
 
-            gap: 11px;
+gap:12px;
 
-            padding:
-                9px 10px;
+align-items:center;
 
-            border:
-                1px solid
-                rgba(255,255,255,.12);
+box-shadow:
+0 20px 60px rgba(0,0,0,.4);
 
-            border-radius:
-                18px;
+opacity:0;
 
-            background:
-                rgba(17,17,22,.96);
+transform:
+translateY(-20px);
 
-            color:
-                #ffffff;
+transition:.25s;
 
-            box-shadow:
+}
 
-                0 22px 65px
-                rgba(0,0,0,.45),
 
-                0 0 35px
-                rgba(139,92,246,.10);
 
-            backdrop-filter:
-                blur(25px);
+.global-toast.show{
 
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
+opacity:1;
 
-            text-align:
-                left;
+transform:
+translateY(0);
 
-            cursor:
-                pointer;
+}
 
-            pointer-events:
-                auto;
 
-            opacity:
-                0;
 
-            transform:
-                translateY(-20px)
-                scale(.97);
+.global-avatar{
 
-            transition:
+width:42px;
 
-                opacity .24s ease,
+height:42px;
 
-                transform .24s ease;
+border-radius:50%;
 
-        }
+background:
+rgba(139,92,246,.25);
 
+display:flex;
 
-        .memora-global-toast.show {
+align-items:center;
 
-            opacity:
-                1;
+justify-content:center;
 
-            transform:
-                translateY(0)
-                scale(1);
+font-weight:800;
 
-        }
+}
 
 
-        .memora-global-toast-avatar {
 
-            width:
-                45px;
+.global-text{
 
-            height:
-                45px;
+display:flex;
 
-            flex-shrink:
-                0;
+flex-direction:column;
 
-            display:
-                flex;
+}
 
-            align-items:
-                center;
 
-            justify-content:
-                center;
 
-            border-radius:
-                50%;
+.global-text strong{
 
-            background:
+font-size:13px;
 
-                linear-gradient(
-                    145deg,
-                    rgba(139,92,246,.22),
-                    rgba(255,255,255,.055)
-                );
+}
 
-            border:
-                1px solid
-                rgba(167,139,250,.24);
 
-            color:
-                #ffffff;
 
-            font-size:
-                13px;
+.global-text span{
 
-            font-weight:
-                850;
+font-size:11px;
 
-        }
+color:
+rgba(255,255,255,.5);
 
+}
 
-        .memora-global-toast-content {
 
-            flex:
-                1;
+`;
 
-            min-width:
-                0;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                3px;
-
-        }
-
-
-        .memora-global-toast-content strong {
-
-            overflow:
-                hidden;
-
-            text-overflow:
-                ellipsis;
-
-            white-space:
-                nowrap;
-
-            font-size:
-                12px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .memora-global-toast-content span {
-
-            overflow:
-                hidden;
-
-            text-overflow:
-                ellipsis;
-
-            white-space:
-                nowrap;
-
-            color:
-                rgba(255,255,255,.44);
-
-            font-size:
-                10px;
-
-        }
-
-
-        .memora-global-toast-close {
-
-            width:
-                27px;
-
-            height:
-                27px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                9px;
-
-            background:
-                rgba(255,255,255,.05);
-
-            color:
-                rgba(255,255,255,.45);
-
-            font-size:
-                17px;
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            #memora-global-toast-container {
-
-                top:
-                    10px;
-
-                width:
-                    calc(100vw - 20px);
-
-            }
-
-        }
-
-    `;
 
 
     document.head.appendChild(
         style
     );
+
+}
+
+
+
+
+
+
+
+function showGlobalToast(
+    notification
+){
+
+
+
+    const box =
+        document.getElementById(
+            "globalToastBox"
+        );
+
+
+
+    if(!box){
+        return;
+    }
+
+
+
+    const name =
+        getName(
+            notification.body
+        );
+
+
+
+    const message =
+        getMessage(
+            notification.body
+        );
+
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+
+    toast.className =
+        "global-toast";
+
+
+
+    toast.innerHTML = `
+
+<div class="global-avatar">
+
+${name[0] || "M"}
+
+</div>
+
+
+<div class="global-text">
+
+<strong>
+${name}
+</strong>
+
+
+<span>
+${message}
+</span>
+
+
+</div>
+
+
+`;
+
+
+
+    box.appendChild(
+        toast
+    );
+
+
+
+    setTimeout(()=>{
+
+        toast.classList.add(
+            "show"
+        );
+
+    },20);
+
+
+
+
+    setTimeout(()=>{
+
+        toast.remove();
+
+    },5000);
+
+
+
+}
+
+
+
+
+
+function getName(body){
+
+
+    const text =
+        String(body || "");
+
+
+
+    const index =
+        text.indexOf(":");
+
+
+
+    if(index===-1){
+
+        return "Memora user";
+
+    }
+
+
+
+    return text
+    .slice(0,index)
+    .trim();
+
+
+}
+
+
+
+function getMessage(body){
+
+
+    const text =
+        String(body || "");
+
+
+
+    const index =
+        text.indexOf(":");
+
+
+
+    if(index===-1){
+
+        return text;
+
+    }
+
+
+
+    return text
+    .slice(index+1)
+    .trim();
+
 
 }
