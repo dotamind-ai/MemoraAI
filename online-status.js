@@ -1,5 +1,11 @@
+// =====================================
+// MEMORA ONLINE STATUS
+// =====================================
+
+
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
+
 
 const SUPABASE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
@@ -12,46 +18,150 @@ const supabaseClient =
     );
 
 
-async function updateOnlineStatus() {
+
+let userId = null;
+
+
+
+// =====================================
+// START
+// =====================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    startOnlineStatus
+);
+
+
+
+async function startOnlineStatus() {
 
 
     const {
         data,
         error
-    } = await supabaseClient.auth.getSession();
+    } =
+    await supabaseClient.auth.getSession();
 
 
-    if (error) {
 
-        console.log(error);
+    if(error){
+
+        console.log(
+            "Session error:",
+            error
+        );
+
         return;
 
     }
 
 
-    if (
+
+    if(
         !data.session
-    ) {
+    ){
 
-        console.log("Нет сессии");
+        console.log(
+            "No session"
+        );
+
         return;
 
     }
 
 
-    const userId =
+
+    userId =
         data.session.user.id;
 
 
+
+    console.log(
+        "Online status started:",
+        userId
+    );
+
+
+
+    // ставим онлайн сразу
+
+    await setOnline();
+
+
+
+    // обновляем каждые 30 секунд
+
+    setInterval(
+        async function(){
+
+            await setOnline();
+
+        },
+        30000
+    );
+
+
+
+    // когда вкладка скрыта
+
+    document.addEventListener(
+        "visibilitychange",
+        async function(){
+
+
+            if(
+                document.hidden
+            ){
+
+                await setOffline();
+
+
+            }
+            else
+            {
+
+                await setOnline();
+
+            }
+
+
+        }
+    );
+
+
+
+}
+
+
+
+// =====================================
+// ONLINE
+// =====================================
+
+async function setOnline(){
+
+
+    if(!userId){
+
+        return;
+
+    }
+
+
+
     const {
-        error: updateError
-    } = await supabaseClient
+        error
+    } =
+    await supabaseClient
         .from("profiles")
         .update({
 
-            is_online: true,
+            is_online:
+                true,
 
-            last_seen: new Date()
+            last_seen:
+                new Date()
 
         })
         .eq(
@@ -60,71 +170,64 @@ async function updateOnlineStatus() {
         );
 
 
-    if (updateError) {
+
+    if(error){
 
         console.log(
-            "Ошибка обновления:",
-            updateError
+            "ONLINE ERROR:",
+            error
         );
 
-    } else {
+    }
+
+}
+
+
+
+// =====================================
+// OFFLINE
+// =====================================
+
+async function setOffline(){
+
+
+    if(!userId){
+
+        return;
+
+    }
+
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("profiles")
+        .update({
+
+            is_online:
+                false,
+
+            last_seen:
+                new Date()
+
+        })
+        .eq(
+            "id",
+            userId
+        );
+
+
+
+    if(error){
 
         console.log(
-            "Пользователь онлайн",
-            userId
+            "OFFLINE ERROR:",
+            error
         );
 
     }
 
 
 }
-
-
-// запуск
-updateOnlineStatus();
-
-
-// обновлять каждые 30 секунд
-setInterval(
-    updateOnlineStatus,
-    30000
-);
-
-
-
-// при закрытии страницы
-window.addEventListener(
-    "beforeunload",
-    async function(){
-
-        const {
-            data
-        } =
-        await supabaseClient.auth.getSession();
-
-
-        if (
-            !data.session
-        ) {
-
-            return;
-
-        }
-
-
-        await supabaseClient
-            .from("profiles")
-            .update({
-
-                is_online:false,
-
-                last_seen:new Date()
-
-            })
-            .eq(
-                "id",
-                data.session.user.id
-            );
-
-    }
-);
