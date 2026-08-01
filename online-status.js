@@ -1,10 +1,5 @@
-// =====================================================
-// MEMORA ONLINE STATUS
-// =====================================================
-
 const ONLINE_SUPABASE_URL =
 "https://eabfkvqeveipwpomtjst.supabase.co";
-
 
 const ONLINE_SUPABASE_KEY =
 "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
@@ -20,46 +15,36 @@ window.supabase.createClient(
 let onlineUser = null;
 
 
-// =====================================================
+// ===============================
 // START
-// =====================================================
+// ===============================
 
 document.addEventListener(
-"DOMContentLoaded",
-startOnlineStatus
+    "DOMContentLoaded",
+    startOnlineStatus
 );
 
 
-
 async function startOnlineStatus(){
+
 
     const {
         data,
         error
     } =
-    await onlineSupabase
-        .auth
-        .getSession();
+    await onlineSupabase.auth.getSession();
 
 
     if(error){
-
-        console.error(
-            "Online status error",
-            error
-        );
-
+        console.error(error);
         return;
-
     }
 
 
     if(
         !data.session
     ){
-
         return;
-
     }
 
 
@@ -67,33 +52,32 @@ async function startOnlineStatus(){
     data.session.user;
 
 
-    setUserOnline();
+    setOnline();
 
 
-    // обновляем каждые 60 секунд
+    // обновляем каждые 30 секунд
 
     setInterval(
-        setUserOnline,
-        60000
+        setOnline,
+        30000
     );
 
-
-    // когда закрываем вкладку
 
     window.addEventListener(
         "beforeunload",
-        setUserOffline
+        setOffline
     );
 
+
 }
 
 
-
-// =====================================================
+// ===============================
 // ONLINE
-// =====================================================
+// ===============================
 
-async function setUserOnline(){
+async function setOnline(){
+
 
     if(!onlineUser){
         return;
@@ -101,32 +85,31 @@ async function setUserOnline(){
 
 
     await onlineSupabase
-        .from("profiles")
-        .update({
+    .from("profiles")
+    .update({
 
-            is_online:true,
+        is_online:true,
 
-            last_seen:
-            new Date(),
+        last_seen:
+        new Date()
 
-            updated_at:
-            new Date()
+    })
+    .eq(
+        "id",
+        onlineUser.id
+    );
 
-        })
-        .eq(
-            "id",
-            onlineUser.id
-        );
 
 }
 
 
 
-// =====================================================
+// ===============================
 // OFFLINE
-// =====================================================
+// ===============================
 
-async function setUserOffline(){
+async function setOffline(){
+
 
     if(!onlineUser){
         return;
@@ -134,21 +117,19 @@ async function setUserOffline(){
 
 
     await onlineSupabase
-        .from("profiles")
-        .update({
+    .from("profiles")
+    .update({
 
-            is_online:false,
+        is_online:false,
 
-            last_seen:
-            new Date(),
+        last_seen:
+        new Date()
 
-            updated_at:
-            new Date()
+    })
+    .eq(
+        "id",
+        onlineUser.id
+    );
 
-        })
-        .eq(
-            "id",
-            onlineUser.id
-        );
 
 }
