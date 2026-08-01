@@ -763,3 +763,161 @@ function renderNotifications(){
 
 
 }
+/* =====================================================
+   REALTIME NOTIFICATIONS
+   PART 4
+===================================================== */
+
+
+function subscribeToNotifications(){
+
+
+    if(
+        !currentUser
+    ){
+
+        return;
+
+    }
+
+
+
+    if(
+        notificationChannel
+    ){
+
+        supabaseClient.removeChannel(
+            notificationChannel
+        );
+
+    }
+
+
+
+    notificationChannel =
+        supabaseClient
+            .channel(
+                "memora-notifications-" +
+                currentUser.id
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event:
+                        "INSERT",
+
+                    schema:
+                        "public",
+
+                    table:
+                        "notifications",
+
+                    filter:
+                        "user_id=eq." +
+                        currentUser.id
+
+                },
+
+                function(payload){
+
+
+                    console.log(
+                        "New notification:",
+                        payload.new
+                    );
+
+
+
+                    notifications.unshift(
+                        payload.new
+                    );
+
+
+
+                    renderNotifications();
+
+
+
+                }
+
+            )
+            .subscribe(
+                function(status){
+
+                    console.log(
+                        "Notification realtime:",
+                        status
+                    );
+
+                }
+            );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   TEMP CHAT OPEN
+===================================================== */
+
+
+async function openConversation(
+    friend
+){
+
+
+    console.log(
+        "Opening chat with:",
+        friend
+    );
+
+
+
+    activeFriend =
+        friend;
+
+
+
+    if(
+        conversationName
+    ){
+
+        conversationName.textContent =
+            friend.display_name ||
+            "Memora user";
+
+    }
+
+
+
+    if(
+        friendsView
+    ){
+
+        friendsView.style.display =
+            "none";
+
+    }
+
+
+
+    if(
+        conversationView
+    ){
+
+        conversationView.style.display =
+            "flex";
+
+    }
+
+
+
+    console.log(
+        "Chat window opened"
+    );
+
+
+}
