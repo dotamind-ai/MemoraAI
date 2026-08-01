@@ -1003,6 +1003,9 @@ function setupConversation(){
 
 
 function closeConversation(){
+   console.trace(
+    "CLOSE CHAT CALLED"
+);
 
 
     console.log(
