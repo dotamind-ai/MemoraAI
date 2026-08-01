@@ -18,8 +18,7 @@ const supabaseClient =
     );
 
 
-
-let userId = null;
+let currentUserId = null;
 
 
 
@@ -48,7 +47,7 @@ async function startOnlineStatus() {
     if(error){
 
         console.log(
-            "Session error:",
+            "Session error",
             error
         );
 
@@ -63,7 +62,7 @@ async function startOnlineStatus() {
     ){
 
         console.log(
-            "No session"
+            "No user"
         );
 
         return;
@@ -72,25 +71,25 @@ async function startOnlineStatus() {
 
 
 
-    userId =
+    currentUserId =
         data.session.user.id;
 
 
 
     console.log(
-        "Online status started:",
-        userId
+        "Online user:",
+        currentUserId
     );
 
 
 
-    // ставим онлайн сразу
+    // сразу онлайн
 
     await setOnline();
 
 
 
-    // обновляем каждые 30 секунд
+    // обновляем время каждые 30 секунд
 
     setInterval(
         async function(){
@@ -102,47 +101,18 @@ async function startOnlineStatus() {
     );
 
 
-
-    // когда вкладка скрыта
-
-    document.addEventListener(
-        "visibilitychange",
-        async function(){
-
-
-            if(
-                document.hidden
-            ){
-
-                await setOffline();
-
-
-            }
-            else
-            {
-
-                await setOnline();
-
-            }
-
-
-        }
-    );
-
-
-
 }
 
 
 
 // =====================================
-// ONLINE
+// SET ONLINE
 // =====================================
 
 async function setOnline(){
 
 
-    if(!userId){
+    if(!currentUserId){
 
         return;
 
@@ -161,12 +131,12 @@ async function setOnline(){
                 true,
 
             last_seen:
-                new Date()
+                new Date().toISOString()
 
         })
         .eq(
             "id",
-            userId
+            currentUserId
         );
 
 
@@ -174,7 +144,7 @@ async function setOnline(){
     if(error){
 
         console.log(
-            "ONLINE ERROR:",
+            "Online error:",
             error
         );
 
@@ -185,13 +155,13 @@ async function setOnline(){
 
 
 // =====================================
-// OFFLINE
+// SET OFFLINE
 // =====================================
 
 async function setOffline(){
 
 
-    if(!userId){
+    if(!currentUserId){
 
         return;
 
@@ -210,12 +180,12 @@ async function setOffline(){
                 false,
 
             last_seen:
-                new Date()
+                new Date().toISOString()
 
         })
         .eq(
             "id",
-            userId
+            currentUserId
         );
 
 
@@ -223,11 +193,35 @@ async function setOffline(){
     if(error){
 
         console.log(
-            "OFFLINE ERROR:",
+            "Offline error:",
             error
         );
 
     }
 
-
 }
+
+
+
+// =====================================
+// LOGOUT SUPPORT
+// =====================================
+
+supabaseClient.auth.onAuthStateChange(
+    async function(
+        event
+    ){
+
+
+        if(
+            event ===
+            "SIGNED_OUT"
+        ){
+
+            await setOffline();
+
+        }
+
+
+    }
+);
