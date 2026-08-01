@@ -1531,3 +1531,118 @@ function autoResizeMessageInput() {
         "px";
 
 }
+// =====================================================
+// SEND MESSAGE
+// =====================================================
+
+async function sendMessage(event) {
+
+    event.preventDefault();
+
+
+    console.log(
+        "SEND MESSAGE START"
+    );
+
+
+    if (
+        !activeConversationId ||
+        !messageInput
+    ) {
+
+        console.warn(
+            "No active conversation"
+        );
+
+        return;
+
+    }
+
+
+    const content =
+        messageInput.value.trim();
+
+
+    if (!content) {
+
+        return;
+
+    }
+
+
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("messages")
+            .insert({
+
+                conversation_id:
+                    activeConversationId,
+
+                sender_id:
+                    currentUser.id,
+
+                content:
+                    content
+
+            })
+            .select(
+                "id,conversation_id,sender_id,content,created_at"
+            )
+            .single();
+
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+
+        console.log(
+            "Message sent:",
+            data
+        );
+
+
+        messageInput.value =
+            "";
+
+
+        if(
+            typeof autoResizeMessageInput === "function"
+        ){
+
+            autoResizeMessageInput();
+
+        }
+
+
+        appendMessage(
+            data
+        );
+
+
+        scrollMessagesToBottom();
+
+
+
+    } catch(error){
+
+
+        console.error(
+            "Send message error:",
+            error
+        );
+
+
+    }
+
+}
