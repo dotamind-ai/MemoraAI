@@ -1,3 +1,7 @@
+// =====================================
+// MEMORA ONLINE STATUS
+// =====================================
+
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
@@ -21,13 +25,31 @@ let userId = null;
 
 async function startOnlineStatus() {
 
-
     const {
-        data
+        data,
+        error
     } = await supabaseClient.auth.getSession();
 
 
-    if (!data.session) {
+    if (error) {
+
+        console.error(
+            "Session error:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !data.session
+    ) {
+
+        console.log(
+            "No session"
+        );
 
         return;
 
@@ -38,30 +60,65 @@ async function startOnlineStatus() {
         data.session.user.id;
 
 
-    await setOnline();
+    console.log(
+        "ONLINE USER:",
+        userId
+    );
 
 
-    // обновляем только время активности
+    await updateOnlineStatus(
+        true
+    );
+
+
+    // обновляем каждые 30 секунд
+
     setInterval(
-        async () => {
+        async function() {
 
-            await updateLastSeen();
+            await updateOnlineStatus(
+                true
+            );
 
         },
         30000
     );
 
 
-    // выход из аккаунта
-    supabaseClient.auth.onAuthStateChange(
-        async function(event) {
+    // при выходе со страницы
+
+    window.addEventListener(
+        "beforeunload",
+        function() {
+
+            updateOnlineStatus(
+                false
+            );
+
+        }
+    );
+
+
+    // когда вкладка скрыта
+
+    document.addEventListener(
+        "visibilitychange",
+        function() {
 
 
             if (
-                event === "SIGNED_OUT"
+                document.hidden
             ) {
 
-                await setOffline();
+                updateOnlineStatus(
+                    false
+                );
+
+            } else {
+
+                updateOnlineStatus(
+                    true
+                );
 
             }
 
@@ -69,120 +126,71 @@ async function startOnlineStatus() {
         }
     );
 
+}
 
-    // закрытие страницы
-    window.addEventListener(
-        "pagehide",
-        function() {
 
-            setOffline();
+// =====================================
+// UPDATE STATUS
+// =====================================
 
-        }
+async function updateOnlineStatus(
+    status
+) {
+
+
+    if (!userId) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("profiles")
+        .update({
+
+            is_online:
+                status,
+
+            last_seen:
+                new Date()
+
+        })
+        .eq(
+            "id",
+            userId
+        )
+        .select();
+
+
+
+    if (error) {
+
+        console.error(
+            "STATUS ERROR:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "STATUS UPDATED:",
+        data
     );
 
-
 }
 
 
-
 // =====================================
-// ONLINE
+// START AFTER PAGE LOAD
 // =====================================
-
-async function setOnline() {
-
-
-    if (!userId) {
-
-        return;
-
-    }
-
-
-    await supabaseClient
-        .from("profiles")
-        .update({
-
-            is_online: true,
-
-            last_seen:
-                new Date()
-
-        })
-        .eq(
-            "id",
-            userId
-        );
-
-}
-
-
-
-// =====================================
-// UPDATE TIME
-// =====================================
-
-async function updateLastSeen() {
-
-
-    if (!userId) {
-
-        return;
-
-    }
-
-
-    await supabaseClient
-        .from("profiles")
-        .update({
-
-            last_seen:
-                new Date()
-
-        })
-        .eq(
-            "id",
-            userId
-        );
-
-}
-
-
-
-// =====================================
-// OFFLINE
-// =====================================
-
-async function setOffline() {
-
-
-    if (!userId) {
-
-        return;
-
-    }
-
-
-    await supabaseClient
-        .from("profiles")
-        .update({
-
-            is_online: false,
-
-            last_seen:
-                new Date()
-
-        })
-        .eq(
-            "id",
-            userId
-        );
-
-}
-
-
-
-// запуск
 
 document.addEventListener(
     "DOMContentLoaded",
