@@ -1,7 +1,7 @@
 // =====================================================
 // MEMORA ONLINE STATUS
 // =====================================================
-
+alert("online-status.js работает");
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
