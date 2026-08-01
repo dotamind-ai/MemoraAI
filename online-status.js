@@ -1,151 +1,116 @@
-// =====================================================
-// MEMORA ONLINE STATUS
-// =====================================================
-// Управляет:
-// - статусом пользователя в сети
-// - временем последнего посещения
-// =====================================================
-
-
-const ONLINE_SUPABASE_URL =
+const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
 
-
-const ONLINE_SUPABASE_KEY =
+const SUPABASE_KEY =
     "sb_publishable_KXXG6XA21lfQODJkpolUxQ_-QSy6I5W";
 
 
-const onlineSupabase =
+const supabaseClient =
     window.supabase.createClient(
-        ONLINE_SUPABASE_URL,
-        ONLINE_SUPABASE_KEY
+        SUPABASE_URL,
+        SUPABASE_KEY
     );
 
 
-let onlineUser = null;
+let userId = null;
 
 
-// =====================================================
+// =====================================
 // START
-// =====================================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    startOnlineStatus
-);
-
-
+// =====================================
 
 async function startOnlineStatus() {
 
-    try {
+
+    const {
+        data
+    } = await supabaseClient.auth.getSession();
 
 
-        const {
-            data,
-            error
-        } =
-        await onlineSupabase
-            .auth
-            .getSession();
+    if (
+        !data.session
+    ) {
+
+        return;
+
+    }
+
+
+    userId =
+        data.session.user.id;
+
+
+    await setOnline(true);
 
 
 
-        if (error) {
+    // проверка каждые 30 секунд
+    setInterval(
+        async () => {
 
-            console.error(
-                "Online session error:",
-                error
-            );
+            await setOnline(true);
 
-            return;
+        },
+        30000
+    );
+
+
+    // когда закрыли страницу
+    window.addEventListener(
+        "beforeunload",
+        function() {
+
+            setOffline();
 
         }
+    );
 
 
+    // когда вкладка скрыта
+    document.addEventListener(
+        "visibilitychange",
+        function() {
 
-        if (
-            !data.session
-        ) {
-
-            return;
-
-        }
-
-
-
-        onlineUser =
-            data.session.user;
-
-
-
-        await setOnline();
-
-
-
-        // Когда вкладка закрывается
-        window.addEventListener(
-            "beforeunload",
-            function() {
+            if (
+                document.hidden
+            ) {
 
                 setOffline();
 
-            }
-        );
+            } else {
 
-
-        // Если вкладка стала активной
-        document.addEventListener(
-            "visibilitychange",
-            function() {
-
-                if (
-                    document.visibilityState ===
-                    "visible"
-                ) {
-
-                    setOnline();
-
-                }
+                setOnline(true);
 
             }
-        );
 
-
-
-    } catch(error) {
-
-        console.error(
-            "Online status error:",
-            error
-        );
-
-    }
+        }
+    );
 
 }
 
 
 
-// =====================================================
+// =====================================
 // ONLINE
-// =====================================================
+// =====================================
 
-async function setOnline() {
+async function setOnline(
+    value
+) {
 
-    if (!onlineUser) {
+    if (!userId) {
+
         return;
+
     }
 
 
-    const {
-        error
-    } =
-    await onlineSupabase
+    await supabaseClient
         .from("profiles")
         .update({
 
             is_online:
-                true,
+                value,
 
             last_seen:
                 new Date()
@@ -153,35 +118,27 @@ async function setOnline() {
         })
         .eq(
             "id",
-            onlineUser.id
+            userId
         );
-
-
-    if(error) {
-
-        console.error(
-            "Set online error:",
-            error
-        );
-
-    }
 
 }
 
 
 
-// =====================================================
+// =====================================
 // OFFLINE
-// =====================================================
+// =====================================
 
-function setOffline() {
+async function setOffline() {
 
-    if (!onlineUser) {
+    if (!userId) {
+
         return;
+
     }
 
 
-    onlineSupabase
+    await supabaseClient
         .from("profiles")
         .update({
 
@@ -194,7 +151,15 @@ function setOffline() {
         })
         .eq(
             "id",
-            onlineUser.id
+            userId
         );
 
 }
+
+
+
+// запуск после загрузки
+document.addEventListener(
+    "DOMContentLoaded",
+    startOnlineStatus
+);
