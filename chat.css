@@ -6518,3 +6518,160 @@ function injectToastStyles() {
     }
 
 }
+   /* =====================================================
+   FRIEND REQUEST BUTTON
+===================================================== */
+
+
+.add-friend-request {
+
+    width: 120px;
+
+    height: 34px;
+
+    margin-top: 10px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(160,120,255,0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(120,80,255,0.22),
+            rgba(80,60,180,0.18)
+        );
+
+    color:
+        #d8ccff;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.3px;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s ease;
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+
+/* обычная кнопка */
+
+.add-friend-request:hover {
+
+    transform:
+        translateY(-1px);
+
+    border-color:
+        rgba(190,160,255,0.9);
+
+    box-shadow:
+        0 0 18px rgba(130,90,255,0.35);
+
+}
+
+
+
+/* нажимаемая */
+
+.add-friend-request:active {
+
+    transform:
+        scale(0.96);
+
+}
+
+
+
+
+/* =====================================================
+   FRIEND STATUS BUTTONS
+===================================================== */
+
+
+/* уже друзья */
+
+.add-friend-request:disabled {
+
+    cursor:
+        default;
+
+    opacity:
+        1;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    color:
+        rgba(255,255,255,0.55);
+
+    box-shadow:
+        none;
+
+}
+
+
+
+
+/* если текст Friends */
+
+.add-friend-request:disabled {
+
+    transition:
+        0.3s ease;
+
+}
+
+
+
+/* когда кнопка показывает Friends ✓ */
+
+.add-friend-request:disabled::after {
+
+    content:
+        "";
+
+}
+
+
+
+
+/* карточка найденного пользователя */
+
+.found-user {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+}
+
+
+
+
+.found-info {
+
+    flex:
+        1;
+
+}
