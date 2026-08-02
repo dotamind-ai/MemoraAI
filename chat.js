@@ -2016,12 +2016,58 @@ if(clearBtn){
 
     clearBtn.addEventListener(
         "click",
-        ()=>{
+        async ()=>{
 
 
             console.log(
                 "Clear notifications clicked"
             );
+
+
+            if(
+                !currentUser
+            ){
+
+                console.error(
+                    "No current user"
+                );
+
+                return;
+
+            }
+
+
+
+            const { error } =
+                await supabaseClient
+                    .from(
+                        "notifications"
+                    )
+                    .delete()
+                    .eq(
+                        "user_id",
+                        currentUser.id
+                    );
+
+
+
+            if(error){
+
+                console.error(
+                    "Clear notifications error:",
+                    error
+                );
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Notifications deleted from database"
+            );
+
 
 
             const list =
@@ -2054,8 +2100,6 @@ if(clearBtn){
 
 
 
-            // если массив существует
-
             if(
                 typeof notifications !== "undefined"
             ){
@@ -2067,6 +2111,5 @@ if(clearBtn){
 
         }
     );
-
 
 }
