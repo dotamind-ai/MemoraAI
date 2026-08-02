@@ -1935,3 +1935,69 @@ if(profileNav){
     };
 
 }
+// ======================================
+// NOTIFICATION PANEL UI
+// ======================================
+
+
+const notificationButton =
+    document.getElementById(
+        "notificationButton"
+    );
+
+
+const notificationPanel =
+    document.getElementById(
+        "notificationPanel"
+    );
+
+
+const closeNotificationPanel =
+    document.getElementById(
+        "closeNotificationPanel"
+    );
+
+
+
+if(notificationButton){
+
+    notificationButton.addEventListener(
+        "click",
+        ()=>{
+
+
+            if(notificationPanel.hidden){
+
+                notificationPanel.hidden = false;
+
+                console.log(
+                    "Notifications opened"
+                );
+
+
+            }else{
+
+                notificationPanel.hidden = true;
+
+            }
+
+
+        }
+    );
+
+}
+
+
+
+if(closeNotificationPanel){
+
+    closeNotificationPanel.addEventListener(
+        "click",
+        ()=>{
+
+            notificationPanel.hidden = true;
+
+        }
+    );
+
+}
