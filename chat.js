@@ -2410,3 +2410,104 @@ if(addFriendSearchButton){
 
 
 }
+/* =====================================================
+   FRIEND REQUEST BUTTON
+===================================================== */
+
+
+document.addEventListener(
+    "click",
+    async function(e){
+
+
+        const button =
+            e.target.closest(
+                ".add-friend-request"
+            );
+
+
+        if(!button){
+            return;
+        }
+
+
+
+        const friendId =
+            button.dataset.userId;
+
+
+
+        console.log(
+            "Send friend request:",
+            friendId
+        );
+
+
+
+        if(!currentUser){
+
+            console.error(
+                "Current user not loaded"
+            );
+
+            return;
+
+        }
+
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from(
+                "friendships"
+            )
+            .insert({
+
+                requester_id:
+                    currentUser.id,
+
+                addressee_id:
+                    friendId,
+
+                status:
+                    "pending"
+
+            })
+            .select()
+            .single();
+
+
+
+        if(error){
+
+            console.error(
+                "Friend request error:",
+                error
+            );
+
+            return;
+
+        }
+
+
+
+        console.log(
+            "Friend request created:",
+            data
+        );
+
+
+
+        button.textContent =
+            "Request sent";
+
+
+        button.disabled =
+            true;
+
+
+    }
+);
