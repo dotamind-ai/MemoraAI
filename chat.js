@@ -2457,8 +2457,10 @@ document.addEventListener(
 
 // CHECK EXISTING REQUEST
 
+// CHECK FRIEND STATUS
+
 const {
-    data: existingRequest,
+    data: existingRequests,
     error: checkError
 }
 =
@@ -2467,12 +2469,84 @@ await supabaseClient
         "friendships"
     )
     .select(
-        "id,status"
+        "id,status,requester_id,addressee_id"
     )
     .or(
         `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
-    )
-    .maybeSingle();
+    );
+
+
+
+if(checkError){
+
+    console.error(
+        "Check request error:",
+        checkError
+    );
+
+    return;
+
+}
+
+
+
+const acceptedFriend =
+    existingRequests?.find(
+        r =>
+            r.status === "accepted"
+    );
+
+
+
+if(acceptedFriend){
+
+    console.log(
+        "Already friends",
+        acceptedFriend
+    );
+
+
+    button.textContent =
+        "Friends ✓";
+
+
+    button.disabled =
+        true;
+
+
+    return;
+
+}
+
+
+
+const pendingRequest =
+    existingRequests?.find(
+        r =>
+            r.status === "pending"
+    );
+
+
+
+if(pendingRequest){
+
+    console.log(
+        "Request already sent",
+        pendingRequest
+    );
+
+
+    button.textContent =
+        "Request sent";
+
+
+    button.disabled =
+        true;
+
+
+    return;
+
+}
 
 
 
