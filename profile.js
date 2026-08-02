@@ -2,7 +2,22 @@
 // MEMORA PROFILE
 // Supabase + Profile + Avatar + Logout
 // =====================================================
+console.log(
+    "PROFILE URL:",
+    window.location.href
+);
 
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+console.log(
+    "PROFILE USER ID:",
+    params.get("user")
+);
 
 const SUPABASE_URL =
     "https://eabfkvqeveipwpomtjst.supabase.co";
