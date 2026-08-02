@@ -2186,6 +2186,11 @@ if(closeAddFriendPanel){
 ===================================================== */
 
 
+/* =====================================================
+   ADD FRIEND SEARCH
+===================================================== */
+
+
 const addFriendSearchButton =
     document.getElementById(
         "searchButton"
@@ -2209,6 +2214,96 @@ const addFriendMessage =
         "searchMessage"
     );
 
+
+
+
+
+/* =====================================================
+   CHECK FRIEND STATUS
+===================================================== */
+
+
+async function checkFriendStatus(
+    friendId
+){
+
+
+    const {
+        data,
+        error
+    }
+    =
+    await supabaseClient
+        .from(
+            "friendships"
+        )
+        .select(
+            "id,status,requester_id,addressee_id"
+        )
+        .or(
+            `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
+        );
+
+
+
+    if(error){
+
+        console.error(
+            "Friend status error:",
+            error
+        );
+
+        return null;
+
+    }
+
+
+
+    const accepted =
+        data.find(
+            item =>
+                item.status === "accepted"
+        );
+
+
+
+    if(accepted){
+
+        return "accepted";
+
+    }
+
+
+
+    const pending =
+        data.find(
+            item =>
+                item.status === "pending"
+        );
+
+
+
+    if(pending){
+
+        return "pending";
+
+    }
+
+
+
+    return null;
+
+
+}
+
+
+
+
+
+
+/* =====================================================
+   FRIEND SEARCH
+===================================================== */
 
 
 if(addFriendSearchButton){
@@ -2258,7 +2353,8 @@ if(addFriendSearchButton){
             const {
                 data,
                 error
-            } =
+            }
+            =
             await supabaseClient
                 .from(
                     "profiles"
@@ -2329,122 +2425,166 @@ if(addFriendSearchButton){
 
 
 
-            data.forEach(
-                user=>{
 
 
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
+            for(
+                const user of data
+            ){
 
 
-                    card.className =
-                        "found-user";
-
-
-let friendButtonText =
-    "Add friend";
-
-
-let friendButtonDisabled =
-    "";
-
-
-
-const relation =
-    await checkFriendStatus(
-        user.id
-    );
-
-
-
-if(relation === "accepted"){
-
-    friendButtonText =
-        "Friends ✓";
-
-    friendButtonDisabled =
-        "disabled";
-
-}
-else if(relation === "pending"){
-
-    friendButtonText =
-        "Request sent";
-
-    friendButtonDisabled =
-        "disabled";
-
-}
-                    card.innerHTML = `
-
-                        <div class="found-avatar">
-
-                            ${
-                                user.avatar_url
-                                ?
-                                `<img src="${user.avatar_url}">`
-                                :
-                                "M"
-                            }
-
-                        </div>
-
-
-                        <div class="found-info">
-
-                            <strong>
-                                ${
-                                    user.display_name
-                                    ||
-                                    "User"
-                                }
-                            </strong>
-
-
-                            <span>
-                                ${
-                                    user.is_online
-                                    ?
-                                    "Online"
-                                    :
-                                    "Offline"
-                                }
-                            </span>
-
-
-                            <button
-                                class="add-friend-request"
-                                data-user-id="${user.id}"
-                                type="button"
-                            >
-                                ${user.friendStatusText || "Add friend"}
-                            </button>
-
-
-                        </div>
-
-                    `;
-
-
-
-                    addFriendResult.appendChild(
-                        card
+                const card =
+                    document.createElement(
+                        "div"
                     );
 
 
+                card.className =
+                    "found-user";
+
+
+
+                const relation =
+                    await checkFriendStatus(
+                        user.id
+                    );
+
+
+
+                let friendButtonText =
+                    "Add friend";
+
+
+                let friendButtonDisabled =
+                    "";
+
+
+
+                if(
+                    relation === "accepted"
+                ){
+
+                    friendButtonText =
+                        "Friends ✓";
+
+
+                    friendButtonDisabled =
+                        "disabled";
+
                 }
-            );
+                else if(
+                    relation === "pending"
+                ){
+
+                    friendButtonText =
+                        "Request sent";
+
+
+                    friendButtonDisabled =
+                        "disabled";
+
+                }
+
+
+
+
+                card.innerHTML = `
+
+
+                    <div class="found-avatar">
+
+
+                        ${
+                            user.avatar_url
+                            ?
+                            `<img src="${user.avatar_url}">`
+                            :
+                            "M"
+                        }
+
+
+                    </div>
+
+
+
+                    <div class="found-info">
+
+
+                        <strong>
+
+                            ${
+                                user.display_name
+                                ||
+                                "User"
+                            }
+
+                        </strong>
+
+
+
+                        <span>
+
+                            ${
+                                user.is_online
+                                ?
+                                "Online"
+                                :
+                                "Offline"
+                            }
+
+                        </span>
+
+
+
+
+                        <button
+
+                            class="add-friend-request"
+
+                            data-user-id="${user.id}"
+
+                            type="button"
+
+                            ${friendButtonDisabled}
+
+                        >
+
+                            ${friendButtonText}
+
+                        </button>
+
+
+
+                    </div>
+
+
+                `;
+
+
+
+                addFriendResult.appendChild(
+                    card
+                );
+
+
+            }
+
 
 
         }
+
     );
 
 
 }
+
+
+
+
+
+
+
 /* =====================================================
-   FRIEND REQUEST BUTTON
+   SEND FRIEND REQUEST
 ===================================================== */
 
 
@@ -2453,15 +2593,32 @@ document.addEventListener(
     async function(e){
 
 
+
         const button =
             e.target.closest(
                 ".add-friend-request"
             );
 
 
+
         if(!button){
+
             return;
+
         }
+
+
+
+        if(!currentUser){
+
+            console.error(
+                "Current user not loaded"
+            );
+
+            return;
+
+        }
+
 
 
 
@@ -2477,149 +2634,61 @@ document.addEventListener(
 
 
 
-        if(!currentUser){
 
-            console.error(
-                "Current user not loaded"
+
+        const relation =
+            await checkFriendStatus(
+                friendId
             );
+
+
+
+        if(
+            relation === "accepted"
+        ){
+
+
+            button.textContent =
+                "Friends ✓";
+
+
+            button.disabled =
+                true;
+
 
             return;
 
         }
 
 
-// CHECK EXISTING REQUEST
 
-// CHECK FRIEND STATUS
+        if(
+            relation === "pending"
+        ){
 
-const {
-    data: existingRequests,
-    error: checkError
-}
-=
-await supabaseClient
-    .from(
-        "friendships"
-    )
-    .select(
-        "id,status,requester_id,addressee_id"
-    )
-    .or(
-        `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
-    );
+
+            button.textContent =
+                "Request sent";
+
+
+            button.disabled =
+                true;
+
+
+            return;
+
+        }
 
 
 
-if(checkError){
-
-    console.error(
-        "Check request error:",
-        checkError
-    );
-
-    return;
-
-}
 
 
 
-const acceptedFriend =
-    existingRequests?.find(
-        r =>
-            r.status === "accepted"
-    );
-
-
-
-if(acceptedFriend){
-
-    console.log(
-        "Already friends",
-        acceptedFriend
-    );
-
-
-    button.textContent =
-        "Friends ✓";
-
-
-    button.disabled =
-        true;
-
-
-    return;
-
-}
-
-
-
-const pendingRequest =
-    existingRequests?.find(
-        r =>
-            r.status === "pending"
-    );
-
-
-
-if(pendingRequest){
-
-    console.log(
-        "Request already sent",
-        pendingRequest
-    );
-
-
-    button.textContent =
-        "Request sent";
-
-
-    button.disabled =
-        true;
-
-
-    return;
-
-}
-
-
-
-if(checkError){
-
-    console.error(
-        "Check request error:",
-        checkError
-    );
-
-    return;
-
-}
-
-
-
-if(existingRequest){
-
-
-    console.log(
-        "Friend request already exists:",
-        existingRequest
-    );
-
-
-    button.textContent =
-        "Request sent";
-
-
-    button.disabled =
-        true;
-
-
-    return;
-
-}
         const {
             data,
             error
-        } =
+        }
+        =
         await supabaseClient
             .from(
                 "friendships"
@@ -2629,8 +2698,10 @@ if(existingRequest){
                 requester_id:
                     currentUser.id,
 
+
                 addressee_id:
                     friendId,
+
 
                 status:
                     "pending"
@@ -2641,12 +2712,16 @@ if(existingRequest){
 
 
 
+
+
         if(error){
+
 
             console.error(
                 "Friend request error:",
                 error
             );
+
 
             return;
 
@@ -2654,61 +2729,80 @@ if(existingRequest){
 
 
 
+
         console.log(
             "Friend request created:",
             data
         );
-       // CREATE NOTIFICATION
-
-const {
-    error: notificationError
-} =
-await supabaseClient
-    .from(
-        "notifications"
-    )
-    .insert({
-
-        user_id:
-            friendId,
-
-        type:
-            "friend_request",
-
-        title:
-            "New friend request",
-
-        body:
-            currentUser.display_name +
-            " wants to add you",
-
-        related_id:
-            data.id,
-
-        read:
-            false
-
-    });
 
 
 
-if(notificationError){
-
-    console.error(
-        "Notification create error:",
-        notificationError
-    );
-
-}
-else{
 
 
-    console.log(
-        "Friend request notification created"
-    );
+
+        const {
+            error:
+            notificationError
+        }
+        =
+        await supabaseClient
+            .from(
+                "notifications"
+            )
+            .insert({
+
+                user_id:
+                    friendId,
 
 
-}
+                type:
+                    "friend_request",
+
+
+                title:
+                    "New friend request",
+
+
+                body:
+                    currentUser.display_name +
+                    " wants to add you",
+
+
+                related_id:
+                    data.id,
+
+
+                read:
+                    false
+
+            });
+
+
+
+
+
+
+        if(notificationError){
+
+
+            console.error(
+                "Notification create error:",
+                notificationError
+            );
+
+
+        }
+        else{
+
+
+            console.log(
+                "Friend request notification created"
+            );
+
+
+        }
+
+
 
 
 
@@ -2718,6 +2812,7 @@ else{
 
         button.disabled =
             true;
+
 
 
     }
