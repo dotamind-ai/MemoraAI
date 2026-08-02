@@ -1948,7 +1948,7 @@ if(profileNav){
 
     profileNav.onclick = function(){
 
-        window.location.href =
+        cation.href =
             "profile.html";
 
     };
@@ -2874,9 +2874,9 @@ if(friendProfileButton){
 
 
 
-            window.location.href =
-                "profile.html?user=" +
-                activeFriend.id;
+           window.location.href =
+    "profile.html?user=" +
+    activeFriend.friend_id;
 
 
         }
