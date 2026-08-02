@@ -1836,3 +1836,23 @@ function scrollMessagesToBottom() {
     );
 
 }
+// ======================================
+// PROFILE BUTTON
+// ======================================
+
+const profileButton =
+    document.getElementById("profileButton");
+
+if (profileButton) {
+
+    profileButton.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "profile.html";
+
+        }
+    );
+
+}
