@@ -623,7 +623,7 @@ function setupEvents(){
             ()=>{
 
                 window.location.href =
-                    "index.html";
+                    "chat.html";
 
             }
         );
