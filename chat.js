@@ -727,34 +727,83 @@ function renderNotifications(){
 
 
     notifications.forEach(
-        function(notification){
+    function(notification){
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "notification-card";
 
 
 
-            const item =
-                document.createElement(
-                    "div"
-                );
+        let actions = "";
 
 
 
-            item.className =
-                "notification-card";
+        if(
+            notification.type === "friend_request"
+        ){
+
+            actions = `
+
+                <div class="notification-actions">
+
+
+                    <button
+                        class="accept-friend-button"
+                        data-request-id="${notification.related_id}"
+                    >
+                        Accept
+                    </button>
 
 
 
-            item.innerHTML = `
+                    <button
+                        class="reject-friend-button"
+                        data-request-id="${notification.related_id}"
+                    >
+                        Reject
+                    </button>
 
-                <strong>
-                    ${notification.title || "Notification"}
-                </strong>
 
-                <span>
-                    ${notification.body || ""}
-                </span>
+                </div>
 
             `;
 
+        }
+
+
+
+        item.innerHTML = `
+
+            <strong>
+                ${notification.title || "Notification"}
+            </strong>
+
+
+            <span>
+                ${notification.body || ""}
+            </span>
+
+
+            ${actions}
+
+        `;
+
+
+
+        notificationList.appendChild(
+            item
+        );
+
+
+    }
+);
 
 
             notificationList.appendChild(
