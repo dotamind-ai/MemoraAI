@@ -2001,3 +2001,77 @@ if(closeNotificationPanel){
     );
 
 }
+// ======================================
+// CLEAR NOTIFICATIONS BUTTON
+// ======================================
+
+
+const clearNotificationsButton =
+    document.getElementById(
+        "clearNotificationsButton"
+    );
+
+
+const notificationBadge =
+    document.getElementById(
+        "notificationBadge"
+    );
+
+
+const notificationList =
+    document.getElementById(
+        "notificationList"
+    );
+
+
+
+if(clearNotificationsButton){
+
+    clearNotificationsButton.addEventListener(
+        "click",
+        ()=>{
+
+
+            console.log(
+                "Clear notifications clicked"
+            );
+
+
+
+            // очищаем список на экране
+
+            if(notificationList){
+
+                notificationList.innerHTML = "";
+
+            }
+
+
+
+            // убираем цифру на колокольчике
+
+            if(notificationBadge){
+
+                notificationBadge.hidden = true;
+
+                notificationBadge.textContent = "0";
+
+            }
+
+
+
+            // очищаем локальный массив
+
+            if(
+                typeof notifications !== "undefined"
+            ){
+
+                notifications = [];
+
+            }
+
+
+        }
+    );
+
+}
