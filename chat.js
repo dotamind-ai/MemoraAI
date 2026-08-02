@@ -2382,7 +2382,7 @@ if(addFriendSearchButton){
 
 
                             <button
-                                class="send-request-button"
+                                class="add-friend-request"
                                 data-user-id="${user.id}"
                                 type="button"
                             >
