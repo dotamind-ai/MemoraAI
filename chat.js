@@ -35,6 +35,10 @@ let activeFriend =
     null;
 
 
+let activeFriendId =
+    null;
+
+
 let activeConversationId =
     null;
 
