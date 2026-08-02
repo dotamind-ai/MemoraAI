@@ -2343,7 +2343,40 @@ if(addFriendSearchButton){
                         "found-user";
 
 
+let friendButtonText =
+    "Add friend";
 
+
+let friendButtonDisabled =
+    "";
+
+
+
+const relation =
+    await checkFriendStatus(
+        user.id
+    );
+
+
+
+if(relation === "accepted"){
+
+    friendButtonText =
+        "Friends ✓";
+
+    friendButtonDisabled =
+        "disabled";
+
+}
+else if(relation === "pending"){
+
+    friendButtonText =
+        "Request sent";
+
+    friendButtonDisabled =
+        "disabled";
+
+}
                     card.innerHTML = `
 
                         <div class="found-avatar">
@@ -2386,7 +2419,7 @@ if(addFriendSearchButton){
                                 data-user-id="${user.id}"
                                 type="button"
                             >
-                                Add friend
+                                ${user.friendStatusText || "Add friend"}
                             </button>
 
 
