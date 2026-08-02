@@ -2498,6 +2498,57 @@ document.addEventListener(
             "Friend request created:",
             data
         );
+       // CREATE NOTIFICATION
+
+const {
+    error: notificationError
+} =
+await supabaseClient
+    .from(
+        "notifications"
+    )
+    .insert({
+
+        user_id:
+            friendId,
+
+        type:
+            "friend_request",
+
+        title:
+            "New friend request",
+
+        body:
+            currentUser.display_name +
+            " wants to add you",
+
+        related_id:
+            data.id,
+
+        read:
+            false
+
+    });
+
+
+
+if(notificationError){
+
+    console.error(
+        "Notification create error:",
+        notificationError
+    );
+
+}
+else{
+
+
+    console.log(
+        "Friend request notification created"
+    );
+
+
+}
 
 
 
