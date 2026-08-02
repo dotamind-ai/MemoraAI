@@ -1856,3 +1856,74 @@ if (profileButton) {
     );
 
 }
+// ======================================
+// BOTTOM NAVIGATION
+// ======================================
+
+
+const homeNav =
+    document.getElementById("homeNav");
+
+
+const calendarNav =
+    document.getElementById("calendarNav");
+
+
+const timelineNav =
+    document.getElementById("timelineNav");
+
+
+const profileNav =
+    document.getElementById("profileNav");
+
+
+
+if(homeNav){
+
+    homeNav.onclick = function(){
+
+        window.location.href =
+            "index.html";
+
+    };
+
+}
+
+
+
+if(calendarNav){
+
+    calendarNav.onclick = function(){
+
+        window.location.href =
+            "calendar.html";
+
+    };
+
+}
+
+
+
+if(timelineNav){
+
+    timelineNav.onclick = function(){
+
+        window.location.href =
+            "timeline.html";
+
+    };
+
+}
+
+
+
+if(profileNav){
+
+    profileNav.onclick = function(){
+
+        window.location.href =
+            "profile.html";
+
+    };
+
+}
