@@ -1869,7 +1869,7 @@ const calendarNav =
     document.getElementById("calendarNav");
 
 
-const timelineNav =
+const eventsNav =
     document.getElementById("timelineNav");
 
 
@@ -1877,6 +1877,8 @@ const profileNav =
     document.getElementById("profileNav");
 
 
+
+// Memories
 
 if(homeNav){
 
@@ -1891,6 +1893,8 @@ if(homeNav){
 
 
 
+// Calendar
+
 if(calendarNav){
 
     calendarNav.onclick = function(){
@@ -1904,18 +1908,22 @@ if(calendarNav){
 
 
 
-if(timelineNav){
+// Events
 
-    timelineNav.onclick = function(){
+if(eventsNav){
+
+    eventsNav.onclick = function(){
 
         window.location.href =
-            "timeline.html";
+            "event.html";
 
     };
 
 }
 
 
+
+// Profile
 
 if(profileNav){
 
