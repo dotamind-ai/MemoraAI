@@ -1190,4 +1190,121 @@ setTimeout(()=>{
 
 },1000);
 
+/* =====================================================
+   REMOVE FRIEND
+===================================================== */
 
+
+const removeFriendButton =
+    document.getElementById(
+        "removeFriendButton"
+    );
+
+
+
+async function setupRemoveFriend(){
+
+
+    // Только для чужого профиля
+
+    if(
+        !viewedUserId ||
+        !currentUser ||
+        !removeFriendButton
+    ){
+
+        return;
+
+    }
+
+
+
+    removeFriendButton.style.display =
+        "block";
+
+
+
+    removeFriendButton.addEventListener(
+        "click",
+        async ()=>{
+
+
+            console.log(
+                "Removing friend:",
+                viewedUserId
+            );
+
+
+
+            removeFriendButton.disabled =
+                true;
+
+
+
+            const {
+                error
+            } =
+            await supabaseClient
+                .from(
+                    "friendships"
+                )
+                .delete()
+                .or(
+                    `and(requester_id.eq.${currentUser.id},addressee_id.eq.${viewedUserId}),and(requester_id.eq.${viewedUserId},addressee_id.eq.${currentUser.id})`
+                );
+
+
+
+            if(error){
+
+
+                console.error(
+                    "Remove friend error:",
+                    error
+                );
+
+
+                removeFriendButton.disabled =
+                    false;
+
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Friend removed"
+            );
+
+
+            removeFriendButton.textContent =
+                "Removed ✓";
+
+
+
+            setTimeout(()=>{
+
+
+                window.location.href =
+                    "chat.html";
+
+
+            },1000);
+
+
+
+        }
+    );
+
+
+}
+
+
+
+setTimeout(()=>{
+
+    setupRemoveFriend();
+
+},1000);
