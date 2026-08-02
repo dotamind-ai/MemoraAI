@@ -2,31 +2,9 @@
 // MEMORA PROFILE
 // Supabase + Profile + Avatar + Logout
 // =====================================================
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const viewedUserId =
-    urlParams.get(
-        "user"
-    );
-
-
-console.log(
-    "FINAL PROFILE TARGET:",
-    viewedUserId || "MY PROFILE"
-);
-console.log(
-    "PROFILE PAGE OPEN"
-);
-
-
-console.log(
-    "CURRENT URL:",
-    window.location.href
-);
+// =====================================================
+// PROFILE TARGET
+// =====================================================
 
 
 const profileParams =
@@ -40,6 +18,36 @@ const viewedUserId =
         "user"
     );
 
+
+console.log(
+    "PROFILE PAGE OPEN"
+);
+
+
+console.log(
+    "CURRENT URL:",
+    window.location.href
+);
+
+
+console.log(
+    "VIEW PROFILE ID:",
+    viewedUserId
+);
+
+
+const isForeignProfile =
+    !!viewedUserId;
+
+
+console.log(
+    "PROFILE MODE:",
+    isForeignProfile
+    ?
+    "FOREIGN USER"
+    :
+    "MY PROFILE"
+);
 
 console.log(
     "VIEW PROFILE ID:",
@@ -354,9 +362,9 @@ async function loadProfile(){
             "id,display_name,avatar_url,updated_at"
         )
         .eq(
-            "id",
-            currentUser.id
-        )
+    "id",
+    viewedUserId || currentUser.id
+)
         .maybeSingle();
 
 
