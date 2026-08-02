@@ -1915,7 +1915,7 @@ if(eventsNav){
     eventsNav.onclick = function(){
 
         window.location.href =
-            "event.html";
+            "events.html";
 
     };
 
