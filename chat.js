@@ -2181,3 +2181,232 @@ if(closeAddFriendPanel){
     );
 
 }
+/* =====================================================
+   ADD FRIEND SEARCH
+===================================================== */
+
+
+const addFriendSearchButton =
+    document.getElementById(
+        "searchButton"
+    );
+
+
+const addFriendInput =
+    document.getElementById(
+        "emailSearch"
+    );
+
+
+const addFriendResult =
+    document.getElementById(
+        "searchResult"
+    );
+
+
+const addFriendMessage =
+    document.getElementById(
+        "searchMessage"
+    );
+
+
+
+if(addFriendSearchButton){
+
+
+    addFriendSearchButton.addEventListener(
+        "click",
+        async ()=>{
+
+
+            const nickname =
+                addFriendInput.value
+                    .trim();
+
+
+
+            if(!nickname){
+
+
+                addFriendMessage.textContent =
+                    "Enter username";
+
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Friend search:",
+                nickname
+            );
+
+
+
+            addFriendMessage.textContent =
+                "Searching...";
+
+
+
+            addFriendResult.innerHTML =
+                "";
+
+
+
+            const {
+                data,
+                error
+            } =
+            await supabaseClient
+                .from(
+                    "profiles"
+                )
+                .select(
+                    `
+                    id,
+                    display_name,
+                    avatar_url,
+                    is_online
+                    `
+                )
+                .ilike(
+                    "display_name",
+                    `%${nickname}%`
+                )
+                .neq(
+                    "id",
+                    currentUser.id
+                );
+
+
+
+            if(error){
+
+
+                console.error(
+                    "Search error:",
+                    error
+                );
+
+
+                addFriendMessage.textContent =
+                    "Search error";
+
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Found users:",
+                data
+            );
+
+
+
+            if(
+                !data ||
+                data.length === 0
+            ){
+
+
+                addFriendMessage.textContent =
+                    "No users found";
+
+
+                return;
+
+            }
+
+
+
+            addFriendMessage.textContent =
+                "";
+
+
+
+            data.forEach(
+                user=>{
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "found-user";
+
+
+
+                    card.innerHTML = `
+
+                        <div class="found-avatar">
+
+                            ${
+                                user.avatar_url
+                                ?
+                                `<img src="${user.avatar_url}">`
+                                :
+                                "M"
+                            }
+
+                        </div>
+
+
+                        <div class="found-info">
+
+                            <strong>
+                                ${
+                                    user.display_name
+                                    ||
+                                    "User"
+                                }
+                            </strong>
+
+
+                            <span>
+                                ${
+                                    user.is_online
+                                    ?
+                                    "Online"
+                                    :
+                                    "Offline"
+                                }
+                            </span>
+
+
+                            <button
+                                class="send-request-button"
+                                data-user-id="${user.id}"
+                                type="button"
+                            >
+                                Add friend
+                            </button>
+
+
+                        </div>
+
+                    `;
+
+
+
+                    addFriendResult.appendChild(
+                        card
+                    );
+
+
+                }
+            );
+
+
+        }
+    );
+
+
+}
