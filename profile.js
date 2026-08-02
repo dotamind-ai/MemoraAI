@@ -3,6 +3,33 @@
 // Supabase + Profile + Avatar + Logout
 // =====================================================
 console.log(
+    "PROFILE PAGE OPEN"
+);
+
+
+console.log(
+    "CURRENT URL:",
+    window.location.href
+);
+
+
+const profileParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const viewedUserId =
+    profileParams.get(
+        "user"
+    );
+
+
+console.log(
+    "VIEW PROFILE ID:",
+    viewedUserId
+);
+console.log(
     "PROFILE URL:",
     window.location.href
 );
