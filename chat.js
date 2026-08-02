@@ -2455,7 +2455,60 @@ document.addEventListener(
         }
 
 
+// CHECK EXISTING REQUEST
 
+const {
+    data: existingRequest,
+    error: checkError
+}
+=
+await supabaseClient
+    .from(
+        "friendships"
+    )
+    .select(
+        "id,status"
+    )
+    .or(
+        `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
+    )
+    .maybeSingle();
+
+
+
+if(checkError){
+
+    console.error(
+        "Check request error:",
+        checkError
+    );
+
+    return;
+
+}
+
+
+
+if(existingRequest){
+
+
+    console.log(
+        "Friend request already exists:",
+        existingRequest
+    );
+
+
+    button.textContent =
+        "Request sent";
+
+
+    button.disabled =
+        true;
+
+
+    return;
+
+}
         const {
             data,
             error
