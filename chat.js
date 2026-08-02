@@ -2113,3 +2113,71 @@ if(clearBtn){
     );
 
 }
+// ======================================
+// ADD FRIEND PANEL
+// ======================================
+
+
+const addFriendBtn =
+    document.getElementById(
+        "addFriendButton"
+    );
+
+
+const addFriendPanel =
+    document.getElementById(
+        "addFriendPanel"
+    );
+
+
+const closeAddFriendPanel =
+    document.getElementById(
+        "closeAddFriendPanel"
+    );
+
+
+
+if(addFriendBtn){
+
+    addFriendBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            console.log(
+                "Add friend opened"
+            );
+
+
+            if(addFriendPanel){
+
+                addFriendPanel.hidden = false;
+
+            }
+
+
+        }
+    );
+
+}
+
+
+
+if(closeAddFriendPanel){
+
+    closeAddFriendPanel.addEventListener(
+        "click",
+        ()=>{
+
+
+            if(addFriendPanel){
+
+                addFriendPanel.hidden = true;
+
+            }
+
+
+        }
+    );
+
+}
