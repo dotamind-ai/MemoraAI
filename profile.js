@@ -2,6 +2,22 @@
 // MEMORA PROFILE
 // Supabase + Profile + Avatar + Logout
 // =====================================================
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const viewedUserId =
+    urlParams.get(
+        "user"
+    );
+
+
+console.log(
+    "FINAL PROFILE TARGET:",
+    viewedUserId || "MY PROFILE"
+);
 console.log(
     "PROFILE PAGE OPEN"
 );
