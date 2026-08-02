@@ -2817,3 +2817,51 @@ document.addEventListener(
 
     }
 );
+/* =====================================================
+   OPEN FRIEND PROFILE FROM CHAT
+===================================================== */
+
+
+const friendProfileButton =
+    document.getElementById(
+        "friendProfileButton"
+    );
+
+
+if(friendProfileButton){
+
+
+    friendProfileButton.addEventListener(
+        "click",
+        ()=>{
+
+
+            if(!activeFriend){
+
+                console.error(
+                    "No active friend"
+                );
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Open profile:",
+                activeFriend.id
+            );
+
+
+
+            window.location.href =
+                "profile.html?user=" +
+                activeFriend.id;
+
+
+        }
+    );
+
+
+}
