@@ -1078,8 +1078,24 @@ async function openConversation(friend){
 
 
 
+    // сохраняем текущего собеседника
+
     activeFriend =
         friend;
+
+
+
+    // сохраняем ID именно друга
+
+    activeFriendId =
+        friend.friend_id;
+
+
+
+    console.log(
+        "Active friend id:",
+        activeFriendId
+    );
 
 
 
@@ -1129,7 +1145,8 @@ async function openConversation(friend){
         const {
             data,
             error
-        } =
+        }
+        =
         await supabaseClient.rpc(
             "get_or_create_direct_chat",
             {
@@ -1185,8 +1202,6 @@ async function openConversation(friend){
 
 
 }
-
-
 
 
 
