@@ -2001,3 +2001,72 @@ if(closeNotificationPanel){
     );
 
 }
+// ======================================
+// CLEAR NOTIFICATIONS BUTTON
+// ======================================
+
+
+const clearBtn =
+    document.getElementById(
+        "clearNotificationsButton"
+    );
+
+
+if(clearBtn){
+
+    clearBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            console.log(
+                "Clear notifications clicked"
+            );
+
+
+            const list =
+                document.getElementById(
+                    "notificationList"
+                );
+
+
+            if(list){
+
+                list.innerHTML = "";
+
+            }
+
+
+
+            const badge =
+                document.getElementById(
+                    "notificationBadge"
+                );
+
+
+            if(badge){
+
+                badge.hidden = true;
+
+                badge.textContent = "0";
+
+            }
+
+
+
+            // если массив существует
+
+            if(
+                typeof notifications !== "undefined"
+            ){
+
+                notifications.length = 0;
+
+            }
+
+
+        }
+    );
+
+
+}
