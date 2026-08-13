@@ -1261,30 +1261,6 @@ function applyProfileMode(){
     }
 
 }
-setTimeout(()=>{
-
-    if(viewedUserId){
-
-        console.log("HIDE FOREIGN PROFILE EDIT");
-
-        if(changeAvatarButton)
-            changeAvatarButton.style.display = "none";
-
-        if(avatarInput)
-            avatarInput.style.display = "none";
-
-        if(displayNameInput)
-            displayNameInput.style.display = "none";
-
-        if(saveProfileButton)
-            saveProfileButton.style.display = "none";
-
-        if(logoutButton)
-            logoutButton.style.display = "none";
-
-    }
-
-},1000);
 
 /* =====================================================
    REMOVE FRIEND
