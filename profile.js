@@ -1103,9 +1103,7 @@ function redirectToWelcome(){
    FOREIGN PROFILE MODE
 ===================================================== */
 
-
 function applyProfileMode(){
-
 
     if(!viewedUserId){
 
@@ -1191,72 +1189,6 @@ function applyProfileMode(){
 
         removeFriendButton.style.display =
             "block";
-
-    }
-
-}
-
-
-    if(
-        !viewedUserId
-    ){
-
-        console.log(
-            "MY PROFILE MODE"
-        );
-
-        return;
-
-    }
-
-
-
-    console.log(
-        "FOREIGN PROFILE MODE"
-    );
-
-
-
-    if(changeAvatarButton){
-
-        changeAvatarButton.style.display =
-            "none";
-
-    }
-
-
-
-    if(avatarInput){
-
-        avatarInput.style.display =
-            "none";
-
-    }
-
-
-
-    if(displayNameInput){
-
-        displayNameInput.style.display =
-            "none";
-
-    }
-
-
-
-    if(saveProfileButton){
-
-        saveProfileButton.style.display =
-            "none";
-
-    }
-
-
-
-    if(logoutButton){
-
-        logoutButton.style.display =
-            "none";
 
     }
 
