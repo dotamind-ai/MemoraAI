@@ -3219,15 +3219,9 @@ if(friendProfileButton){
 
 
 
-            localStorage.setItem(
-                "memora_view_profile",
-                activeFriend.id
-            );
-
-
-
             window.location.href =
-                "profile.html";
+                "profile.html?user=" +
+                activeFriend.friend_id;
 
 
         }
