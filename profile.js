@@ -257,10 +257,13 @@ async function initializeProfile(){
         renderAccountDate();
 
 
-        await loadProfile();
+       await loadProfile();
 
+applyProfileMode();
 
-        setupEvents();
+setupEvents();
+
+setupRemoveFriend();
 
 
 
