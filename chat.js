@@ -2958,14 +2958,6 @@ document.addEventListener(
                     "id",
                     requestId
                 )
-                .eq(
-                    "addressee_id",
-                    currentUser.id
-                )
-                .eq(
-                    "status",
-                    "pending"
-                )
                 .select()
                 .single();
 
@@ -2997,6 +2989,11 @@ document.addEventListener(
 
 
 
+            const {
+                error:
+                notificationError
+            }
+            =
             await supabaseClient
                 .from(
                     "notifications"
@@ -3010,6 +3007,17 @@ document.addEventListener(
                     "related_id",
                     requestId
                 );
+
+
+
+            if(notificationError){
+
+                console.error(
+                    "Delete notification error:",
+                    notificationError
+                );
+
+            }
 
 
 
@@ -3083,14 +3091,6 @@ document.addEventListener(
                     "id",
                     requestId
                 )
-                .eq(
-                    "addressee_id",
-                    currentUser.id
-                )
-                .eq(
-                    "status",
-                    "pending"
-                )
                 .select()
                 .single();
 
@@ -3122,6 +3122,11 @@ document.addEventListener(
 
 
 
+            const {
+                error:
+                notificationError
+            }
+            =
             await supabaseClient
                 .from(
                     "notifications"
@@ -3135,6 +3140,17 @@ document.addEventListener(
                     "related_id",
                     requestId
                 );
+
+
+
+            if(notificationError){
+
+                console.error(
+                    "Delete notification error:",
+                    notificationError
+                );
+
+            }
 
 
 
