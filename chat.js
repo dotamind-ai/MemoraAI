@@ -812,7 +812,6 @@ function renderNotifications(){
 }
 /* =====================================================
    REALTIME NOTIFICATIONS
-   PART 4
 ===================================================== */
 
 
@@ -885,6 +884,26 @@ function subscribeToNotifications(){
 
 
 
+                    /* =================================
+                       SHOW NOTIFICATION PANEL
+                    ================================= */
+
+
+                    if(
+                        notificationPanel
+                    ){
+
+                        notificationPanel.hidden =
+                            false;
+
+
+                        console.log(
+                            "Notification panel opened"
+                        );
+
+                    }
+
+
                 }
 
             )
@@ -901,8 +920,6 @@ function subscribeToNotifications(){
 
 
 }
-
-
 
 
 
