@@ -1107,6 +1107,96 @@ function redirectToWelcome(){
 function applyProfileMode(){
 
 
+    if(!viewedUserId){
+
+        console.log(
+            "MY PROFILE MODE"
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "FOREIGN PROFILE MODE"
+    );
+
+
+    if(changeAvatarButton){
+
+        changeAvatarButton.style.display =
+            "none";
+
+    }
+
+
+    if(avatarInput){
+
+        avatarInput.style.display =
+            "none";
+
+    }
+
+
+    if(displayNameInput){
+
+        displayNameInput.style.display =
+            "none";
+
+    }
+
+
+    if(saveProfileButton){
+
+        saveProfileButton.style.display =
+            "none";
+
+    }
+
+
+    if(logoutButton){
+
+        logoutButton.style.display =
+            "none";
+
+    }
+
+
+    if(profileEmail){
+
+        profileEmail.style.display =
+            "none";
+
+    }
+
+
+    if(emailValue){
+
+        emailValue.style.display =
+            "none";
+
+    }
+
+
+    if(accountDate){
+
+        accountDate.style.display =
+            "none";
+
+    }
+
+
+    if(removeFriendButton){
+
+        removeFriendButton.style.display =
+            "block";
+
+    }
+
+}
+
+
     if(
         !viewedUserId
     ){
