@@ -1375,8 +1375,4 @@ async function setupRemoveFriend(){
 
 
 
-setTimeout(()=>{
 
-    setupRemoveFriend();
-
-},1000);
