@@ -1181,3 +1181,88 @@ body {
     }
 
 }
+/* =====================================================
+   REMOVE FRIEND BUTTON
+===================================================== */
+
+#removeFriendButton {
+
+    display: none;
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid rgba(255, 90, 90, .18);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 70, 70, .055);
+
+    color:
+        rgba(255, 150, 150, .78);
+
+    font-family:
+        inherit;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .3px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
+
+}
+
+
+#removeFriendButton:hover {
+
+    background:
+        rgba(255, 70, 70, .11);
+
+    border-color:
+        rgba(255, 90, 90, .35);
+
+    color:
+        rgba(255, 190, 190, .95);
+
+    box-shadow:
+        0 8px 28px
+        rgba(255, 60, 60, .08);
+
+}
+
+
+#removeFriendButton:active {
+
+    transform:
+        scale(.96);
+
+}
+
+
+#removeFriendButton:disabled {
+
+    opacity:
+        .45;
+
+    cursor:
+        default;
+
+    box-shadow:
+        none;
+
+}
