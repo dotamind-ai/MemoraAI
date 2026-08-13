@@ -155,7 +155,10 @@ const logoutButton =
     document.getElementById(
         "logoutButton"
     );
-
+const removeFriendButton =
+    document.getElementById(
+        "removeFriendButton"
+    );
 
 const backButton =
     document.getElementById(
