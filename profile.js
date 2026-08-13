@@ -1199,13 +1199,6 @@ function applyProfileMode(){
 ===================================================== */
 
 
-const removeFriendButton =
-    document.getElementById(
-        "removeFriendButton"
-    );
-
-
-
 async function setupRemoveFriend(){
 
 
