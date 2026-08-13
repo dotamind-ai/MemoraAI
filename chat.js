@@ -3189,3 +3189,48 @@ document.addEventListener(
 
     }
 );
+/* =====================================================
+   FRIEND PROFILE BUTTON
+===================================================== */
+
+
+if(friendProfileButton){
+
+    friendProfileButton.addEventListener(
+        "click",
+        function(){
+
+            if(!activeFriend){
+
+                console.warn(
+                    "No active friend"
+                );
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Opening friend profile:",
+                activeFriend
+            );
+
+
+
+            localStorage.setItem(
+                "memora_view_profile",
+                activeFriend.id
+            );
+
+
+
+            window.location.href =
+                "profile.html";
+
+
+        }
+    );
+
+}
