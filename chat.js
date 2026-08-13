@@ -2879,3 +2879,280 @@ document.addEventListener(
 
     }
 );
+/* =====================================================
+   ACCEPT / REJECT FRIEND REQUEST
+===================================================== */
+
+
+document.addEventListener(
+    "click",
+    async function(e){
+
+
+        const acceptButton =
+            e.target.closest(
+                ".accept-friend-button"
+            );
+
+
+        const rejectButton =
+            e.target.closest(
+                ".reject-friend-button"
+            );
+
+
+
+        /* =========================================
+           ACCEPT FRIEND REQUEST
+        ========================================= */
+
+
+        if(acceptButton){
+
+
+            if(!currentUser){
+
+                console.error(
+                    "Current user not loaded"
+                );
+
+                return;
+
+            }
+
+
+
+            const requestId =
+                acceptButton.dataset.requestId;
+
+
+
+            console.log(
+                "Accept friend request:",
+                requestId
+            );
+
+
+
+            acceptButton.disabled =
+                true;
+
+
+
+            const {
+                data,
+                error
+            }
+            =
+            await supabaseClient
+                .from(
+                    "friendships"
+                )
+                .update({
+
+                    status:
+                        "accepted"
+
+                })
+                .eq(
+                    "id",
+                    requestId
+                )
+                .eq(
+                    "addressee_id",
+                    currentUser.id
+                )
+                .eq(
+                    "status",
+                    "pending"
+                )
+                .select()
+                .single();
+
+
+
+            if(error){
+
+
+                console.error(
+                    "Accept friend request error:",
+                    error
+                );
+
+
+                acceptButton.disabled =
+                    false;
+
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Friend request accepted:",
+                data
+            );
+
+
+
+            await supabaseClient
+                .from(
+                    "notifications"
+                )
+                .delete()
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .eq(
+                    "related_id",
+                    requestId
+                );
+
+
+
+            notifications =
+                notifications.filter(
+                    notification =>
+                        notification.related_id !==
+                        requestId
+                );
+
+
+
+            renderNotifications();
+
+
+
+            return;
+
+        }
+
+
+
+        /* =========================================
+           REJECT FRIEND REQUEST
+        ========================================= */
+
+
+        if(rejectButton){
+
+
+            if(!currentUser){
+
+                console.error(
+                    "Current user not loaded"
+                );
+
+                return;
+
+            }
+
+
+
+            const requestId =
+                rejectButton.dataset.requestId;
+
+
+
+            console.log(
+                "Reject friend request:",
+                requestId
+            );
+
+
+
+            rejectButton.disabled =
+                true;
+
+
+
+            const {
+                data,
+                error
+            }
+            =
+            await supabaseClient
+                .from(
+                    "friendships"
+                )
+                .delete()
+                .eq(
+                    "id",
+                    requestId
+                )
+                .eq(
+                    "addressee_id",
+                    currentUser.id
+                )
+                .eq(
+                    "status",
+                    "pending"
+                )
+                .select()
+                .single();
+
+
+
+            if(error){
+
+
+                console.error(
+                    "Reject friend request error:",
+                    error
+                );
+
+
+                rejectButton.disabled =
+                    false;
+
+
+                return;
+
+            }
+
+
+
+            console.log(
+                "Friend request rejected:",
+                data
+            );
+
+
+
+            await supabaseClient
+                .from(
+                    "notifications"
+                )
+                .delete()
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .eq(
+                    "related_id",
+                    requestId
+                );
+
+
+
+            notifications =
+                notifications.filter(
+                    notification =>
+                        notification.related_id !==
+                        requestId
+                );
+
+
+
+            renderNotifications();
+
+
+
+        }
+
+
+    }
+);
