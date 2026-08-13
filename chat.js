@@ -806,13 +806,7 @@ function renderNotifications(){
 );
 
 
-            notificationList.appendChild(
-                item
-            );
-
-
-        }
-    );
+   
 
 
 }
